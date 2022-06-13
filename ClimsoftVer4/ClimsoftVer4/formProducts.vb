@@ -67,7 +67,7 @@ Public Class frmProducts
         End If
 
         'add them to the list view
-        For Each row As DataRow In dataTable.Rows
+        For Each row As DataRow In dataRows
             'add product and prodcut details. List view has 2 columns
             lstViewProducts.Items.Add(New ListViewItem({row.Field(Of String)("productName"),
                                                        row.Field(Of String)("prDetails")}))
