@@ -39,7 +39,7 @@ Partial Class frmSplashScreen
         lblWait.Anchor = System.Windows.Forms.AnchorStyles.None
         lblWait.BackColor = System.Drawing.Color.Transparent
         lblWait.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        lblWait.Location = New System.Drawing.Point(432, 440)
+        lblWait.Location = New System.Drawing.Point(432, 460)
         lblWait.Name = "lblWait"
         lblWait.Size = New System.Drawing.Size(122, 19)
         lblWait.TabIndex = 7
@@ -53,15 +53,15 @@ Partial Class frmSplashScreen
         Me.MainLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.MainLayoutPanel.ColumnCount = 1
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 986.0!))
-        Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.MainLayoutPanel.Controls.Add(Me.lblDescription, 0, 1)
         Me.MainLayoutPanel.Controls.Add(Me.ApplicationTitle, 1, 0)
-        Me.MainLayoutPanel.Controls.Add(Me.lblVersion, 0, 1)
-        Me.MainLayoutPanel.Controls.Add(lblWait, 0, 2)
+        Me.MainLayoutPanel.Controls.Add(lblWait, 0, 3)
+        Me.MainLayoutPanel.Controls.Add(Me.lblVersion, 0, 2)
         Me.MainLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MainLayoutPanel.Location = New System.Drawing.Point(0, 0)
         Me.MainLayoutPanel.Name = "MainLayoutPanel"
-        Me.MainLayoutPanel.RowCount = 3
-        Me.MainLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 188.0!))
+        Me.MainLayoutPanel.RowCount = 4
+        Me.MainLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 168.0!))
         Me.MainLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 105.0!))
         Me.MainLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59.0!))
         Me.MainLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
@@ -73,7 +73,7 @@ Partial Class frmSplashScreen
         Me.ApplicationTitle.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ApplicationTitle.BackColor = System.Drawing.Color.Transparent
         Me.ApplicationTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ApplicationTitle.Location = New System.Drawing.Point(357, 61)
+        Me.ApplicationTitle.Location = New System.Drawing.Point(357, 51)
         Me.ApplicationTitle.Name = "ApplicationTitle"
         Me.ApplicationTitle.Size = New System.Drawing.Size(272, 65)
         Me.ApplicationTitle.TabIndex = 0
@@ -85,7 +85,7 @@ Partial Class frmSplashScreen
         Me.lblVersion.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblVersion.BackColor = System.Drawing.Color.Transparent
         Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblVersion.Location = New System.Drawing.Point(443, 227)
+        Me.lblVersion.Location = New System.Drawing.Point(443, 289)
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(99, 27)
         Me.lblVersion.TabIndex = 6
@@ -96,10 +96,10 @@ Partial Class frmSplashScreen
         '
         'lblDescription
         '
-        Me.lblDescription.AutoSize = True
+        Me.lblDescription.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblDescription.BackColor = System.Drawing.Color.Transparent
         Me.lblDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescription.Location = New System.Drawing.Point(350, 150)
+        Me.lblDescription.Location = New System.Drawing.Point(350, 210)
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(286, 20)
         Me.lblDescription.TabIndex = 1
@@ -113,7 +113,6 @@ Partial Class frmSplashScreen
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(983, 607)
         Me.ControlBox = False
-        Me.Controls.Add(Me.lblDescription)
         Me.Controls.Add(Me.MainLayoutPanel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -123,7 +122,6 @@ Partial Class frmSplashScreen
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.MainLayoutPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Timer1 As System.Windows.Forms.Timer

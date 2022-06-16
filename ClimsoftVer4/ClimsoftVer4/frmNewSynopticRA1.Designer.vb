@@ -30,14 +30,14 @@ Partial Class frmNewSynopticRA1
         Me.ucrSynopticRA1.Location = New System.Drawing.Point(7, 6)
         Me.ucrSynopticRA1.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSynopticRA1.Name = "ucrSynopticRA1"
-        Me.ucrSynopticRA1.Size = New System.Drawing.Size(842, 660)
+        Me.ucrSynopticRA1.Size = New System.Drawing.Size(917, 660)
         Me.ucrSynopticRA1.TabIndex = 5
         '
         'frmNewSynopticRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(855, 674)
+        Me.ClientSize = New System.Drawing.Size(927, 674)
         Me.Controls.Add(Me.ucrSynopticRA1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmNewSynopticRA1"

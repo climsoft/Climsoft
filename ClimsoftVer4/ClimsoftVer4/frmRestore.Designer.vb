@@ -74,7 +74,7 @@ Partial Class frmRestore
         'lblBackupFolder
         '
         Me.lblBackupFolder.AutoSize = True
-        Me.lblBackupFolder.Location = New System.Drawing.Point(41, 86)
+        Me.lblBackupFolder.Location = New System.Drawing.Point(7, 86)
         Me.lblBackupFolder.Name = "lblBackupFolder"
         Me.lblBackupFolder.Size = New System.Drawing.Size(79, 13)
         Me.lblBackupFolder.TabIndex = 11
@@ -82,7 +82,7 @@ Partial Class frmRestore
         '
         'txtBackupFolder
         '
-        Me.txtBackupFolder.Location = New System.Drawing.Point(126, 83)
+        Me.txtBackupFolder.Location = New System.Drawing.Point(132, 83)
         Me.txtBackupFolder.Name = "txtBackupFolder"
         Me.txtBackupFolder.Size = New System.Drawing.Size(266, 20)
         Me.txtBackupFolder.TabIndex = 10

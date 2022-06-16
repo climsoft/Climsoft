@@ -57,6 +57,8 @@ Public Class formMetadata
         populateSearchStation()
         populateSearchElement()
 
+        ClsTranslations.TranslateForm(Me)
+
     End Sub
 
     Sub SetDataSet(tbl As String)
@@ -94,17 +96,17 @@ Public Class formMetadata
 
                 populateElementMetadata("obselement", rec, Kount)
             Case 2 ' StationElement
-                FillList(txtStation, "station", "stationId")
+                FillList(cboStation, "station", "stationId")
                 FillList(txtElement, "obselement", "elementId")
-                FillList(txtInstrument, "instrument", "instrumentId")
-                FillList(txtScheduleClass, "obsscheduleclass", "scheduleClass")
+                FillList(cboInstrument, "instrument", "instrumentId")
+                FillList(cboScheduleClass, "obsscheduleclass", "scheduleClass")
 
                 SetDataSet("stationelement")
                 rec = 0
 
                 populateStationElement("stationelement", rec, Kount)
             Case 3 ' Instrument
-                FillList(txtInstrStn, "station", "stationId")
+                FillList(cboInstrStn, "station", "stationId")
                 SetDataSet("instrument")
                 rec = 0
                 'populatePaperArchiveDefinition("instrument", rec, Kount)
@@ -113,22 +115,22 @@ Public Class formMetadata
                 'rec = 0
                 populateInstrument("instrument", rec, Kount)
             Case 4 ' Station Location History
-                FillList(txtlocStn, "station", "stationId")
+                FillList(cboStn, "station", "stationId")
                 SetDataSet("stationlocationhistory")
                 rec = 0
                 populateStationHistory("stationlocationhistory", rec, Kount)
             Case 5 ' Station Qualifier
-                FillList(txtQualifierStation, "station", "stationId")
+                FillList(cboQualifierStation, "station", "stationId")
                 SetDataSet("stationqualifier")
                 rec = 0
                 populateStationQualifier("stationqualifier", rec, Kount)
             Case 6 ' Schedule Class
-                FillList(txtClassStation, "station", "stationId")
+                FillList(cboClassStation, "station", "stationId")
                 SetDataSet("obsscheduleclass")
                 rec = 0
                 populateScheduleClass("obsscheduleclass", rec, Kount)
             Case 7 ' Physical Feature
-                FillList(txtFeatureStation, "station", "stationId")
+                FillList(cboFeatureStation, "station", "stationId")
                 SetDataSet("physicalfeature")
                 rec = 0
 
@@ -155,7 +157,7 @@ Public Class formMetadata
 
         SetDataSet(frm)
 
-        txtstationId.Text = ds.Tables("station").Rows(num).Item("stationId")
+        cboStationId.Text = ds.Tables("station").Rows(num).Item("stationId")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationName")) Then txtStationName.Text = ds.Tables("station").Rows(num).Item("stationName")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("wmoid")) Then txtwmoid.Text = ds.Tables("station").Rows(num).Item("wmoid")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("icaoid")) Then txticaoid.Text = ds.Tables("station").Rows(num).Item("icaoid")
@@ -169,7 +171,7 @@ Public Class formMetadata
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationmethod")) Then txtgeoMethod.Text = ds.Tables("station").Rows(num).Item("geolocationmethod")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationaccuracy")) Then txtgeoAccuracy.Text = ds.Tables("station").Rows(num).Item("geolocationaccuracy")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationoperational")) Then txtStationOperation.CheckState = ds.Tables("station").Rows(num).Item("stationoperational")
-        If Not IsDBNull(ds.Tables("station").Rows(num).Item("qualifier")) Then txtStationType.Text = ds.Tables("station").Rows(num).Item("qualifier")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("qualifier")) Then cboStationType.Text = ds.Tables("station").Rows(num).Item("qualifier")
 
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("openingdatetime")) Then
             txtOpeningDate.Text = ds.Tables("station").Rows(num).Item("openingdatetime")
@@ -190,7 +192,7 @@ Public Class formMetadata
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
         ClearElementForm()
-        If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementId")) Then txtId.Text = ds.Tables(frm).Rows(num).Item("elementId")
+        If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementId")) Then cboElementId.Text = ds.Tables(frm).Rows(num).Item("elementId")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("abbreviation")) Then txtAbbreviation.Text = ds.Tables(frm).Rows(num).Item("abbreviation")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementName")) Then txtName.Text = ds.Tables(frm).Rows(num).Item("elementName")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("description")) Then txtDescription.Text = ds.Tables(frm).Rows(num).Item("description")
@@ -198,7 +200,7 @@ Public Class formMetadata
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("upperLimit")) Then txtUpperLimit.Text = ds.Tables(frm).Rows(num).Item("upperLimit")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("lowerLimit")) Then txtLowerLimit.Text = ds.Tables(frm).Rows(num).Item("lowerLimit")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("units")) Then txtUnit.Text = ds.Tables(frm).Rows(num).Item("units")
-        If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementtype")) Then txtType.Text = ds.Tables(frm).Rows(num).Item("elementtype")
+        If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementtype")) Then cboType.Text = ds.Tables(frm).Rows(num).Item("elementtype")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("selected")) Then
             If ds.Tables(frm).Rows(num).Item("selected") = 1 Then
                 chkESelected.Checked = True
@@ -223,18 +225,18 @@ Public Class formMetadata
         SetDataSet(frm)
         'MsgBox(num & " " & maxRows)
         ClearStationElementForm()
-        txtStation.Text = ds.Tables(frm).Rows(num).Item("recordedFrom")
+        cboStation.Text = ds.Tables(frm).Rows(num).Item("recordedFrom")
         txtElement.Text = ds.Tables(frm).Rows(num).Item("describedBy")
-        txtInstrument.Text = ds.Tables(frm).Rows(num).Item("recordedWith")
+        cboInstrument.Text = ds.Tables(frm).Rows(num).Item("recordedWith")
         txtInstrumentCode.Text = ds.Tables(frm).Rows(num).Item("instrumentcode")
-        txtScheduleClass.Text = ds.Tables(frm).Rows(num).Item("scheduledFor")
+        cboScheduleClass.Text = ds.Tables(frm).Rows(num).Item("scheduledFor")
         txtHeight.Text = ds.Tables(frm).Rows(num).Item("height")
         txtBeginDate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
         txtEndate.Text = ds.Tables(frm).Rows(num).Item("endDate")
 
-        metadfrm.seStn = txtStation.Text
+        metadfrm.seStn = cboStation.Text
         metadfrm.Eecode = txtElement.Text
-        metadfrm.Iecode = txtInstrument.Text
+        metadfrm.Iecode = cboInstrument.Text
         metadfrm.sebdate = txtBeginDate.Text
 
         If maxRows > 0 Then txtNavigator1.Text = rec + 1 & " of " & maxRows ' - 1 '"Record 1 of " & maxRows
@@ -248,7 +250,7 @@ Public Class formMetadata
         txtInstrumentId.Text = ds.Tables(frm).Rows(num).Item("instrumentId")
         txtInstName.Text = ds.Tables(frm).Rows(num).Item("instrumentName")
         txtAbbrev.Text = ds.Tables(frm).Rows(num).Item("abbreviation")
-        txtInstrStn.Text = ds.Tables(frm).Rows(num).Item("installedAt")
+        cboInstrStn.Text = ds.Tables(frm).Rows(num).Item("installedAt")
         txtSerial.Text = ds.Tables(frm).Rows(num).Item("serialNumber")
         txtModel.Text = ds.Tables(frm).Rows(num).Item("model")
         txtManufacturer.Text = ds.Tables(frm).Rows(num).Item("manufacturer")
@@ -265,7 +267,7 @@ Public Class formMetadata
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
         ClearStationHistoryForm()
-        txtlocStn.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
+        cboStn.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
         txtStnType.Text = ds.Tables(frm).Rows(num).Item("stationType")
         txtMethod.Text = ds.Tables(frm).Rows(num).Item("geoLocationMethod")
         txtAccuracy.Text = ds.Tables(frm).Rows(num).Item("geoLocationAccuracy")
@@ -286,7 +288,7 @@ Public Class formMetadata
         SetDataSet(frm)
         ClearStationQualifierForm()
         txtqualifier.Text = ds.Tables(frm).Rows(num).Item("qualifier")
-        txtQualifierStation.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
+        cboQualifierStation.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
         txtBDate.Text = ds.Tables(frm).Rows(num).Item("qualifierBeginDate")
         txtEndDate.Text = ds.Tables(frm).Rows(num).Item("qualifierEndDate")
         txtTZone.Text = ds.Tables(frm).Rows(num).Item("stationTimeZone")
@@ -295,7 +297,7 @@ Public Class formMetadata
         metadfrm.qlfr = txtqualifier.Text
         metadfrm.bdate = txtBDate.Text
         metadfrm.edate = txtEndDate.Text
-        metadfrm.stn = txtQualifierStation.Text
+        metadfrm.stn = cboQualifierStation.Text
 
         If maxRows > 0 Then txtNav4.Text = rec + 1 & " of " & maxRows
     End Sub
@@ -305,7 +307,7 @@ Public Class formMetadata
         SetDataSet(frm)
         ClearFormScheduleClass()
         txtClass.Text = ds.Tables(frm).Rows(num).Item("scheduleClass")
-        txtClassStation.Text = ds.Tables(frm).Rows(num).Item("refersTo")
+        cboClassStation.Text = ds.Tables(frm).Rows(num).Item("refersTo")
         txtClassDescription.Text = ds.Tables(frm).Rows(num).Item("description")
 
         If maxRows > 0 Then txtNav5.Text = rec + 1 & " of " & maxRows
@@ -316,7 +318,7 @@ Public Class formMetadata
         SetDataSet(frm)
         ClearPhysicalFeatureForm()
 
-        txtFeatureStation.Text = ds.Tables(frm).Rows(num).Item("associatedWith")
+        cboFeatureStation.Text = ds.Tables(frm).Rows(num).Item("associatedWith")
         txtFeatureBdate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
         txtFeatureEdate.Text = ds.Tables(frm).Rows(num).Item("endDate")
         txtFeatureDescription.Text = ds.Tables(frm).Rows(num).Item("description")
@@ -353,29 +355,29 @@ Public Class formMetadata
         txtFormId.Text = ds.Tables(frm).Rows(num).Item("formId")
         txtFormDescription.Text = ds.Tables(frm).Rows(num).Item("description")
 
-        If maxRows > 0 Then PaperArchiveNavigation.Text = rec + 1 & " of " & maxRows '"Record 1 of " & maxRows
+        If maxRows > 0 Then txtRecordNumArchive.Text = rec + 1 & " of " & maxRows '"Record 1 of " & maxRows
     End Sub
 
-    Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
+    Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirstStation.Click
         rec = 0
         populateStations("station", rec, Kount)
     End Sub
 
-    Private Sub btnMovePrevious_Click(sender As Object, e As EventArgs) Handles btnMovePrevious.Click
+    Private Sub btnMovePrevious_Click(sender As Object, e As EventArgs) Handles btnMovePreviousStation.Click
         If rec > 0 Then
             rec = rec - 1
             populateStations("station", rec, Kount)
         End If
     End Sub
 
-    Private Sub btnMoveNext_Click(sender As Object, e As EventArgs) Handles btnMoveNext.Click
+    Private Sub btnMoveNext_Click(sender As Object, e As EventArgs) Handles btnMoveNextStation.Click
         If rec < Kount - 1 Then
             rec = rec + 1
             populateStations("station", rec, Kount)
         End If
     End Sub
 
-    Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
+    Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLastStation.Click
         rec = Kount - 1
         populateStations("station", rec, Kount)
     End Sub
@@ -391,7 +393,7 @@ Public Class formMetadata
             Dim recCommit As New dataEntryGlobalRoutines
 
             dsNewRow = ds.Tables("station").NewRow
-            dsNewRow.Item("stationId") = txtstationId.Text
+            dsNewRow.Item("stationId") = cboStationId.Text
             dsNewRow.Item("wmoid") = txtwmoid.Text
             dsNewRow.Item("icaoid") = txticaoid.Text
             dsNewRow.Item("stationName") = txtStationName.Text
@@ -452,8 +454,8 @@ Public Class formMetadata
         '    End If
         'Next
 
-        txtstationId.Text = ""
-        combSearchStation.Text = ""
+        cboStationId.Text = ""
+        cboSearchStation.Text = ""
         txtStationName.Clear()
         txtwmoid.Clear()
         txticaoid.Clear()
@@ -470,7 +472,7 @@ Public Class formMetadata
         'ClosingDate.Text = ""
         txtOpeningDate.Text = ""
         txtClosingDate.Text = ""
-        txtStationType.Text = ""
+        cboStationType.Text = ""
         txtStationOperation.CheckState = CheckState.Unchecked
         txtRecNumber.Clear()
         txtDegreesLat.Text = ""
@@ -481,13 +483,13 @@ Public Class formMetadata
         txtMinutesLon.Text = ""
         txtSecondsLon.Text = ""
         lstEW.Text = ""
-        txtstationId.Focus()
+        cboStationId.Focus()
 
     End Sub
 
     Sub ClearElementForm()
 
-        txtId.Text = ""
+        cboElementId.Text = ""
         txtAbbreviation.Clear()
         txtName.Clear()
         txtDescription.Clear()
@@ -495,22 +497,22 @@ Public Class formMetadata
         txtUpperLimit.Clear()
         txtLowerLimit.Clear()
         txtUnit.Clear()
-        txtType.Text = ""
+        cboType.Text = ""
         chkESelected.Checked = False
         chkqcTotal.Checked = False
         txtElementNavigator.Clear()
-        txtId.Focus()
+        cboElementId.Focus()
     End Sub
     Sub ClearStationElementForm()
-        txtStation.Text = ""
+        cboStation.Text = ""
         txtElement.Text = ""
-        txtInstrument.Text = ""
+        cboInstrument.Text = ""
         txtInstrumentCode.Text = ""
-        txtScheduleClass.Text = ""
+        cboScheduleClass.Text = ""
         txtHeight.Text = ""
         txtBeginDate.Text = ""
         txtEndate.Text = ""
-        txtStation.Focus()
+        cboStation.Focus()
     End Sub
     Sub ClearInstrumentForm()
         txtInstrumentId.Text = ""
@@ -524,11 +526,11 @@ Public Class formMetadata
         txtDeinstallDate.Text = ""
         txthgt.Text = ""
         txtInstrumentPicFile.Text = ""
-        txtInstrStn.Text = ""
+        cboInstrStn.Text = ""
         txtInstrumentId.Focus()
     End Sub
     Sub ClearStationHistoryForm()
-        txtlocStn.Text = ""
+        cboStn.Text = ""
         txtStnType.Text = ""
         txtMethod.Text = ""
         txtAccuracy.Text = ""
@@ -540,11 +542,11 @@ Public Class formMetadata
         txtAuth.Text = ""
         txtAdmin.Text = ""
         txtDrgBasin.Text = ""
-        txtlocStn.Focus()
+        cboStn.Focus()
     End Sub
     Sub ClearStationQualifierForm()
         txtqualifier.Text = ""
-        txtQualifierStation.Text = ""
+        cboQualifierStation.Text = ""
         txtBDate.Text = ""
         txtEndDate.Text = ""
         txtTZone.Text = ""
@@ -553,22 +555,22 @@ Public Class formMetadata
     End Sub
     Sub ClearFormScheduleClass()
         txtClass.Text = ""
-        txtClassStation.Text = ""
+        cboClassStation.Text = ""
         txtClassDescription.Text = ""
         txtClass.Focus()
     End Sub
     Sub ClearPhysicalFeatureForm()
         txtFeatureClass.Text = ""
-        txtFeatureStation.Text = ""
+        cboFeatureStation.Text = ""
         txtImageFile.Text = ""
-        txtFeatureStation.Text = ""
+        cboFeatureStation.Text = ""
         txtFeatureBdate.Text = ""
         txtFeatureEdate.Text = ""
         txtImageFile.Text = ""
         txtFeatureDescription.Text = ""
         txtFeatureClass.Text = ""
         txtFeatureClassDescription.Text = ""
-        txtFeatureStation.Focus()
+        cboFeatureStation.Focus()
     End Sub
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
         Dim oper As Integer
@@ -580,7 +582,7 @@ Public Class formMetadata
             oper = 0
         End If
 
-        If txtstationId.Text = "" Then
+        If cboStationId.Text = "" Then
             MsgBox("No record Selected")
         Else
             ' Set blank numerical values to NULL
@@ -595,8 +597,8 @@ Public Class formMetadata
             'sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = '" & txtLatitude.Text & "', qualifier = '" & txtStationType.Text & "', longitude = '" & txtLongitude.Text & "', elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
             '    ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
 
-            sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = " & lat & ", qualifier = '" & txtStationType.Text & "', longitude = " & lon & " , elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
-                ", adminRegion = '" & txtAdminRegion.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
+            sql = "UPDATE station SET stationId = '" & cboStationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = " & lat & ", qualifier = '" & cboStationType.Text & "', longitude = " & lon & " , elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
+                ", adminRegion = '" & txtAdminRegion.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & cboStationId.Text & "';"
 
             'MsgBox(sql)
             If Not Update_Rec(sql) Then
@@ -620,7 +622,7 @@ Public Class formMetadata
 
             'MsgBox(ds.Tables("station").Rows.Count)
 
-            ds.Tables("station").Rows(recs).Item("stationId") = txtstationId.Text
+            ds.Tables("station").Rows(recs).Item("stationId") = cboStationId.Text
             ds.Tables("station").Rows(recs).Item("stationName") = txtStationName.Text
             ds.Tables("station").Rows(recs).Item("wmoid") = txtwmoid.Text
             ds.Tables("station").Rows(recs).Item("icaoid") = txticaoid.Text
@@ -713,24 +715,24 @@ Public Class formMetadata
 
 
 
-    Private Sub cmdFirstRecord_Click(sender As Object, e As EventArgs) Handles cmdFirstRecord.Click
+    Private Sub cmdFirstRecord_Click(sender As Object, e As EventArgs) Handles btnMoveFirstElement.Click
         rec = 0
         populateElementMetadata("obselement", rec, Kount)
     End Sub
 
-    Private Sub cmdLastRecord_Click(sender As Object, e As EventArgs) Handles cmdLastRecord.Click
+    Private Sub cmdLastRecord_Click(sender As Object, e As EventArgs) Handles btnMoveLastElement.Click
         rec = Kount - 1
         populateElementMetadata("obselement", rec, Kount)
     End Sub
 
-    Private Sub cmdPrevoius_Click(sender As Object, e As EventArgs) Handles cmdPrevoius.Click
+    Private Sub cmdPrevoius_Click(sender As Object, e As EventArgs) Handles btnMovePreviousElement.Click
         If rec > 0 Then
             rec = rec - 1
             populateElementMetadata("obselement", rec, Kount)
         End If
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnMoveNextElement.Click
         If rec < Kount - 1 Then
             rec = rec + 1
             populateElementMetadata("obselement", rec, Kount)
@@ -748,7 +750,7 @@ Public Class formMetadata
         Try
 
             dsNewRow = ds.Tables("obselement").NewRow
-            dsNewRow.Item("elementId") = txtId.Text
+            dsNewRow.Item("elementId") = cboElementId.Text
             dsNewRow.Item("abbreviation") = txtAbbreviation.Text
             dsNewRow.Item("elementName") = txtName.Text
             dsNewRow.Item("description") = txtDescription.Text
@@ -756,7 +758,7 @@ Public Class formMetadata
             dsNewRow.Item("upperLimit") = txtUpperLimit.Text
             dsNewRow.Item("lowerLimit") = txtLowerLimit.Text
             dsNewRow.Item("units") = txtUnit.Text
-            dsNewRow.Item("elementtype") = txtType.Text
+            dsNewRow.Item("elementtype") = cboType.Text
             If chkESelected.Checked = True Then
                 dsNewRow.Item("selected") = 1
             Else
@@ -789,12 +791,12 @@ Public Class formMetadata
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
-        If txtId.Text = "" Then
+        If cboElementId.Text = "" Then
             MsgBox("No record Selected")
             Exit Sub
         End If
 
-        ds.Tables("obselement").Rows(rec).Item("elementId") = txtId.Text
+        ds.Tables("obselement").Rows(rec).Item("elementId") = cboElementId.Text
         ds.Tables("obselement").Rows(rec).Item("elementName") = txtName.Text
         ds.Tables("obselement").Rows(rec).Item("abbreviation") = txtAbbreviation.Text
         ds.Tables("obselement").Rows(rec).Item("description") = txtDescription.Text
@@ -802,7 +804,7 @@ Public Class formMetadata
         ds.Tables("obselement").Rows(rec).Item("upperLimit") = txtUpperLimit.Text
         ds.Tables("obselement").Rows(rec).Item("lowerLimit") = txtLowerLimit.Text
         ds.Tables("obselement").Rows(rec).Item("units") = txtUnit.Text
-        ds.Tables("obselement").Rows(rec).Item("elementtype") = txtType.Text
+        ds.Tables("obselement").Rows(rec).Item("elementtype") = cboType.Text
         If chkESelected.Checked = True Then
             ds.Tables("obselement").Rows(rec).Item("selected") = 1
         Else
@@ -880,11 +882,11 @@ Err:
         Try
             dsNewRow = ds.Tables("stationelement").NewRow
 
-            dsNewRow.Item("recordedFrom") = txtStation.Text
+            dsNewRow.Item("recordedFrom") = cboStation.Text
             dsNewRow.Item("describedBy") = txtElement.Text
-            dsNewRow.Item("recordedWith") = txtInstrument.Text
+            dsNewRow.Item("recordedWith") = cboInstrument.Text
             dsNewRow.Item("instrumentcode") = txtInstrumentCode.Text
-            dsNewRow.Item("scheduledFor") = txtScheduleClass.Text
+            dsNewRow.Item("scheduledFor") = cboScheduleClass.Text
             dsNewRow.Item("height") = txtHeight.Text
             dsNewRow.Item("beginDate") = txtBeginDate.Text
             dsNewRow.Item("endDate") = txtEndate.Text
@@ -1130,13 +1132,13 @@ Err:
             sql = "SELECT stationId, stationName FROM station ORDER BY stationId"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
-            combSearchStation.Items.Clear()
+            cboSearchStation.Items.Clear()
             da.Fill(ds, "station")
             dbconn.Close()
             maxRows = ds.Tables("station").Rows.Count
             For i = 0 To maxRows - 1 Step 1
-                combSearchStation.Items.Add(ds.Tables("station").Rows(i).Item("stationName"))
-                txtstationId.Items.Add(ds.Tables("station").Rows(i).Item("stationId"))
+                cboSearchStation.Items.Add(ds.Tables("station").Rows(i).Item("stationName"))
+                cboStationId.Items.Add(ds.Tables("station").Rows(i).Item("stationId"))
             Next
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
@@ -1158,20 +1160,20 @@ Err:
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
-            combSearchElement.Items.Clear()
+            cboSearchElement.Items.Clear()
             da.Fill(ds, "obselement")
             maxRows = ds.Tables("obselement").Rows.Count
             For i = 0 To maxRows - 1 Step 1
-                combSearchElement.Items.Add(ds.Tables("obselement").Rows(i).Item("elementName"))
+                cboSearchElement.Items.Add(ds.Tables("obselement").Rows(i).Item("elementName"))
             Next
 
             sql = "SELECT elementId FROM obselement ORDER BY elementId"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
-            txtId.Items.Clear()
+            cboElementId.Items.Clear()
             da.Fill(ds, "obselement")
             For i = 0 To maxRows - 1 Step 1
-                txtId.Items.Add(ds.Tables("obselement").Rows(i).Item("elementId"))
+                cboElementId.Items.Add(ds.Tables("obselement").Rows(i).Item("elementId"))
             Next
 
             dbconn.Close()
@@ -1181,7 +1183,7 @@ Err:
             MessageBox.Show(ex.Message)
         End Try
     End Sub
-    Private Sub combSearchStation_Click(sender As Object, e As EventArgs) Handles combSearchStation.Click
+    Private Sub combSearchStation_Click(sender As Object, e As EventArgs) Handles cboSearchStation.Click
 
     End Sub
 
@@ -1266,29 +1268,20 @@ Err:
     End Sub
 
 
-    Private Sub combSearchStation_SelectedValueChanged(sender As Object, e As EventArgs) Handles combSearchStation.SelectedValueChanged
-        Locate_Station("stationName", combSearchStation.Text)
+    Private Sub combSearchStation_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboSearchStation.SelectedValueChanged
+        Locate_Station("stationName", cboSearchStation.Text)
     End Sub
 
-    Private Sub txtstationId_SelectedValueChanged(sender As Object, e As EventArgs) Handles txtstationId.SelectedValueChanged
-        Locate_Station("stationId", txtstationId.Text)
+    Private Sub txtstationId_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboStationId.SelectedValueChanged
+        Locate_Station("stationId", cboStationId.Text)
     End Sub
 
-
-    Private Sub combSearchStation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combSearchStation.SelectedIndexChanged
-
+    Private Sub combSearchElement_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboSearchElement.SelectedValueChanged
+        Locate_Element("Nm", cboSearchElement.Text)
     End Sub
 
-    Private Sub combSearchElement_SelectedIndexChanged(sender As Object, e As EventArgs) Handles combSearchElement.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub combSearchElement_SelectedValueChanged(sender As Object, e As EventArgs) Handles combSearchElement.SelectedValueChanged
-        Locate_Element("Nm", combSearchElement.Text)
-    End Sub
-
-    Private Sub txtId_SelectedValueChanged(sender As Object, e As EventArgs) Handles txtId.SelectedValueChanged
-        Locate_Element("Id", txtId.Text)
+    Private Sub txtId_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboElementId.SelectedValueChanged
+        Locate_Element("Id", cboElementId.Text)
     End Sub
 
 
@@ -1296,25 +1289,25 @@ Err:
 
     End Sub
 
-    Private Sub nav8Left_Click(sender As Object, e As EventArgs) Handles nav8Left.Click
+    Private Sub nav8Left_Click(sender As Object, e As EventArgs) Handles btnMovePrevArchive.Click
         If rec > 0 Then
             rec = rec - 1
             populatePaperArchiveDefinition("paperarchivedefinition", rec, Kount)
         End If
     End Sub
 
-    Private Sub nav8First_Click(sender As Object, e As EventArgs) Handles nav8First.Click
+    Private Sub nav8First_Click(sender As Object, e As EventArgs) Handles btnMoveFirstArchive.Click
         rec = 0
         populatePaperArchiveDefinition("paperarchivedefinition", rec, Kount)
     End Sub
 
-    Private Sub nav8Last_Click(sender As Object, e As EventArgs) Handles nav8Last.Click
+    Private Sub nav8Last_Click(sender As Object, e As EventArgs) Handles btnMoveLastArchive.Click
         'rec = Kount - 2
         rec = Kount - 1
         populatePaperArchiveDefinition("paperarchivedefinition", rec, Kount)
     End Sub
 
-    Private Sub nav8Righ_Click(sender As Object, e As EventArgs) Handles nav8Right.Click
+    Private Sub nav8Righ_Click(sender As Object, e As EventArgs) Handles btnMoveNextArchive.Click
         If rec < Kount - 1 Then
             rec = rec + 1
             populatePaperArchiveDefinition("paperarchivedefinition", rec, Kount)
@@ -1376,7 +1369,7 @@ Err:
             dsNewRow.Item("deinstallationDatetime") = txtDeinstallDate.Text
             dsNewRow.Item("height") = txthgt.Text
             'dsNewRow.Item("instrumentPicture") = picInstrument.Image
-            dsNewRow.Item("installedAt") = txtInstrStn.Text
+            dsNewRow.Item("installedAt") = cboInstrStn.Text
 
             'Add a new record to the data source table
             ds.Tables("instrument").Rows.Add(dsNewRow)
@@ -1416,7 +1409,7 @@ Err:
 
             dsNewRow = ds.Tables("stationlocationhistory").NewRow
 
-            dsNewRow.Item("belongsTo") = txtlocStn.Text
+            dsNewRow.Item("belongsTo") = cboStn.Text
             dsNewRow.Item("stationType") = txtStnType.Text
             dsNewRow.Item("geoLocationMethod") = txtMethod.Text
             dsNewRow.Item("geoLocationAccuracy") = txtAccuracy.Text
@@ -1454,7 +1447,7 @@ Err:
             dsNewRow = ds.Tables("stationqualifier").NewRow
 
             dsNewRow.Item("qualifier") = txtqualifier.Text
-            dsNewRow.Item("belongsTo") = txtQualifierStation.Text
+            dsNewRow.Item("belongsTo") = cboQualifierStation.Text
             dsNewRow.Item("qualifierBeginDate") = txtdBDate.Text
             dsNewRow.Item("qualifierEndDate") = txtdEndDate.Text
             dsNewRow.Item("stationTimeZone") = txtTZone.Text
@@ -1486,7 +1479,7 @@ Err:
             dsNewRow = ds.Tables("obsscheduleclass").NewRow
 
             dsNewRow.Item("scheduleClass") = txtClass.Text
-            dsNewRow.Item("refersTo") = txtClassStation.Text
+            dsNewRow.Item("refersTo") = cboClassStation.Text
             dsNewRow.Item("description") = txtClassDescription.Text
 
             'Add a new record to the data source table
@@ -1516,7 +1509,7 @@ Err:
             dsNewRow = ds.Tables("physicalfeatureclass").NewRow
 
             dsNewRow.Item("featureClass") = txtFeatureClass.Text
-            dsNewRow.Item("refersTo") = txtFeatureStation.Text
+            dsNewRow.Item("refersTo") = cboFeatureStation.Text
             dsNewRow.Item("description") = txtFeatureClassDescription.Text
 
             ds.Tables("physicalfeatureclass").Rows.Add(dsNewRow)
@@ -1531,7 +1524,7 @@ Err:
 
             dsNewRowp = ds.Tables("physicalfeature").NewRow
 
-            dsNewRowp.Item("associatedWith") = txtFeatureStation.Text
+            dsNewRowp.Item("associatedWith") = cboFeatureStation.Text
             dsNewRowp.Item("beginDate") = txtFeaturedBdate.Text
             dsNewRowp.Item("endDate") = txtFeaturedEdate.Text
             dsNewRowp.Item("image") = txtImageFile.Text
@@ -1574,7 +1567,7 @@ Err:
             ds.Tables("instrument").Rows(rec).Item("installationDatetime") = txtInstallDate.Text
             ds.Tables("instrument").Rows(rec).Item("deinstallationDatetime") = txtDeinstallDate.Text
             ds.Tables("instrument").Rows(rec).Item("height") = txthgt.Text
-            ds.Tables("instrument").Rows(rec).Item("installedAt") = txtInstrStn.Text
+            ds.Tables("instrument").Rows(rec).Item("installedAt") = cboInstrStn.Text
             ds.Tables("instrument").Rows(rec).Item("instrumentPicture") = txtInstrumentPicFile.Text
             'dsNewRow.Item("instrumentPicture") = picInstrument.Image
 
@@ -1607,10 +1600,10 @@ Err:
             If Len(metadfrm.sebdate) = 0 Then bdate = "IS NULL"
 
             ' Format for NULLs in the new values
-            If Len(txtStation.Text) = 0 Then
+            If Len(cboStation.Text) = 0 Then
                 stn0 = "NULL"
             Else
-                stn0 = "'" & txtStation.Text & "'"
+                stn0 = "'" & cboStation.Text & "'"
             End If
 
             If Len(txtElement.Text) = 0 Then
@@ -1619,10 +1612,10 @@ Err:
                 ecode0 = "'" & txtElement.Text & "'"
             End If
 
-            If Len(txtInstrument.Text) = 0 Then
+            If Len(cboInstrument.Text) = 0 Then
                 icode0 = "NULL"
             Else
-                icode0 = "'" & txtInstrument.Text & "'"
+                icode0 = "'" & cboInstrument.Text & "'"
             End If
 
             If Len(txtBeginDate.Text) = 0 Then
@@ -1631,7 +1624,7 @@ Err:
                 bdate0 = "'" & txtBeginDate.Text & "'"
             End If
 
-            sql = "Update stationelement set recordedFrom = " & stn0 & ",describedBy=" & ecode0 & ", recordedWith =" & icode0 & ", instrumentcode='" & txtInstrumentCode.Text & "', scheduledFor='" & txtScheduleClass.Text & "', height='" & txtHeight.Text & "', beginDate=" & bdate0 & ", endDate='" & txtEndate.Text & "' " &
+            sql = "Update stationelement set recordedFrom = " & stn0 & ",describedBy=" & ecode0 & ", recordedWith =" & icode0 & ", instrumentcode='" & txtInstrumentCode.Text & "', scheduledFor='" & cboScheduleClass.Text & "', height='" & txtHeight.Text & "', beginDate=" & bdate0 & ", endDate='" & txtEndate.Text & "' " &
                  "where recordedFrom " & stn & "  AND describedBy " & ecode & "  AND recordedWith " & icode & "  AND beginDate " & bdate & ";"
 
             'MsgBox(sql)
@@ -1673,19 +1666,19 @@ Err:
         ClearPhysicalFeatureForm()
     End Sub
 
-    Private Sub cmdfiratRec1_Click(sender As Object, e As EventArgs) Handles cmdfiratRec1.Click
+    Private Sub cmdfiratRec1_Click(sender As Object, e As EventArgs) Handles btnMoveFirstStationElement.Click
         rec = 0
         populateStationElement("stationelement", rec, Kount)
     End Sub
 
-    Private Sub cmdPrev1_Click(sender As Object, e As EventArgs) Handles cmdPrev1.Click
+    Private Sub cmdPrev1_Click(sender As Object, e As EventArgs) Handles btnMovePrevStationElement.Click
         If rec > 0 Then
             rec = rec - 1
             populateStationElement("stationelement", rec, Kount)
         End If
     End Sub
 
-    Private Sub cmdNext1_Click(sender As Object, e As EventArgs) Handles cmdNext1.Click
+    Private Sub cmdNext1_Click(sender As Object, e As EventArgs) Handles btnMoveNextStationElement.Click
 
         If rec < Kount - 1 Then
             rec = rec + 1
@@ -1693,120 +1686,120 @@ Err:
         End If
     End Sub
 
-    Private Sub cmdLast1_Click(sender As Object, e As EventArgs) Handles cmdLast1.Click
+    Private Sub cmdLast1_Click(sender As Object, e As EventArgs) Handles btnMoveLastStationElement.Click
         rec = Kount - 1
         populateStationElement("stationelement", rec, Kount)
     End Sub
 
-    Private Sub cmdFirst1_Click(sender As Object, e As EventArgs) Handles cmdFirst1.Click
+    Private Sub cmdFirst1_Click(sender As Object, e As EventArgs) Handles btnMoveFirstInstrument.Click
         rec = 0
         populateInstrument("instrument", rec, Kount)
     End Sub
 
-    Private Sub cmdPrev2_Click(sender As Object, e As EventArgs) Handles cmdPrev2.Click
+    Private Sub cmdPrev2_Click(sender As Object, e As EventArgs) Handles btnMovePrevInstrument.Click
         If rec > 0 Then
             rec = rec - 1
             populateInstrument("instrument", rec, Kount)
         End If
     End Sub
 
-    Private Sub cmdNext2_Click_1(sender As Object, e As EventArgs) Handles cmdNext2.Click
+    Private Sub cmdNext2_Click_1(sender As Object, e As EventArgs) Handles btnMoveNextInstrument.Click
         If rec < Kount - 1 Then
             rec = rec + 1
             populateInstrument("instrument", rec, Kount)
         End If
     End Sub
 
-    Private Sub cmdLast2_Click_1(sender As Object, e As EventArgs) Handles cmdLast2.Click
+    Private Sub cmdLast2_Click_1(sender As Object, e As EventArgs) Handles btnMoveLastInstrument.Click
         rec = Kount - 1
         populateInstrument("instrument", rec, Kount)
     End Sub
 
-    Private Sub cmdfirst3_Click(sender As Object, e As EventArgs) Handles cmdfirst3.Click
+    Private Sub cmdfirst3_Click(sender As Object, e As EventArgs) Handles btnMoveFirstLocation.Click
         rec = 0
         populateStationHistory("stationlocationhistory", rec, Kount)
     End Sub
 
-    Private Sub cmdprev3_Click(sender As Object, e As EventArgs) Handles cmdprev3.Click
+    Private Sub cmdprev3_Click(sender As Object, e As EventArgs) Handles btnMovePrevLocation.Click
         If rec > 0 Then
             rec = rec - 1
             populateStationHistory("stationlocationhistory", rec, Kount)
         End If
     End Sub
 
-    Private Sub cmdNext3_Click(sender As Object, e As EventArgs) Handles cmdNext3.Click
+    Private Sub cmdNext3_Click(sender As Object, e As EventArgs) Handles btnMoveNextLocation.Click
         If rec < Kount - 1 Then
             rec = rec + 1
             populateStationHistory("stationlocationhistory", rec, Kount)
         End If
     End Sub
 
-    Private Sub cmdLast3_Click(sender As Object, e As EventArgs) Handles cmdLast3.Click
+    Private Sub cmdLast3_Click(sender As Object, e As EventArgs) Handles btnMoveLastLocation.Click
         rec = Kount - 1
         populateStationHistory("stationlocationhistory", rec, Kount)
     End Sub
 
-    Private Sub cmdFirst4_Click(sender As Object, e As EventArgs) Handles cmdFirst4.Click
+    Private Sub cmdFirst4_Click(sender As Object, e As EventArgs) Handles btnMoveFirstQualifier.Click
         rec = 0
         populateStationQualifier("stationqualifier", rec, Kount)
     End Sub
 
-    Private Sub cmdPrev4_Click(sender As Object, e As EventArgs) Handles cmdPrev4.Click
+    Private Sub cmdPrev4_Click(sender As Object, e As EventArgs) Handles btnMovePrevQualifier.Click
         If rec > 0 Then
             rec = rec - 1
             populateStationQualifier("stationqualifier", rec, Kount)
         End If
     End Sub
 
-    Private Sub cmdNext4_Click(sender As Object, e As EventArgs) Handles cmdNext4.Click
+    Private Sub cmdNext4_Click(sender As Object, e As EventArgs) Handles btnMoveNextQualifier.Click
         If rec < Kount - 1 Then
             rec = rec + 1
             populateStationQualifier("stationqualifier", rec, Kount)
         End If
     End Sub
 
-    Private Sub cmdLast4_Click(sender As Object, e As EventArgs) Handles cmdLast4.Click
+    Private Sub cmdLast4_Click(sender As Object, e As EventArgs) Handles btnMoveLastQualifier.Click
         rec = Kount - 1
         populateStationQualifier("stationqualifier", rec, Kount)
     End Sub
 
-    Private Sub cmdFirst5_Click(sender As Object, e As EventArgs) Handles cmdFirst5.Click
+    Private Sub cmdFirst5_Click(sender As Object, e As EventArgs) Handles btnMoveFirstClass.Click
         rec = 0
         populateScheduleClass("obsscheduleclass", rec, Kount)
     End Sub
 
-    Private Sub cmdPrev5_Click(sender As Object, e As EventArgs) Handles cmdPrev5.Click
+    Private Sub cmdPrev5_Click(sender As Object, e As EventArgs) Handles btnMovePrevClass.Click
         If rec > 0 Then
             rec = rec - 1
             populateScheduleClass("obsscheduleclass", rec, Kount)
         End If
     End Sub
 
-    Private Sub cmdNext5_Click(sender As Object, e As EventArgs) Handles cmdNext5.Click
+    Private Sub cmdNext5_Click(sender As Object, e As EventArgs) Handles btnMoveNextClass.Click
         If rec < Kount - 1 Then
             rec = rec + 1
             populateScheduleClass("obsscheduleclass", rec, Kount)
         End If
     End Sub
 
-    Private Sub cmdLast5_Click(sender As Object, e As EventArgs) Handles cmdLast5.Click
+    Private Sub cmdLast5_Click(sender As Object, e As EventArgs) Handles btnMoveLastClass.Click
         rec = Kount - 1
         populateScheduleClass("obsscheduleclass", rec, Kount)
     End Sub
 
-    Private Sub cmdFirst6_Click(sender As Object, e As EventArgs) Handles cmdFirst6.Click
+    Private Sub cmdFirst6_Click(sender As Object, e As EventArgs) Handles btnMoveFirstFeature.Click
         rec = Kount - 1
         populatePhysicalFeature("physicalfeature", rec, Kount)
     End Sub
 
-    Private Sub cmdPrev6_Click(sender As Object, e As EventArgs) Handles cmdPrev6.Click
+    Private Sub cmdPrev6_Click(sender As Object, e As EventArgs) Handles btnMovePrevFeature.Click
         If rec > 0 Then
             rec = rec - 1
             populatePhysicalFeature("physicalfeature", rec, Kount)
         End If
     End Sub
 
-    Private Sub cmdNext6_Click(sender As Object, e As EventArgs) Handles cmdNext6.Click
+    Private Sub cmdNext6_Click(sender As Object, e As EventArgs) Handles btnMoveNextFeature.Click
 
         If rec < Kount - 1 Then
             rec = rec + 1
@@ -1814,7 +1807,7 @@ Err:
         End If
     End Sub
 
-    Private Sub cmdLast6_Click(sender As Object, e As EventArgs) Handles cmdLast6.Click
+    Private Sub cmdLast6_Click(sender As Object, e As EventArgs) Handles btnMoveLastFeature.Click
         rec = Kount - 1
         populatePhysicalFeature("physicalfeature", rec, Kount)
     End Sub
@@ -1853,8 +1846,8 @@ Err:
             If Not IsNumeric(txtAccuracy.Text) Then G_accuracy = ",geoLocationAccuracy= Null"
 
             sql = "Update stationlocationhistory set " &
-                   "belongsTo = '" & txtlocStn.Text & "',stationType= '" & txtStnType.Text & "',geoLocationMethod= '" & txtMethod.Text & "'" & G_accuracy & ",openingDatetime='" & txtOpDate.Text & "',closingDatetime='" & txtClosDate.Text & "',latitude = '" & txtLat.Text & "',longitude = '" & txtLon.Text & "',elevation = '" & txtElev.Text & "',authority= '" & txtAuth.Text & "',adminRegion= '" & txtAdmin.Text & "',drainageBasin= '" & txtDrgBasin.Text & "'" &
-                  " where belongsTo = '" & txtlocStn.Text & "' and openingDatetime = '" & txtOpDate.Text & "';"
+                   "belongsTo = '" & cboStn.Text & "',stationType= '" & txtStnType.Text & "',geoLocationMethod= '" & txtMethod.Text & "'" & G_accuracy & ",openingDatetime='" & txtOpDate.Text & "',closingDatetime='" & txtClosDate.Text & "',latitude = '" & txtLat.Text & "',longitude = '" & txtLon.Text & "',elevation = '" & txtElev.Text & "',authority= '" & txtAuth.Text & "',adminRegion= '" & txtAdmin.Text & "',drainageBasin= '" & txtDrgBasin.Text & "'" &
+                  " where belongsTo = '" & cboStn.Text & "' and openingDatetime = '" & txtOpDate.Text & "';"
             'MsgBox(sql)
 
             If Not Update_Rec(sql) Then
@@ -1904,7 +1897,7 @@ Err:
             ntwk = txtNetwork.Text
             stationTimeZone = Val(txtTZone.Text)
 
-            sql = "UPDATE `stationqualifier` SET `belongsTo`='" & txtQualifierStation.Text & "',`qualifier`='" & txtqualifier.Text & "',`qualifierBeginDate`= " & dateb & " , `qualifierEndDate`= " & datee & " , `stationTimeZone`='" & stationTimeZone & "', `stationNetworkType`='" & ntwk & "' WHERE  `qualifier`" & qlfr & " AND `qualifierBeginDate` " & bdate & " AND `qualifierEndDate` " & edate & " AND `belongsTo`" & stn & ";"
+            sql = "UPDATE `stationqualifier` SET `belongsTo`='" & cboQualifierStation.Text & "',`qualifier`='" & txtqualifier.Text & "',`qualifierBeginDate`= " & dateb & " , `qualifierEndDate`= " & datee & " , `stationTimeZone`='" & stationTimeZone & "', `stationNetworkType`='" & ntwk & "' WHERE  `qualifier`" & qlfr & " AND `qualifierBeginDate` " & bdate & " AND `qualifierEndDate` " & edate & " AND `belongsTo`" & stn & ";"
 
             'MsgBox(sql)
 
@@ -1930,7 +1923,7 @@ Err:
         Try
 
             ds.Tables("obsscheduleclass").Rows(rec).Item("scheduleClass") = txtClass.Text
-            ds.Tables("obsscheduleclass").Rows(rec).Item("refersTo") = txtClassStation.Text
+            ds.Tables("obsscheduleclass").Rows(rec).Item("refersTo") = cboClassStation.Text
             ds.Tables("obsscheduleclass").Rows(rec).Item("description") = txtClassDescription.Text
 
             da.Update(ds, "obsscheduleclass")
@@ -1990,7 +1983,7 @@ Err:
 
             'sql = "UPDATE `physicalfeature` SET `associatedWith`='8534002' ,`beginDate`='20/01/2018' ,`endDate`= '20/01/2015' ,`image`='climate.jpg' ,`description`='1', `classifiedInto`='1' WHERE  `description`='1' AND `beginDate`='20/01/2018' AND `classifiedInto`='1' AND `associatedWith`='8534002';"
             img = txtImageFile.Text
-            sql = "UPDATE `physicalfeature` SET `associatedWith`='" & txtFeatureStation.Text & "' ,`beginDate`" & bdate & " ,`endDate`" & edate & ", `image`='" & img & "' ,`description`='" & txtFeatureDescription.Text & "', `classifiedInto`='" & txtFeatureClass.Text & "' WHERE  `description`" & ftr & " AND `beginDate` " & bdat & " AND `classifiedInto` " & cls & " AND `associatedWith`" & stn & ";"
+            sql = "UPDATE `physicalfeature` SET `associatedWith`='" & cboFeatureStation.Text & "' ,`beginDate`" & bdate & " ,`endDate`" & edate & ", `image`='" & img & "' ,`description`='" & txtFeatureDescription.Text & "', `classifiedInto`='" & txtFeatureClass.Text & "' WHERE  `description`" & ftr & " AND `beginDate` " & bdat & " AND `classifiedInto` " & cls & " AND `associatedWith`" & stn & ";"
 
             'MsgBox(sql)
 
@@ -2017,15 +2010,15 @@ Err:
     End Sub
 
     Private Sub cmdDeleteHistory_Click(sender As Object, e As EventArgs) Handles cmdDeleteHistory.Click
-        sql = "Delete from stationlocationhistory where belongsTo ='" & txtlocStn.Text & "' and openingDatetime='" & txtOpDate.Text & "';"
+        sql = "Delete from stationlocationhistory where belongsTo ='" & cboStn.Text & "' and openingDatetime='" & txtOpDate.Text & "';"
 
         If Not Update_Rec(sql) Then
             MsgBox("Delete Failed")
         Else
             MsgBox("Record Deleted")
             ' Refresh records
-            cmdLast3.PerformClick()
-            cmdfirst3.PerformClick()
+            btnMoveLastLocation.PerformClick()
+            btnMoveFirstLocation.PerformClick()
         End If
 
     End Sub
@@ -2182,13 +2175,13 @@ Err:
     End Sub
 
 
-    Private Sub txtfeaturepic_Click(sender As Object, e As EventArgs) Handles txtfeaturepic.Click
+    Private Sub txtfeaturepic_Click(sender As Object, e As EventArgs) Handles pictureBoxFeaturepic.Click
 
     End Sub
 
     Private Sub txtImageFile_TextChanged(sender As Object, e As EventArgs) Handles txtImageFile.TextChanged
-        txtfeaturepic.ImageLocation = txtImageFile.Text
-        txtfeaturepic.Refresh()
+        pictureBoxFeaturepic.ImageLocation = txtImageFile.Text
+        pictureBoxFeaturepic.Refresh()
     End Sub
 
     Private Sub cmdOpenFile_Click(sender As Object, e As EventArgs) Handles cmdOpenFile.Click
@@ -2235,8 +2228,8 @@ Err:
     End Sub
 
     Private Sub txtInstrumentPicFile_TextChanged(sender As Object, e As EventArgs) Handles txtInstrumentPicFile.TextChanged
-        picInstrument.ImageLocation = txtInstrumentPicFile.Text
-        picInstrument.Refresh()
+        pictureBoxInstrument.ImageLocation = txtInstrumentPicFile.Text
+        pictureBoxInstrument.Refresh()
     End Sub
 
 End Class

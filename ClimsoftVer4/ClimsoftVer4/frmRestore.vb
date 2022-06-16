@@ -37,7 +37,7 @@
                 ' Create the Command for executing query and set its properties
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql2, conn)
                 Try
-                    lblDataIngestionProgress.Text = "Importing backup data for station [" & stnId & "]"
+                    lblDataIngestionProgress.Text = ClsTranslations.GetTranslation("Importing backup data for station") & " [" & stnId & "]"
                     lblDataIngestionProgress.Refresh()
                     'Execute query
                     objCmd.ExecuteNonQuery()
@@ -52,7 +52,7 @@
 
         Next i
         conn.Close()
-        MsgBox("Observation data imported successfully!")
+        MsgBox(ClsTranslations.GetTranslation("Observation data imported successfully!"))
 
     End Sub
 
@@ -68,7 +68,7 @@
         Dim dialog As New FolderBrowserDialog()
         dialog.RootFolder = Environment.SpecialFolder.Desktop
         dialog.SelectedPath = "C:\"
-        dialog.Description = "Select Path for backup files"
+        dialog.Description = ClsTranslations.GetTranslation("Select Path for backup files")
         If dialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
             strBackupFolder = dialog.SelectedPath
             txtBackupFolder.Text = strBackupFolder
@@ -76,6 +76,10 @@
             strBackupFolderUnixStyle = strBackupFolder.Replace("\", "/")
             'MsgBox(strBackupFolderUnixStyle)
         End If
+    End Sub
+
+    Private Sub frmRestore_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub txtBackupFolder_TextChanged(sender As Object, e As EventArgs) Handles txtBackupFolder.TextChanged

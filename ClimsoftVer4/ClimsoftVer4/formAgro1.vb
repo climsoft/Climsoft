@@ -1,4 +1,4 @@
-﻿Public Class form_agro1
+﻿Public Class formAgro1
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
     Dim usrName As String
@@ -305,6 +305,9 @@
             '' Retrieve Keyentry mode information and mark on the checkbox
             ''MsgBox(FldName.Key_Entry_Mode(Me.Name))
             'If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
+
+            ClsTranslations.TranslateForm(Me)
+
             Me.CenterToScreen()
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then

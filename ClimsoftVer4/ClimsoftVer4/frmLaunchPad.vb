@@ -47,8 +47,8 @@ Public Class frmLaunchPad
 
             PrintLine(12, dbconnectstr)
             FileClose(12)
-            frmLogin.cmbDatabases.Text = dbconnectstr
-            frmLogin.cmbDatabases.Refresh()
+            frmLogin.cboDatabases.Text = dbconnectstr
+            frmLogin.cboDatabases.Refresh()
             MsgBox("Database Details Updated", MsgBoxStyle.Information)
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)

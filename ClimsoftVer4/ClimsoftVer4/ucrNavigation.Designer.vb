@@ -25,7 +25,7 @@ Partial Class ucrNavigation
         Me.btnMovePrevious = New System.Windows.Forms.Button()
         Me.btnMoveFirst = New System.Windows.Forms.Button()
         Me.btnMoveLast = New System.Windows.Forms.Button()
-        Me.txtRecNum = New System.Windows.Forms.TextBox()
+        Me.txtRecordNum = New System.Windows.Forms.TextBox()
         Me.btnMoveNext = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -33,10 +33,9 @@ Partial Class ucrNavigation
         'btnMovePrevious
         '
         Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(74, 0)
-        Me.btnMovePrevious.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnMovePrevious.Location = New System.Drawing.Point(49, 0)
         Me.btnMovePrevious.Name = "btnMovePrevious"
-        Me.btnMovePrevious.Size = New System.Drawing.Size(69, 35)
+        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
         Me.btnMovePrevious.TabIndex = 677
         Me.btnMovePrevious.Text = "<<"
         Me.btnMovePrevious.UseVisualStyleBackColor = True
@@ -44,10 +43,9 @@ Partial Class ucrNavigation
         'btnMoveFirst
         '
         Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(4, 0)
-        Me.btnMoveFirst.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnMoveFirst.Location = New System.Drawing.Point(3, 0)
         Me.btnMoveFirst.Name = "btnMoveFirst"
-        Me.btnMoveFirst.Size = New System.Drawing.Size(62, 35)
+        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveFirst.TabIndex = 676
         Me.btnMoveFirst.Text = "|<<"
         Me.btnMoveFirst.UseVisualStyleBackColor = True
@@ -55,45 +53,42 @@ Partial Class ucrNavigation
         'btnMoveLast
         '
         Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(438, 0)
-        Me.btnMoveLast.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnMoveLast.Location = New System.Drawing.Point(292, 0)
         Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(62, 35)
+        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveLast.TabIndex = 675
         Me.btnMoveLast.Text = ">>|"
         Me.btnMoveLast.UseVisualStyleBackColor = True
         '
-        'txtRecNum
+        'txtRecordNum
         '
-        Me.txtRecNum.Location = New System.Drawing.Point(152, 3)
-        Me.txtRecNum.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtRecNum.Name = "txtRecNum"
-        Me.txtRecNum.Size = New System.Drawing.Size(210, 26)
-        Me.txtRecNum.TabIndex = 674
+        Me.txtRecordNum.Location = New System.Drawing.Point(101, 2)
+        Me.txtRecordNum.Name = "txtRecordNum"
+        Me.txtRecordNum.Size = New System.Drawing.Size(141, 20)
+        Me.txtRecordNum.TabIndex = 674
         '
         'btnMoveNext
         '
         Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(372, 0)
-        Me.btnMoveNext.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnMoveNext.Location = New System.Drawing.Point(248, 0)
         Me.btnMoveNext.Name = "btnMoveNext"
-        Me.btnMoveNext.Size = New System.Drawing.Size(57, 35)
+        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
         Me.btnMoveNext.TabIndex = 673
         Me.btnMoveNext.Text = ">>"
         Me.btnMoveNext.UseVisualStyleBackColor = True
         '
         'ucrNavigation
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.btnMovePrevious)
         Me.Controls.Add(Me.btnMoveFirst)
         Me.Controls.Add(Me.btnMoveLast)
-        Me.Controls.Add(Me.txtRecNum)
+        Me.Controls.Add(Me.txtRecordNum)
         Me.Controls.Add(Me.btnMoveNext)
-        Me.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrNavigation"
-        Me.Size = New System.Drawing.Size(504, 39)
+        Me.Size = New System.Drawing.Size(336, 25)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -103,6 +98,6 @@ Partial Class ucrNavigation
     Friend WithEvents btnMovePrevious As Button
     Friend WithEvents btnMoveFirst As Button
     Friend WithEvents btnMoveLast As Button
-    Friend WithEvents txtRecNum As TextBox
+    Friend WithEvents txtRecordNum As TextBox
     Friend WithEvents btnMoveNext As Button
 End Class

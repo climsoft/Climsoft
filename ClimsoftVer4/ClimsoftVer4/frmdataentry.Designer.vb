@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmKeyEntry
+Partial Class frmDataEntry
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -103,7 +103,7 @@ Partial Class frmKeyEntry
         Me.lblSelection.TabIndex = 7
         Me.lblSelection.Text = "Select the entry form to open:"
         '
-        'frmKeyEntry
+        'frmDataEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -118,7 +118,7 @@ Partial Class frmKeyEntry
         Me.HelpProvider1.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
         Me.HelpProvider1.SetHelpString(Me, "topic2")
         Me.KeyPreview = True
-        Me.Name = "frmKeyEntry"
+        Me.Name = "frmDataEntry"
         Me.HelpProvider1.SetShowHelp(Me, True)
         Me.Text = "Data Key Entry Forms"
         Me.ResumeLayout(False)

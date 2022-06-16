@@ -181,6 +181,9 @@ Public Class formDaily1
             MessageBox.Show(ex.Message)
         End Try
         conn.Close()
+
+        ClsTranslations.TranslateForm(Me)
+
     End Sub
 
     Function load_Controls() As Boolean
@@ -262,6 +265,7 @@ Public Class formDaily1
                         txtflag.Location = New System.Drawing.Point(flgX, posY1)
                         txtflag.Size = New System.Drawing.Size(23, 20)
                         txtflag.TabIndex = i + .Columns.Count
+                        txtflag.Enabled = False
                         Me.Controls.Add(txtflag)
 
                         ' Draw text box Label
@@ -336,37 +340,42 @@ Public Class formDaily1
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
-        'Update header fields for form in database
-        ds.Tables("form_daily1").Rows(inc).Item("stationId") = cboStation.SelectedValue
-        ds.Tables("form_daily1").Rows(inc).Item("yyyy") = txtYear.Text
-        ds.Tables("form_daily1").Rows(inc).Item("mm") = cboMonth.Text
-        ds.Tables("form_daily1").Rows(inc).Item("dd") = cboDay.Text
 
-        'Update observation values in database
-        'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-        For m = 5 To (valueFldsTotal + 4) 'm = 5 To 53
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_daily1").Rows(inc).Item(m) = ctl.Text
-                End If
-            Next ctl
-        Next m
+        Try
+            'Update header fields for form in database
+            ds.Tables("form_daily1").Rows(inc).Item("stationId") = cboStation.SelectedValue
+            ds.Tables("form_daily1").Rows(inc).Item("yyyy") = txtYear.Text
+            ds.Tables("form_daily1").Rows(inc).Item("mm") = cboMonth.Text
+            ds.Tables("form_daily1").Rows(inc).Item("dd") = cboDay.Text
 
-        'Update observation flags in database
-        'Observation values range from column 55 i.e. column index 54 to column 103 i.e. column index 102
-        For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4 'm = 54 To 102
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_daily1").Rows(inc).Item(m) = ctl.Text
-                End If
-            Next ctl
-        Next m
+            'Update observation values in database
+            'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
+            For m = 5 To (valueFldsTotal + 4) 'm = 5 To 53
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ds.Tables("form_daily1").Rows(inc).Item(m) = ctl.Text
+                    End If
+                Next ctl
+            Next m
 
-        'The data adapter is used to update the record in the data source table
-        da.Update(ds, "form_daily1")
+            'Update observation flags in database
+            'Observation values range from column 55 i.e. column index 54 to column 103 i.e. column index 102
+            For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4 'm = 54 To 102
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ds.Tables("form_daily1").Rows(inc).Item(m) = ctl.Text
+                    End If
+                Next ctl
+            Next m
 
-        'Show message for successful updating or record.
-        recUpdate.messageBoxRecordedUpdated()
+            'The data adapter is used to update the record in the data source table
+            da.Update(ds, "form_daily1")
+
+            'Show message for successful updating or record.
+            recUpdate.messageBoxRecordedUpdated()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -707,7 +716,12 @@ Public Class formDaily1
                     End If
                 End If
 
+            ElseIf (e.KeyCode = 33 Or e.KeyCode = 34) And Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" Then
+                'shiftEntries(e.KeyCode)
+                FldName.shiftEntries(e.KeyCode, Me, "form_daily1")
+                'MsgBox(Me.ActiveControl.Name)
             End If
+
         Catch ex As Exception
 
             MsgBox(ex.Message)
@@ -1228,5 +1242,115 @@ Public Class formDaily1
     '        'MsgBox(ex.Message)
     '    End Try
     'End Sub
+    'Sub shiftFlags()
+    '    Dim flagIndexDiff As Integer
+    '    Dim ctls As Control
+    '    Dim txt, flg As String
+
+    '    If Not totalCTLS(flagIndexDiff) Then Exit Sub
+    '    For Each ctls In Me.Controls
+    '        If Strings.Left(ctls.Name, 6) = "txtVal" Then
+    '            txt = ctls.Text
+    '            flg = "txt" & "Flag" & Strings.Mid(ctls.Name, 12, 3) & "Field" & Format(Val(Strings.Right(ctls.Name, 3)) + flagIndexDiff, "000")
+    '            FlagValue(ctls, txt, flg)
+    '        End If
+    '    Next
+    'End Sub
+
+    'Sub FlagValue(txtCTL As Control, txt As String, flg As String)
+    '    Dim flgCTL As Control
+
+    '    For Each flgCTL In Me.Controls
+    '        If flgCTL.Name = flg Then
+    '            If txt = "" Then
+    '                If txtCTL.Enabled Then flgCTL.Text = "M"
+    '            Else
+    '                flgCTL.Text = ""
+    '            End If
+    '        End If
+    '    Next
+
+    'End Sub
+    'Sub shiftEntries(kycode As Integer)
+    '    Select Case kycode
+    '        Case 34 ' Insert
+    '            insertValues()
+    '            shiftFlags()
+    '        Case 33 ' Delete
+    '            deleteValues()
+    '            shiftFlags()
+    '    End Select
+
+    'End Sub
+    'Sub insertValues()
+    '    Dim ActvCTL, nxtCTL As Control
+    '    Dim kount As Integer
+    '    Dim txt1, txt2 As String
+
+    '    ActvCTL = Me.ActiveControl
+    '    txt1 = ActvCTL.Text
+    '    If totalCTLS(kount) Then
+    '        ActvCTL.Text = ""
+    '        For i = 0 To kount - 2
+    '            nxtCTL = GetNextControl(ActvCTL, True)
+    '            If nxtCTL.Enabled = True Then
+    '                txt2 = nxtCTL.Text
+    '                nxtCTL.Text = txt1
+    '                If Strings.Left(nxtCTL.Name, 6) <> "txtVal" Then Exit For
+    '                txt1 = txt2
+    '            End If
+    '            'MsgBox(nxtCTL.Name)
+    '            ActvCTL = nxtCTL
+    '        Next
+    '    End If
+    'End Sub
+    'Sub deleteValues()
+    '    Dim ActvCTL, nxtCTL As Control
+    '    Dim kount As Integer
+
+    '    ActvCTL = Me.ActiveControl
+
+    '    If totalCTLS(kount) Then
+    '        For i = 0 To kount - 1
+    '            nxtCTL = GetNextControl(ActvCTL, True)
+    '            Do While nxtCTL.Enabled = False
+    '                nxtCTL = GetNextControl(nxtCTL, True)
+    '            Loop
+
+    '            If Strings.Left(nxtCTL.Name, 6) <> "txtVal" Then
+    '                ActvCTL.Text = ""
+    '                Exit For
+    '            Else
+    '                ActvCTL.Text = nxtCTL.Text
+    '                ActvCTL = nxtCTL
+    '            End If
+
+    '        Next
+    '    End If
+    'End Sub
+    'Function totalCTLS(ByRef kount As Integer) As Boolean
+    '    kount = 0
+
+    '    sql = "select * from form_daily1;"
+
+    '    Try
+    '        conn.Open()
+    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+    '        ds.Clear()
+    '        da.Fill(ds, "flds")
+    '        conn.Close()
+
+    '        With ds.Tables("flds")
+    '            For i = 5 To .Columns.Count - 1
+    '                If Strings.Left(.Columns(i).ColumnName, 8) = "Val_Elem" Then
+    '                    kount = kount + 1
+    '                End If
+    '            Next
+    '        End With
+    '        Return True
+    '    Catch ex As Exception
+    '        Return False
+    '    End Try
+    'End Function
 
 End Class

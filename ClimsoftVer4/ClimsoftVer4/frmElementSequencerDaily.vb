@@ -5,7 +5,7 @@
     Dim sql As String
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Me.DataGridView1.Rows.Remove(DataGridView1.SelectedRows(0))
+        Me.dataGridView1.Rows.Remove(dataGridView1.SelectedRows(0))
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Try
             da.Update(ds, "seqDailyElement")
@@ -22,7 +22,10 @@
         sql = "select * from seq_daily_element"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "seqDailyElement")
-        Me.DataGridView1.DataSource = ds.Tables(0)
+        Me.dataGridView1.DataSource = ds.Tables(0)
+
+        ClsTranslations.TranslateForm(Me)
+
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click

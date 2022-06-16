@@ -73,6 +73,9 @@ Public Class frmMonitoring
             qwry.CommandTimeout = 0
             qwry.ExecuteNonQuery()
             conn.Close()
+
+            ClsTranslations.TranslateForm(Me)
+
         Catch ex As Exception
             conn.Close()
             If ex.HResult = -2147467259 Then
@@ -87,24 +90,24 @@ Public Class frmMonitoring
         Dim dts, dte As String
 
         Me.Cursor = Cursors.WaitCursor
-        ListViewRecs.Clear()
+        listViewRecs.Clear()
         lblTrecs.Text = 0
 
-        dts = DateAndTime.Year(DateTimeStart.Text) & "-" & DateAndTime.Month(DateTimeStart.Text) & "-" & DateAndTime.Day(DateTimeStart.Text) & " 00:00:00"
-        dte = DateAndTime.Year(DateTimeEnd.Text) & "-" & DateAndTime.Month(DateTimeEnd.Text) & "-" & DateAndTime.Day(DateTimeEnd.Text) & " 23:59:59"
+        dts = DateAndTime.Year(dtpStartDate.Text) & "-" & DateAndTime.Month(dtpStartDate.Text) & "-" & DateAndTime.Day(dtpStartDate.Text) & " 00:00:00"
+        dte = DateAndTime.Year(dtpEndDate.Text) & "-" & DateAndTime.Month(dtpEndDate.Text) & "-" & DateAndTime.Day(dtpEndDate.Text) & " 23:59:59"
         Dim Rec(6) As String
 
         Try
             'Initialize List View
 
-            ListViewRecs.Clear()
-            ListViewRecs.Columns.Clear()
-            ListViewRecs.Columns.Add("Login", 120, HorizontalAlignment.Left)
-            ListViewRecs.Columns.Add("Station", 80, HorizontalAlignment.Left)
-            ListViewRecs.Columns.Add("Year", 60, HorizontalAlignment.Left)
-            ListViewRecs.Columns.Add("Month/Code", 80, HorizontalAlignment.Left)
-            ListViewRecs.Columns.Add("Form", 150, HorizontalAlignment.Left)
-            ListViewRecs.Columns.Add("Entry DateTime", 200, HorizontalAlignment.Left)
+            listViewRecs.Clear()
+            listViewRecs.Columns.Clear()
+            listViewRecs.Columns.Add("Login", 120, HorizontalAlignment.Left)
+            listViewRecs.Columns.Add("Station", 80, HorizontalAlignment.Left)
+            listViewRecs.Columns.Add("Year", 60, HorizontalAlignment.Left)
+            listViewRecs.Columns.Add("Month/Code", 80, HorizontalAlignment.Left)
+            listViewRecs.Columns.Add("Form", 150, HorizontalAlignment.Left)
+            listViewRecs.Columns.Add("Entry DateTime", 200, HorizontalAlignment.Left)
 
             For i = 0 To cboForms.Items.Count - 1
 
@@ -171,11 +174,11 @@ Public Class frmMonitoring
                     Rec(5) = ds.Tables("Records").Rows(kount).Item("Entry_DateTime")
 
                     Dim itms = New ListViewItem(Rec)
-                    ListViewRecs.Items.Add(itms)
+                    listViewRecs.Items.Add(itms)
                 Next kount
             Next i
 
-            lblTrecs.Text = ListViewRecs.Items.Count
+            lblTrecs.Text = listViewRecs.Items.Count
             lblTrecs.Refresh()
             If Val(lblTrecs.Text) > 0 Then
                 cmdSave2.Enabled = True
@@ -195,11 +198,11 @@ Public Class frmMonitoring
         Dim kt As Long
 
         Me.Cursor = Cursors.WaitCursor
-        ListViewRecs.Clear()
+        listViewRecs.Clear()
         lblTrecs.Text = 0
 
-        dtf = DateAndTime.Year(dtFrom.Text) & "-" & DateAndTime.Month(dtFrom.Text) & "-" & DateAndTime.Day(dtFrom.Text) & " 00:00:00"
-        dtt = DateAndTime.Year(dtTo.Text) & "-" & DateAndTime.Month(dtTo.Text) & "-" & DateAndTime.Day(dtTo.Text) & " 23:59:59"
+        dtf = DateAndTime.Year(dtpFrom.Text) & "-" & DateAndTime.Month(dtpFrom.Text) & "-" & DateAndTime.Day(dtpFrom.Text) & " 00:00:00"
+        dtt = DateAndTime.Year(dtpTo.Text) & "-" & DateAndTime.Month(dtpTo.Text) & "-" & DateAndTime.Day(dtpTo.Text) & " 23:59:59"
 
         Try
             kt = 0
@@ -250,12 +253,12 @@ Public Class frmMonitoring
         Try
             ' Initialize List View
 
-            ListViewRecs.Clear()
-            ListViewRecs.Columns.Clear()
-            ListViewRecs.Columns.Add("User", 120, HorizontalAlignment.Left)
-            ListViewRecs.Columns.Add("Records", 100, HorizontalAlignment.Right)
-            ListViewRecs.Columns.Add("Target", 100, HorizontalAlignment.Right)
-            ListViewRecs.Columns.Add("Performance % ", 150, HorizontalAlignment.Right)
+            listViewRecs.Clear()
+            listViewRecs.Columns.Clear()
+            listViewRecs.Columns.Add("User", 120, HorizontalAlignment.Left)
+            listViewRecs.Columns.Add("Records", 100, HorizontalAlignment.Right)
+            listViewRecs.Columns.Add("Target", 100, HorizontalAlignment.Right)
+            listViewRecs.Columns.Add("Performance % ", 150, HorizontalAlignment.Right)
 
             'sql = "Select * from userrecords"
             sql = "SELECT username as Login, recsdone as Records,recsexpt as Target, round(recsdone/recsexpt * 100, 1) as performance FROM userrecords WHERE recsexpt IS NOT NULL;"
@@ -285,7 +288,7 @@ Public Class frmMonitoring
                 'Rec(3) = Format(perf, "0.0") 'ds.Tables("Records").Rows(i).Item(3)
 
                 Dim itms = New ListViewItem(Rec)
-                ListViewRecs.Items.Add(itms)
+                listViewRecs.Items.Add(itms)
             Next i
 
             lblTrecs.Text = ds.Tables("Performs").Rows.Count
@@ -317,7 +320,7 @@ Public Class frmMonitoring
             If OptMonthly.Checked Then
                 datahdr = "Period: " & MonthName(Val(cboMonth.Text)) & "   " & txtYear.Text
             Else
-                datahdr = "Period: From  " & dtFrom.Text & "  To  " & dtTo.Text
+                datahdr = "Period: From  " & dtpFrom.Text & "  To  " & dtpTo.Text
             End If
 
             PrintLine(11, datahdr)
@@ -375,7 +378,7 @@ Public Class frmMonitoring
             End If
         End Try
 
-        ListViewRecs.Clear()
+        listViewRecs.Clear()
         lblTrecs.Text = 0
 
         Try
@@ -386,8 +389,8 @@ Public Class frmMonitoring
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "settings")
-                DataGridSettings.DataSource = ds.Tables("settings")
-                DataGridSettings.Refresh()
+                dataGridSettings.DataSource = ds.Tables("settings")
+                dataGridSettings.Refresh()
             ElseIf optEntryMode.Checked Then
                 sql = "SELECT form_name,description, entry_mode FROM data_forms where selected ='1';"
 
@@ -395,8 +398,8 @@ Public Class frmMonitoring
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "forms")
-                DataGridSettings.DataSource = ds.Tables("forms")
-                DataGridSettings.Refresh()
+                dataGridSettings.DataSource = ds.Tables("forms")
+                dataGridSettings.Refresh()
             ElseIf optUsersStatus.Checked Then
                 sql = "SELECT username as User,entry_status as Entry_Status FROM climsoftusers;"
 
@@ -404,11 +407,11 @@ Public Class frmMonitoring
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "EntryStatus")
-                DataGridSettings.DataSource = ds.Tables("EntryStatus")
-                DataGridSettings.Refresh()
+                dataGridSettings.DataSource = ds.Tables("EntryStatus")
+                dataGridSettings.Refresh()
             End If
             Me.Cursor = Cursors.Default
-            lblTrecs.Text = DataGridSettings.Rows.Count
+            lblTrecs.Text = dataGridSettings.Rows.Count
             conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -423,7 +426,7 @@ Public Class frmMonitoring
         Try
             conn.Open()
 
-            With DataGridSettings
+            With dataGridSettings
                 If .Rows.Count = 0 Then
                     MsgBox("No records retrieved yet!. Click View")
                     Exit Sub
@@ -502,7 +505,7 @@ Public Class frmMonitoring
 
         Try
             Me.Cursor = Cursors.WaitCursor
-            ListViewRecs.Clear()
+            listViewRecs.Clear()
             lblTrecs.Text = 0
 
             If optNotEntered.Checked Then
@@ -540,14 +543,14 @@ Public Class frmMonitoring
             da.Fill(ds, "verified")
 
             ' Initialize List View
-            ListViewRecs.Clear()
-            ListViewRecs.Columns.Clear()
-            ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
-            ListViewRecs.Columns.Add("Element", 100, HorizontalAlignment.Left)
-            ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
-            ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
-            ListViewRecs.Columns.Add("Form", 150, HorizontalAlignment.Left)
-            ListViewRecs.Columns.Add("Login", 150, HorizontalAlignment.Left)
+            listViewRecs.Clear()
+            listViewRecs.Columns.Clear()
+            listViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
+            listViewRecs.Columns.Add("Element", 100, HorizontalAlignment.Left)
+            listViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
+            listViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
+            listViewRecs.Columns.Add("Form", 150, HorizontalAlignment.Left)
+            listViewRecs.Columns.Add("Login", 150, HorizontalAlignment.Left)
 
             For i = 0 To ds.Tables("verified").Rows.Count - 1
                 Rec(0) = ds.Tables("verified").Rows(i).Item(0)
@@ -569,9 +572,9 @@ Public Class frmMonitoring
                 End If
 
                 Dim itms = New ListViewItem(Rec)
-                ListViewRecs.Items.Add(itms)
+                listViewRecs.Items.Add(itms)
             Next i
-            lblTrecs.Text = ListViewRecs.Items.Count
+            lblTrecs.Text = listViewRecs.Items.Count
             Me.Cursor = Cursors.Default
             conn.Close()
 
@@ -607,20 +610,20 @@ Public Class frmMonitoring
             fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\RecordsNotEntered.csv"
             FileOpen(11, fl, OpenMode.Output)
 
-            If ListViewRecs.Items.Count > 0 Then
+            If listViewRecs.Items.Count > 0 Then
 
                 ' Get and print Header Row
-                datahdr = ListViewRecs.Columns(0).Text
-                For k = 1 To ListViewRecs.Columns.Count - 1
-                    datahdr = datahdr & "," & ListViewRecs.Columns(k).Text
+                datahdr = listViewRecs.Columns(0).Text
+                For k = 1 To listViewRecs.Columns.Count - 1
+                    datahdr = datahdr & "," & listViewRecs.Columns(k).Text
                 Next
                 PrintLine(11, datahdr)
 
                 ' Output data records
-                For i = 0 To ListViewRecs.Items.Count - 1
-                    datarow = ListViewRecs.Items(i).SubItems(0).Text
-                    For j = 1 To ListViewRecs.Columns.Count - 1
-                        datarow = datarow & "," & ListViewRecs.Items(i).SubItems(j).Text
+                For i = 0 To listViewRecs.Items.Count - 1
+                    datarow = listViewRecs.Items(i).SubItems(0).Text
+                    For j = 1 To listViewRecs.Columns.Count - 1
+                        datarow = datarow & "," & listViewRecs.Items(i).SubItems(j).Text
                     Next
                     PrintLine(11, datarow)
                 Next
@@ -649,20 +652,20 @@ Public Class frmMonitoring
             fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & flnm & ".csv"
             FileOpen(11, fl, OpenMode.Output)
 
-            If ListViewRecs.Items.Count > 0 Then
+            If listViewRecs.Items.Count > 0 Then
 
                 ' Get and print Header Row
-                datahdr = ListViewRecs.Columns(0).Name
-                For k = 1 To ListViewRecs.Columns.Count - 1
-                    datahdr = datahdr & "," & ListViewRecs.Columns(k).Name
+                datahdr = listViewRecs.Columns(0).Name
+                For k = 1 To listViewRecs.Columns.Count - 1
+                    datahdr = datahdr & "," & listViewRecs.Columns(k).Name
                 Next
                 PrintLine(11, datahdr)
 
                 ' Output data records
-                For i = 0 To ListViewRecs.Items.Count - 1
-                    datarow = ListViewRecs.Items(i).SubItems(0).Text
-                    For j = 1 To ListViewRecs.Columns.Count - 1
-                        datarow = datarow & "," & ListViewRecs.Items(i).SubItems(j).Text
+                For i = 0 To listViewRecs.Items.Count - 1
+                    datarow = listViewRecs.Items(i).SubItems(0).Text
+                    For j = 1 To listViewRecs.Columns.Count - 1
+                        datarow = datarow & "," & listViewRecs.Items(i).SubItems(j).Text
                     Next
                     PrintLine(11, datarow)
                 Next
@@ -734,7 +737,7 @@ Public Class frmMonitoring
             'Open the output file
             fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\userRecord.csv"
             FileOpen(21, fl, OpenMode.Output)
-            With ListViewRecs
+            With listViewRecs
                 ' Output headers titls
                 datahdr = .Columns(0).Text
                 For j = 1 To .Columns.Count - 1
@@ -764,8 +767,8 @@ Public Class frmMonitoring
     End Sub
 
     Private Sub optTargets_CheckedChanged(sender As Object, e As EventArgs) Handles optTargets.CheckedChanged
-        DataGridSettings.DataSource = ""
-        DataGridSettings.Refresh()
+        dataGridSettings.DataSource = ""
+        dataGridSettings.Refresh()
         lblTrecs.Text = 0
     End Sub
 
@@ -791,12 +794,12 @@ Public Class frmMonitoring
             ElseIf cboForms.Text = "form_daily2" Then
                 ' Initialize List View
                 Dim Rec(4) As String
-                ListViewRecs.Clear()
-                ListViewRecs.Columns.Clear()
-                ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
-                ListViewRecs.Columns.Add("Element", 50, HorizontalAlignment.Left)
-                ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
-                ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
+                listViewRecs.Clear()
+                listViewRecs.Columns.Clear()
+                listViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
+                listViewRecs.Columns.Add("Element", 50, HorizontalAlignment.Left)
+                listViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
+                listViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
 
                 conn.Open()
                 sql = "select stationId, elementId from form_daily2 group by stationId, elementId;"
@@ -826,8 +829,8 @@ Public Class frmMonitoring
                                     Rec(3) = k
 
                                     Dim itms = New ListViewItem(Rec)
-                                    ListViewRecs.Items.Add(itms)
-                                    lblTrecs.Text = ListViewRecs.Items.Count
+                                    listViewRecs.Items.Add(itms)
+                                    lblTrecs.Text = listViewRecs.Items.Count
                                 End If
                             Next
                         Next
@@ -836,13 +839,13 @@ Public Class frmMonitoring
             ElseIf cboForms.Text = "form_hourly" Then
                 ' Initialize List View
                 Dim Rec(5) As String
-                ListViewRecs.Clear()
-                ListViewRecs.Columns.Clear()
-                ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
-                ListViewRecs.Columns.Add("Element", 50, HorizontalAlignment.Left)
-                ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
-                ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
-                ListViewRecs.Columns.Add("Day", 50, HorizontalAlignment.Right)
+                listViewRecs.Clear()
+                listViewRecs.Columns.Clear()
+                listViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
+                listViewRecs.Columns.Add("Element", 50, HorizontalAlignment.Left)
+                listViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
+                listViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
+                listViewRecs.Columns.Add("Day", 50, HorizontalAlignment.Right)
 
                 conn.Open()
                 sql = "select stationId, elementId from form_hourly group by stationId, elementId;"
@@ -875,8 +878,8 @@ Public Class frmMonitoring
                                         Rec(4) = l
 
                                         Dim itms = New ListViewItem(Rec)
-                                        ListViewRecs.Items.Add(itms)
-                                        lblTrecs.Text = ListViewRecs.Items.Count
+                                        listViewRecs.Items.Add(itms)
+                                        lblTrecs.Text = listViewRecs.Items.Count
                                     End If
                                 Next
                             Next
@@ -886,12 +889,12 @@ Public Class frmMonitoring
             ElseIf cboForms.Text = "form_agro1" Or cboForms.Text = "form_daily1" Or cboForms.Text = "form_hourlywind" Then
                 ' Initialize List View
                 Dim Rec(4) As String
-                ListViewRecs.Clear()
-                ListViewRecs.Columns.Clear()
-                ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
-                ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
-                ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
-                ListViewRecs.Columns.Add("Day", 50, HorizontalAlignment.Right)
+                listViewRecs.Clear()
+                listViewRecs.Columns.Clear()
+                listViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
+                listViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
+                listViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
+                listViewRecs.Columns.Add("Day", 50, HorizontalAlignment.Right)
 
                 conn.Open()
                 sql = "select stationId from " & cboForms.Text & " group by stationId;"
@@ -922,8 +925,8 @@ Public Class frmMonitoring
                                         Rec(3) = l
 
                                         Dim itms = New ListViewItem(Rec)
-                                        ListViewRecs.Items.Add(itms)
-                                        lblTrecs.Text = ListViewRecs.Items.Count
+                                        listViewRecs.Items.Add(itms)
+                                        lblTrecs.Text = listViewRecs.Items.Count
                                     End If
                                 Next
                             Next
@@ -933,13 +936,13 @@ Public Class frmMonitoring
             ElseIf cboForms.Text = "form_synoptic_2_ra1" Or cboForms.Text = "form_synoptic2_TDCF" Or cboForms.Text = "form_synoptic2_caribbean" Then
                 ' Initialize List View
                 Dim Rec(4) As String
-                ListViewRecs.Clear()
-                ListViewRecs.Columns.Clear()
-                ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
-                ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
-                ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
-                ListViewRecs.Columns.Add("Day", 50, HorizontalAlignment.Right)
-                ListViewRecs.Columns.Add("Hour", 50, HorizontalAlignment.Right)
+                listViewRecs.Clear()
+                listViewRecs.Columns.Clear()
+                listViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
+                listViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
+                listViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
+                listViewRecs.Columns.Add("Day", 50, HorizontalAlignment.Right)
+                listViewRecs.Columns.Add("Hour", 50, HorizontalAlignment.Right)
 
                 conn.Open()
                 sql = "select stationId from " & cboForms.Text & " group by stationId;"
@@ -972,8 +975,8 @@ Public Class frmMonitoring
                                             Rec(4) = m
 
                                             Dim itms = New ListViewItem(Rec)
-                                            ListViewRecs.Items.Add(itms)
-                                            lblTrecs.Text = ListViewRecs.Items.Count
+                                            listViewRecs.Items.Add(itms)
+                                            lblTrecs.Text = listViewRecs.Items.Count
                                         End If
                                     Next
                                 Next

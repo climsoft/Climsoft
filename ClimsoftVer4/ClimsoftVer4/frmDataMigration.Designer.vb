@@ -74,7 +74,7 @@ Partial Class frmDataMigration
         '
         'txtEyear
         '
-        Me.txtEyear.Location = New System.Drawing.Point(345, 110)
+        Me.txtEyear.Location = New System.Drawing.Point(382, 110)
         Me.txtEyear.Name = "txtEyear"
         Me.txtEyear.Size = New System.Drawing.Size(36, 20)
         Me.txtEyear.TabIndex = 3
@@ -82,7 +82,7 @@ Partial Class frmDataMigration
         '
         'txtByear
         '
-        Me.txtByear.Location = New System.Drawing.Point(231, 110)
+        Me.txtByear.Location = New System.Drawing.Point(227, 110)
         Me.txtByear.Name = "txtByear"
         Me.txtByear.Size = New System.Drawing.Size(41, 20)
         Me.txtByear.TabIndex = 2
@@ -91,7 +91,7 @@ Partial Class frmDataMigration
         'lblEyear
         '
         Me.lblEyear.AutoSize = True
-        Me.lblEyear.Location = New System.Drawing.Point(297, 112)
+        Me.lblEyear.Location = New System.Drawing.Point(304, 114)
         Me.lblEyear.Name = "lblEyear"
         Me.lblEyear.Size = New System.Drawing.Size(51, 13)
         Me.lblEyear.TabIndex = 8
@@ -100,7 +100,7 @@ Partial Class frmDataMigration
         'lblByear
         '
         Me.lblByear.AutoSize = True
-        Me.lblByear.Location = New System.Drawing.Point(167, 113)
+        Me.lblByear.Location = New System.Drawing.Point(129, 113)
         Me.lblByear.Name = "lblByear"
         Me.lblByear.Size = New System.Drawing.Size(65, 13)
         Me.lblByear.TabIndex = 7
@@ -117,7 +117,7 @@ Partial Class frmDataMigration
         '
         'txtV4db
         '
-        Me.txtV4db.Location = New System.Drawing.Point(345, 37)
+        Me.txtV4db.Location = New System.Drawing.Point(358, 37)
         Me.txtV4db.Name = "txtV4db"
         Me.txtV4db.Size = New System.Drawing.Size(185, 20)
         Me.txtV4db.TabIndex = 1
@@ -134,7 +134,7 @@ Partial Class frmDataMigration
         'lblV3
         '
         Me.lblV3.AutoSize = True
-        Me.lblV3.Location = New System.Drawing.Point(36, 41)
+        Me.lblV3.Location = New System.Drawing.Point(13, 41)
         Me.lblV3.Name = "lblV3"
         Me.lblV3.Size = New System.Drawing.Size(35, 13)
         Me.lblV3.TabIndex = 3
@@ -143,7 +143,7 @@ Partial Class frmDataMigration
         'optSeletedRecords
         '
         Me.optSeletedRecords.AutoSize = True
-        Me.optSeletedRecords.Location = New System.Drawing.Point(33, 111)
+        Me.optSeletedRecords.Location = New System.Drawing.Point(10, 111)
         Me.optSeletedRecords.Name = "optSeletedRecords"
         Me.optSeletedRecords.Size = New System.Drawing.Size(113, 17)
         Me.optSeletedRecords.TabIndex = 9
@@ -154,7 +154,7 @@ Partial Class frmDataMigration
         '
         Me.optEntireDb.AutoSize = True
         Me.optEntireDb.Checked = True
-        Me.optEntireDb.Location = New System.Drawing.Point(33, 76)
+        Me.optEntireDb.Location = New System.Drawing.Point(10, 76)
         Me.optEntireDb.Name = "optEntireDb"
         Me.optEntireDb.Size = New System.Drawing.Size(101, 17)
         Me.optEntireDb.TabIndex = 8
@@ -180,7 +180,7 @@ Partial Class frmDataMigration
         '
         Me.cmdCSV.BackgroundImage = CType(resources.GetObject("cmdCSV.BackgroundImage"), System.Drawing.Image)
         Me.cmdCSV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdCSV.Location = New System.Drawing.Point(439, 32)
+        Me.cmdCSV.Location = New System.Drawing.Point(488, 32)
         Me.cmdCSV.Name = "cmdCSV"
         Me.cmdCSV.Size = New System.Drawing.Size(36, 29)
         Me.cmdCSV.TabIndex = 6
@@ -197,9 +197,9 @@ Partial Class frmDataMigration
         '
         'txtBkpFile
         '
-        Me.txtBkpFile.Location = New System.Drawing.Point(80, 36)
+        Me.txtBkpFile.Location = New System.Drawing.Point(132, 37)
         Me.txtBkpFile.Name = "txtBkpFile"
-        Me.txtBkpFile.Size = New System.Drawing.Size(362, 20)
+        Me.txtBkpFile.Size = New System.Drawing.Size(345, 20)
         Me.txtBkpFile.TabIndex = 4
         '
         'lstMsgs

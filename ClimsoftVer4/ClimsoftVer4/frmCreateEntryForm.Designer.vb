@@ -22,7 +22,7 @@ Partial Class frmCreateEntryForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lstForms = New System.Windows.Forms.ListBox()
+        Me.lstBoxForms = New System.Windows.Forms.ListBox()
         Me.lblForms = New System.Windows.Forms.Label()
         Me.cboElements = New System.Windows.Forms.ComboBox()
         Me.lblElements = New System.Windows.Forms.Label()
@@ -30,17 +30,17 @@ Partial Class frmCreateEntryForm
         Me.cmdFinish = New System.Windows.Forms.Button()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.lstvElements = New System.Windows.Forms.ListView()
+        Me.lstViewElements = New System.Windows.Forms.ListView()
         Me.butClear = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'lstForms
+        'lstBoxForms
         '
-        Me.lstForms.FormattingEnabled = True
-        Me.lstForms.Location = New System.Drawing.Point(93, 31)
-        Me.lstForms.Name = "lstForms"
-        Me.lstForms.Size = New System.Drawing.Size(427, 30)
-        Me.lstForms.TabIndex = 0
+        Me.lstBoxForms.FormattingEnabled = True
+        Me.lstBoxForms.Location = New System.Drawing.Point(93, 31)
+        Me.lstBoxForms.Name = "lstBoxForms"
+        Me.lstBoxForms.Size = New System.Drawing.Size(427, 30)
+        Me.lstBoxForms.TabIndex = 0
         '
         'lblForms
         '
@@ -104,22 +104,22 @@ Partial Class frmCreateEntryForm
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'lstvElements
+        'lstViewElements
         '
-        Me.lstvElements.AllowColumnReorder = True
-        Me.lstvElements.AllowDrop = True
-        Me.lstvElements.FullRowSelect = True
-        Me.lstvElements.GridLines = True
-        Me.lstvElements.HideSelection = False
-        Me.lstvElements.HoverSelection = True
-        Me.lstvElements.LabelEdit = True
-        Me.lstvElements.Location = New System.Drawing.Point(93, 125)
-        Me.lstvElements.Name = "lstvElements"
-        Me.lstvElements.RightToLeftLayout = True
-        Me.lstvElements.Size = New System.Drawing.Size(423, 289)
-        Me.lstvElements.TabIndex = 19
-        Me.lstvElements.UseCompatibleStateImageBehavior = False
-        Me.lstvElements.View = System.Windows.Forms.View.Details
+        Me.lstViewElements.AllowColumnReorder = True
+        Me.lstViewElements.AllowDrop = True
+        Me.lstViewElements.FullRowSelect = True
+        Me.lstViewElements.GridLines = True
+        Me.lstViewElements.HideSelection = False
+        Me.lstViewElements.HoverSelection = True
+        Me.lstViewElements.LabelEdit = True
+        Me.lstViewElements.Location = New System.Drawing.Point(93, 125)
+        Me.lstViewElements.Name = "lstViewElements"
+        Me.lstViewElements.RightToLeftLayout = True
+        Me.lstViewElements.Size = New System.Drawing.Size(423, 289)
+        Me.lstViewElements.TabIndex = 19
+        Me.lstViewElements.UseCompatibleStateImageBehavior = False
+        Me.lstViewElements.View = System.Windows.Forms.View.Details
         '
         'butClear
         '
@@ -136,7 +136,7 @@ Partial Class frmCreateEntryForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(598, 450)
         Me.Controls.Add(Me.butClear)
-        Me.Controls.Add(Me.lstvElements)
+        Me.Controls.Add(Me.lstViewElements)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.cmdFinish)
@@ -144,15 +144,15 @@ Partial Class frmCreateEntryForm
         Me.Controls.Add(Me.lblElements)
         Me.Controls.Add(Me.cboElements)
         Me.Controls.Add(Me.lblForms)
-        Me.Controls.Add(Me.lstForms)
+        Me.Controls.Add(Me.lstBoxForms)
         Me.Name = "frmCreateEntryForm"
-        Me.Text = "frmCreateEntryForm"
+        Me.Text = "Create Entry Form"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents lstForms As ListBox
+    Friend WithEvents lstBoxForms As ListBox
     Friend WithEvents lblForms As Label
     Friend WithEvents cboElements As ComboBox
     Friend WithEvents lblElements As Label
@@ -160,6 +160,6 @@ Partial Class frmCreateEntryForm
     Friend WithEvents cmdFinish As Button
     Friend WithEvents cmdClose As Button
     Friend WithEvents cmdHelp As Button
-    Public WithEvents lstvElements As ListView
+    Public WithEvents lstViewElements As ListView
     Friend WithEvents butClear As Button
 End Class

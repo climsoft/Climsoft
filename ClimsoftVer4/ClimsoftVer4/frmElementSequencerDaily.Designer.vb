@@ -27,9 +27,9 @@ Partial Class frmElementSequencerDaily
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.dataGridView1 = New System.Windows.Forms.DataGridView()
         Me.lblSequencerGuidelines = New System.Windows.Forms.Label()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnHelp
@@ -68,14 +68,14 @@ Partial Class frmElementSequencerDaily
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'DataGridView1
+        'dataGridView1
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(70, 68)
-        Me.DataGridView1.MultiSelect = False
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(358, 215)
-        Me.DataGridView1.TabIndex = 5
+        Me.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataGridView1.Location = New System.Drawing.Point(70, 68)
+        Me.dataGridView1.MultiSelect = False
+        Me.dataGridView1.Name = "dataGridView1"
+        Me.dataGridView1.Size = New System.Drawing.Size(358, 215)
+        Me.dataGridView1.TabIndex = 5
         '
         'lblSequencerGuidelines
         '
@@ -96,12 +96,12 @@ Partial Class frmElementSequencerDaily
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.dataGridView1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmElementSequencerDaily"
         Me.Text = "Sequencer for Entering Daily Data on FormDaily2"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -109,6 +109,6 @@ Partial Class frmElementSequencerDaily
     Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents dataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents lblSequencerGuidelines As System.Windows.Forms.Label
 End Class

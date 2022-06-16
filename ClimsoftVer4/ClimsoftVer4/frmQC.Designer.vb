@@ -61,7 +61,7 @@ Partial Class frmQC
         '
         'cmdApply
         '
-        Me.cmdApply.Location = New System.Drawing.Point(195, 435)
+        Me.cmdApply.Location = New System.Drawing.Point(195, 471)
         Me.cmdApply.Name = "cmdApply"
         Me.cmdApply.Size = New System.Drawing.Size(73, 23)
         Me.cmdApply.TabIndex = 7
@@ -71,7 +71,7 @@ Partial Class frmQC
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(126, 435)
+        Me.cmdOk.Location = New System.Drawing.Point(126, 471)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(63, 23)
         Me.cmdOk.TabIndex = 6
@@ -81,7 +81,7 @@ Partial Class frmQC
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(151, 435)
+        Me.cmdCancel.Location = New System.Drawing.Point(151, 471)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(73, 23)
         Me.cmdCancel.TabIndex = 5
@@ -90,7 +90,7 @@ Partial Class frmQC
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(288, 435)
+        Me.cmdHelp.Location = New System.Drawing.Point(288, 471)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(73, 23)
         Me.cmdHelp.TabIndex = 4
@@ -101,7 +101,7 @@ Partial Class frmQC
         '
         Me.pnlAdvanced.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlAdvanced.Controls.Add(Me.lblQcAdvanced)
-        Me.pnlAdvanced.Location = New System.Drawing.Point(693, 38)
+        Me.pnlAdvanced.Location = New System.Drawing.Point(615, 32)
         Me.pnlAdvanced.Name = "pnlAdvanced"
         Me.pnlAdvanced.Size = New System.Drawing.Size(100, 25)
         Me.pnlAdvanced.TabIndex = 9
@@ -110,7 +110,7 @@ Partial Class frmQC
         'lblQcAdvanced
         '
         Me.lblQcAdvanced.AutoSize = True
-        Me.lblQcAdvanced.Location = New System.Drawing.Point(3, 0)
+        Me.lblQcAdvanced.Location = New System.Drawing.Point(4, 0)
         Me.lblQcAdvanced.Name = "lblQcAdvanced"
         Me.lblQcAdvanced.Size = New System.Drawing.Size(74, 13)
         Me.lblQcAdvanced.TabIndex = 0
@@ -129,12 +129,12 @@ Partial Class frmQC
         Me.pnlQcStandard.Controls.Add(Me.lblBeginYear)
         Me.pnlQcStandard.Location = New System.Drawing.Point(3, 319)
         Me.pnlQcStandard.Name = "pnlQcStandard"
-        Me.pnlQcStandard.Size = New System.Drawing.Size(255, 63)
+        Me.pnlQcStandard.Size = New System.Drawing.Size(302, 63)
         Me.pnlQcStandard.TabIndex = 8
         '
         'txtEndMonth
         '
-        Me.txtEndMonth.Location = New System.Drawing.Point(206, 34)
+        Me.txtEndMonth.Location = New System.Drawing.Point(258, 34)
         Me.txtEndMonth.Name = "txtEndMonth"
         Me.txtEndMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtEndMonth.TabIndex = 10
@@ -143,7 +143,7 @@ Partial Class frmQC
         '
         'txtBeginMonth
         '
-        Me.txtBeginMonth.Location = New System.Drawing.Point(206, 6)
+        Me.txtBeginMonth.Location = New System.Drawing.Point(258, 6)
         Me.txtBeginMonth.Name = "txtBeginMonth"
         Me.txtBeginMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtBeginMonth.TabIndex = 9
@@ -152,7 +152,7 @@ Partial Class frmQC
         '
         'txtEndYear
         '
-        Me.txtEndYear.Location = New System.Drawing.Point(68, 36)
+        Me.txtEndYear.Location = New System.Drawing.Point(94, 36)
         Me.txtEndYear.Name = "txtEndYear"
         Me.txtEndYear.Size = New System.Drawing.Size(44, 20)
         Me.txtEndYear.TabIndex = 8
@@ -160,7 +160,7 @@ Partial Class frmQC
         '
         'txtBeginYear
         '
-        Me.txtBeginYear.Location = New System.Drawing.Point(68, 8)
+        Me.txtBeginYear.Location = New System.Drawing.Point(94, 8)
         Me.txtBeginYear.Name = "txtBeginYear"
         Me.txtBeginYear.Size = New System.Drawing.Size(44, 20)
         Me.txtBeginYear.TabIndex = 7
@@ -169,7 +169,7 @@ Partial Class frmQC
         'lblEndMonth
         '
         Me.lblEndMonth.AutoSize = True
-        Me.lblEndMonth.Location = New System.Drawing.Point(133, 38)
+        Me.lblEndMonth.Location = New System.Drawing.Point(159, 38)
         Me.lblEndMonth.Name = "lblEndMonth"
         Me.lblEndMonth.Size = New System.Drawing.Size(59, 13)
         Me.lblEndMonth.TabIndex = 6
@@ -178,7 +178,7 @@ Partial Class frmQC
         'lblBeginMonth
         '
         Me.lblBeginMonth.AutoSize = True
-        Me.lblBeginMonth.Location = New System.Drawing.Point(133, 10)
+        Me.lblBeginMonth.Location = New System.Drawing.Point(159, 10)
         Me.lblBeginMonth.Name = "lblBeginMonth"
         Me.lblBeginMonth.Size = New System.Drawing.Size(67, 13)
         Me.lblBeginMonth.TabIndex = 5
@@ -206,9 +206,9 @@ Partial Class frmQC
         '
         Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.btnUpdate.Location = New System.Drawing.Point(537, 428)
+        Me.btnUpdate.Location = New System.Drawing.Point(496, 448)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(137, 30)
+        Me.btnUpdate.Size = New System.Drawing.Size(180, 30)
         Me.btnUpdate.TabIndex = 11
         Me.btnUpdate.Text = "Update With QC Report"
         Me.btnUpdate.UseVisualStyleBackColor = False
@@ -218,7 +218,8 @@ Partial Class frmQC
         Me.LstViewStations.CheckBoxes = True
         Me.LstViewStations.FullRowSelect = True
         Me.LstViewStations.GridLines = True
-        Me.LstViewStations.Location = New System.Drawing.Point(264, 57)
+        Me.LstViewStations.HideSelection = False
+        Me.LstViewStations.Location = New System.Drawing.Point(311, 81)
         Me.LstViewStations.Name = "LstViewStations"
         Me.LstViewStations.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.LstViewStations.RightToLeftLayout = True
@@ -232,11 +233,12 @@ Partial Class frmQC
         Me.lstViewElements.CheckBoxes = True
         Me.lstViewElements.FullRowSelect = True
         Me.lstViewElements.GridLines = True
-        Me.lstViewElements.Location = New System.Drawing.Point(565, 55)
+        Me.lstViewElements.HideSelection = False
+        Me.lstViewElements.Location = New System.Drawing.Point(622, 84)
         Me.lstViewElements.Name = "lstViewElements"
         Me.lstViewElements.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.lstViewElements.RightToLeftLayout = True
-        Me.lstViewElements.Size = New System.Drawing.Size(276, 326)
+        Me.lstViewElements.Size = New System.Drawing.Size(276, 320)
         Me.lstViewElements.TabIndex = 15
         Me.lstViewElements.UseCompatibleStateImageBehavior = False
         Me.lstViewElements.View = System.Windows.Forms.View.Details
@@ -244,7 +246,7 @@ Partial Class frmQC
         'chkAllStations
         '
         Me.chkAllStations.AutoSize = True
-        Me.chkAllStations.Location = New System.Drawing.Point(267, 384)
+        Me.chkAllStations.Location = New System.Drawing.Point(314, 411)
         Me.chkAllStations.Name = "chkAllStations"
         Me.chkAllStations.Size = New System.Drawing.Size(111, 17)
         Me.chkAllStations.TabIndex = 16
@@ -254,7 +256,7 @@ Partial Class frmQC
         'chkAllElements
         '
         Me.chkAllElements.AutoSize = True
-        Me.chkAllElements.Location = New System.Drawing.Point(568, 385)
+        Me.chkAllElements.Location = New System.Drawing.Point(623, 416)
         Me.chkAllElements.Name = "chkAllElements"
         Me.chkAllElements.Size = New System.Drawing.Size(116, 17)
         Me.chkAllElements.TabIndex = 17
@@ -263,9 +265,9 @@ Partial Class frmQC
         '
         'cmdPerformQC
         '
-        Me.cmdPerformQC.Location = New System.Drawing.Point(14, 435)
+        Me.cmdPerformQC.Location = New System.Drawing.Point(14, 471)
         Me.cmdPerformQC.Name = "cmdPerformQC"
-        Me.cmdPerformQC.Size = New System.Drawing.Size(73, 23)
+        Me.cmdPerformQC.Size = New System.Drawing.Size(93, 23)
         Me.cmdPerformQC.TabIndex = 18
         Me.cmdPerformQC.Text = "Perform QC"
         Me.cmdPerformQC.UseVisualStyleBackColor = True
@@ -297,7 +299,7 @@ Partial Class frmQC
         Me.pnlQCTypes.Controls.Add(Me.optAbsoluteLimits)
         Me.pnlQCTypes.Location = New System.Drawing.Point(3, 27)
         Me.pnlQCTypes.Name = "pnlQCTypes"
-        Me.pnlQCTypes.Size = New System.Drawing.Size(257, 259)
+        Me.pnlQCTypes.Size = New System.Drawing.Size(302, 259)
         Me.pnlQCTypes.TabIndex = 23
         '
         'optInterElement
@@ -347,7 +349,7 @@ Partial Class frmQC
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(264, 35)
+        Me.lblStation.Location = New System.Drawing.Point(313, 37)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(73, 13)
         Me.lblStation.TabIndex = 27
@@ -357,7 +359,7 @@ Partial Class frmQC
         '
         Me.cmbstation.FormattingEnabled = True
         Me.cmbstation.ItemHeight = 13
-        Me.cmbstation.Location = New System.Drawing.Point(338, 31)
+        Me.cmbstation.Location = New System.Drawing.Point(311, 57)
         Me.cmbstation.Name = "cmbstation"
         Me.cmbstation.Size = New System.Drawing.Size(221, 21)
         Me.cmbstation.TabIndex = 26
@@ -365,7 +367,7 @@ Partial Class frmQC
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(562, 35)
+        Me.lblElement.Location = New System.Drawing.Point(622, 37)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(78, 13)
         Me.lblElement.TabIndex = 29
@@ -375,7 +377,7 @@ Partial Class frmQC
         '
         Me.cmbElement.FormattingEnabled = True
         Me.cmbElement.ItemHeight = 13
-        Me.cmbElement.Location = New System.Drawing.Point(641, 31)
+        Me.cmbElement.Location = New System.Drawing.Point(622, 57)
         Me.cmbElement.Name = "cmbElement"
         Me.cmbElement.Size = New System.Drawing.Size(200, 21)
         Me.cmbElement.TabIndex = 28
@@ -384,7 +386,7 @@ Partial Class frmQC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(848, 461)
+        Me.ClientSize = New System.Drawing.Size(907, 506)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.cmbElement)
         Me.Controls.Add(Me.lblStation)
@@ -400,12 +402,12 @@ Partial Class frmQC
         Me.Controls.Add(Me.lstViewElements)
         Me.Controls.Add(Me.LstViewStations)
         Me.Controls.Add(Me.btnUpdate)
-        Me.Controls.Add(Me.pnlAdvanced)
         Me.Controls.Add(Me.pnlQcStandard)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdApply)
+        Me.Controls.Add(Me.pnlAdvanced)
         Me.Name = "frmQC"
         Me.Text = "Quality Control Checks"
         Me.pnlAdvanced.ResumeLayout(False)

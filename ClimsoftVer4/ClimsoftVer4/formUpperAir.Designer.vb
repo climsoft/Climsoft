@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class form_upperair1
+Partial Class formUpperAir
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -36,6 +36,9 @@ Partial Class form_upperair1
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lbStation = New System.Windows.Forms.Label()
         Me.grpData = New System.Windows.Forms.GroupBox()
+        Me.txtFlag313Field026 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem313Field013 = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.txtFlag312Field031 = New System.Windows.Forms.TextBox()
         Me.txtFlag308Field030 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem308Field017 = New System.Windows.Forms.TextBox()
@@ -92,9 +95,6 @@ Partial Class form_upperair1
         Me.recNumberTextBox = New System.Windows.Forms.TextBox()
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.txtFlag313Field026 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem313Field013 = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpHeaders.SuspendLayout()
         Me.grpData.SuspendLayout()
         Me.pnlConmmand.SuspendLayout()
@@ -114,9 +114,9 @@ Partial Class form_upperair1
         Me.grpHeaders.Controls.Add(Me.lblMonth)
         Me.grpHeaders.Controls.Add(Me.lblYear)
         Me.grpHeaders.Controls.Add(Me.lbStation)
-        Me.grpHeaders.Location = New System.Drawing.Point(33, 14)
+        Me.grpHeaders.Location = New System.Drawing.Point(8, 14)
         Me.grpHeaders.Name = "grpHeaders"
-        Me.grpHeaders.Size = New System.Drawing.Size(581, 90)
+        Me.grpHeaders.Size = New System.Drawing.Size(642, 90)
         Me.grpHeaders.TabIndex = 0
         Me.grpHeaders.TabStop = False
         '
@@ -124,16 +124,16 @@ Partial Class form_upperair1
         '
         Me.cboStation.FormattingEnabled = True
         Me.cboStation.Items.AddRange(New Object() {"Surface", "1000", "925", "850", "700", "500", "400", "300", "250", "200", "150", "100", "70", "50", "30", "20", "10"})
-        Me.cboStation.Location = New System.Drawing.Point(99, 16)
+        Me.cboStation.Location = New System.Drawing.Point(162, 16)
         Me.cboStation.Name = "cboStation"
-        Me.cboStation.Size = New System.Drawing.Size(455, 21)
+        Me.cboStation.Size = New System.Drawing.Size(392, 21)
         Me.cboStation.TabIndex = 0
         '
         'cboLevel
         '
         Me.cboLevel.FormattingEnabled = True
         Me.cboLevel.Items.AddRange(New Object() {"Surface", "1000", "925", "850", "700", "500", "400", "300", "250", "200", "150", "100", "70", "50", "30", "20", "10"})
-        Me.cboLevel.Location = New System.Drawing.Point(448, 56)
+        Me.cboLevel.Location = New System.Drawing.Point(497, 56)
         Me.cboLevel.Name = "cboLevel"
         Me.cboLevel.Size = New System.Drawing.Size(106, 21)
         Me.cboLevel.TabIndex = 5
@@ -142,7 +142,7 @@ Partial Class form_upperair1
         '
         Me.cboHour.FormattingEnabled = True
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboHour.Location = New System.Drawing.Point(353, 56)
+        Me.cboHour.Location = New System.Drawing.Point(390, 56)
         Me.cboHour.Name = "cboHour"
         Me.cboHour.Size = New System.Drawing.Size(36, 21)
         Me.cboHour.TabIndex = 4
@@ -151,7 +151,7 @@ Partial Class form_upperair1
         '
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.cboMonth.Location = New System.Drawing.Point(191, 56)
+        Me.cboMonth.Location = New System.Drawing.Point(199, 56)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(36, 21)
         Me.cboMonth.TabIndex = 2
@@ -160,7 +160,7 @@ Partial Class form_upperair1
         '
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(269, 56)
+        Me.cboDay.Location = New System.Drawing.Point(289, 56)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(36, 21)
         Me.cboDay.TabIndex = 3
@@ -168,64 +168,64 @@ Partial Class form_upperair1
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(99, 56)
+        Me.txtYear.Location = New System.Drawing.Point(85, 56)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(38, 20)
         Me.txtYear.TabIndex = 1
         '
         'lblLevel
         '
-        Me.lblLevel.AutoSize = True
-        Me.lblLevel.Location = New System.Drawing.Point(409, 59)
+        Me.lblLevel.Location = New System.Drawing.Point(437, 61)
         Me.lblLevel.Name = "lblLevel"
-        Me.lblLevel.Size = New System.Drawing.Size(33, 13)
+        Me.lblLevel.Size = New System.Drawing.Size(54, 13)
         Me.lblLevel.TabIndex = 6
         Me.lblLevel.Text = "Level"
+        Me.lblLevel.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblHour
         '
-        Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(322, 59)
+        Me.lblHour.Location = New System.Drawing.Point(331, 61)
         Me.lblHour.Name = "lblHour"
-        Me.lblHour.Size = New System.Drawing.Size(30, 13)
+        Me.lblHour.Size = New System.Drawing.Size(53, 13)
         Me.lblHour.TabIndex = 5
         Me.lblHour.Text = "Hour"
+        Me.lblHour.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblDay
         '
-        Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(242, 59)
+        Me.lblDay.Location = New System.Drawing.Point(250, 61)
         Me.lblDay.Name = "lblDay"
-        Me.lblDay.Size = New System.Drawing.Size(26, 13)
+        Me.lblDay.Size = New System.Drawing.Size(33, 13)
         Me.lblDay.TabIndex = 4
         Me.lblDay.Text = "Day"
+        Me.lblDay.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblMonth
         '
-        Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(151, 59)
+        Me.lblMonth.Location = New System.Drawing.Point(150, 60)
         Me.lblMonth.Name = "lblMonth"
-        Me.lblMonth.Size = New System.Drawing.Size(37, 13)
+        Me.lblMonth.Size = New System.Drawing.Size(44, 13)
         Me.lblMonth.TabIndex = 3
         Me.lblMonth.Text = "Month"
+        Me.lblMonth.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblYear
         '
-        Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(64, 59)
+        Me.lblYear.Location = New System.Drawing.Point(32, 60)
         Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(29, 13)
+        Me.lblYear.Size = New System.Drawing.Size(47, 13)
         Me.lblYear.TabIndex = 2
         Me.lblYear.Text = "Year"
+        Me.lblYear.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lbStation
         '
-        Me.lbStation.AutoSize = True
-        Me.lbStation.Location = New System.Drawing.Point(6, 24)
+        Me.lbStation.Location = New System.Drawing.Point(6, 22)
         Me.lbStation.Name = "lbStation"
-        Me.lbStation.Size = New System.Drawing.Size(87, 13)
+        Me.lbStation.Size = New System.Drawing.Size(150, 13)
         Me.lbStation.TabIndex = 0
         Me.lbStation.Text = "Station Name/ID"
+        Me.lbStation.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'grpData
         '
@@ -276,9 +276,33 @@ Partial Class form_upperair1
         Me.grpData.TabIndex = 1
         Me.grpData.TabStop = False
         '
+        'txtFlag313Field026
+        '
+        Me.txtFlag313Field026.Location = New System.Drawing.Point(342, 214)
+        Me.txtFlag313Field026.Name = "txtFlag313Field026"
+        Me.txtFlag313Field026.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag313Field026.TabIndex = 38
+        Me.txtFlag313Field026.TabStop = False
+        '
+        'txtVal_Elem313Field013
+        '
+        Me.txtVal_Elem313Field013.Location = New System.Drawing.Point(279, 214)
+        Me.txtVal_Elem313Field013.Name = "txtVal_Elem313Field013"
+        Me.txtVal_Elem313Field013.Size = New System.Drawing.Size(56, 20)
+        Me.txtVal_Elem313Field013.TabIndex = 13
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(40, 218)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(89, 13)
+        Me.Label1.TabIndex = 43
+        Me.Label1.Text = "Relative Humidity"
+        '
         'txtFlag312Field031
         '
-        Me.txtFlag312Field031.Location = New System.Drawing.Point(304, 344)
+        Me.txtFlag312Field031.Location = New System.Drawing.Point(342, 344)
         Me.txtFlag312Field031.Name = "txtFlag312Field031"
         Me.txtFlag312Field031.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag312Field031.TabIndex = 43
@@ -286,7 +310,7 @@ Partial Class form_upperair1
         '
         'txtFlag308Field030
         '
-        Me.txtFlag308Field030.Location = New System.Drawing.Point(304, 318)
+        Me.txtFlag308Field030.Location = New System.Drawing.Point(342, 318)
         Me.txtFlag308Field030.Name = "txtFlag308Field030"
         Me.txtFlag308Field030.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag308Field030.TabIndex = 42
@@ -294,14 +318,14 @@ Partial Class form_upperair1
         '
         'txtVal_Elem308Field017
         '
-        Me.txtVal_Elem308Field017.Location = New System.Drawing.Point(241, 318)
+        Me.txtVal_Elem308Field017.Location = New System.Drawing.Point(279, 318)
         Me.txtVal_Elem308Field017.Name = "txtVal_Elem308Field017"
         Me.txtVal_Elem308Field017.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem308Field017.TabIndex = 17
         '
         'txtFlag307Field029
         '
-        Me.txtFlag307Field029.Location = New System.Drawing.Point(304, 292)
+        Me.txtFlag307Field029.Location = New System.Drawing.Point(342, 292)
         Me.txtFlag307Field029.Name = "txtFlag307Field029"
         Me.txtFlag307Field029.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag307Field029.TabIndex = 41
@@ -309,14 +333,14 @@ Partial Class form_upperair1
         '
         'txtVal_Elem307Field016
         '
-        Me.txtVal_Elem307Field016.Location = New System.Drawing.Point(241, 292)
+        Me.txtVal_Elem307Field016.Location = New System.Drawing.Point(279, 292)
         Me.txtVal_Elem307Field016.Name = "txtVal_Elem307Field016"
         Me.txtVal_Elem307Field016.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem307Field016.TabIndex = 16
         '
         'txtFlag306Field028
         '
-        Me.txtFlag306Field028.Location = New System.Drawing.Point(304, 266)
+        Me.txtFlag306Field028.Location = New System.Drawing.Point(342, 266)
         Me.txtFlag306Field028.Name = "txtFlag306Field028"
         Me.txtFlag306Field028.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag306Field028.TabIndex = 40
@@ -324,14 +348,14 @@ Partial Class form_upperair1
         '
         'txtVal_Elem306Field015
         '
-        Me.txtVal_Elem306Field015.Location = New System.Drawing.Point(241, 266)
+        Me.txtVal_Elem306Field015.Location = New System.Drawing.Point(279, 266)
         Me.txtVal_Elem306Field015.Name = "txtVal_Elem306Field015"
         Me.txtVal_Elem306Field015.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem306Field015.TabIndex = 15
         '
         'txtFlag305Field027
         '
-        Me.txtFlag305Field027.Location = New System.Drawing.Point(304, 240)
+        Me.txtFlag305Field027.Location = New System.Drawing.Point(342, 240)
         Me.txtFlag305Field027.Name = "txtFlag305Field027"
         Me.txtFlag305Field027.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag305Field027.TabIndex = 39
@@ -339,14 +363,14 @@ Partial Class form_upperair1
         '
         'txtVal_Elem305Field014
         '
-        Me.txtVal_Elem305Field014.Location = New System.Drawing.Point(241, 240)
+        Me.txtVal_Elem305Field014.Location = New System.Drawing.Point(279, 240)
         Me.txtVal_Elem305Field014.Name = "txtVal_Elem305Field014"
         Me.txtVal_Elem305Field014.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem305Field014.TabIndex = 14
         '
         'txtFlag304Field025
         '
-        Me.txtFlag304Field025.Location = New System.Drawing.Point(304, 188)
+        Me.txtFlag304Field025.Location = New System.Drawing.Point(342, 188)
         Me.txtFlag304Field025.Name = "txtFlag304Field025"
         Me.txtFlag304Field025.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag304Field025.TabIndex = 37
@@ -354,14 +378,14 @@ Partial Class form_upperair1
         '
         'txtVal_Elem304Field012
         '
-        Me.txtVal_Elem304Field012.Location = New System.Drawing.Point(241, 188)
+        Me.txtVal_Elem304Field012.Location = New System.Drawing.Point(279, 188)
         Me.txtVal_Elem304Field012.Name = "txtVal_Elem304Field012"
         Me.txtVal_Elem304Field012.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem304Field012.TabIndex = 12
         '
         'txtFlag303Field024
         '
-        Me.txtFlag303Field024.Location = New System.Drawing.Point(304, 162)
+        Me.txtFlag303Field024.Location = New System.Drawing.Point(342, 162)
         Me.txtFlag303Field024.Name = "txtFlag303Field024"
         Me.txtFlag303Field024.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag303Field024.TabIndex = 36
@@ -369,14 +393,14 @@ Partial Class form_upperair1
         '
         'txtVal_Elem303Field011
         '
-        Me.txtVal_Elem303Field011.Location = New System.Drawing.Point(241, 162)
+        Me.txtVal_Elem303Field011.Location = New System.Drawing.Point(279, 162)
         Me.txtVal_Elem303Field011.Name = "txtVal_Elem303Field011"
         Me.txtVal_Elem303Field011.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem303Field011.TabIndex = 11
         '
         'txtFlag302Field023
         '
-        Me.txtFlag302Field023.Location = New System.Drawing.Point(304, 136)
+        Me.txtFlag302Field023.Location = New System.Drawing.Point(342, 136)
         Me.txtFlag302Field023.Name = "txtFlag302Field023"
         Me.txtFlag302Field023.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag302Field023.TabIndex = 35
@@ -384,14 +408,14 @@ Partial Class form_upperair1
         '
         'txtVal_Elem302Field010
         '
-        Me.txtVal_Elem302Field010.Location = New System.Drawing.Point(241, 136)
+        Me.txtVal_Elem302Field010.Location = New System.Drawing.Point(279, 136)
         Me.txtVal_Elem302Field010.Name = "txtVal_Elem302Field010"
         Me.txtVal_Elem302Field010.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem302Field010.TabIndex = 10
         '
         'txtFlag301Field022
         '
-        Me.txtFlag301Field022.Location = New System.Drawing.Point(304, 110)
+        Me.txtFlag301Field022.Location = New System.Drawing.Point(342, 110)
         Me.txtFlag301Field022.Name = "txtFlag301Field022"
         Me.txtFlag301Field022.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag301Field022.TabIndex = 34
@@ -399,14 +423,14 @@ Partial Class form_upperair1
         '
         'txtVal_Elem301Field009
         '
-        Me.txtVal_Elem301Field009.Location = New System.Drawing.Point(241, 110)
+        Me.txtVal_Elem301Field009.Location = New System.Drawing.Point(279, 110)
         Me.txtVal_Elem301Field009.Name = "txtVal_Elem301Field009"
         Me.txtVal_Elem301Field009.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem301Field009.TabIndex = 9
         '
         'txtFlag310Field021
         '
-        Me.txtFlag310Field021.Location = New System.Drawing.Point(304, 84)
+        Me.txtFlag310Field021.Location = New System.Drawing.Point(342, 84)
         Me.txtFlag310Field021.Name = "txtFlag310Field021"
         Me.txtFlag310Field021.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag310Field021.TabIndex = 33
@@ -414,21 +438,21 @@ Partial Class form_upperair1
         '
         'txtVal_Elem310Field008
         '
-        Me.txtVal_Elem310Field008.Location = New System.Drawing.Point(241, 84)
+        Me.txtVal_Elem310Field008.Location = New System.Drawing.Point(279, 84)
         Me.txtVal_Elem310Field008.Name = "txtVal_Elem310Field008"
         Me.txtVal_Elem310Field008.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem310Field008.TabIndex = 8
         '
         'txtVal_Elem312Field018
         '
-        Me.txtVal_Elem312Field018.Location = New System.Drawing.Point(241, 344)
+        Me.txtVal_Elem312Field018.Location = New System.Drawing.Point(279, 344)
         Me.txtVal_Elem312Field018.Name = "txtVal_Elem312Field018"
         Me.txtVal_Elem312Field018.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem312Field018.TabIndex = 18
         '
         'txtFlag309Field020
         '
-        Me.txtFlag309Field020.Location = New System.Drawing.Point(304, 58)
+        Me.txtFlag309Field020.Location = New System.Drawing.Point(342, 58)
         Me.txtFlag309Field020.Name = "txtFlag309Field020"
         Me.txtFlag309Field020.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag309Field020.TabIndex = 32
@@ -436,7 +460,7 @@ Partial Class form_upperair1
         '
         'txtVal_Elem309Field007
         '
-        Me.txtVal_Elem309Field007.Location = New System.Drawing.Point(241, 58)
+        Me.txtVal_Elem309Field007.Location = New System.Drawing.Point(279, 58)
         Me.txtVal_Elem309Field007.Name = "txtVal_Elem309Field007"
         Me.txtVal_Elem309Field007.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem309Field007.TabIndex = 7
@@ -444,7 +468,7 @@ Partial Class form_upperair1
         'lblFlag
         '
         Me.lblFlag.AutoSize = True
-        Me.lblFlag.Location = New System.Drawing.Point(304, 16)
+        Me.lblFlag.Location = New System.Drawing.Point(342, 16)
         Me.lblFlag.Name = "lblFlag"
         Me.lblFlag.Size = New System.Drawing.Size(27, 13)
         Me.lblFlag.TabIndex = 15
@@ -453,7 +477,7 @@ Partial Class form_upperair1
         'lblValue
         '
         Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(249, 16)
+        Me.lblValue.Location = New System.Drawing.Point(281, 16)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(34, 13)
         Me.lblValue.TabIndex = 14
@@ -461,7 +485,7 @@ Partial Class form_upperair1
         '
         'txtFlag311Field019
         '
-        Me.txtFlag311Field019.Location = New System.Drawing.Point(304, 32)
+        Me.txtFlag311Field019.Location = New System.Drawing.Point(342, 32)
         Me.txtFlag311Field019.Name = "txtFlag311Field019"
         Me.txtFlag311Field019.Size = New System.Drawing.Size(36, 20)
         Me.txtFlag311Field019.TabIndex = 31
@@ -469,7 +493,7 @@ Partial Class form_upperair1
         '
         'txtVal_Elem311Field006
         '
-        Me.txtVal_Elem311Field006.Location = New System.Drawing.Point(241, 32)
+        Me.txtVal_Elem311Field006.Location = New System.Drawing.Point(279, 32)
         Me.txtVal_Elem311Field006.Name = "txtVal_Elem311Field006"
         Me.txtVal_Elem311Field006.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem311Field006.TabIndex = 6
@@ -477,7 +501,7 @@ Partial Class form_upperair1
         'lblVerSig
         '
         Me.lblVerSig.AutoSize = True
-        Me.lblVerSig.Location = New System.Drawing.Point(58, 348)
+        Me.lblVerSig.Location = New System.Drawing.Point(40, 348)
         Me.lblVerSig.Name = "lblVerSig"
         Me.lblVerSig.Size = New System.Drawing.Size(136, 13)
         Me.lblVerSig.TabIndex = 11
@@ -486,7 +510,7 @@ Partial Class form_upperair1
         'lblWindShrA
         '
         Me.lblWindShrA.AutoSize = True
-        Me.lblWindShrA.Location = New System.Drawing.Point(58, 322)
+        Me.lblWindShrA.Location = New System.Drawing.Point(40, 322)
         Me.lblWindShrA.Name = "lblWindShrA"
         Me.lblWindShrA.Size = New System.Drawing.Size(147, 13)
         Me.lblWindShrA.TabIndex = 10
@@ -495,7 +519,7 @@ Partial Class form_upperair1
         'lblWindShrB
         '
         Me.lblWindShrB.AutoSize = True
-        Me.lblWindShrB.Location = New System.Drawing.Point(58, 296)
+        Me.lblWindShrB.Location = New System.Drawing.Point(40, 296)
         Me.lblWindShrB.Name = "lblWindShrB"
         Me.lblWindShrB.Size = New System.Drawing.Size(145, 13)
         Me.lblWindShrB.TabIndex = 9
@@ -504,7 +528,7 @@ Partial Class form_upperair1
         'lblWindspd
         '
         Me.lblWindspd.AutoSize = True
-        Me.lblWindspd.Location = New System.Drawing.Point(58, 270)
+        Me.lblWindspd.Location = New System.Drawing.Point(40, 270)
         Me.lblWindspd.Name = "lblWindspd"
         Me.lblWindspd.Size = New System.Drawing.Size(66, 13)
         Me.lblWindspd.TabIndex = 8
@@ -513,7 +537,7 @@ Partial Class form_upperair1
         'lblWinddir
         '
         Me.lblWinddir.AutoSize = True
-        Me.lblWinddir.Location = New System.Drawing.Point(58, 244)
+        Me.lblWinddir.Location = New System.Drawing.Point(40, 244)
         Me.lblWinddir.Name = "lblWinddir"
         Me.lblWinddir.Size = New System.Drawing.Size(77, 13)
         Me.lblWinddir.TabIndex = 7
@@ -522,7 +546,7 @@ Partial Class form_upperair1
         'lblDPT
         '
         Me.lblDPT.AutoSize = True
-        Me.lblDPT.Location = New System.Drawing.Point(58, 192)
+        Me.lblDPT.Location = New System.Drawing.Point(40, 192)
         Me.lblDPT.Name = "lblDPT"
         Me.lblDPT.Size = New System.Drawing.Size(119, 13)
         Me.lblDPT.TabIndex = 6
@@ -531,7 +555,7 @@ Partial Class form_upperair1
         'lblDBT
         '
         Me.lblDBT.AutoSize = True
-        Me.lblDBT.Location = New System.Drawing.Point(58, 166)
+        Me.lblDBT.Location = New System.Drawing.Point(40, 166)
         Me.lblDBT.Name = "lblDBT"
         Me.lblDBT.Size = New System.Drawing.Size(110, 13)
         Me.lblDBT.TabIndex = 5
@@ -540,7 +564,7 @@ Partial Class form_upperair1
         'lblGeop
         '
         Me.lblGeop.AutoSize = True
-        Me.lblGeop.Location = New System.Drawing.Point(58, 140)
+        Me.lblGeop.Location = New System.Drawing.Point(40, 140)
         Me.lblGeop.Name = "lblGeop"
         Me.lblGeop.Size = New System.Drawing.Size(95, 13)
         Me.lblGeop.TabIndex = 4
@@ -549,7 +573,7 @@ Partial Class form_upperair1
         'lblPress
         '
         Me.lblPress.AutoSize = True
-        Me.lblPress.Location = New System.Drawing.Point(57, 114)
+        Me.lblPress.Location = New System.Drawing.Point(39, 114)
         Me.lblPress.Name = "lblPress"
         Me.lblPress.Size = New System.Drawing.Size(48, 13)
         Me.lblPress.TabIndex = 3
@@ -558,7 +582,7 @@ Partial Class form_upperair1
         'lblLonDisp
         '
         Me.lblLonDisp.AutoSize = True
-        Me.lblLonDisp.Location = New System.Drawing.Point(58, 88)
+        Me.lblLonDisp.Location = New System.Drawing.Point(40, 88)
         Me.lblLonDisp.Name = "lblLonDisp"
         Me.lblLonDisp.Size = New System.Drawing.Size(148, 13)
         Me.lblLonDisp.TabIndex = 2
@@ -567,7 +591,7 @@ Partial Class form_upperair1
         'lblLatdisp
         '
         Me.lblLatdisp.AutoSize = True
-        Me.lblLatdisp.Location = New System.Drawing.Point(58, 62)
+        Me.lblLatdisp.Location = New System.Drawing.Point(40, 62)
         Me.lblLatdisp.Name = "lblLatdisp"
         Me.lblLatdisp.Size = New System.Drawing.Size(139, 13)
         Me.lblLatdisp.TabIndex = 1
@@ -576,7 +600,7 @@ Partial Class form_upperair1
         'lblTimeDisp
         '
         Me.lblTimeDisp.AutoSize = True
-        Me.lblTimeDisp.Location = New System.Drawing.Point(58, 36)
+        Me.lblTimeDisp.Location = New System.Drawing.Point(40, 36)
         Me.lblTimeDisp.Name = "lblTimeDisp"
         Me.lblTimeDisp.Size = New System.Drawing.Size(123, 13)
         Me.lblTimeDisp.TabIndex = 0
@@ -639,17 +663,17 @@ Partial Class form_upperair1
         '
         'Label5
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(171, 86)
+        Me.Label5.Location = New System.Drawing.Point(179, 86)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(59, 13)
+        Me.Label5.Size = New System.Drawing.Size(81, 13)
         Me.Label5.TabIndex = 29
         Me.Label5.Text = "Sequencer"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.TopRight
         Me.Label5.Visible = False
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(236, 82)
+        Me.txtSequencer.Location = New System.Drawing.Point(266, 82)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 28
@@ -768,31 +792,7 @@ Partial Class form_upperair1
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'txtFlag313Field026
-        '
-        Me.txtFlag313Field026.Location = New System.Drawing.Point(304, 214)
-        Me.txtFlag313Field026.Name = "txtFlag313Field026"
-        Me.txtFlag313Field026.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag313Field026.TabIndex = 38
-        Me.txtFlag313Field026.TabStop = False
-        '
-        'txtVal_Elem313Field013
-        '
-        Me.txtVal_Elem313Field013.Location = New System.Drawing.Point(241, 214)
-        Me.txtVal_Elem313Field013.Name = "txtVal_Elem313Field013"
-        Me.txtVal_Elem313Field013.Size = New System.Drawing.Size(56, 20)
-        Me.txtVal_Elem313Field013.TabIndex = 13
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(58, 218)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(89, 13)
-        Me.Label1.TabIndex = 43
-        Me.Label1.Text = "Relative Humidity"
-        '
-        'form_upperair1
+        'formUpperAir
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -801,7 +801,7 @@ Partial Class form_upperair1
         Me.Controls.Add(Me.grpData)
         Me.Controls.Add(Me.grpHeaders)
         Me.KeyPreview = True
-        Me.Name = "form_upperair1"
+        Me.Name = "formUpperAir"
         Me.Text = "Upper air Observations"
         Me.grpHeaders.ResumeLayout(False)
         Me.grpHeaders.PerformLayout()

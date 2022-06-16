@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class form_agro1
+Partial Class formAgro1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -178,53 +178,53 @@ Partial Class form_agro1
         '
         'Label62
         '
-        Me.Label62.AutoSize = True
-        Me.Label62.Location = New System.Drawing.Point(411, 68)
+        Me.Label62.Location = New System.Drawing.Point(451, 68)
         Me.Label62.Name = "Label62"
-        Me.Label62.Size = New System.Drawing.Size(26, 13)
+        Me.Label62.Size = New System.Drawing.Size(50, 13)
         Me.Label62.TabIndex = 1010
         Me.Label62.Text = "Day"
+        Me.Label62.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label61
         '
-        Me.Label61.AutoSize = True
-        Me.Label61.Location = New System.Drawing.Point(287, 68)
+        Me.Label61.Location = New System.Drawing.Point(335, 69)
         Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(37, 13)
+        Me.Label61.Size = New System.Drawing.Size(50, 13)
         Me.Label61.TabIndex = 1009
         Me.Label61.Text = "Month"
+        Me.Label61.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(178, 68)
+        Me.Label2.Location = New System.Drawing.Point(209, 69)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(29, 13)
+        Me.Label2.Size = New System.Drawing.Size(44, 13)
         Me.Label2.TabIndex = 1008
         Me.Label2.Text = "Year"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(101, 25)
+        Me.Label1.Location = New System.Drawing.Point(63, 27)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(103, 13)
+        Me.Label1.Size = New System.Drawing.Size(170, 13)
         Me.Label1.TabIndex = 1007
         Me.Label1.Text = "Station Identification"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'cboStation
         '
         Me.cboStation.FormattingEnabled = True
-        Me.cboStation.Location = New System.Drawing.Point(209, 22)
+        Me.cboStation.Location = New System.Drawing.Point(239, 22)
         Me.cboStation.Name = "cboStation"
-        Me.cboStation.Size = New System.Drawing.Size(532, 21)
+        Me.cboStation.Size = New System.Drawing.Size(356, 21)
         Me.cboStation.TabIndex = 0
         '
         'cboMonth
         '
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.cboMonth.Location = New System.Drawing.Point(325, 64)
+        Me.cboMonth.Location = New System.Drawing.Point(391, 64)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(41, 21)
         Me.cboMonth.TabIndex = 2
@@ -233,14 +233,14 @@ Partial Class form_agro1
         '
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(441, 64)
+        Me.cboDay.Location = New System.Drawing.Point(507, 64)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(39, 21)
         Me.cboDay.TabIndex = 3
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(210, 64)
+        Me.txtYear.Location = New System.Drawing.Point(259, 64)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(40, 20)
         Me.txtYear.TabIndex = 1
@@ -248,7 +248,7 @@ Partial Class form_agro1
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(202, 148)
+        Me.Label7.Location = New System.Drawing.Point(164, 148)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(27, 13)
         Me.Label7.TabIndex = 1021
@@ -257,7 +257,7 @@ Partial Class form_agro1
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(163, 148)
+        Me.Label6.Location = New System.Drawing.Point(113, 148)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(34, 13)
         Me.Label6.TabIndex = 1020
@@ -265,7 +265,7 @@ Partial Class form_agro1
         '
         'txtFlag103Field040
         '
-        Me.txtFlag103Field040.Location = New System.Drawing.Point(204, 209)
+        Me.txtFlag103Field040.Location = New System.Drawing.Point(166, 209)
         Me.txtFlag103Field040.Name = "txtFlag103Field040"
         Me.txtFlag103Field040.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag103Field040.TabIndex = 1019
@@ -274,7 +274,7 @@ Partial Class form_agro1
         '
         'txtFlag102Field039
         '
-        Me.txtFlag102Field039.Location = New System.Drawing.Point(204, 185)
+        Me.txtFlag102Field039.Location = New System.Drawing.Point(166, 185)
         Me.txtFlag102Field039.Name = "txtFlag102Field039"
         Me.txtFlag102Field039.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag102Field039.TabIndex = 1018
@@ -283,7 +283,7 @@ Partial Class form_agro1
         '
         'txtFlag101Field038
         '
-        Me.txtFlag101Field038.Location = New System.Drawing.Point(204, 163)
+        Me.txtFlag101Field038.Location = New System.Drawing.Point(166, 163)
         Me.txtFlag101Field038.Name = "txtFlag101Field038"
         Me.txtFlag101Field038.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag101Field038.TabIndex = 1017
@@ -292,55 +292,55 @@ Partial Class form_agro1
         '
         'txtVal_Elem103Field006
         '
-        Me.txtVal_Elem103Field006.Location = New System.Drawing.Point(161, 209)
+        Me.txtVal_Elem103Field006.Location = New System.Drawing.Point(115, 209)
         Me.txtVal_Elem103Field006.Name = "txtVal_Elem103Field006"
         Me.txtVal_Elem103Field006.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem103Field006.TabIndex = 6
         '
         'txtVal_Elem102Field005
         '
-        Me.txtVal_Elem102Field005.Location = New System.Drawing.Point(161, 186)
+        Me.txtVal_Elem102Field005.Location = New System.Drawing.Point(115, 186)
         Me.txtVal_Elem102Field005.Name = "txtVal_Elem102Field005"
         Me.txtVal_Elem102Field005.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem102Field005.TabIndex = 5
         '
         'txtVal_Elem101Field004
         '
-        Me.txtVal_Elem101Field004.Location = New System.Drawing.Point(161, 163)
+        Me.txtVal_Elem101Field004.Location = New System.Drawing.Point(115, 163)
         Me.txtVal_Elem101Field004.Name = "txtVal_Elem101Field004"
         Me.txtVal_Elem101Field004.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem101Field004.TabIndex = 4
         '
         'lblDP06
         '
-        Me.lblDP06.AutoSize = True
-        Me.lblDP06.Location = New System.Drawing.Point(104, 213)
+        Me.lblDP06.Location = New System.Drawing.Point(14, 213)
         Me.lblDP06.Name = "lblDP06"
-        Me.lblDP06.Size = New System.Drawing.Size(56, 13)
+        Me.lblDP06.Size = New System.Drawing.Size(95, 13)
         Me.lblDP06.TabIndex = 1013
         Me.lblDP06.Text = "Dew Point"
+        Me.lblDP06.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblWB06
         '
-        Me.lblWB06.AutoSize = True
-        Me.lblWB06.Location = New System.Drawing.Point(104, 190)
+        Me.lblWB06.Location = New System.Drawing.Point(14, 190)
         Me.lblWB06.Name = "lblWB06"
-        Me.lblWB06.Size = New System.Drawing.Size(51, 13)
+        Me.lblWB06.Size = New System.Drawing.Size(95, 13)
         Me.lblWB06.TabIndex = 1012
         Me.lblWB06.Text = "Wet Bulb"
+        Me.lblWB06.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblDB06
         '
-        Me.lblDB06.AutoSize = True
-        Me.lblDB06.Location = New System.Drawing.Point(104, 167)
+        Me.lblDB06.Location = New System.Drawing.Point(14, 167)
         Me.lblDB06.Name = "lblDB06"
-        Me.lblDB06.Size = New System.Drawing.Size(47, 13)
+        Me.lblDB06.Size = New System.Drawing.Size(95, 13)
         Me.lblDB06.TabIndex = 1011
         Me.lblDB06.Text = "Dry Bulb"
+        Me.lblDB06.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtFlag105Field041
         '
-        Me.txtFlag105Field041.Location = New System.Drawing.Point(204, 232)
+        Me.txtFlag105Field041.Location = New System.Drawing.Point(166, 232)
         Me.txtFlag105Field041.Name = "txtFlag105Field041"
         Me.txtFlag105Field041.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag105Field041.TabIndex = 1024
@@ -348,23 +348,23 @@ Partial Class form_agro1
         '
         'Label60
         '
-        Me.Label60.AutoSize = True
-        Me.Label60.Location = New System.Drawing.Point(104, 236)
+        Me.Label60.Location = New System.Drawing.Point(14, 236)
         Me.Label60.Name = "Label60"
-        Me.Label60.Size = New System.Drawing.Size(40, 13)
+        Me.Label60.Size = New System.Drawing.Size(95, 13)
         Me.Label60.TabIndex = 1023
         Me.Label60.Text = "RH (%)"
+        Me.Label60.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtVal_Elem105Field007
         '
-        Me.txtVal_Elem105Field007.Location = New System.Drawing.Point(161, 232)
+        Me.txtVal_Elem105Field007.Location = New System.Drawing.Point(115, 232)
         Me.txtVal_Elem105Field007.Name = "txtVal_Elem105Field007"
         Me.txtVal_Elem105Field007.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem105Field007.TabIndex = 7
         '
         'txtFlag099Field044
         '
-        Me.txtFlag099Field044.Location = New System.Drawing.Point(204, 301)
+        Me.txtFlag099Field044.Location = New System.Drawing.Point(166, 301)
         Me.txtFlag099Field044.Name = "txtFlag099Field044"
         Me.txtFlag099Field044.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag099Field044.TabIndex = 1033
@@ -372,7 +372,7 @@ Partial Class form_agro1
         '
         'txtFlag003Field043
         '
-        Me.txtFlag003Field043.Location = New System.Drawing.Point(204, 278)
+        Me.txtFlag003Field043.Location = New System.Drawing.Point(166, 278)
         Me.txtFlag003Field043.Name = "txtFlag003Field043"
         Me.txtFlag003Field043.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag003Field043.TabIndex = 1032
@@ -380,7 +380,7 @@ Partial Class form_agro1
         '
         'txtFlag002Field042
         '
-        Me.txtFlag002Field042.Location = New System.Drawing.Point(204, 255)
+        Me.txtFlag002Field042.Location = New System.Drawing.Point(166, 255)
         Me.txtFlag002Field042.Name = "txtFlag002Field042"
         Me.txtFlag002Field042.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag002Field042.TabIndex = 1031
@@ -388,51 +388,51 @@ Partial Class form_agro1
         '
         'txtVal_Elem099Field010
         '
-        Me.txtVal_Elem099Field010.Location = New System.Drawing.Point(161, 301)
+        Me.txtVal_Elem099Field010.Location = New System.Drawing.Point(115, 301)
         Me.txtVal_Elem099Field010.Name = "txtVal_Elem099Field010"
         Me.txtVal_Elem099Field010.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem099Field010.TabIndex = 10
         '
         'txtVal_Elem003Field009
         '
-        Me.txtVal_Elem003Field009.Location = New System.Drawing.Point(161, 278)
+        Me.txtVal_Elem003Field009.Location = New System.Drawing.Point(115, 278)
         Me.txtVal_Elem003Field009.Name = "txtVal_Elem003Field009"
         Me.txtVal_Elem003Field009.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem003Field009.TabIndex = 9
         '
         'txtVal_Elem002Field008
         '
-        Me.txtVal_Elem002Field008.Location = New System.Drawing.Point(161, 255)
+        Me.txtVal_Elem002Field008.Location = New System.Drawing.Point(115, 255)
         Me.txtVal_Elem002Field008.Name = "txtVal_Elem002Field008"
         Me.txtVal_Elem002Field008.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem002Field008.TabIndex = 8
         '
         'Label8
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(104, 305)
+        Me.Label8.Location = New System.Drawing.Point(14, 305)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(60, 13)
+        Me.Label8.Size = New System.Drawing.Size(95, 13)
         Me.Label8.TabIndex = 1027
         Me.Label8.Text = "Grass Tmin"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label9
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(104, 282)
+        Me.Label9.Location = New System.Drawing.Point(14, 282)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(31, 13)
+        Me.Label9.Size = New System.Drawing.Size(95, 13)
         Me.Label9.TabIndex = 1026
         Me.Label9.Text = "TMin"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label10
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(104, 259)
+        Me.Label10.Location = New System.Drawing.Point(14, 259)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(34, 13)
+        Me.Label10.Size = New System.Drawing.Size(95, 13)
         Me.Label10.TabIndex = 1025
         Me.Label10.Text = "TMax"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtFlag076Field050
         '
@@ -482,7 +482,7 @@ Partial Class form_agro1
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(255, 282)
+        Me.Label16.Location = New System.Drawing.Point(258, 282)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(42, 13)
         Me.Label16.TabIndex = 1050
@@ -491,7 +491,7 @@ Partial Class form_agro1
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(255, 259)
+        Me.Label17.Location = New System.Drawing.Point(258, 259)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(42, 13)
         Me.Label17.TabIndex = 1049
@@ -500,7 +500,7 @@ Partial Class form_agro1
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(255, 236)
+        Me.Label18.Location = New System.Drawing.Point(258, 236)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(42, 13)
         Me.Label18.TabIndex = 1048
@@ -518,7 +518,7 @@ Partial Class form_agro1
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(314, 148)
+        Me.Label12.Location = New System.Drawing.Point(308, 148)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(34, 13)
         Me.Label12.TabIndex = 1046
@@ -572,7 +572,7 @@ Partial Class form_agro1
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(254, 213)
+        Me.Label13.Location = New System.Drawing.Point(257, 213)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(42, 13)
         Me.Label13.TabIndex = 1036
@@ -581,7 +581,7 @@ Partial Class form_agro1
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(254, 190)
+        Me.Label14.Location = New System.Drawing.Point(257, 190)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(42, 13)
         Me.Label14.TabIndex = 1035
@@ -590,7 +590,7 @@ Partial Class form_agro1
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(254, 167)
+        Me.Label15.Location = New System.Drawing.Point(257, 167)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(42, 13)
         Me.Label15.TabIndex = 1034
@@ -600,7 +600,7 @@ Partial Class form_agro1
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(265, 123)
+        Me.Label3.Location = New System.Drawing.Point(274, 123)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(134, 13)
         Me.Label3.TabIndex = 1054
@@ -610,7 +610,7 @@ Partial Class form_agro1
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(110, 123)
+        Me.Label4.Location = New System.Drawing.Point(67, 123)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(152, 13)
         Me.Label4.TabIndex = 1055
@@ -620,7 +620,7 @@ Partial Class form_agro1
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(409, 123)
+        Me.Label5.Location = New System.Drawing.Point(452, 123)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(134, 13)
         Me.Label5.TabIndex = 1056
@@ -629,7 +629,7 @@ Partial Class form_agro1
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(500, 148)
+        Me.Label19.Location = New System.Drawing.Point(539, 148)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(27, 13)
         Me.Label19.TabIndex = 1067
@@ -638,7 +638,7 @@ Partial Class form_agro1
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(462, 148)
+        Me.Label20.Location = New System.Drawing.Point(482, 148)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(34, 13)
         Me.Label20.TabIndex = 1066
@@ -646,7 +646,7 @@ Partial Class form_agro1
         '
         'txtFlag563Field053
         '
-        Me.txtFlag563Field053.Location = New System.Drawing.Point(502, 209)
+        Me.txtFlag563Field053.Location = New System.Drawing.Point(541, 209)
         Me.txtFlag563Field053.Name = "txtFlag563Field053"
         Me.txtFlag563Field053.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag563Field053.TabIndex = 1065
@@ -654,7 +654,7 @@ Partial Class form_agro1
         '
         'txtFlag562Field052
         '
-        Me.txtFlag562Field052.Location = New System.Drawing.Point(502, 186)
+        Me.txtFlag562Field052.Location = New System.Drawing.Point(541, 186)
         Me.txtFlag562Field052.Name = "txtFlag562Field052"
         Me.txtFlag562Field052.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag562Field052.TabIndex = 1064
@@ -662,7 +662,7 @@ Partial Class form_agro1
         '
         'txtFlag561Field051
         '
-        Me.txtFlag561Field051.Location = New System.Drawing.Point(502, 163)
+        Me.txtFlag561Field051.Location = New System.Drawing.Point(541, 163)
         Me.txtFlag561Field051.Name = "txtFlag561Field051"
         Me.txtFlag561Field051.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag561Field051.TabIndex = 1063
@@ -670,21 +670,21 @@ Partial Class form_agro1
         '
         'txtVal_Elem563Field019
         '
-        Me.txtVal_Elem563Field019.Location = New System.Drawing.Point(459, 209)
+        Me.txtVal_Elem563Field019.Location = New System.Drawing.Point(486, 209)
         Me.txtVal_Elem563Field019.Name = "txtVal_Elem563Field019"
         Me.txtVal_Elem563Field019.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem563Field019.TabIndex = 19
         '
         'txtVal_Elem562Field018
         '
-        Me.txtVal_Elem562Field018.Location = New System.Drawing.Point(459, 186)
+        Me.txtVal_Elem562Field018.Location = New System.Drawing.Point(486, 186)
         Me.txtVal_Elem562Field018.Name = "txtVal_Elem562Field018"
         Me.txtVal_Elem562Field018.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem562Field018.TabIndex = 18
         '
         'txtVal_Elem561Field017
         '
-        Me.txtVal_Elem561Field017.Location = New System.Drawing.Point(459, 163)
+        Me.txtVal_Elem561Field017.Location = New System.Drawing.Point(486, 163)
         Me.txtVal_Elem561Field017.Name = "txtVal_Elem561Field017"
         Me.txtVal_Elem561Field017.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem561Field017.TabIndex = 17
@@ -692,7 +692,7 @@ Partial Class form_agro1
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(402, 213)
+        Me.Label21.Location = New System.Drawing.Point(433, 213)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(42, 13)
         Me.Label21.TabIndex = 1059
@@ -701,7 +701,7 @@ Partial Class form_agro1
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(402, 190)
+        Me.Label22.Location = New System.Drawing.Point(433, 190)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(42, 13)
         Me.Label22.TabIndex = 1058
@@ -710,7 +710,7 @@ Partial Class form_agro1
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(402, 167)
+        Me.Label23.Location = New System.Drawing.Point(433, 167)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(42, 13)
         Me.Label23.TabIndex = 1057
@@ -718,7 +718,7 @@ Partial Class form_agro1
         '
         'txtFlag513Field054
         '
-        Me.txtFlag513Field054.Location = New System.Drawing.Point(689, 163)
+        Me.txtFlag513Field054.Location = New System.Drawing.Point(778, 163)
         Me.txtFlag513Field054.Name = "txtFlag513Field054"
         Me.txtFlag513Field054.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag513Field054.TabIndex = 1070
@@ -726,24 +726,24 @@ Partial Class form_agro1
         '
         'txtVal_Elem513Field020
         '
-        Me.txtVal_Elem513Field020.Location = New System.Drawing.Point(646, 163)
+        Me.txtVal_Elem513Field020.Location = New System.Drawing.Point(723, 164)
         Me.txtVal_Elem513Field020.Name = "txtVal_Elem513Field020"
         Me.txtVal_Elem513Field020.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem513Field020.TabIndex = 20
         '
         'Label32
         '
-        Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(546, 167)
+        Me.Label32.Location = New System.Drawing.Point(599, 170)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(78, 13)
+        Me.Label32.Size = New System.Drawing.Size(118, 13)
         Me.Label32.TabIndex = 1069
         Me.Label32.Text = "Wind Run (km)"
+        Me.Label32.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(687, 148)
+        Me.Label24.Location = New System.Drawing.Point(776, 148)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(27, 13)
         Me.Label24.TabIndex = 1078
@@ -752,7 +752,7 @@ Partial Class form_agro1
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(650, 148)
+        Me.Label25.Location = New System.Drawing.Point(727, 149)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(34, 13)
         Me.Label25.TabIndex = 1077
@@ -760,7 +760,7 @@ Partial Class form_agro1
         '
         'txtFlag504Field056
         '
-        Me.txtFlag504Field056.Location = New System.Drawing.Point(689, 209)
+        Me.txtFlag504Field056.Location = New System.Drawing.Point(778, 209)
         Me.txtFlag504Field056.Name = "txtFlag504Field056"
         Me.txtFlag504Field056.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag504Field056.TabIndex = 1076
@@ -768,7 +768,7 @@ Partial Class form_agro1
         '
         'txtFlag005Field055
         '
-        Me.txtFlag005Field055.Location = New System.Drawing.Point(689, 186)
+        Me.txtFlag005Field055.Location = New System.Drawing.Point(778, 186)
         Me.txtFlag005Field055.Name = "txtFlag005Field055"
         Me.txtFlag005Field055.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag005Field055.TabIndex = 1075
@@ -776,41 +776,41 @@ Partial Class form_agro1
         '
         'txtVal_Elem504Field022
         '
-        Me.txtVal_Elem504Field022.Location = New System.Drawing.Point(646, 209)
+        Me.txtVal_Elem504Field022.Location = New System.Drawing.Point(723, 210)
         Me.txtVal_Elem504Field022.Name = "txtVal_Elem504Field022"
         Me.txtVal_Elem504Field022.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem504Field022.TabIndex = 22
         '
         'txtVal_Elem005Field021
         '
-        Me.txtVal_Elem005Field021.Location = New System.Drawing.Point(646, 186)
+        Me.txtVal_Elem005Field021.Location = New System.Drawing.Point(723, 187)
         Me.txtVal_Elem005Field021.Name = "txtVal_Elem005Field021"
         Me.txtVal_Elem005Field021.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem005Field021.TabIndex = 21
         '
         'Label27
         '
-        Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(546, 213)
+        Me.Label27.Location = New System.Drawing.Point(599, 216)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(95, 13)
+        Me.Label27.Size = New System.Drawing.Size(118, 13)
         Me.Label27.TabIndex = 1072
         Me.Label27.Text = "Rain Duration (hrs)"
+        Me.Label27.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label28
         '
-        Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(546, 190)
+        Me.Label28.Location = New System.Drawing.Point(599, 193)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(90, 13)
+        Me.Label28.Size = New System.Drawing.Size(118, 13)
         Me.Label28.TabIndex = 1071
         Me.Label28.Text = "Rain Amount(mm)"
+        Me.Label28.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label26
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(554, 123)
+        Me.Label26.Location = New System.Drawing.Point(642, 123)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(170, 13)
         Me.Label26.TabIndex = 1079
@@ -819,7 +819,7 @@ Partial Class form_agro1
         'Label33
         '
         Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(203, 366)
+        Me.Label33.Location = New System.Drawing.Point(165, 366)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(27, 13)
         Me.Label33.TabIndex = 1088
@@ -828,7 +828,7 @@ Partial Class form_agro1
         'Label34
         '
         Me.Label34.AutoSize = True
-        Me.Label34.Location = New System.Drawing.Point(164, 366)
+        Me.Label34.Location = New System.Drawing.Point(112, 366)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(34, 13)
         Me.Label34.TabIndex = 1087
@@ -836,7 +836,7 @@ Partial Class form_agro1
         '
         'txtFlag137Field058
         '
-        Me.txtFlag137Field058.Location = New System.Drawing.Point(204, 404)
+        Me.txtFlag137Field058.Location = New System.Drawing.Point(166, 404)
         Me.txtFlag137Field058.Name = "txtFlag137Field058"
         Me.txtFlag137Field058.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag137Field058.TabIndex = 1086
@@ -844,7 +844,7 @@ Partial Class form_agro1
         '
         'txtFlag532Field057
         '
-        Me.txtFlag532Field057.Location = New System.Drawing.Point(204, 380)
+        Me.txtFlag532Field057.Location = New System.Drawing.Point(166, 380)
         Me.txtFlag532Field057.Name = "txtFlag532Field057"
         Me.txtFlag532Field057.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag532Field057.TabIndex = 1085
@@ -852,71 +852,71 @@ Partial Class form_agro1
         '
         'txtVal_Elem137Field024
         '
-        Me.txtVal_Elem137Field024.Location = New System.Drawing.Point(161, 404)
+        Me.txtVal_Elem137Field024.Location = New System.Drawing.Point(115, 404)
         Me.txtVal_Elem137Field024.Name = "txtVal_Elem137Field024"
         Me.txtVal_Elem137Field024.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem137Field024.TabIndex = 24
         '
         'txtVal_Elem532Field023
         '
-        Me.txtVal_Elem532Field023.Location = New System.Drawing.Point(161, 380)
+        Me.txtVal_Elem532Field023.Location = New System.Drawing.Point(115, 380)
         Me.txtVal_Elem532Field023.Name = "txtVal_Elem532Field023"
         Me.txtVal_Elem532Field023.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem532Field023.TabIndex = 23
         '
         'Label35
         '
-        Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(100, 408)
+        Me.Label35.Location = New System.Drawing.Point(13, 408)
         Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(52, 13)
+        Me.Label35.Size = New System.Drawing.Size(96, 13)
         Me.Label35.TabIndex = 1082
         Me.Label35.Text = "Radiation"
+        Me.Label35.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblSunHrs
         '
-        Me.lblSunHrs.AutoSize = True
-        Me.lblSunHrs.Location = New System.Drawing.Point(101, 384)
+        Me.lblSunHrs.Location = New System.Drawing.Point(14, 384)
         Me.lblSunHrs.Name = "lblSunHrs"
-        Me.lblSunHrs.Size = New System.Drawing.Size(45, 13)
+        Me.lblSunHrs.Size = New System.Drawing.Size(95, 13)
         Me.lblSunHrs.TabIndex = 1081
         Me.lblSunHrs.Text = "Sun Hrs"
+        Me.lblSunHrs.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label39
         '
-        Me.Label39.AutoSize = True
-        Me.Label39.Location = New System.Drawing.Point(101, 432)
+        Me.Label39.Location = New System.Drawing.Point(14, 432)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(60, 13)
+        Me.Label39.Size = New System.Drawing.Size(95, 13)
         Me.Label39.TabIndex = 1089
         Me.Label39.Text = "Evap Pan1"
+        Me.Label39.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label38
         '
-        Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(100, 456)
+        Me.Label38.Location = New System.Drawing.Point(13, 456)
         Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(60, 13)
+        Me.Label38.Size = New System.Drawing.Size(96, 13)
         Me.Label38.TabIndex = 1090
         Me.Label38.Text = "Evap Pan2"
+        Me.Label38.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtVal_Elem018Field025
         '
-        Me.txtVal_Elem018Field025.Location = New System.Drawing.Point(161, 428)
+        Me.txtVal_Elem018Field025.Location = New System.Drawing.Point(115, 428)
         Me.txtVal_Elem018Field025.Name = "txtVal_Elem018Field025"
         Me.txtVal_Elem018Field025.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem018Field025.TabIndex = 25
         '
         'txtVal_Elem518Field026
         '
-        Me.txtVal_Elem518Field026.Location = New System.Drawing.Point(161, 452)
+        Me.txtVal_Elem518Field026.Location = New System.Drawing.Point(115, 452)
         Me.txtVal_Elem518Field026.Name = "txtVal_Elem518Field026"
         Me.txtVal_Elem518Field026.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem518Field026.TabIndex = 26
         '
         'txtFlag018Field059
         '
-        Me.txtFlag018Field059.Location = New System.Drawing.Point(204, 428)
+        Me.txtFlag018Field059.Location = New System.Drawing.Point(166, 428)
         Me.txtFlag018Field059.Name = "txtFlag018Field059"
         Me.txtFlag018Field059.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag018Field059.TabIndex = 1093
@@ -924,7 +924,7 @@ Partial Class form_agro1
         '
         'txtFlag518Field060
         '
-        Me.txtFlag518Field060.Location = New System.Drawing.Point(204, 452)
+        Me.txtFlag518Field060.Location = New System.Drawing.Point(166, 452)
         Me.txtFlag518Field060.Name = "txtFlag518Field060"
         Me.txtFlag518Field060.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag518Field060.TabIndex = 1094
@@ -934,7 +934,7 @@ Partial Class form_agro1
         '
         Me.Label29.AutoSize = True
         Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label29.Location = New System.Drawing.Point(94, 345)
+        Me.Label29.Location = New System.Drawing.Point(60, 345)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(156, 13)
         Me.Label29.TabIndex = 1080
@@ -944,7 +944,7 @@ Partial Class form_agro1
         '
         Me.Label30.AutoSize = True
         Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(256, 345)
+        Me.Label30.Location = New System.Drawing.Point(268, 345)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(146, 13)
         Me.Label30.TabIndex = 1095
@@ -1015,30 +1015,30 @@ Partial Class form_agro1
         '
         'Label42
         '
-        Me.Label42.AutoSize = True
-        Me.Label42.Location = New System.Drawing.Point(255, 432)
+        Me.Label42.Location = New System.Drawing.Point(215, 432)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(56, 13)
+        Me.Label42.Size = New System.Drawing.Size(90, 13)
         Me.Label42.TabIndex = 1098
         Me.Label42.Text = "Dew Point"
+        Me.Label42.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label43
         '
-        Me.Label43.AutoSize = True
-        Me.Label43.Location = New System.Drawing.Point(255, 408)
+        Me.Label43.Location = New System.Drawing.Point(215, 408)
         Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(51, 13)
+        Me.Label43.Size = New System.Drawing.Size(84, 13)
         Me.Label43.TabIndex = 1097
         Me.Label43.Text = "Wet Bulb"
+        Me.Label43.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label44
         '
-        Me.Label44.AutoSize = True
-        Me.Label44.Location = New System.Drawing.Point(255, 384)
+        Me.Label44.Location = New System.Drawing.Point(218, 384)
         Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(47, 13)
+        Me.Label44.Size = New System.Drawing.Size(81, 13)
         Me.Label44.TabIndex = 1096
         Me.Label44.Text = "Dry Bulb"
+        Me.Label44.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtFlag515Field064
         '
@@ -1057,17 +1057,17 @@ Partial Class form_agro1
         '
         'lblRH06Z
         '
-        Me.lblRH06Z.AutoSize = True
-        Me.lblRH06Z.Location = New System.Drawing.Point(254, 456)
+        Me.lblRH06Z.Location = New System.Drawing.Point(212, 456)
         Me.lblRH06Z.Name = "lblRH06Z"
-        Me.lblRH06Z.Size = New System.Drawing.Size(40, 13)
+        Me.lblRH06Z.Size = New System.Drawing.Size(87, 13)
         Me.lblRH06Z.TabIndex = 1108
         Me.lblRH06Z.Text = "RH (%)"
+        Me.lblRH06Z.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label45
         '
         Me.Label45.AutoSize = True
-        Me.Label45.Location = New System.Drawing.Point(515, 366)
+        Me.Label45.Location = New System.Drawing.Point(550, 366)
         Me.Label45.Name = "Label45"
         Me.Label45.Size = New System.Drawing.Size(27, 13)
         Me.Label45.TabIndex = 1120
@@ -1076,7 +1076,7 @@ Partial Class form_agro1
         'Label46
         '
         Me.Label46.AutoSize = True
-        Me.Label46.Location = New System.Drawing.Point(476, 366)
+        Me.Label46.Location = New System.Drawing.Point(501, 366)
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(34, 13)
         Me.Label46.TabIndex = 1119
@@ -1084,7 +1084,7 @@ Partial Class form_agro1
         '
         'txtFlag566Field067
         '
-        Me.txtFlag566Field067.Location = New System.Drawing.Point(517, 428)
+        Me.txtFlag566Field067.Location = New System.Drawing.Point(552, 428)
         Me.txtFlag566Field067.Name = "txtFlag566Field067"
         Me.txtFlag566Field067.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag566Field067.TabIndex = 1118
@@ -1092,7 +1092,7 @@ Partial Class form_agro1
         '
         'txtFlag565Field066
         '
-        Me.txtFlag565Field066.Location = New System.Drawing.Point(517, 404)
+        Me.txtFlag565Field066.Location = New System.Drawing.Point(552, 404)
         Me.txtFlag565Field066.Name = "txtFlag565Field066"
         Me.txtFlag565Field066.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag565Field066.TabIndex = 1117
@@ -1100,7 +1100,7 @@ Partial Class form_agro1
         '
         'txtFlag564Field065
         '
-        Me.txtFlag564Field065.Location = New System.Drawing.Point(517, 380)
+        Me.txtFlag564Field065.Location = New System.Drawing.Point(552, 380)
         Me.txtFlag564Field065.Name = "txtFlag564Field065"
         Me.txtFlag564Field065.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag564Field065.TabIndex = 1116
@@ -1108,21 +1108,21 @@ Partial Class form_agro1
         '
         'txtVal_Elem566Field033
         '
-        Me.txtVal_Elem566Field033.Location = New System.Drawing.Point(473, 428)
+        Me.txtVal_Elem566Field033.Location = New System.Drawing.Point(498, 428)
         Me.txtVal_Elem566Field033.Name = "txtVal_Elem566Field033"
         Me.txtVal_Elem566Field033.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem566Field033.TabIndex = 33
         '
         'txtVal_Elem565Field032
         '
-        Me.txtVal_Elem565Field032.Location = New System.Drawing.Point(473, 404)
+        Me.txtVal_Elem565Field032.Location = New System.Drawing.Point(498, 404)
         Me.txtVal_Elem565Field032.Name = "txtVal_Elem565Field032"
         Me.txtVal_Elem565Field032.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem565Field032.TabIndex = 32
         '
         'txtVal_Elem564Field031
         '
-        Me.txtVal_Elem564Field031.Location = New System.Drawing.Point(473, 380)
+        Me.txtVal_Elem564Field031.Location = New System.Drawing.Point(498, 380)
         Me.txtVal_Elem564Field031.Name = "txtVal_Elem564Field031"
         Me.txtVal_Elem564Field031.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem564Field031.TabIndex = 31
@@ -1130,7 +1130,7 @@ Partial Class form_agro1
         'Label47
         '
         Me.Label47.AutoSize = True
-        Me.Label47.Location = New System.Drawing.Point(416, 432)
+        Me.Label47.Location = New System.Drawing.Point(448, 432)
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(42, 13)
         Me.Label47.TabIndex = 1112
@@ -1139,7 +1139,7 @@ Partial Class form_agro1
         'Label48
         '
         Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(416, 408)
+        Me.Label48.Location = New System.Drawing.Point(448, 408)
         Me.Label48.Name = "Label48"
         Me.Label48.Size = New System.Drawing.Size(42, 13)
         Me.Label48.TabIndex = 1111
@@ -1148,7 +1148,7 @@ Partial Class form_agro1
         'Label49
         '
         Me.Label49.AutoSize = True
-        Me.Label49.Location = New System.Drawing.Point(416, 384)
+        Me.Label49.Location = New System.Drawing.Point(448, 384)
         Me.Label49.Name = "Label49"
         Me.Label49.Size = New System.Drawing.Size(42, 13)
         Me.Label49.TabIndex = 1110
@@ -1158,7 +1158,7 @@ Partial Class form_agro1
         '
         Me.Label31.AutoSize = True
         Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label31.Location = New System.Drawing.Point(410, 345)
+        Me.Label31.Location = New System.Drawing.Point(455, 345)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(148, 13)
         Me.Label31.TabIndex = 1121
@@ -1167,7 +1167,7 @@ Partial Class form_agro1
         'Label50
         '
         Me.Label50.AutoSize = True
-        Me.Label50.Location = New System.Drawing.Point(687, 366)
+        Me.Label50.Location = New System.Drawing.Point(776, 366)
         Me.Label50.Name = "Label50"
         Me.Label50.Size = New System.Drawing.Size(27, 13)
         Me.Label50.TabIndex = 1129
@@ -1176,7 +1176,7 @@ Partial Class form_agro1
         'Label51
         '
         Me.Label51.AutoSize = True
-        Me.Label51.Location = New System.Drawing.Point(650, 366)
+        Me.Label51.Location = New System.Drawing.Point(727, 367)
         Me.Label51.Name = "Label51"
         Me.Label51.Size = New System.Drawing.Size(34, 13)
         Me.Label51.TabIndex = 1128
@@ -1184,7 +1184,7 @@ Partial Class form_agro1
         '
         'txtFlag530Field069
         '
-        Me.txtFlag530Field069.Location = New System.Drawing.Point(689, 404)
+        Me.txtFlag530Field069.Location = New System.Drawing.Point(778, 404)
         Me.txtFlag530Field069.Name = "txtFlag530Field069"
         Me.txtFlag530Field069.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag530Field069.TabIndex = 1127
@@ -1192,7 +1192,7 @@ Partial Class form_agro1
         '
         'txtFlag531Field068
         '
-        Me.txtFlag531Field068.Location = New System.Drawing.Point(689, 380)
+        Me.txtFlag531Field068.Location = New System.Drawing.Point(778, 380)
         Me.txtFlag531Field068.Name = "txtFlag531Field068"
         Me.txtFlag531Field068.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag531Field068.TabIndex = 1126
@@ -1200,39 +1200,39 @@ Partial Class form_agro1
         '
         'txtVal_Elem530Field035
         '
-        Me.txtVal_Elem530Field035.Location = New System.Drawing.Point(646, 404)
+        Me.txtVal_Elem530Field035.Location = New System.Drawing.Point(723, 405)
         Me.txtVal_Elem530Field035.Name = "txtVal_Elem530Field035"
         Me.txtVal_Elem530Field035.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem530Field035.TabIndex = 35
         '
         'txtVal_Elem531Field034
         '
-        Me.txtVal_Elem531Field034.Location = New System.Drawing.Point(646, 380)
+        Me.txtVal_Elem531Field034.Location = New System.Drawing.Point(723, 381)
         Me.txtVal_Elem531Field034.Name = "txtVal_Elem531Field034"
         Me.txtVal_Elem531Field034.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem531Field034.TabIndex = 34
         '
         'Label52
         '
-        Me.Label52.AutoSize = True
-        Me.Label52.Location = New System.Drawing.Point(583, 408)
+        Me.Label52.Location = New System.Drawing.Point(602, 410)
         Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(56, 13)
+        Me.Label52.Size = New System.Drawing.Size(115, 13)
         Me.Label52.TabIndex = 1123
         Me.Label52.Text = "Tmin reset"
+        Me.Label52.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label53
         '
-        Me.Label53.AutoSize = True
-        Me.Label53.Location = New System.Drawing.Point(583, 384)
+        Me.Label53.Location = New System.Drawing.Point(605, 386)
         Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(65, 13)
+        Me.Label53.Size = New System.Drawing.Size(112, 13)
         Me.Label53.TabIndex = 1122
         Me.Label53.Text = "TMax Reset"
+        Me.Label53.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtFlag542Field071
         '
-        Me.txtFlag542Field071.Location = New System.Drawing.Point(689, 452)
+        Me.txtFlag542Field071.Location = New System.Drawing.Point(778, 452)
         Me.txtFlag542Field071.Name = "txtFlag542Field071"
         Me.txtFlag542Field071.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag542Field071.TabIndex = 1135
@@ -1240,7 +1240,7 @@ Partial Class form_agro1
         '
         'txtFlag541Field070
         '
-        Me.txtFlag541Field070.Location = New System.Drawing.Point(689, 428)
+        Me.txtFlag541Field070.Location = New System.Drawing.Point(778, 428)
         Me.txtFlag541Field070.Name = "txtFlag541Field070"
         Me.txtFlag541Field070.Size = New System.Drawing.Size(23, 20)
         Me.txtFlag541Field070.TabIndex = 1134
@@ -1248,41 +1248,41 @@ Partial Class form_agro1
         '
         'txtVal_Elem542Field037
         '
-        Me.txtVal_Elem542Field037.Location = New System.Drawing.Point(646, 452)
+        Me.txtVal_Elem542Field037.Location = New System.Drawing.Point(723, 453)
         Me.txtVal_Elem542Field037.Name = "txtVal_Elem542Field037"
         Me.txtVal_Elem542Field037.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem542Field037.TabIndex = 37
         '
         'txtVal_Elem541Field036
         '
-        Me.txtVal_Elem541Field036.Location = New System.Drawing.Point(646, 428)
+        Me.txtVal_Elem541Field036.Location = New System.Drawing.Point(723, 429)
         Me.txtVal_Elem541Field036.Name = "txtVal_Elem541Field036"
         Me.txtVal_Elem541Field036.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem541Field036.TabIndex = 36
         '
         'Label56
         '
-        Me.Label56.AutoSize = True
-        Me.Label56.Location = New System.Drawing.Point(556, 456)
+        Me.Label56.Location = New System.Drawing.Point(597, 458)
         Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(93, 13)
+        Me.Label56.Size = New System.Drawing.Size(120, 13)
         Me.Label56.TabIndex = 1131
         Me.Label56.Text = "Moisture @100cm"
+        Me.Label56.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label57
         '
-        Me.Label57.AutoSize = True
-        Me.Label57.Location = New System.Drawing.Point(555, 432)
+        Me.Label57.Location = New System.Drawing.Point(596, 434)
         Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(93, 13)
+        Me.Label57.Size = New System.Drawing.Size(121, 13)
         Me.Label57.TabIndex = 1130
         Me.Label57.Text = "Moisture @005cm"
+        Me.Label57.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label36
         '
         Me.Label36.AutoSize = True
         Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label36.Location = New System.Drawing.Point(571, 345)
+        Me.Label36.Location = New System.Drawing.Point(643, 345)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(175, 13)
         Me.Label36.TabIndex = 1136
@@ -1321,7 +1321,7 @@ Partial Class form_agro1
         'Label37
         '
         Me.Label37.AutoSize = True
-        Me.Label37.Location = New System.Drawing.Point(283, 600)
+        Me.Label37.Location = New System.Drawing.Point(265, 600)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(59, 13)
         Me.Label37.TabIndex = 1149
@@ -1329,7 +1329,7 @@ Partial Class form_agro1
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(348, 597)
+        Me.txtSequencer.Location = New System.Drawing.Point(360, 597)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(175, 20)
         Me.txtSequencer.TabIndex = 1148
@@ -1455,12 +1455,13 @@ Partial Class form_agro1
         Me.btnPush.Text = "Push"
         Me.btnPush.UseVisualStyleBackColor = True
         '
-        'form_agro1
+        'formAgro1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(827, 644)
-        Me.Controls.Add(Me.btnPush)
+        Me.ClientSize = New System.Drawing.Size(950, 644)
+
+    Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.btnCommit)
         Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.btnView)
@@ -1613,7 +1614,7 @@ Partial Class form_agro1
         Me.Controls.Add(Me.cboDay)
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
-        Me.Name = "form_agro1"
+        Me.Name = "formAgro1"
         Me.Text = "Kenya Agromet data"
         Me.ResumeLayout(False)
         Me.PerformLayout()

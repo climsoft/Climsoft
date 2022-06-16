@@ -14,9 +14,9 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class frmKeyEntry
+Public Class frmDataEntry
 
-    Private Sub frmKeyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             Dim dataCall As New DataCall
             Dim dataTable As DataTable
@@ -26,6 +26,7 @@ Public Class frmKeyEntry
             dataCall.SetFilter("selected", "=", 1)
             dataTable = dataCall.GetDataTable()
             For Each row As DataRow In dataTable.Rows
+                'lstViewForms.Items.Add(New ListViewItem({row.Item("form_name"), ClsTranslations.GetTranslation(row.Item("description"))}))
                 lstViewForms.Items.Add(New ListViewItem({row.Item("form_name"), row.Item("description")}))
             Next
 
@@ -36,6 +37,10 @@ Public Class frmKeyEntry
             If lstViewForms.Items.Count > 0 Then
                 lstViewForms.Height = ((lstViewForms.Items.Count + 1) * lstViewForms.Items.Item(0).Bounds.Height) + 30
             End If
+
+            ClsTranslations.TranslateForm(Me)
+            'todo in future this will be done automatically by TranslateForms(Me)
+            ClsTranslations.TranslateComponent(lstViewForms, False)
 
         Catch ex As Exception
             MessageBox.Show("Error : " & ex.Message)
@@ -74,6 +79,7 @@ Public Class frmKeyEntry
         Dim frm As String
 
         Try
+            'todo. code needs to be changed. texts in the list view may be translated
             If lstViewForms.SelectedItems.Count > 0 Then
                 Select Case lstViewForms.SelectedItems.Item(0).Text
                     Case "formSynoptic2RA1"
@@ -87,20 +93,18 @@ Public Class frmKeyEntry
                     Case "form_monthly"
                         frmNewMonthly.Show()
                     Case "form_upperair1"
-                        form_upperair1.Show()
+                        formUpperAir.Show()
                     Case "form_hourlywind"
                         frmNewHourlyWind.Show()
                     Case "form_agro1"
-                        form_agro1.Show()
+                        formAgro1.Show()
                     Case "form_synoptic2_caribbean"
                         formSynopticCaribbean.Show()
-                    Case "form_upperair1"
-                        form_upperair1.Show()
                     Case "form_synoptic2_TDCF"
                         formSynoptic2.Show()
                     Case Else
                         frm = lstViewForms.SelectedItems.Item(0).Text
-                        MsgBox("Form " & frm & " not yet implemented")
+                        MsgBox(ClsTranslations.GetTranslation("Form") & " " & frm & " " & ClsTranslations.GetTranslation("not yet implemented"))
                         idx = lstViewForms.SelectedItems.Item(0).Index
                         lstViewForms.Items(idx).Remove()
                         formUnselect(frm)
