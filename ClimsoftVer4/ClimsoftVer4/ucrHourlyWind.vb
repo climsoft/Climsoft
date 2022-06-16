@@ -6,6 +6,7 @@ Public Class ucrHourlyWind
     Private iDirectionElementId As Integer
     Private iSpeedElementId As Integer
     Private bSpeedTotalRequired As Boolean
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub ucrHourlyWind_Load(sender As Object, e As EventArgs) Handles Me.Load
 
@@ -567,5 +568,13 @@ Public Class ucrHourlyWind
 
     End Sub
 
-
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+        Me.Cursor = Cursors.WaitCursor
+        If FldName.DataPush("form_hourlywind") Then
+            MsgBox("Data Pushed to remote server successfully")
+        Else
+            MsgBox("Data Push Failed!")
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
 End Class

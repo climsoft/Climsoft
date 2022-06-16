@@ -496,7 +496,7 @@ Partial Class formMetadata
         'cboStationType
         '
         Me.cboStationType.FormattingEnabled = True
-        Me.cboStationType.Items.AddRange(New Object() {"AGROMET", "CLIMATE", "SYNOPTIC", "RAINFALL", "UPPER AIR", ""})
+        Me.cboStationType.Items.AddRange(New Object() {"AGROMET", "CLIMATE", "SYNOPTIC", "RAINFALL", "UPPER AIR"})
         Me.cboStationType.Location = New System.Drawing.Point(518, 197)
         Me.cboStationType.Name = "cboStationType"
         Me.cboStationType.Size = New System.Drawing.Size(180, 21)

@@ -317,31 +317,34 @@ Public Class frmQC
 
         ' Get folder for the QC reports
 
-        'Try
-        qcReportsFolderWindows = dsReg.Tables("regData").Rows(7).Item("keyValue")
+        Try
+            qcReportsFolderWindows = dsReg.Tables("regData").Rows(7).Item("keyValue")
 
-        'Create qc reports folder if it does not exist
-        If Not IO.Directory.Exists(qcReportsFolderWindows) Then IO.Directory.CreateDirectory(qcReportsFolderWindows)
+            'Create qc reports folder if it does not exist
+            If Not IO.Directory.Exists(qcReportsFolderWindows) Then IO.Directory.CreateDirectory(qcReportsFolderWindows)
 
-        qcReportsFolderUnix = dsReg.Tables("regData").Rows(8).Item("keyValue")
+            qcReportsFolderUnix = dsReg.Tables("regData").Rows(8).Item("keyValue")
 
-        ''If Not IO.Directory.Exists(qcReportsFolderUnix) Then IO.Directory.CreateDirectory(qcReportsFolderUnix)
-        'QcReportFile = qcReportsFolderWindows & "/qc_report_upperlimit_" & beginYearMonth & "_" & endYearMonth & "'.csv'"
-        'MsgBox(QcReportFile)
+            ''If Not IO.Directory.Exists(qcReportsFolderUnix) Then IO.Directory.CreateDirectory(qcReportsFolderUnix)
+            'QcReportFile = qcReportsFolderWindows & "/qc_report_upperlimit_" & beginYearMonth & "_" & endYearMonth & "'.csv'"
+            'MsgBox(QcReportFile)
 
-        ''Delete the QC Report file if already there
-        'If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
+            ''Delete the QC Report file if already there
+            'If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
 
-        If beginMonth < 10 Then beginYearMonth = beginYear & "0" & beginMonth
-        If endMonth < 10 Then endYearMonth = endYear & "0" & beginMonth
+            If beginMonth < 10 Then beginYearMonth = beginYear & "0" & beginMonth
+            If endMonth < 10 Then endYearMonth = endYear & "0" & beginMonth
 
-        ' create the QC output table if not existing
-        'strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`limitType` varchar(10) DEFAULT NULL,`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`,`limitType`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
-        strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+            ' create the QC output table if not existing
+            'strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`limitType` varchar(10) DEFAULT NULL,`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`,`limitType`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+            strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
-        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
-        objCmd.CommandTimeout = 0
+            objCmd.CommandTimeout = 0
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
         Try
             objCmd.CommandTimeout = 0

@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.IO
 Imports System.Security.AccessControl
 Imports System.Security.Principal
 Imports ClimsoftVer4.Translations
@@ -116,6 +117,7 @@ Public Class frmLogin
             ' The connection string has historically been stored in this control
             ' There are other locations in the software that may access this
             txtusrpwd.Text = builder.ConnectionString & ";Convert Zero Datetime=True"
+
         Catch ex As Exception
             MsgBox("Login failed: " & ex.Message)
             Exit Sub
@@ -264,37 +266,14 @@ Public Class frmLogin
             My.Settings.Save()
         End If
     End Sub
-    Sub Path_Security1()
-        Dim dtpath As String
-        ' Grant full access on `filePath` for all users (allows any user to write to file)
-        ' This is currently necessary because some Climsoft installers are not Windows Administrators
-        dtpath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4"
-        Try
-            'MsgBox(dtpath)
-            Dim dInfo As IO.DirectoryInfo = New IO.DirectoryInfo(dtpath)
-            Dim dSecurity As DirectorySecurity = dInfo.GetAccessControl()
-            'MsgBox(dInfo.Parent.FullName)
-            'New SecurityIdentifier(WellKnownSidType.WorldSid, Nothing)
-            dSecurity.AddAccessRule(New FileSystemAccessRule(
-                New SecurityIdentifier(WellKnownSidType.AccountComputersSid, Nothing),
-                FileSystemRights.FullControl,
-                InheritanceFlags.ObjectInherit Or InheritanceFlags.ContainerInherit,
-                PropagationFlags.NoPropagateInherit, AccessControlType.Allow
-            ))
-            dInfo.SetAccessControl(dSecurity)
 
-        Catch ex As Exception
-            'If ex.HResult = -2147024891 Then Exit Sub
-            MsgBox(ex.Message)
-        End Try
-    End Sub
     Sub Path_Security()
         Dim dtpath As String
 
         dtpath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4"
         ' Create the path if it is not there
         If IO.Directory.Exists(dtpath) = False Then
-            IO.Directory.CreateDirectory(dtpath & "\data")
+            IO.Directory.CreateDirectory(dtpath)
         End If
 
         ' Grant full access on `filePath` for all users (allows any user to write to file)
@@ -312,37 +291,12 @@ Public Class frmLogin
 
             dInfo.SetAccessControl(dSecurity)
 
-            ''Also Grant full access on `filePath` for all users (allows any user to write to file)
-            'dSecurity.AddAccessRule(New FileSystemAccessRule(
-            '    New SecurityIdentifier(WindowsAccountType.Normal, Nothing),
-            '    FileSystemRights.FullControl,
-            '    InheritanceFlags.ObjectInherit Or InheritanceFlags.ContainerInherit,
-            '    PropagationFlags.NoPropagateInherit, AccessControlType.Allow
-            '))
-            'dInfo.SetAccessControl(dSecurity)
         Catch ex As Exception
-            'If ex.HResult = -2147024891 Then Exit Sub
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-    Sub Path_Security2()
-        Dim FolderPath As String = "C:\ProgramData\Climsoft4" 'Specify the folder here
-        'Dim UserAccount As String = "mydomain\Someuser" 'Specify the user here
 
-        Try
-            Dim FolderInfo As IO.DirectoryInfo = New IO.DirectoryInfo(FolderPath)
-            Dim FolderAcl As New DirectorySecurity
-            FolderAcl.AddAccessRule(New FileSystemAccessRule(
-              New SecurityIdentifier(WindowsAccountType.Normal, Nothing),
-              FileSystemRights.FullControl,
-              InheritanceFlags.ContainerInherit Or InheritanceFlags.ObjectInherit,
-              PropagationFlags.None, AccessControlType.Allow))
-            'FolderAcl.SetAccessRuleProtection(True, False) 'uncomment to remove existing permissions
-            FolderInfo.SetAccessControl(FolderAcl)
-        Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
+
 
     Private Sub linkLabelLanguage_Click(sender As Object, e As EventArgs) Handles linkLabelLanguage.Click
         frmLanguage.ShowDialog()

@@ -14,6 +14,13 @@ Public Class frmFormUpload
     End Sub
 
     Private Sub frmDataTransferProgress_Load(sender As Object, e As EventArgs) Handles Me.Load
+        'MsgBox(userGroup)
+        ' Close the form if the User has no previleges to Upload data
+        If userGroup <> "ClimsoftAdmin" And userGroup <> "ClimsoftQC" And userGroup <> "ClimsoftOperatorSupervisor" And userGroup <> "ClimsoftDeveloper" And userGroup <> "" Then
+            Me.Close()
+            Exit Sub
+        End If
+
         frmUploadgroundWorker.WorkerReportsProgress = True
         frmUploadgroundWorker.WorkerSupportsCancellation = True
 

@@ -3203,7 +3203,7 @@
         Return True
 Err:
         If Err.Number = 5 Then Resume Next
-        MsgBox(Err.Description)
+        'MsgBox(Err.Description)
         Return False
     End Function
 End Class
