@@ -122,7 +122,6 @@ Partial Class formAWSRealTime
         Me.btnMoveLast = New System.Windows.Forms.Button()
         Me.txtSitesNavigator = New System.Windows.Forms.TextBox()
         Me.btnMoveNext = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.txtIP = New System.Windows.Forms.ComboBox()
         Me.txtDataStructure = New System.Windows.Forms.ComboBox()
         Me.txtFlag = New System.Windows.Forms.TextBox()
@@ -386,7 +385,7 @@ Partial Class formAWSRealTime
         'optStart
         '
         Me.optStart.AutoSize = True
-        Me.optStart.Location = New System.Drawing.Point(47, 26)
+        Me.optStart.Location = New System.Drawing.Point(10, 26)
         Me.optStart.Name = "optStart"
         Me.optStart.Size = New System.Drawing.Size(59, 17)
         Me.optStart.TabIndex = 0
@@ -453,7 +452,7 @@ Partial Class formAWSRealTime
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(48, 96)
+        Me.Label10.Location = New System.Drawing.Point(11, 96)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(129, 13)
         Me.Label10.TabIndex = 9
@@ -462,7 +461,7 @@ Partial Class formAWSRealTime
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(507, 62)
+        Me.Label11.Location = New System.Drawing.Point(605, 62)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(30, 13)
         Me.Label11.TabIndex = 8
@@ -470,7 +469,7 @@ Partial Class formAWSRealTime
         '
         'txtPeriod
         '
-        Me.txtPeriod.Location = New System.Drawing.Point(473, 58)
+        Me.txtPeriod.Location = New System.Drawing.Point(571, 58)
         Me.txtPeriod.Name = "txtPeriod"
         Me.txtPeriod.Size = New System.Drawing.Size(33, 20)
         Me.txtPeriod.TabIndex = 7
@@ -479,7 +478,7 @@ Partial Class formAWSRealTime
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(402, 62)
+        Me.Label12.Location = New System.Drawing.Point(463, 62)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(70, 13)
         Me.Label12.TabIndex = 6
@@ -487,7 +486,7 @@ Partial Class formAWSRealTime
         '
         'txtOffset
         '
-        Me.txtOffset.Location = New System.Drawing.Point(344, 58)
+        Me.txtOffset.Location = New System.Drawing.Point(394, 58)
         Me.txtOffset.Name = "txtOffset"
         Me.txtOffset.Size = New System.Drawing.Size(33, 20)
         Me.txtOffset.TabIndex = 5
@@ -496,7 +495,7 @@ Partial Class formAWSRealTime
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(234, 62)
+        Me.Label13.Location = New System.Drawing.Point(248, 62)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(107, 13)
         Me.Label13.TabIndex = 4
@@ -513,7 +512,7 @@ Partial Class formAWSRealTime
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(48, 62)
+        Me.Label14.Location = New System.Drawing.Point(11, 62)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(133, 13)
         Me.Label14.TabIndex = 2
@@ -523,7 +522,7 @@ Partial Class formAWSRealTime
         '
         Me.optStop.AutoSize = True
         Me.optStop.Checked = True
-        Me.optStop.Location = New System.Drawing.Point(121, 26)
+        Me.optStop.Location = New System.Drawing.Point(139, 26)
         Me.optStop.Name = "optStop"
         Me.optStop.Size = New System.Drawing.Size(47, 17)
         Me.optStop.TabIndex = 1
@@ -883,7 +882,7 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
         Me.pnlDataStructures.Location = New System.Drawing.Point(203, 316)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(745, 99)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(753, 113)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
@@ -904,7 +903,7 @@ Partial Class formAWSRealTime
         Me.grpStructures1.Controls.Add(Me.cmbExistingStructures)
         Me.grpStructures1.Location = New System.Drawing.Point(192, 12)
         Me.grpStructures1.Name = "grpStructures1"
-        Me.grpStructures1.Size = New System.Drawing.Size(327, 219)
+        Me.grpStructures1.Size = New System.Drawing.Size(410, 219)
         Me.grpStructures1.TabIndex = 1
         Me.grpStructures1.TabStop = False
         Me.grpStructures1.Text = "Data Structures"
@@ -935,7 +934,7 @@ Partial Class formAWSRealTime
         Me.grpStructures.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.grpStructures.Location = New System.Drawing.Point(13, 62)
         Me.grpStructures.Name = "grpStructures"
-        Me.grpStructures.Size = New System.Drawing.Size(296, 149)
+        Me.grpStructures.Size = New System.Drawing.Size(391, 149)
         Me.grpStructures.TabIndex = 7
         Me.grpStructures.TabStop = False
         '
@@ -952,35 +951,35 @@ Partial Class formAWSRealTime
         '
         Me.txtDelimiter.FormattingEnabled = True
         Me.txtDelimiter.Items.AddRange(New Object() {"comma", "tab", "space"})
-        Me.txtDelimiter.Location = New System.Drawing.Point(125, 31)
+        Me.txtDelimiter.Location = New System.Drawing.Point(193, 31)
         Me.txtDelimiter.Name = "txtDelimiter"
         Me.txtDelimiter.Size = New System.Drawing.Size(135, 21)
         Me.txtDelimiter.TabIndex = 18
         '
         'txtQualifier
         '
-        Me.txtQualifier.Location = New System.Drawing.Point(125, 72)
+        Me.txtQualifier.Location = New System.Drawing.Point(193, 72)
         Me.txtQualifier.Name = "txtQualifier"
         Me.txtQualifier.Size = New System.Drawing.Size(135, 20)
         Me.txtQualifier.TabIndex = 17
         '
         'txtHeaders
         '
-        Me.txtHeaders.Location = New System.Drawing.Point(125, 52)
+        Me.txtHeaders.Location = New System.Drawing.Point(193, 52)
         Me.txtHeaders.Name = "txtHeaders"
         Me.txtHeaders.Size = New System.Drawing.Size(135, 20)
         Me.txtHeaders.TabIndex = 16
         '
         'txtStrName
         '
-        Me.txtStrName.Location = New System.Drawing.Point(125, 11)
+        Me.txtStrName.Location = New System.Drawing.Point(193, 11)
         Me.txtStrName.Name = "txtStrName"
         Me.txtStrName.Size = New System.Drawing.Size(135, 20)
         Me.txtStrName.TabIndex = 14
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(200, 118)
+        Me.cmdDelete.Location = New System.Drawing.Point(256, 118)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(62, 23)
         Me.cmdDelete.TabIndex = 13
@@ -989,7 +988,7 @@ Partial Class formAWSRealTime
         '
         'cmdUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(117, 118)
+        Me.cmdUpdate.Location = New System.Drawing.Point(173, 118)
         Me.cmdUpdate.Name = "cmdUpdate"
         Me.cmdUpdate.Size = New System.Drawing.Size(62, 23)
         Me.cmdUpdate.TabIndex = 12
@@ -998,7 +997,7 @@ Partial Class formAWSRealTime
         '
         'cmdCreate
         '
-        Me.cmdCreate.Location = New System.Drawing.Point(34, 118)
+        Me.cmdCreate.Location = New System.Drawing.Point(90, 118)
         Me.cmdCreate.Name = "cmdCreate"
         Me.cmdCreate.Size = New System.Drawing.Size(62, 23)
         Me.cmdCreate.TabIndex = 11
@@ -1045,7 +1044,7 @@ Partial Class formAWSRealTime
         'cmbExistingStructures
         '
         Me.cmbExistingStructures.FormattingEnabled = True
-        Me.cmbExistingStructures.Location = New System.Drawing.Point(163, 25)
+        Me.cmbExistingStructures.Location = New System.Drawing.Point(231, 25)
         Me.cmbExistingStructures.Name = "cmbExistingStructures"
         Me.cmbExistingStructures.Size = New System.Drawing.Size(146, 21)
         Me.cmbExistingStructures.TabIndex = 1
@@ -1056,10 +1055,10 @@ Partial Class formAWSRealTime
         Me.pnlSites.AutoSize = True
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
         Me.pnlSites.Controls.Add(Me.grpSites)
-        Me.pnlSites.Location = New System.Drawing.Point(199, 498)
+        Me.pnlSites.Location = New System.Drawing.Point(197, 447)
         Me.pnlSites.Name = "pnlSites"
         Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.pnlSites.Size = New System.Drawing.Size(757, 468)
+        Me.pnlSites.Size = New System.Drawing.Size(757, 389)
         Me.pnlSites.TabIndex = 3
         '
         'grpSites
@@ -1082,7 +1081,6 @@ Partial Class formAWSRealTime
         Me.grpSites.Controls.Add(Me.btnMoveLast)
         Me.grpSites.Controls.Add(Me.txtSitesNavigator)
         Me.grpSites.Controls.Add(Me.btnMoveNext)
-        Me.grpSites.Controls.Add(Me.Label4)
         Me.grpSites.Controls.Add(Me.txtIP)
         Me.grpSites.Controls.Add(Me.txtDataStructure)
         Me.grpSites.Controls.Add(Me.txtFlag)
@@ -1103,7 +1101,7 @@ Partial Class formAWSRealTime
         'DataGridViewSites
         '
         Me.DataGridViewSites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewSites.Location = New System.Drawing.Point(395, 203)
+        Me.DataGridViewSites.Location = New System.Drawing.Point(440, 203)
         Me.DataGridViewSites.Name = "DataGridViewSites"
         Me.DataGridViewSites.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DataGridViewSites.Size = New System.Drawing.Size(241, 51)
@@ -1114,7 +1112,7 @@ Partial Class formAWSRealTime
         '
         Me.chkPrefix.AutoSize = True
         Me.chkPrefix.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkPrefix.Location = New System.Drawing.Point(353, 106)
+        Me.chkPrefix.Location = New System.Drawing.Point(442, 106)
         Me.chkPrefix.Name = "chkPrefix"
         Me.chkPrefix.Size = New System.Drawing.Size(107, 17)
         Me.chkPrefix.TabIndex = 101
@@ -1124,7 +1122,7 @@ Partial Class formAWSRealTime
         '
         'txtfilePrefix
         '
-        Me.txtfilePrefix.Location = New System.Drawing.Point(460, 104)
+        Me.txtfilePrefix.Location = New System.Drawing.Point(594, 104)
         Me.txtfilePrefix.Name = "txtfilePrefix"
         Me.txtfilePrefix.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtfilePrefix.Size = New System.Drawing.Size(140, 20)
@@ -1133,7 +1131,7 @@ Partial Class formAWSRealTime
         '
         'txtGTSHeader
         '
-        Me.txtGTSHeader.Location = New System.Drawing.Point(157, 209)
+        Me.txtGTSHeader.Location = New System.Drawing.Point(227, 209)
         Me.txtGTSHeader.Name = "txtGTSHeader"
         Me.txtGTSHeader.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtGTSHeader.Size = New System.Drawing.Size(135, 20)
@@ -1152,9 +1150,9 @@ Partial Class formAWSRealTime
         '
         Me.chkGTSEncode.AutoSize = True
         Me.chkGTSEncode.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkGTSEncode.Location = New System.Drawing.Point(62, 268)
+        Me.chkGTSEncode.Location = New System.Drawing.Point(225, 271)
         Me.chkGTSEncode.Name = "chkGTSEncode"
-        Me.chkGTSEncode.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.chkGTSEncode.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.chkGTSEncode.Size = New System.Drawing.Size(109, 17)
         Me.chkGTSEncode.TabIndex = 96
         Me.chkGTSEncode.Text = "Encode for GTS  "
@@ -1164,7 +1162,7 @@ Partial Class formAWSRealTime
         'txtSiteName
         '
         Me.txtSiteName.FormattingEnabled = True
-        Me.txtSiteName.Location = New System.Drawing.Point(157, 76)
+        Me.txtSiteName.Location = New System.Drawing.Point(227, 76)
         Me.txtSiteName.Name = "txtSiteName"
         Me.txtSiteName.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtSiteName.Size = New System.Drawing.Size(280, 21)
@@ -1276,19 +1274,10 @@ Partial Class formAWSRealTime
         Me.btnMoveNext.TabIndex = 79
         Me.btnMoveNext.UseVisualStyleBackColor = True
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(62, 247)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(61, 13)
-        Me.Label4.TabIndex = 78
-        Me.Label4.Text = "Operational"
-        '
         'txtIP
         '
         Me.txtIP.FormattingEnabled = True
-        Me.txtIP.Location = New System.Drawing.Point(156, 182)
+        Me.txtIP.Location = New System.Drawing.Point(226, 182)
         Me.txtIP.Name = "txtIP"
         Me.txtIP.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtIP.Size = New System.Drawing.Size(135, 21)
@@ -1297,7 +1286,7 @@ Partial Class formAWSRealTime
         'txtDataStructure
         '
         Me.txtDataStructure.FormattingEnabled = True
-        Me.txtDataStructure.Location = New System.Drawing.Point(157, 129)
+        Me.txtDataStructure.Location = New System.Drawing.Point(227, 129)
         Me.txtDataStructure.Name = "txtDataStructure"
         Me.txtDataStructure.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtDataStructure.Size = New System.Drawing.Size(185, 21)
@@ -1305,7 +1294,7 @@ Partial Class formAWSRealTime
         '
         'txtFlag
         '
-        Me.txtFlag.Location = New System.Drawing.Point(157, 156)
+        Me.txtFlag.Location = New System.Drawing.Point(227, 156)
         Me.txtFlag.Name = "txtFlag"
         Me.txtFlag.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtFlag.Size = New System.Drawing.Size(135, 20)
@@ -1315,10 +1304,11 @@ Partial Class formAWSRealTime
         '
         Me.chkOperational.AutoSize = True
         Me.chkOperational.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkOperational.Location = New System.Drawing.Point(158, 246)
+        Me.chkOperational.Location = New System.Drawing.Point(227, 246)
         Me.chkOperational.Name = "chkOperational"
-        Me.chkOperational.Size = New System.Drawing.Size(15, 14)
+        Me.chkOperational.Size = New System.Drawing.Size(80, 17)
         Me.chkOperational.TabIndex = 74
+        Me.chkOperational.Text = "Operational"
         Me.chkOperational.TextAlign = System.Drawing.ContentAlignment.TopRight
         Me.chkOperational.UseVisualStyleBackColor = True
         '
@@ -1351,7 +1341,7 @@ Partial Class formAWSRealTime
         '
         'txtInFile
         '
-        Me.txtInFile.Location = New System.Drawing.Point(156, 103)
+        Me.txtInFile.Location = New System.Drawing.Point(226, 103)
         Me.txtInFile.Name = "txtInFile"
         Me.txtInFile.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtInFile.Size = New System.Drawing.Size(186, 20)
@@ -1369,7 +1359,7 @@ Partial Class formAWSRealTime
         'txtSiteID
         '
         Me.txtSiteID.FormattingEnabled = True
-        Me.txtSiteID.Location = New System.Drawing.Point(157, 49)
+        Me.txtSiteID.Location = New System.Drawing.Point(227, 49)
         Me.txtSiteID.Name = "txtSiteID"
         Me.txtSiteID.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtSiteID.Size = New System.Drawing.Size(137, 21)
@@ -1394,7 +1384,7 @@ Partial Class formAWSRealTime
         Me.pnlServers.Controls.Add(Me.pnlMSS)
         Me.pnlServers.Location = New System.Drawing.Point(206, 188)
         Me.pnlServers.Name = "pnlServers"
-        Me.pnlServers.Size = New System.Drawing.Size(753, 118)
+        Me.pnlServers.Size = New System.Drawing.Size(753, 119)
         Me.pnlServers.TabIndex = 2
         Me.pnlServers.Visible = False
         '
@@ -1459,7 +1449,7 @@ Partial Class formAWSRealTime
         '
         Me.txtBasestationFTPMode.FormattingEnabled = True
         Me.txtBasestationFTPMode.Items.AddRange(New Object() {"FTP", "SFTP"})
-        Me.txtBasestationFTPMode.Location = New System.Drawing.Point(206, 102)
+        Me.txtBasestationFTPMode.Location = New System.Drawing.Point(245, 102)
         Me.txtBasestationFTPMode.Name = "txtBasestationFTPMode"
         Me.txtBasestationFTPMode.Size = New System.Drawing.Size(116, 21)
         Me.txtBasestationFTPMode.TabIndex = 73
@@ -1575,7 +1565,7 @@ Partial Class formAWSRealTime
         '
         'txtbaseStationPWConfirm
         '
-        Me.txtbaseStationPWConfirm.Location = New System.Drawing.Point(205, 195)
+        Me.txtbaseStationPWConfirm.Location = New System.Drawing.Point(244, 195)
         Me.txtbaseStationPWConfirm.Name = "txtbaseStationPWConfirm"
         Me.txtbaseStationPWConfirm.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtbaseStationPWConfirm.Size = New System.Drawing.Size(87, 20)
@@ -1583,7 +1573,7 @@ Partial Class formAWSRealTime
         '
         'txtbaseStationPW
         '
-        Me.txtbaseStationPW.Location = New System.Drawing.Point(205, 164)
+        Me.txtbaseStationPW.Location = New System.Drawing.Point(244, 164)
         Me.txtbaseStationPW.Name = "txtbaseStationPW"
         Me.txtbaseStationPW.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtbaseStationPW.Size = New System.Drawing.Size(87, 20)
@@ -1591,21 +1581,21 @@ Partial Class formAWSRealTime
         '
         'txtBaseStationUser
         '
-        Me.txtBaseStationUser.Location = New System.Drawing.Point(205, 133)
+        Me.txtBaseStationUser.Location = New System.Drawing.Point(244, 133)
         Me.txtBaseStationUser.Name = "txtBaseStationUser"
         Me.txtBaseStationUser.Size = New System.Drawing.Size(87, 20)
         Me.txtBaseStationUser.TabIndex = 8
         '
         'txtBaseStationFolder
         '
-        Me.txtBaseStationFolder.Location = New System.Drawing.Point(205, 71)
+        Me.txtBaseStationFolder.Location = New System.Drawing.Point(244, 71)
         Me.txtBaseStationFolder.Name = "txtBaseStationFolder"
         Me.txtBaseStationFolder.Size = New System.Drawing.Size(117, 20)
         Me.txtBaseStationFolder.TabIndex = 6
         '
         'txtBaseStationAddress
         '
-        Me.txtBaseStationAddress.Location = New System.Drawing.Point(205, 40)
+        Me.txtBaseStationAddress.Location = New System.Drawing.Point(244, 40)
         Me.txtBaseStationAddress.Name = "txtBaseStationAddress"
         Me.txtBaseStationAddress.Size = New System.Drawing.Size(187, 20)
         Me.txtBaseStationAddress.TabIndex = 5
@@ -1951,14 +1941,14 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox5)
         Me.pnlMsgEncoding.Location = New System.Drawing.Point(203, 435)
         Me.pnlMsgEncoding.Name = "pnlMsgEncoding"
-        Me.pnlMsgEncoding.Size = New System.Drawing.Size(726, 51)
+        Me.pnlMsgEncoding.Size = New System.Drawing.Size(753, 57)
         Me.pnlMsgEncoding.TabIndex = 4
         Me.pnlMsgEncoding.Visible = False
         '
         'GroupBox6
         '
         Me.GroupBox6.Controls.Add(Me.dgrdCodeFlag)
-        Me.GroupBox6.Location = New System.Drawing.Point(311, 20)
+        Me.GroupBox6.Location = New System.Drawing.Point(333, 20)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(413, 466)
         Me.GroupBox6.TabIndex = 2
@@ -2002,7 +1992,7 @@ Partial Class formAWSRealTime
         Me.grpIndicators.Controls.Add(Me.Label34)
         Me.grpIndicators.Location = New System.Drawing.Point(9, 159)
         Me.grpIndicators.Name = "grpIndicators"
-        Me.grpIndicators.Size = New System.Drawing.Size(296, 323)
+        Me.grpIndicators.Size = New System.Drawing.Size(321, 323)
         Me.grpIndicators.TabIndex = 1
         Me.grpIndicators.TabStop = False
         Me.grpIndicators.Text = "BUFR Section 2"
@@ -2045,75 +2035,74 @@ Partial Class formAWSRealTime
         '
         'chkOptionalSection
         '
-        Me.chkOptionalSection.AutoSize = True
         Me.chkOptionalSection.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chkOptionalSection.Location = New System.Drawing.Point(15, 123)
         Me.chkOptionalSection.Name = "chkOptionalSection"
-        Me.chkOptionalSection.Size = New System.Drawing.Size(204, 17)
+        Me.chkOptionalSection.Size = New System.Drawing.Size(256, 17)
         Me.chkOptionalSection.TabIndex = 20
         Me.chkOptionalSection.Tag = "  "
-        Me.chkOptionalSection.Text = "Option Section Inclusion                     "
+        Me.chkOptionalSection.Text = "Option Section Inclusion"
         Me.chkOptionalSection.UseVisualStyleBackColor = True
         '
         'txtLocaltableVersion
         '
-        Me.txtLocaltableVersion.Location = New System.Drawing.Point(204, 225)
+        Me.txtLocaltableVersion.Location = New System.Drawing.Point(256, 225)
         Me.txtLocaltableVersion.Name = "txtLocaltableVersion"
         Me.txtLocaltableVersion.Size = New System.Drawing.Size(60, 20)
         Me.txtLocaltableVersion.TabIndex = 19
         '
         'txtMastertableVersion
         '
-        Me.txtMastertableVersion.Location = New System.Drawing.Point(204, 204)
+        Me.txtMastertableVersion.Location = New System.Drawing.Point(256, 204)
         Me.txtMastertableVersion.Name = "txtMastertableVersion"
         Me.txtMastertableVersion.Size = New System.Drawing.Size(60, 20)
         Me.txtMastertableVersion.TabIndex = 18
         '
         'txtLocalSubcategory
         '
-        Me.txtLocalSubcategory.Location = New System.Drawing.Point(204, 183)
+        Me.txtLocalSubcategory.Location = New System.Drawing.Point(256, 183)
         Me.txtLocalSubcategory.Name = "txtLocalSubcategory"
         Me.txtLocalSubcategory.Size = New System.Drawing.Size(60, 20)
         Me.txtLocalSubcategory.TabIndex = 17
         '
         'txtInternationalSubcategory
         '
-        Me.txtInternationalSubcategory.Location = New System.Drawing.Point(204, 162)
+        Me.txtInternationalSubcategory.Location = New System.Drawing.Point(256, 162)
         Me.txtInternationalSubcategory.Name = "txtInternationalSubcategory"
         Me.txtInternationalSubcategory.Size = New System.Drawing.Size(60, 20)
         Me.txtInternationalSubcategory.TabIndex = 16
         '
         'txtDataCategory
         '
-        Me.txtDataCategory.Location = New System.Drawing.Point(204, 141)
+        Me.txtDataCategory.Location = New System.Drawing.Point(256, 141)
         Me.txtDataCategory.Name = "txtDataCategory"
         Me.txtDataCategory.Size = New System.Drawing.Size(60, 20)
         Me.txtDataCategory.TabIndex = 15
         '
         'txtUpdateSequence
         '
-        Me.txtUpdateSequence.Location = New System.Drawing.Point(204, 99)
+        Me.txtUpdateSequence.Location = New System.Drawing.Point(256, 99)
         Me.txtUpdateSequence.Name = "txtUpdateSequence"
         Me.txtUpdateSequence.Size = New System.Drawing.Size(60, 20)
         Me.txtUpdateSequence.TabIndex = 13
         '
         'txtOriginatingSubcentre
         '
-        Me.txtOriginatingSubcentre.Location = New System.Drawing.Point(204, 78)
+        Me.txtOriginatingSubcentre.Location = New System.Drawing.Point(256, 78)
         Me.txtOriginatingSubcentre.Name = "txtOriginatingSubcentre"
         Me.txtOriginatingSubcentre.Size = New System.Drawing.Size(60, 20)
         Me.txtOriginatingSubcentre.TabIndex = 12
         '
         'txtOriginatingCentre
         '
-        Me.txtOriginatingCentre.Location = New System.Drawing.Point(204, 57)
+        Me.txtOriginatingCentre.Location = New System.Drawing.Point(256, 57)
         Me.txtOriginatingCentre.Name = "txtOriginatingCentre"
         Me.txtOriginatingCentre.Size = New System.Drawing.Size(60, 20)
         Me.txtOriginatingCentre.TabIndex = 11
         '
         'txtBufrEdition
         '
-        Me.txtBufrEdition.Location = New System.Drawing.Point(204, 36)
+        Me.txtBufrEdition.Location = New System.Drawing.Point(256, 36)
         Me.txtBufrEdition.Name = "txtBufrEdition"
         Me.txtBufrEdition.Size = New System.Drawing.Size(60, 20)
         Me.txtBufrEdition.TabIndex = 10
@@ -2207,7 +2196,7 @@ Partial Class formAWSRealTime
         Me.GroupBox5.Controls.Add(Me.Label24)
         Me.GroupBox5.Location = New System.Drawing.Point(9, 29)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(296, 104)
+        Me.GroupBox5.Size = New System.Drawing.Size(321, 104)
         Me.GroupBox5.TabIndex = 0
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Tag = ""
@@ -2216,7 +2205,7 @@ Partial Class formAWSRealTime
         'txtTemplate
         '
         Me.txtTemplate.FormattingEnabled = True
-        Me.txtTemplate.Location = New System.Drawing.Point(109, 33)
+        Me.txtTemplate.Location = New System.Drawing.Point(143, 33)
         Me.txtTemplate.Name = "txtTemplate"
         Me.txtTemplate.Size = New System.Drawing.Size(177, 21)
         Me.txtTemplate.TabIndex = 3
@@ -2232,7 +2221,7 @@ Partial Class formAWSRealTime
         '
         'txtMsgHeader
         '
-        Me.txtMsgHeader.Location = New System.Drawing.Point(166, 67)
+        Me.txtMsgHeader.Location = New System.Drawing.Point(200, 67)
         Me.txtMsgHeader.Name = "txtMsgHeader"
         Me.txtMsgHeader.Size = New System.Drawing.Size(117, 20)
         Me.txtMsgHeader.TabIndex = 1
@@ -2259,12 +2248,12 @@ Partial Class formAWSRealTime
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(960, 615)
+        Me.Controls.Add(Me.pnlDataStructures)
+        Me.Controls.Add(Me.pnlServers)
         Me.Controls.Add(Me.pnlProcessing)
         Me.Controls.Add(Me.pnlMsgEncoding)
         Me.Controls.Add(Me.pnlControl)
         Me.Controls.Add(Me.pnlSites)
-        Me.Controls.Add(Me.pnlServers)
-        Me.Controls.Add(Me.pnlDataStructures)
         Me.KeyPreview = True
         Me.Name = "formAWSRealTime"
         Me.Text = "AWS Real Time"
@@ -2459,7 +2448,6 @@ Partial Class formAWSRealTime
     Friend WithEvents cmdMssReset As System.Windows.Forms.Button
     Friend WithEvents txtmssFTPMode As System.Windows.Forms.ComboBox
     Friend WithEvents grpSites As System.Windows.Forms.GroupBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtIP As System.Windows.Forms.ComboBox
     Friend WithEvents txtDataStructure As System.Windows.Forms.ComboBox
     Friend WithEvents txtFlag As System.Windows.Forms.TextBox

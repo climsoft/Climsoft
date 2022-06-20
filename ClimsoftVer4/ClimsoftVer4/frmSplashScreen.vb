@@ -73,13 +73,4 @@ Public NotInheritable Class frmSplashScreen
         End If
 
     End Sub
-
-
-    Private Sub MainLayoutPanel_Paint(sender As Object, e As PaintEventArgs) Handles MainLayoutPanel.Paint
-
-    End Sub
-
-    Private Sub lblDescription_Click(sender As Object, e As EventArgs) Handles lblDescription.Click
-
-    End Sub
 End Class

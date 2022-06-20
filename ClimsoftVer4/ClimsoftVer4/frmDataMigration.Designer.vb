@@ -197,9 +197,9 @@ Partial Class frmDataMigration
         '
         'txtBkpFile
         '
-        Me.txtBkpFile.Location = New System.Drawing.Point(111, 36)
+        Me.txtBkpFile.Location = New System.Drawing.Point(132, 37)
         Me.txtBkpFile.Name = "txtBkpFile"
-        Me.txtBkpFile.Size = New System.Drawing.Size(362, 20)
+        Me.txtBkpFile.Size = New System.Drawing.Size(345, 20)
         Me.txtBkpFile.TabIndex = 4
         '
         'lstMsgs

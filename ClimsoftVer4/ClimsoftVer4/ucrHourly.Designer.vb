@@ -106,6 +106,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod0 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrValueFlagPeriod1 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnPush = New System.Windows.Forms.Button()
         lblYear = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -113,7 +114,7 @@ Partial Class ucrHourly
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(429, 8)
+        lblYear.Location = New System.Drawing.Point(433, 9)
         lblYear.Name = "lblYear"
         lblYear.Size = New System.Drawing.Size(32, 13)
         lblYear.TabIndex = 758
@@ -123,7 +124,7 @@ Partial Class ucrHourly
         '
         Me.chkRepeatEntry.AutoSize = True
         Me.chkRepeatEntry.Enabled = False
-        Me.chkRepeatEntry.Location = New System.Drawing.Point(84, 564)
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(56, 564)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
         Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
         Me.chkRepeatEntry.TabIndex = 48
@@ -133,7 +134,7 @@ Partial Class ucrHourly
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(196, 565)
+        Me.lblSequencer.Location = New System.Drawing.Point(185, 565)
         Me.lblSequencer.Name = "lblSequencer"
         Me.lblSequencer.Size = New System.Drawing.Size(62, 13)
         Me.lblSequencer.TabIndex = 779
@@ -141,7 +142,7 @@ Partial Class ucrHourly
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(261, 562)
+        Me.txtSequencer.Location = New System.Drawing.Point(271, 562)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.ReadOnly = True
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
@@ -150,9 +151,9 @@ Partial Class ucrHourly
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(417, 527)
+        Me.btnView.Location = New System.Drawing.Point(368, 527)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(60, 23)
+        Me.btnView.Size = New System.Drawing.Size(45, 23)
         Me.btnView.TabIndex = 44
         Me.btnView.Tag = ""
         Me.btnView.Text = "View"
@@ -170,9 +171,9 @@ Partial Class ucrHourly
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(552, 527)
+        Me.btnHelp.Location = New System.Drawing.Point(545, 527)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(60, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(45, 23)
         Me.btnHelp.TabIndex = 46
         Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
@@ -180,9 +181,9 @@ Partial Class ucrHourly
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(280, 527)
+        Me.btnClear.Location = New System.Drawing.Point(254, 527)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(60, 23)
+        Me.btnClear.Size = New System.Drawing.Size(45, 23)
         Me.btnClear.TabIndex = 42
         Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
@@ -190,9 +191,9 @@ Partial Class ucrHourly
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(77, 527)
+        Me.btnSave.Location = New System.Drawing.Point(83, 527)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(60, 23)
+        Me.btnSave.Size = New System.Drawing.Size(45, 23)
         Me.btnSave.TabIndex = 31
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
@@ -200,9 +201,9 @@ Partial Class ucrHourly
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(211, 527)
+        Me.btnDelete.Location = New System.Drawing.Point(197, 527)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(60, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(45, 23)
         Me.btnDelete.TabIndex = 40
         Me.btnDelete.Tag = "delete"
         Me.btnDelete.Text = "Delete"
@@ -220,9 +221,9 @@ Partial Class ucrHourly
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(144, 527)
+        Me.btnUpdate.Location = New System.Drawing.Point(140, 527)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(45, 23)
         Me.btnUpdate.TabIndex = 32
         Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
@@ -230,9 +231,9 @@ Partial Class ucrHourly
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(486, 527)
+        Me.btnClose.Location = New System.Drawing.Point(488, 527)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(60, 23)
+        Me.btnClose.Size = New System.Drawing.Size(45, 23)
         Me.btnClose.TabIndex = 45
         Me.btnClose.Tag = "close"
         Me.btnClose.Text = "Close"
@@ -262,7 +263,7 @@ Partial Class ucrHourly
         '
         Me.ucrInputSameValue.FieldName = Nothing
         Me.ucrInputSameValue.KeyControl = False
-        Me.ucrInputSameValue.Location = New System.Drawing.Point(432, 63)
+        Me.ucrInputSameValue.Location = New System.Drawing.Point(450, 63)
         Me.ucrInputSameValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputSameValue.Name = "ucrInputSameValue"
         Me.ucrInputSameValue.Size = New System.Drawing.Size(58, 26)
@@ -281,7 +282,7 @@ Partial Class ucrHourly
         '
         'ucrNavigation
         '
-        Me.ucrNavigation.Location = New System.Drawing.Point(129, 494)
+        Me.ucrNavigation.Location = New System.Drawing.Point(113, 494)
         Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigation.Name = "ucrNavigation"
         Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
@@ -291,7 +292,7 @@ Partial Class ucrHourly
         '
         Me.ucrDaySelector.FieldName = "dd"
         Me.ucrDaySelector.KeyControl = True
-        Me.ucrDaySelector.Location = New System.Drawing.Point(544, 28)
+        Me.ucrDaySelector.Location = New System.Drawing.Point(557, 28)
         Me.ucrDaySelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrDaySelector.Name = "ucrDaySelector"
         Me.ucrDaySelector.Size = New System.Drawing.Size(42, 21)
@@ -302,7 +303,7 @@ Partial Class ucrHourly
         '
         Me.ucrMonthSelector.FieldName = "mm"
         Me.ucrMonthSelector.KeyControl = True
-        Me.ucrMonthSelector.Location = New System.Drawing.Point(493, 28)
+        Me.ucrMonthSelector.Location = New System.Drawing.Point(502, 28)
         Me.ucrMonthSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrMonthSelector.Name = "ucrMonthSelector"
         Me.ucrMonthSelector.Size = New System.Drawing.Size(36, 25)
@@ -313,7 +314,7 @@ Partial Class ucrHourly
         '
         Me.ucrYearSelector.FieldName = "yyyy"
         Me.ucrYearSelector.KeyControl = True
-        Me.ucrYearSelector.Location = New System.Drawing.Point(432, 28)
+        Me.ucrYearSelector.Location = New System.Drawing.Point(436, 28)
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(49, 25)
@@ -323,7 +324,7 @@ Partial Class ucrHourly
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(541, 10)
+        Me.lblDay.Location = New System.Drawing.Point(554, 9)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
         Me.lblDay.TabIndex = 760
@@ -332,7 +333,7 @@ Partial Class ucrHourly
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(490, 8)
+        Me.lblMonth.Location = New System.Drawing.Point(499, 9)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 759
@@ -958,18 +959,28 @@ Partial Class ucrHourly
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(349, 527)
+        Me.btnCancel.Location = New System.Drawing.Point(311, 527)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(60, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(45, 23)
         Me.btnCancel.TabIndex = 43
         Me.btnCancel.Tag = "cancel"
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(425, 527)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(51, 23)
+        Me.btnPush.TabIndex = 1155
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
+        '
         'ucrHourly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.lblSequencer)
@@ -1056,7 +1067,7 @@ Partial Class ucrHourly
         Me.Controls.Add(Me.ucrValueFlagPeriod1)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ucrHourly"
-        Me.Size = New System.Drawing.Size(626, 598)
+        Me.Size = New System.Drawing.Size(630, 598)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -1146,4 +1157,5 @@ Partial Class ucrHourly
     Friend WithEvents UcrValueFlagPeriod0 As ucrValueFlagPeriod
     Friend WithEvents ucrValueFlagPeriod1 As ucrValueFlagPeriod
     Friend WithEvents btnCancel As Button
+    Friend WithEvents btnPush As Button
 End Class

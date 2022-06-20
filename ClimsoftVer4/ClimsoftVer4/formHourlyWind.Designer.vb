@@ -184,6 +184,7 @@ Partial Class form_hourlywind
         Me.Label33 = New System.Windows.Forms.Label()
         Me.btnView = New System.Windows.Forms.Button()
         Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
+        Me.btnPush = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'YyyyLabel
@@ -1458,11 +1459,21 @@ Partial Class form_hourlywind
         Me.chkRepeatEntry.UseVisualStyleBackColor = True
         Me.chkRepeatEntry.Visible = False
         '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(496, 539)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(51, 23)
+        Me.btnPush.TabIndex = 1155
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
+        '
         'form_hourlywind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(687, 601)
+        Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.Label33)
@@ -1794,4 +1805,5 @@ Partial Class form_hourlywind
     Friend WithEvents YyyyLabel As System.Windows.Forms.Label
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents chkRepeatEntry As System.Windows.Forms.CheckBox
+    Friend WithEvents btnPush As Button
 End Class

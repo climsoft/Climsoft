@@ -27,51 +27,6 @@ Public Class formProductsSelectCriteria
     Dim cmd As MySql.Data.MySqlClient.MySqlCommand
     Dim ItmExist As Boolean
 
-    'Private Sub formProducts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '    Dim prtyp As New clsProducts
-
-    '    MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
-
-    '    'TODO: This line of code loads data into the 'Dataforms.data_forms' table
-
-    '    lstvProducts.Columns.Add("Product Name", 100, HorizontalAlignment.Left)
-    '    lstvProducts.Columns.Add("Product Details", 500, HorizontalAlignment.Left)
-
-    '    Try
-    '        conn.ConnectionString = MyConnectionString
-    '        conn.Open()
-
-    '        'MsgBox("Connection Successful !", MsgBoxStyle.Information)
-
-    '        sql = "SELECT * FROM tblproducts"
-    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-    '        da.Fill(ds, "tblproducts")
-    '        conn.Close()
-    '        'MsgBox("Dataset Field !", MsgBoxStyle.Information)
-
-    '    Catch ex As MySql.Data.MySqlClient.MySqlException
-    '        MessageBox.Show(ex.Message)
-    '    End Try
-
-    '    maxRows = ds.Tables("tblproducts").Rows.Count
-
-    '    Dim str(2) As String
-    '    Dim itm As ListViewItem
-
-    '    For kount = 0 To maxRows - 1 Step 1
-    '        'MsgBox(ds.Tables("data_forms").Rows(kount).Item("selected"))
-    '        'If ds.Tables("data_forms").Rows(kount).Item("selected") = 1 Then
-    '        str(0) = ds.Tables("tblproducts").Rows(kount).Item("productName")
-    '        str(1) = ds.Tables("tblproducts").Rows(kount).Item("prDetails")
-    '        itm = New ListViewItem(str)
-    '        lstvProducts.Items.Add(itm)
-    '        ' End If
-    '    Next
-    '    ' MsgBox(ListView1.Items.Count)
-    '    'MsgBox((ListView1.Height - 46) / ListView1.Items.Count)
-    '    lstvProducts.Height = 46 + 23 * (lstvProducts.Items.Count - 1)
-    'End Sub
-
     Private Sub formProducts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'Set Header for Stations list view
@@ -108,9 +63,7 @@ Public Class formProductsSelectCriteria
         maxRows = ds.Tables("station").Rows.Count
         'MsgBox(maxRows)
         For kount = 0 To maxRows - 1 Step 1
-
             cmbstation.Items.Add(ds.Tables("station").Rows(kount).Item("stationName"))
-
         Next
 
         ds.Clear()
@@ -133,6 +86,10 @@ Public Class formProductsSelectCriteria
         ' When only one station is to be selected
         If lblProductType.Text = "Yearly Elements Observed" Then cmdSelectAllStations.Enabled = False
 
+        'translate form controls
+        ClsTranslations.TranslateForm(Me)
+        'todo in future this will be done automatically by TranslateForms(Me)
+        'ClsTranslations.TranslateComponent(lstViewProducts, True)
     End Sub
 
 
@@ -2924,6 +2881,7 @@ Err:
 
 
     End Sub
+
 
     Private Sub butFill_Click(sender As Object, e As EventArgs) Handles butFill.Click
         Dim lat, lon, radius, degRadius As Double

@@ -404,6 +404,7 @@ Public Class formMetadata
             dsNewRow.Item("adminRegion") = txtAdminRegion.Text
             dsNewRow.Item("drainageBasin") = txtDrainageBasin.Text
             dsNewRow.Item("authority") = txtAuthority.Text
+            dsNewRow.Item("qualifier") = txtStationType.Text
             If IsNumeric(txtgeoAccuracy.Text) Then dsNewRow.Item("geolocationAccuracy") = Val(txtgeoAccuracy.Text)
             If IsNumeric(txtgeoMethod.Text) Then dsNewRow.Item("geolocationMethod") = Val(txtgeoMethod.Text)
 
@@ -433,6 +434,7 @@ Public Class formMetadata
             'Add a new record to the data source table
             ds.Tables("station").Rows.Add(dsNewRow)
             da.Update(ds, "station")
+            MsgBox("New station added successfully")
             ClearStationForm()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -772,6 +774,7 @@ Public Class formMetadata
             'Add a new record to the data source table
             ds.Tables("obselement").Rows.Add(dsNewRow)
             da.Update(ds, "obselement")
+            MsgBox("New element added successfully")
             ClearElementForm()
         Catch ex As Exception
             If Err.Number = 5 Then
@@ -891,6 +894,7 @@ Err:
             'Add a new record to the data source table
             ds.Tables("stationelement").Rows.Add(dsNewRow)
             da.Update(ds, "stationelement")
+            MsgBox("New record added successfully")
             ClearStationElementForm()
         Catch ex As Exception
 
@@ -926,6 +930,7 @@ Err:
         dsNewRow.Item("description") = txtFormDescription.Text
         ds.Tables("paperarchivedefinition").Rows.Add(dsNewRow)
         da.Update(ds, "paperarchivedefinition")
+        MsgBox("New record added successfully")
         ' Clear Text boxes
         txtFormId.Text = ""
         txtFormDescription.Text = ""
@@ -1271,15 +1276,6 @@ Err:
         Locate_Station("stationId", cboStationId.Text)
     End Sub
 
-
-    Private Sub combSearchStation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearchStation.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub combSearchElement_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearchElement.SelectedIndexChanged
-
-    End Sub
-
     Private Sub combSearchElement_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboSearchElement.SelectedValueChanged
         Locate_Element("Nm", cboSearchElement.Text)
     End Sub
@@ -1378,7 +1374,7 @@ Err:
             'Add a new record to the data source table
             ds.Tables("instrument").Rows.Add(dsNewRow)
             da.Update(ds, "instrument")
-
+            MsgBox("New instrument added successfully")
             ClearInstrumentForm()
 
         Catch ex As Exception
@@ -1429,7 +1425,7 @@ Err:
             'Add a new record to the data source table
             ds.Tables("stationlocationhistory").Rows.Add(dsNewRow)
             da.Update(ds, "stationlocationhistory")
-
+            MsgBox("New record added successfully")
             ClearStationHistoryForm()
 
         Catch ex As Exception
@@ -1461,7 +1457,7 @@ Err:
             'Add a new record to the data source table
             ds.Tables("stationqualifier").Rows.Add(dsNewRow)
             da.Update(ds, "stationqualifier")
-
+            MsgBox("New record added successfully")
             ClearStationQualifierForm()
 
         Catch ex As Exception
@@ -1489,7 +1485,7 @@ Err:
             'Add a new record to the data source table
             ds.Tables("obsscheduleclass").Rows.Add(dsNewRow)
             da.Update(ds, "obsscheduleclass")
-
+            MsgBox("New record added successfully")
             ClearFormScheduleClass()
 
         Catch ex As Exception
@@ -1538,7 +1534,7 @@ Err:
             'Add a new record to the data source table
             ds.Tables("physicalfeature").Rows.Add(dsNewRowp)
             da.Update(ds, "physicalfeature")
-
+            MsgBox("New record added successfully")
             ClearPhysicalFeatureForm()
 
         Catch ex As Exception

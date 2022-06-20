@@ -15,159 +15,108 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class frmProducts
-    Public xy As String
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
-    Dim ds As New DataSet
-    Dim sql As String
-    Dim maxRows As Integer
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-    Dim MyConnectionString As String
-    Dim kounts As Integer
-    Dim SelectedProduct
+    'Public xy As String
+    Private dataTable As DataTable
+
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'todo. this function is meant to update the products table everytime it's run
+        'ProductsTable_Update()
 
-        'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
-        MyConnectionString = frmLogin.txtusrpwd.Text
+        'set up the products data table
+        Dim clsDataCall As New DataCall
+        clsDataCall.SetTableName("tblProducts")
+        clsDataCall.SetFields({"productName", "prDetails", "prCategory"})
+        dataTable = clsDataCall.GetDataTable()
 
-        Try
-            conn.ConnectionString = MyConnectionString
-            conn.Open()
+        'set up the combobox data source
+        Dim dctProductCategories As New Dictionary(Of String, String)
+        For Each row As DataRow In dataTable.Rows
+            'prCategory is duplicated in the databas, so only get unique values
+            If Not dctProductCategories.ContainsKey(row.Field(Of String)("prCategory")) Then
+                dctProductCategories.Add(
+                    row.Field(Of String)("prCategory"),
+                    ClsTranslations.GetTranslation(row.Field(Of String)("prCategory")))
+            End If
+        Next
 
-            ProductsTable_Update()
-            'sql = "SELECT * FROM tblproducts"
-            sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            ds.Clear()
-            cboProductsCategory.Items.Clear()
-            lstViewProducts.Clear()
-            da.Fill(ds, "tblproducts")
-            conn.Close()
-            '------MaxRows assignment statement and [kount loop] below moved from position below [End Try] block
-            maxRows = ds.Tables("tblproducts").Rows.Count
-            For kount = 0 To maxRows - 1 Step 1
+        'initialise DisplayMember and ValueMember of the combobox to be filled with dictionary values
+        'set the untranslated product category as the display member
+        cboProductsCategory.ValueMember = "Key"
+        'set the translated product category as the display member
+        cboProductsCategory.DisplayMember = "Value"
 
-                cboProductsCategory.Items.Add(ClsTranslations.GetTranslation(ds.Tables("tblproducts").Rows(kount).Item("prCategory")))
+        'bind the combobox to dictionary 
+        cboProductsCategory.DataSource = New BindingSource(dctProductCategories, Nothing)
 
-            Next
-            '--------------
-        Catch ex As MySql.Data.MySqlClient.MySqlException
-            MessageBox.Show(ex.Message)
-        End Try
+        cboProductsCategory.SelectedIndex = -1
 
-
-        '' maxRows = ds.Tables("tblproducts").Rows.Count
-        'MsgBox(maxRows)
-        ''For kount = 0 To maxRows - 1 Step 1
-
-        ''    cmbProductsCategory.Items.Add(ds.Tables("tblproducts").Rows(kount).Item("prCategory"))
-
-        ''Next
-
+        'translate form controls
         ClsTranslations.TranslateForm(Me)
         'todo in future this will be done automatically by TranslateForms(Me)
         ClsTranslations.TranslateComponent(lstViewProducts, True)
-        Exit Sub
 
     End Sub
 
     Private Sub cmbProductsCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboProductsCategory.SelectedIndexChanged
-        Dim prod As String
+        'clear list view rows
+        lstViewProducts.Items.Clear()
 
-        prod = cboProductsCategory.Text
+        'get products of the selected category
+        Dim dataRows() As DataRow = dataTable.Select("prCategory = '" & cboProductsCategory.SelectedValue & "'")
 
-        'If prod = "Rain Days" Then ProductsTable_Update()
-        'ProductsTable_Update()
-        lstViewProducts.Clear()
-        lstViewProducts.Columns.Clear()
-        lstViewProducts.Columns.Add("Products Name", 100, HorizontalAlignment.Left)
-        lstViewProducts.Columns.Add("Products Details", 500, HorizontalAlignment.Left)
+        If dataRows Is Nothing Then
+            Exit Sub
+        End If
 
-        sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
-
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        ds.Clear()
-
-        da.Fill(ds, "tblProducts")
-
-        maxRows = (ds.Tables("tblProducts").Rows.Count)
-        Dim str(2) As String
-        Dim itm = New ListViewItem
-
-        For kount = 0 To maxRows - 1 Step 1
-            str(0) = ds.Tables("tblProducts").Rows(kount).Item("productName")
-            str(1) = ds.Tables("tblProducts").Rows(kount).Item("prDetails")
-            itm = New ListViewItem(str)
-            lstViewProducts.Items.Add(itm)
+        'add them to the list view
+        For Each row As DataRow In dataRows
+            'add product and prodcut details. List view has 2 columns
+            lstViewProducts.Items.Add(New ListViewItem({row.Field(Of String)("productName"),
+                                                       row.Field(Of String)("prDetails")}))
         Next
+
         'todo in future this will be done automatically by TranslateForms(Me)
         ClsTranslations.TranslateComponent(lstViewProducts, False)
     End Sub
 
     Private Sub lstvProducts_Click(sender As Object, e As EventArgs) Handles lstViewProducts.Click
 
-        'todo. this code needs to be refactored urgent, the product names could have been translated
-
-        Dim prtyp As New clsHelp
-        'Dim formcaption As String
-
-        For i = 0 To lstViewProducts.Items.Count - 1
-            If (lstViewProducts.Items(i).Selected) Then
-                prtyp.ProductType = lstViewProducts.Items(i).Text
-                Exit For
-            End If
-        Next
-
-        If prtyp.ProductType = "Stations Records" Then
-            frmInventoryChart.Show()
-            Exit Sub
-        ElseIf prtyp.ProductType = "CLIMAT" Then
-            frmCLIMAT.Show()
+        If lstViewProducts.SelectedItems.Count = 0 Then
             Exit Sub
         End If
 
-
-        formProductsSelectCriteria.lblProductType.Text = prtyp.ProductType
-
-        'If prtyp.ProductType = "Histograms" Or prtyp.ProductType = "TimeSeires" Then formProductsSelectCriteria.pnlSummary.Enabled = True
-
-        formProductsSelectCriteria.Show()
-
+        Dim selectedProductName As String = lstViewProducts.SelectedItems.Item(0).Text
+        Select Case selectedProductName
+            Case "Stations Records"
+                frmInventoryChart.Show()
+            Case "CLIMAT"
+                frmCLIMAT.Show()
+            Case Else
+                'todo. refactor formProductsSelectCriteria to not use product type label
+                'the label should show translated text
+                formProductsSelectCriteria.lblProductType.Text = selectedProductName
+                formProductsSelectCriteria.Show()
+        End Select
     End Sub
 
-    'Public Function SelectProducts() As Boolean
-    '    Dim prtyp As New ClassHelp
-
-    '    For i = 0 To lstvProducts.Items.Count - 1
-    '        If (lstvProducts.Items(i).Selected) Then
-    '            prtyp.ProductType = lstvProducts.Items(i).Text
-    '            MsgBox(prtyp.ProductType)
-    '            formProductsSelectCriteria.Show()
-    '            ' MsgBox(SelectedProduct)
-    '            SelectProducts = True
-    '        End If
-    '    Next
-    'End Function
-
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        Me.Hide()
-    End Sub
-
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+    Private Sub Close_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click, ToolStripButton1.Click
         Me.Close()
     End Sub
 
-
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#products")
-
     End Sub
 
-    Sub ProductsTable_Update()
-        Dim currDB, sql0 As String
+    'todo. should this always be called?? and is this the right place to call it
+    'this should be done as part of the scripts update
+    Private Sub ProductsTable_Update()
+        Dim currDB As String = ""
+        Dim sql0 As String
         Dim qry0 As MySql.Data.MySqlClient.MySqlCommand
+        Dim MyConnectionString As String
 
+        MyConnectionString = frmLogin.txtusrpwd.Text
         frmUserManagement.CurrentDB(MyConnectionString, currDB)
-
         sql0 = "USE `" & currDB & "`;
                 CREATE TABLE IF NOT EXISTS `tblproducts` (
                   `productId` varchar(10) NOT NULL,
@@ -216,15 +165,14 @@ Public Class frmProducts
                ('34', 'Annual Levels', 'Annual Summeries', 'Upper Air');"
         Try
             Me.Cursor = Cursors.WaitCursor
-            qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, conn)
-
+            qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)
             qry0.CommandTimeout = 0
             qry0.ExecuteNonQuery()
-
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
+
 End Class

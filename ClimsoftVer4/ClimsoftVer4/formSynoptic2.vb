@@ -374,6 +374,7 @@
             lastRec = DateSerial(lastRecYear, lastRecMonth, lastRecDay) & " " & lastRecHour & ":00:00"
 
             nextRec = DateAdd("h", 3, lastRec)
+            'nextRec = DateAdd("h", 1, lastRec)
 
             txtYear.Text = DateAndTime.Year(nextRec)
             cboMonth.Text = DateAndTime.Month(nextRec)
@@ -786,11 +787,12 @@
         End Try
 
         ' Load units of measure to the appropriate boxes
-        cboTempUnits.Text = FldName.RegkeyValue("key10")
-        cboPrecipUnits.Text = FldName.RegkeyValue("key09")
-        cboCloudheightUnits.Text = FldName.RegkeyValue("key11")
-        cboVisibilityUnits.Text = FldName.RegkeyValue("key14")
-        cboWindSpdUnits.Text = FldName.RegkeyValue("key13")
+        cboTempUnits.Text = "Deg C" 'FldName.RegkeyValue("key10")
+        cboPrecipUnits.Text = "metres" ' FldName.RegkeyValue("key09")
+        cboCloudheightUnits.Text = "feet" 'FldName.RegkeyValue("key11")
+        cboVisibilityUnits.Text = "metres" ' FldName.RegkeyValue("key14")
+        cboWindSpdUnits.Text = "knots" 'FldName.RegkeyValue("key13")
+
         '' Poplate the Hour text box with the value from registry
         'Try
 
@@ -1460,6 +1462,21 @@
             Return False
         End Try
     End Function
+
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+
+        Me.Cursor = Cursors.WaitCursor
+        If FldName.DataPush("form_synoptic2_TDCF") Then
+            MsgBox("Data Pushed to remote server successfully")
+        Else
+            MsgBox("Data Push Failed!")
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub cboPrecipUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPrecipUnits.SelectedIndexChanged
+
+    End Sub
 
     Private Sub cboStation_TextChanged(sender As Object, e As EventArgs) Handles cboStation.TextChanged
         'If RecordExist() Then MsgBox(cboStation.SelectedValue)

@@ -552,6 +552,15 @@ Public Class formDaily1
         'If Len(cboDay.Text) > 0 Then formPopulate()
     End Sub
 
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+        Me.Cursor = Cursors.WaitCursor
+        If FldName.DataPush("form_daily1") Then
+            MsgBox("Data Pushed to remote server successfully")
+        Else
+            MsgBox("Data Push Failed!")
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
 
     Private Sub formDaily1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         'If e.KeyCode = Keys.Enter Then My.Computer.Keyboard.SendKeys("{TAB}")

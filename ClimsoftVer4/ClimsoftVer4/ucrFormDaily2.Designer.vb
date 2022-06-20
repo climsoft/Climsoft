@@ -132,6 +132,7 @@ Partial Class ucrFormDaily2
         Me.Label5 = New System.Windows.Forms.Label()
         Me.ucrInputSameValue = New ClimsoftVer4.ucrTextBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnPush = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -1051,7 +1052,7 @@ Partial Class ucrFormDaily2
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(188, 557)
+        Me.lblSequencer.Location = New System.Drawing.Point(167, 557)
         Me.lblSequencer.Name = "lblSequencer"
         Me.lblSequencer.Size = New System.Drawing.Size(59, 13)
         Me.lblSequencer.TabIndex = 709
@@ -1068,7 +1069,7 @@ Partial Class ucrFormDaily2
         '
         'ucrDaily2Navigation
         '
-        Me.ucrDaily2Navigation.Location = New System.Drawing.Point(155, 486)
+        Me.ucrDaily2Navigation.Location = New System.Drawing.Point(124, 486)
         Me.ucrDaily2Navigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDaily2Navigation.Name = "ucrDaily2Navigation"
         Me.ucrDaily2Navigation.Size = New System.Drawing.Size(336, 25)
@@ -1086,7 +1087,7 @@ Partial Class ucrFormDaily2
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(411, 518)
+        Me.btnView.Location = New System.Drawing.Point(399, 518)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(60, 23)
         Me.btnView.TabIndex = 44
@@ -1096,7 +1097,7 @@ Partial Class ucrFormDaily2
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(543, 518)
+        Me.btnHelp.Location = New System.Drawing.Point(582, 518)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(60, 23)
         Me.btnHelp.TabIndex = 46
@@ -1106,7 +1107,7 @@ Partial Class ucrFormDaily2
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(279, 518)
+        Me.btnClear.Location = New System.Drawing.Point(271, 518)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(60, 23)
         Me.btnClear.TabIndex = 42
@@ -1116,7 +1117,7 @@ Partial Class ucrFormDaily2
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(81, 518)
+        Me.btnSave.Location = New System.Drawing.Point(79, 518)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(60, 23)
         Me.btnSave.TabIndex = 38
@@ -1126,7 +1127,7 @@ Partial Class ucrFormDaily2
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(213, 518)
+        Me.btnDelete.Location = New System.Drawing.Point(207, 518)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(60, 23)
         Me.btnDelete.TabIndex = 41
@@ -1146,7 +1147,7 @@ Partial Class ucrFormDaily2
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(147, 518)
+        Me.btnUpdate.Location = New System.Drawing.Point(143, 518)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
         Me.btnUpdate.TabIndex = 39
@@ -1156,7 +1157,7 @@ Partial Class ucrFormDaily2
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(477, 518)
+        Me.btnClose.Location = New System.Drawing.Point(518, 518)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(60, 23)
         Me.btnClose.TabIndex = 45
@@ -1166,7 +1167,7 @@ Partial Class ucrFormDaily2
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(345, 518)
+        Me.btnCancel.Location = New System.Drawing.Point(335, 518)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(60, 23)
         Me.btnCancel.TabIndex = 43
@@ -1268,10 +1269,10 @@ Partial Class ucrFormDaily2
         '
         Me.ucrInputSameValue.FieldName = Nothing
         Me.ucrInputSameValue.KeyControl = False
-        Me.ucrInputSameValue.Location = New System.Drawing.Point(597, 33)
+        Me.ucrInputSameValue.Location = New System.Drawing.Point(608, 33)
         Me.ucrInputSameValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputSameValue.Name = "ucrInputSameValue"
-        Me.ucrInputSameValue.Size = New System.Drawing.Size(58, 26)
+        Me.ucrInputSameValue.Size = New System.Drawing.Size(47, 26)
         Me.ucrInputSameValue.TabIndex = 769
         Me.ucrInputSameValue.TextboxValue = ""
         '
@@ -1284,9 +1285,19 @@ Partial Class ucrFormDaily2
         Me.Label6.TabIndex = 771
         Me.Label6.Text = "Units"
         '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(463, 518)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(51, 23)
+        Me.btnPush.TabIndex = 1155
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
+        '
         'ucrFormDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.lblVisibility)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.LblCloudheight)
@@ -1521,4 +1532,5 @@ Partial Class ucrFormDaily2
     Friend WithEvents Label5 As Label
     Friend WithEvents ucrInputSameValue As ucrTextBox
     Friend WithEvents Label6 As Label
+    Friend WithEvents btnPush As Button
 End Class

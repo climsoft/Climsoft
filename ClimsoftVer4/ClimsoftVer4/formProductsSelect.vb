@@ -14,6 +14,10 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+''' <summary>
+''' this form is NOT being used anywhere
+''' todo. delete
+''' </summary>
 Public Class frmProductsSelect
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim ds As New DataSet

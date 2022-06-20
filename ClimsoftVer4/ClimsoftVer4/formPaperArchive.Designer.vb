@@ -312,14 +312,14 @@ Partial Class formPaperArchive
         'txtFormId
         '
         Me.txtFormId.FormattingEnabled = True
-        Me.txtFormId.Location = New System.Drawing.Point(355, 68)
+        Me.txtFormId.Location = New System.Drawing.Point(365, 68)
         Me.txtFormId.Name = "txtFormId"
         Me.txtFormId.Size = New System.Drawing.Size(148, 21)
         Me.txtFormId.TabIndex = 2
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(78, 102)
+        Me.txtYear.Location = New System.Drawing.Point(101, 102)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(41, 20)
         Me.txtYear.TabIndex = 3
@@ -365,7 +365,7 @@ Partial Class formPaperArchive
         '
         'txtImageFile
         '
-        Me.txtImageFile.Location = New System.Drawing.Point(79, 20)
+        Me.txtImageFile.Location = New System.Drawing.Point(102, 20)
         Me.txtImageFile.Name = "txtImageFile"
         Me.txtImageFile.Size = New System.Drawing.Size(342, 20)
         Me.txtImageFile.TabIndex = 0
@@ -373,7 +373,7 @@ Partial Class formPaperArchive
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(288, 72)
+        Me.Label5.Location = New System.Drawing.Point(298, 72)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(44, 13)
         Me.Label5.TabIndex = 11
@@ -383,7 +383,7 @@ Partial Class formPaperArchive
         '
         Me.txtHour.FormattingEnabled = True
         Me.txtHour.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHour.Location = New System.Drawing.Point(78, 203)
+        Me.txtHour.Location = New System.Drawing.Point(101, 203)
         Me.txtHour.Name = "txtHour"
         Me.txtHour.Size = New System.Drawing.Size(41, 21)
         Me.txtHour.TabIndex = 6
@@ -429,7 +429,7 @@ Partial Class formPaperArchive
         '
         Me.txtDay.FormattingEnabled = True
         Me.txtDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.txtDay.Location = New System.Drawing.Point(78, 169)
+        Me.txtDay.Location = New System.Drawing.Point(101, 169)
         Me.txtDay.Name = "txtDay"
         Me.txtDay.Size = New System.Drawing.Size(41, 21)
         Me.txtDay.TabIndex = 5
@@ -438,7 +438,7 @@ Partial Class formPaperArchive
         '
         Me.txtMonth.FormattingEnabled = True
         Me.txtMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.txtMonth.Location = New System.Drawing.Point(78, 135)
+        Me.txtMonth.Location = New System.Drawing.Point(101, 135)
         Me.txtMonth.Name = "txtMonth"
         Me.txtMonth.Size = New System.Drawing.Size(41, 21)
         Me.txtMonth.TabIndex = 4
@@ -446,7 +446,7 @@ Partial Class formPaperArchive
         'txtStationArchive
         '
         Me.txtStationArchive.FormattingEnabled = True
-        Me.txtStationArchive.Location = New System.Drawing.Point(77, 68)
+        Me.txtStationArchive.Location = New System.Drawing.Point(100, 68)
         Me.txtStationArchive.Name = "txtStationArchive"
         Me.txtStationArchive.Size = New System.Drawing.Size(173, 21)
         Me.txtStationArchive.TabIndex = 1
@@ -648,7 +648,7 @@ Partial Class formPaperArchive
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(82, 198)
+        Me.Label8.Location = New System.Drawing.Point(73, 198)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(30, 13)
         Me.Label8.TabIndex = 5
@@ -657,7 +657,7 @@ Partial Class formPaperArchive
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(82, 168)
+        Me.Label7.Location = New System.Drawing.Point(73, 168)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(26, 13)
         Me.Label7.TabIndex = 4
@@ -666,7 +666,7 @@ Partial Class formPaperArchive
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(82, 138)
+        Me.Label6.Location = New System.Drawing.Point(73, 138)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 13)
         Me.Label6.TabIndex = 3
@@ -675,7 +675,7 @@ Partial Class formPaperArchive
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(82, 108)
+        Me.Label4.Location = New System.Drawing.Point(73, 108)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(29, 13)
         Me.Label4.TabIndex = 2
@@ -684,7 +684,7 @@ Partial Class formPaperArchive
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(82, 79)
+        Me.Label3.Location = New System.Drawing.Point(73, 79)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(41, 13)
         Me.Label3.TabIndex = 1
@@ -693,7 +693,7 @@ Partial Class formPaperArchive
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(82, 46)
+        Me.Label2.Location = New System.Drawing.Point(73, 46)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 13)
         Me.Label2.TabIndex = 0
@@ -835,7 +835,7 @@ Partial Class formPaperArchive
         'lblZoomout
         '
         Me.lblZoomout.AutoSize = True
-        Me.lblZoomout.Location = New System.Drawing.Point(1026, 27)
+        Me.lblZoomout.Location = New System.Drawing.Point(996, 27)
         Me.lblZoomout.Name = "lblZoomout"
         Me.lblZoomout.Size = New System.Drawing.Size(66, 13)
         Me.lblZoomout.TabIndex = 31

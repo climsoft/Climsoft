@@ -43,7 +43,7 @@ Partial Class frmUserManagement
         '
         'txtUserName
         '
-        Me.txtUserName.Location = New System.Drawing.Point(146, 67)
+        Me.txtUserName.Location = New System.Drawing.Point(166, 67)
         Me.txtUserName.Name = "txtUserName"
         Me.txtUserName.Size = New System.Drawing.Size(184, 20)
         Me.txtUserName.TabIndex = 0
@@ -52,14 +52,14 @@ Partial Class frmUserManagement
         '
         Me.cboUserRole.FormattingEnabled = True
         Me.cboUserRole.Items.AddRange(New Object() {"ClimsoftAdmin", "ClimsoftDeveloper", "ClimsoftMetadata", "ClimsoftOperator", "ClimsoftOperatorSupervisor", "ClimsoftProducts", "ClimsoftQC", "ClimsoftRainfall", "ClimsoftTranslator"})
-        Me.cboUserRole.Location = New System.Drawing.Point(146, 105)
+        Me.cboUserRole.Location = New System.Drawing.Point(166, 105)
         Me.cboUserRole.Name = "cboUserRole"
         Me.cboUserRole.Size = New System.Drawing.Size(184, 21)
         Me.cboUserRole.TabIndex = 1
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(146, 143)
+        Me.txtPassword.Location = New System.Drawing.Point(166, 143)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(184, 20)
@@ -67,7 +67,7 @@ Partial Class frmUserManagement
         '
         'txtConfirmPassword
         '
-        Me.txtConfirmPassword.Location = New System.Drawing.Point(146, 181)
+        Me.txtConfirmPassword.Location = New System.Drawing.Point(166, 181)
         Me.txtConfirmPassword.Name = "txtConfirmPassword"
         Me.txtConfirmPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtConfirmPassword.Size = New System.Drawing.Size(184, 20)
@@ -88,7 +88,7 @@ Partial Class frmUserManagement
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DataGridView1.Location = New System.Drawing.Point(372, 61)
+        Me.DataGridView1.Location = New System.Drawing.Point(372, 58)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(291, 182)
@@ -161,12 +161,11 @@ Partial Class frmUserManagement
         '
         'lblFrmUserManagementGuidelines
         '
-        Me.lblFrmUserManagementGuidelines.AutoSize = True
         Me.lblFrmUserManagementGuidelines.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFrmUserManagementGuidelines.ForeColor = System.Drawing.Color.Red
         Me.lblFrmUserManagementGuidelines.Location = New System.Drawing.Point(125, 16)
         Me.lblFrmUserManagementGuidelines.Name = "lblFrmUserManagementGuidelines"
-        Me.lblFrmUserManagementGuidelines.Size = New System.Drawing.Size(466, 16)
+        Me.lblFrmUserManagementGuidelines.Size = New System.Drawing.Size(466, 39)
         Me.lblFrmUserManagementGuidelines.TabIndex = 12
         Me.lblFrmUserManagementGuidelines.Text = "To delete or update user account, first select the username on the grid display"
         '

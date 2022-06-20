@@ -55,7 +55,7 @@ Partial Class frmUploadToObsFinal
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(498, 429)
+        Me.btnHelp.Location = New System.Drawing.Point(547, 468)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 23
@@ -64,7 +64,7 @@ Partial Class frmUploadToObsFinal
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(399, 429)
+        Me.btnCancel.Location = New System.Drawing.Point(448, 468)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 22
@@ -74,7 +74,7 @@ Partial Class frmUploadToObsFinal
         'btnOK
         '
         Me.btnOK.Enabled = False
-        Me.btnOK.Location = New System.Drawing.Point(613, 426)
+        Me.btnOK.Location = New System.Drawing.Point(662, 470)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 23)
         Me.btnOK.TabIndex = 4
@@ -84,43 +84,43 @@ Partial Class frmUploadToObsFinal
         '
         'lblEndMonth
         '
-        Me.lblEndMonth.AutoSize = True
-        Me.lblEndMonth.Location = New System.Drawing.Point(142, 436)
+        Me.lblEndMonth.Location = New System.Drawing.Point(170, 426)
         Me.lblEndMonth.Name = "lblEndMonth"
-        Me.lblEndMonth.Size = New System.Drawing.Size(59, 13)
+        Me.lblEndMonth.Size = New System.Drawing.Size(95, 13)
         Me.lblEndMonth.TabIndex = 20
         Me.lblEndMonth.Text = "End Month"
+        Me.lblEndMonth.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblBeginMonth
         '
-        Me.lblBeginMonth.AutoSize = True
-        Me.lblBeginMonth.Location = New System.Drawing.Point(142, 410)
+        Me.lblBeginMonth.Location = New System.Drawing.Point(170, 400)
         Me.lblBeginMonth.Name = "lblBeginMonth"
-        Me.lblBeginMonth.Size = New System.Drawing.Size(70, 13)
+        Me.lblBeginMonth.Size = New System.Drawing.Size(95, 13)
         Me.lblBeginMonth.TabIndex = 19
         Me.lblBeginMonth.Text = "Begin Month:"
+        Me.lblBeginMonth.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblEndYear
         '
-        Me.lblEndYear.AutoSize = True
-        Me.lblEndYear.Location = New System.Drawing.Point(12, 436)
+        Me.lblEndYear.Location = New System.Drawing.Point(12, 426)
         Me.lblEndYear.Name = "lblEndYear"
-        Me.lblEndYear.Size = New System.Drawing.Size(54, 13)
+        Me.lblEndYear.Size = New System.Drawing.Size(86, 13)
         Me.lblEndYear.TabIndex = 18
         Me.lblEndYear.Text = "End Year:"
+        Me.lblEndYear.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblBeginYear
         '
-        Me.lblBeginYear.AutoSize = True
-        Me.lblBeginYear.Location = New System.Drawing.Point(12, 410)
+        Me.lblBeginYear.Location = New System.Drawing.Point(12, 400)
         Me.lblBeginYear.Name = "lblBeginYear"
-        Me.lblBeginYear.Size = New System.Drawing.Size(62, 13)
+        Me.lblBeginYear.Size = New System.Drawing.Size(86, 13)
         Me.lblBeginYear.TabIndex = 17
         Me.lblBeginYear.Text = "Begin Year:"
+        Me.lblBeginYear.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtEndMonth
         '
-        Me.txtEndMonth.Location = New System.Drawing.Point(218, 432)
+        Me.txtEndMonth.Location = New System.Drawing.Point(271, 422)
         Me.txtEndMonth.Name = "txtEndMonth"
         Me.txtEndMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtEndMonth.TabIndex = 3
@@ -129,7 +129,7 @@ Partial Class frmUploadToObsFinal
         '
         'txtBeginMonth
         '
-        Me.txtBeginMonth.Location = New System.Drawing.Point(218, 406)
+        Me.txtBeginMonth.Location = New System.Drawing.Point(271, 396)
         Me.txtBeginMonth.Name = "txtBeginMonth"
         Me.txtBeginMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtBeginMonth.TabIndex = 2
@@ -138,14 +138,14 @@ Partial Class frmUploadToObsFinal
         '
         'txtEndYear
         '
-        Me.txtEndYear.Location = New System.Drawing.Point(80, 432)
+        Me.txtEndYear.Location = New System.Drawing.Point(104, 423)
         Me.txtEndYear.Name = "txtEndYear"
         Me.txtEndYear.Size = New System.Drawing.Size(48, 20)
         Me.txtEndYear.TabIndex = 1
         '
         'txtBeginYear
         '
-        Me.txtBeginYear.Location = New System.Drawing.Point(80, 406)
+        Me.txtBeginYear.Location = New System.Drawing.Point(104, 397)
         Me.txtBeginYear.Name = "txtBeginYear"
         Me.txtBeginYear.Size = New System.Drawing.Size(48, 20)
         Me.txtBeginYear.TabIndex = 0
@@ -153,7 +153,7 @@ Partial Class frmUploadToObsFinal
         'chkAllElements
         '
         Me.chkAllElements.AutoSize = True
-        Me.chkAllElements.Location = New System.Drawing.Point(386, 357)
+        Me.chkAllElements.Location = New System.Drawing.Point(389, 360)
         Me.chkAllElements.Name = "chkAllElements"
         Me.chkAllElements.Size = New System.Drawing.Size(116, 17)
         Me.chkAllElements.TabIndex = 29
@@ -175,6 +175,7 @@ Partial Class frmUploadToObsFinal
         Me.lstViewElements.CheckBoxes = True
         Me.lstViewElements.FullRowSelect = True
         Me.lstViewElements.GridLines = True
+        Me.lstViewElements.HideSelection = False
         Me.lstViewElements.Location = New System.Drawing.Point(386, 12)
         Me.lstViewElements.Name = "lstViewElements"
         Me.lstViewElements.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -189,6 +190,7 @@ Partial Class frmUploadToObsFinal
         Me.LstViewStations.CheckBoxes = True
         Me.LstViewStations.FullRowSelect = True
         Me.LstViewStations.GridLines = True
+        Me.LstViewStations.HideSelection = False
         Me.LstViewStations.Location = New System.Drawing.Point(12, 12)
         Me.LstViewStations.Name = "LstViewStations"
         Me.LstViewStations.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -200,7 +202,7 @@ Partial Class frmUploadToObsFinal
         '
         'cmdUploadData
         '
-        Me.cmdUploadData.Location = New System.Drawing.Point(288, 429)
+        Me.cmdUploadData.Location = New System.Drawing.Point(337, 468)
         Me.cmdUploadData.Name = "cmdUploadData"
         Me.cmdUploadData.Size = New System.Drawing.Size(73, 23)
         Me.cmdUploadData.TabIndex = 30
@@ -210,7 +212,7 @@ Partial Class frmUploadToObsFinal
         'txtDataTransferProgress
         '
         Me.txtDataTransferProgress.ForeColor = System.Drawing.Color.Black
-        Me.txtDataTransferProgress.Location = New System.Drawing.Point(456, 380)
+        Me.txtDataTransferProgress.Location = New System.Drawing.Point(456, 419)
         Me.txtDataTransferProgress.Name = "txtDataTransferProgress"
         Me.txtDataTransferProgress.Size = New System.Drawing.Size(280, 20)
         Me.txtDataTransferProgress.TabIndex = 31
@@ -220,7 +222,7 @@ Partial Class frmUploadToObsFinal
         '
         Me.lblTableRecords.AutoSize = True
         Me.lblTableRecords.ForeColor = System.Drawing.Color.Black
-        Me.lblTableRecords.Location = New System.Drawing.Point(519, 403)
+        Me.lblTableRecords.Location = New System.Drawing.Point(519, 442)
         Me.lblTableRecords.Name = "lblTableRecords"
         Me.lblTableRecords.Size = New System.Drawing.Size(122, 13)
         Me.lblTableRecords.TabIndex = 32
@@ -229,7 +231,7 @@ Partial Class frmUploadToObsFinal
         'chkUpdateRecs
         '
         Me.chkUpdateRecs.AutoSize = True
-        Me.chkUpdateRecs.Location = New System.Drawing.Point(605, 357)
+        Me.chkUpdateRecs.Location = New System.Drawing.Point(389, 390)
         Me.chkUpdateRecs.Name = "chkUpdateRecs"
         Me.chkUpdateRecs.Size = New System.Drawing.Size(137, 17)
         Me.chkUpdateRecs.TabIndex = 33
@@ -240,7 +242,7 @@ Partial Class frmUploadToObsFinal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(748, 466)
+        Me.ClientSize = New System.Drawing.Size(748, 498)
         Me.Controls.Add(Me.chkUpdateRecs)
         Me.Controls.Add(Me.lblTableRecords)
         Me.Controls.Add(Me.txtDataTransferProgress)

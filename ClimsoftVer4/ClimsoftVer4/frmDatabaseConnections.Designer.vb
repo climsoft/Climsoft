@@ -23,10 +23,6 @@ Partial Class frmDatabaseConnections
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dataGridViewConnections = New System.Windows.Forms.DataGridView()
-        Me.connection = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.server = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.database = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.port = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.grpCurrentSelection = New System.Windows.Forms.GroupBox()
         Me.cmdMakeDefault = New System.Windows.Forms.Button()
@@ -44,6 +40,10 @@ Partial Class frmDatabaseConnections
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdOK = New System.Windows.Forms.Button()
+        Me.connection = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.server = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.database = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.port = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridViewConnections, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCurrentSelection.SuspendLayout()
         Me.grpConnectionExamples.SuspendLayout()
@@ -53,36 +53,12 @@ Partial Class frmDatabaseConnections
         '
         Me.dataGridViewConnections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dataGridViewConnections.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.connection, Me.server, Me.database, Me.port})
-        Me.dataGridViewConnections.Location = New System.Drawing.Point(12, 12)
+        Me.dataGridViewConnections.Location = New System.Drawing.Point(8, 12)
         Me.dataGridViewConnections.MultiSelect = False
         Me.dataGridViewConnections.Name = "dataGridViewConnections"
         Me.dataGridViewConnections.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.dataGridViewConnections.Size = New System.Drawing.Size(627, 208)
+        Me.dataGridViewConnections.Size = New System.Drawing.Size(637, 208)
         Me.dataGridViewConnections.TabIndex = 0
-        '
-        'connection
-        '
-        Me.connection.HeaderText = "Connection name"
-        Me.connection.Name = "connection"
-        Me.connection.Width = 150
-        '
-        'server
-        '
-        Me.server.HeaderText = "Server address"
-        Me.server.Name = "server"
-        Me.server.Width = 150
-        '
-        'database
-        '
-        Me.database.HeaderText = "Database name"
-        Me.database.Name = "database"
-        Me.database.Width = 200
-        '
-        'port
-        '
-        Me.port.HeaderText = "Port number"
-        Me.port.Name = "port"
-        Me.port.Width = 60
         '
         'cmdCancel
         '
@@ -100,9 +76,9 @@ Partial Class frmDatabaseConnections
         Me.grpCurrentSelection.Controls.Add(Me.cmdRemove)
         Me.grpCurrentSelection.Enabled = False
         Me.grpCurrentSelection.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpCurrentSelection.Location = New System.Drawing.Point(483, 239)
+        Me.grpCurrentSelection.Location = New System.Drawing.Point(483, 231)
         Me.grpCurrentSelection.Name = "grpCurrentSelection"
-        Me.grpCurrentSelection.Size = New System.Drawing.Size(156, 115)
+        Me.grpCurrentSelection.Size = New System.Drawing.Size(162, 115)
         Me.grpCurrentSelection.TabIndex = 6
         Me.grpCurrentSelection.TabStop = False
         Me.grpCurrentSelection.Text = "Current selection"
@@ -151,9 +127,9 @@ Partial Class frmDatabaseConnections
         Me.grpConnectionExamples.Controls.Add(Me.Label2)
         Me.grpConnectionExamples.Controls.Add(Me.Label1)
         Me.grpConnectionExamples.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpConnectionExamples.Location = New System.Drawing.Point(12, 239)
+        Me.grpConnectionExamples.Location = New System.Drawing.Point(12, 231)
         Me.grpConnectionExamples.Name = "grpConnectionExamples"
-        Me.grpConnectionExamples.Size = New System.Drawing.Size(465, 144)
+        Me.grpConnectionExamples.Size = New System.Drawing.Size(465, 157)
         Me.grpConnectionExamples.TabIndex = 7
         Me.grpConnectionExamples.TabStop = False
         Me.grpConnectionExamples.Text = "Example connections"
@@ -162,7 +138,7 @@ Partial Class frmDatabaseConnections
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(173, 120)
+        Me.Label10.Location = New System.Drawing.Point(173, 129)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(83, 13)
         Me.Label10.TabIndex = 9
@@ -172,7 +148,7 @@ Partial Class frmDatabaseConnections
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(173, 104)
+        Me.Label9.Location = New System.Drawing.Point(173, 113)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(77, 13)
         Me.Label9.TabIndex = 8
@@ -181,7 +157,7 @@ Partial Class frmDatabaseConnections
         'lblExamplePort3308
         '
         Me.lblExamplePort3308.AutoSize = True
-        Me.lblExamplePort3308.Location = New System.Drawing.Point(121, 120)
+        Me.lblExamplePort3308.Location = New System.Drawing.Point(121, 129)
         Me.lblExamplePort3308.Name = "lblExamplePort3308"
         Me.lblExamplePort3308.Size = New System.Drawing.Size(35, 13)
         Me.lblExamplePort3308.TabIndex = 7
@@ -190,7 +166,7 @@ Partial Class frmDatabaseConnections
         'lblExampleDabaseName2
         '
         Me.lblExampleDabaseName2.AutoSize = True
-        Me.lblExampleDabaseName2.Location = New System.Drawing.Point(121, 74)
+        Me.lblExampleDabaseName2.Location = New System.Drawing.Point(121, 87)
         Me.lblExampleDabaseName2.Name = "lblExampleDabaseName2"
         Me.lblExampleDabaseName2.Size = New System.Drawing.Size(171, 13)
         Me.lblExampleDabaseName2.TabIndex = 6
@@ -199,7 +175,7 @@ Partial Class frmDatabaseConnections
         'lblExamplePort3306
         '
         Me.lblExamplePort3306.AutoSize = True
-        Me.lblExamplePort3306.Location = New System.Drawing.Point(121, 105)
+        Me.lblExamplePort3306.Location = New System.Drawing.Point(121, 114)
         Me.lblExamplePort3306.Name = "lblExamplePort3306"
         Me.lblExamplePort3306.Size = New System.Drawing.Size(35, 13)
         Me.lblExamplePort3306.TabIndex = 5
@@ -208,7 +184,7 @@ Partial Class frmDatabaseConnections
         'lblExampleDabaseName1
         '
         Me.lblExampleDabaseName1.AutoSize = True
-        Me.lblExampleDabaseName1.Location = New System.Drawing.Point(121, 57)
+        Me.lblExampleDabaseName1.Location = New System.Drawing.Point(121, 70)
         Me.lblExampleDabaseName1.Name = "lblExampleDabaseName1"
         Me.lblExampleDabaseName1.Size = New System.Drawing.Size(143, 13)
         Me.lblExampleDabaseName1.TabIndex = 4
@@ -217,7 +193,7 @@ Partial Class frmDatabaseConnections
         'lblExampleServerAddress
         '
         Me.lblExampleServerAddress.AutoSize = True
-        Me.lblExampleServerAddress.Location = New System.Drawing.Point(121, 29)
+        Me.lblExampleServerAddress.Location = New System.Drawing.Point(121, 27)
         Me.lblExampleServerAddress.Name = "lblExampleServerAddress"
         Me.lblExampleServerAddress.Size = New System.Drawing.Size(61, 13)
         Me.lblExampleServerAddress.TabIndex = 3
@@ -225,31 +201,28 @@ Partial Class frmDatabaseConnections
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(15, 104)
+        Me.Label3.Location = New System.Drawing.Point(15, 113)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(64, 13)
+        Me.Label3.Size = New System.Drawing.Size(64, 29)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Port number"
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(15, 56)
+        Me.Label2.Location = New System.Drawing.Point(15, 69)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(82, 13)
+        Me.Label2.Size = New System.Drawing.Size(82, 31)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Database name"
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(15, 28)
+        Me.Label1.Location = New System.Drawing.Point(15, 26)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(78, 13)
+        Me.Label1.Size = New System.Drawing.Size(78, 30)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Server address"
         '
@@ -261,6 +234,29 @@ Partial Class frmDatabaseConnections
         Me.cmdOK.TabIndex = 8
         Me.cmdOK.Text = "OK"
         Me.cmdOK.UseVisualStyleBackColor = True
+        '
+        'connection
+        '
+        Me.connection.HeaderText = "Connection name"
+        Me.connection.Name = "connection"
+        Me.connection.Width = 150
+        '
+        'server
+        '
+        Me.server.HeaderText = "Server address"
+        Me.server.Name = "server"
+        Me.server.Width = 150
+        '
+        'database
+        '
+        Me.database.HeaderText = "Database name"
+        Me.database.Name = "database"
+        Me.database.Width = 200
+        '
+        'port
+        '
+        Me.port.HeaderText = "Port number"
+        Me.port.Name = "port"
         '
         'frmDatabaseConnections
         '
@@ -285,10 +281,6 @@ Partial Class frmDatabaseConnections
 
     Friend WithEvents dataGridViewConnections As DataGridView
     Friend WithEvents cmdCancel As Button
-    Friend WithEvents connection As DataGridViewTextBoxColumn
-    Friend WithEvents server As DataGridViewTextBoxColumn
-    Friend WithEvents database As DataGridViewTextBoxColumn
-    Friend WithEvents port As DataGridViewTextBoxColumn
     Friend WithEvents grpCurrentSelection As GroupBox
     Friend WithEvents cmdTest As Button
     Friend WithEvents cmdRemove As Button
@@ -305,4 +297,8 @@ Partial Class frmDatabaseConnections
     Friend WithEvents lblExampleDabaseName2 As Label
     Friend WithEvents cmdOK As Button
     Friend WithEvents cmdMakeDefault As Button
+    Friend WithEvents connection As DataGridViewTextBoxColumn
+    Friend WithEvents server As DataGridViewTextBoxColumn
+    Friend WithEvents database As DataGridViewTextBoxColumn
+    Friend WithEvents port As DataGridViewTextBoxColumn
 End Class

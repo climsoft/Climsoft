@@ -33,6 +33,7 @@ Partial Class formSynoptic2
         Me.cboHour = New System.Windows.Forms.ComboBox()
         Me.txtYear = New System.Windows.Forms.TextBox()
         Me.GroupBoxCommands = New System.Windows.Forms.GroupBox()
+        Me.btnPush = New System.Windows.Forms.Button()
         Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         Me.btnTDCF = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
@@ -158,6 +159,7 @@ Partial Class formSynoptic2
         '
         'GroupBoxCommands
         '
+        Me.GroupBoxCommands.Controls.Add(Me.btnPush)
         Me.GroupBoxCommands.Controls.Add(Me.chkRepeatEntry)
         Me.GroupBoxCommands.Controls.Add(Me.btnTDCF)
         Me.GroupBoxCommands.Controls.Add(Me.btnView)
@@ -184,6 +186,15 @@ Partial Class formSynoptic2
         Me.GroupBoxCommands.TabIndex = 1172
         Me.GroupBoxCommands.TabStop = False
         '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(528, 41)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(64, 23)
+        Me.btnPush.TabIndex = 700
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
+        '
         'chkRepeatEntry
         '
         Me.chkRepeatEntry.AutoSize = True
@@ -197,7 +208,7 @@ Partial Class formSynoptic2
         '
         'btnTDCF
         '
-        Me.btnTDCF.Location = New System.Drawing.Point(502, 42)
+        Me.btnTDCF.Location = New System.Drawing.Point(464, 41)
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(64, 23)
         Me.btnTDCF.TabIndex = 698
@@ -206,7 +217,7 @@ Partial Class formSynoptic2
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(434, 42)
+        Me.btnView.Location = New System.Drawing.Point(400, 41)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(64, 23)
         Me.btnView.TabIndex = 697
@@ -242,7 +253,7 @@ Partial Class formSynoptic2
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(638, 42)
+        Me.btnHelp.Location = New System.Drawing.Point(656, 41)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(64, 23)
         Me.btnHelp.TabIndex = 688
@@ -252,7 +263,7 @@ Partial Class formSynoptic2
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(366, 42)
+        Me.btnClear.Location = New System.Drawing.Point(336, 41)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(64, 23)
         Me.btnClear.TabIndex = 686
@@ -262,7 +273,7 @@ Partial Class formSynoptic2
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(162, 42)
+        Me.btnCommit.Location = New System.Drawing.Point(144, 41)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(64, 23)
         Me.btnCommit.TabIndex = 682
@@ -271,7 +282,7 @@ Partial Class formSynoptic2
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(298, 42)
+        Me.btnDelete.Location = New System.Drawing.Point(272, 41)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(64, 23)
         Me.btnDelete.TabIndex = 685
@@ -280,7 +291,7 @@ Partial Class formSynoptic2
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(94, 42)
+        Me.btnAddNew.Location = New System.Drawing.Point(80, 41)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(64, 23)
         Me.btnAddNew.TabIndex = 684
@@ -289,7 +300,7 @@ Partial Class formSynoptic2
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(230, 42)
+        Me.btnUpdate.Location = New System.Drawing.Point(208, 41)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(64, 23)
         Me.btnUpdate.TabIndex = 683
@@ -346,7 +357,7 @@ Partial Class formSynoptic2
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(570, 42)
+        Me.btnClose.Location = New System.Drawing.Point(592, 41)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(64, 23)
         Me.btnClose.TabIndex = 687
@@ -380,6 +391,7 @@ Partial Class formSynoptic2
         Me.cboWindSpdUnits.Name = "cboWindSpdUnits"
         Me.cboWindSpdUnits.Size = New System.Drawing.Size(54, 21)
         Me.cboWindSpdUnits.TabIndex = 1197
+        Me.cboWindSpdUnits.Text = "knots"
         '
         'cboVisibilityUnits
         '
@@ -389,6 +401,7 @@ Partial Class formSynoptic2
         Me.cboVisibilityUnits.Name = "cboVisibilityUnits"
         Me.cboVisibilityUnits.Size = New System.Drawing.Size(54, 21)
         Me.cboVisibilityUnits.TabIndex = 1196
+        Me.cboVisibilityUnits.Text = "meters"
         '
         'cboCloudheightUnits
         '
@@ -398,6 +411,7 @@ Partial Class formSynoptic2
         Me.cboCloudheightUnits.Name = "cboCloudheightUnits"
         Me.cboCloudheightUnits.Size = New System.Drawing.Size(54, 21)
         Me.cboCloudheightUnits.TabIndex = 1195
+        Me.cboCloudheightUnits.Text = "meters"
         '
         'cboPrecipUnits
         '
@@ -407,6 +421,7 @@ Partial Class formSynoptic2
         Me.cboPrecipUnits.Name = "cboPrecipUnits"
         Me.cboPrecipUnits.Size = New System.Drawing.Size(54, 21)
         Me.cboPrecipUnits.TabIndex = 1194
+        Me.cboPrecipUnits.Text = "mm"
         '
         'cboTempUnits
         '
@@ -416,6 +431,7 @@ Partial Class formSynoptic2
         Me.cboTempUnits.Name = "cboTempUnits"
         Me.cboTempUnits.Size = New System.Drawing.Size(54, 21)
         Me.cboTempUnits.TabIndex = 1193
+        Me.cboTempUnits.Text = "deg C"
         '
         'Label6
         '
@@ -543,4 +559,5 @@ Partial Class formSynoptic2
     Friend WithEvents lblPrecip As Label
     Friend WithEvents lblTemperature As Label
     Friend WithEvents lblInsDel As Label
+    Friend WithEvents btnPush As Button
 End Class
