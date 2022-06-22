@@ -404,7 +404,7 @@ Public Class formMetadata
             dsNewRow.Item("adminRegion") = txtAdminRegion.Text
             dsNewRow.Item("drainageBasin") = txtDrainageBasin.Text
             dsNewRow.Item("authority") = txtAuthority.Text
-            dsNewRow.Item("qualifier") = txtStationType.Text
+            dsNewRow.Item("qualifier") = cboStationType.Text
             If IsNumeric(txtgeoAccuracy.Text) Then dsNewRow.Item("geolocationAccuracy") = Val(txtgeoAccuracy.Text)
             If IsNumeric(txtgeoMethod.Text) Then dsNewRow.Item("geolocationMethod") = Val(txtgeoMethod.Text)
 
