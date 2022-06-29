@@ -1,4 +1,6 @@
 ﻿Public Class ucrStationSelector
+    'todo implement a proper search control
+
     Private strStationsTableName As String = "station"
     Private strStationName As String = "stationName"
     Private strStationId As String = "stationId"
