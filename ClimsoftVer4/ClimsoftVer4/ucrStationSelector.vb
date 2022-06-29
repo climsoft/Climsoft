@@ -3,6 +3,7 @@
     Private strStationName As String = "stationName"
     Private strStationId As String = "stationId"
     Private strIDsAndStations As String = "ids_stations"
+    Private strStationsNamesAndIds As String = "stations_Names_ids"
 
     Public Overrides Sub PopulateControl()
         bSuppressChangedEvents = True
@@ -12,7 +13,7 @@
             'TODO 
             'what if there were no records on the first load.Then there are records later
             If bFirstLoad Then
-                SetViewTypeAsIDsAndStations()
+                SetViewTypeStationsAndIDS()
             End If
         Else
             cboValues.DataSource = Nothing
@@ -52,6 +53,10 @@
         SetDisplayMember(strIDsAndStations)
     End Sub
 
+    Public Sub SetViewTypeStationsAndIDS()
+        SetDisplayMember(strStationsNamesAndIds)
+    End Sub
+
     Public Sub SortByID()
         SortBy(strStationId)
         cmsStationSortByID.Checked = True
@@ -81,6 +86,7 @@
             dct.Add(strStationId, New List(Of String)({strStationId}))
             dct.Add(strStationName, New List(Of String)({strStationName}))
             dct.Add(strIDsAndStations, New List(Of String)({strStationId, strStationName}))
+            dct.Add(strStationsNamesAndIds, New List(Of String)({strStationName, strStationId}))
             SetTableNameAndFields(strStationsTableName, dct)
             PopulateControl()
             bFirstLoad = False
