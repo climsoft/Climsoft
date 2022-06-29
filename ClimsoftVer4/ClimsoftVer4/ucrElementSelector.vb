@@ -13,7 +13,7 @@
             'what if there were no records on the first load. 
             'Then there are records later
             If bFirstLoad Then
-                SetViewTypeAsElements()
+                SetViewTypeAsIDsAndElements()
             End If
         Else
             cboValues.DataSource = Nothing

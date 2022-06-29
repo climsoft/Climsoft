@@ -12,7 +12,7 @@
             'TODO 
             'what if there were no records on the first load.Then there are records later
             If bFirstLoad Then
-                SetViewTypeAsStations()
+                SetViewTypeAsIDsAndStations()
             End If
         Else
             cboValues.DataSource = Nothing
