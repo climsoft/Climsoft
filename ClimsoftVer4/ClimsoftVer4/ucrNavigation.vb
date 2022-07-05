@@ -435,14 +435,16 @@ Public Class ucrNavigation
 
         'get the current row index from the seqencer row and if exists then compute the next record
         iCurrentSequencerRow = dtbSequencer.Rows.IndexOf(dtbSequencer.Select(strSelectStatement).FirstOrDefault)
-        If iCurrentSequencerRow > -1 Then
-            IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iCurrentSequencerRow + 1, lstDateIncrementControls, ucrYear)
-        End If
+        'If iCurrentSequencerRow > -1 Then
+        'IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iCurrentSequencerRow + 1, lstDateIncrementControls, ucrYear)
+        'End If
+        IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iCurrentSequencerRow + 1, lstDateIncrementControls, ucrYear)
+
     End Sub
 
     'Increments the sequncer values and tries to populate the table entry.
     Private Sub IncrementNextSequencerRowValues(dtbSequencer As DataTable, dctKeySequencerControls As Dictionary(Of String, ucrValueView), iSelectedSequencerRow As Integer, lstDateIncrementControls As List(Of ucrDataLinkCombobox), ucrYear As ucrYearSelector)
-        If iSelectedSequencerRow <= dtbSequencer.Rows.Count - 1 Then
+        If iSelectedSequencerRow >= 0 AndAlso iSelectedSequencerRow <= dtbSequencer.Rows.Count - 1 Then
             Dim rowNext As DataRow
             rowNext = dtbSequencer.Rows(iSelectedSequencerRow)
             For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeySequencerControls
@@ -453,8 +455,9 @@ Public Class ucrNavigation
             'only one control should trigger the event change
             dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1).OnevtValueChanged(dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1), Nothing)
 
+            'if still updating
             If ucrLinkedTableEntry.bUpdating Then
-                'go to the next sequncer values
+                'go to the next sequencer values
                 iSelectedSequencerRow = iSelectedSequencerRow + 1
                 IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
             End If
@@ -483,19 +486,26 @@ Public Class ucrNavigation
                     ucrYear.SetValue(ucrYear.GetValue() + 1)
                 End If
 
-                'if year is incremented the this will be false. TODO. then just check on bIncrementYear
+                'if year is incremented the this will be false.
                 If ucrLinkedTableEntry.bUpdating Then
-                    'go to the next sequncer value
-                    iSelectedSequencerRow = iSelectedSequencerRow + 1
+                    If iSelectedSequencerRow <> -1 AndAlso dtbSequencer.Rows.Count > 0 Then
+                        iSelectedSequencerRow = iSelectedSequencerRow + 1
+                    End If
+                    'go to the next sequencer value
                     IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
                 Else
                     'go to the first sequencer value
-                    IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, 0, lstDateIncrementControls, ucrYear)
+                    If iSelectedSequencerRow <> -1 AndAlso dtbSequencer.Rows.Count > 0 Then
+                        IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, 0, lstDateIncrementControls, ucrYear)
+                    End If
                 End If
             ElseIf ucrYear IsNot Nothing Then
                 ucrYear.SetValue(ucrYear.GetValue() + 1)
-                'go to the first sequencer value
-                IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, 0, lstDateIncrementControls, ucrYear)
+                'if year is incremented the this will be false.
+                If ucrLinkedTableEntry.bUpdating Then
+                    'go to the first sequencer value
+                    IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, 0, lstDateIncrementControls, ucrYear)
+                End If
 
             End If
         End If
