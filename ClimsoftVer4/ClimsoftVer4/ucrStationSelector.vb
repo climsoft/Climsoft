@@ -1,6 +1,4 @@
 ﻿Public Class ucrStationSelector
-    'todo implement a proper search control
-
     Private strStationsTableName As String = "station"
     Private strStationName As String = "stationName"
     Private strStationId As String = "stationId"
@@ -25,9 +23,9 @@
     End Sub
 
     Public Overrides Function ValidateValue() As Boolean
-        Dim bValid As Boolean = False
-        bValid = MyBase.ValidateValue()
-
+        'validate by display member 
+        Dim bValid As Boolean = MyBase.ValidateValue()
+        'if not valid, validate by value member
         If Not bValid Then
             If Not String.IsNullOrEmpty(cboValues.ValueMember) Then
                 For Each rTemp As DataRow In dtbRecords.Rows
@@ -96,15 +94,11 @@
     End Sub
 
     Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
-        If Not cboValues.DisplayMember = strStationId Then
-            If IsNumeric(cboValues.Text) Then
-                If ValidateValue() Then
-                    Dim bChangedEvents As Boolean = Me.bSuppressChangedEvents
-                    bSuppressChangedEvents = True
-                    SetValue(cboValues.Text)
-                    bSuppressChangedEvents = bChangedEvents
-                End If
-            End If
+        If ValidateValue() Then
+            Dim bChangedEvents As Boolean = Me.bSuppressChangedEvents
+            bSuppressChangedEvents = True
+            SetValue(cboValues.Text)
+            bSuppressChangedEvents = bChangedEvents
         End If
     End Sub
 

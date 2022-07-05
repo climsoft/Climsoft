@@ -160,8 +160,8 @@
 
     Protected Sub SetComboBoxSelectorProperties(Optional comboBoxStyle As ComboBoxStyle = ComboBoxStyle.DropDown, Optional autoCompletSource As AutoCompleteSource = AutoCompleteSource.ListItems, Optional autoCompleteMode As AutoCompleteMode = AutoCompleteMode.SuggestAppend)
         cboValues.DropDownStyle = comboBoxStyle
-        cboValues.AutoCompleteSource = autoCompletSource
-        cboValues.AutoCompleteMode = autoCompleteMode
+        'cboValues.AutoCompleteSource = autoCompletSource
+        'cboValues.AutoCompleteMode = autoCompleteMode
     End Sub
 
     Protected Overridable Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -186,7 +186,7 @@
     End Sub
 
     Private Sub cboValues_TextChanged(sender As Object, e As EventArgs) Handles cboValues.TextChanged
-        ValidateValue()
+        'ValidateValue()
         OnevtTextChanged(Me, e)
     End Sub
 
