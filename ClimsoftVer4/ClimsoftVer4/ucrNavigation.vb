@@ -8,7 +8,7 @@ Public Class ucrNavigation
     Public iCurrRow As Integer
     'Stores the sort by querry
     Public strSortCol As String = ""
-    'Stors the dictonary of key controls and their fields
+    'Stores the dictonary of key controls and their fields
     Private dctKeyControls As New Dictionary(Of String, ucrValueView)
     Private ucrLinkedTableEntry As ucrTableEntry
     Public bSuppressKeyControlChanges As Boolean = False
@@ -390,6 +390,124 @@ Public Class ucrNavigation
         End If
     End Sub
 
+    '----------------
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="strSequencerTable"></param>
+    ''' <param name="arrSequencerCols"></param>
+    ''' <param name="dctSequencerColControls">
+    ''' A dictionary of sequencer columns and it's correspondig controls.
+    ''' key = Sequencer column. Must exist in the seqencer table
+    ''' Value = Sequencer control. It's value is used for getting current sequencer position.
+    ''' Also control will be set with the new sequencer value</param>
+    ''' <param name="ucrYear"></param>
+    ''' <param name="ucrMonth"></param>
+    ''' <param name="ucrDay"></param>
+    Public Sub NewSequencedRecord(strSequencerTable As String, arrSequencerCols() As String,
+                                   dctSequencerColControls As Dictionary(Of String, ucrValueView),
+                                    ucrYear As ucrYearSelector,
+                                  Optional ucrMonth As ucrMonth = Nothing,
+                                  Optional ucrDay As ucrDay = Nothing)
+
+
+        If ucrLinkedTableEntry Is Nothing Then
+            Exit Sub
+        End If
+
+        'move to the last record first
+        MoveLast()
+
+        'get all the sequencer values from the database
+        Dim clsSeqDataCall As New DataCall
+        Dim dtbSequencer As DataTable
+        clsSeqDataCall.SetTableNameAndFields(strSequencerTable, arrSequencerCols)
+        dtbSequencer = clsSeqDataCall.GetDataTable()
+
+        'create the select filter statement to be used for getting current sequencer row
+        Dim strFilter As String = ""
+        For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctSequencerColControls
+            If strFilter <> "" Then
+                strFilter = strFilter & " AND "
+            End If
+            strFilter = strFilter & kvpTemp.Key & " = " & Chr(39) & kvpTemp.Value.GetValue() & Chr(39)
+        Next
+
+        'get the current row index from the seqencer row and if exists then compute the next record
+        Dim iCurrentSequencerRow As Integer = -1
+        If strFilter <> "" Then
+            iCurrentSequencerRow = dtbSequencer.Rows.IndexOf(dtbSequencer.Select(strFilter).FirstOrDefault)
+        End If
+        'if there is still another sequencer value then increment to it
+        If iCurrentSequencerRow > -1 AndAlso iCurrentSequencerRow < dtbSequencer.Rows.Count - 1 Then
+            Dim nextSequenceRowValues As DataRow = dtbSequencer.Rows(iCurrentSequencerRow + 1)
+            IncrementSequencerColControlsValues(dctSequencerColControls, nextSequenceRowValues)
+        End If
+
+        'if still updating. try to increment the date controls
+        If ucrLinkedTableEntry.bUpdating Then
+            IncrementDateValues(ucrYear, ucrMonth, ucrDay)
+        End If
+    End Sub
+
+    Private Sub IncrementSequencerColControlsValues(dctSequencerColControls As Dictionary(Of String, ucrValueView),
+                                                   nextSequenceRowValues As DataRow)
+
+        For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctSequencerColControls
+            kvpTemp.Value.bSuppressChangedEvents = True
+            kvpTemp.Value.SetValue(nextSequenceRowValues.Item(kvpTemp.Key))
+            kvpTemp.Value.bSuppressChangedEvents = False
+        Next
+
+        'only one control should trigger the event change
+        dctSequencerColControls.Values(dctSequencerColControls.Count - 1).OnevtValueChanged(dctSequencerColControls.Values(dctSequencerColControls.Count - 1), Nothing)
+
+    End Sub
+
+    ''' <summary>
+    ''' Increments the date controls.
+    ''' This subroutine is recursive until 'Add New' state s achieved
+    ''' </summary>
+    ''' <param name="ucrYear">Nul NOT allowed.</param>
+    ''' <param name="ucrMonth">Null allowed. If null it's increment will be ignored</param>
+    ''' <param name="ucrDay">Null allowed. If null it's increment will be ignored</param>
+    Private Sub IncrementDateValues(ucrYear As ucrYearSelector, ucrMonth As ucrMonth, ucrDay As ucrDay)
+
+        'try increment day value
+        If ucrDay IsNot Nothing AndAlso ucrDay.cboValues.SelectedIndex < ucrDay.cboValues.Items.Count - 1 Then
+            ucrDay.SetValue(ucrDay.GetValue + 1)
+        ElseIf ucrMonth IsNot Nothing AndAlso ucrMonth.cboValues.SelectedIndex < ucrMonth.cboValues.Items.Count - 1 Then
+            'set the date values in the following order. 
+            'prevents unrepresentable date error
+            If ucrDay IsNot Nothing Then
+                ucrDay.SetValue(1)
+            End If
+            ucrMonth.SetValue(ucrMonth.GetValue + 1)
+        Else
+            'set the date values in the following order.
+            'prevents unrepresentable date error
+            If ucrDay IsNot Nothing Then
+                ucrDay.SetValue(1)
+            End If
+            If ucrMonth IsNot Nothing Then
+                ucrMonth.SetValue(1)
+            End If
+            ucrYear.SetValue(ucrYear.GetValue + 1)
+        End If
+
+
+        'if still updating. try to increment the date controls
+        If ucrLinkedTableEntry.bUpdating Then
+            IncrementDateValues(ucrYear, ucrMonth, ucrDay)
+        End If
+
+    End Sub
+
+
+    '-----------------
+
+    'todo. deprecated. delete
     Public Sub NewSequencerRecord(strSequencer As String, iEnumerableNewFields As IEnumerable(Of String), Optional iEnumerableDateIncrementControls As IEnumerable(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
         Dim dctFields As New Dictionary(Of String, List(Of String))
         For Each strTemp As String In iEnumerableNewFields
@@ -405,7 +523,11 @@ Public Class ucrNavigation
 
     End Sub
 
-    Public Sub NewSequencerRecord(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
+    'todo. deprecated. delete
+    Public Sub NewSequencerRecord(strSequencerTable As String,
+                                  dctTableFields As Dictionary(Of String, List(Of String)),
+                                  Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing,
+                                  Optional ucrYear As ucrYearSelector = Nothing)
         Dim clsSeqDataCall As New DataCall
         Dim dtbSequencer As DataTable
         Dim dctKeySequencerControls As New Dictionary(Of String, ucrValueView)
@@ -414,16 +536,31 @@ Public Class ucrNavigation
 
         MoveLast()
 
-        If String.IsNullOrEmpty(strSequencer) OrElse ucrLinkedTableEntry Is Nothing OrElse dctKeyControls.Count < 1 Then
+        If String.IsNullOrEmpty(strSequencerTable) OrElse
+            ucrLinkedTableEntry Is Nothing OrElse
+            dctKeyControls.Count < 1 Then
             Exit Sub
         End If
 
         'fill all the sequencer values from the database
-        clsSeqDataCall.SetTableNameAndFields(strSequencer, dctFields)
+        clsSeqDataCall.SetTableNameAndFields(strSequencerTable, dctTableFields)
         dtbSequencer = clsSeqDataCall.GetDataTable()
 
         'create the select filter statement to be used against the datatable
         For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
+
+            'todo. Later find a better solution
+            'this check is temporary because of seq_element table that used element_code instead of elementid
+            If kvpTemp.Key.ToLower.Contains("elementid") AndAlso dtbSequencer.Columns.Contains("element_code") Then
+                dctKeySequencerControls.Add("element_code", kvpTemp.Value)
+                If strSelectStatement <> "" Then
+                    strSelectStatement = strSelectStatement & " AND "
+                End If
+                strSelectStatement = strSelectStatement & "element_code" &
+                    " = " & Chr(39) & kvpTemp.Value.GetValue() & Chr(39)
+                'important continue because above is temporary
+                Continue For
+            End If
             If dtbSequencer.Columns.Contains(kvpTemp.Key) Then
                 dctKeySequencerControls.Add(kvpTemp.Key, kvpTemp.Value)
                 If strSelectStatement <> "" Then
@@ -442,11 +579,15 @@ Public Class ucrNavigation
 
     End Sub
 
+    'todo. deprecated. delete
     'Increments the sequncer values and tries to populate the table entry.
-    Private Sub IncrementNextSequencerRowValues(dtbSequencer As DataTable, dctKeySequencerControls As Dictionary(Of String, ucrValueView), iSelectedSequencerRow As Integer, lstDateIncrementControls As List(Of ucrDataLinkCombobox), ucrYear As ucrYearSelector)
-        If iSelectedSequencerRow >= 0 AndAlso iSelectedSequencerRow <= dtbSequencer.Rows.Count - 1 Then
-            Dim rowNext As DataRow
-            rowNext = dtbSequencer.Rows(iSelectedSequencerRow)
+    Private Sub IncrementNextSequencerRowValues(dtbSequencer As DataTable,
+                                                dctKeySequencerControls As Dictionary(Of String, ucrValueView), iSelectedSequencerRow As Integer, lstDateIncrementControls As List(Of ucrDataLinkCombobox), ucrYear As ucrYearSelector)
+        If iSelectedSequencerRow >= 0 AndAlso
+            iSelectedSequencerRow <= dtbSequencer.Rows.Count - 1 AndAlso
+            dctKeySequencerControls.Count > 0 Then
+
+            Dim rowNext As DataRow = dtbSequencer.Rows(iSelectedSequencerRow)
             For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeySequencerControls
                 kvpTemp.Value.bSuppressChangedEvents = True
                 kvpTemp.Value.SetValue(rowNext.Item(kvpTemp.Key))
@@ -495,7 +636,7 @@ Public Class ucrNavigation
                     IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
                 Else
                     'go to the first sequencer value
-                    If iSelectedSequencerRow <> -1 AndAlso dtbSequencer.Rows.Count > 0 Then
+                    If iSelectedSequencerRow <> -1 AndAlso dtbSequencer.Rows.Count > 0 AndAlso dctKeySequencerControls.Count > 0 Then
                         IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, 0, lstDateIncrementControls, ucrYear)
                     End If
                 End If
@@ -508,84 +649,6 @@ Public Class ucrNavigation
                 End If
 
             End If
-        End If
-
-    End Sub
-
-    'TODO.Remove this later. Left here for reference
-    Private Sub NewSequencerRecordOLD(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
-        Dim clsSeqDataCall As New DataCall
-        Dim dtbSequencer As DataTable
-        Dim dctKeySequencerControls As New Dictionary(Of String, ucrValueView)
-        Dim strSelectStatement As String = ""
-        Dim rowsFitered As DataRow()
-        Dim iCurrentSequencerRow As Integer
-        Dim rowNext As DataRow
-        Dim ucrTemp As ucrDataLinkCombobox
-        Dim bIncrementYear As Boolean = False
-
-        MoveLast()
-
-        If String.IsNullOrEmpty(strSequencer) Then
-            Exit Sub
-        End If
-
-        clsSeqDataCall.SetTableNameAndFields(strSequencer, dctFields)
-        dtbSequencer = clsSeqDataCall.GetDataTable()
-
-        For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
-            If dtbSequencer.Columns.Contains(kvpTemp.Key) Then
-                dctKeySequencerControls.Add(kvpTemp.Key, kvpTemp.Value)
-                If strSelectStatement <> "" Then
-                    strSelectStatement = strSelectStatement & " AND "
-                End If
-                strSelectStatement = strSelectStatement & kvpTemp.Key & " = " & Chr(39) & kvpTemp.Value.GetValue() & Chr(39)
-            End If
-        Next
-        Try
-            rowsFitered = dtbSequencer.Select(strSelectStatement)
-        Catch ex As Exception
-            rowsFitered = Nothing
-        End Try
-
-        If rowsFitered IsNot Nothing AndAlso rowsFitered.Count > 0 Then
-            'TODO take first row or last row?
-            iCurrentSequencerRow = dtbSequencer.Rows.IndexOf(rowsFitered(0))
-            If iCurrentSequencerRow < dtbSequencer.Rows.Count - 1 Then
-                rowNext = dtbSequencer.Rows(iCurrentSequencerRow + 1)
-            Else
-                rowNext = dtbSequencer.Rows(0)
-                If lstDateIncrementControls IsNot Nothing AndAlso lstDateIncrementControls.Count > 0 Then
-                    For j As Integer = 0 To lstDateIncrementControls.Count - 1
-                        ucrTemp = lstDateIncrementControls(j)
-                        If ucrTemp.cboValues.SelectedIndex < ucrTemp.cboValues.Items.Count - 1 Then
-                            'TODO do this through SetValue() instead
-                            ucrTemp.cboValues.SelectedIndex = ucrTemp.cboValues.SelectedIndex + 1
-                            Exit For
-                        Else
-                            ucrTemp.cboValues.SelectedIndex = 0
-                            If j = lstDateIncrementControls.Count - 1 Then
-                                bIncrementYear = True
-                            End If
-                        End If
-                    Next
-                    If bIncrementYear Then
-                        ucrYear.SetValue(ucrYear.GetValue() + 1)
-                    End If
-                End If
-            End If
-            If dctKeySequencerControls.Count > 0 Then
-                For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeySequencerControls
-                    kvpTemp.Value.bSuppressChangedEvents = True
-                    kvpTemp.Value.SetValue(rowNext.Item(kvpTemp.Key))
-                    kvpTemp.Value.bSuppressChangedEvents = False
-                Next
-                'only one control should trigger the event change
-                dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1).OnevtValueChanged(dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1), Nothing)
-
-            End If
-        Else
-            'First item in sequencer? 
         End If
 
     End Sub

@@ -147,7 +147,7 @@ Partial Class ucrHourly
         Me.txtSequencer.ReadOnly = True
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 778
-        Me.txtSequencer.Text = "seq_month_day_element"
+        Me.txtSequencer.Text = "seq_element"
         '
         'btnView
         '
@@ -246,7 +246,7 @@ Partial Class ucrHourly
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(154, 23)
         Me.btnHourSelection.TabIndex = 765
-        Me.btnHourSelection.Text = "Enable synoptic hours only"
+        Me.btnHourSelection.Text = "Enable selected hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
         '
         'Label1
