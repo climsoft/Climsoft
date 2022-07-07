@@ -52,7 +52,10 @@
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Try
-            ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"elementId", "mm", "dd"}, {ucrDaySelector, ucrMonthSelector}, ucrYearSelector)
+
+            ucrNavigation.NewSequencerRecord("seq_element", {"element_code"}, {ucrDaySelector, ucrMonthSelector}, ucrYearSelector)
+
+            'ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"elementId", "mm", "dd"}, {ucrDaySelector, ucrMonthSelector}, ucrYearSelector)
             ' ucrNavigation.NewRecord() 'temporary
             SaveEnable()
             UcrValueFlagPeriod0.Focus()
