@@ -147,13 +147,13 @@ Partial Class ucrHourly
         Me.txtSequencer.ReadOnly = True
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 778
-        Me.txtSequencer.Text = "seq_month_day_element"
+        Me.txtSequencer.Text = "seq_element"
         '
         'btnView
         '
         Me.btnView.Location = New System.Drawing.Point(368, 527)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(45, 23)
+        Me.btnView.Size = New System.Drawing.Size(51, 23)
         Me.btnView.TabIndex = 44
         Me.btnView.Tag = ""
         Me.btnView.Text = "View"
@@ -173,7 +173,7 @@ Partial Class ucrHourly
         '
         Me.btnHelp.Location = New System.Drawing.Point(545, 527)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(45, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(54, 23)
         Me.btnHelp.TabIndex = 46
         Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
@@ -183,7 +183,7 @@ Partial Class ucrHourly
         '
         Me.btnClear.Location = New System.Drawing.Point(254, 527)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(45, 23)
+        Me.btnClear.Size = New System.Drawing.Size(51, 23)
         Me.btnClear.TabIndex = 42
         Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
@@ -193,7 +193,7 @@ Partial Class ucrHourly
         '
         Me.btnSave.Location = New System.Drawing.Point(83, 527)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(45, 23)
+        Me.btnSave.Size = New System.Drawing.Size(51, 23)
         Me.btnSave.TabIndex = 31
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
@@ -203,7 +203,7 @@ Partial Class ucrHourly
         '
         Me.btnDelete.Location = New System.Drawing.Point(197, 527)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(45, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(51, 23)
         Me.btnDelete.TabIndex = 40
         Me.btnDelete.Tag = "delete"
         Me.btnDelete.Text = "Delete"
@@ -223,7 +223,7 @@ Partial Class ucrHourly
         '
         Me.btnUpdate.Location = New System.Drawing.Point(140, 527)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(45, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(51, 23)
         Me.btnUpdate.TabIndex = 32
         Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
@@ -233,7 +233,7 @@ Partial Class ucrHourly
         '
         Me.btnClose.Location = New System.Drawing.Point(488, 527)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(45, 23)
+        Me.btnClose.Size = New System.Drawing.Size(50, 23)
         Me.btnClose.TabIndex = 45
         Me.btnClose.Tag = "close"
         Me.btnClose.Text = "Close"
@@ -246,7 +246,7 @@ Partial Class ucrHourly
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(154, 23)
         Me.btnHourSelection.TabIndex = 765
-        Me.btnHourSelection.Text = "Enable synoptic hours only"
+        Me.btnHourSelection.Text = "Enable selected hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
         '
         'Label1
@@ -961,7 +961,7 @@ Partial Class ucrHourly
         '
         Me.btnCancel.Location = New System.Drawing.Point(311, 527)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(45, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(51, 23)
         Me.btnCancel.TabIndex = 43
         Me.btnCancel.Tag = "cancel"
         Me.btnCancel.Text = "Cancel"
@@ -971,7 +971,7 @@ Partial Class ucrHourly
         '
         Me.btnPush.Location = New System.Drawing.Point(425, 527)
         Me.btnPush.Name = "btnPush"
-        Me.btnPush.Size = New System.Drawing.Size(51, 23)
+        Me.btnPush.Size = New System.Drawing.Size(57, 23)
         Me.btnPush.TabIndex = 1155
         Me.btnPush.Text = "Push"
         Me.btnPush.UseVisualStyleBackColor = True

@@ -52,8 +52,16 @@
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Try
-            ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"elementId", "mm", "dd"}, {ucrDaySelector, ucrMonthSelector}, ucrYearSelector)
-            ' ucrNavigation.NewRecord() 'temporary
+
+            'ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"element_code"}, {ucrMonthSelector, ucrDaySelector}, ucrYearSelector)
+
+            Dim dctSequencerColControls As New Dictionary(Of String, ucrValueView)
+            dctSequencerColControls.Add("element_code", ucrElementSelector)
+            ucrNavigation.NewSequencedRecord(txtSequencer.Text,
+                                              {"element_code"}, dctSequencerColControls,
+                                              ucrYearSelector, ucrMonthSelector, ucrDaySelector)
+
+
             SaveEnable()
             UcrValueFlagPeriod0.Focus()
 
@@ -166,11 +174,11 @@
         End If
     End Sub
 
-    Private Sub ucrYearSelector_evtValueChanged(sender As Object, e As EventArgs) Handles ucrYearSelector.evtValueChanged
-        If ucrYearSelector.ValidateValue() Then
-            txtSequencer.Text = If(ucrYearSelector.IsLeapYear(), "seq_month_day_element_leap_yr", "seq_month_day_element")
-        End If
-    End Sub
+    'Private Sub ucrYearSelector_evtValueChanged(sender As Object, e As EventArgs) Handles ucrYearSelector.evtValueChanged
+    '    If ucrYearSelector.ValidateValue() Then
+    '        txtSequencer.Text = If(ucrYearSelector.IsLeapYear(), "seq_month_day_element_leap_yr", "seq_month_day_element")
+    '    End If
+    'End Sub
 
     Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
         If e.KeyCode = Keys.Enter Then

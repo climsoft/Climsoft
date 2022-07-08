@@ -3,6 +3,7 @@
     Private strStationName As String = "stationName"
     Private strStationId As String = "stationId"
     Private strIDsAndStations As String = "ids_stations"
+    Private strStationsNamesAndIds As String = "stations_Names_ids"
 
     Public Overrides Sub PopulateControl()
         bSuppressChangedEvents = True
@@ -12,6 +13,7 @@
             'TODO 
             'what if there were no records on the first load.Then there are records later
             If bFirstLoad Then
+                'SetViewTypeStationsAndIDS()
                 SetViewTypeAsStations()
             End If
         Else
@@ -22,9 +24,9 @@
     End Sub
 
     Public Overrides Function ValidateValue() As Boolean
-        Dim bValid As Boolean = False
-        bValid = MyBase.ValidateValue()
-
+        'validate by display member 
+        Dim bValid As Boolean = MyBase.ValidateValue()
+        'if not valid, validate by value member
         If Not bValid Then
             If Not String.IsNullOrEmpty(cboValues.ValueMember) Then
                 For Each rTemp As DataRow In dtbRecords.Rows
@@ -50,6 +52,10 @@
 
     Public Sub SetViewTypeAsIDsAndStations()
         SetDisplayMember(strIDsAndStations)
+    End Sub
+
+    Public Sub SetViewTypeStationsAndIDS()
+        SetDisplayMember(strStationsNamesAndIds)
     End Sub
 
     Public Sub SortByID()
@@ -81,6 +87,7 @@
             dct.Add(strStationId, New List(Of String)({strStationId}))
             dct.Add(strStationName, New List(Of String)({strStationName}))
             dct.Add(strIDsAndStations, New List(Of String)({strStationId, strStationName}))
+            dct.Add(strStationsNamesAndIds, New List(Of String)({strStationName, strStationId}))
             SetTableNameAndFields(strStationsTableName, dct)
             PopulateControl()
             bFirstLoad = False
@@ -88,15 +95,11 @@
     End Sub
 
     Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
-        If Not cboValues.DisplayMember = strStationId Then
-            If IsNumeric(cboValues.Text) Then
-                If ValidateValue() Then
-                    Dim bChangedEvents As Boolean = Me.bSuppressChangedEvents
-                    bSuppressChangedEvents = True
-                    SetValue(cboValues.Text)
-                    bSuppressChangedEvents = bChangedEvents
-                End If
-            End If
+        If ValidateValue() Then
+            Dim bChangedEvents As Boolean = Me.bSuppressChangedEvents
+            bSuppressChangedEvents = True
+            SetValue(cboValues.Text)
+            bSuppressChangedEvents = bChangedEvents
         End If
     End Sub
 
