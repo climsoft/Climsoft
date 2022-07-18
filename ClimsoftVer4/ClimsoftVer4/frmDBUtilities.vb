@@ -201,6 +201,8 @@ Public Class frmDBUtilities
         Dim frmImportDaily As New frmImportDaily
         frmImportDaily.Setup(frmImportDaily.ImportType.NOAAGTS)
         frmImportDaily.Show()
+        frmImportDaily.Text = "NOAA GTS Data Import"
+        frmImportDaily.pnlDbTable.Visible = True
     End Sub
 
     Private Sub CLIMSOFTV3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CLIMSOFTV3ToolStripMenuItem.Click
@@ -225,7 +227,7 @@ Public Class frmDBUtilities
 
         '        'MsgBox(bkpfile)
 
-        '        sql_obsv = "use " & dbstr & ";select recorded_from,described_by,recorded_at,made_at,obs_value,flag,period,qc_status,qc_type_log,acquisition_type,data_form,captured_by,mark from observation where recorded_from=67774010 into outfile '" & bkpfile & "' fields terminated by ',';"
+        '        sql_obsv = "use " & dbstr & ";Select recorded_from,described_by,recorded_at,made_at,obs_value,flag,period,qc_status,qc_type_log,acquisition_type,data_form,captured_by,mark from observation where recorded_from=67774010 into outfile '" & bkpfile & "' fields terminated by ',';"
 
         '        conn.ConnectionString = frmLogin.txtusrpwd.Text
         '        conn.Open()
@@ -256,6 +258,8 @@ Public Class frmDBUtilities
         Dim frmImportDaily As New frmImportDaily
         frmImportDaily.Setup(frmImportDaily.ImportType.AWSData)
         frmImportDaily.Show()
+        frmImportDaily.Text = "AWS Data Import"
+        'frmImportDaily.pnlDbTable.Visible = True
     End Sub
 
 
@@ -286,6 +290,7 @@ Public Class frmDBUtilities
         Dim frmImportDaily As New frmImportDaily
         frmImportDaily.Setup(frmImportDaily.ImportType.Daily)
         frmImportDaily.Show()
+        frmImportDaily.Text = "Daily Data Import"
     End Sub
 
 
@@ -294,6 +299,7 @@ Public Class frmDBUtilities
         Dim frmImportDaily As New frmImportDaily
         frmImportDaily.Setup(frmImportDaily.ImportType.MultipleElements)
         frmImportDaily.Show()
+        frmImportDaily.Text = "Multiple Columns Data Import"
     End Sub
 
     Private Sub DailyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripHourly.Click
@@ -301,6 +307,7 @@ Public Class frmDBUtilities
         Dim frmImportDaily As New frmImportDaily
         frmImportDaily.Setup(frmImportDaily.ImportType.Hourly)
         frmImportDaily.Show()
+        frmImportDaily.Text = "Hourly Data Import"
     End Sub
 
     Private Sub ToolStripSynoptic_Click(sender As Object, e As EventArgs) Handles ToolStripSynoptic.Click
@@ -308,6 +315,7 @@ Public Class frmDBUtilities
         Dim frmImportDaily As New frmImportDaily
         frmImportDaily.Setup(frmImportDaily.ImportType.Dekadal)
         frmImportDaily.Show()
+        frmImportDaily.Text = "Dekadal Data Import"
     End Sub
 
     Private Sub DailyToolStripMenuItem1_Click_1(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem1.Click
@@ -315,6 +323,7 @@ Public Class frmDBUtilities
         Dim frmImportDaily As New frmImportDaily
         frmImportDaily.Setup(frmImportDaily.ImportType.ClicomDaily)
         frmImportDaily.Show()
+        frmImportDaily.Text = "CLICOM Daily Data Import"
     End Sub
 
     Private Sub SynopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SynopToolStripMenuItem.Click
@@ -322,6 +331,7 @@ Public Class frmDBUtilities
         Dim frmImportDaily As New frmImportDaily
         frmImportDaily.Setup(frmImportDaily.ImportType.ClicomSynop)
         frmImportDaily.Show()
+        frmImportDaily.Text = "CLICOM Synop Data Import"
     End Sub
 
     Private Sub HourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem.Click
@@ -329,6 +339,7 @@ Public Class frmDBUtilities
         Dim frmImportDaily As New frmImportDaily
         frmImportDaily.Setup(frmImportDaily.ImportType.ClicomHourly)
         frmImportDaily.Show()
+        frmImportDaily.Text = "CLICOM Hourly Data Import"
     End Sub
 
     Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
@@ -336,5 +347,6 @@ Public Class frmDBUtilities
         Dim frmImportDaily As New frmImportDaily
         frmImportDaily.Setup(frmImportDaily.ImportType.Monthly)
         frmImportDaily.Show()
+        frmImportDaily.Text = "Monthly Data Import"
     End Sub
 End Class

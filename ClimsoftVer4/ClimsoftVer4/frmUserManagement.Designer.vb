@@ -51,7 +51,7 @@ Partial Class frmUserManagement
         'cboUserRole
         '
         Me.cboUserRole.FormattingEnabled = True
-        Me.cboUserRole.Items.AddRange(New Object() {"ClimsoftAdmin", "ClimsoftDeveloper", "ClimsoftMetadata", "ClimsoftOperator", "ClimsoftOperatorSupervisor", "ClimsoftProducts", "ClimsoftQC", "ClimsoftRainfall", "ClimsoftTranslator"})
+        Me.cboUserRole.Items.AddRange(New Object() {"ClimsoftAdmin", "ClimsoftDeveloper", "ClimsoftMetadata", "ClimsoftOperator", "ClimsoftOperatorSupervisor", "ClimsoftProducts", "ClimsoftQC", "ClimsoftRainfall", "ClimsoftTranslator", "ClimsoftInventory"})
         Me.cboUserRole.Location = New System.Drawing.Point(166, 105)
         Me.cboUserRole.Name = "cboUserRole"
         Me.cboUserRole.Size = New System.Drawing.Size(184, 21)

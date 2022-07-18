@@ -7,6 +7,7 @@
     Dim dsNewRow As DataRow
     Dim sql, currentRow(), delimit, cprd As String
     Dim lin, rec, col, kount, prd As Integer
+    Dim ImportFile As Boolean
 
     Public Enum ImportType
         Hourly
@@ -24,7 +25,9 @@
     Private _enumImportType As ImportType = ImportType.Daily
 
     Public Sub Setup(enumImportType As ImportType)
+
         Me._enumImportType = enumImportType
+
         Select Case _enumImportType
             Case ImportType.Hourly
                 Text = ClsTranslations.GetTranslation("Hourly Data Import")
@@ -124,7 +127,7 @@
         dlgOpenImportFile.ShowDialog()
 
         txtImportFile.Text = dlgOpenImportFile.FileName
-
+        lblSpecs.Text = ""
     End Sub
 
     Private Sub cmdView_Click(sender As Object, e As EventArgs) Handles cmdView.Click
@@ -228,7 +231,7 @@
             Me.Cursor = Cursors.Default
         End Try
         If DataGridView1.RowCount > 0 Then
-            cmdLoadData.Enabled = True
+            'cmdLoadData.Enabled = True
 
             ' CLICOM imports have fixed structure hence the panel for header specifications should not be used hence it's not enabled
             If InStr(Text, ClsTranslations.GetTranslation("CLICOM")) < 1 Then pnlHeaders.Enabled = True
@@ -430,7 +433,10 @@
         Dim DataCat, fl1, fl2, cr, sql0 As String
         Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
 
+        ImportFile = True
+        pnlErrors.Visible = False
         Try
+
             ' Set busy Cursor pointer
             Me.Cursor = Cursors.WaitCursor
             lblRecords.Text = ""
@@ -456,6 +462,7 @@
             Next
 
             ' Determine data category from selected menu
+
             Select Case _enumImportType
                 Case ImportType.Hourly
                     DataCat = "Hourly"
@@ -479,16 +486,6 @@
                     DataCat = ""
             End Select
 
-            ' Check for Daily1, Hourly1 and AWS_special file type
-            'For i = 0 To DataGridView1.Columns.Count - 1
-            '    If DataGridView1.Columns(i).Name = "value" And lblType.Text = "Daily" Then
-            '        DataCat = "Daily1"
-            '        Exit For
-            '    ElseIf DataGridView1.Columns(i).Name = "value" And lblType.Text = "AWS" Then
-            '        DataCat = "AWS_special"
-            '        Exit For
-            '    End If
-            'Next
 
             ' Determine special data categories from files header
             ' Check for Daily1, Hourly1 and AWS_special file types
@@ -541,7 +538,22 @@
 
             ' Create sql query
             sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,acquisitionType);"
-            If DataCat = "NOAAGTS" Then sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,acquisitionType);"
+
+            'If DataCat = "NOAAGTS" Then sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,acquisitionType);"
+
+            If DataCat = "NOAAGTS" Then
+                If rbtnFinal.Checked Then
+                    sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType);"
+                Else
+                    sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType);"
+                End If
+            End If
+
+            'objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql0, dbcon)
+
+            '' Create sql query
+            'sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,acquisitionType);"
+
 
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql0, dbcon)
 
@@ -549,13 +561,18 @@
             objCmd.CommandTimeout = 0
             objCmd.ExecuteNonQuery()
 
-            lblRecords.Text = ClsTranslations.GetTranslation("Data import process completed")
+            If ImportFile Then
+                lblRecords.Text = "Data import process successfully completed"
+            Else
+                lblRecords.Text = "Data Import Failed!"
+            End If
 
             dbcon.Close()
             Me.Cursor = Cursors.Default
 
             ' Output stations and elements errors into a file
             'pnlErrors.Visible = False
+
 
             If lstStations.Items.Count > 0 Then
                 pnlErrors.Visible = True
@@ -573,7 +590,7 @@
 
         Catch ex As Exception
             MsgBox(ex.Message)
-            lblRecords.Text = ClsTranslations.GetTranslation("Data Import Failed! Check if the Staion Id exists in metadata")
+            lblRecords.Text = "Data Import Failed!, Check if the Staion Id exists in metadata"
             dbcon.Close()
             FileClose(101)
             Me.Cursor = Cursors.Default
@@ -626,8 +643,10 @@
                         st = cboStns.SelectedValue
                         acquisitiontype = 6
                         h = txtObsHour.Text
-                        'cod = txtElmCode.Text
+                        'cod = cboElement.Text
                         cod = cboElement.SelectedValue
+                        'MsgBox(cod)
+
                         lvl = "surface"
 
                         For Each currentField In currentRow
@@ -689,6 +708,8 @@
 
                                             If Station_Element(st, cod) Then
                                                 If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For 'Sub
+                                            Else
+                                                If Not ImportFile Then Exit Sub
                                             End If
                                             End If
                                         End If
@@ -733,6 +754,7 @@
                         h = txtObsHour.Text
                         'cod = txtElmCode.Text
                         cod = cboElement.SelectedValue
+                        If cboElement.Text = "" Then cod = ""
                         lvl = "surface"
                         acquisitiontype = 6
                         dttime = ""
@@ -776,7 +798,11 @@
                                 ' Check for missing flag data values 
                                 If dat = txtMissingFlag.Text Then
                                     If IsDate(dttime) Then
-                                        If Station_Element(st, cod) Then Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl)
+                                        If Station_Element(st, cod) Then
+                                            Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl)
+                                        Else
+                                            If Not ImportFile Then Exit Sub
+                                        End If
                                         lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                         lblRecords.Refresh()
                                         col = col + 1
@@ -792,6 +818,8 @@
                                 If IsDate(dttime) And IsDate(DateSerial(y, m, h)) Then
                                     If Station_Element(st, cod) Then
                                         If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For
+                                    Else
+                                        If Not ImportFile Then Exit Sub
                                     End If
                                 End If
 
@@ -896,7 +924,9 @@
                                                 Else
                                                     Get_Value_Flag(cod, dat, flg)
                                                 End If
-                                                If Station_Element(st, cod) Then
+                                            If Not Station_Element(st, cod) Then
+                                                If Not ImportFile Then Exit Sub
+                                            Else
                                                 If IsDate(dttime) Then
 
                                                     If chkUTC.Checked Then
@@ -1003,8 +1033,11 @@
                                                 dat = ""
                                             End If
 
-                                            If Station_Element(st, cod) Then Add_Record(st, cod, dttim, dat, flg, acquisitiontype)
-
+                                            If Station_Element(st, cod) Then
+                                                Add_Record(st, cod, dttim, dat, flg, acquisitiontype)
+                                            Else
+                                                If Not ImportFile Then Exit Sub
+                                            End If
                                         End If
                                     End If
                                 End If
@@ -1096,7 +1129,9 @@
                                         Continue For
                                     End If
 
-                                    If Station_Element(st, cod) Then
+                                    If Not Station_Element(st, cod) Then
+                                        If Not ImportFile Then Exit Sub
+                                    Else
                                         If Not Add_Record(st, cod, dttim, dat, flg, acquisitiontype) Then Exit For
                                     End If
 
@@ -1192,10 +1227,14 @@
                                                 'MsgBox(hd & " " & dt_tm)
                                                 If IsDate(dt_tm) Then
                                                     'MsgBox(st & " " & cod)
-                                                    If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, "", "M", acquisitiontype)
-                                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
-                                                    lblRecords.Refresh()
-                                                    col = col + 1
+                                                    If Station_Element(st, cod) Then
+                                                        Add_Record(st, cod, dt_tm, "", "M", acquisitiontype)
+                                                        lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                        lblRecords.Refresh()
+                                                        col = col + 1
+                                                    Else
+                                                        If ImportFile = False Then Exit Sub
+                                                    End If
                                                 End If
                                                 Continue For
                                             End If
@@ -1203,14 +1242,14 @@
                                             ' Process data
 
                                             dat = currentField
-                                                flg = ""
+                                            flg = ""
 
-                                                If IsNumeric(dat) Then
-                                                    prd = 0
-                                                    If chkScale.Checked = True Then Scale_Data(cod, dat)
-                                                Else
-                                                    Get_Value_Flag(cod, dat, flg)
-                                                End If
+                                            If IsNumeric(dat) Then
+                                                prd = 0
+                                                If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                            Else
+                                                Get_Value_Flag(cod, dat, flg)
+                                            End If
 
                                             ' Process Dekadal data if any
                                             If optDekadal.Checked = True Then
@@ -1232,15 +1271,20 @@
                                             'Else
                                             '    If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
                                             'End If
-                                            If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
-
+                                            If Station_Element(st, cod) Then
+                                                Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
+                                                lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                                                lblRecords.Refresh()
+                                            Else
+                                                If ImportFile = False Then Exit Sub
+                                            End If
                                         End If
-                                        End If
+                                    End If
                                 End With
 
                                 ' Show upload progress
-                                lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
-                                lblRecords.Refresh()
+                                'lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                                'lblRecords.Refresh()
                                 col = col + 1
                             Next
                         End If
@@ -1249,7 +1293,7 @@
             End Using
 
         Catch ex As Exception
-            MsgBox(ex.HResult & " " & ex.Message)
+            MsgBox(ex.Message)
         End Try
     End Sub
 
@@ -1354,6 +1398,8 @@
                                                 flg = dat
                                                 If Station_Element(st, cod) And IsDate(dttime) Then ' Exit For
                                                     If Not Add_Record(st, cod, dttime, obsv, flg, acquisitiontype) Then Exit For
+                                                Else
+                                                    If Not ImportFile Then Exit Sub
                                                 End If
                                             End If
                                         End If
@@ -1447,6 +1493,8 @@
 
                                             If Station_Element(st, cod) Then
                                                 If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For 'Sub
+                                            Else
+                                                If Not ImportFile Then Exit Sub
                                             End If
 
                                         End If
@@ -1545,9 +1593,12 @@
                                             Get_Value_Flag(cod, dat, flg)
                                         End If
 
-                                        If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
-
-                                    End If
+                                        If Station_Element(st, cod) Then
+                                            Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
+                                        Else
+                                            If Not ImportFile Then Exit Sub
+                                        End If
+                                End If
                                 End If
                             End With
 
@@ -1644,7 +1695,6 @@
                                     ElseIf .Columns(col).Name = "NA" Then ' Not Required
                                         'Do nothing
                                     Else ' Data Column found
-                                        'MsgBox(st)
                                         cod = .Columns(col).Name
                                         '    dat = .Rows(i).Cells(j).Value
                                         If dt_tm = False Then dttim = dt & " " & h & ":00"
@@ -1654,50 +1704,42 @@
                                         If IsDate(dttim) Then
 
                                             ' Check for missing flag data values 
-                                            If dat = txtMissingFlag.Text Then
-                                                ' Skip Uploading Missing data
-
-                                                'If IsDate(dttim) Then
-                                                '    If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
-                                                '    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
-                                                '    lblRecords.Refresh()
-
-                                                'End If
+                                            If NOAA_MissingData(dat) Then
                                                 col = col + 1
                                                 Continue For
                                             End If
 
                                             'flg = ""
                                             If IsNumeric(dat) Then
-                                                '    If chkScale.Checked = True Then Scale_Data(cod, dat)
-                                                'Else
-                                                ' Treat string data values as missing data
-                                                'flg = "M"
-                                                'dat = ""
                                                 ' Units coversions
-                                                If cod = 2 Or cod = 3 Or cod = 4 Or cod = 101 Or cod = 102 Or cod = 103 Then ' Temperatures - Fahreheit to Celsius
+                                                If cod = 1 Or cod = 2 Or cod = 3 Or cod = 4 Or cod = 14 Or cod = 101 Or cod = 102 Or cod = 103 Then ' Temperatures - Fahreheit to Celsius
                                                     dat = 5 / 9 * (Val(dat) - 32)
                                                 ElseIf cod = 5 Or cod = 50 Then ' Precipitation/Snow Depth - inches to mm
                                                     dat = Val(dat) * 25.4
                                                 ElseIf cod = 110 Then ' Visibility - Miles to Metres
                                                     dat = Val(dat) * 1609.34
-                                                    'ElseIf cod = 58 Or cod = 60 Or cod = 111 Then ' Wind Speed - Knots to M/s
-                                                    '    dat = Val(dat) * 0.514444
+                                                ElseIf cod = 56 Or cod = 57 Or cod = 58 Or cod = 60 Or cod = 111 Then ' Wind Speed - Knots to M/s
+                                                    dat = Val(dat) * 0.514444
                                                 End If
+
+                                                If chkScale.Checked = True Then Scale_Data(cod, dat)
+
                                             End If
 
-                                            If Station_Element(st, cod) Then Add_Record(st, cod, dttim, dat, flg, acquisitiontype)
-
-                                        End If
+                                            If Station_Element(st, cod) Then
+                                                Add_Record_NOAGTS(st, cod, dttim, dat, flg, acquisitiontype)
+                                            Else
+                                                If Not ImportFile Then Exit Sub
+                                            End If
+                                    End If
                                     End If
                                 End If
                             End With
 
                             col = col + 1
                             ' Show upload progress
-                            lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                            lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
                             lblRecords.Refresh()
-
                         Next
                     End If
                 Loop
@@ -1706,6 +1748,17 @@
             MsgBox(ex.HResult & " " & ex.Message)
         End Try
     End Sub
+
+    Function NOAA_MissingData(flg As String) As Boolean
+        Try
+            If flg = 999999 Or flg = 9999.9 Or flg = 999.9 Or flg = 99.99 Then
+                Return True
+            End If
+            Return False
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     Function Get_DateTime(datRow() As String, ByRef dtt As Date, ByRef lvl As String) As Boolean
         Dim datValue As String
         Dim itm As Integer
@@ -1886,7 +1939,31 @@
         End Try
 
     End Function
+    Function Add_Record_NOAGTS(stn As String, code As String, datetime As String, obsVal As String, flg As String, acqTyp As Integer, Optional levels As String = "surface") As Boolean
+        Dim dat As String
 
+        Try
+
+            If rbtnFinal.Checked Then
+                dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & ",1," & acqTyp
+            Else
+                dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & ",0," & acqTyp
+            End If
+
+            Print(101, dat)
+            PrintLine(101)
+
+            Return True
+        Catch ex As Exception
+            'dbcon.Close()
+
+            If ex.HResult <> -2147024882 And ex.HResult <> -2146232969 And ex.HResult <> -2146233079 Then
+                'If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Return False
+            End If
+            Return False
+        End Try
+
+    End Function
     Private Sub cmbFields_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFields.SelectedIndexChanged
         Dim Colhd As String
         Dim x As Integer
@@ -1920,7 +1997,7 @@
         Dim scales As Decimal
 
         Try
-            sql = "select elementId, elementScale from obselement where elementId like " & code & ";"
+            sql = "select elementId, elementScale from obselement where elementId like '" & code & "';"
 
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
@@ -2041,14 +2118,17 @@
             End If
 
             If stn = False Or elm = False Then
+                'ImportFile = False
                 Return False
             Else
                 Return True
-
             End If
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'MsgBox(ex.Message)
+            MsgBox("Missing Metadata")
+            ImportFile = False
+            Return False
         End Try
 
     End Function
@@ -2137,6 +2217,7 @@
             code = cboElement.SelectedValue
             flg = txtMissingFlag.Text
             PrintLine(100, dlt & "," & strw & "," & obshr & "," & scal & "," & id & "," & code & "," & flg)
+            lblSpecs.Text = schemafile
         Catch ex As Exception
             FileClose(100)
         End Try
@@ -2150,6 +2231,7 @@
         dlgOpenImportFile.Title = "Schema File"
         dlgOpenImportFile.ShowDialog()
         sch = dlgOpenImportFile.FileName
+
         Try
             Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(sch)
                 MyReader.TextFieldType = FileIO.FieldType.Delimited
@@ -2162,6 +2244,7 @@
 
                 If hdr.Count <> DataGridView1.Columns.Count Then
                     MsgBox(ClsTranslations.GetTranslation("Header Specs don't match data columms. Selected specs file not loaded"))
+                    lblSpecs.Text = ""
                     Exit Sub
                 End If
 
@@ -2202,8 +2285,10 @@
                     End If
                 End If
             End Using
+            lblSpecs.Text = sch
         Catch ex As Exception
             If ex.HResult <> -2147467261 Then MsgBox(ex.Message)
+            lblSpecs.Text = ""
         End Try
 
     End Sub
@@ -2219,18 +2304,48 @@
 
     End Sub
 
-    Private Sub lblColumns_Click(sender As Object, e As EventArgs) Handles lblColumns.Click
-
-    End Sub
-
-    Private Sub lstColumn_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstColumn.SelectedIndexChanged
-
+    Private Sub rbtnFinal_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnFinal.CheckedChanged
+        If rbtnFinal.Checked = True Then
+            chkScale.Checked = False
+        Else
+            chkScale.Checked = True
+        End If
     End Sub
 
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
         Me.Close()
     End Sub
 
+    Private Sub cmdSaveErrors_Click_1(sender As Object, e As EventArgs) Handles cmdSaveErrors.Click
+        Dim flerr As String
+        ' Save Stations errors
+        With lstStations.Items
+            If .Count > 0 Then
+                flerr = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\stationsErrors.csv"
+                FileOpen(15, flerr, OpenMode.Output)
+
+                For i = 0 To .Count - 1
+                    PrintLine(15, .Item(i))
+                Next
+                FileClose(15)
+                lblStnErr.Text = "Stations Errors Saved in '" & flerr & "'"
+            End If
+        End With
+
+        ' Save Element errors
+        With lstElements.Items
+            If .Count > 0 Then
+                flerr = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\ElementsErrors.csv"
+                FileOpen(15, flerr, OpenMode.Output)
+
+                For i = 0 To .Count - 1
+                    PrintLine(15, .Item(i))
+                Next
+                FileClose(15)
+                lblElmErr.Text = "Elements Errors Saved in '" & flerr & "'"
+            End If
+        End With
+    End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Select Case _enumImportType
@@ -2357,6 +2472,14 @@
 
         If e.KeyValue = 13 Then
             Recs.Valid_Elm(cboElement)
+        End If
+    End Sub
+
+    Private Sub lblSpecs_TextChanged(sender As Object, e As EventArgs) Handles lblSpecs.TextChanged
+        If Len(lblSpecs.Text) > 0 Then
+            cmdLoadData.Enabled = True
+        Else
+            cmdLoadData.Enabled = False
         End If
     End Sub
 
