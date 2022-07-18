@@ -267,6 +267,7 @@
                 stn(0) = dss.Tables("station").Rows(i).Item("stationId") '"0123456789"
                 If Not IsDBNull(dss.Tables("station").Rows(i).Item("stationName")) Then
                     stn(1) = dss.Tables("station").Rows(i).Item("stationName")
+                    cmbstation.Items.Add(stn(1))
                 Else
                     stn(1) = ""
                 End If
@@ -285,6 +286,7 @@
                 elm(0) = dss.Tables("element").Rows(i).Item("elementId")
                 If Not IsDBNull(dss.Tables("element").Rows(i).Item("description")) Then
                     elm(1) = dss.Tables("element").Rows(i).Item("description")
+                    cmbElement.Items.Add(elm(1))
                 Else ' When Elent Description is empty
                     elm(1) = ""
                 End If
@@ -322,6 +324,48 @@
         End If
     End Sub
 
+    Private Sub cmbstation_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbstation.KeyPress
+        If Asc(e.KeyChar) = 13 Then
+            For i = 0 To LstViewStations.Items.Count - 1
+                If LstViewStations.Items(i).SubItems(0).Text = cmbstation.Text Then
+                    LstViewStations.Items(i).Checked = True
+                    cmbstation.Text = ""
+                    Exit For
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub cmbElement_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbElement.KeyPress
+        If Asc(e.KeyChar) = 13 Then
+            For i = 0 To lstViewElements.Items.Count - 1
+                If lstViewElements.Items(i).SubItems(0).Text = cmbElement.Text Then
+                    lstViewElements.Items(i).Checked = True
+                    cmbElement.Text = ""
+                    Exit For
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub cmbElement_Click(sender As Object, e As EventArgs) Handles cmbElement.Click
+        For i = 0 To lstViewElements.Items.Count - 1
+            If lstViewElements.Items(i).SubItems(1).Text = cmbElement.Text Then
+                lstViewElements.Items(i).Checked = True
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub cmbstation_Click(sender As Object, e As EventArgs) Handles cmbstation.Click
+        For i = 0 To LstViewStations.Items.Count - 1
+            If LstViewStations.Items(i).SubItems(1).Text = cmbstation.Text Then
+                LstViewStations.Items(i).Checked = True
+                Exit For
+            End If
+        Next
+    End Sub
+
     Private Sub chkAllElements_Click(sender As Object, e As EventArgs) Handles chkAllElements.Click
         If chkAllElements.Checked = False Then
             For i = 0 To lstViewElements.Items.Count - 1
@@ -341,11 +385,8 @@
     Private Sub cmdUploadData_Click(sender As Object, e As EventArgs) Handles cmdUploadData.Click
         'Open form for displaying data transfer progress
         Dim m As Integer, n As Integer, elem1 As Integer, elem2, Trecs As Integer
-        Dim elmcode, stnlist, elmlist, stnelm_selected As String
+        Dim elmcode, stnlist, elmlist, stnelm_selected, fl1, rec As String
         Dim stnselected, elmselected As Boolean
-
-        'frmDataTransferProgress.Show()
-        'lblTableRecords.Refresh()
 
         'Upload data to observationInitial table
         Dim strSQL, stnId, elemCode, obsVal, obsFlag, period, mark1, qcStatus, obsLevel, obsDate, mm, dd, hh, mnt, ss As String
@@ -356,6 +397,11 @@
         Dim beginYear As Integer, endYear As Integer, beginMonth As Integer, endMonth As Integer
 
         Try
+            fl1 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\init_2_final_sql.csv"
+            FileOpen(102, fl1, OpenMode.Output)
+
+            ' Convert path separater to SQL format
+            fl1 = Strings.Replace(fl1, "\", "/")
 
             ' List the selected stations
             stnlist = ""
@@ -395,7 +441,6 @@
                         Else
                             elmlist = elmlist & " OR describedBy = " & "'" & elmcode & "'"
                         End If
-                        'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
                     End If
                 Next
             Else ' When All stations are selected
@@ -424,21 +469,15 @@
             endMonth = Val(txtEndMonth.Text)
 
 
-            '------
-            'ds.Clear()
             MyConnectionString = frmLogin.txtusrpwd.Text
-            ' conn.Close()
             conn.ConnectionString = MyConnectionString
             conn.Open()
+
             'First upload records with QC status =1
 
             sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,period,qcStatus,acquisitionType,mark " &
                 "FROM observationInitial WHERE " & stnelm_selected & " year(obsDateTime) between " & beginYear & " AND " & endYear &
                 " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=1;"
-
-            'MsgBox(sql)
-            'Exit Sub
-            'dadData.SelectCommand.CommandTimeout=120
 
             Trecs = 0
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -446,11 +485,6 @@
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "obsInitial")
-            ''conn.Close() '
-            ' Dim dsObsInitial As New MySql.Data.MySqlClient.MySqlDataAdapter
-            'Catch ex As Exception
-            '    If ex.HResult <> -2147024882 Then MsgBox(ex.Message)
-            'End Try
 
             Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
             maxRows = ds.Tables("obsInitial").Rows.Count
@@ -494,9 +528,6 @@
                 mnt = Minute(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
                 ss = Second(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
 
-                ''obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
-
-                ' Code improved to include minutes and seconds in the datetime string
                 obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":" & mnt & ":" & ss
 
                 stnId = ds.Tables("obsInitial").Rows(n).Item("recordedFrom")
@@ -522,8 +553,6 @@
                     period = "NULL"
                 End If
 
-                'period = ds.Tables("obsInitial").Rows(n).Item("period")
-
                 'Types of bservation values
                 If IsDBNull(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of NULL for obs values
                     obsVal = "NULL"
@@ -548,44 +577,61 @@
 
                 'Generate SQL string for inserting data into observationFinal table
                 If Not chkUpdateRecs.Checked Then
-                    strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark) " &
-                    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
-                    period & "," & qcStatus & "," & acquisitionType & "," & mark1 & ")"
+                    'strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark) " &
+                    '"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
+                    'period & "," & qcStatus & "," & acquisitionType & "," & mark1 & ")"
+
+                    rec = stnId & "," & elemCode & "," & obsDate & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & period & "," & qcStatus & "," & acquisitionType & "," & mark1
+                    Print(102, rec)
+                    PrintLine(102)
                 Else
                     strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period, qcStatus,acquisitionType,mark) " &
                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
                      period & "," & qcStatus & "," & acquisitionType & "," & mark1 & ")"
+
+                    ' Upload with replacing existing records 
+                    ' Create the Command for executing query and set its properties
+                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                    objCmd.CommandTimeout = 0
+
+                    'Execute query
+                    objCmd.ExecuteNonQuery()
                 End If
-
-                'strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                '    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
-                '    qcStatus & "," & acquisitionType & ")"
-                'MsgBox(strSQL)
-                ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-                objCmd.CommandTimeout = 0
-
-                'Execute query
-                objCmd.ExecuteNonQuery()
-                'Catch ex As MySql.Data.MySqlClient.MySqlException
-                '    'Ignore expected error i.e. error of Duplicates in MySqlException
-                'Catch ex As Exception
-                '    If ex.HResult <> -2147024882 Then MsgBox(ex.Message)
-                'End Try
-
-                'Move to next record in dataset
 
             Next n
 
+            ' Update database with records from a file
+            FileClose(102)
+            If Not chkUpdateRecs.Checked Then
+                txtDataTransferProgress.Refresh()
+                txtDataTransferProgress.Text = "Updating Database from bufer ...... Please Wait!"
+                txtDataTransferProgress.Refresh()
+
+                ' Create sql query
+                strSQL = "LOAD DATA local INFILE '" & fl1 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark);"
+
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+                'Execute query
+                objCmd.CommandTimeout = 0
+                objCmd.ExecuteNonQuery()
+
+                txtDataTransferProgress.Text = ""
+                txtDataTransferProgress.Refresh()
+            End If
+
+            'Next upload records with QC status =2
             conn.Close()
-            '------
             ds.Clear()
             MyConnectionString = frmLogin.txtusrpwd.Text
             ' conn.Close()
             conn.ConnectionString = MyConnectionString
             conn.Open()
             'Try
-            'Next upload records with QC status =2
+
+            txtDataTransferProgress.Text = "Checking for records with QC status =2 ...... Please Wait!"
+            txtDataTransferProgress.Refresh()
+
             sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,period,qcStatus,acquisitionType " &
                 "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear &
                 " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=2"
@@ -594,8 +640,6 @@
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "obsInitial")
-            ''conn.Close() '
-            ' Dim dsObsInitial As New MySql.Data.MySqlClient.MySqlDataAdapter
 
             maxRows = ds.Tables("obsInitial").Rows.Count
             Trecs = Trecs + maxRows
@@ -607,31 +651,17 @@
 
             da1.Fill(ds1, "elemScale")
             elemMaxRows = ds1.Tables("elemScale").Rows.Count
-            'MsgBox("Number of elements: " & elemMaxRows)
 
-            'Loop through all records in dataset
-            'Catch ex As Exception
-            '    If ex.HResult <> -2147024882 Then MsgBox(ex.Message)
-            'End Try
-            'MsgBox(7)
-
-            'MsgBox("Uploading records with qcStatus=2")
             For n = 0 To maxRows - 1
 
                 lblTableRecords.Text = "Uploading records with qcStatus=2"
                 lblTableRecords.Refresh()
 
                 'Display progress of data transfer
-
-                'frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
-
-                'frmDataTransferProgress.txtDataTransferProgress.Refresh()
-
                 txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
                 txtDataTransferProgress.Refresh()
 
                 'Loop through all observation fields adding observation records to observationInitial table
-                'Try
                 dd = ""
                 hh = ""
                 yyyy = DateAndTime.Year(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
@@ -644,9 +674,6 @@
                 mnt = Minute(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
                 ss = Second(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
 
-                'obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
-
-                ' Code improved to include minutes and seconds in the datetime string
                 obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":" & mnt & ":" & ss
 
                 stnId = ds.Tables("obsInitial").Rows(n).Item("recordedFrom")
@@ -685,44 +712,33 @@
 
                 strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag, qcStatus) " &
                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & qcStatus & ");"
-                'MsgBox(strSQL)
+
                 ' Create the Command for executing query and set its properties
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
                 objCmd.CommandTimeout = 0
 
                 'Execute query
                 objCmd.ExecuteNonQuery()
-                'Catch ex As MySql.Data.MySqlClient.MySqlException
-                '    'Ignore expected error i.e. error of Duplicates in MySqlException
-                'Catch ex As Exception
-
-                '    If ex.HResult <> -2147024882 Then MsgBox(ex.Message)
-                'End Try
-
-                'Move to next record in dataset
 
             Next n
+
+            conn.Close()
+
+            lblTableRecords.ForeColor = Color.Red
+            lblTableRecords.Text = "Data transfer complete !"
+            txtDataTransferProgress.Text = Trecs & " Records Transferred!"
+
+            'Set Cursor to busy mode
+            Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             MsgBox(ex.Message)
             lblTableRecords.ForeColor = Color.Red
             lblTableRecords.Text = "Data transfer failed !"
             conn.Close()
+            FileClose(102)
             Me.Cursor = Cursors.Default
-            Exit Sub
         End Try
-
-
-        conn.Close()
-        'frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
-        'frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
-
-        lblTableRecords.ForeColor = Color.Red
-        lblTableRecords.Text = "Data transfer complete !"
-        txtDataTransferProgress.Text = Trecs & " Records Transferred!"
-
-        'Set Cursor to busy mode
-        Me.Cursor = Cursors.Default
     End Sub
 
 

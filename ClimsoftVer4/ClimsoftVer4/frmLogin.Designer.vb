@@ -53,9 +53,9 @@ Partial Class frmLogin
         '
         Me.pictureBoxLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.pictureBoxLogo.Image = CType(resources.GetObject("pictureBoxLogo.Image"), System.Drawing.Image)
-        Me.pictureBoxLogo.Location = New System.Drawing.Point(0, 17)
+        Me.pictureBoxLogo.Location = New System.Drawing.Point(0, 0)
         Me.pictureBoxLogo.Name = "pictureBoxLogo"
-        Me.pictureBoxLogo.Size = New System.Drawing.Size(199, 251)
+        Me.pictureBoxLogo.Size = New System.Drawing.Size(240, 288)
         Me.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pictureBoxLogo.TabIndex = 0
         Me.pictureBoxLogo.TabStop = False
@@ -63,7 +63,7 @@ Partial Class frmLogin
         'lblUsername
         '
         Me.lblUsername.AutoSize = True
-        Me.lblUsername.Location = New System.Drawing.Point(218, 11)
+        Me.lblUsername.Location = New System.Drawing.Point(262, 11)
         Me.lblUsername.Name = "lblUsername"
         Me.lblUsername.Size = New System.Drawing.Size(55, 13)
         Me.lblUsername.TabIndex = 0
@@ -74,7 +74,7 @@ Partial Class frmLogin
         'lblPassword
         '
         Me.lblPassword.AutoSize = True
-        Me.lblPassword.Location = New System.Drawing.Point(218, 61)
+        Me.lblPassword.Location = New System.Drawing.Point(262, 61)
         Me.lblPassword.Name = "lblPassword"
         Me.lblPassword.Size = New System.Drawing.Size(53, 13)
         Me.lblPassword.TabIndex = 2
@@ -84,7 +84,7 @@ Partial Class frmLogin
         '
         'txtUsername
         '
-        Me.txtUsername.Location = New System.Drawing.Point(220, 31)
+        Me.txtUsername.Location = New System.Drawing.Point(264, 31)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(220, 20)
         Me.txtUsername.TabIndex = 1
@@ -92,7 +92,7 @@ Partial Class frmLogin
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(220, 81)
+        Me.txtPassword.Location = New System.Drawing.Point(264, 81)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(220, 20)
@@ -101,7 +101,7 @@ Partial Class frmLogin
         '
         'OK
         '
-        Me.OK.Location = New System.Drawing.Point(219, 254)
+        Me.OK.Location = New System.Drawing.Point(263, 254)
         Me.OK.Name = "OK"
         Me.OK.Size = New System.Drawing.Size(67, 23)
         Me.OK.TabIndex = 4
@@ -111,7 +111,7 @@ Partial Class frmLogin
         'Cancel
         '
         Me.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel.Location = New System.Drawing.Point(322, 254)
+        Me.Cancel.Location = New System.Drawing.Point(366, 254)
         Me.Cancel.Name = "Cancel"
         Me.Cancel.Size = New System.Drawing.Size(67, 23)
         Me.Cancel.TabIndex = 5
@@ -120,7 +120,7 @@ Partial Class frmLogin
         '
         'txtusrpwd
         '
-        Me.txtusrpwd.Location = New System.Drawing.Point(223, 32)
+        Me.txtusrpwd.Location = New System.Drawing.Point(267, 32)
         Me.txtusrpwd.Name = "txtusrpwd"
         Me.txtusrpwd.Size = New System.Drawing.Size(177, 20)
         Me.txtusrpwd.TabIndex = 6
@@ -129,7 +129,7 @@ Partial Class frmLogin
         'cmdHelp
         '
         Me.cmdHelp.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.cmdHelp.Location = New System.Drawing.Point(425, 254)
+        Me.cmdHelp.Location = New System.Drawing.Point(469, 254)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(67, 23)
         Me.cmdHelp.TabIndex = 9
@@ -141,7 +141,7 @@ Partial Class frmLogin
         '
         Me.cboDatabases.BackColor = System.Drawing.SystemColors.Menu
         Me.cboDatabases.FormattingEnabled = True
-        Me.cboDatabases.Location = New System.Drawing.Point(218, 162)
+        Me.cboDatabases.Location = New System.Drawing.Point(262, 162)
         Me.cboDatabases.Name = "cboDatabases"
         Me.cboDatabases.Size = New System.Drawing.Size(222, 21)
         Me.cboDatabases.TabIndex = 7
@@ -151,7 +151,7 @@ Partial Class frmLogin
         Me.lblDbdetails.AutoSize = True
         Me.lblDbdetails.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lblDbdetails.ForeColor = System.Drawing.Color.Blue
-        Me.lblDbdetails.Location = New System.Drawing.Point(218, 187)
+        Me.lblDbdetails.Location = New System.Drawing.Point(262, 187)
         Me.lblDbdetails.Name = "lblDbdetails"
         Me.lblDbdetails.Size = New System.Drawing.Size(154, 13)
         Me.lblDbdetails.TabIndex = 8
@@ -161,7 +161,7 @@ Partial Class frmLogin
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(218, 142)
+        Me.Label1.Location = New System.Drawing.Point(262, 142)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(53, 13)
         Me.Label1.TabIndex = 10
@@ -172,7 +172,7 @@ Partial Class frmLogin
         'chkRememberUsername
         '
         Me.chkRememberUsername.AutoSize = True
-        Me.chkRememberUsername.Location = New System.Drawing.Point(220, 113)
+        Me.chkRememberUsername.Location = New System.Drawing.Point(264, 113)
         Me.chkRememberUsername.Name = "chkRememberUsername"
         Me.chkRememberUsername.Size = New System.Drawing.Size(126, 17)
         Me.chkRememberUsername.TabIndex = 11
@@ -183,21 +183,23 @@ Partial Class frmLogin
         '
         Me.linkLabelLanguage.Cursor = System.Windows.Forms.Cursors.Hand
         Me.linkLabelLanguage.ForeColor = System.Drawing.Color.Blue
-        Me.linkLabelLanguage.Location = New System.Drawing.Point(218, 214)
+        Me.linkLabelLanguage.Location = New System.Drawing.Point(262, 214)
         Me.linkLabelLanguage.Name = "linkLabelLanguage"
         Me.linkLabelLanguage.Size = New System.Drawing.Size(98, 28)
         Me.linkLabelLanguage.TabIndex = 12
         Me.linkLabelLanguage.Tag = ""
         Me.linkLabelLanguage.Text = "Change language:"
+        Me.linkLabelLanguage.Visible = False
         '
         'lblLanguage
         '
-        Me.lblLanguage.Location = New System.Drawing.Point(335, 214)
+        Me.lblLanguage.Location = New System.Drawing.Point(379, 214)
         Me.lblLanguage.Name = "lblLanguage"
         Me.lblLanguage.Size = New System.Drawing.Size(105, 28)
         Me.lblLanguage.TabIndex = 13
         Me.lblLanguage.Tag = "Password"
         Me.lblLanguage.Text = "language"
+        Me.lblLanguage.Visible = False
         '
         'frmLogin
         '
@@ -205,7 +207,7 @@ Partial Class frmLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
-        Me.ClientSize = New System.Drawing.Size(539, 287)
+        Me.ClientSize = New System.Drawing.Size(551, 287)
         Me.Controls.Add(Me.lblLanguage)
         Me.Controls.Add(Me.linkLabelLanguage)
         Me.Controls.Add(Me.chkRememberUsername)

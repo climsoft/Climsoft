@@ -1694,15 +1694,14 @@
 
                     Sql = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '" & usrName & "'@'localhost'; FLUSH PRIVILEGES;"
                     objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                    conn.Close()
+                    'conn.Close()
                     ' Set new privileges according to the new roles
                     If Not SetPrivileges(usrName, usrRole) Then Continue For
                 Next
             End With
 
-            conn.Close()
             populateDataGrid()
-
+            conn.Close()
             MsgBox("User privileges refreshed")
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -1733,6 +1732,14 @@
             objCmd.ExecuteNonQuery()
 
         ElseIf usrRole = "ClimsoftOperator" Then
+
+
+            Sql = "GRANT SELECT ON *.* TO '" & txtUserName.Text & "'@'localhost';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
+
             'Privileges on operational CLIMSOFT V4 database
             Sql = "GRANT FILE ON *.* TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
@@ -1790,6 +1797,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".seq_hour TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON " & dbnme & ".regkeys TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -1912,6 +1925,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_hour TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.regkeys TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2037,6 +2056,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".seq_hour TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON " & dbnme & ".regkeys TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2143,6 +2168,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_hour TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.regkeys TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2255,6 +2286,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".seq_hour TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON " & dbnme & ".regkeys TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2365,6 +2402,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_hour TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.regkeys TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2492,6 +2535,11 @@
             'execute command
             objCmd.ExecuteNonQuery()
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".qc_interelement_2 TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_hour TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
@@ -2625,6 +2673,11 @@
             'execute command
             objCmd.ExecuteNonQuery()
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.qc_interelement_2 TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_hour TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
@@ -2903,6 +2956,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".seq_hour TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON " & dbnme & ".regkeys TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2924,10 +2983,6 @@
             'execute command
             objCmd.ExecuteNonQuery()
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".paperarchive TO '" & usrName & "';"
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-            'execute command
-            objCmd.ExecuteNonQuery()
-            Sql = "GRANT ALL PRIVILEGES ON " & dbnme & ".inventory_output TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
@@ -2981,6 +3036,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_hour TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.regkeys TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -3005,10 +3066,6 @@
             'execute command
             objCmd.ExecuteNonQuery()
             Sql = "GRANT CREATE,DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.tblproducts TO '" & usrName & "';"
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-            'execute command
-            objCmd.ExecuteNonQuery()
-            Sql = "GRANT ALL PRIVILEGES ON mariadb_climsoft_test_db_v4.inventory_output TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
@@ -3048,6 +3105,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".seq_hour TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON " & dbnme & ".regkeys TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -3106,6 +3169,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_hour TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.regkeys TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -3192,6 +3261,54 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
+            '10. Inventory
+        ElseIf usrRole = "ClimsoftInventory" Then
+            'Privileges on operational CLIMSOFT V4 database
+            Sql = "GRANT FILE ON *.* TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".regkeys TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".climsoftusers TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".station TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".obselement TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".observationfinal TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT SELECT ON " & dbnme & ".language_translation TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
+            Sql = "GRANT CREATE,SELECT,INSERT,UPDATE ON " & dbnme & ".tblproducts TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+            Sql = "GRANT ALL PRIVILEGES ON " & dbnme & ".inventory_output TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
         End If
 
         'Flush privileges
