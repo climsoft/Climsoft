@@ -78,7 +78,7 @@ Public Class formAWSRealTime
         load_Indicators()
         Timer1.Start()
         'Timer2.Start()
-
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub cmdServers_Click(sender As Object, e As EventArgs) Handles cmdServers.Click
@@ -134,7 +134,7 @@ Public Class formAWSRealTime
         ShowPanel(pnlMsgEncoding, "Message Coding Settings")
     End Sub
 
-    Private Sub ProgressBar1_Click(sender As Object, e As EventArgs) Handles ProgressBar1.Click
+    Private Sub ProgressBar1_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -556,11 +556,11 @@ Err:
         PopulateForm("mss", txtmssNavigator, rec)
     End Sub
 
-    Private Sub pnlDataStructures_Paint(sender As Object, e As PaintEventArgs) Handles pnlDataStructures.Paint
+    Private Sub pnlDataStructures_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles grpStructures1.Enter
+    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -760,7 +760,7 @@ Err:
         lst.Refresh()
     End Sub
 
-    Private Sub cmbExistingStructures_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbExistingStructures.SelectedIndexChanged
+    Private Sub cmbExistingStructures_SelectedIndexChanged(sender As Object, e As EventArgs)
         Try
             SetDataSet("aws_structures")
 
@@ -785,7 +785,7 @@ Err:
         '        MsgBox(Err.Number & " " & Err.Description)
     End Sub
 
-    Private Sub cmdCreate_Click(sender As Object, e As EventArgs) Handles cmdCreate.Click
+    Private Sub cmdCreate_Click(sender As Object, e As EventArgs)
         'On Error GoTo Err
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
@@ -823,19 +823,19 @@ Err:
 
         Try
 
-            sql0 = "CREATE TABLE `" & txtStrName.Text & "` " & _
-                   "( " & _
-                    "`Cols` INT NOT NULL, " & _
-                    "`Element_abbreviation` VARCHAR(20) NULL DEFAULT NULL, " & _
-                    "`Element_Name` VARCHAR(20) NULL DEFAULT NULL, " & _
-                    "`Element_Details` VARCHAR(25) NULL DEFAULT NULL, " & _
-                    "`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
-                    "`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
-                    "`unit` VARCHAR(15) NULL DEFAULT NULL, " & _
-                    "`lower_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
-                    "`upper_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
-                    "`obsv` VARCHAR(25) NULL DEFAULT NULL, " & _
-                    "UNIQUE KEY `identification` (`Cols`) " & _
+            sql0 = "CREATE TABLE `" & txtStrName.Text & "` " &
+                   "( " &
+                    "`Cols` INT NOT NULL, " &
+                    "`Element_abbreviation` VARCHAR(20) NULL DEFAULT NULL, " &
+                    "`Element_Name` VARCHAR(20) NULL DEFAULT NULL, " &
+                    "`Element_Details` VARCHAR(25) NULL DEFAULT NULL, " &
+                    "`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL, " &
+                    "`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL, " &
+                    "`unit` VARCHAR(15) NULL DEFAULT NULL, " &
+                    "`lower_limit` VARCHAR(10) NULL DEFAULT NULL, " &
+                    "`upper_limit` VARCHAR(10) NULL DEFAULT NULL, " &
+                    "`obsv` VARCHAR(25) NULL DEFAULT NULL, " &
+                    "UNIQUE KEY `identification` (`Cols`) " &
                  ") COLLATE='utf8_general_ci';"
 
             comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
@@ -858,7 +858,7 @@ Err:
         '        MsgBox(Err.Number & " : " & Err.Description)
     End Sub
 
-    Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
+    Private Sub cmdUpdate_Click(sender As Object, e As EventArgs)
         'MsgBox(Strings.Right(txtRecNo.Text, 1))
         Try
             Dim recs As Integer
@@ -871,7 +871,7 @@ Err:
 
     End Sub
 
-    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+    Private Sub cmdDelete_Click(sender As Object, e As EventArgs)
         Try
             If Not IsNumeric(Strings.Right(lblRecords.Text, 1)) Then ' No data structure selected
                 MsgBox("Nothing to delete")
@@ -1063,7 +1063,7 @@ Err:
     End Sub
 
 
-    Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
+    Private Sub cmdSave_Click(sender As Object, e As EventArgs)
         'Log_Errors("Error Testing")
         ' Save Changes made on Processing parameters
         load_PressingParameters("dpupdate")
@@ -1399,7 +1399,7 @@ Err:
 
         FileOpen(30, fl, OpenMode.Input)
 
-        Dim dts(1000), subs(1000), Tdone, Tsubs, subst, yy, mm, dd, hh,mn As String
+        Dim dts(1000), subs(1000), Tdone, Tsubs, subst, yy, mm, dd, hh, mn As String
 
         ' Load the subsets records from an output file into arrays
         Kount = 0
@@ -1684,14 +1684,8 @@ Err:
                         ' Improved FTP method that uses WinSCP commands and works even in Filezilla servers
                         Print(1, "open FTP://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
                         Print(1, "cd " & flder & Chr(13) & Chr(10))
-                        'Print(1, "asc" & Chr(13) & Chr(10))
 
-                        ' open FTP: //awsinam:aws#99@aws.inam.gov.mz
-                        'cd /
-                        'cd / Mapulanguene
-                        'get *20220530*
-                        'Close()
-                        'Exit
+
                     End If
 
                     ' Where file prefix is used
@@ -1771,35 +1765,22 @@ Err:
             FileClose(3)
 
             ' Execute the batch file to transfer the aws data file from aws server to a local folder
+
+            'FTP connection time out period Settings 
             Dim Twait As Long
 
             If txtTimeout.Text = "999" Then
                 Twait = -1 ' No timeout period
             Else
-                Twait = Val(txtTimeout.Text) * 1000 ' Time out period in millisecond
+                Twait = Val(txtTimeout.Text) * 1000 ' Time out period in milliseconds
             End If
+
             'Shell(ftpbatch, vbMinimizedNoFocus)
             Interaction.Shell(ftpbatch, vbMinimizedNoFocus, Wait:=True, Timeout:=Twait)
 
             If ftpmethod = "get" Then
-                '' Cause some delay to allow ftp file transfer before the processing starts.
-                'Dim Cdate1 As Date
-                'Dim tot As Integer
-                'Dim timeout As Integer
-                Dim dat As String
 
-                'Cdate1 = Now() '& " " & Time
-                'tot = 0
-                'timeout = CLng(txtTimeout.Text)
-                'With ProgressBar1
-                '    .Visible = True
-                '    .Maximum = timeout ' 60
-                '    Do While tot < timeout
-                '        tot = DateDiff("s", Cdate1, Now())
-                '        .Value = tot
-                '    Loop
-                '    .Visible = False
-                'End With
+                Dim dat As String
 
                 If Len(flprefix) > 0 Then
 
@@ -1830,7 +1811,6 @@ Err:
                 lstInputFiles.Items.Add(System.IO.Path.GetFileName(ftpfile))
                 lstInputFiles.Refresh()
                 txtInputServer.Refresh()
-
 
             Else
                 'txtOutputServer.Text = ftp_host
@@ -1935,15 +1915,12 @@ Err:
             Drv = Strings.Left(Drv, Len(Drv) - 1)
 
             ftpscript = Lflder & "\ftp_putFiles.txt"
-            'ftpscript = "ftp_put.txt"
 
-            'sql = "SELECT * FROM aws_mss"
             sql = "SELECT * FROM aws_mss where foldertype = 'binary';"
 
             rf = GetDataSet("aws_mss", sql)
             If rf.Tables("aws_mss").Rows.Count = 0 Then
                 Log_Errors("No Message Switch available")
-                'Return False
             Else
                 With rf.Tables("aws_mss") ' Only one message switch. Get its details
                     ftp_host = .Rows(0).Item("ftpId")
@@ -1955,38 +1932,27 @@ Err:
             End If
             binFile = Strings.Replace(fl, "tmp", "f") ' Create temporary binary file for convinience of uploading to MSS
             FileOpen(111, ftpscript, OpenMode.Output)
-            'If ftpmode = "psftp" Then Print(2, "cd " & Rflder & Chr(13) & Chr(10))
+
             If ftpmode = "FTP" Then
-                'Print(111, "open " & ftp_host & Chr(13) & Chr(10))
                 Print(111, "open ftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
-                'Print(111, usr & Chr(13) & Chr(10))
-                'Print(111, pwd & Chr(13) & Chr(10))
             ElseIf ftpmode = "SFTP" Then
                 Print(111, "open sftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
             End If
             Print(111, "cd " & Rflder & Chr(13) & Chr(10))
             Print(111, "bin" & Chr(13) & Chr(10))
-            'Print(111, "quote PASV" & Chr(13) & Chr(10))
             Print(111, "put" & " " & fl & Chr(13) & Chr(10))
-            'Print(111, "rename" & " " & fl & " " & binFile & Chr(13) & Chr(10))
             Print(111, "mv" & " " & fl & " " & binFile & Chr(13) & Chr(10))
-            'Print(111, "bye" & Chr(13) & Chr(10))
             Print(111, "close" & Chr(13) & Chr(10))
             Print(111, "exit" & Chr(13) & Chr(10))
             FileClose(111)
 
-            '        ' Create batch file to execute FTP script
+            'Create batch file to execute FTP script
             ftpbatch = Lflder & "\ftp_putFiles.bat"
 
             FileOpen(112, ftpbatch, OpenMode.Output)
-
             Print(112, "echo off" & Chr(13) & Chr(10))
             Print(112, Drv & Chr(13) & Chr(10))
             Print(112, "CD " & Lflder & Chr(13) & Chr(10))
-            'If ftpmode = "FTP" Then Print(112, ftpmode & " -v -s:ftp_put.txt" & Chr(13) & Chr(10))
-            'If ftpmode = "PSFTP" Then Print(112, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_put.txt" & Chr(13) & Chr(10))
-            'Print(112, "echo on" & Chr(13) & Chr(10))
-            'Print(112, "EXIT" & Chr(13) & Chr(10))
             Print(112, Chr(34) & Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /ini=nul /script=" & Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
             Print(112, "echo on" & Chr(13) & Chr(10))
             Print(112, "close" & Chr(13) & Chr(10))
@@ -1995,43 +1961,18 @@ Err:
             FileClose(112)
 
             ' Execute the batch file to transfer the aws data file from aws server to a local folder
-            'Shell(ftpbatch, vbMinimizedNoFocus)
             Interaction.Shell(ftpbatch, vbMinimizedNoFocus, Wait:=True)
 
             txtOutputServer.Text = ftp_host
             txtOutputFolder.Text = Rflder
 
             ' List the processed output file
-            'lstOutputFiles.Items.Add(System.IO.Path.GetFileName(fl))
             lstOutputFiles.Items.Add(System.IO.Path.GetFileName(binFile))
             txtOutputServer.Refresh()
             txtOutputFolder.Refresh()
             lstOutputFiles.Refresh()
 
             Return True
-
-            'Dim oScript As Object
-            'FileOpen(111, scriptfl, OpenMode.Output)
-
-            'If ftpmode = "psftp" Then PrintLine(111, "cd " & Lflder)
-            'If ftpmode = "FTP" Then
-            '    PrintLine(111, "open " & ftp_host & Chr(13) & Chr(10))
-            '    PrintLine(111, usr)
-            '    PrintLine(111, pwd)
-            '    PrintLine(111, "cd " & Rflder)
-            '    PrintLine(111, "bin")
-            'End If
-            'PrintLine(111, "put" & " " & fl)
-            'PrintLine(111, "bye")
-            'FileClose(111)
-            'Dim strCMD As String
-            'strCMD = "ftp.exe -i -s: " & scriptfl ' C:\ftpCommand.ftp"
-            '' create the temperory file to store the output generated after executing the FTP command 
-            'Dim strTempFile As String
-            'strTempFile = Lflder & "\ftpOutput.txt" '"C:\ftpOutput.txt"
-            '' call the command promt control to execute the delete operation
-
-            'Call Shell("cmd.exe /c " & strCMD & " > " & strTempFile, 0, True)
 
         Catch ex As Exception
             Log_Errors(ex.Message & " at FTP_put")
@@ -2258,11 +2199,11 @@ Err:
 
     End Function
 
-    Private Sub optStart_CheckedChanged(sender As Object, e As EventArgs) Handles optStart.CheckedChanged
+    Private Sub optStart_CheckedChanged(sender As Object, e As EventArgs)
         'If optStart.Checked = True Then Start_Process()
     End Sub
 
-    Private Sub optStart_Click(sender As Object, e As EventArgs) Handles optStart.Click
+    Private Sub optStart_Click(sender As Object, e As EventArgs)
         'If optStart.Checked = True Then Start_Process()
 
         Start_Process()
@@ -2365,19 +2306,19 @@ Err:
 
                 FileOpen(21, fl, OpenMode.Append)
 
-                    If Val(obs) < Val(L_limit) Then limittype = "Lower Limit"
-                    If Val(obs) > Val(U_limit) Then limittype = "Upper Limit"
+                If Val(obs) < Val(L_limit) Then limittype = "Lower Limit"
+                If Val(obs) > Val(U_limit) Then limittype = "Upper Limit"
 
-                    errdata = stn & "," & elms & "," & dts & "," & obs & "," & limittype
+                errdata = stn & "," & elms & "," & dts & "," & obs & "," & limittype
 
-                    PrintLine(21, errdata)
-                    FileClose(21)
+                PrintLine(21, errdata)
+                FileClose(21)
 
-                    txtQC.Text = "QC Errors saved In file: " & fl
-                    txtQC.Refresh()
+                txtQC.Text = "QC Errors saved In file: " & fl
+                txtQC.Refresh()
 
-                    'Log_Errors("QC Errors saved in file: " & fl)
-                End If
+                'Log_Errors("QC Errors saved in file: " & fl)
+            End If
             'End If
         Catch ex As Exception
             FileClose(21)
@@ -3702,7 +3643,7 @@ Err:
 
         'MsgBox(byt)
 
-        Dim fileStream As FileStream = _
+        Dim fileStream As FileStream =
             New FileStream(fileName, FileMode.Create)
         Try
             Dim kounts As Long
@@ -3845,7 +3786,7 @@ Err:
 
 
 
-    Private Sub DataGridViewStructures_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewStructures.CellEndEdit
+    Private Sub DataGridViewStructures_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
         Dim col, rw As Integer
         Dim tbl, dat As String
         Dim recUpdate As New dataEntryGlobalRoutines
@@ -3906,7 +3847,7 @@ Err:
 
 
 
-    Private Sub DataGridViewStructures_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridViewStructures.KeyDown
+    Private Sub DataGridViewStructures_KeyDown(sender As Object, e As KeyEventArgs)
         Dim tbl As String
         Dim recno As Integer
         Try
@@ -4032,7 +3973,7 @@ Err:
         End Try
     End Function
 
-    Private Sub optStop_CheckedChanged(sender As Object, e As EventArgs) Handles optStop.CheckedChanged
+    Private Sub optStop_CheckedChanged(sender As Object, e As EventArgs)
         Process_Status("Process Stopped")
     End Sub
 

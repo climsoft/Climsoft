@@ -6,7 +6,7 @@
     Dim ds, dsSequencer, dsValueLimits As New DataSet
     Dim sql, obsValue, elemCode, sqlValueLimits, valUpperLimit, valLowerLimit As String
     Dim FldName As New dataEntryGlobalRoutines
-    Dim DBT, WBT, DPT, RH As String
+    Dim DBT, WBT, DPT, RH, PPP, GPM, ELV As String
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
         'MsgBox(inc)
@@ -346,6 +346,7 @@
             Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
             Dim SQL_last_record, lastRecYear, lastRecMonth, lastRecDay, lastRecHour, stn As String
             Dim lastRec, nextRec As Date
+            Dim hh As Integer
 
             SQL_last_record = "SELECT stationId,yyyy,mm,dd,hh, signature,entryDatetime from form_synoptic2_tdcf WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_synoptic2_tdcf);"
             dsLastDataRecord.Clear()
@@ -370,45 +371,22 @@
             End If
 
             ' Sequence the records for next entry by selecting the next hour
-
             lastRec = DateSerial(lastRecYear, lastRecMonth, lastRecDay) & " " & lastRecHour & ":00:00"
 
-            nextRec = DateAdd("h", 3, lastRec)
-            'nextRec = DateAdd("h", 1, lastRec)
+            nextRec = lastRec
+            If DateAdd_Hour(nextRec, hh) Then
+                txtYear.Text = DateAndTime.Year(nextRec)
+                cboMonth.Text = DateAndTime.Month(nextRec)
+                cboDay.Text = DateAndTime.Day(nextRec)
+                cboHour.Text = hh
+            Else
+                cboHour.Text = hh
+            End If
 
-            txtYear.Text = DateAndTime.Year(nextRec)
-            cboMonth.Text = DateAndTime.Month(nextRec)
-            cboDay.Text = DateAndTime.Day(nextRec)
-            cboHour.Text = DateAndTime.Hour(nextRec)
-            ' Sequencer code Ends there
-
-            ''Clear textboxes for observation values
-            ''Observation values range from column 6 i.e. column index 5
-            'For m = 5 To (valueFldsTotal + 4)
-            '    For Each ctl In Me.Controls
-            '        If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-            '            ctl.Text = ""
-            '        End If
-            '    Next ctl
-            'Next m
-
-            ''Clear textboxes for observation flags
-            ''Observation flags range from column 30 i.e. column index 29 to column 53 i.e. column index 52
-            'For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
-            '    For Each ctl In Me.Controls
-            '        If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-            '            ctl.Text = ""
-            '        End If
-            '    Next ctl
-            'Next m
-
-            'Set record index to last record
-            'If RecordExist() Then MsgBox("Record Exist")
             inc = maxrows
 
             'Display record position in record navigation Text Box
             recNumberTextBox.Text = "Record " & maxrows + 1 & " of " & maxrows + 1
-            'txtVal_Elem101Field004.Focus()
             txtbox1Focus()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -913,27 +891,69 @@
                         End If
                     End If
 
-                    ' Compute Dew point temperature and Relative humidity
                     If Strings.Left(Me.ActiveControl.Name, 14) = "txtVal_Elem101" Then DBT = Me.ActiveControl.Text
+                    If Strings.Left(Me.ActiveControl.Name, 14) = "txtVal_Elem106" Then PPP = Me.ActiveControl.Text
                     If Strings.Left(Me.ActiveControl.Name, 14) = "txtVal_Elem102" Then
                         WBT = Me.ActiveControl.Text
                         For Each ctl In Me.Controls
+                            If Strings.Left(Me.ActiveControl.Name, 14) = "txtVal_Elem101" Then DBT = Me.ActiveControl.Text
                             If Strings.Left(ctl.name, 14) = "txtVal_Elem103" Then
                                 'Compute Dew point
                                 If IsNumeric(DBT) And IsNumeric(WBT) Then
                                     DPT = FldName.calculateDewpoint(Val(DBT) / 10, Val(WBT) / 10)
-                                    ctl.text = Val(DPT) * 10
+
+                                    ' In case the computed DPT becomes higher than WBT the DPT text box is not populated 
+                                    If DPT <= WBT / 10 Then
+                                        ctl.text = Val(DPT) * 10
+                                    Else
+                                        ctl.text = ""
+                                    End If
+
                                 End If
                             ElseIf Strings.Left(ctl.name, 14) = "txtVal_Elem105" Then
-                                'Compute Dew point
+
+                                'Compute Relative Humidity
                                 If IsNumeric(DBT) And IsNumeric(DPT) Then
-                                    RH = FldName.calculateRH(DPT, Val(DBT) / 10)
-                                    ctl.text = RH
+                                    If DPT <= WBT / 10 Then ' Compute RH only if WBT is higher DPT
+                                        RH = FldName.calculateRH(DPT, Val(DBT) / 10)
+                                        ctl.text = RH
+                                    Else
+                                        ctl.text = ""
+                                    End If
                                 End If
 
                             End If
                         Next
                     End If
+
+                    ' Compute Geopopential Height
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 14) = "txtVal_Elem106" Then PPP = ctl.text
+
+                        If Strings.Left(ctl.name, 14) = "txtVal_Elem101" Then
+                            DBT = ctl.text
+
+                            ELV = Station_Elv(cboStation.SelectedValue) ' Get Elevation
+
+                            Dim ctlGPM As Control
+                            For Each ctlGPM In Me.Controls
+                                If Strings.Left(ctlGPM.Name, 14) = "txtVal_Elem185" Then
+                                    If IsNumeric(DBT) And IsNumeric(PPP) And IsNumeric(ELV) Then
+                                        GPM = FldName.calculateGeopotential(Val(PPP) / 10, Val(DBT) / 10, Val(ELV), 850)
+                                        ctlGPM.Text = GPM
+                                    Else
+                                        ctlGPM.Text = ""
+                                    End If
+                                End If
+                            Next
+
+                            ' Clear M in flag box if captured
+                            Dim flgctl As Control
+                            For Each flgctl In Me.Controls
+                                If Strings.Left(flgctl.Name, 10) = "txtFlag185" Then flgctl.Text = ""
+                            Next
+                        End If
+                    Next
 
                 ElseIf Me.ActiveControl.Name = "txtYear" Then
                     'Check for numeric
@@ -1000,8 +1020,7 @@
                     End If
                 End If
             ElseIf (e.KeyCode = 33 Or e.KeyCode = 34) And Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" Then
-                'shiftEntries(e.KeyCode)
-                FldName.shiftEntries(e.KeyCode, Me, "form_synoptic2_tdcf")
+                shiftEntries(e.KeyCode)
             End If
         Catch ex As Exception
 
@@ -1595,7 +1614,6 @@
             End If
         Next ctl
     End Sub
-
     'Sub shiftEntries(kycode As Integer)
     '    Select Case kycode
     '        Case 34 ' Insert
@@ -1621,112 +1639,193 @@
     '        End If
     '    Next
     'End Sub
+    Sub shiftEntries(kycode As Integer)
+        Select Case kycode
+            Case 34 ' Insert
+                insertValues()
+                shiftFlags()
+            Case 33 ' Delete
+                deleteValues()
+                shiftFlags()
+        End Select
 
-    'Sub FlagValue(txtCTL As Control, txt As String, flg As String)
-    '    Dim flgCTL As Control
+    End Sub
+    Sub shiftFlags()
+        Dim flagIndexDiff As Integer
+        Dim ctls As Control
+        Dim txt, flg As String
 
-    '    For Each flgCTL In Me.Controls
-    '        If flgCTL.Name = flg Then
-    '            If txt = "" Then
-    '                If txtCTL.Enabled Then flgCTL.Text = "M"
-    '            Else
-    '                flgCTL.Text = ""
-    '            End If
-    '        End If
-    '    Next
+        If Not totalCTLS(flagIndexDiff) Then Exit Sub
+        For Each ctls In Me.Controls
+            If Strings.Left(ctls.Name, 6) = "txtVal" Then
+                txt = ctls.Text
+                flg = "txt" & "Flag" & Strings.Mid(ctls.Name, 12, 3) & "Field" & Format(Val(Strings.Right(ctls.Name, 3)) + flagIndexDiff, "000")
+                FlagValue(ctls, txt, flg)
+            End If
+        Next
+    End Sub
 
-    'End Sub
-    ''Sub NextBox(bx As String, ByRef nxtbox As String)
-    ''    Dim kount As Integer
-    ''    sql = "select * from form_synoptic2_tdcf;"
+    Sub FlagValue(txtCTL As Control, txt As String, flg As String)
+        Dim flgCTL As Control
 
-    ''    conn.Open()
-    ''    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-    ''    ds.Clear()
-    ''    da.Fill(ds, "flds")
-    ''    conn.Close()
+        For Each flgCTL In Me.Controls
+            If flgCTL.Name = flg Then
+                If txt = "" Then
+                    If txtCTL.Enabled Then flgCTL.Text = "M"
+                Else
+                    flgCTL.Text = ""
+                End If
+            End If
+        Next
 
-    ''    With ds.Tables("flds")
-    ''        For kount = 5 To .Columns.Count - 1
-    ''            If .Columns(kount).ColumnName = bx Then
-    ''                nxtbox = .Columns(kount + 1).ColumnName
-    ''                nxtbox = "txt" & nxtbox & "Field" & Strings.Format(kount + 1, "000")
-    ''                Exit For
-    ''            End If
-    ''        Next
-
-    ''    End With
-
-    ''End Sub
-
-    'Sub insertValues()
-    '    Dim ActvCTL, nxtCTL As Control
+    End Sub
+    'Sub NextBox(bx As String, ByRef nxtbox As String)
     '    Dim kount As Integer
-    '    Dim txt1, txt2 As String
-
-    '    ActvCTL = Me.ActiveControl
-    '    txt1 = ActvCTL.Text
-    '    If totalCTLS(kount) Then
-    '        ActvCTL.Text = ""
-    '        For i = 0 To kount - 2
-    '            nxtCTL = GetNextControl(ActvCTL, True)
-    '            If nxtCTL.Enabled = True Then
-    '                txt2 = nxtCTL.Text
-    '                nxtCTL.Text = txt1
-    '                If Strings.Left(nxtCTL.Name, 6) <> "txtVal" Then Exit For
-    '                txt1 = txt2
-    '            End If
-    '            'MsgBox(nxtCTL.Name)
-    '            ActvCTL = nxtCTL
-    '        Next
-    '    End If
-    'End Sub
-    'Sub deleteValues()
-    '    Dim ActvCTL, nxtCTL As Control
-    '    Dim kount As Integer
-
-    '    ActvCTL = Me.ActiveControl
-
-    '    If totalCTLS(kount) Then
-    '        For i = 0 To kount - 1
-    '            nxtCTL = GetNextControl(ActvCTL, True)
-    '            Do While nxtCTL.Enabled = False
-    '                nxtCTL = GetNextControl(nxtCTL, True)
-    '            Loop
-
-    '            If Strings.Left(nxtCTL.Name, 6) <> "txtVal" Then
-    '                ActvCTL.Text = ""
-    '                Exit For
-    '            Else
-    '                ActvCTL.Text = nxtCTL.Text
-    '                ActvCTL = nxtCTL
-    '            End If
-
-    '        Next
-    '    End If
-    'End Sub
-    'Function totalCTLS(ByRef kount As Integer) As Boolean
-    '    kount = 0
-
     '    sql = "select * from form_synoptic2_tdcf;"
 
-    '    Try
-    '        conn.Open()
-    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-    '        ds.Clear()
-    '        da.Fill(ds, "flds")
-    '        conn.Close()
+    '    conn.Open()
+    '    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+    '    ds.Clear()
+    '    da.Fill(ds, "flds")
+    '    conn.Close()
 
-    '        With ds.Tables("flds")
-    '            For i = 5 To .Columns.Count - 1
-    '                If Strings.Left(.Columns(i).ColumnName, 8) = "Val_Elem" Then
-    '                    kount = kount + 1
-    '                End If
-    '            Next
-    '        End With
-    '        Return True
-    '    Catch ex As Exception
-    '        Return False
-    '    End Try
-    'End Function
+    '    With ds.Tables("flds")
+    '        For kount = 5 To .Columns.Count - 1
+    '            If .Columns(kount).ColumnName = bx Then
+    '                nxtbox = .Columns(kount + 1).ColumnName
+    '                nxtbox = "txt" & nxtbox & "Field" & Strings.Format(kount + 1, "000")
+    '                Exit For
+    '            End If
+    '        Next
+
+    '    End With
+
+    'End Sub
+
+    Sub insertValues()
+        Dim ActvCTL, nxtCTL As Control
+        Dim kount As Integer
+        Dim txt1, txt2 As String
+
+        ActvCTL = Me.ActiveControl
+        txt1 = ActvCTL.Text
+        If totalCTLS(kount) Then
+            ActvCTL.Text = ""
+            For i = 0 To kount - 2
+                nxtCTL = GetNextControl(ActvCTL, True)
+                If nxtCTL.Enabled = True Then
+                    txt2 = nxtCTL.Text
+                    nxtCTL.Text = txt1
+                    If Strings.Left(nxtCTL.Name, 6) <> "txtVal" Then Exit For
+                    txt1 = txt2
+                End If
+                'MsgBox(nxtCTL.Name)
+                ActvCTL = nxtCTL
+            Next
+        End If
+    End Sub
+    Sub deleteValues()
+        Dim ActvCTL, nxtCTL As Control
+        Dim kount As Integer
+
+        ActvCTL = Me.ActiveControl
+
+        If totalCTLS(kount) Then
+            For i = 0 To kount - 1
+                nxtCTL = GetNextControl(ActvCTL, True)
+                Do While nxtCTL.Enabled = False
+                    nxtCTL = GetNextControl(nxtCTL, True)
+                Loop
+
+                If Strings.Left(nxtCTL.Name, 6) <> "txtVal" Then
+                    ActvCTL.Text = ""
+                    Exit For
+                Else
+                    ActvCTL.Text = nxtCTL.Text
+                    ActvCTL = nxtCTL
+                End If
+
+            Next
+        End If
+    End Sub
+    Function totalCTLS(ByRef kount As Integer) As Boolean
+        kount = 0
+
+        sql = "select * from form_synoptic2_tdcf;"
+
+        Try
+            conn.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "flds")
+            conn.Close()
+
+            With ds.Tables("flds")
+                For i = 5 To .Columns.Count - 1
+                    If Strings.Left(.Columns(i).ColumnName, 8) = "Val_Elem" Then
+                        kount = kount + 1
+                    End If
+                Next
+            End With
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Function Station_Elv(stnid As String) As String
+
+        Try
+            sql = "select elevation from station where stationId = '" & stnid & "';"
+            conn.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "elevation")
+            conn.Close()
+
+            Return ds.Tables("elevation").Rows(0).Item(0)
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+    Function DateAdd_Hour(ByRef nextRec As Date, ByRef hh As Integer) As Boolean
+        Dim hr, SeqMax As Integer
+        Try
+            hr = Int(DateAndTime.Hour(nextRec))
+
+            sql = "select hh from seq_hour;"
+            conn.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "hours")
+            conn.Close()
+
+            With ds.Tables("hours")
+                SeqMax = .Rows.Count
+
+                If SeqMax = 0 Then
+                    hh = Hour(nextRec)
+                    nextRec = DateAdd("d", 1, nextRec)
+                    Return True
+                Else
+                    For i = 0 To SeqMax - 1
+                        If Int(.Rows(i).Item(0)) = hr Then
+                            If i < SeqMax - 1 Then
+                                hh = Int(.Rows(i + 1).Item(0))
+                            Else
+                                hh = Int(.Rows(0).Item(0))
+                                nextRec = DateAdd("d", 1, nextRec)
+                            End If
+                            Exit For
+                        End If
+                    Next
+                End If
+            End With
+
+            Return True
+        Catch ex As Exception
+            conn.Close()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
 End Class

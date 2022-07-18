@@ -28,6 +28,7 @@ Partial Class frmMainMenu
         Me.mnuAccessoriesDewPointRH = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAccessoriesXMLOutput = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserRecordsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuInventory = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProducts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuQC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAdministration = New System.Windows.Forms.ToolStripMenuItem()
@@ -50,6 +51,7 @@ Partial Class frmMainMenu
         Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormHourlyTimeSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FormSynopticTimeSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSElementsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSStationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -119,7 +121,7 @@ Partial Class frmMainMenu
         '
         'mnuAccessories
         '
-        Me.mnuAccessories.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAccessoriesDewPointRH, Me.mnuAccessoriesXMLOutput, Me.UserRecordsToolStripMenuItem1})
+        Me.mnuAccessories.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAccessoriesDewPointRH, Me.mnuAccessoriesXMLOutput, Me.UserRecordsToolStripMenuItem1, Me.MnuInventory})
         Me.mnuAccessories.Name = "mnuAccessories"
         Me.mnuAccessories.Size = New System.Drawing.Size(90, 23)
         Me.mnuAccessories.Tag = "Accessories"
@@ -128,22 +130,28 @@ Partial Class frmMainMenu
         'mnuAccessoriesDewPointRH
         '
         Me.mnuAccessoriesDewPointRH.Name = "mnuAccessoriesDewPointRH"
-        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(274, 24)
+        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(275, 24)
         Me.mnuAccessoriesDewPointRH.Tag = "Calculation_of_dew_Point_and_RH"
         Me.mnuAccessoriesDewPointRH.Text = "Calculation of dew Point and RH"
         '
         'mnuAccessoriesXMLOutput
         '
         Me.mnuAccessoriesXMLOutput.Name = "mnuAccessoriesXMLOutput"
-        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(274, 24)
+        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(275, 24)
         Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
         '
         'UserRecordsToolStripMenuItem1
         '
         Me.UserRecordsToolStripMenuItem1.Name = "UserRecordsToolStripMenuItem1"
-        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(274, 24)
+        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(275, 24)
         Me.UserRecordsToolStripMenuItem1.Text = "User Records"
+        '
+        'MnuInventory
+        '
+        Me.MnuInventory.Name = "MnuInventory"
+        Me.MnuInventory.Size = New System.Drawing.Size(275, 24)
+        Me.MnuInventory.Text = "Inventory"
         '
         'mnuProducts
         '
@@ -234,16 +242,16 @@ Partial Class frmMainMenu
         '
         'mnuTools
         '
-        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem, Me.ConfigurationForTDCFToolStripMenuItem})
+        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.FormSynopticTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem, Me.ConfigurationForTDCFToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
-        Me.mnuTools.Size = New System.Drawing.Size(52, 23)
+        Me.mnuTools.Size = New System.Drawing.Size(53, 23)
         Me.mnuTools.Tag = "Tools"
         Me.mnuTools.Text = "Tools"
         '
         'mnuToolsModifyForms
         '
         Me.mnuToolsModifyForms.Name = "mnuToolsModifyForms"
-        Me.mnuToolsModifyForms.Size = New System.Drawing.Size(242, 24)
+        Me.mnuToolsModifyForms.Size = New System.Drawing.Size(250, 24)
         Me.mnuToolsModifyForms.Tag = "Modify_Forms"
         Me.mnuToolsModifyForms.Text = "Modify Forms"
         Me.mnuToolsModifyForms.Visible = False
@@ -251,21 +259,22 @@ Partial Class frmMainMenu
         'SelectLanguageToolStripMenuItem
         '
         Me.SelectLanguageToolStripMenuItem.Name = "SelectLanguageToolStripMenuItem"
-        Me.SelectLanguageToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.SelectLanguageToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.SelectLanguageToolStripMenuItem.Tag = "Select_Language"
         Me.SelectLanguageToolStripMenuItem.Text = "Select Language"
+        Me.SelectLanguageToolStripMenuItem.Visible = False
         '
         'GenerlSettingsToolStripMenuItem
         '
         Me.GenerlSettingsToolStripMenuItem.Name = "GenerlSettingsToolStripMenuItem"
-        Me.GenerlSettingsToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.GenerlSettingsToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.GenerlSettingsToolStripMenuItem.Text = "General Settings"
         '
         'SequencerConfigurationToolStripMenuItem
         '
         Me.SequencerConfigurationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HourlyToolStripMenuItem, Me.DailyToolStripMenuItem, Me.MonthlyToolStripMenuItem})
         Me.SequencerConfigurationToolStripMenuItem.Name = "SequencerConfigurationToolStripMenuItem"
-        Me.SequencerConfigurationToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.SequencerConfigurationToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.SequencerConfigurationToolStripMenuItem.Text = "Sequencer Configuration"
         '
         'HourlyToolStripMenuItem
@@ -289,33 +298,39 @@ Partial Class frmMainMenu
         'FormHourlyTimeSelectionToolStripMenuItem
         '
         Me.FormHourlyTimeSelectionToolStripMenuItem.Name = "FormHourlyTimeSelectionToolStripMenuItem"
-        Me.FormHourlyTimeSelectionToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.FormHourlyTimeSelectionToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.FormHourlyTimeSelectionToolStripMenuItem.Text = "FormHourly Time Selection"
+        '
+        'FormSynopticTimeSelectionToolStripMenuItem
+        '
+        Me.FormSynopticTimeSelectionToolStripMenuItem.Name = "FormSynopticTimeSelectionToolStripMenuItem"
+        Me.FormSynopticTimeSelectionToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
+        Me.FormSynopticTimeSelectionToolStripMenuItem.Text = "FormSynoptic Hours Setting"
         '
         'AWSToolStripMenuItem
         '
         Me.AWSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AWSElementsToolStripMenuItem, Me.AWSStationsToolStripMenuItem})
         Me.AWSToolStripMenuItem.Name = "AWSToolStripMenuItem"
-        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.AWSToolStripMenuItem.Text = "AWS"
         Me.AWSToolStripMenuItem.Visible = False
         '
         'AWSElementsToolStripMenuItem
         '
         Me.AWSElementsToolStripMenuItem.Name = "AWSElementsToolStripMenuItem"
-        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
+        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
         Me.AWSElementsToolStripMenuItem.Text = "AWS Elements"
         '
         'AWSStationsToolStripMenuItem
         '
         Me.AWSStationsToolStripMenuItem.Name = "AWSStationsToolStripMenuItem"
-        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
+        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
         Me.AWSStationsToolStripMenuItem.Text = "AWS Stations"
         '
         'ConfigurationForTDCFToolStripMenuItem
         '
         Me.ConfigurationForTDCFToolStripMenuItem.Name = "ConfigurationForTDCFToolStripMenuItem"
-        Me.ConfigurationForTDCFToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.ConfigurationForTDCFToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.ConfigurationForTDCFToolStripMenuItem.Text = "TDCF Settings"
         '
         'mnuHelp
@@ -717,4 +732,6 @@ Partial Class frmMainMenu
     Friend WithEvents EmptyKeyEntryTablesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CreateModifyKeyEntryFormToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HelpProvider1 As HelpProvider
+    Friend WithEvents FormSynopticTimeSelectionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MnuInventory As ToolStripMenuItem
 End Class

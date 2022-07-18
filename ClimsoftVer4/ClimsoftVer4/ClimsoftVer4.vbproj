@@ -610,6 +610,12 @@
     <Compile Include="frmSynopTDCF.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSynopticTimeSelection.Designer.vb">
+      <DependentUpon>frmSynopticTimeSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSynopticTimeSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmTDCFindicators.Designer.vb">
       <DependentUpon>frmTDCFindicators.vb</DependentUpon>
     </Compile>
@@ -1120,6 +1126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSynopTDCF.resx">
       <DependentUpon>frmSynopTDCF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSynopticTimeSelection.resx">
+      <DependentUpon>frmSynopticTimeSelection.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTDCFindicators.resx">
       <DependentUpon>frmTDCFindicators.vb</DependentUpon>
