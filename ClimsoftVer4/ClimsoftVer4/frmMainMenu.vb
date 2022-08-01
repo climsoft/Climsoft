@@ -98,6 +98,25 @@ Public Class frmMainMenu
                     btnMainPaperArchive.Enabled = False
                     btnMainProducts.Enabled = False
                     btnMainMetadata.Enabled = False
+
+                ElseIf usrRole = "ClimsoftInventory" Then
+                    mnuInput.Enabled = False
+                    mnuAccessoriesXMLOutput.Enabled = False
+                    UserRecordsToolStripMenuItem1.Enabled = False
+                    MnuInventory.Enabled = True
+                    mnuAdministration.Enabled = False
+                    mnuTools.Enabled = False
+                    mnuQC.Enabled = False
+                    mnuProducts.Enabled = False
+                    btnMainDataTransfer.Enabled = False
+                    btnMainSettingsAWS.Enabled = False
+                    btnMainUserManagement.Enabled = False
+                    btnMainQC.Enabled = False
+                    btnMainDataEntry.Enabled = False
+                    btnMainPaperArchive.Enabled = False
+                    btnMainProducts.Enabled = False
+                    btnMainMetadata.Enabled = False
+                    btnMainDataTransfer.Enabled = False
                 End If
             End If
 
@@ -311,4 +330,14 @@ Public Class frmMainMenu
         frmCreateEntryForm.Show()
     End Sub
 
+    Private Sub FormSynopticTimeSelectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormSynopticTimeSelectionToolStripMenuItem.Click
+        frmSynopticTimeSelection.Show()
+    End Sub
+
+    Private Sub MnuInventory_Click(sender As Object, e As EventArgs) Handles MnuInventory.Click
+        With formProductsSelectCriteria
+            .Show()
+            .lblProductType.Text = "Inventory"
+        End With
+    End Sub
 End Class

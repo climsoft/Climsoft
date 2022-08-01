@@ -126,7 +126,16 @@ Public Class frmFormUpload
                 sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
             End If
         End If
-            Try
+
+        'Create a file to save data into to be uploaded later
+        Dim fl, frmrec As String
+        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\form_2_initial_sql.csv"
+        FileOpen(122, fl, OpenMode.Output)
+
+        ' Convert path separater to SQL format
+        fl = Strings.Replace(fl, "\", "/")
+
+        Try
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
 
@@ -152,6 +161,7 @@ Public Class frmFormUpload
             flds = (ed - st) + 1 ' Total fields for the observation values
 
             'Loop through all records in dataset
+            stnId = ""
             For n = 0 To maxRows - 1
                 'Display progress of data transfer
 
@@ -165,10 +175,6 @@ Public Class frmFormUpload
                 Else
                     capturedBy = ""
                 End If
-
-                'obsVal = ""
-                'obsFlag = ""
-                'obsperiod = vbNull
 
                 If code_loc = "Vertical" Then elemCode = dss.Tables(frm_tbl).Rows(n).Item("elementId")
 
@@ -190,7 +196,6 @@ Public Class frmFormUpload
                     Else
                         obsFlag = ""
                     End If
-                    'If dss.Tables(frm_tbl).Rows(n).Item(m) = "" Then obsFlag = "M"
 
                     Select Case dataForm
                         Case "form_synoptic_2_ra1"
@@ -213,10 +218,7 @@ Public Class frmFormUpload
                             dd = (m - st) + 1
                             hh = dss.Tables(frm_tbl).Rows(n).Item("hh")
 
-
-                            'If Len(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) > 0 Then obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
                             If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then
-                                'obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
                                 If IsNumeric(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
                             Else
                                 'obsperiod = ""
@@ -232,7 +234,6 @@ Public Class frmFormUpload
 
                         Case "form_upperair1"
                             elemCode = Strings.Right(dss.Tables(frm_tbl).Columns(m).ColumnName, 3)
-                            'MsgBox(m & " " & elemCode)
                             yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
                             mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
                             dd = dss.Tables(frm_tbl).Rows(n).Item("dd")
@@ -294,14 +295,12 @@ Public Class frmFormUpload
 
                             strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                      "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
-                            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
 
-                            Try
-                                objCmd.ExecuteNonQuery()
-                            Catch x As Exception
-                                MsgBox(x.Message)
-                            End Try
-                            'Get Wind Speed values
+                            ' First save data into a text file to be uploaded later
+                            frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
+                            Print(122, frmrec)
+                            PrintLine(122)
+
                             elemCode = "111"
 
                             If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then
@@ -311,19 +310,18 @@ Public Class frmFormUpload
                                 obsVal = ""
                                 obsFlag = "M"
                             End If
-                            ''If dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2)) = "" Then obsFlag = "M"
 
                             datetimeGTS(obsDatetime)
 
-                            strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
-                                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
-                            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
+                            ''Generate SQL string for inserting data into observationinitial table
+                            'strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
+                            '         "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
-                            Try
-                                objCmd.ExecuteNonQuery()
-                            Catch x As Exception
-                                MsgBox(x.Message)
-                            End Try
+                            ' First save data into a text file to be uploaded later
+                            frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
+                            Print(122, frmrec)
+                            PrintLine(122)
+
                             Continue For
 
                         Case Else
@@ -336,42 +334,52 @@ Public Class frmFormUpload
 
                     datetimeGTS(obsDatetime)
 
-                    'Generate SQL string for inserting data into observationinitial table
-                    strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
-                        "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," _
-                        & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
-                    'MsgBox(strSQL)
-                    ' Create the Command for executing query and set its properties
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
+                    ''Generate SQL string for inserting data into observationinitial table
+                    'strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,qcTypeLog,acquisitionType,capturedBy,dataForm) " &
+                    '    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," _
+                    '    & qcStatus & ", '0'," & acquisitionType & ",'" & capturedBy & "',-1,'" & dataForm & "')"
 
-                    Try
-                        objCmd.ExecuteNonQuery()
-                    Catch x As Exception
-                        'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                        'MsgBox(x.Message)
-                        lblDataTransferProgress.Text = "Record No.: " & n + 1 & " skipped due to some errors"
-                    End Try
+                    frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
+                    Print(122, frmrec)
+                    PrintLine(122)
+
 
                 Next m
                 'Move to next record in dataset
             Next n
 
+            ' Upload form data saved into a text file
+            FileClose(122)
+
+            ' Remove the previously uploaded records that are among the selection 
+
+            ' Create sql query
+
+            strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm);"
+
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
+
+            'Execute query
+            objCmd.CommandTimeout = 0
+            objCmd.ExecuteNonQuery()
+
             If maxRows = 0 Then
                 txtDataTransferProgress1.Text = " No data found "
             Else
                 lblDataTransferProgress.ForeColor = Color.Red
-                lblDataTransferProgress.Text = "Data transfer complete !"
+                lblDataTransferProgress.Text = "Total " & maxRows & " Records Transfered" 'Data transfer complete !"
                 txtDataTransferProgress1.Text = ""
             End If
             conns.Close()
         Catch ex As Exception
+            FileClose(122)
             MsgBox(ex.Message)
             lblDataTransferProgress.ForeColor = Color.Red
             lblDataTransferProgress.Text = "Data transfer Failure !"
-            'MsgBox("Check and confirm selections")
-            'MsgBox(ex.Message)
+
             conns.Close()
         End Try
+
     End Sub
 
     Private Sub frmUploadgroundWorker_ProgressChanged(sender As Object, e As ProgressChangedEventArgs) Handles frmUploadgroundWorker.ProgressChanged
