@@ -425,28 +425,41 @@ Public Class ucrNavigation
         clsSeqDataCall.SetTableNameAndFields(strSequencerTable, arrSequencerCols)
         dtbSequencer = clsSeqDataCall.GetDataTable()
 
-        'create the select filter statement to be used for getting current sequencer row
-        Dim strFilter As String = ""
-        For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctSequencerColControls
-            If strFilter <> "" Then
-                strFilter = strFilter & " AND "
-            End If
-            strFilter = strFilter & kvpTemp.Key & " = " & Chr(39) & kvpTemp.Value.GetValue() & Chr(39)
-        Next
+        'if there are elements sequencers
+        If dtbSequencer.Rows.Count > 0 Then
+            'create the select filter statement to be used for getting current sequencer row
+            Dim strFilter As String = ""
+            For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctSequencerColControls
+                If strFilter <> "" Then
+                    strFilter = strFilter & " AND "
+                End If
+                strFilter = strFilter & kvpTemp.Key & " = " & Chr(39) & kvpTemp.Value.GetValue() & Chr(39)
+            Next
 
-        'get the current row index from the seqencer row and if exists then compute the next record
-        Dim iCurrentSequencerRow As Integer = -1
-        If strFilter <> "" Then
-            iCurrentSequencerRow = dtbSequencer.Rows.IndexOf(dtbSequencer.Select(strFilter).FirstOrDefault)
-        End If
-        'if there is still another sequencer value then increment to it
-        If iCurrentSequencerRow > -1 AndAlso iCurrentSequencerRow < dtbSequencer.Rows.Count - 1 Then
-            Dim nextSequenceRowValues As DataRow = dtbSequencer.Rows(iCurrentSequencerRow + 1)
+            'get the current row index from the seqencer row and if exists then compute the next record
+            Dim iCurrentSequencerRow As Integer = -1
+            If strFilter <> "" Then
+                iCurrentSequencerRow = dtbSequencer.Rows.IndexOf(dtbSequencer.Select(strFilter).FirstOrDefault)
+            End If
+
+            'if there is still another sequencer value then increment to it
+            'change the sequencer control values to the first sequencer value
+            Dim nextSequenceRowValues As DataRow
+            If iCurrentSequencerRow > -1 AndAlso iCurrentSequencerRow < dtbSequencer.Rows.Count - 1 Then
+                nextSequenceRowValues = dtbSequencer.Rows(iCurrentSequencerRow + 1)
+            Else
+                nextSequenceRowValues = dtbSequencer.Rows(0)
+            End If
             IncrementSequencerColControlsValues(dctSequencerColControls, nextSequenceRowValues)
         End If
 
         'if still updating. try to increment the date controls
         If ucrLinkedTableEntry.bUpdating Then
+            'change the sequencer control values to the first sequencer value
+            'If dtbSequencer.Rows.Count > 0 Then
+            'IncrementSequencerColControlsValues(dctSequencerColControls, dtbSequencer.Rows(0))
+            'End If
+            'increment date controls
             IncrementDateValues(ucrYear, ucrMonth, ucrDay)
         End If
     End Sub
@@ -469,7 +482,7 @@ Public Class ucrNavigation
     ''' Increments the date controls.
     ''' This subroutine is recursive until 'Add New' state s achieved
     ''' </summary>
-    ''' <param name="ucrYear">Nul NOT allowed.</param>
+    ''' <param name="ucrYear">Null NOT allowed.</param>
     ''' <param name="ucrMonth">Null allowed. If null it's increment will be ignored</param>
     ''' <param name="ucrDay">Null allowed. If null it's increment will be ignored</param>
     Private Sub IncrementDateValues(ucrYear As ucrYearSelector, ucrMonth As ucrMonth, ucrDay As ucrDay)
