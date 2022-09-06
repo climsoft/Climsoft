@@ -29,14 +29,14 @@ Partial Class frmNewFormDaily2
         '
         Me.ucrFormDaily.Location = New System.Drawing.Point(8, 7)
         Me.ucrFormDaily.Name = "ucrFormDaily"
-        Me.ucrFormDaily.Size = New System.Drawing.Size(738, 612)
+        Me.ucrFormDaily.Size = New System.Drawing.Size(762, 612)
         Me.ucrFormDaily.TabIndex = 5
         '
         'frmNewFormDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(757, 631)
+        Me.ClientSize = New System.Drawing.Size(784, 631)
         Me.Controls.Add(Me.ucrFormDaily)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmNewFormDaily2"
