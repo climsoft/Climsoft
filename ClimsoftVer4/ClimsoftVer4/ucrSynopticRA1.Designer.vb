@@ -165,7 +165,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem046Label
         '
         Me.Val_Elem046Label.AutoSize = True
-        Me.Val_Elem046Label.Location = New System.Drawing.Point(652, 401)
+        Me.Val_Elem046Label.Location = New System.Drawing.Point(706, 410)
         Me.Val_Elem046Label.Name = "Val_Elem046Label"
         Me.Val_Elem046Label.Size = New System.Drawing.Size(52, 13)
         Me.Val_Elem046Label.TabIndex = 747
@@ -174,7 +174,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem174Label
         '
         Me.Val_Elem174Label.AutoSize = True
-        Me.Val_Elem174Label.Location = New System.Drawing.Point(652, 329)
+        Me.Val_Elem174Label.Location = New System.Drawing.Point(706, 338)
         Me.Val_Elem174Label.Name = "Val_Elem174Label"
         Me.Val_Elem174Label.Size = New System.Drawing.Size(57, 13)
         Me.Val_Elem174Label.TabIndex = 746
@@ -183,7 +183,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem005Label
         '
         Me.Val_Elem005Label.AutoSize = True
-        Me.Val_Elem005Label.Location = New System.Drawing.Point(652, 305)
+        Me.Val_Elem005Label.Location = New System.Drawing.Point(706, 314)
         Me.Val_Elem005Label.Name = "Val_Elem005Label"
         Me.Val_Elem005Label.Size = New System.Drawing.Size(63, 13)
         Me.Val_Elem005Label.TabIndex = 745
@@ -192,7 +192,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem132Label
         '
         Me.Val_Elem132Label.AutoSize = True
-        Me.Val_Elem132Label.Location = New System.Drawing.Point(652, 281)
+        Me.Val_Elem132Label.Location = New System.Drawing.Point(706, 290)
         Me.Val_Elem132Label.Name = "Val_Elem132Label"
         Me.Val_Elem132Label.Size = New System.Drawing.Size(48, 13)
         Me.Val_Elem132Label.TabIndex = 743
@@ -201,7 +201,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem084Label
         '
         Me.Val_Elem084Label.AutoSize = True
-        Me.Val_Elem084Label.Location = New System.Drawing.Point(652, 257)
+        Me.Val_Elem084Label.Location = New System.Drawing.Point(706, 266)
         Me.Val_Elem084Label.Name = "Val_Elem084Label"
         Me.Val_Elem084Label.Size = New System.Drawing.Size(54, 13)
         Me.Val_Elem084Label.TabIndex = 740
@@ -210,7 +210,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem018Label
         '
         Me.Val_Elem018Label.AutoSize = True
-        Me.Val_Elem018Label.Location = New System.Drawing.Point(652, 231)
+        Me.Val_Elem018Label.Location = New System.Drawing.Point(706, 240)
         Me.Val_Elem018Label.Name = "Val_Elem018Label"
         Me.Val_Elem018Label.Size = New System.Drawing.Size(64, 13)
         Me.Val_Elem018Label.TabIndex = 739
@@ -219,7 +219,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem099Label
         '
         Me.Val_Elem099Label.AutoSize = True
-        Me.Val_Elem099Label.Location = New System.Drawing.Point(652, 209)
+        Me.Val_Elem099Label.Location = New System.Drawing.Point(706, 218)
         Me.Val_Elem099Label.Name = "Val_Elem099Label"
         Me.Val_Elem099Label.Size = New System.Drawing.Size(84, 13)
         Me.Val_Elem099Label.TabIndex = 738
@@ -228,7 +228,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem003Label
         '
         Me.Val_Elem003Label.AutoSize = True
-        Me.Val_Elem003Label.Location = New System.Drawing.Point(652, 184)
+        Me.Val_Elem003Label.Location = New System.Drawing.Point(717, 193)
         Me.Val_Elem003Label.Name = "Val_Elem003Label"
         Me.Val_Elem003Label.Size = New System.Drawing.Size(30, 13)
         Me.Val_Elem003Label.TabIndex = 737
@@ -237,7 +237,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem002Label
         '
         Me.Val_Elem002Label.AutoSize = True
-        Me.Val_Elem002Label.Location = New System.Drawing.Point(652, 160)
+        Me.Val_Elem002Label.Location = New System.Drawing.Point(717, 169)
         Me.Val_Elem002Label.Name = "Val_Elem002Label"
         Me.Val_Elem002Label.Size = New System.Drawing.Size(33, 13)
         Me.Val_Elem002Label.TabIndex = 736
@@ -246,7 +246,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem130Label
         '
         Me.Val_Elem130Label.AutoSize = True
-        Me.Val_Elem130Label.Location = New System.Drawing.Point(356, 447)
+        Me.Val_Elem130Label.Location = New System.Drawing.Point(370, 456)
         Me.Val_Elem130Label.Name = "Val_Elem130Label"
         Me.Val_Elem130Label.Size = New System.Drawing.Size(104, 13)
         Me.Val_Elem130Label.TabIndex = 733
@@ -255,7 +255,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem129Label
         '
         Me.Val_Elem129Label.AutoSize = True
-        Me.Val_Elem129Label.Location = New System.Drawing.Point(356, 424)
+        Me.Val_Elem129Label.Location = New System.Drawing.Point(370, 433)
         Me.Val_Elem129Label.Name = "Val_Elem129Label"
         Me.Val_Elem129Label.Size = New System.Drawing.Size(100, 13)
         Me.Val_Elem129Label.TabIndex = 732
@@ -264,7 +264,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem128Label
         '
         Me.Val_Elem128Label.AutoSize = True
-        Me.Val_Elem128Label.Location = New System.Drawing.Point(356, 400)
+        Me.Val_Elem128Label.Location = New System.Drawing.Point(370, 409)
         Me.Val_Elem128Label.Name = "Val_Elem128Label"
         Me.Val_Elem128Label.Size = New System.Drawing.Size(95, 13)
         Me.Val_Elem128Label.TabIndex = 731
@@ -273,7 +273,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem131Label
         '
         Me.Val_Elem131Label.AutoSize = True
-        Me.Val_Elem131Label.Location = New System.Drawing.Point(356, 377)
+        Me.Val_Elem131Label.Location = New System.Drawing.Point(370, 386)
         Me.Val_Elem131Label.Name = "Val_Elem131Label"
         Me.Val_Elem131Label.Size = New System.Drawing.Size(112, 13)
         Me.Val_Elem131Label.TabIndex = 730
@@ -282,7 +282,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem126Label
         '
         Me.Val_Elem126Label.AutoSize = True
-        Me.Val_Elem126Label.Location = New System.Drawing.Point(356, 353)
+        Me.Val_Elem126Label.Location = New System.Drawing.Point(370, 362)
         Me.Val_Elem126Label.Name = "Val_Elem126Label"
         Me.Val_Elem126Label.Size = New System.Drawing.Size(106, 13)
         Me.Val_Elem126Label.TabIndex = 729
@@ -291,7 +291,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem125Label
         '
         Me.Val_Elem125Label.AutoSize = True
-        Me.Val_Elem125Label.Location = New System.Drawing.Point(356, 327)
+        Me.Val_Elem125Label.Location = New System.Drawing.Point(370, 336)
         Me.Val_Elem125Label.Name = "Val_Elem125Label"
         Me.Val_Elem125Label.Size = New System.Drawing.Size(100, 13)
         Me.Val_Elem125Label.TabIndex = 728
@@ -300,7 +300,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem124Label
         '
         Me.Val_Elem124Label.AutoSize = True
-        Me.Val_Elem124Label.Location = New System.Drawing.Point(356, 304)
+        Me.Val_Elem124Label.Location = New System.Drawing.Point(370, 313)
         Me.Val_Elem124Label.Name = "Val_Elem124Label"
         Me.Val_Elem124Label.Size = New System.Drawing.Size(95, 13)
         Me.Val_Elem124Label.TabIndex = 727
@@ -309,7 +309,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem127Label
         '
         Me.Val_Elem127Label.AutoSize = True
-        Me.Val_Elem127Label.Location = New System.Drawing.Point(356, 279)
+        Me.Val_Elem127Label.Location = New System.Drawing.Point(370, 288)
         Me.Val_Elem127Label.Name = "Val_Elem127Label"
         Me.Val_Elem127Label.Size = New System.Drawing.Size(103, 13)
         Me.Val_Elem127Label.TabIndex = 726
@@ -318,7 +318,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem122Label
         '
         Me.Val_Elem122Label.AutoSize = True
-        Me.Val_Elem122Label.Location = New System.Drawing.Point(356, 255)
+        Me.Val_Elem122Label.Location = New System.Drawing.Point(370, 264)
         Me.Val_Elem122Label.Name = "Val_Elem122Label"
         Me.Val_Elem122Label.Size = New System.Drawing.Size(106, 13)
         Me.Val_Elem122Label.TabIndex = 725
@@ -327,7 +327,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem121Label
         '
         Me.Val_Elem121Label.AutoSize = True
-        Me.Val_Elem121Label.Location = New System.Drawing.Point(356, 233)
+        Me.Val_Elem121Label.Location = New System.Drawing.Point(370, 242)
         Me.Val_Elem121Label.Name = "Val_Elem121Label"
         Me.Val_Elem121Label.Size = New System.Drawing.Size(98, 13)
         Me.Val_Elem121Label.TabIndex = 724
@@ -336,7 +336,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem120Label
         '
         Me.Val_Elem120Label.AutoSize = True
-        Me.Val_Elem120Label.Location = New System.Drawing.Point(356, 208)
+        Me.Val_Elem120Label.Location = New System.Drawing.Point(370, 217)
         Me.Val_Elem120Label.Name = "Val_Elem120Label"
         Me.Val_Elem120Label.Size = New System.Drawing.Size(95, 13)
         Me.Val_Elem120Label.TabIndex = 723
@@ -345,7 +345,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem123Label
         '
         Me.Val_Elem123Label.AutoSize = True
-        Me.Val_Elem123Label.Location = New System.Drawing.Point(356, 184)
+        Me.Val_Elem123Label.Location = New System.Drawing.Point(370, 193)
         Me.Val_Elem123Label.Name = "Val_Elem123Label"
         Me.Val_Elem123Label.Size = New System.Drawing.Size(112, 13)
         Me.Val_Elem123Label.TabIndex = 722
@@ -354,7 +354,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem118Label
         '
         Me.Val_Elem118Label.AutoSize = True
-        Me.Val_Elem118Label.Location = New System.Drawing.Point(356, 159)
+        Me.Val_Elem118Label.Location = New System.Drawing.Point(370, 168)
         Me.Val_Elem118Label.Name = "Val_Elem118Label"
         Me.Val_Elem118Label.Size = New System.Drawing.Size(106, 13)
         Me.Val_Elem118Label.TabIndex = 721
@@ -363,7 +363,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem117Label
         '
         Me.Val_Elem117Label.AutoSize = True
-        Me.Val_Elem117Label.Location = New System.Drawing.Point(356, 134)
+        Me.Val_Elem117Label.Location = New System.Drawing.Point(370, 143)
         Me.Val_Elem117Label.Name = "Val_Elem117Label"
         Me.Val_Elem117Label.Size = New System.Drawing.Size(100, 13)
         Me.Val_Elem117Label.TabIndex = 720
@@ -372,7 +372,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem116Label
         '
         Me.Val_Elem116Label.AutoSize = True
-        Me.Val_Elem116Label.Location = New System.Drawing.Point(356, 112)
+        Me.Val_Elem116Label.Location = New System.Drawing.Point(370, 121)
         Me.Val_Elem116Label.Name = "Val_Elem116Label"
         Me.Val_Elem116Label.Size = New System.Drawing.Size(95, 13)
         Me.Val_Elem116Label.TabIndex = 719
@@ -381,7 +381,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem119Label
         '
         Me.Val_Elem119Label.AutoSize = True
-        Me.Val_Elem119Label.Location = New System.Drawing.Point(356, 89)
+        Me.Val_Elem119Label.Location = New System.Drawing.Point(370, 98)
         Me.Val_Elem119Label.Name = "Val_Elem119Label"
         Me.Val_Elem119Label.Size = New System.Drawing.Size(109, 13)
         Me.Val_Elem119Label.TabIndex = 799
@@ -435,7 +435,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem193Label
         '
         Me.Val_Elem193Label.AutoSize = True
-        Me.Val_Elem193Label.Location = New System.Drawing.Point(652, 137)
+        Me.Val_Elem193Label.Location = New System.Drawing.Point(706, 146)
         Me.Val_Elem193Label.Name = "Val_Elem193Label"
         Me.Val_Elem193Label.Size = New System.Drawing.Size(50, 13)
         Me.Val_Elem193Label.TabIndex = 781
@@ -444,7 +444,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem197Label
         '
         Me.Val_Elem197Label.AutoSize = True
-        Me.Val_Elem197Label.Location = New System.Drawing.Point(652, 114)
+        Me.Val_Elem197Label.Location = New System.Drawing.Point(706, 123)
         Me.Val_Elem197Label.Name = "Val_Elem197Label"
         Me.Val_Elem197Label.Size = New System.Drawing.Size(50, 13)
         Me.Val_Elem197Label.TabIndex = 778
@@ -453,7 +453,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem167Label
         '
         Me.Val_Elem167Label.AutoSize = True
-        Me.Val_Elem167Label.Location = New System.Drawing.Point(652, 89)
+        Me.Val_Elem167Label.Location = New System.Drawing.Point(706, 98)
         Me.Val_Elem167Label.Name = "Val_Elem167Label"
         Me.Val_Elem167Label.Size = New System.Drawing.Size(59, 13)
         Me.Val_Elem167Label.TabIndex = 744
@@ -462,7 +462,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem111Label
         '
         Me.Val_Elem111Label.AutoSize = True
-        Me.Val_Elem111Label.Location = New System.Drawing.Point(652, 377)
+        Me.Val_Elem111Label.Location = New System.Drawing.Point(706, 386)
         Me.Val_Elem111Label.Name = "Val_Elem111Label"
         Me.Val_Elem111Label.Size = New System.Drawing.Size(81, 13)
         Me.Val_Elem111Label.TabIndex = 742
@@ -471,7 +471,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem112Label
         '
         Me.Val_Elem112Label.AutoSize = True
-        Me.Val_Elem112Label.Location = New System.Drawing.Point(652, 352)
+        Me.Val_Elem112Label.Location = New System.Drawing.Point(706, 361)
         Me.Val_Elem112Label.Name = "Val_Elem112Label"
         Me.Val_Elem112Label.Size = New System.Drawing.Size(92, 13)
         Me.Val_Elem112Label.TabIndex = 741
@@ -609,10 +609,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPStationLevelPressure.FieldName = "106"
         Me.ucrVFPStationLevelPressure.IncludePeriod = True
         Me.ucrVFPStationLevelPressure.KeyControl = False
-        Me.ucrVFPStationLevelPressure.Location = New System.Drawing.Point(214, 83)
+        Me.ucrVFPStationLevelPressure.Location = New System.Drawing.Point(204, 88)
         Me.ucrVFPStationLevelPressure.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPStationLevelPressure.Name = "ucrVFPStationLevelPressure"
-        Me.ucrVFPStationLevelPressure.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPStationLevelPressure.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPStationLevelPressure.TabIndex = 6
         Me.ucrVFPStationLevelPressure.Tag = "106"
         '
@@ -621,10 +621,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPHighLvlCloudsType.FieldName = "171"
         Me.ucrVFPHighLvlCloudsType.IncludePeriod = True
         Me.ucrVFPHighLvlCloudsType.KeyControl = False
-        Me.ucrVFPHighLvlCloudsType.Location = New System.Drawing.Point(214, 515)
+        Me.ucrVFPHighLvlCloudsType.Location = New System.Drawing.Point(204, 520)
         Me.ucrVFPHighLvlCloudsType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPHighLvlCloudsType.Name = "ucrVFPHighLvlCloudsType"
-        Me.ucrVFPHighLvlCloudsType.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPHighLvlCloudsType.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPHighLvlCloudsType.TabIndex = 24
         Me.ucrVFPHighLvlCloudsType.Tag = "171"
         '
@@ -633,10 +633,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPMediumLvlClouds.FieldName = "170"
         Me.ucrVFPMediumLvlClouds.IncludePeriod = True
         Me.ucrVFPMediumLvlClouds.KeyControl = False
-        Me.ucrVFPMediumLvlClouds.Location = New System.Drawing.Point(214, 491)
+        Me.ucrVFPMediumLvlClouds.Location = New System.Drawing.Point(204, 496)
         Me.ucrVFPMediumLvlClouds.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPMediumLvlClouds.Name = "ucrVFPMediumLvlClouds"
-        Me.ucrVFPMediumLvlClouds.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPMediumLvlClouds.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPMediumLvlClouds.TabIndex = 23
         Me.ucrVFPMediumLvlClouds.Tag = "170"
         '
@@ -645,10 +645,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPLowLvlCloudsType.FieldName = "169"
         Me.ucrVFPLowLvlCloudsType.IncludePeriod = True
         Me.ucrVFPLowLvlCloudsType.KeyControl = False
-        Me.ucrVFPLowLvlCloudsType.Location = New System.Drawing.Point(214, 467)
+        Me.ucrVFPLowLvlCloudsType.Location = New System.Drawing.Point(204, 472)
         Me.ucrVFPLowLvlCloudsType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPLowLvlCloudsType.Name = "ucrVFPLowLvlCloudsType"
-        Me.ucrVFPLowLvlCloudsType.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPLowLvlCloudsType.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPLowLvlCloudsType.TabIndex = 22
         Me.ucrVFPLowLvlCloudsType.Tag = "169"
         '
@@ -657,10 +657,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPLowLvlCloudsAmt.FieldName = "168"
         Me.ucrVFPLowLvlCloudsAmt.IncludePeriod = True
         Me.ucrVFPLowLvlCloudsAmt.KeyControl = False
-        Me.ucrVFPLowLvlCloudsAmt.Location = New System.Drawing.Point(214, 443)
+        Me.ucrVFPLowLvlCloudsAmt.Location = New System.Drawing.Point(204, 448)
         Me.ucrVFPLowLvlCloudsAmt.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPLowLvlCloudsAmt.Name = "ucrVFPLowLvlCloudsAmt"
-        Me.ucrVFPLowLvlCloudsAmt.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPLowLvlCloudsAmt.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPLowLvlCloudsAmt.TabIndex = 21
         Me.ucrVFPLowLvlCloudsAmt.Tag = "168"
         '
@@ -669,10 +669,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPVerticalSignificance.FieldName = "115"
         Me.ucrVFPVerticalSignificance.IncludePeriod = True
         Me.ucrVFPVerticalSignificance.KeyControl = False
-        Me.ucrVFPVerticalSignificance.Location = New System.Drawing.Point(214, 419)
+        Me.ucrVFPVerticalSignificance.Location = New System.Drawing.Point(204, 424)
         Me.ucrVFPVerticalSignificance.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPVerticalSignificance.Name = "ucrVFPVerticalSignificance"
-        Me.ucrVFPVerticalSignificance.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPVerticalSignificance.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPVerticalSignificance.TabIndex = 20
         Me.ucrVFPVerticalSignificance.Tag = "115"
         '
@@ -681,10 +681,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPTotalCloudCover.FieldName = "114"
         Me.ucrVFPTotalCloudCover.IncludePeriod = True
         Me.ucrVFPTotalCloudCover.KeyControl = False
-        Me.ucrVFPTotalCloudCover.Location = New System.Drawing.Point(214, 395)
+        Me.ucrVFPTotalCloudCover.Location = New System.Drawing.Point(204, 400)
         Me.ucrVFPTotalCloudCover.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPTotalCloudCover.Name = "ucrVFPTotalCloudCover"
-        Me.ucrVFPTotalCloudCover.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPTotalCloudCover.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPTotalCloudCover.TabIndex = 19
         Me.ucrVFPTotalCloudCover.Tag = "114"
         '
@@ -693,10 +693,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPLowCloudHght.FieldName = "192"
         Me.ucrVFPLowCloudHght.IncludePeriod = True
         Me.ucrVFPLowCloudHght.KeyControl = False
-        Me.ucrVFPLowCloudHght.Location = New System.Drawing.Point(214, 371)
+        Me.ucrVFPLowCloudHght.Location = New System.Drawing.Point(204, 376)
         Me.ucrVFPLowCloudHght.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPLowCloudHght.Name = "ucrVFPLowCloudHght"
-        Me.ucrVFPLowCloudHght.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPLowCloudHght.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPLowCloudHght.TabIndex = 18
         Me.ucrVFPLowCloudHght.Tag = "192"
         '
@@ -705,10 +705,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPHorizontalVisibilty.FieldName = "110"
         Me.ucrVFPHorizontalVisibilty.IncludePeriod = True
         Me.ucrVFPHorizontalVisibilty.KeyControl = False
-        Me.ucrVFPHorizontalVisibilty.Location = New System.Drawing.Point(214, 347)
+        Me.ucrVFPHorizontalVisibilty.Location = New System.Drawing.Point(204, 352)
         Me.ucrVFPHorizontalVisibilty.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPHorizontalVisibilty.Name = "ucrVFPHorizontalVisibilty"
-        Me.ucrVFPHorizontalVisibilty.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPHorizontalVisibilty.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPHorizontalVisibilty.TabIndex = 17
         Me.ucrVFPHorizontalVisibilty.Tag = "110"
         '
@@ -717,10 +717,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPRelativeHumidity.FieldName = "105"
         Me.ucrVFPRelativeHumidity.IncludePeriod = True
         Me.ucrVFPRelativeHumidity.KeyControl = False
-        Me.ucrVFPRelativeHumidity.Location = New System.Drawing.Point(214, 323)
+        Me.ucrVFPRelativeHumidity.Location = New System.Drawing.Point(204, 328)
         Me.ucrVFPRelativeHumidity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPRelativeHumidity.Name = "ucrVFPRelativeHumidity"
-        Me.ucrVFPRelativeHumidity.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPRelativeHumidity.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPRelativeHumidity.TabIndex = 16
         Me.ucrVFPRelativeHumidity.Tag = "105"
         '
@@ -729,10 +729,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPDewPointTemp.FieldName = "103"
         Me.ucrVFPDewPointTemp.IncludePeriod = True
         Me.ucrVFPDewPointTemp.KeyControl = False
-        Me.ucrVFPDewPointTemp.Location = New System.Drawing.Point(214, 299)
+        Me.ucrVFPDewPointTemp.Location = New System.Drawing.Point(204, 304)
         Me.ucrVFPDewPointTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPDewPointTemp.Name = "ucrVFPDewPointTemp"
-        Me.ucrVFPDewPointTemp.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPDewPointTemp.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPDewPointTemp.TabIndex = 15
         Me.ucrVFPDewPointTemp.Tag = "103"
         '
@@ -741,10 +741,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPWetBulbTemp.FieldName = "102"
         Me.ucrVFPWetBulbTemp.IncludePeriod = True
         Me.ucrVFPWetBulbTemp.KeyControl = False
-        Me.ucrVFPWetBulbTemp.Location = New System.Drawing.Point(214, 275)
+        Me.ucrVFPWetBulbTemp.Location = New System.Drawing.Point(204, 280)
         Me.ucrVFPWetBulbTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPWetBulbTemp.Name = "ucrVFPWetBulbTemp"
-        Me.ucrVFPWetBulbTemp.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPWetBulbTemp.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPWetBulbTemp.TabIndex = 14
         Me.ucrVFPWetBulbTemp.Tag = "102"
         '
@@ -753,10 +753,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPDryBulbTemp.FieldName = "101"
         Me.ucrVFPDryBulbTemp.IncludePeriod = True
         Me.ucrVFPDryBulbTemp.KeyControl = False
-        Me.ucrVFPDryBulbTemp.Location = New System.Drawing.Point(214, 251)
+        Me.ucrVFPDryBulbTemp.Location = New System.Drawing.Point(204, 256)
         Me.ucrVFPDryBulbTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPDryBulbTemp.Name = "ucrVFPDryBulbTemp"
-        Me.ucrVFPDryBulbTemp.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPDryBulbTemp.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPDryBulbTemp.TabIndex = 13
         Me.ucrVFPDryBulbTemp.Tag = "101"
         '
@@ -765,10 +765,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPGeopotentialHeight.FieldName = "185"
         Me.ucrVFPGeopotentialHeight.IncludePeriod = True
         Me.ucrVFPGeopotentialHeight.KeyControl = False
-        Me.ucrVFPGeopotentialHeight.Location = New System.Drawing.Point(214, 227)
+        Me.ucrVFPGeopotentialHeight.Location = New System.Drawing.Point(204, 232)
         Me.ucrVFPGeopotentialHeight.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPGeopotentialHeight.Name = "ucrVFPGeopotentialHeight"
-        Me.ucrVFPGeopotentialHeight.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPGeopotentialHeight.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPGeopotentialHeight.TabIndex = 12
         Me.ucrVFPGeopotentialHeight.Tag = "185"
         '
@@ -777,10 +777,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPStandardPressureLevel.FieldName = "301"
         Me.ucrVFPStandardPressureLevel.IncludePeriod = True
         Me.ucrVFPStandardPressureLevel.KeyControl = False
-        Me.ucrVFPStandardPressureLevel.Location = New System.Drawing.Point(214, 203)
+        Me.ucrVFPStandardPressureLevel.Location = New System.Drawing.Point(204, 208)
         Me.ucrVFPStandardPressureLevel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPStandardPressureLevel.Name = "ucrVFPStandardPressureLevel"
-        Me.ucrVFPStandardPressureLevel.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPStandardPressureLevel.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPStandardPressureLevel.TabIndex = 11
         Me.ucrVFPStandardPressureLevel.Tag = "301"
         '
@@ -789,10 +789,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFP24HrPressureChange.FieldName = "399"
         Me.ucrVFP24HrPressureChange.IncludePeriod = True
         Me.ucrVFP24HrPressureChange.KeyControl = False
-        Me.ucrVFP24HrPressureChange.Location = New System.Drawing.Point(214, 179)
+        Me.ucrVFP24HrPressureChange.Location = New System.Drawing.Point(204, 184)
         Me.ucrVFP24HrPressureChange.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFP24HrPressureChange.Name = "ucrVFP24HrPressureChange"
-        Me.ucrVFP24HrPressureChange.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFP24HrPressureChange.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFP24HrPressureChange.TabIndex = 10
         Me.ucrVFP24HrPressureChange.Tag = "399"
         '
@@ -801,10 +801,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFP3hrPressureCharacteristic.FieldName = "814"
         Me.ucrVFP3hrPressureCharacteristic.IncludePeriod = True
         Me.ucrVFP3hrPressureCharacteristic.KeyControl = False
-        Me.ucrVFP3hrPressureCharacteristic.Location = New System.Drawing.Point(214, 155)
+        Me.ucrVFP3hrPressureCharacteristic.Location = New System.Drawing.Point(204, 160)
         Me.ucrVFP3hrPressureCharacteristic.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFP3hrPressureCharacteristic.Name = "ucrVFP3hrPressureCharacteristic"
-        Me.ucrVFP3hrPressureCharacteristic.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFP3hrPressureCharacteristic.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFP3hrPressureCharacteristic.TabIndex = 9
         Me.ucrVFP3hrPressureCharacteristic.Tag = "814"
         '
@@ -813,10 +813,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFP3hrPressureChange.FieldName = "400"
         Me.ucrVFP3hrPressureChange.IncludePeriod = True
         Me.ucrVFP3hrPressureChange.KeyControl = False
-        Me.ucrVFP3hrPressureChange.Location = New System.Drawing.Point(214, 131)
+        Me.ucrVFP3hrPressureChange.Location = New System.Drawing.Point(204, 136)
         Me.ucrVFP3hrPressureChange.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFP3hrPressureChange.Name = "ucrVFP3hrPressureChange"
-        Me.ucrVFP3hrPressureChange.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFP3hrPressureChange.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFP3hrPressureChange.TabIndex = 8
         Me.ucrVFP3hrPressureChange.Tag = "400"
         '
@@ -825,10 +825,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPressureReduced.FieldName = "107"
         Me.ucrVFPPressureReduced.IncludePeriod = True
         Me.ucrVFPPressureReduced.KeyControl = False
-        Me.ucrVFPPressureReduced.Location = New System.Drawing.Point(214, 107)
+        Me.ucrVFPPressureReduced.Location = New System.Drawing.Point(204, 112)
         Me.ucrVFPPressureReduced.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPressureReduced.Name = "ucrVFPPressureReduced"
-        Me.ucrVFPPressureReduced.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPPressureReduced.Size = New System.Drawing.Size(159, 23)
         Me.ucrVFPPressureReduced.TabIndex = 7
         Me.ucrVFPPressureReduced.Tag = "107"
         '
@@ -837,10 +837,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudTypeLvlC4.FieldName = "129"
         Me.ucrVFPCloudTypeLvlC4.IncludePeriod = True
         Me.ucrVFPCloudTypeLvlC4.KeyControl = False
-        Me.ucrVFPCloudTypeLvlC4.Location = New System.Drawing.Point(508, 419)
+        Me.ucrVFPCloudTypeLvlC4.Location = New System.Drawing.Point(534, 426)
         Me.ucrVFPCloudTypeLvlC4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudTypeLvlC4.Name = "ucrVFPCloudTypeLvlC4"
-        Me.ucrVFPCloudTypeLvlC4.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudTypeLvlC4.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudTypeLvlC4.TabIndex = 39
         Me.ucrVFPCloudTypeLvlC4.Tag = "129"
         '
@@ -849,10 +849,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudHtLvl4HsHs4.FieldName = "130"
         Me.ucrVFPCloudHtLvl4HsHs4.IncludePeriod = True
         Me.ucrVFPCloudHtLvl4HsHs4.KeyControl = False
-        Me.ucrVFPCloudHtLvl4HsHs4.Location = New System.Drawing.Point(508, 443)
+        Me.ucrVFPCloudHtLvl4HsHs4.Location = New System.Drawing.Point(534, 450)
         Me.ucrVFPCloudHtLvl4HsHs4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudHtLvl4HsHs4.Name = "ucrVFPCloudHtLvl4HsHs4"
-        Me.ucrVFPCloudHtLvl4HsHs4.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudHtLvl4HsHs4.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudHtLvl4HsHs4.TabIndex = 40
         Me.ucrVFPCloudHtLvl4HsHs4.Tag = "130"
         '
@@ -861,10 +861,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPInsolation.FieldName = "046"
         Me.ucrVFPInsolation.IncludePeriod = True
         Me.ucrVFPInsolation.KeyControl = False
-        Me.ucrVFPInsolation.Location = New System.Drawing.Point(770, 395)
+        Me.ucrVFPInsolation.Location = New System.Drawing.Point(816, 400)
         Me.ucrVFPInsolation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPInsolation.Name = "ucrVFPInsolation"
-        Me.ucrVFPInsolation.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPInsolation.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPInsolation.TabIndex = 54
         Me.ucrVFPInsolation.Tag = "046"
         '
@@ -873,10 +873,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPWindSpeedfff.FieldName = "111"
         Me.ucrVFPWindSpeedfff.IncludePeriod = True
         Me.ucrVFPWindSpeedfff.KeyControl = False
-        Me.ucrVFPWindSpeedfff.Location = New System.Drawing.Point(770, 371)
+        Me.ucrVFPWindSpeedfff.Location = New System.Drawing.Point(816, 376)
         Me.ucrVFPWindSpeedfff.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPWindSpeedfff.Name = "ucrVFPWindSpeedfff"
-        Me.ucrVFPWindSpeedfff.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPWindSpeedfff.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPWindSpeedfff.TabIndex = 53
         Me.ucrVFPWindSpeedfff.Tag = "111"
         '
@@ -885,10 +885,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPWindDirectiondd.FieldName = "112"
         Me.ucrVFPWindDirectiondd.IncludePeriod = True
         Me.ucrVFPWindDirectiondd.KeyControl = False
-        Me.ucrVFPWindDirectiondd.Location = New System.Drawing.Point(770, 347)
+        Me.ucrVFPWindDirectiondd.Location = New System.Drawing.Point(816, 352)
         Me.ucrVFPWindDirectiondd.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPWindDirectiondd.Name = "ucrVFPWindDirectiondd"
-        Me.ucrVFPWindDirectiondd.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPWindDirectiondd.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPWindDirectiondd.TabIndex = 52
         Me.ucrVFPWindDirectiondd.Tag = "112"
         '
@@ -897,10 +897,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPrecip3Hr.FieldName = "174"
         Me.ucrVFPPrecip3Hr.IncludePeriod = True
         Me.ucrVFPPrecip3Hr.KeyControl = False
-        Me.ucrVFPPrecip3Hr.Location = New System.Drawing.Point(770, 323)
+        Me.ucrVFPPrecip3Hr.Location = New System.Drawing.Point(816, 328)
         Me.ucrVFPPrecip3Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPrecip3Hr.Name = "ucrVFPPrecip3Hr"
-        Me.ucrVFPPrecip3Hr.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPPrecip3Hr.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPPrecip3Hr.TabIndex = 51
         Me.ucrVFPPrecip3Hr.Tag = "174"
         '
@@ -909,10 +909,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPrecip24Hr.FieldName = "005"
         Me.ucrVFPPrecip24Hr.IncludePeriod = True
         Me.ucrVFPPrecip24Hr.KeyControl = False
-        Me.ucrVFPPrecip24Hr.Location = New System.Drawing.Point(770, 299)
+        Me.ucrVFPPrecip24Hr.Location = New System.Drawing.Point(816, 304)
         Me.ucrVFPPrecip24Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPrecip24Hr.Name = "ucrVFPPrecip24Hr"
-        Me.ucrVFPPrecip24Hr.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPPrecip24Hr.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPPrecip24Hr.TabIndex = 50
         Me.ucrVFPPrecip24Hr.Tag = "005"
         '
@@ -921,10 +921,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPSss1Hr.FieldName = "132"
         Me.ucrVFPSss1Hr.IncludePeriod = True
         Me.ucrVFPSss1Hr.KeyControl = False
-        Me.ucrVFPSss1Hr.Location = New System.Drawing.Point(770, 275)
+        Me.ucrVFPSss1Hr.Location = New System.Drawing.Point(816, 280)
         Me.ucrVFPSss1Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPSss1Hr.Name = "ucrVFPSss1Hr"
-        Me.ucrVFPSss1Hr.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPSss1Hr.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPSss1Hr.TabIndex = 49
         Me.ucrVFPSss1Hr.Tag = "132"
         '
@@ -933,10 +933,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPSss24Hr.FieldName = "084"
         Me.ucrVFPSss24Hr.IncludePeriod = True
         Me.ucrVFPSss24Hr.KeyControl = False
-        Me.ucrVFPSss24Hr.Location = New System.Drawing.Point(770, 251)
+        Me.ucrVFPSss24Hr.Location = New System.Drawing.Point(816, 256)
         Me.ucrVFPSss24Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPSss24Hr.Name = "ucrVFPSss24Hr"
-        Me.ucrVFPSss24Hr.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPSss24Hr.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPSss24Hr.TabIndex = 48
         Me.ucrVFPSss24Hr.Tag = "084"
         '
@@ -945,10 +945,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPEvaporation.FieldName = "018"
         Me.ucrVFPEvaporation.IncludePeriod = True
         Me.ucrVFPEvaporation.KeyControl = False
-        Me.ucrVFPEvaporation.Location = New System.Drawing.Point(770, 227)
+        Me.ucrVFPEvaporation.Location = New System.Drawing.Point(816, 232)
         Me.ucrVFPEvaporation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPEvaporation.Name = "ucrVFPEvaporation"
-        Me.ucrVFPEvaporation.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPEvaporation.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPEvaporation.TabIndex = 47
         Me.ucrVFPEvaporation.Tag = "018"
         '
@@ -957,10 +957,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPGrassMinTemp.FieldName = "099"
         Me.ucrVFPGrassMinTemp.IncludePeriod = True
         Me.ucrVFPGrassMinTemp.KeyControl = False
-        Me.ucrVFPGrassMinTemp.Location = New System.Drawing.Point(770, 204)
+        Me.ucrVFPGrassMinTemp.Location = New System.Drawing.Point(816, 209)
         Me.ucrVFPGrassMinTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPGrassMinTemp.Name = "ucrVFPGrassMinTemp"
-        Me.ucrVFPGrassMinTemp.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPGrassMinTemp.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPGrassMinTemp.TabIndex = 46
         Me.ucrVFPGrassMinTemp.Tag = "099"
         '
@@ -969,10 +969,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPTmin.FieldName = "003"
         Me.ucrVFPTmin.IncludePeriod = True
         Me.ucrVFPTmin.KeyControl = False
-        Me.ucrVFPTmin.Location = New System.Drawing.Point(770, 179)
+        Me.ucrVFPTmin.Location = New System.Drawing.Point(816, 184)
         Me.ucrVFPTmin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPTmin.Name = "ucrVFPTmin"
-        Me.ucrVFPTmin.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPTmin.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPTmin.TabIndex = 45
         Me.ucrVFPTmin.Tag = "003"
         '
@@ -981,10 +981,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPTmax.FieldName = "002"
         Me.ucrVFPTmax.IncludePeriod = True
         Me.ucrVFPTmax.KeyControl = False
-        Me.ucrVFPTmax.Location = New System.Drawing.Point(770, 155)
+        Me.ucrVFPTmax.Location = New System.Drawing.Point(816, 160)
         Me.ucrVFPTmax.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPTmax.Name = "ucrVFPTmax"
-        Me.ucrVFPTmax.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPTmax.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPTmax.TabIndex = 44
         Me.ucrVFPTmax.Tag = "002"
         '
@@ -993,10 +993,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPastWx2.FieldName = "193"
         Me.ucrVFPPastWx2.IncludePeriod = True
         Me.ucrVFPPastWx2.KeyControl = False
-        Me.ucrVFPPastWx2.Location = New System.Drawing.Point(770, 131)
+        Me.ucrVFPPastWx2.Location = New System.Drawing.Point(816, 136)
         Me.ucrVFPPastWx2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPastWx2.Name = "ucrVFPPastWx2"
-        Me.ucrVFPPastWx2.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPPastWx2.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPPastWx2.TabIndex = 43
         Me.ucrVFPPastWx2.Tag = "193"
         '
@@ -1005,10 +1005,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPastWx1.FieldName = "197"
         Me.ucrVFPPastWx1.IncludePeriod = True
         Me.ucrVFPPastWx1.KeyControl = False
-        Me.ucrVFPPastWx1.Location = New System.Drawing.Point(770, 107)
+        Me.ucrVFPPastWx1.Location = New System.Drawing.Point(816, 112)
         Me.ucrVFPPastWx1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPastWx1.Name = "ucrVFPPastWx1"
-        Me.ucrVFPPastWx1.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPPastWx1.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPPastWx1.TabIndex = 42
         Me.ucrVFPPastWx1.Tag = "197"
         '
@@ -1017,10 +1017,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPresentWx.FieldName = "167"
         Me.ucrVFPPresentWx.IncludePeriod = True
         Me.ucrVFPPresentWx.KeyControl = False
-        Me.ucrVFPPresentWx.Location = New System.Drawing.Point(770, 83)
+        Me.ucrVFPPresentWx.Location = New System.Drawing.Point(816, 88)
         Me.ucrVFPPresentWx.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPresentWx.Name = "ucrVFPPresentWx"
-        Me.ucrVFPPresentWx.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPPresentWx.Size = New System.Drawing.Size(165, 23)
         Me.ucrVFPPresentWx.TabIndex = 41
         Me.ucrVFPPresentWx.Tag = "167"
         '
@@ -1029,10 +1029,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPVerticalSignificance4.FieldName = "131"
         Me.ucrVFPVerticalSignificance4.IncludePeriod = True
         Me.ucrVFPVerticalSignificance4.KeyControl = False
-        Me.ucrVFPVerticalSignificance4.Location = New System.Drawing.Point(508, 371)
+        Me.ucrVFPVerticalSignificance4.Location = New System.Drawing.Point(534, 378)
         Me.ucrVFPVerticalSignificance4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPVerticalSignificance4.Name = "ucrVFPVerticalSignificance4"
-        Me.ucrVFPVerticalSignificance4.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPVerticalSignificance4.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPVerticalSignificance4.TabIndex = 37
         Me.ucrVFPVerticalSignificance4.Tag = "131"
         '
@@ -1041,10 +1041,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudAmtLvl4N4.FieldName = "128"
         Me.ucrVFPCloudAmtLvl4N4.IncludePeriod = True
         Me.ucrVFPCloudAmtLvl4N4.KeyControl = False
-        Me.ucrVFPCloudAmtLvl4N4.Location = New System.Drawing.Point(508, 395)
+        Me.ucrVFPCloudAmtLvl4N4.Location = New System.Drawing.Point(534, 402)
         Me.ucrVFPCloudAmtLvl4N4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudAmtLvl4N4.Name = "ucrVFPCloudAmtLvl4N4"
-        Me.ucrVFPCloudAmtLvl4N4.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudAmtLvl4N4.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudAmtLvl4N4.TabIndex = 38
         Me.ucrVFPCloudAmtLvl4N4.Tag = "128"
         '
@@ -1053,10 +1053,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudHtLvl2H2Hs2.FieldName = "122"
         Me.ucrVFPCloudHtLvl2H2Hs2.IncludePeriod = True
         Me.ucrVFPCloudHtLvl2H2Hs2.KeyControl = False
-        Me.ucrVFPCloudHtLvl2H2Hs2.Location = New System.Drawing.Point(508, 251)
+        Me.ucrVFPCloudHtLvl2H2Hs2.Location = New System.Drawing.Point(534, 258)
         Me.ucrVFPCloudHtLvl2H2Hs2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudHtLvl2H2Hs2.Name = "ucrVFPCloudHtLvl2H2Hs2"
-        Me.ucrVFPCloudHtLvl2H2Hs2.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudHtLvl2H2Hs2.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudHtLvl2H2Hs2.TabIndex = 32
         Me.ucrVFPCloudHtLvl2H2Hs2.Tag = "122"
         '
@@ -1065,10 +1065,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudTypeLv2C2.FieldName = "121"
         Me.ucrVFPCloudTypeLv2C2.IncludePeriod = True
         Me.ucrVFPCloudTypeLv2C2.KeyControl = False
-        Me.ucrVFPCloudTypeLv2C2.Location = New System.Drawing.Point(508, 227)
+        Me.ucrVFPCloudTypeLv2C2.Location = New System.Drawing.Point(534, 234)
         Me.ucrVFPCloudTypeLv2C2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudTypeLv2C2.Name = "ucrVFPCloudTypeLv2C2"
-        Me.ucrVFPCloudTypeLv2C2.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudTypeLv2C2.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudTypeLv2C2.TabIndex = 31
         Me.ucrVFPCloudTypeLv2C2.Tag = "121"
         '
@@ -1077,10 +1077,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudAmtLvl2N2.FieldName = "120"
         Me.ucrVFPCloudAmtLvl2N2.IncludePeriod = True
         Me.ucrVFPCloudAmtLvl2N2.KeyControl = False
-        Me.ucrVFPCloudAmtLvl2N2.Location = New System.Drawing.Point(508, 203)
+        Me.ucrVFPCloudAmtLvl2N2.Location = New System.Drawing.Point(534, 210)
         Me.ucrVFPCloudAmtLvl2N2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudAmtLvl2N2.Name = "ucrVFPCloudAmtLvl2N2"
-        Me.ucrVFPCloudAmtLvl2N2.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudAmtLvl2N2.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudAmtLvl2N2.TabIndex = 30
         Me.ucrVFPCloudAmtLvl2N2.Tag = "120"
         '
@@ -1089,10 +1089,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPVerticalSignificance2.FieldName = "123"
         Me.ucrVFPVerticalSignificance2.IncludePeriod = True
         Me.ucrVFPVerticalSignificance2.KeyControl = False
-        Me.ucrVFPVerticalSignificance2.Location = New System.Drawing.Point(508, 179)
+        Me.ucrVFPVerticalSignificance2.Location = New System.Drawing.Point(534, 186)
         Me.ucrVFPVerticalSignificance2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPVerticalSignificance2.Name = "ucrVFPVerticalSignificance2"
-        Me.ucrVFPVerticalSignificance2.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPVerticalSignificance2.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPVerticalSignificance2.TabIndex = 29
         Me.ucrVFPVerticalSignificance2.Tag = "123"
         '
@@ -1101,10 +1101,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudHtLvl1HsHs1.FieldName = "118"
         Me.ucrVFPCloudHtLvl1HsHs1.IncludePeriod = True
         Me.ucrVFPCloudHtLvl1HsHs1.KeyControl = False
-        Me.ucrVFPCloudHtLvl1HsHs1.Location = New System.Drawing.Point(508, 155)
+        Me.ucrVFPCloudHtLvl1HsHs1.Location = New System.Drawing.Point(534, 162)
         Me.ucrVFPCloudHtLvl1HsHs1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudHtLvl1HsHs1.Name = "ucrVFPCloudHtLvl1HsHs1"
-        Me.ucrVFPCloudHtLvl1HsHs1.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudHtLvl1HsHs1.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudHtLvl1HsHs1.TabIndex = 28
         Me.ucrVFPCloudHtLvl1HsHs1.Tag = "118"
         '
@@ -1113,10 +1113,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudTypeLvl1C1.FieldName = "117"
         Me.ucrVFPCloudTypeLvl1C1.IncludePeriod = True
         Me.ucrVFPCloudTypeLvl1C1.KeyControl = False
-        Me.ucrVFPCloudTypeLvl1C1.Location = New System.Drawing.Point(508, 131)
+        Me.ucrVFPCloudTypeLvl1C1.Location = New System.Drawing.Point(534, 138)
         Me.ucrVFPCloudTypeLvl1C1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudTypeLvl1C1.Name = "ucrVFPCloudTypeLvl1C1"
-        Me.ucrVFPCloudTypeLvl1C1.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudTypeLvl1C1.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudTypeLvl1C1.TabIndex = 27
         Me.ucrVFPCloudTypeLvl1C1.Tag = "117"
         '
@@ -1125,10 +1125,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudAmtLvl1N1.FieldName = "116"
         Me.ucrVFPCloudAmtLvl1N1.IncludePeriod = True
         Me.ucrVFPCloudAmtLvl1N1.KeyControl = False
-        Me.ucrVFPCloudAmtLvl1N1.Location = New System.Drawing.Point(508, 107)
+        Me.ucrVFPCloudAmtLvl1N1.Location = New System.Drawing.Point(534, 114)
         Me.ucrVFPCloudAmtLvl1N1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudAmtLvl1N1.Name = "ucrVFPCloudAmtLvl1N1"
-        Me.ucrVFPCloudAmtLvl1N1.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudAmtLvl1N1.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudAmtLvl1N1.TabIndex = 26
         Me.ucrVFPCloudAmtLvl1N1.Tag = "116"
         '
@@ -1137,10 +1137,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPVerticalSignificance1.FieldName = "119"
         Me.ucrVFPVerticalSignificance1.IncludePeriod = True
         Me.ucrVFPVerticalSignificance1.KeyControl = False
-        Me.ucrVFPVerticalSignificance1.Location = New System.Drawing.Point(508, 83)
+        Me.ucrVFPVerticalSignificance1.Location = New System.Drawing.Point(534, 90)
         Me.ucrVFPVerticalSignificance1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPVerticalSignificance1.Name = "ucrVFPVerticalSignificance1"
-        Me.ucrVFPVerticalSignificance1.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPVerticalSignificance1.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPVerticalSignificance1.TabIndex = 25
         Me.ucrVFPVerticalSignificance1.Tag = "119"
         '
@@ -1149,10 +1149,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudAmtLvl3N3.FieldName = "124"
         Me.ucrVFPCloudAmtLvl3N3.IncludePeriod = True
         Me.ucrVFPCloudAmtLvl3N3.KeyControl = False
-        Me.ucrVFPCloudAmtLvl3N3.Location = New System.Drawing.Point(508, 299)
+        Me.ucrVFPCloudAmtLvl3N3.Location = New System.Drawing.Point(534, 306)
         Me.ucrVFPCloudAmtLvl3N3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudAmtLvl3N3.Name = "ucrVFPCloudAmtLvl3N3"
-        Me.ucrVFPCloudAmtLvl3N3.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudAmtLvl3N3.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudAmtLvl3N3.TabIndex = 34
         Me.ucrVFPCloudAmtLvl3N3.Tag = "124"
         '
@@ -1161,10 +1161,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudHtLvlHsHs3.FieldName = "126"
         Me.ucrVFPCloudHtLvlHsHs3.IncludePeriod = True
         Me.ucrVFPCloudHtLvlHsHs3.KeyControl = False
-        Me.ucrVFPCloudHtLvlHsHs3.Location = New System.Drawing.Point(508, 347)
+        Me.ucrVFPCloudHtLvlHsHs3.Location = New System.Drawing.Point(534, 354)
         Me.ucrVFPCloudHtLvlHsHs3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudHtLvlHsHs3.Name = "ucrVFPCloudHtLvlHsHs3"
-        Me.ucrVFPCloudHtLvlHsHs3.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudHtLvlHsHs3.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudHtLvlHsHs3.TabIndex = 36
         Me.ucrVFPCloudHtLvlHsHs3.Tag = "126"
         '
@@ -1173,10 +1173,10 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPVerticalSignificant3.FieldName = "127"
         Me.ucrVFPVerticalSignificant3.IncludePeriod = True
         Me.ucrVFPVerticalSignificant3.KeyControl = False
-        Me.ucrVFPVerticalSignificant3.Location = New System.Drawing.Point(508, 274)
+        Me.ucrVFPVerticalSignificant3.Location = New System.Drawing.Point(534, 281)
         Me.ucrVFPVerticalSignificant3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPVerticalSignificant3.Name = "ucrVFPVerticalSignificant3"
-        Me.ucrVFPVerticalSignificant3.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPVerticalSignificant3.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPVerticalSignificant3.TabIndex = 33
         Me.ucrVFPVerticalSignificant3.Tag = "127"
         '
@@ -1185,17 +1185,17 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudTypeLvl3C3.FieldName = "125"
         Me.ucrVFPCloudTypeLvl3C3.IncludePeriod = True
         Me.ucrVFPCloudTypeLvl3C3.KeyControl = False
-        Me.ucrVFPCloudTypeLvl3C3.Location = New System.Drawing.Point(508, 323)
+        Me.ucrVFPCloudTypeLvl3C3.Location = New System.Drawing.Point(534, 330)
         Me.ucrVFPCloudTypeLvl3C3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudTypeLvl3C3.Name = "ucrVFPCloudTypeLvl3C3"
-        Me.ucrVFPCloudTypeLvl3C3.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPCloudTypeLvl3C3.Size = New System.Drawing.Size(170, 23)
         Me.ucrVFPCloudTypeLvl3C3.TabIndex = 35
         Me.ucrVFPCloudTypeLvl3C3.Tag = "125"
         '
         'lblValue
         '
         Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(209, 67)
+        Me.lblValue.Location = New System.Drawing.Point(205, 72)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(34, 13)
         Me.lblValue.TabIndex = 822
@@ -1204,7 +1204,7 @@ Partial Class ucrSynopticRA1
         'lblFlag
         '
         Me.lblFlag.AutoSize = True
-        Me.lblFlag.Location = New System.Drawing.Point(275, 67)
+        Me.lblFlag.Location = New System.Drawing.Point(276, 72)
         Me.lblFlag.Name = "lblFlag"
         Me.lblFlag.Size = New System.Drawing.Size(27, 13)
         Me.lblFlag.TabIndex = 823
@@ -1213,7 +1213,7 @@ Partial Class ucrSynopticRA1
         'lblValueTwo
         '
         Me.lblValueTwo.AutoSize = True
-        Me.lblValueTwo.Location = New System.Drawing.Point(502, 67)
+        Me.lblValueTwo.Location = New System.Drawing.Point(526, 72)
         Me.lblValueTwo.Name = "lblValueTwo"
         Me.lblValueTwo.Size = New System.Drawing.Size(34, 13)
         Me.lblValueTwo.TabIndex = 824
@@ -1222,7 +1222,7 @@ Partial Class ucrSynopticRA1
         'lblFlagTwo
         '
         Me.lblFlagTwo.AutoSize = True
-        Me.lblFlagTwo.Location = New System.Drawing.Point(569, 67)
+        Me.lblFlagTwo.Location = New System.Drawing.Point(604, 74)
         Me.lblFlagTwo.Name = "lblFlagTwo"
         Me.lblFlagTwo.Size = New System.Drawing.Size(27, 13)
         Me.lblFlagTwo.TabIndex = 825
@@ -1231,7 +1231,7 @@ Partial Class ucrSynopticRA1
         'lblValueThree
         '
         Me.lblValueThree.AutoSize = True
-        Me.lblValueThree.Location = New System.Drawing.Point(774, 67)
+        Me.lblValueThree.Location = New System.Drawing.Point(824, 72)
         Me.lblValueThree.Name = "lblValueThree"
         Me.lblValueThree.Size = New System.Drawing.Size(34, 13)
         Me.lblValueThree.TabIndex = 826
@@ -1240,7 +1240,7 @@ Partial Class ucrSynopticRA1
         'lblFlagThree
         '
         Me.lblFlagThree.AutoSize = True
-        Me.lblFlagThree.Location = New System.Drawing.Point(831, 67)
+        Me.lblFlagThree.Location = New System.Drawing.Point(890, 72)
         Me.lblFlagThree.Name = "lblFlagThree"
         Me.lblFlagThree.Size = New System.Drawing.Size(27, 13)
         Me.lblFlagThree.TabIndex = 827
@@ -1248,7 +1248,7 @@ Partial Class ucrSynopticRA1
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(391, 589)
+        Me.btnCancel.Location = New System.Drawing.Point(422, 589)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(60, 23)
         Me.btnCancel.TabIndex = 59
@@ -1278,9 +1278,9 @@ Partial Class ucrSynopticRA1
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(463, 589)
+        Me.btnView.Location = New System.Drawing.Point(488, 589)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(60, 23)
+        Me.btnView.Size = New System.Drawing.Size(72, 23)
         Me.btnView.TabIndex = 61
         Me.btnView.Tag = ""
         Me.btnView.Text = "View"
@@ -1298,7 +1298,7 @@ Partial Class ucrSynopticRA1
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(751, 589)
+        Me.btnHelp.Location = New System.Drawing.Point(788, 589)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(60, 23)
         Me.btnHelp.TabIndex = 64
@@ -1308,9 +1308,9 @@ Partial Class ucrSynopticRA1
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(319, 589)
+        Me.btnClear.Location = New System.Drawing.Point(350, 589)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(60, 23)
+        Me.btnClear.Size = New System.Drawing.Size(66, 23)
         Me.btnClear.TabIndex = 58
         Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
@@ -1320,7 +1320,7 @@ Partial Class ucrSynopticRA1
         '
         Me.btnSave.Location = New System.Drawing.Point(103, 589)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(60, 23)
+        Me.btnSave.Size = New System.Drawing.Size(80, 23)
         Me.btnSave.TabIndex = 55
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
@@ -1328,9 +1328,9 @@ Partial Class ucrSynopticRA1
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(247, 589)
+        Me.btnDelete.Location = New System.Drawing.Point(271, 589)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(60, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(73, 23)
         Me.btnDelete.TabIndex = 57
         Me.btnDelete.Tag = "delete"
         Me.btnDelete.Text = "Delete"
@@ -1340,7 +1340,7 @@ Partial Class ucrSynopticRA1
         '
         Me.btnAddNew.Location = New System.Drawing.Point(31, 589)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(60, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(66, 23)
         Me.btnAddNew.TabIndex = 60
         Me.btnAddNew.Tag = "add"
         Me.btnAddNew.Text = "Add New"
@@ -1348,9 +1348,9 @@ Partial Class ucrSynopticRA1
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(175, 589)
+        Me.btnUpdate.Location = New System.Drawing.Point(189, 589)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(76, 23)
         Me.btnUpdate.TabIndex = 56
         Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
@@ -1358,7 +1358,7 @@ Partial Class ucrSynopticRA1
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(679, 589)
+        Me.btnClose.Location = New System.Drawing.Point(716, 589)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(60, 23)
         Me.btnClose.TabIndex = 63
@@ -1405,7 +1405,7 @@ Partial Class ucrSynopticRA1
         Me.ucrHourSelector.Location = New System.Drawing.Point(551, 31)
         Me.ucrHourSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrHourSelector.Name = "ucrHourSelector"
-        Me.ucrHourSelector.Size = New System.Drawing.Size(59, 24)
+        Me.ucrHourSelector.Size = New System.Drawing.Size(46, 24)
         Me.ucrHourSelector.TabIndex = 5
         Me.ucrHourSelector.Tag = "hh"
         '
@@ -1416,7 +1416,7 @@ Partial Class ucrSynopticRA1
         Me.ucrMonthSelector.Location = New System.Drawing.Point(337, 31)
         Me.ucrMonthSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrMonthSelector.Name = "ucrMonthSelector"
-        Me.ucrMonthSelector.Size = New System.Drawing.Size(100, 24)
+        Me.ucrMonthSelector.Size = New System.Drawing.Size(59, 24)
         Me.ucrMonthSelector.TabIndex = 3
         Me.ucrMonthSelector.Tag = "mm"
         '
@@ -1480,9 +1480,9 @@ Partial Class ucrSynopticRA1
         '
         'btnTDCF
         '
-        Me.btnTDCF.Location = New System.Drawing.Point(535, 589)
+        Me.btnTDCF.Location = New System.Drawing.Point(566, 589)
         Me.btnTDCF.Name = "btnTDCF"
-        Me.btnTDCF.Size = New System.Drawing.Size(60, 23)
+        Me.btnTDCF.Size = New System.Drawing.Size(66, 23)
         Me.btnTDCF.TabIndex = 62
         Me.btnTDCF.Tag = ""
         Me.btnTDCF.Text = "TDCF"
@@ -1490,9 +1490,9 @@ Partial Class ucrSynopticRA1
         '
         'btnPush
         '
-        Me.btnPush.Location = New System.Drawing.Point(607, 589)
+        Me.btnPush.Location = New System.Drawing.Point(638, 589)
         Me.btnPush.Name = "btnPush"
-        Me.btnPush.Size = New System.Drawing.Size(60, 23)
+        Me.btnPush.Size = New System.Drawing.Size(66, 23)
         Me.btnPush.TabIndex = 852
         Me.btnPush.Text = "Push"
         Me.btnPush.UseVisualStyleBackColor = True
@@ -1632,7 +1632,7 @@ Partial Class ucrSynopticRA1
         Me.Controls.Add(Me.Val_Elem106Label)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrSynopticRA1"
-        Me.Size = New System.Drawing.Size(915, 659)
+        Me.Size = New System.Drawing.Size(1009, 659)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -577,4 +577,24 @@ Public Class ucrHourlyWind
         End If
         Me.Cursor = Cursors.Default
     End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+
+    End Sub
+
+    Private Sub ucrMonth_Load(sender As Object, e As EventArgs) Handles ucrMonth.Load
+
+    End Sub
+
+    Private Sub lblMonth_Click(sender As Object, e As EventArgs) Handles lblMonth.Click
+
+    End Sub
+
+    Private Sub ucrYearSelector_Load(sender As Object, e As EventArgs) Handles ucrYearSelector.Load
+
+    End Sub
+
+    Private Sub lblYear_Click(sender As Object, e As EventArgs)
+
+    End Sub
 End Class

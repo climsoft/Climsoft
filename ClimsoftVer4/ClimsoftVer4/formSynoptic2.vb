@@ -1493,6 +1493,14 @@
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub cboStation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStation.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+
+    End Sub
+
     Private Sub cboPrecipUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPrecipUnits.SelectedIndexChanged
 
     End Sub
