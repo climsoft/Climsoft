@@ -382,7 +382,7 @@ Partial Class frmMainMenu
         Me.Panel1.Location = New System.Drawing.Point(0, 27)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0, 3, 3, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(931, 521)
+        Me.Panel1.Size = New System.Drawing.Size(931, 558)
         Me.Panel1.TabIndex = 10
         '
         'Label5
@@ -412,9 +412,9 @@ Partial Class frmMainMenu
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(162, 471)
+        Me.Label9.Location = New System.Drawing.Point(165, 471)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(176, 40)
+        Me.Label9.Size = New System.Drawing.Size(148, 78)
         Me.Label9.TabIndex = 33
         Me.Label9.Tag = "AWS_Real_Time_Processing"
         Me.Label9.Text = "AWS Real Time Processing"
@@ -656,7 +656,7 @@ Partial Class frmMainMenu
         'frmMainMenu
         '
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(931, 548)
+        Me.ClientSize = New System.Drawing.Size(931, 585)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.menuStripMain)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
