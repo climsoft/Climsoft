@@ -189,7 +189,6 @@ Partial Class frmLogin
         Me.linkLabelLanguage.TabIndex = 12
         Me.linkLabelLanguage.Tag = ""
         Me.linkLabelLanguage.Text = "Change language:"
-        Me.linkLabelLanguage.Visible = False
         '
         'lblLanguage
         '
@@ -199,7 +198,6 @@ Partial Class frmLogin
         Me.lblLanguage.TabIndex = 13
         Me.lblLanguage.Tag = "Password"
         Me.lblLanguage.Text = "language"
-        Me.lblLanguage.Visible = False
         '
         'frmLogin
         '

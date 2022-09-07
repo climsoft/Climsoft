@@ -73,7 +73,7 @@ Partial Class ucrMonthlyData
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(434, 13)
+        lblYear.Location = New System.Drawing.Point(504, 10)
         lblYear.Name = "lblYear"
         lblYear.Size = New System.Drawing.Size(32, 13)
         lblYear.TabIndex = 589
@@ -84,10 +84,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod1.FieldName = "01"
         Me.UcrValueFlagPeriod1.IncludePeriod = True
         Me.UcrValueFlagPeriod1.KeyControl = False
-        Me.UcrValueFlagPeriod1.Location = New System.Drawing.Point(232, 91)
+        Me.UcrValueFlagPeriod1.Location = New System.Drawing.Point(234, 91)
         Me.UcrValueFlagPeriod1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod1.Name = "UcrValueFlagPeriod1"
-        Me.UcrValueFlagPeriod1.Size = New System.Drawing.Size(137, 28)
+        Me.UcrValueFlagPeriod1.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod1.TabIndex = 4
         Me.UcrValueFlagPeriod1.Tag = "01"
         '
@@ -96,10 +96,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod5.FieldName = "05"
         Me.UcrValueFlagPeriod5.IncludePeriod = True
         Me.UcrValueFlagPeriod5.KeyControl = False
-        Me.UcrValueFlagPeriod5.Location = New System.Drawing.Point(232, 208)
+        Me.UcrValueFlagPeriod5.Location = New System.Drawing.Point(234, 208)
         Me.UcrValueFlagPeriod5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod5.Name = "UcrValueFlagPeriod5"
-        Me.UcrValueFlagPeriod5.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod5.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod5.TabIndex = 8
         Me.UcrValueFlagPeriod5.Tag = "05"
         '
@@ -108,10 +108,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod6.FieldName = "06"
         Me.UcrValueFlagPeriod6.IncludePeriod = True
         Me.UcrValueFlagPeriod6.KeyControl = False
-        Me.UcrValueFlagPeriod6.Location = New System.Drawing.Point(232, 238)
+        Me.UcrValueFlagPeriod6.Location = New System.Drawing.Point(234, 238)
         Me.UcrValueFlagPeriod6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod6.Name = "UcrValueFlagPeriod6"
-        Me.UcrValueFlagPeriod6.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod6.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod6.TabIndex = 9
         Me.UcrValueFlagPeriod6.Tag = "06"
         '
@@ -120,10 +120,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod12.FieldName = "12"
         Me.UcrValueFlagPeriod12.IncludePeriod = True
         Me.UcrValueFlagPeriod12.KeyControl = False
-        Me.UcrValueFlagPeriod12.Location = New System.Drawing.Point(232, 416)
+        Me.UcrValueFlagPeriod12.Location = New System.Drawing.Point(234, 416)
         Me.UcrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod12.Name = "UcrValueFlagPeriod12"
-        Me.UcrValueFlagPeriod12.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod12.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod12.TabIndex = 15
         Me.UcrValueFlagPeriod12.Tag = "12"
         '
@@ -132,10 +132,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod11.FieldName = "11"
         Me.UcrValueFlagPeriod11.IncludePeriod = True
         Me.UcrValueFlagPeriod11.KeyControl = False
-        Me.UcrValueFlagPeriod11.Location = New System.Drawing.Point(232, 387)
+        Me.UcrValueFlagPeriod11.Location = New System.Drawing.Point(234, 387)
         Me.UcrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod11.Name = "UcrValueFlagPeriod11"
-        Me.UcrValueFlagPeriod11.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod11.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod11.TabIndex = 14
         Me.UcrValueFlagPeriod11.Tag = "11"
         '
@@ -144,10 +144,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod10.FieldName = "10"
         Me.UcrValueFlagPeriod10.IncludePeriod = True
         Me.UcrValueFlagPeriod10.KeyControl = False
-        Me.UcrValueFlagPeriod10.Location = New System.Drawing.Point(232, 357)
+        Me.UcrValueFlagPeriod10.Location = New System.Drawing.Point(234, 357)
         Me.UcrValueFlagPeriod10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod10.Name = "UcrValueFlagPeriod10"
-        Me.UcrValueFlagPeriod10.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod10.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod10.TabIndex = 13
         Me.UcrValueFlagPeriod10.Tag = "10"
         '
@@ -156,10 +156,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod7.FieldName = "07"
         Me.UcrValueFlagPeriod7.IncludePeriod = True
         Me.UcrValueFlagPeriod7.KeyControl = False
-        Me.UcrValueFlagPeriod7.Location = New System.Drawing.Point(232, 269)
+        Me.UcrValueFlagPeriod7.Location = New System.Drawing.Point(234, 269)
         Me.UcrValueFlagPeriod7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod7.Name = "UcrValueFlagPeriod7"
-        Me.UcrValueFlagPeriod7.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod7.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod7.TabIndex = 10
         Me.UcrValueFlagPeriod7.Tag = "07"
         '
@@ -168,10 +168,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod8.FieldName = "08"
         Me.UcrValueFlagPeriod8.IncludePeriod = True
         Me.UcrValueFlagPeriod8.KeyControl = False
-        Me.UcrValueFlagPeriod8.Location = New System.Drawing.Point(232, 297)
+        Me.UcrValueFlagPeriod8.Location = New System.Drawing.Point(234, 297)
         Me.UcrValueFlagPeriod8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod8.Name = "UcrValueFlagPeriod8"
-        Me.UcrValueFlagPeriod8.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod8.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod8.TabIndex = 11
         Me.UcrValueFlagPeriod8.Tag = "08"
         '
@@ -180,10 +180,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod9.FieldName = "09"
         Me.UcrValueFlagPeriod9.IncludePeriod = True
         Me.UcrValueFlagPeriod9.KeyControl = False
-        Me.UcrValueFlagPeriod9.Location = New System.Drawing.Point(232, 327)
+        Me.UcrValueFlagPeriod9.Location = New System.Drawing.Point(234, 327)
         Me.UcrValueFlagPeriod9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod9.Name = "UcrValueFlagPeriod9"
-        Me.UcrValueFlagPeriod9.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod9.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod9.TabIndex = 12
         Me.UcrValueFlagPeriod9.Tag = "09"
         '
@@ -192,10 +192,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod4.FieldName = "04"
         Me.UcrValueFlagPeriod4.IncludePeriod = True
         Me.UcrValueFlagPeriod4.KeyControl = False
-        Me.UcrValueFlagPeriod4.Location = New System.Drawing.Point(232, 179)
+        Me.UcrValueFlagPeriod4.Location = New System.Drawing.Point(234, 179)
         Me.UcrValueFlagPeriod4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod4.Name = "UcrValueFlagPeriod4"
-        Me.UcrValueFlagPeriod4.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod4.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod4.TabIndex = 7
         Me.UcrValueFlagPeriod4.Tag = "04"
         '
@@ -204,10 +204,10 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod3.FieldName = "03"
         Me.UcrValueFlagPeriod3.IncludePeriod = True
         Me.UcrValueFlagPeriod3.KeyControl = False
-        Me.UcrValueFlagPeriod3.Location = New System.Drawing.Point(232, 152)
+        Me.UcrValueFlagPeriod3.Location = New System.Drawing.Point(234, 152)
         Me.UcrValueFlagPeriod3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod3.Name = "UcrValueFlagPeriod3"
-        Me.UcrValueFlagPeriod3.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod3.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod3.TabIndex = 6
         Me.UcrValueFlagPeriod3.Tag = "03"
         '
@@ -216,17 +216,17 @@ Partial Class ucrMonthlyData
         Me.UcrValueFlagPeriod2.FieldName = "02"
         Me.UcrValueFlagPeriod2.IncludePeriod = True
         Me.UcrValueFlagPeriod2.KeyControl = False
-        Me.UcrValueFlagPeriod2.Location = New System.Drawing.Point(232, 121)
+        Me.UcrValueFlagPeriod2.Location = New System.Drawing.Point(234, 121)
         Me.UcrValueFlagPeriod2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod2.Name = "UcrValueFlagPeriod2"
-        Me.UcrValueFlagPeriod2.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod2.Size = New System.Drawing.Size(178, 28)
         Me.UcrValueFlagPeriod2.TabIndex = 5
         Me.UcrValueFlagPeriod2.Tag = "02"
         '
         'lblFlag
         '
         Me.lblFlag.AutoSize = True
-        Me.lblFlag.Location = New System.Drawing.Point(285, 75)
+        Me.lblFlag.Location = New System.Drawing.Point(303, 75)
         Me.lblFlag.Name = "lblFlag"
         Me.lblFlag.Size = New System.Drawing.Size(27, 13)
         Me.lblFlag.TabIndex = 572
@@ -235,7 +235,7 @@ Partial Class ucrMonthlyData
         'lblValue
         '
         Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(233, 75)
+        Me.lblValue.Location = New System.Drawing.Point(232, 75)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(34, 13)
         Me.lblValue.TabIndex = 571
@@ -244,7 +244,7 @@ Partial Class ucrMonthlyData
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(174, 74)
+        Me.lblMonth.Location = New System.Drawing.Point(169, 74)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(37, 13)
         Me.lblMonth.TabIndex = 570
@@ -361,7 +361,7 @@ Partial Class ucrMonthlyData
         'lblPeriod
         '
         Me.lblPeriod.AutoSize = True
-        Me.lblPeriod.Location = New System.Drawing.Point(332, 76)
+        Me.lblPeriod.Location = New System.Drawing.Point(356, 74)
         Me.lblPeriod.Name = "lblPeriod"
         Me.lblPeriod.Size = New System.Drawing.Size(37, 13)
         Me.lblPeriod.TabIndex = 585
@@ -371,7 +371,7 @@ Partial Class ucrMonthlyData
         '
         Me.ucrYearSelector.FieldName = "yyyy"
         Me.ucrYearSelector.KeyControl = True
-        Me.ucrYearSelector.Location = New System.Drawing.Point(437, 29)
+        Me.ucrYearSelector.Location = New System.Drawing.Point(507, 26)
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(85, 25)
@@ -382,10 +382,10 @@ Partial Class ucrMonthlyData
         '
         Me.ucrElementSelector.FieldName = "elementId"
         Me.ucrElementSelector.KeyControl = True
-        Me.ucrElementSelector.Location = New System.Drawing.Point(234, 29)
+        Me.ucrElementSelector.Location = New System.Drawing.Point(274, 26)
         Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrElementSelector.Name = "ucrElementSelector"
-        Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
+        Me.ucrElementSelector.Size = New System.Drawing.Size(202, 21)
         Me.ucrElementSelector.TabIndex = 2
         Me.ucrElementSelector.Tag = "elementId"
         '
@@ -393,17 +393,17 @@ Partial Class ucrMonthlyData
         '
         Me.ucrStationSelector.FieldName = "stationId"
         Me.ucrStationSelector.KeyControl = True
-        Me.ucrStationSelector.Location = New System.Drawing.Point(32, 29)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(62, 26)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrStationSelector.Name = "ucrStationSelector"
-        Me.ucrStationSelector.Size = New System.Drawing.Size(187, 24)
+        Me.ucrStationSelector.Size = New System.Drawing.Size(197, 24)
         Me.ucrStationSelector.TabIndex = 1
         Me.ucrStationSelector.Tag = "stationId"
         '
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(231, 13)
+        Me.lblElement.Location = New System.Drawing.Point(271, 9)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
         Me.lblElement.TabIndex = 591
@@ -412,7 +412,7 @@ Partial Class ucrMonthlyData
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(35, 13)
+        Me.lblStation.Location = New System.Drawing.Point(59, 11)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 590
@@ -421,9 +421,9 @@ Partial Class ucrMonthlyData
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(532, 540)
+        Me.btnUpload.Location = New System.Drawing.Point(482, 544)
         Me.btnUpload.Name = "btnUpload"
-        Me.btnUpload.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpload.Size = New System.Drawing.Size(83, 23)
         Me.btnUpload.TabIndex = 25
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
@@ -448,9 +448,9 @@ Partial Class ucrMonthlyData
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(344, 507)
+        Me.btnCancel.Location = New System.Drawing.Point(399, 507)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(60, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(77, 23)
         Me.btnCancel.TabIndex = 21
         Me.btnCancel.Tag = "cancel"
         Me.btnCancel.Text = "Cancel"
@@ -458,9 +458,9 @@ Partial Class ucrMonthlyData
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(412, 507)
+        Me.btnView.Location = New System.Drawing.Point(482, 507)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(60, 23)
+        Me.btnView.Size = New System.Drawing.Size(83, 23)
         Me.btnView.TabIndex = 22
         Me.btnView.Tag = ""
         Me.btnView.Text = "View"
@@ -468,9 +468,9 @@ Partial Class ucrMonthlyData
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(547, 507)
+        Me.btnHelp.Location = New System.Drawing.Point(650, 507)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(60, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(66, 23)
         Me.btnHelp.TabIndex = 24
         Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
@@ -478,9 +478,9 @@ Partial Class ucrMonthlyData
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(275, 507)
+        Me.btnClear.Location = New System.Drawing.Point(322, 507)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(60, 23)
+        Me.btnClear.Size = New System.Drawing.Size(71, 23)
         Me.btnClear.TabIndex = 20
         Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
@@ -488,9 +488,9 @@ Partial Class ucrMonthlyData
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(72, 507)
+        Me.btnSave.Location = New System.Drawing.Point(82, 507)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(60, 23)
+        Me.btnSave.Size = New System.Drawing.Size(78, 23)
         Me.btnSave.TabIndex = 16
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
@@ -498,9 +498,9 @@ Partial Class ucrMonthlyData
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(206, 507)
+        Me.btnDelete.Location = New System.Drawing.Point(246, 507)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(60, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(70, 23)
         Me.btnDelete.TabIndex = 18
         Me.btnDelete.Tag = "delete"
         Me.btnDelete.Text = "Delete"
@@ -510,7 +510,7 @@ Partial Class ucrMonthlyData
         '
         Me.btnAddNew.Location = New System.Drawing.Point(6, 507)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(60, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(70, 23)
         Me.btnAddNew.TabIndex = 19
         Me.btnAddNew.Tag = "add"
         Me.btnAddNew.Text = "Add New"
@@ -518,9 +518,9 @@ Partial Class ucrMonthlyData
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(139, 507)
+        Me.btnUpdate.Location = New System.Drawing.Point(166, 507)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(74, 23)
         Me.btnUpdate.TabIndex = 17
         Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
@@ -528,9 +528,9 @@ Partial Class ucrMonthlyData
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(481, 507)
+        Me.btnClose.Location = New System.Drawing.Point(571, 507)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(60, 23)
+        Me.btnClose.Size = New System.Drawing.Size(73, 23)
         Me.btnClose.TabIndex = 23
         Me.btnClose.Tag = "close"
         Me.btnClose.Text = "Close"
@@ -538,7 +538,7 @@ Partial Class ucrMonthlyData
         '
         'ucrNavigation
         '
-        Me.ucrNavigation.Location = New System.Drawing.Point(124, 467)
+        Me.ucrNavigation.Location = New System.Drawing.Point(166, 464)
         Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigation.Name = "ucrNavigation"
         Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
@@ -596,7 +596,7 @@ Partial Class ucrMonthlyData
         Me.Controls.Add(Me.UcrValueFlagPeriod1)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrMonthlyData"
-        Me.Size = New System.Drawing.Size(623, 581)
+        Me.Size = New System.Drawing.Size(796, 581)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

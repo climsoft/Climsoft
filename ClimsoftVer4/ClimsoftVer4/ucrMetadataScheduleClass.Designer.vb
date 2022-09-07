@@ -47,7 +47,7 @@ Partial Class ucrMetadataScheduleClass
         Me.lblScheduleClass.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblScheduleClass.Location = New System.Drawing.Point(257, 20)
         Me.lblScheduleClass.Name = "lblScheduleClass"
-        Me.lblScheduleClass.Size = New System.Drawing.Size(116, 16)
+        Me.lblScheduleClass.Size = New System.Drawing.Size(115, 16)
         Me.lblScheduleClass.TabIndex = 0
         Me.lblScheduleClass.Text = "Schedule Class"
         '
@@ -81,6 +81,7 @@ Partial Class ucrMetadataScheduleClass
         'ucrTextBoxClass
         '
         Me.ucrTextBoxClass.FieldName = "scheduleClass"
+        Me.ucrTextBoxClass.KeyControl = False
         Me.ucrTextBoxClass.Location = New System.Drawing.Point(270, 96)
         Me.ucrTextBoxClass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxClass.Name = "ucrTextBoxClass"
@@ -92,6 +93,7 @@ Partial Class ucrMetadataScheduleClass
         'ucrStationSelector
         '
         Me.ucrStationSelector.FieldName = "refersTo"
+        Me.ucrStationSelector.KeyControl = False
         Me.ucrStationSelector.Location = New System.Drawing.Point(270, 133)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
@@ -102,6 +104,7 @@ Partial Class ucrMetadataScheduleClass
         'ucrTextBoxDescription
         '
         Me.ucrTextBoxDescription.FieldName = "description"
+        Me.ucrTextBoxDescription.KeyControl = False
         Me.ucrTextBoxDescription.Location = New System.Drawing.Point(270, 176)
         Me.ucrTextBoxDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDescription.Name = "ucrTextBoxDescription"
@@ -126,54 +129,54 @@ Partial Class ucrMetadataScheduleClass
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(412, 5)
+        Me.btnClear.Location = New System.Drawing.Point(401, 5)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(81, 27)
+        Me.btnClear.Size = New System.Drawing.Size(92, 27)
         Me.btnClear.TabIndex = 4
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(510, 5)
+        Me.btnView.Location = New System.Drawing.Point(499, 5)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(81, 27)
+        Me.btnView.Size = New System.Drawing.Size(97, 27)
         Me.btnView.TabIndex = 5
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(314, 5)
+        Me.btnDelete.Location = New System.Drawing.Point(303, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(81, 27)
+        Me.btnDelete.Size = New System.Drawing.Size(92, 27)
         Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(216, 5)
+        Me.btnUpdate.Location = New System.Drawing.Point(205, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(81, 27)
+        Me.btnUpdate.Size = New System.Drawing.Size(92, 27)
         Me.btnUpdate.TabIndex = 2
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(118, 5)
+        Me.btnSave.Location = New System.Drawing.Point(107, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(81, 27)
+        Me.btnSave.Size = New System.Drawing.Size(92, 27)
         Me.btnSave.TabIndex = 1
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(20, 5)
+        Me.btnAddNew.Location = New System.Drawing.Point(6, 5)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
+        Me.btnAddNew.Size = New System.Drawing.Size(95, 27)
         Me.btnAddNew.TabIndex = 0
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True

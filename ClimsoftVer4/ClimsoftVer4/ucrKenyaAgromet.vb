@@ -68,5 +68,7 @@
         End If
     End Sub
 
+    Private Sub Label34_Click(sender As Object, e As EventArgs) Handles Label34.Click
 
+    End Sub
 End Class
