@@ -111,6 +111,7 @@ Partial Class ucrMetadataStation
         'ucrStationName
         '
         Me.ucrStationName.FieldName = "stationName"
+        Me.ucrStationName.KeyControl = False
         Me.ucrStationName.Location = New System.Drawing.Point(121, 95)
         Me.ucrStationName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationName.Name = "ucrStationName"
@@ -122,6 +123,7 @@ Partial Class ucrMetadataStation
         'ucrDatePickerClosingDate
         '
         Me.ucrDatePickerClosingDate.FieldName = "closingDatetime"
+        Me.ucrDatePickerClosingDate.KeyControl = False
         Me.ucrDatePickerClosingDate.Location = New System.Drawing.Point(522, 273)
         Me.ucrDatePickerClosingDate.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrDatePickerClosingDate.Name = "ucrDatePickerClosingDate"
@@ -132,6 +134,7 @@ Partial Class ucrMetadataStation
         'ucrDatePickerOpeningDate
         '
         Me.ucrDatePickerOpeningDate.FieldName = "openingDatetime"
+        Me.ucrDatePickerOpeningDate.KeyControl = False
         Me.ucrDatePickerOpeningDate.Location = New System.Drawing.Point(522, 249)
         Me.ucrDatePickerOpeningDate.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrDatePickerOpeningDate.Name = "ucrDatePickerOpeningDate"
@@ -142,6 +145,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxGeographicalAccuracy
         '
         Me.ucrTextBoxGeographicalAccuracy.FieldName = "geoLocationAccuracy"
+        Me.ucrTextBoxGeographicalAccuracy.KeyControl = False
         Me.ucrTextBoxGeographicalAccuracy.Location = New System.Drawing.Point(522, 327)
         Me.ucrTextBoxGeographicalAccuracy.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxGeographicalAccuracy.Name = "ucrTextBoxGeographicalAccuracy"
@@ -153,6 +157,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxGraphicalMethod
         '
         Me.ucrTextBoxGraphicalMethod.FieldName = "geoLocationMethod"
+        Me.ucrTextBoxGraphicalMethod.KeyControl = False
         Me.ucrTextBoxGraphicalMethod.Location = New System.Drawing.Point(522, 303)
         Me.ucrTextBoxGraphicalMethod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxGraphicalMethod.Name = "ucrTextBoxGraphicalMethod"
@@ -164,6 +169,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxQualifier
         '
         Me.ucrTextBoxQualifier.FieldName = "qualifier"
+        Me.ucrTextBoxQualifier.KeyControl = False
         Me.ucrTextBoxQualifier.Location = New System.Drawing.Point(522, 227)
         Me.ucrTextBoxQualifier.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxQualifier.Name = "ucrTextBoxQualifier"
@@ -175,6 +181,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxDrainageBasin
         '
         Me.ucrTextBoxDrainageBasin.FieldName = "drainageBasin"
+        Me.ucrTextBoxDrainageBasin.KeyControl = False
         Me.ucrTextBoxDrainageBasin.Location = New System.Drawing.Point(120, 356)
         Me.ucrTextBoxDrainageBasin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDrainageBasin.Name = "ucrTextBoxDrainageBasin"
@@ -186,6 +193,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxAdminRegion
         '
         Me.ucrTextBoxAdminRegion.FieldName = "adminRegion"
+        Me.ucrTextBoxAdminRegion.KeyControl = False
         Me.ucrTextBoxAdminRegion.Location = New System.Drawing.Point(121, 327)
         Me.ucrTextBoxAdminRegion.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAdminRegion.Name = "ucrTextBoxAdminRegion"
@@ -197,6 +205,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxAuthority
         '
         Me.ucrTextBoxAuthority.FieldName = "authority"
+        Me.ucrTextBoxAuthority.KeyControl = False
         Me.ucrTextBoxAuthority.Location = New System.Drawing.Point(121, 303)
         Me.ucrTextBoxAuthority.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAuthority.Name = "ucrTextBoxAuthority"
@@ -208,6 +217,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxCountry
         '
         Me.ucrTextBoxCountry.FieldName = "country"
+        Me.ucrTextBoxCountry.KeyControl = False
         Me.ucrTextBoxCountry.Location = New System.Drawing.Point(120, 274)
         Me.ucrTextBoxCountry.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxCountry.Name = "ucrTextBoxCountry"
@@ -219,6 +229,7 @@ Partial Class ucrMetadataStation
         'ucrICAOId
         '
         Me.ucrICAOId.FieldName = "icaoid"
+        Me.ucrICAOId.KeyControl = False
         Me.ucrICAOId.Location = New System.Drawing.Point(120, 249)
         Me.ucrICAOId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrICAOId.Name = "ucrICAOId"
@@ -230,6 +241,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxWMOId
         '
         Me.ucrTextBoxWMOId.FieldName = "wmoid"
+        Me.ucrTextBoxWMOId.KeyControl = False
         Me.ucrTextBoxWMOId.Location = New System.Drawing.Point(121, 222)
         Me.ucrTextBoxWMOId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxWMOId.Name = "ucrTextBoxWMOId"
@@ -241,6 +253,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxElevation
         '
         Me.ucrTextBoxElevation.FieldName = "elevation"
+        Me.ucrTextBoxElevation.KeyControl = False
         Me.ucrTextBoxElevation.Location = New System.Drawing.Point(121, 193)
         Me.ucrTextBoxElevation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxElevation.Name = "ucrTextBoxElevation"
@@ -252,6 +265,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxLongitude
         '
         Me.ucrTextBoxLongitude.FieldName = "longitude"
+        Me.ucrTextBoxLongitude.KeyControl = False
         Me.ucrTextBoxLongitude.Location = New System.Drawing.Point(121, 159)
         Me.ucrTextBoxLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLongitude.Name = "ucrTextBoxLongitude"
@@ -263,6 +277,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxLatitude
         '
         Me.ucrTextBoxLatitude.FieldName = "latitude"
+        Me.ucrTextBoxLatitude.KeyControl = False
         Me.ucrTextBoxLatitude.Location = New System.Drawing.Point(120, 134)
         Me.ucrTextBoxLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLatitude.Name = "ucrTextBoxLatitude"
@@ -274,6 +289,7 @@ Partial Class ucrMetadataStation
         'ucrStationIDcombobox
         '
         Me.ucrStationIDcombobox.FieldName = "stationId"
+        Me.ucrStationIDcombobox.KeyControl = False
         Me.ucrStationIDcombobox.Location = New System.Drawing.Point(121, 72)
         Me.ucrStationIDcombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationIDcombobox.Name = "ucrStationIDcombobox"
@@ -319,6 +335,7 @@ Partial Class ucrMetadataStation
         'ucrDataLinkComboboxEW
         '
         Me.ucrDataLinkComboboxEW.FieldName = Nothing
+        Me.ucrDataLinkComboboxEW.KeyControl = False
         Me.ucrDataLinkComboboxEW.Location = New System.Drawing.Point(395, 38)
         Me.ucrDataLinkComboboxEW.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataLinkComboboxEW.Name = "ucrDataLinkComboboxEW"
@@ -328,6 +345,7 @@ Partial Class ucrMetadataStation
         'ucrDataLinkComboboxNS
         '
         Me.ucrDataLinkComboboxNS.FieldName = Nothing
+        Me.ucrDataLinkComboboxNS.KeyControl = False
         Me.ucrDataLinkComboboxNS.Location = New System.Drawing.Point(395, 15)
         Me.ucrDataLinkComboboxNS.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataLinkComboboxNS.Name = "ucrDataLinkComboboxNS"
@@ -337,6 +355,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxSecondsLongitude
         '
         Me.ucrTextBoxSecondsLongitude.FieldName = Nothing
+        Me.ucrTextBoxSecondsLongitude.KeyControl = False
         Me.ucrTextBoxSecondsLongitude.Location = New System.Drawing.Point(295, 43)
         Me.ucrTextBoxSecondsLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxSecondsLongitude.Name = "ucrTextBoxSecondsLongitude"
@@ -347,6 +366,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxSecondsLatitude
         '
         Me.ucrTextBoxSecondsLatitude.FieldName = Nothing
+        Me.ucrTextBoxSecondsLatitude.KeyControl = False
         Me.ucrTextBoxSecondsLatitude.Location = New System.Drawing.Point(295, 15)
         Me.ucrTextBoxSecondsLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxSecondsLatitude.Name = "ucrTextBoxSecondsLatitude"
@@ -357,6 +377,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxMinutesLongitude
         '
         Me.ucrTextBoxMinutesLongitude.FieldName = Nothing
+        Me.ucrTextBoxMinutesLongitude.KeyControl = False
         Me.ucrTextBoxMinutesLongitude.Location = New System.Drawing.Point(173, 43)
         Me.ucrTextBoxMinutesLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxMinutesLongitude.Name = "ucrTextBoxMinutesLongitude"
@@ -367,6 +388,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxMinutesLatitude
         '
         Me.ucrTextBoxMinutesLatitude.FieldName = Nothing
+        Me.ucrTextBoxMinutesLatitude.KeyControl = False
         Me.ucrTextBoxMinutesLatitude.Location = New System.Drawing.Point(173, 18)
         Me.ucrTextBoxMinutesLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxMinutesLatitude.Name = "ucrTextBoxMinutesLatitude"
@@ -377,6 +399,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxDegreesLongitude
         '
         Me.ucrTextBoxDegreesLongitude.FieldName = Nothing
+        Me.ucrTextBoxDegreesLongitude.KeyControl = False
         Me.ucrTextBoxDegreesLongitude.Location = New System.Drawing.Point(56, 44)
         Me.ucrTextBoxDegreesLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDegreesLongitude.Name = "ucrTextBoxDegreesLongitude"
@@ -387,6 +410,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxDegreesLatitude
         '
         Me.ucrTextBoxDegreesLatitude.FieldName = Nothing
+        Me.ucrTextBoxDegreesLatitude.KeyControl = False
         Me.ucrTextBoxDegreesLatitude.Location = New System.Drawing.Point(56, 18)
         Me.ucrTextBoxDegreesLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDegreesLatitude.Name = "ucrTextBoxDegreesLatitude"
@@ -510,18 +534,18 @@ Partial Class ucrMetadataStation
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(424, 0)
+        Me.btnClear.Location = New System.Drawing.Point(413, 0)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.Size = New System.Drawing.Size(86, 23)
         Me.btnClear.TabIndex = 4
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnImport
         '
-        Me.btnImport.Location = New System.Drawing.Point(626, 0)
+        Me.btnImport.Location = New System.Drawing.Point(606, 0)
         Me.btnImport.Name = "btnImport"
-        Me.btnImport.Size = New System.Drawing.Size(75, 23)
+        Me.btnImport.Size = New System.Drawing.Size(112, 23)
         Me.btnImport.TabIndex = 6
         Me.btnImport.Text = "Import"
         Me.btnImport.UseVisualStyleBackColor = True
@@ -537,36 +561,36 @@ Partial Class ucrMetadataStation
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(525, 0)
+        Me.btnView.Location = New System.Drawing.Point(505, 0)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.Size = New System.Drawing.Size(95, 23)
         Me.btnView.TabIndex = 5
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(323, 0)
+        Me.btnDelete.Location = New System.Drawing.Point(314, 0)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(84, 23)
         Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(222, 0)
+        Me.btnUpdate.Location = New System.Drawing.Point(204, 0)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(93, 23)
         Me.btnUpdate.TabIndex = 2
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(121, 0)
+        Me.btnSave.Location = New System.Drawing.Point(101, 0)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.Size = New System.Drawing.Size(95, 23)
         Me.btnSave.TabIndex = 1
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -703,6 +727,7 @@ Partial Class ucrMetadataStation
         'ucrSearchStationName
         '
         Me.ucrSearchStationName.FieldName = ""
+        Me.ucrSearchStationName.KeyControl = False
         Me.ucrSearchStationName.Location = New System.Drawing.Point(475, 68)
         Me.ucrSearchStationName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSearchStationName.Name = "ucrSearchStationName"
@@ -714,6 +739,7 @@ Partial Class ucrMetadataStation
         '
         Me.ucrCheckStationOperational.CheckBoxText = ""
         Me.ucrCheckStationOperational.FieldName = "stationOperational"
+        Me.ucrCheckStationOperational.KeyControl = False
         Me.ucrCheckStationOperational.Location = New System.Drawing.Point(522, 352)
         Me.ucrCheckStationOperational.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrCheckStationOperational.Name = "ucrCheckStationOperational"

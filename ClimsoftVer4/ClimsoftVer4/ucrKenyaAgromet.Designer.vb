@@ -140,9 +140,9 @@ Partial Class ucrKenyaAgromet
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(416, 515)
+        Me.btnCancel.Location = New System.Drawing.Point(478, 515)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(60, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(82, 23)
         Me.btnCancel.TabIndex = 1214
         Me.btnCancel.Tag = "cancel"
         Me.btnCancel.Text = "Cancel"
@@ -150,9 +150,9 @@ Partial Class ucrKenyaAgromet
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(484, 515)
+        Me.btnView.Location = New System.Drawing.Point(566, 516)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(60, 23)
+        Me.btnView.Size = New System.Drawing.Size(78, 23)
         Me.btnView.TabIndex = 1215
         Me.btnView.Tag = ""
         Me.btnView.Text = "View"
@@ -161,18 +161,18 @@ Partial Class ucrKenyaAgromet
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.Lime
-        Me.Button1.Location = New System.Drawing.Point(605, 545)
+        Me.Button1.Location = New System.Drawing.Point(566, 545)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.Size = New System.Drawing.Size(78, 23)
         Me.Button1.TabIndex = 1221
         Me.Button1.Text = "Upload"
         Me.Button1.UseVisualStyleBackColor = False
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(619, 515)
+        Me.btnHelp.Location = New System.Drawing.Point(733, 516)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(60, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(67, 23)
         Me.btnHelp.TabIndex = 1217
         Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
@@ -180,9 +180,9 @@ Partial Class ucrKenyaAgromet
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(347, 515)
+        Me.btnClear.Location = New System.Drawing.Point(395, 515)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(60, 23)
+        Me.btnClear.Size = New System.Drawing.Size(77, 23)
         Me.btnClear.TabIndex = 1213
         Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
@@ -192,7 +192,7 @@ Partial Class ucrKenyaAgromet
         '
         Me.btnSave.Location = New System.Drawing.Point(144, 515)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(60, 23)
+        Me.btnSave.Size = New System.Drawing.Size(76, 23)
         Me.btnSave.TabIndex = 1210
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
@@ -200,9 +200,9 @@ Partial Class ucrKenyaAgromet
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(278, 515)
+        Me.btnDelete.Location = New System.Drawing.Point(313, 515)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(60, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(76, 23)
         Me.btnDelete.TabIndex = 1212
         Me.btnDelete.Tag = "delete"
         Me.btnDelete.Text = "Delete"
@@ -220,9 +220,9 @@ Partial Class ucrKenyaAgromet
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(211, 515)
+        Me.btnUpdate.Location = New System.Drawing.Point(226, 515)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(81, 23)
         Me.btnUpdate.TabIndex = 1211
         Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
@@ -230,9 +230,9 @@ Partial Class ucrKenyaAgromet
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(553, 515)
+        Me.btnClose.Location = New System.Drawing.Point(650, 516)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(60, 23)
+        Me.btnClose.Size = New System.Drawing.Size(77, 23)
         Me.btnClose.TabIndex = 1216
         Me.btnClose.Tag = "close"
         Me.btnClose.Text = "Close"
@@ -278,40 +278,43 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod31
         '
         Me.UcrValueFlagPeriod31.FieldName = "530"
+        Me.UcrValueFlagPeriod31.IncludePeriod = True
         Me.UcrValueFlagPeriod31.KeyControl = False
-        Me.UcrValueFlagPeriod31.Location = New System.Drawing.Point(746, 380)
+        Me.UcrValueFlagPeriod31.Location = New System.Drawing.Point(791, 380)
         Me.UcrValueFlagPeriod31.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod31.Name = "UcrValueFlagPeriod31"
-        Me.UcrValueFlagPeriod31.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod31.Size = New System.Drawing.Size(154, 23)
         Me.UcrValueFlagPeriod31.TabIndex = 1206
         Me.UcrValueFlagPeriod31.Tag = "530"
         '
         'UcrValueFlagPeriod32
         '
         Me.UcrValueFlagPeriod32.FieldName = "541"
+        Me.UcrValueFlagPeriod32.IncludePeriod = True
         Me.UcrValueFlagPeriod32.KeyControl = False
-        Me.UcrValueFlagPeriod32.Location = New System.Drawing.Point(746, 408)
+        Me.UcrValueFlagPeriod32.Location = New System.Drawing.Point(791, 408)
         Me.UcrValueFlagPeriod32.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod32.Name = "UcrValueFlagPeriod32"
-        Me.UcrValueFlagPeriod32.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod32.Size = New System.Drawing.Size(154, 23)
         Me.UcrValueFlagPeriod32.TabIndex = 1207
         Me.UcrValueFlagPeriod32.Tag = "541"
         '
         'UcrValueFlagPeriod33
         '
         Me.UcrValueFlagPeriod33.FieldName = "542"
+        Me.UcrValueFlagPeriod33.IncludePeriod = True
         Me.UcrValueFlagPeriod33.KeyControl = False
-        Me.UcrValueFlagPeriod33.Location = New System.Drawing.Point(746, 436)
+        Me.UcrValueFlagPeriod33.Location = New System.Drawing.Point(791, 436)
         Me.UcrValueFlagPeriod33.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod33.Name = "UcrValueFlagPeriod33"
-        Me.UcrValueFlagPeriod33.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod33.Size = New System.Drawing.Size(154, 23)
         Me.UcrValueFlagPeriod33.TabIndex = 1208
         Me.UcrValueFlagPeriod33.Tag = "542"
         '
         'Label41
         '
         Me.Label41.AutoSize = True
-        Me.Label41.Location = New System.Drawing.Point(810, 337)
+        Me.Label41.Location = New System.Drawing.Point(855, 337)
         Me.Label41.Name = "Label41"
         Me.Label41.Size = New System.Drawing.Size(27, 13)
         Me.Label41.TabIndex = 1275
@@ -320,7 +323,7 @@ Partial Class ucrKenyaAgromet
         'Label45
         '
         Me.Label45.AutoSize = True
-        Me.Label45.Location = New System.Drawing.Point(750, 337)
+        Me.Label45.Location = New System.Drawing.Point(795, 337)
         Me.Label45.Name = "Label45"
         Me.Label45.Size = New System.Drawing.Size(34, 13)
         Me.Label45.TabIndex = 1274
@@ -329,11 +332,12 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod34
         '
         Me.UcrValueFlagPeriod34.FieldName = "531"
+        Me.UcrValueFlagPeriod34.IncludePeriod = True
         Me.UcrValueFlagPeriod34.KeyControl = False
-        Me.UcrValueFlagPeriod34.Location = New System.Drawing.Point(746, 352)
+        Me.UcrValueFlagPeriod34.Location = New System.Drawing.Point(791, 352)
         Me.UcrValueFlagPeriod34.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod34.Name = "UcrValueFlagPeriod34"
-        Me.UcrValueFlagPeriod34.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod34.Size = New System.Drawing.Size(154, 23)
         Me.UcrValueFlagPeriod34.TabIndex = 1205
         Me.UcrValueFlagPeriod34.Tag = "531"
         '
@@ -341,7 +345,7 @@ Partial Class ucrKenyaAgromet
         '
         Me.Label37.AutoSize = True
         Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(658, 317)
+        Me.Label37.Location = New System.Drawing.Point(703, 317)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(175, 13)
         Me.Label37.TabIndex = 1273
@@ -350,7 +354,7 @@ Partial Class ucrKenyaAgromet
         'Label56
         '
         Me.Label56.AutoSize = True
-        Me.Label56.Location = New System.Drawing.Point(648, 445)
+        Me.Label56.Location = New System.Drawing.Point(693, 445)
         Me.Label56.Name = "Label56"
         Me.Label56.Size = New System.Drawing.Size(93, 13)
         Me.Label56.TabIndex = 1272
@@ -359,7 +363,7 @@ Partial Class ucrKenyaAgromet
         'Label57
         '
         Me.Label57.AutoSize = True
-        Me.Label57.Location = New System.Drawing.Point(644, 417)
+        Me.Label57.Location = New System.Drawing.Point(689, 417)
         Me.Label57.Name = "Label57"
         Me.Label57.Size = New System.Drawing.Size(93, 13)
         Me.Label57.TabIndex = 1271
@@ -368,7 +372,7 @@ Partial Class ucrKenyaAgromet
         'Label52
         '
         Me.Label52.AutoSize = True
-        Me.Label52.Location = New System.Drawing.Point(678, 389)
+        Me.Label52.Location = New System.Drawing.Point(723, 389)
         Me.Label52.Name = "Label52"
         Me.Label52.Size = New System.Drawing.Size(56, 13)
         Me.Label52.TabIndex = 1270
@@ -377,7 +381,7 @@ Partial Class ucrKenyaAgromet
         'Label53
         '
         Me.Label53.AutoSize = True
-        Me.Label53.Location = New System.Drawing.Point(669, 356)
+        Me.Label53.Location = New System.Drawing.Point(714, 356)
         Me.Label53.Name = "Label53"
         Me.Label53.Size = New System.Drawing.Size(65, 13)
         Me.Label53.TabIndex = 1269
@@ -386,29 +390,31 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod28
         '
         Me.UcrValueFlagPeriod28.FieldName = "565"
+        Me.UcrValueFlagPeriod28.IncludePeriod = True
         Me.UcrValueFlagPeriod28.KeyControl = False
-        Me.UcrValueFlagPeriod28.Location = New System.Drawing.Point(493, 383)
+        Me.UcrValueFlagPeriod28.Location = New System.Drawing.Point(509, 383)
         Me.UcrValueFlagPeriod28.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod28.Name = "UcrValueFlagPeriod28"
-        Me.UcrValueFlagPeriod28.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod28.Size = New System.Drawing.Size(171, 23)
         Me.UcrValueFlagPeriod28.TabIndex = 1203
         Me.UcrValueFlagPeriod28.Tag = "565"
         '
         'UcrValueFlagPeriod29
         '
         Me.UcrValueFlagPeriod29.FieldName = "566"
+        Me.UcrValueFlagPeriod29.IncludePeriod = True
         Me.UcrValueFlagPeriod29.KeyControl = False
-        Me.UcrValueFlagPeriod29.Location = New System.Drawing.Point(493, 411)
+        Me.UcrValueFlagPeriod29.Location = New System.Drawing.Point(509, 411)
         Me.UcrValueFlagPeriod29.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod29.Name = "UcrValueFlagPeriod29"
-        Me.UcrValueFlagPeriod29.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod29.Size = New System.Drawing.Size(171, 23)
         Me.UcrValueFlagPeriod29.TabIndex = 1204
         Me.UcrValueFlagPeriod29.Tag = "566"
         '
         'Label33
         '
         Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(512, 337)
+        Me.Label33.Location = New System.Drawing.Point(528, 337)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(27, 13)
         Me.Label33.TabIndex = 1268
@@ -417,11 +423,12 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod30
         '
         Me.UcrValueFlagPeriod30.FieldName = "564"
+        Me.UcrValueFlagPeriod30.IncludePeriod = True
         Me.UcrValueFlagPeriod30.KeyControl = False
-        Me.UcrValueFlagPeriod30.Location = New System.Drawing.Point(493, 355)
+        Me.UcrValueFlagPeriod30.Location = New System.Drawing.Point(509, 355)
         Me.UcrValueFlagPeriod30.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod30.Name = "UcrValueFlagPeriod30"
-        Me.UcrValueFlagPeriod30.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod30.Size = New System.Drawing.Size(171, 23)
         Me.UcrValueFlagPeriod30.TabIndex = 1202
         Me.UcrValueFlagPeriod30.Tag = "564"
         '
@@ -429,7 +436,7 @@ Partial Class ucrKenyaAgromet
         '
         Me.Label31.AutoSize = True
         Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label31.Location = New System.Drawing.Point(464, 317)
+        Me.Label31.Location = New System.Drawing.Point(480, 317)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(148, 13)
         Me.Label31.TabIndex = 1267
@@ -438,7 +445,7 @@ Partial Class ucrKenyaAgromet
         'lblRH06Z
         '
         Me.lblRH06Z.AutoSize = True
-        Me.lblRH06Z.Location = New System.Drawing.Point(248, 445)
+        Me.lblRH06Z.Location = New System.Drawing.Point(254, 445)
         Me.lblRH06Z.Name = "lblRH06Z"
         Me.lblRH06Z.Size = New System.Drawing.Size(40, 13)
         Me.lblRH06Z.TabIndex = 1266
@@ -447,7 +454,7 @@ Partial Class ucrKenyaAgromet
         'Label42
         '
         Me.Label42.AutoSize = True
-        Me.Label42.Location = New System.Drawing.Point(235, 417)
+        Me.Label42.Location = New System.Drawing.Point(241, 417)
         Me.Label42.Name = "Label42"
         Me.Label42.Size = New System.Drawing.Size(56, 13)
         Me.Label42.TabIndex = 1265
@@ -456,7 +463,7 @@ Partial Class ucrKenyaAgromet
         'Label43
         '
         Me.Label43.AutoSize = True
-        Me.Label43.Location = New System.Drawing.Point(239, 389)
+        Me.Label43.Location = New System.Drawing.Point(245, 389)
         Me.Label43.Name = "Label43"
         Me.Label43.Size = New System.Drawing.Size(51, 13)
         Me.Label43.TabIndex = 1264
@@ -465,7 +472,7 @@ Partial Class ucrKenyaAgromet
         'Label44
         '
         Me.Label44.AutoSize = True
-        Me.Label44.Location = New System.Drawing.Point(243, 361)
+        Me.Label44.Location = New System.Drawing.Point(249, 361)
         Me.Label44.Name = "Label44"
         Me.Label44.Size = New System.Drawing.Size(47, 13)
         Me.Label44.TabIndex = 1263
@@ -475,7 +482,7 @@ Partial Class ucrKenyaAgromet
         '
         Me.Label40.AutoSize = True
         Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label40.Location = New System.Drawing.Point(248, 317)
+        Me.Label40.Location = New System.Drawing.Point(254, 317)
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(146, 13)
         Me.Label40.TabIndex = 1262
@@ -484,7 +491,7 @@ Partial Class ucrKenyaAgromet
         'Label38
         '
         Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(0, 445)
+        Me.Label38.Location = New System.Drawing.Point(13, 445)
         Me.Label38.Name = "Label38"
         Me.Label38.Size = New System.Drawing.Size(60, 13)
         Me.Label38.TabIndex = 1261
@@ -493,7 +500,7 @@ Partial Class ucrKenyaAgromet
         'Label39
         '
         Me.Label39.AutoSize = True
-        Me.Label39.Location = New System.Drawing.Point(0, 417)
+        Me.Label39.Location = New System.Drawing.Point(13, 417)
         Me.Label39.Name = "Label39"
         Me.Label39.Size = New System.Drawing.Size(60, 13)
         Me.Label39.TabIndex = 1260
@@ -502,7 +509,7 @@ Partial Class ucrKenyaAgromet
         'Label35
         '
         Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(0, 389)
+        Me.Label35.Location = New System.Drawing.Point(13, 389)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(52, 13)
         Me.Label35.TabIndex = 1259
@@ -511,7 +518,7 @@ Partial Class ucrKenyaAgromet
         'lblSunHrs
         '
         Me.lblSunHrs.AutoSize = True
-        Me.lblSunHrs.Location = New System.Drawing.Point(-2, 361)
+        Me.lblSunHrs.Location = New System.Drawing.Point(11, 361)
         Me.lblSunHrs.Name = "lblSunHrs"
         Me.lblSunHrs.Size = New System.Drawing.Size(45, 13)
         Me.lblSunHrs.TabIndex = 1258
@@ -521,7 +528,7 @@ Partial Class ucrKenyaAgromet
         '
         Me.Label34.AutoSize = True
         Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.Location = New System.Drawing.Point(0, 317)
+        Me.Label34.Location = New System.Drawing.Point(25, 317)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(156, 13)
         Me.Label34.TabIndex = 1257
@@ -530,55 +537,60 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod27
         '
         Me.UcrValueFlagPeriod27.FieldName = "512"
+        Me.UcrValueFlagPeriod27.IncludePeriod = True
         Me.UcrValueFlagPeriod27.KeyControl = False
-        Me.UcrValueFlagPeriod27.Location = New System.Drawing.Point(293, 383)
+        Me.UcrValueFlagPeriod27.Location = New System.Drawing.Point(299, 383)
         Me.UcrValueFlagPeriod27.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod27.Name = "UcrValueFlagPeriod27"
-        Me.UcrValueFlagPeriod27.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod27.Size = New System.Drawing.Size(161, 23)
         Me.UcrValueFlagPeriod27.TabIndex = 1199
         Me.UcrValueFlagPeriod27.Tag = "512"
         '
         'UcrValueFlagPeriod26
         '
         Me.UcrValueFlagPeriod26.FieldName = "503"
+        Me.UcrValueFlagPeriod26.IncludePeriod = True
         Me.UcrValueFlagPeriod26.KeyControl = False
-        Me.UcrValueFlagPeriod26.Location = New System.Drawing.Point(293, 411)
+        Me.UcrValueFlagPeriod26.Location = New System.Drawing.Point(299, 411)
         Me.UcrValueFlagPeriod26.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod26.Name = "UcrValueFlagPeriod26"
-        Me.UcrValueFlagPeriod26.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod26.Size = New System.Drawing.Size(161, 23)
         Me.UcrValueFlagPeriod26.TabIndex = 1200
         Me.UcrValueFlagPeriod26.Tag = "503"
         '
         'UcrValueFlagPeriod20
         '
         Me.UcrValueFlagPeriod20.FieldName = "137"
+        Me.UcrValueFlagPeriod20.IncludePeriod = True
         Me.UcrValueFlagPeriod20.KeyControl = False
         Me.UcrValueFlagPeriod20.Location = New System.Drawing.Point(80, 383)
         Me.UcrValueFlagPeriod20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod20.Name = "UcrValueFlagPeriod20"
-        Me.UcrValueFlagPeriod20.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod20.Size = New System.Drawing.Size(154, 23)
         Me.UcrValueFlagPeriod20.TabIndex = 1195
         Me.UcrValueFlagPeriod20.Tag = "137"
         '
         'UcrValueFlagPeriod25
         '
         Me.UcrValueFlagPeriod25.FieldName = "515"
+        Me.UcrValueFlagPeriod25.IncludePeriod = True
         Me.UcrValueFlagPeriod25.KeyControl = False
-        Me.UcrValueFlagPeriod25.Location = New System.Drawing.Point(293, 439)
+        Me.UcrValueFlagPeriod25.Location = New System.Drawing.Point(299, 439)
         Me.UcrValueFlagPeriod25.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod25.Name = "UcrValueFlagPeriod25"
-        Me.UcrValueFlagPeriod25.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod25.Size = New System.Drawing.Size(161, 23)
         Me.UcrValueFlagPeriod25.TabIndex = 1201
         Me.UcrValueFlagPeriod25.Tag = "515"
         '
         'UcrValueFlagPeriod21
         '
         Me.UcrValueFlagPeriod21.FieldName = "018"
+        Me.UcrValueFlagPeriod21.IncludePeriod = True
         Me.UcrValueFlagPeriod21.KeyControl = False
         Me.UcrValueFlagPeriod21.Location = New System.Drawing.Point(80, 411)
         Me.UcrValueFlagPeriod21.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod21.Name = "UcrValueFlagPeriod21"
-        Me.UcrValueFlagPeriod21.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod21.Size = New System.Drawing.Size(154, 23)
         Me.UcrValueFlagPeriod21.TabIndex = 1196
         Me.UcrValueFlagPeriod21.Tag = "018"
         '
@@ -594,11 +606,12 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod22
         '
         Me.UcrValueFlagPeriod22.FieldName = "518"
+        Me.UcrValueFlagPeriod22.IncludePeriod = True
         Me.UcrValueFlagPeriod22.KeyControl = False
         Me.UcrValueFlagPeriod22.Location = New System.Drawing.Point(80, 439)
         Me.UcrValueFlagPeriod22.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod22.Name = "UcrValueFlagPeriod22"
-        Me.UcrValueFlagPeriod22.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod22.Size = New System.Drawing.Size(154, 23)
         Me.UcrValueFlagPeriod22.TabIndex = 1197
         Me.UcrValueFlagPeriod22.Tag = "518"
         '
@@ -623,11 +636,12 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod24
         '
         Me.UcrValueFlagPeriod24.FieldName = "511"
+        Me.UcrValueFlagPeriod24.IncludePeriod = True
         Me.UcrValueFlagPeriod24.KeyControl = False
-        Me.UcrValueFlagPeriod24.Location = New System.Drawing.Point(293, 355)
+        Me.UcrValueFlagPeriod24.Location = New System.Drawing.Point(299, 355)
         Me.UcrValueFlagPeriod24.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod24.Name = "UcrValueFlagPeriod24"
-        Me.UcrValueFlagPeriod24.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod24.Size = New System.Drawing.Size(161, 23)
         Me.UcrValueFlagPeriod24.TabIndex = 1198
         Me.UcrValueFlagPeriod24.Tag = "511"
         '
@@ -643,18 +657,19 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod23
         '
         Me.UcrValueFlagPeriod23.FieldName = "532"
+        Me.UcrValueFlagPeriod23.IncludePeriod = True
         Me.UcrValueFlagPeriod23.KeyControl = False
         Me.UcrValueFlagPeriod23.Location = New System.Drawing.Point(80, 355)
         Me.UcrValueFlagPeriod23.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod23.Name = "UcrValueFlagPeriod23"
-        Me.UcrValueFlagPeriod23.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod23.Size = New System.Drawing.Size(154, 23)
         Me.UcrValueFlagPeriod23.TabIndex = 1194
         Me.UcrValueFlagPeriod23.Tag = "532"
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(810, 83)
+        Me.Label11.Location = New System.Drawing.Point(855, 83)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(27, 13)
         Me.Label11.TabIndex = 1252
@@ -663,7 +678,7 @@ Partial Class ucrKenyaAgromet
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(750, 83)
+        Me.Label20.Location = New System.Drawing.Point(795, 83)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(34, 13)
         Me.Label20.TabIndex = 1251
@@ -672,33 +687,36 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod17
         '
         Me.UcrValueFlagPeriod17.FieldName = "005"
+        Me.UcrValueFlagPeriod17.IncludePeriod = True
         Me.UcrValueFlagPeriod17.KeyControl = False
-        Me.UcrValueFlagPeriod17.Location = New System.Drawing.Point(753, 129)
+        Me.UcrValueFlagPeriod17.Location = New System.Drawing.Point(798, 129)
         Me.UcrValueFlagPeriod17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod17.Name = "UcrValueFlagPeriod17"
-        Me.UcrValueFlagPeriod17.Size = New System.Drawing.Size(139, 23)
+        Me.UcrValueFlagPeriod17.Size = New System.Drawing.Size(163, 23)
         Me.UcrValueFlagPeriod17.TabIndex = 1192
         Me.UcrValueFlagPeriod17.Tag = "005"
         '
         'UcrValueFlagPeriod18
         '
         Me.UcrValueFlagPeriod18.FieldName = "504"
+        Me.UcrValueFlagPeriod18.IncludePeriod = True
         Me.UcrValueFlagPeriod18.KeyControl = False
-        Me.UcrValueFlagPeriod18.Location = New System.Drawing.Point(753, 157)
+        Me.UcrValueFlagPeriod18.Location = New System.Drawing.Point(798, 157)
         Me.UcrValueFlagPeriod18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod18.Name = "UcrValueFlagPeriod18"
-        Me.UcrValueFlagPeriod18.Size = New System.Drawing.Size(139, 23)
+        Me.UcrValueFlagPeriod18.Size = New System.Drawing.Size(163, 23)
         Me.UcrValueFlagPeriod18.TabIndex = 1193
         Me.UcrValueFlagPeriod18.Tag = "504"
         '
         'UcrValueFlagPeriod19
         '
         Me.UcrValueFlagPeriod19.FieldName = "513"
+        Me.UcrValueFlagPeriod19.IncludePeriod = True
         Me.UcrValueFlagPeriod19.KeyControl = False
-        Me.UcrValueFlagPeriod19.Location = New System.Drawing.Point(753, 101)
+        Me.UcrValueFlagPeriod19.Location = New System.Drawing.Point(798, 101)
         Me.UcrValueFlagPeriod19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod19.Name = "UcrValueFlagPeriod19"
-        Me.UcrValueFlagPeriod19.Size = New System.Drawing.Size(139, 23)
+        Me.UcrValueFlagPeriod19.Size = New System.Drawing.Size(163, 23)
         Me.UcrValueFlagPeriod19.TabIndex = 1191
         Me.UcrValueFlagPeriod19.Tag = "513"
         '
@@ -706,7 +724,7 @@ Partial Class ucrKenyaAgromet
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(667, 63)
+        Me.Label26.Location = New System.Drawing.Point(693, 63)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(170, 13)
         Me.Label26.TabIndex = 1250
@@ -715,7 +733,7 @@ Partial Class ucrKenyaAgromet
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(658, 165)
+        Me.Label27.Location = New System.Drawing.Point(703, 165)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(95, 13)
         Me.Label27.TabIndex = 1249
@@ -724,16 +742,16 @@ Partial Class ucrKenyaAgromet
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(658, 137)
+        Me.Label28.Location = New System.Drawing.Point(703, 137)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(90, 13)
+        Me.Label28.Size = New System.Drawing.Size(93, 13)
         Me.Label28.TabIndex = 1248
-        Me.Label28.Text = "Rain Amount(mm)"
+        Me.Label28.Text = "Rain Amount (mm)"
         '
         'Label32
         '
         Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(658, 109)
+        Me.Label32.Location = New System.Drawing.Point(703, 109)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(78, 13)
         Me.Label32.TabIndex = 1247
@@ -742,7 +760,7 @@ Partial Class ucrKenyaAgromet
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(570, 83)
+        Me.Label12.Location = New System.Drawing.Point(586, 83)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(27, 13)
         Me.Label12.TabIndex = 1246
@@ -751,7 +769,7 @@ Partial Class ucrKenyaAgromet
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(510, 83)
+        Me.Label19.Location = New System.Drawing.Point(526, 83)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(34, 13)
         Me.Label19.TabIndex = 1245
@@ -760,40 +778,43 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod14
         '
         Me.UcrValueFlagPeriod14.FieldName = "562"
+        Me.UcrValueFlagPeriod14.IncludePeriod = True
         Me.UcrValueFlagPeriod14.KeyControl = False
-        Me.UcrValueFlagPeriod14.Location = New System.Drawing.Point(513, 129)
+        Me.UcrValueFlagPeriod14.Location = New System.Drawing.Point(529, 129)
         Me.UcrValueFlagPeriod14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod14.Name = "UcrValueFlagPeriod14"
-        Me.UcrValueFlagPeriod14.Size = New System.Drawing.Size(141, 23)
+        Me.UcrValueFlagPeriod14.Size = New System.Drawing.Size(165, 23)
         Me.UcrValueFlagPeriod14.TabIndex = 1189
         Me.UcrValueFlagPeriod14.Tag = "562"
         '
         'UcrValueFlagPeriod15
         '
         Me.UcrValueFlagPeriod15.FieldName = "563"
+        Me.UcrValueFlagPeriod15.IncludePeriod = True
         Me.UcrValueFlagPeriod15.KeyControl = False
-        Me.UcrValueFlagPeriod15.Location = New System.Drawing.Point(513, 157)
+        Me.UcrValueFlagPeriod15.Location = New System.Drawing.Point(529, 157)
         Me.UcrValueFlagPeriod15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod15.Name = "UcrValueFlagPeriod15"
-        Me.UcrValueFlagPeriod15.Size = New System.Drawing.Size(141, 23)
+        Me.UcrValueFlagPeriod15.Size = New System.Drawing.Size(167, 23)
         Me.UcrValueFlagPeriod15.TabIndex = 1190
         Me.UcrValueFlagPeriod15.Tag = "563"
         '
         'UcrValueFlagPeriod16
         '
         Me.UcrValueFlagPeriod16.FieldName = "561"
+        Me.UcrValueFlagPeriod16.IncludePeriod = True
         Me.UcrValueFlagPeriod16.KeyControl = False
-        Me.UcrValueFlagPeriod16.Location = New System.Drawing.Point(513, 101)
+        Me.UcrValueFlagPeriod16.Location = New System.Drawing.Point(529, 101)
         Me.UcrValueFlagPeriod16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod16.Name = "UcrValueFlagPeriod16"
-        Me.UcrValueFlagPeriod16.Size = New System.Drawing.Size(141, 23)
+        Me.UcrValueFlagPeriod16.Size = New System.Drawing.Size(167, 23)
         Me.UcrValueFlagPeriod16.TabIndex = 1188
         Me.UcrValueFlagPeriod16.Tag = "561"
         '
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(464, 164)
+        Me.Label21.Location = New System.Drawing.Point(480, 164)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(42, 13)
         Me.Label21.TabIndex = 1244
@@ -802,7 +823,7 @@ Partial Class ucrKenyaAgromet
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(464, 137)
+        Me.Label22.Location = New System.Drawing.Point(480, 137)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(42, 13)
         Me.Label22.TabIndex = 1243
@@ -811,7 +832,7 @@ Partial Class ucrKenyaAgromet
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(464, 108)
+        Me.Label23.Location = New System.Drawing.Point(480, 108)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(42, 13)
         Me.Label23.TabIndex = 1242
@@ -858,66 +879,72 @@ Partial Class ucrKenyaAgromet
         'UcrValueFlagPeriod8
         '
         Me.UcrValueFlagPeriod8.FieldName = "073"
+        Me.UcrValueFlagPeriod8.IncludePeriod = True
         Me.UcrValueFlagPeriod8.KeyControl = False
         Me.UcrValueFlagPeriod8.Location = New System.Drawing.Point(299, 129)
         Me.UcrValueFlagPeriod8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod8.Name = "UcrValueFlagPeriod8"
-        Me.UcrValueFlagPeriod8.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod8.Size = New System.Drawing.Size(155, 23)
         Me.UcrValueFlagPeriod8.TabIndex = 1183
         Me.UcrValueFlagPeriod8.Tag = "073"
         '
         'UcrValueFlagPeriod9
         '
         Me.UcrValueFlagPeriod9.FieldName = "074"
+        Me.UcrValueFlagPeriod9.IncludePeriod = True
         Me.UcrValueFlagPeriod9.KeyControl = False
         Me.UcrValueFlagPeriod9.Location = New System.Drawing.Point(299, 157)
         Me.UcrValueFlagPeriod9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod9.Name = "UcrValueFlagPeriod9"
-        Me.UcrValueFlagPeriod9.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod9.Size = New System.Drawing.Size(155, 23)
         Me.UcrValueFlagPeriod9.TabIndex = 1184
         Me.UcrValueFlagPeriod9.Tag = "074"
         '
         'UcrValueFlagPeriod10
         '
         Me.UcrValueFlagPeriod10.FieldName = "554"
+        Me.UcrValueFlagPeriod10.IncludePeriod = True
         Me.UcrValueFlagPeriod10.KeyControl = False
         Me.UcrValueFlagPeriod10.Location = New System.Drawing.Point(299, 185)
         Me.UcrValueFlagPeriod10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod10.Name = "UcrValueFlagPeriod10"
-        Me.UcrValueFlagPeriod10.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod10.Size = New System.Drawing.Size(155, 23)
         Me.UcrValueFlagPeriod10.TabIndex = 1185
         Me.UcrValueFlagPeriod10.Tag = "554"
         '
         'UcrValueFlagPeriod11
         '
         Me.UcrValueFlagPeriod11.FieldName = "076"
+        Me.UcrValueFlagPeriod11.IncludePeriod = True
         Me.UcrValueFlagPeriod11.KeyControl = False
         Me.UcrValueFlagPeriod11.Location = New System.Drawing.Point(299, 241)
         Me.UcrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod11.Name = "UcrValueFlagPeriod11"
-        Me.UcrValueFlagPeriod11.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod11.Size = New System.Drawing.Size(155, 23)
         Me.UcrValueFlagPeriod11.TabIndex = 1187
         Me.UcrValueFlagPeriod11.Tag = "076"
         '
         'UcrValueFlagPeriod12
         '
         Me.UcrValueFlagPeriod12.FieldName = "075"
+        Me.UcrValueFlagPeriod12.IncludePeriod = True
         Me.UcrValueFlagPeriod12.KeyControl = False
         Me.UcrValueFlagPeriod12.Location = New System.Drawing.Point(299, 213)
         Me.UcrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod12.Name = "UcrValueFlagPeriod12"
-        Me.UcrValueFlagPeriod12.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod12.Size = New System.Drawing.Size(155, 23)
         Me.UcrValueFlagPeriod12.TabIndex = 1186
         Me.UcrValueFlagPeriod12.Tag = "075"
         '
         'UcrValueFlagPeriod13
         '
         Me.UcrValueFlagPeriod13.FieldName = "072"
+        Me.UcrValueFlagPeriod13.IncludePeriod = True
         Me.UcrValueFlagPeriod13.KeyControl = False
         Me.UcrValueFlagPeriod13.Location = New System.Drawing.Point(299, 101)
         Me.UcrValueFlagPeriod13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod13.Name = "UcrValueFlagPeriod13"
-        Me.UcrValueFlagPeriod13.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod13.Size = New System.Drawing.Size(155, 23)
         Me.UcrValueFlagPeriod13.TabIndex = 1182
         Me.UcrValueFlagPeriod13.Tag = "072"
         '
@@ -978,66 +1005,72 @@ Partial Class ucrKenyaAgromet
         'Elem102
         '
         Me.Elem102.FieldName = "102"
+        Me.Elem102.IncludePeriod = True
         Me.Elem102.KeyControl = False
         Me.Elem102.Location = New System.Drawing.Point(80, 129)
         Me.Elem102.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem102.Name = "Elem102"
-        Me.Elem102.Size = New System.Drawing.Size(130, 23)
+        Me.Elem102.Size = New System.Drawing.Size(154, 23)
         Me.Elem102.TabIndex = 1173
         Me.Elem102.Tag = "102"
         '
         'Elem103
         '
         Me.Elem103.FieldName = "103"
+        Me.Elem103.IncludePeriod = True
         Me.Elem103.KeyControl = False
         Me.Elem103.Location = New System.Drawing.Point(80, 157)
         Me.Elem103.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem103.Name = "Elem103"
-        Me.Elem103.Size = New System.Drawing.Size(130, 23)
+        Me.Elem103.Size = New System.Drawing.Size(154, 23)
         Me.Elem103.TabIndex = 1177
         Me.Elem103.Tag = "103"
         '
         'Elem105
         '
         Me.Elem105.FieldName = "105"
+        Me.Elem105.IncludePeriod = True
         Me.Elem105.KeyControl = False
         Me.Elem105.Location = New System.Drawing.Point(80, 185)
         Me.Elem105.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem105.Name = "Elem105"
-        Me.Elem105.Size = New System.Drawing.Size(130, 23)
+        Me.Elem105.Size = New System.Drawing.Size(154, 23)
         Me.Elem105.TabIndex = 1178
         Me.Elem105.Tag = "105"
         '
         'UcrValueFlagPeriod7
         '
         Me.UcrValueFlagPeriod7.FieldName = "099"
+        Me.UcrValueFlagPeriod7.IncludePeriod = True
         Me.UcrValueFlagPeriod7.KeyControl = False
         Me.UcrValueFlagPeriod7.Location = New System.Drawing.Point(80, 269)
         Me.UcrValueFlagPeriod7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod7.Name = "UcrValueFlagPeriod7"
-        Me.UcrValueFlagPeriod7.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod7.Size = New System.Drawing.Size(154, 23)
         Me.UcrValueFlagPeriod7.TabIndex = 1181
         Me.UcrValueFlagPeriod7.Tag = "099"
         '
         'UcrValueFlagPeriod6
         '
         Me.UcrValueFlagPeriod6.FieldName = "003"
+        Me.UcrValueFlagPeriod6.IncludePeriod = True
         Me.UcrValueFlagPeriod6.KeyControl = False
         Me.UcrValueFlagPeriod6.Location = New System.Drawing.Point(80, 241)
         Me.UcrValueFlagPeriod6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod6.Name = "UcrValueFlagPeriod6"
-        Me.UcrValueFlagPeriod6.Size = New System.Drawing.Size(130, 23)
+        Me.UcrValueFlagPeriod6.Size = New System.Drawing.Size(154, 23)
         Me.UcrValueFlagPeriod6.TabIndex = 1180
         Me.UcrValueFlagPeriod6.Tag = "003"
         '
         'Elem002
         '
         Me.Elem002.FieldName = "002"
+        Me.Elem002.IncludePeriod = True
         Me.Elem002.KeyControl = False
         Me.Elem002.Location = New System.Drawing.Point(80, 213)
         Me.Elem002.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem002.Name = "Elem002"
-        Me.Elem002.Size = New System.Drawing.Size(130, 23)
+        Me.Elem002.Size = New System.Drawing.Size(154, 23)
         Me.Elem002.TabIndex = 1179
         Me.Elem002.Tag = "002"
         '
@@ -1062,11 +1095,12 @@ Partial Class ucrKenyaAgromet
         'ucrVFPElem101
         '
         Me.ucrVFPElem101.FieldName = "101"
+        Me.ucrVFPElem101.IncludePeriod = True
         Me.ucrVFPElem101.KeyControl = False
         Me.ucrVFPElem101.Location = New System.Drawing.Point(80, 101)
         Me.ucrVFPElem101.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPElem101.Name = "ucrVFPElem101"
-        Me.ucrVFPElem101.Size = New System.Drawing.Size(130, 23)
+        Me.ucrVFPElem101.Size = New System.Drawing.Size(154, 23)
         Me.ucrVFPElem101.TabIndex = 1172
         Me.ucrVFPElem101.Tag = "101"
         '
@@ -1226,7 +1260,7 @@ Partial Class ucrKenyaAgromet
         'Label47
         '
         Me.Label47.AutoSize = True
-        Me.Label47.Location = New System.Drawing.Point(445, 417)
+        Me.Label47.Location = New System.Drawing.Point(461, 417)
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(42, 13)
         Me.Label47.TabIndex = 1279
@@ -1235,7 +1269,7 @@ Partial Class ucrKenyaAgromet
         'Label48
         '
         Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(445, 389)
+        Me.Label48.Location = New System.Drawing.Point(461, 389)
         Me.Label48.Name = "Label48"
         Me.Label48.Size = New System.Drawing.Size(42, 13)
         Me.Label48.TabIndex = 1278
@@ -1244,7 +1278,7 @@ Partial Class ucrKenyaAgromet
         'Label49
         '
         Me.Label49.AutoSize = True
-        Me.Label49.Location = New System.Drawing.Point(445, 362)
+        Me.Label49.Location = New System.Drawing.Point(461, 362)
         Me.Label49.Name = "Label49"
         Me.Label49.Size = New System.Drawing.Size(42, 13)
         Me.Label49.TabIndex = 1277
@@ -1368,7 +1402,7 @@ Partial Class ucrKenyaAgromet
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrStationSelector)
         Me.Name = "ucrKenyaAgromet"
-        Me.Size = New System.Drawing.Size(899, 579)
+        Me.Size = New System.Drawing.Size(977, 579)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -27,17 +27,17 @@ Partial Class frmNewHourlyWind
         '
         'UcrHourlyWind1
         '
-        Me.UcrHourlyWind1.Location = New System.Drawing.Point(9, 10)
+        Me.UcrHourlyWind1.Location = New System.Drawing.Point(0, 4)
         Me.UcrHourlyWind1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrHourlyWind1.Name = "UcrHourlyWind1"
-        Me.UcrHourlyWind1.Size = New System.Drawing.Size(639, 579)
+        Me.UcrHourlyWind1.Size = New System.Drawing.Size(779, 589)
         Me.UcrHourlyWind1.TabIndex = 0
         '
         'frmNewHourlyWind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(658, 596)
+        Me.ClientSize = New System.Drawing.Size(782, 596)
         Me.Controls.Add(Me.UcrHourlyWind1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmNewHourlyWind"

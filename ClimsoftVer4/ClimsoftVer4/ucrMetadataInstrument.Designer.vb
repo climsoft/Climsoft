@@ -67,6 +67,7 @@ Partial Class ucrMetadataInstrument
         'ucrTextBoxtInstrumentName
         '
         Me.ucrTextBoxtInstrumentName.FieldName = "instrumentName"
+        Me.ucrTextBoxtInstrumentName.KeyControl = False
         Me.ucrTextBoxtInstrumentName.Location = New System.Drawing.Point(132, 75)
         Me.ucrTextBoxtInstrumentName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxtInstrumentName.Name = "ucrTextBoxtInstrumentName"
@@ -101,9 +102,9 @@ Partial Class ucrMetadataInstrument
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(469, 5)
+        Me.btnClear.Location = New System.Drawing.Point(440, 5)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.Size = New System.Drawing.Size(104, 23)
         Me.btnClear.TabIndex = 4
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
@@ -119,36 +120,36 @@ Partial Class ucrMetadataInstrument
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(579, 6)
+        Me.btnView.Location = New System.Drawing.Point(550, 6)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.Size = New System.Drawing.Size(104, 23)
         Me.btnView.TabIndex = 5
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(359, 5)
+        Me.btnDelete.Location = New System.Drawing.Point(330, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(104, 23)
         Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(249, 5)
+        Me.btnUpdate.Location = New System.Drawing.Point(220, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(104, 23)
         Me.btnUpdate.TabIndex = 2
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(139, 5)
+        Me.btnSave.Location = New System.Drawing.Point(110, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.Size = New System.Drawing.Size(104, 23)
         Me.btnSave.TabIndex = 1
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -192,6 +193,7 @@ Partial Class ucrMetadataInstrument
         'ucrTextBoxImageFile
         '
         Me.ucrTextBoxImageFile.FieldName = "instrumentPicture"
+        Me.ucrTextBoxImageFile.KeyControl = False
         Me.ucrTextBoxImageFile.Location = New System.Drawing.Point(132, 362)
         Me.ucrTextBoxImageFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxImageFile.Name = "ucrTextBoxImageFile"
@@ -203,6 +205,7 @@ Partial Class ucrMetadataInstrument
         'ucrTextBoxHeight
         '
         Me.ucrTextBoxHeight.FieldName = "height"
+        Me.ucrTextBoxHeight.KeyControl = False
         Me.ucrTextBoxHeight.Location = New System.Drawing.Point(132, 334)
         Me.ucrTextBoxHeight.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxHeight.Name = "ucrTextBoxHeight"
@@ -214,6 +217,7 @@ Partial Class ucrMetadataInstrument
         'ucrTextBoxUncertainity
         '
         Me.ucrTextBoxUncertainity.FieldName = "instrumentUncertainty"
+        Me.ucrTextBoxUncertainity.KeyControl = False
         Me.ucrTextBoxUncertainity.Location = New System.Drawing.Point(132, 250)
         Me.ucrTextBoxUncertainity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxUncertainity.Name = "ucrTextBoxUncertainity"
@@ -225,6 +229,7 @@ Partial Class ucrMetadataInstrument
         'ucrTextBoxManufacturer
         '
         Me.ucrTextBoxManufacturer.FieldName = "manufacturer"
+        Me.ucrTextBoxManufacturer.KeyControl = False
         Me.ucrTextBoxManufacturer.Location = New System.Drawing.Point(132, 222)
         Me.ucrTextBoxManufacturer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxManufacturer.Name = "ucrTextBoxManufacturer"
@@ -236,6 +241,7 @@ Partial Class ucrMetadataInstrument
         'ucrTextBoxModel
         '
         Me.ucrTextBoxModel.FieldName = "model"
+        Me.ucrTextBoxModel.KeyControl = False
         Me.ucrTextBoxModel.Location = New System.Drawing.Point(132, 194)
         Me.ucrTextBoxModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxModel.Name = "ucrTextBoxModel"
@@ -247,6 +253,7 @@ Partial Class ucrMetadataInstrument
         'ucrTextBoxSerialNumber
         '
         Me.ucrTextBoxSerialNumber.FieldName = "serialNumber"
+        Me.ucrTextBoxSerialNumber.KeyControl = False
         Me.ucrTextBoxSerialNumber.Location = New System.Drawing.Point(132, 166)
         Me.ucrTextBoxSerialNumber.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxSerialNumber.Name = "ucrTextBoxSerialNumber"
@@ -258,6 +265,7 @@ Partial Class ucrMetadataInstrument
         'ucrStationSelector
         '
         Me.ucrStationSelector.FieldName = "installedAt"
+        Me.ucrStationSelector.KeyControl = False
         Me.ucrStationSelector.Location = New System.Drawing.Point(132, 138)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
@@ -268,6 +276,7 @@ Partial Class ucrMetadataInstrument
         'ucrTextBoxAbbrevation
         '
         Me.ucrTextBoxAbbrevation.FieldName = "abbreviation"
+        Me.ucrTextBoxAbbrevation.KeyControl = False
         Me.ucrTextBoxAbbrevation.Location = New System.Drawing.Point(132, 108)
         Me.ucrTextBoxAbbrevation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAbbrevation.Name = "ucrTextBoxAbbrevation"
@@ -279,6 +288,7 @@ Partial Class ucrMetadataInstrument
         'ucrDataLinkInstrumentID
         '
         Me.ucrDataLinkInstrumentID.FieldName = "instrumentId"
+        Me.ucrDataLinkInstrumentID.KeyControl = False
         Me.ucrDataLinkInstrumentID.Location = New System.Drawing.Point(132, 46)
         Me.ucrDataLinkInstrumentID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataLinkInstrumentID.Name = "ucrDataLinkInstrumentID"
@@ -397,6 +407,7 @@ Partial Class ucrMetadataInstrument
         'ucrDatePickerInstallation
         '
         Me.ucrDatePickerInstallation.FieldName = "installationDatetime"
+        Me.ucrDatePickerInstallation.KeyControl = False
         Me.ucrDatePickerInstallation.Location = New System.Drawing.Point(132, 278)
         Me.ucrDatePickerInstallation.Name = "ucrDatePickerInstallation"
         Me.ucrDatePickerInstallation.Size = New System.Drawing.Size(139, 23)
@@ -406,6 +417,7 @@ Partial Class ucrMetadataInstrument
         'ucrDatePickerDeinstallation
         '
         Me.ucrDatePickerDeinstallation.FieldName = "deinstallationDatetime"
+        Me.ucrDatePickerDeinstallation.KeyControl = False
         Me.ucrDatePickerDeinstallation.Location = New System.Drawing.Point(130, 303)
         Me.ucrDatePickerDeinstallation.Name = "ucrDatePickerDeinstallation"
         Me.ucrDatePickerDeinstallation.Size = New System.Drawing.Size(141, 23)

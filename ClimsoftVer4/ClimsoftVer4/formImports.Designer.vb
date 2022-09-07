@@ -68,25 +68,25 @@ Partial Class formImports
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(193, 2)
+        Me.cmdReset.Location = New System.Drawing.Point(207, 2)
         Me.cmdReset.Name = "cmdReset"
-        Me.cmdReset.Size = New System.Drawing.Size(65, 33)
+        Me.cmdReset.Size = New System.Drawing.Size(94, 32)
         Me.cmdReset.TabIndex = 8
         Me.cmdReset.Text = "Reset"
         Me.cmdReset.UseVisualStyleBackColor = True
         '
         'cmHelp
         '
-        Me.cmHelp.Location = New System.Drawing.Point(393, 2)
+        Me.cmHelp.Location = New System.Drawing.Point(378, 2)
         Me.cmHelp.Name = "cmHelp"
-        Me.cmHelp.Size = New System.Drawing.Size(65, 33)
+        Me.cmHelp.Size = New System.Drawing.Size(65, 32)
         Me.cmHelp.TabIndex = 7
         Me.cmHelp.Text = "Help"
         Me.cmHelp.UseVisualStyleBackColor = True
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(293, 2)
+        Me.cmdClose.Location = New System.Drawing.Point(307, 1)
         Me.cmdClose.Name = "cmdClose"
         Me.cmdClose.Size = New System.Drawing.Size(65, 33)
         Me.cmdClose.TabIndex = 6
@@ -95,18 +95,18 @@ Partial Class formImports
         '
         'cmdProcess
         '
-        Me.cmdProcess.Location = New System.Drawing.Point(93, 2)
+        Me.cmdProcess.Location = New System.Drawing.Point(116, 2)
         Me.cmdProcess.Name = "cmdProcess"
-        Me.cmdProcess.Size = New System.Drawing.Size(65, 33)
+        Me.cmdProcess.Size = New System.Drawing.Size(87, 32)
         Me.cmdProcess.TabIndex = 5
         Me.cmdProcess.Text = "Import"
         Me.cmdProcess.UseVisualStyleBackColor = True
         '
         'cmdStart
         '
-        Me.cmdStart.Location = New System.Drawing.Point(38, 2)
+        Me.cmdStart.Location = New System.Drawing.Point(19, 2)
         Me.cmdStart.Name = "cmdStart"
-        Me.cmdStart.Size = New System.Drawing.Size(65, 33)
+        Me.cmdStart.Size = New System.Drawing.Size(91, 29)
         Me.cmdStart.TabIndex = 4
         Me.cmdStart.Text = "Open File"
         Me.cmdStart.UseVisualStyleBackColor = True

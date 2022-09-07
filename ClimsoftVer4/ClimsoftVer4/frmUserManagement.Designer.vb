@@ -45,7 +45,7 @@ Partial Class frmUserManagement
         '
         Me.txtUserName.Location = New System.Drawing.Point(166, 67)
         Me.txtUserName.Name = "txtUserName"
-        Me.txtUserName.Size = New System.Drawing.Size(184, 20)
+        Me.txtUserName.Size = New System.Drawing.Size(210, 20)
         Me.txtUserName.TabIndex = 0
         '
         'cboUserRole
@@ -54,7 +54,7 @@ Partial Class frmUserManagement
         Me.cboUserRole.Items.AddRange(New Object() {"ClimsoftAdmin", "ClimsoftDeveloper", "ClimsoftMetadata", "ClimsoftOperator", "ClimsoftOperatorSupervisor", "ClimsoftProducts", "ClimsoftQC", "ClimsoftRainfall", "ClimsoftTranslator", "ClimsoftInventory"})
         Me.cboUserRole.Location = New System.Drawing.Point(166, 105)
         Me.cboUserRole.Name = "cboUserRole"
-        Me.cboUserRole.Size = New System.Drawing.Size(184, 21)
+        Me.cboUserRole.Size = New System.Drawing.Size(210, 21)
         Me.cboUserRole.TabIndex = 1
         '
         'txtPassword
@@ -62,7 +62,7 @@ Partial Class frmUserManagement
         Me.txtPassword.Location = New System.Drawing.Point(166, 143)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPassword.Size = New System.Drawing.Size(184, 20)
+        Me.txtPassword.Size = New System.Drawing.Size(210, 20)
         Me.txtPassword.TabIndex = 2
         '
         'txtConfirmPassword
@@ -70,15 +70,15 @@ Partial Class frmUserManagement
         Me.txtConfirmPassword.Location = New System.Drawing.Point(166, 181)
         Me.txtConfirmPassword.Name = "txtConfirmPassword"
         Me.txtConfirmPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtConfirmPassword.Size = New System.Drawing.Size(184, 20)
+        Me.txtConfirmPassword.Size = New System.Drawing.Size(210, 20)
         Me.txtConfirmPassword.TabIndex = 3
         '
         'btnAddNew
         '
         Me.btnAddNew.Enabled = False
-        Me.btnAddNew.Location = New System.Drawing.Point(38, 220)
+        Me.btnAddNew.Location = New System.Drawing.Point(35, 220)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(59, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 4
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
@@ -88,17 +88,17 @@ Partial Class frmUserManagement
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DataGridView1.Location = New System.Drawing.Point(372, 58)
+        Me.DataGridView1.Location = New System.Drawing.Point(420, 58)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(291, 182)
+        Me.DataGridView1.Size = New System.Drawing.Size(336, 185)
         Me.DataGridView1.TabIndex = 8
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(278, 220)
+        Me.btnHelp.Location = New System.Drawing.Point(355, 220)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(52, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(59, 23)
         Me.btnHelp.TabIndex = 6
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -107,9 +107,9 @@ Partial Class frmUserManagement
         '
         Me.btnDelete.BackColor = System.Drawing.SystemColors.ControlLight
         Me.btnDelete.ForeColor = System.Drawing.Color.Red
-        Me.btnDelete.Location = New System.Drawing.Point(163, 220)
+        Me.btnDelete.Location = New System.Drawing.Point(202, 220)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(53, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(74, 23)
         Me.btnDelete.TabIndex = 7
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
@@ -152,9 +152,9 @@ Partial Class frmUserManagement
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(219, 220)
+        Me.btnClose.Location = New System.Drawing.Point(282, 220)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(56, 23)
+        Me.btnClose.Size = New System.Drawing.Size(67, 23)
         Me.btnClose.TabIndex = 5
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
@@ -171,18 +171,18 @@ Partial Class frmUserManagement
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(100, 220)
+        Me.btnUpdate.Location = New System.Drawing.Point(116, 220)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(80, 23)
         Me.btnUpdate.TabIndex = 13
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnPrivilges
         '
-        Me.btnPrivilges.Location = New System.Drawing.Point(461, 242)
+        Me.btnPrivilges.Location = New System.Drawing.Point(490, 257)
         Me.btnPrivilges.Name = "btnPrivilges"
-        Me.btnPrivilges.Size = New System.Drawing.Size(118, 23)
+        Me.btnPrivilges.Size = New System.Drawing.Size(163, 23)
         Me.btnPrivilges.TabIndex = 14
         Me.btnPrivilges.Text = "Refresh Privileges"
         Me.btnPrivilges.UseVisualStyleBackColor = True
@@ -191,7 +191,7 @@ Partial Class frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(695, 266)
+        Me.ClientSize = New System.Drawing.Size(788, 297)
         Me.Controls.Add(Me.btnPrivilges)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.lblFrmUserManagementGuidelines)

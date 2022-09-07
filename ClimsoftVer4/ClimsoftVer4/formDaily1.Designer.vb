@@ -33,6 +33,7 @@ Partial Class formDaily1
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cboHour = New System.Windows.Forms.ComboBox()
         Me.GroupBoxCommands = New System.Windows.Forms.GroupBox()
+        Me.btnPush = New System.Windows.Forms.Button()
         Me.btnCommit = New System.Windows.Forms.Button()
         Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         Me.btnView = New System.Windows.Forms.Button()
@@ -50,7 +51,6 @@ Partial Class formDaily1
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnMoveFirst = New System.Windows.Forms.Button()
-        Me.btnPush = New System.Windows.Forms.Button()
         Me.lblInsDel = New System.Windows.Forms.Label()
         Me.GroupBoxCommands.SuspendLayout()
         Me.SuspendLayout()
@@ -58,7 +58,7 @@ Partial Class formDaily1
         'Label62
         '
         Me.Label62.AutoSize = True
-        Me.Label62.Location = New System.Drawing.Point(357, 74)
+        Me.Label62.Location = New System.Drawing.Point(391, 74)
         Me.Label62.Name = "Label62"
         Me.Label62.Size = New System.Drawing.Size(26, 13)
         Me.Label62.TabIndex = 1018
@@ -67,7 +67,7 @@ Partial Class formDaily1
         'Label61
         '
         Me.Label61.AutoSize = True
-        Me.Label61.Location = New System.Drawing.Point(233, 74)
+        Me.Label61.Location = New System.Drawing.Point(267, 74)
         Me.Label61.Name = "Label61"
         Me.Label61.Size = New System.Drawing.Size(37, 13)
         Me.Label61.TabIndex = 1017
@@ -76,7 +76,7 @@ Partial Class formDaily1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(124, 74)
+        Me.Label2.Location = New System.Drawing.Point(158, 74)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(29, 13)
         Me.Label2.TabIndex = 1016
@@ -94,7 +94,7 @@ Partial Class formDaily1
         'cboStation
         '
         Me.cboStation.FormattingEnabled = True
-        Me.cboStation.Location = New System.Drawing.Point(155, 28)
+        Me.cboStation.Location = New System.Drawing.Point(191, 28)
         Me.cboStation.Name = "cboStation"
         Me.cboStation.Size = New System.Drawing.Size(424, 21)
         Me.cboStation.TabIndex = 0
@@ -103,7 +103,7 @@ Partial Class formDaily1
         '
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.cboMonth.Location = New System.Drawing.Point(271, 70)
+        Me.cboMonth.Location = New System.Drawing.Point(310, 70)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(41, 21)
         Me.cboMonth.TabIndex = 2
@@ -112,14 +112,14 @@ Partial Class formDaily1
         '
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(387, 70)
+        Me.cboDay.Location = New System.Drawing.Point(440, 71)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(39, 21)
         Me.cboDay.TabIndex = 3
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(156, 70)
+        Me.txtYear.Location = New System.Drawing.Point(200, 72)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(40, 20)
         Me.txtYear.TabIndex = 1
@@ -127,7 +127,7 @@ Partial Class formDaily1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(451, 74)
+        Me.Label3.Location = New System.Drawing.Point(485, 74)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(30, 13)
         Me.Label3.TabIndex = 1020
@@ -137,7 +137,7 @@ Partial Class formDaily1
         '
         Me.cboHour.FormattingEnabled = True
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboHour.Location = New System.Drawing.Point(481, 70)
+        Me.cboHour.Location = New System.Drawing.Point(524, 72)
         Me.cboHour.Name = "cboHour"
         Me.cboHour.Size = New System.Drawing.Size(39, 21)
         Me.cboHour.TabIndex = 4
@@ -165,16 +165,25 @@ Partial Class formDaily1
         Me.GroupBoxCommands.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBoxCommands.Location = New System.Drawing.Point(0, 355)
         Me.GroupBoxCommands.Name = "GroupBoxCommands"
-        Me.GroupBoxCommands.Size = New System.Drawing.Size(624, 124)
+        Me.GroupBoxCommands.Size = New System.Drawing.Size(888, 124)
         Me.GroupBoxCommands.TabIndex = 1171
         Me.GroupBoxCommands.TabStop = False
+        '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(488, 45)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(75, 23)
+        Me.btnPush.TabIndex = 1188
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
         '
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(84, 45)
+        Me.btnCommit.Location = New System.Drawing.Point(112, 45)
         Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(55, 23)
+        Me.btnCommit.Size = New System.Drawing.Size(69, 23)
         Me.btnCommit.TabIndex = 1171
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
@@ -192,9 +201,9 @@ Partial Class formDaily1
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(352, 45)
+        Me.btnView.Location = New System.Drawing.Point(412, 45)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(55, 23)
+        Me.btnView.Size = New System.Drawing.Size(70, 23)
         Me.btnView.TabIndex = 1176
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
@@ -202,7 +211,7 @@ Partial Class formDaily1
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(513, 83)
+        Me.btnUpload.Location = New System.Drawing.Point(460, 84)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
         Me.btnUpload.TabIndex = 1186
@@ -228,7 +237,7 @@ Partial Class formDaily1
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(549, 45)
+        Me.btnHelp.Location = New System.Drawing.Point(630, 45)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(55, 23)
         Me.btnHelp.TabIndex = 1177
@@ -238,27 +247,27 @@ Partial Class formDaily1
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(285, 45)
+        Me.btnClear.Location = New System.Drawing.Point(336, 45)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(55, 23)
+        Me.btnClear.Size = New System.Drawing.Size(70, 23)
         Me.btnClear.TabIndex = 1175
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(218, 45)
+        Me.btnDelete.Location = New System.Drawing.Point(261, 45)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(55, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(69, 23)
         Me.btnDelete.TabIndex = 1174
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(8, 45)
+        Me.btnAddNew.Location = New System.Drawing.Point(36, 45)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(64, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(70, 23)
         Me.btnAddNew.TabIndex = 1172
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
@@ -266,7 +275,7 @@ Partial Class formDaily1
         'btnMovePrevious
         '
         Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(225, 12)
+        Me.btnMovePrevious.Location = New System.Drawing.Point(244, 17)
         Me.btnMovePrevious.Name = "btnMovePrevious"
         Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
         Me.btnMovePrevious.TabIndex = 1183
@@ -275,9 +284,9 @@ Partial Class formDaily1
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(151, 45)
+        Me.btnUpdate.Location = New System.Drawing.Point(187, 45)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(55, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(68, 23)
         Me.btnUpdate.TabIndex = 1173
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -285,7 +294,7 @@ Partial Class formDaily1
         'btnMoveLast
         '
         Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(468, 12)
+        Me.btnMoveLast.Location = New System.Drawing.Point(487, 17)
         Me.btnMoveLast.Name = "btnMoveLast"
         Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveLast.TabIndex = 1181
@@ -294,7 +303,7 @@ Partial Class formDaily1
         '
         'recNumberTextBox
         '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(277, 14)
+        Me.recNumberTextBox.Location = New System.Drawing.Point(296, 19)
         Me.recNumberTextBox.Name = "recNumberTextBox"
         Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
         Me.recNumberTextBox.TabIndex = 1180
@@ -302,7 +311,7 @@ Partial Class formDaily1
         'btnMoveNext
         '
         Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(424, 12)
+        Me.btnMoveNext.Location = New System.Drawing.Point(443, 17)
         Me.btnMoveNext.Name = "btnMoveNext"
         Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
         Me.btnMoveNext.TabIndex = 1179
@@ -311,7 +320,7 @@ Partial Class formDaily1
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(482, 45)
+        Me.btnClose.Location = New System.Drawing.Point(569, 45)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(55, 23)
         Me.btnClose.TabIndex = 1178
@@ -321,38 +330,28 @@ Partial Class formDaily1
         'btnMoveFirst
         '
         Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(178, 12)
+        Me.btnMoveFirst.Location = New System.Drawing.Point(197, 17)
         Me.btnMoveFirst.Name = "btnMoveFirst"
         Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveFirst.TabIndex = 1182
         Me.btnMoveFirst.Text = "|<<"
         Me.btnMoveFirst.UseVisualStyleBackColor = True
         '
-        'btnPush
-        '
-        Me.btnPush.Location = New System.Drawing.Point(419, 45)
-        Me.btnPush.Name = "btnPush"
-        Me.btnPush.Size = New System.Drawing.Size(51, 23)
-        Me.btnPush.TabIndex = 1188
-        Me.btnPush.Text = "Push"
-        Me.btnPush.UseVisualStyleBackColor = True
-
         'lblInsDel
         '
         Me.lblInsDel.AutoSize = True
         Me.lblInsDel.ForeColor = System.Drawing.Color.Blue
-        Me.lblInsDel.Location = New System.Drawing.Point(360, 94)
+        Me.lblInsDel.Location = New System.Drawing.Point(391, 104)
         Me.lblInsDel.Name = "lblInsDel"
         Me.lblInsDel.Size = New System.Drawing.Size(241, 13)
         Me.lblInsDel.TabIndex = 1172
         Me.lblInsDel.Text = "Press Pg Down to Insert Cell and Pg Up to Delete"
-
         '
         'formDaily1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(624, 479)
+        Me.ClientSize = New System.Drawing.Size(888, 479)
         Me.Controls.Add(Me.lblInsDel)
         Me.Controls.Add(Me.GroupBoxCommands)
         Me.Controls.Add(Me.Label3)

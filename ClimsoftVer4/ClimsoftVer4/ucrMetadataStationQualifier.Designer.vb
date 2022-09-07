@@ -107,13 +107,14 @@ Partial Class ucrMetadataStationQualifier
         Me.lblStationQualifier.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStationQualifier.Location = New System.Drawing.Point(281, 30)
         Me.lblStationQualifier.Name = "lblStationQualifier"
-        Me.lblStationQualifier.Size = New System.Drawing.Size(118, 16)
+        Me.lblStationQualifier.Size = New System.Drawing.Size(117, 16)
         Me.lblStationQualifier.TabIndex = 0
         Me.lblStationQualifier.Text = "Station Qualifier"
         '
         'ucrTextBoxQualifier
         '
         Me.ucrTextBoxQualifier.FieldName = "qualifier"
+        Me.ucrTextBoxQualifier.KeyControl = False
         Me.ucrTextBoxQualifier.Location = New System.Drawing.Point(301, 89)
         Me.ucrTextBoxQualifier.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxQualifier.Name = "ucrTextBoxQualifier"
@@ -125,6 +126,7 @@ Partial Class ucrMetadataStationQualifier
         'ucrStationSelector
         '
         Me.ucrStationSelector.FieldName = "belongsTo"
+        Me.ucrStationSelector.KeyControl = False
         Me.ucrStationSelector.Location = New System.Drawing.Point(301, 126)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
@@ -148,54 +150,54 @@ Partial Class ucrMetadataStationQualifier
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(466, 6)
+        Me.btnClear.Location = New System.Drawing.Point(445, 6)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.Size = New System.Drawing.Size(96, 23)
         Me.btnClear.TabIndex = 4
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(18, 4)
+        Me.btnAddNew.Location = New System.Drawing.Point(6, 4)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(87, 23)
         Me.btnAddNew.TabIndex = 0
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(578, 5)
+        Me.btnView.Location = New System.Drawing.Point(547, 5)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.Size = New System.Drawing.Size(106, 23)
         Me.btnView.TabIndex = 5
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(354, 5)
+        Me.btnDelete.Location = New System.Drawing.Point(335, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(94, 23)
         Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(242, 5)
+        Me.btnUpdate.Location = New System.Drawing.Point(224, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(93, 23)
         Me.btnUpdate.TabIndex = 2
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(130, 5)
+        Me.btnSave.Location = New System.Drawing.Point(110, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.Size = New System.Drawing.Size(95, 23)
         Me.btnSave.TabIndex = 1
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -203,6 +205,7 @@ Partial Class ucrMetadataStationQualifier
         'ucrTextBoxNetworkType
         '
         Me.ucrTextBoxNetworkType.FieldName = "stationNetworkType"
+        Me.ucrTextBoxNetworkType.KeyControl = False
         Me.ucrTextBoxNetworkType.Location = New System.Drawing.Point(301, 274)
         Me.ucrTextBoxNetworkType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxNetworkType.Name = "ucrTextBoxNetworkType"
@@ -222,6 +225,7 @@ Partial Class ucrMetadataStationQualifier
         'ucrTextBoxTimeZone
         '
         Me.ucrTextBoxTimeZone.FieldName = "stationTimeZone"
+        Me.ucrTextBoxTimeZone.KeyControl = False
         Me.ucrTextBoxTimeZone.Location = New System.Drawing.Point(301, 237)
         Me.ucrTextBoxTimeZone.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxTimeZone.Name = "ucrTextBoxTimeZone"
@@ -233,6 +237,7 @@ Partial Class ucrMetadataStationQualifier
         'ucrDatePickerBeginDate
         '
         Me.ucrDatePickerBeginDate.FieldName = "qualifierBeginDate"
+        Me.ucrDatePickerBeginDate.KeyControl = False
         Me.ucrDatePickerBeginDate.Location = New System.Drawing.Point(301, 160)
         Me.ucrDatePickerBeginDate.Name = "ucrDatePickerBeginDate"
         Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(155, 21)
@@ -242,6 +247,7 @@ Partial Class ucrMetadataStationQualifier
         'ucrDatePickerEndDate
         '
         Me.ucrDatePickerEndDate.FieldName = "qualifierEndDate"
+        Me.ucrDatePickerEndDate.KeyControl = False
         Me.ucrDatePickerEndDate.Location = New System.Drawing.Point(301, 196)
         Me.ucrDatePickerEndDate.Name = "ucrDatePickerEndDate"
         Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(155, 21)

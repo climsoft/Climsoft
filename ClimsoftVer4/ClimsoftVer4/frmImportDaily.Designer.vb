@@ -62,6 +62,9 @@ Partial Class frmImportDaily
         Me.optMonthly = New System.Windows.Forms.RadioButton()
         Me.optDekadal = New System.Windows.Forms.RadioButton()
         Me.pnlErrors = New System.Windows.Forms.Panel()
+        Me.lblTRecords = New System.Windows.Forms.Label()
+        Me.lblElmErr = New System.Windows.Forms.Label()
+        Me.lblStnErr = New System.Windows.Forms.Label()
         Me.cmdSaveErrors = New System.Windows.Forms.Button()
         Me.lstElements = New System.Windows.Forms.ListBox()
         Me.lstStations = New System.Windows.Forms.ListBox()
@@ -83,9 +86,6 @@ Partial Class frmImportDaily
         Me.lblDbTable = New System.Windows.Forms.Label()
         Me.rbtnFinal = New System.Windows.Forms.RadioButton()
         Me.rbtnInitial = New System.Windows.Forms.RadioButton()
-        Me.lblStnErr = New System.Windows.Forms.Label()
-        Me.lblElmErr = New System.Windows.Forms.Label()
-        Me.lblTRecords = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.grpSummary.SuspendLayout()
@@ -129,7 +129,7 @@ Partial Class frmImportDaily
         Me.cmdView.Enabled = False
         Me.cmdView.Location = New System.Drawing.Point(14, 215)
         Me.cmdView.Name = "cmdView"
-        Me.cmdView.Size = New System.Drawing.Size(69, 27)
+        Me.cmdView.Size = New System.Drawing.Size(81, 27)
         Me.cmdView.TabIndex = 3
         Me.cmdView.Text = "View Data"
         Me.cmdView.UseVisualStyleBackColor = True
@@ -175,9 +175,9 @@ Partial Class frmImportDaily
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(217, 215)
+        Me.cmdClear.Location = New System.Drawing.Point(206, 215)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(62, 29)
+        Me.cmdClear.Size = New System.Drawing.Size(73, 29)
         Me.cmdClear.TabIndex = 8
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
@@ -239,9 +239,9 @@ Partial Class frmImportDaily
         'cmdLoadData
         '
         Me.cmdLoadData.Enabled = False
-        Me.cmdLoadData.Location = New System.Drawing.Point(117, 215)
+        Me.cmdLoadData.Location = New System.Drawing.Point(101, 215)
         Me.cmdLoadData.Name = "cmdLoadData"
-        Me.cmdLoadData.Size = New System.Drawing.Size(69, 29)
+        Me.cmdLoadData.Size = New System.Drawing.Size(85, 29)
         Me.cmdLoadData.TabIndex = 16
         Me.cmdLoadData.Text = "Load Data"
         Me.cmdLoadData.UseVisualStyleBackColor = True
@@ -469,6 +469,32 @@ Partial Class frmImportDaily
         Me.pnlErrors.TabIndex = 44
         Me.pnlErrors.Visible = False
         '
+        'lblTRecords
+        '
+        Me.lblTRecords.AutoSize = True
+        Me.lblTRecords.Location = New System.Drawing.Point(951, 44)
+        Me.lblTRecords.Name = "lblTRecords"
+        Me.lblTRecords.Size = New System.Drawing.Size(74, 13)
+        Me.lblTRecords.TabIndex = 58
+        Me.lblTRecords.Text = "Total Records"
+        Me.lblTRecords.Visible = False
+        '
+        'lblElmErr
+        '
+        Me.lblElmErr.AutoSize = True
+        Me.lblElmErr.Location = New System.Drawing.Point(565, 38)
+        Me.lblElmErr.Name = "lblElmErr"
+        Me.lblElmErr.Size = New System.Drawing.Size(0, 13)
+        Me.lblElmErr.TabIndex = 57
+        '
+        'lblStnErr
+        '
+        Me.lblStnErr.AutoSize = True
+        Me.lblStnErr.Location = New System.Drawing.Point(562, 10)
+        Me.lblStnErr.Name = "lblStnErr"
+        Me.lblStnErr.Size = New System.Drawing.Size(0, 13)
+        Me.lblStnErr.TabIndex = 56
+        '
         'cmdSaveErrors
         '
         Me.cmdSaveErrors.Location = New System.Drawing.Point(447, 15)
@@ -671,32 +697,6 @@ Partial Class frmImportDaily
         Me.rbtnInitial.TabStop = True
         Me.rbtnInitial.Text = "Observation Initial"
         Me.rbtnInitial.UseVisualStyleBackColor = True
-        '
-        'lblStnErr
-        '
-        Me.lblStnErr.AutoSize = True
-        Me.lblStnErr.Location = New System.Drawing.Point(562, 10)
-        Me.lblStnErr.Name = "lblStnErr"
-        Me.lblStnErr.Size = New System.Drawing.Size(0, 13)
-        Me.lblStnErr.TabIndex = 56
-        '
-        'lblElmErr
-        '
-        Me.lblElmErr.AutoSize = True
-        Me.lblElmErr.Location = New System.Drawing.Point(565, 38)
-        Me.lblElmErr.Name = "lblElmErr"
-        Me.lblElmErr.Size = New System.Drawing.Size(0, 13)
-        Me.lblElmErr.TabIndex = 57
-        '
-        'lblTRecords
-        '
-        Me.lblTRecords.AutoSize = True
-        Me.lblTRecords.Location = New System.Drawing.Point(951, 44)
-        Me.lblTRecords.Name = "lblTRecords"
-        Me.lblTRecords.Size = New System.Drawing.Size(74, 13)
-        Me.lblTRecords.TabIndex = 58
-        Me.lblTRecords.Text = "Total Records"
-        Me.lblTRecords.Visible = False
         '
         'frmImportDaily
         '
