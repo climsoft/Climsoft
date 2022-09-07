@@ -55,9 +55,9 @@ Partial Class formDataView
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(634, 472)
+        Me.btnHelp.Location = New System.Drawing.Point(619, 472)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(58, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(73, 23)
         Me.btnHelp.TabIndex = 8
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -65,9 +65,9 @@ Partial Class formDataView
         'btnDelete
         '
         Me.btnDelete.Enabled = False
-        Me.btnDelete.Location = New System.Drawing.Point(146, 472)
+        Me.btnDelete.Location = New System.Drawing.Point(106, 472)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(58, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(77, 23)
         Me.btnDelete.TabIndex = 7
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -75,36 +75,36 @@ Partial Class formDataView
         'btnUpdate
         '
         Me.btnUpdate.Enabled = False
-        Me.btnUpdate.Location = New System.Drawing.Point(225, 472)
+        Me.btnUpdate.Location = New System.Drawing.Point(189, 472)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(58, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(69, 23)
         Me.btnUpdate.TabIndex = 6
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(555, 472)
+        Me.btnClose.Location = New System.Drawing.Point(540, 472)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(58, 23)
+        Me.btnClose.Size = New System.Drawing.Size(73, 23)
         Me.btnClose.TabIndex = 5
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'cmdExport
         '
-        Me.cmdExport.Location = New System.Drawing.Point(304, 472)
+        Me.cmdExport.Location = New System.Drawing.Point(264, 472)
         Me.cmdExport.Name = "cmdExport"
-        Me.cmdExport.Size = New System.Drawing.Size(58, 23)
+        Me.cmdExport.Size = New System.Drawing.Size(74, 23)
         Me.cmdExport.TabIndex = 9
         Me.cmdExport.Text = "Export"
         Me.cmdExport.UseVisualStyleBackColor = True
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(462, 472)
+        Me.cmdEdit.Location = New System.Drawing.Point(427, 472)
         Me.cmdEdit.Name = "cmdEdit"
-        Me.cmdEdit.Size = New System.Drawing.Size(72, 23)
+        Me.cmdEdit.Size = New System.Drawing.Size(107, 23)
         Me.cmdEdit.TabIndex = 10
         Me.cmdEdit.Text = "Edit Mode"
         Me.cmdEdit.UseVisualStyleBackColor = True
@@ -128,7 +128,7 @@ Partial Class formDataView
         '
         Me.cmdSearch.Location = New System.Drawing.Point(192, 15)
         Me.cmdSearch.Name = "cmdSearch"
-        Me.cmdSearch.Size = New System.Drawing.Size(53, 20)
+        Me.cmdSearch.Size = New System.Drawing.Size(57, 20)
         Me.cmdSearch.TabIndex = 30
         Me.cmdSearch.Text = "Search"
         Me.cmdSearch.UseVisualStyleBackColor = True
@@ -183,9 +183,9 @@ Partial Class formDataView
         '
         'cmdImport
         '
-        Me.cmdImport.Location = New System.Drawing.Point(383, 472)
+        Me.cmdImport.Location = New System.Drawing.Point(344, 472)
         Me.cmdImport.Name = "cmdImport"
-        Me.cmdImport.Size = New System.Drawing.Size(58, 23)
+        Me.cmdImport.Size = New System.Drawing.Size(77, 23)
         Me.cmdImport.TabIndex = 18
         Me.cmdImport.Text = "Import"
         Me.cmdImport.UseVisualStyleBackColor = True

@@ -101,7 +101,7 @@ Partial Class frmClimatSettings
         '
         Me.butGrant.Location = New System.Drawing.Point(317, 5)
         Me.butGrant.Name = "butGrant"
-        Me.butGrant.Size = New System.Drawing.Size(131, 23)
+        Me.butGrant.Size = New System.Drawing.Size(152, 23)
         Me.butGrant.TabIndex = 16
         Me.butGrant.Text = "Grant User Permissions "
         Me.butGrant.UseVisualStyleBackColor = True
@@ -110,7 +110,7 @@ Partial Class frmClimatSettings
         '
         Me.butUpdate.Location = New System.Drawing.Point(189, 5)
         Me.butUpdate.Name = "butUpdate"
-        Me.butUpdate.Size = New System.Drawing.Size(58, 23)
+        Me.butUpdate.Size = New System.Drawing.Size(72, 23)
         Me.butUpdate.TabIndex = 0
         Me.butUpdate.Text = "Update"
         Me.butUpdate.UseVisualStyleBackColor = True
@@ -240,7 +240,7 @@ Partial Class frmClimatSettings
         '
         Me.cmdUpdate.Location = New System.Drawing.Point(287, 233)
         Me.cmdUpdate.Name = "cmdUpdate"
-        Me.cmdUpdate.Size = New System.Drawing.Size(63, 22)
+        Me.cmdUpdate.Size = New System.Drawing.Size(75, 22)
         Me.cmdUpdate.TabIndex = 26
         Me.cmdUpdate.Text = "Update"
         Me.cmdUpdate.UseVisualStyleBackColor = True
@@ -356,7 +356,7 @@ Partial Class frmClimatSettings
         '
         Me.btnUpdates.Location = New System.Drawing.Point(289, 407)
         Me.btnUpdates.Name = "btnUpdates"
-        Me.btnUpdates.Size = New System.Drawing.Size(58, 23)
+        Me.btnUpdates.Size = New System.Drawing.Size(88, 23)
         Me.btnUpdates.TabIndex = 8
         Me.btnUpdates.Text = "Update"
         Me.btnUpdates.UseVisualStyleBackColor = True
@@ -365,16 +365,16 @@ Partial Class frmClimatSettings
         '
         Me.butClose.Location = New System.Drawing.Point(402, 407)
         Me.butClose.Name = "butClose"
-        Me.butClose.Size = New System.Drawing.Size(58, 23)
+        Me.butClose.Size = New System.Drawing.Size(75, 23)
         Me.butClose.TabIndex = 9
         Me.butClose.Text = "Close"
         Me.butClose.UseVisualStyleBackColor = True
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(515, 407)
+        Me.btnHelp.Location = New System.Drawing.Point(501, 407)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(58, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(72, 23)
         Me.btnHelp.TabIndex = 10
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -383,7 +383,7 @@ Partial Class frmClimatSettings
         '
         Me.btnAddNew.Location = New System.Drawing.Point(171, 407)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(58, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(100, 23)
         Me.btnAddNew.TabIndex = 11
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True

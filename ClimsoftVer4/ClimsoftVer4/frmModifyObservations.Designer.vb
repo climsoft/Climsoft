@@ -273,16 +273,16 @@ Partial Class frmModifyObservations
         Me.GrBxCommands.Controls.Add(Me.cmdDelete)
         Me.GrBxCommands.Controls.Add(Me.cmdUpade)
         Me.GrBxCommands.Controls.Add(Me.cmdView)
-        Me.GrBxCommands.Location = New System.Drawing.Point(799, 30)
+        Me.GrBxCommands.Location = New System.Drawing.Point(791, 30)
         Me.GrBxCommands.Name = "GrBxCommands"
-        Me.GrBxCommands.Size = New System.Drawing.Size(344, 58)
+        Me.GrBxCommands.Size = New System.Drawing.Size(358, 58)
         Me.GrBxCommands.TabIndex = 5
         Me.GrBxCommands.TabStop = False
         Me.GrBxCommands.Text = "Commands"
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(280, 24)
+        Me.Button1.Location = New System.Drawing.Point(295, 24)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(57, 23)
         Me.Button1.TabIndex = 4
@@ -291,9 +291,9 @@ Partial Class frmModifyObservations
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(212, 24)
+        Me.cmdClose.Location = New System.Drawing.Point(228, 24)
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(57, 23)
+        Me.cmdClose.Size = New System.Drawing.Size(61, 23)
         Me.cmdClose.TabIndex = 3
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
@@ -301,9 +301,9 @@ Partial Class frmModifyObservations
         'cmdDelete
         '
         Me.cmdDelete.Enabled = False
-        Me.cmdDelete.Location = New System.Drawing.Point(144, 24)
+        Me.cmdDelete.Location = New System.Drawing.Point(160, 24)
         Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(57, 23)
+        Me.cmdDelete.Size = New System.Drawing.Size(62, 23)
         Me.cmdDelete.TabIndex = 2
         Me.cmdDelete.Text = "Delete"
         Me.cmdDelete.UseVisualStyleBackColor = True
@@ -311,9 +311,9 @@ Partial Class frmModifyObservations
         'cmdUpade
         '
         Me.cmdUpade.Enabled = False
-        Me.cmdUpade.Location = New System.Drawing.Point(76, 24)
+        Me.cmdUpade.Location = New System.Drawing.Point(83, 24)
         Me.cmdUpade.Name = "cmdUpade"
-        Me.cmdUpade.Size = New System.Drawing.Size(57, 23)
+        Me.cmdUpade.Size = New System.Drawing.Size(71, 23)
         Me.cmdUpade.TabIndex = 1
         Me.cmdUpade.Text = "Update"
         Me.cmdUpade.UseVisualStyleBackColor = True
@@ -322,7 +322,7 @@ Partial Class frmModifyObservations
         '
         Me.cmdView.Location = New System.Drawing.Point(8, 24)
         Me.cmdView.Name = "cmdView"
-        Me.cmdView.Size = New System.Drawing.Size(57, 23)
+        Me.cmdView.Size = New System.Drawing.Size(69, 23)
         Me.cmdView.TabIndex = 0
         Me.cmdView.Text = "View"
         Me.cmdView.UseVisualStyleBackColor = True
