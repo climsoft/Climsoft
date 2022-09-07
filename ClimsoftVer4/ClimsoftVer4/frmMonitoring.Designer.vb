@@ -458,9 +458,9 @@ Partial Class frmMonitoring
         '
         'cmdSave
         '
-        Me.cmdSave.Location = New System.Drawing.Point(546, 122)
+        Me.cmdSave.Location = New System.Drawing.Point(529, 122)
         Me.cmdSave.Name = "cmdSave"
-        Me.cmdSave.Size = New System.Drawing.Size(63, 25)
+        Me.cmdSave.Size = New System.Drawing.Size(80, 25)
         Me.cmdSave.TabIndex = 32
         Me.cmdSave.Text = "Save"
         Me.cmdSave.UseVisualStyleBackColor = True
@@ -469,7 +469,7 @@ Partial Class frmMonitoring
         '
         Me.cmdExtarct.Location = New System.Drawing.Point(447, 122)
         Me.cmdExtarct.Name = "cmdExtarct"
-        Me.cmdExtarct.Size = New System.Drawing.Size(63, 25)
+        Me.cmdExtarct.Size = New System.Drawing.Size(76, 25)
         Me.cmdExtarct.TabIndex = 31
         Me.cmdExtarct.Text = "Retrieve"
         Me.cmdExtarct.UseVisualStyleBackColor = True
@@ -676,16 +676,16 @@ Partial Class frmMonitoring
         '
         Me.cmdUpdate.Location = New System.Drawing.Point(98, 186)
         Me.cmdUpdate.Name = "cmdUpdate"
-        Me.cmdUpdate.Size = New System.Drawing.Size(56, 25)
+        Me.cmdUpdate.Size = New System.Drawing.Size(72, 25)
         Me.cmdUpdate.TabIndex = 2
         Me.cmdUpdate.Text = "Update"
         Me.cmdUpdate.UseVisualStyleBackColor = True
         '
         'cmdretrieve1
         '
-        Me.cmdretrieve1.Location = New System.Drawing.Point(18, 187)
+        Me.cmdretrieve1.Location = New System.Drawing.Point(7, 187)
         Me.cmdretrieve1.Name = "cmdretrieve1"
-        Me.cmdretrieve1.Size = New System.Drawing.Size(56, 25)
+        Me.cmdretrieve1.Size = New System.Drawing.Size(67, 25)
         Me.cmdretrieve1.TabIndex = 1
         Me.cmdretrieve1.Text = "View"
         Me.cmdretrieve1.UseVisualStyleBackColor = True
@@ -734,7 +734,7 @@ Partial Class frmMonitoring
         '
         Me.cmdClose.Location = New System.Drawing.Point(9, 262)
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(78, 23)
+        Me.cmdClose.Size = New System.Drawing.Size(86, 23)
         Me.cmdClose.TabIndex = 13
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
