@@ -33,12 +33,12 @@ Partial Class frmInventoryChart
         Me.grpColors = New System.Windows.Forms.GroupBox()
         Me.lstSeries = New System.Windows.Forms.ListBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtXinterval = New System.Windows.Forms.TextBox()
+        Me.butXinterval = New System.Windows.Forms.Button()
+        Me.lblXinterval = New System.Windows.Forms.Label()
         Me.lblYinterval = New System.Windows.Forms.Label()
         Me.butYinterval = New System.Windows.Forms.Button()
         Me.txtYinterval = New System.Windows.Forms.TextBox()
-        Me.lblXinterval = New System.Windows.Forms.Label()
-        Me.butXinterval = New System.Windows.Forms.Button()
-        Me.txtXinterval = New System.Windows.Forms.TextBox()
         Me.lblSettings = New System.Windows.Forms.Label()
         CType(Me.chartInventory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpColors.SuspendLayout()
@@ -63,45 +63,45 @@ Partial Class frmInventoryChart
         'cmdview
         '
         Me.cmdview.Enabled = False
-        Me.cmdview.Location = New System.Drawing.Point(513, 438)
+        Me.cmdview.Location = New System.Drawing.Point(529, 438)
         Me.cmdview.Name = "cmdview"
-        Me.cmdview.Size = New System.Drawing.Size(89, 24)
+        Me.cmdview.Size = New System.Drawing.Size(73, 24)
         Me.cmdview.TabIndex = 13
         Me.cmdview.Text = "View Data"
         Me.cmdview.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(621, 438)
+        Me.cmdHelp.Location = New System.Drawing.Point(636, 438)
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(65, 24)
+        Me.cmdHelp.Size = New System.Drawing.Size(50, 24)
         Me.cmdHelp.TabIndex = 12
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'CmdClose
         '
-        Me.CmdClose.Location = New System.Drawing.Point(702, 438)
+        Me.CmdClose.Location = New System.Drawing.Point(720, 438)
         Me.CmdClose.Name = "CmdClose"
-        Me.CmdClose.Size = New System.Drawing.Size(68, 24)
+        Me.CmdClose.Size = New System.Drawing.Size(50, 24)
         Me.CmdClose.TabIndex = 11
         Me.CmdClose.Text = "Close"
         Me.CmdClose.UseVisualStyleBackColor = True
         '
         'cmdPrint
         '
-        Me.cmdPrint.Location = New System.Drawing.Point(430, 438)
+        Me.cmdPrint.Location = New System.Drawing.Point(445, 438)
         Me.cmdPrint.Name = "cmdPrint"
-        Me.cmdPrint.Size = New System.Drawing.Size(65, 24)
+        Me.cmdPrint.Size = New System.Drawing.Size(50, 24)
         Me.cmdPrint.TabIndex = 10
         Me.cmdPrint.Text = "Print"
         Me.cmdPrint.UseVisualStyleBackColor = True
         '
         'comdSave
         '
-        Me.comdSave.Location = New System.Drawing.Point(340, 438)
+        Me.comdSave.Location = New System.Drawing.Point(361, 438)
         Me.comdSave.Name = "comdSave"
-        Me.comdSave.Size = New System.Drawing.Size(72, 24)
+        Me.comdSave.Size = New System.Drawing.Size(51, 24)
         Me.comdSave.TabIndex = 9
         Me.comdSave.Text = "Save"
         Me.comdSave.UseVisualStyleBackColor = True
@@ -140,6 +140,31 @@ Partial Class frmInventoryChart
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Axis Intervals"
         '
+        'txtXinterval
+        '
+        Me.txtXinterval.Location = New System.Drawing.Point(8, 40)
+        Me.txtXinterval.Name = "txtXinterval"
+        Me.txtXinterval.Size = New System.Drawing.Size(47, 20)
+        Me.txtXinterval.TabIndex = 0
+        '
+        'butXinterval
+        '
+        Me.butXinterval.Location = New System.Drawing.Point(51, 39)
+        Me.butXinterval.Name = "butXinterval"
+        Me.butXinterval.Size = New System.Drawing.Size(38, 22)
+        Me.butXinterval.TabIndex = 1
+        Me.butXinterval.Text = "Set"
+        Me.butXinterval.UseVisualStyleBackColor = True
+        '
+        'lblXinterval
+        '
+        Me.lblXinterval.AutoSize = True
+        Me.lblXinterval.Location = New System.Drawing.Point(11, 23)
+        Me.lblXinterval.Name = "lblXinterval"
+        Me.lblXinterval.Size = New System.Drawing.Size(36, 13)
+        Me.lblXinterval.TabIndex = 2
+        Me.lblXinterval.Text = "X Axis"
+        '
         'lblYinterval
         '
         Me.lblYinterval.AutoSize = True
@@ -164,31 +189,6 @@ Partial Class frmInventoryChart
         Me.txtYinterval.Name = "txtYinterval"
         Me.txtYinterval.Size = New System.Drawing.Size(47, 20)
         Me.txtYinterval.TabIndex = 3
-        '
-        'lblXinterval
-        '
-        Me.lblXinterval.AutoSize = True
-        Me.lblXinterval.Location = New System.Drawing.Point(11, 23)
-        Me.lblXinterval.Name = "lblXinterval"
-        Me.lblXinterval.Size = New System.Drawing.Size(36, 13)
-        Me.lblXinterval.TabIndex = 2
-        Me.lblXinterval.Text = "X Axis"
-        '
-        'butXinterval
-        '
-        Me.butXinterval.Location = New System.Drawing.Point(51, 39)
-        Me.butXinterval.Name = "butXinterval"
-        Me.butXinterval.Size = New System.Drawing.Size(38, 22)
-        Me.butXinterval.TabIndex = 1
-        Me.butXinterval.Text = "Set"
-        Me.butXinterval.UseVisualStyleBackColor = True
-        '
-        'txtXinterval
-        '
-        Me.txtXinterval.Location = New System.Drawing.Point(8, 40)
-        Me.txtXinterval.Name = "txtXinterval"
-        Me.txtXinterval.Size = New System.Drawing.Size(47, 20)
-        Me.txtXinterval.TabIndex = 0
         '
         'lblSettings
         '
