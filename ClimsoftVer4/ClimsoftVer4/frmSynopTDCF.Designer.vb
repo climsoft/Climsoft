@@ -147,9 +147,9 @@ Partial Class frmSynopTDCF
         '
         'cmdSend
         '
-        Me.cmdSend.Location = New System.Drawing.Point(387, 424)
+        Me.cmdSend.Location = New System.Drawing.Point(375, 424)
         Me.cmdSend.Name = "cmdSend"
-        Me.cmdSend.Size = New System.Drawing.Size(71, 22)
+        Me.cmdSend.Size = New System.Drawing.Size(83, 22)
         Me.cmdSend.TabIndex = 10
         Me.cmdSend.Text = "Send"
         Me.cmdSend.UseVisualStyleBackColor = True
@@ -395,7 +395,7 @@ Partial Class frmSynopTDCF
         '
         Me.cmdUpdate.Location = New System.Drawing.Point(120, 208)
         Me.cmdUpdate.Name = "cmdUpdate"
-        Me.cmdUpdate.Size = New System.Drawing.Size(63, 22)
+        Me.cmdUpdate.Size = New System.Drawing.Size(103, 22)
         Me.cmdUpdate.TabIndex = 12
         Me.cmdUpdate.Text = "Update"
         Me.cmdUpdate.UseVisualStyleBackColor = True
@@ -620,7 +620,7 @@ Partial Class frmSynopTDCF
         '
         Me.cmdUpadate.Location = New System.Drawing.Point(211, 295)
         Me.cmdUpadate.Name = "cmdUpadate"
-        Me.cmdUpadate.Size = New System.Drawing.Size(72, 20)
+        Me.cmdUpadate.Size = New System.Drawing.Size(94, 20)
         Me.cmdUpadate.TabIndex = 15
         Me.cmdUpadate.Text = "Update"
         Me.cmdUpadate.UseVisualStyleBackColor = True
@@ -672,9 +672,9 @@ Partial Class frmSynopTDCF
         '
         'cmdNew
         '
-        Me.cmdNew.Location = New System.Drawing.Point(94, 295)
+        Me.cmdNew.Location = New System.Drawing.Point(72, 295)
         Me.cmdNew.Name = "cmdNew"
-        Me.cmdNew.Size = New System.Drawing.Size(72, 20)
+        Me.cmdNew.Size = New System.Drawing.Size(94, 20)
         Me.cmdNew.TabIndex = 0
         Me.cmdNew.Text = "AddNew"
         Me.cmdNew.UseVisualStyleBackColor = True
