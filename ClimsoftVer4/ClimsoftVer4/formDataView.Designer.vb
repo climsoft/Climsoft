@@ -55,7 +55,7 @@ Partial Class formDataView
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(619, 472)
+        Me.btnHelp.Location = New System.Drawing.Point(701, 475)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(73, 23)
         Me.btnHelp.TabIndex = 8
@@ -65,9 +65,9 @@ Partial Class formDataView
         'btnDelete
         '
         Me.btnDelete.Enabled = False
-        Me.btnDelete.Location = New System.Drawing.Point(106, 472)
+        Me.btnDelete.Location = New System.Drawing.Point(77, 475)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(77, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(87, 23)
         Me.btnDelete.TabIndex = 7
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -75,36 +75,36 @@ Partial Class formDataView
         'btnUpdate
         '
         Me.btnUpdate.Enabled = False
-        Me.btnUpdate.Location = New System.Drawing.Point(189, 472)
+        Me.btnUpdate.Location = New System.Drawing.Point(170, 475)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(69, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(82, 23)
         Me.btnUpdate.TabIndex = 6
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(540, 472)
+        Me.btnClose.Location = New System.Drawing.Point(609, 475)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(73, 23)
+        Me.btnClose.Size = New System.Drawing.Size(86, 23)
         Me.btnClose.TabIndex = 5
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'cmdExport
         '
-        Me.cmdExport.Location = New System.Drawing.Point(264, 472)
+        Me.cmdExport.Location = New System.Drawing.Point(258, 475)
         Me.cmdExport.Name = "cmdExport"
-        Me.cmdExport.Size = New System.Drawing.Size(74, 23)
+        Me.cmdExport.Size = New System.Drawing.Size(99, 23)
         Me.cmdExport.TabIndex = 9
         Me.cmdExport.Text = "Export"
         Me.cmdExport.UseVisualStyleBackColor = True
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(427, 472)
+        Me.cmdEdit.Location = New System.Drawing.Point(466, 475)
         Me.cmdEdit.Name = "cmdEdit"
-        Me.cmdEdit.Size = New System.Drawing.Size(107, 23)
+        Me.cmdEdit.Size = New System.Drawing.Size(127, 23)
         Me.cmdEdit.TabIndex = 10
         Me.cmdEdit.Text = "Edit Mode"
         Me.cmdEdit.UseVisualStyleBackColor = True
@@ -118,39 +118,39 @@ Partial Class formDataView
         Me.grpSearch.Controls.Add(Me.lblYear)
         Me.grpSearch.Controls.Add(Me.Label1)
         Me.grpSearch.Controls.Add(Me.txtStn)
-        Me.grpSearch.Location = New System.Drawing.Point(581, 5)
+        Me.grpSearch.Location = New System.Drawing.Point(542, 5)
         Me.grpSearch.Name = "grpSearch"
-        Me.grpSearch.Size = New System.Drawing.Size(255, 44)
+        Me.grpSearch.Size = New System.Drawing.Size(294, 44)
         Me.grpSearch.TabIndex = 17
         Me.grpSearch.TabStop = False
         '
         'cmdSearch
         '
-        Me.cmdSearch.Location = New System.Drawing.Point(192, 15)
+        Me.cmdSearch.Location = New System.Drawing.Point(212, 15)
         Me.cmdSearch.Name = "cmdSearch"
-        Me.cmdSearch.Size = New System.Drawing.Size(57, 20)
+        Me.cmdSearch.Size = New System.Drawing.Size(76, 20)
         Me.cmdSearch.TabIndex = 30
         Me.cmdSearch.Text = "Search"
         Me.cmdSearch.UseVisualStyleBackColor = True
         '
         'txtMM
         '
-        Me.txtMM.Location = New System.Drawing.Point(159, 16)
+        Me.txtMM.Location = New System.Drawing.Point(172, 16)
         Me.txtMM.Name = "txtMM"
-        Me.txtMM.Size = New System.Drawing.Size(30, 20)
+        Me.txtMM.Size = New System.Drawing.Size(28, 20)
         Me.txtMM.TabIndex = 28
         '
         'txtYY
         '
-        Me.txtYY.Location = New System.Drawing.Point(104, 16)
+        Me.txtYY.Location = New System.Drawing.Point(117, 16)
         Me.txtYY.Name = "txtYY"
-        Me.txtYY.Size = New System.Drawing.Size(45, 20)
+        Me.txtYY.Size = New System.Drawing.Size(43, 20)
         Me.txtYY.TabIndex = 27
         '
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(156, 2)
+        Me.lblMonth.Location = New System.Drawing.Point(169, 2)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(37, 13)
         Me.lblMonth.TabIndex = 25
@@ -159,7 +159,7 @@ Partial Class formDataView
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(111, 2)
+        Me.lblYear.Location = New System.Drawing.Point(124, 2)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(29, 13)
         Me.lblYear.TabIndex = 24
@@ -178,14 +178,14 @@ Partial Class formDataView
         '
         Me.txtStn.Location = New System.Drawing.Point(11, 16)
         Me.txtStn.Name = "txtStn"
-        Me.txtStn.Size = New System.Drawing.Size(83, 20)
+        Me.txtStn.Size = New System.Drawing.Size(100, 20)
         Me.txtStn.TabIndex = 22
         '
         'cmdImport
         '
-        Me.cmdImport.Location = New System.Drawing.Point(344, 472)
+        Me.cmdImport.Location = New System.Drawing.Point(363, 475)
         Me.cmdImport.Name = "cmdImport"
-        Me.cmdImport.Size = New System.Drawing.Size(77, 23)
+        Me.cmdImport.Size = New System.Drawing.Size(97, 23)
         Me.cmdImport.TabIndex = 18
         Me.cmdImport.Text = "Import"
         Me.cmdImport.UseVisualStyleBackColor = True
