@@ -919,6 +919,10 @@
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub Label28_Click(sender As Object, e As EventArgs) Handles Label28.Click
+
+    End Sub
+
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_agro1")
     End Sub

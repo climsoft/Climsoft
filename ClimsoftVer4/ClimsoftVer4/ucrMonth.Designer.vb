@@ -32,7 +32,7 @@ Partial Class ucrMonth
         '
         Me.cmsMonth.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmsMonthIDs, Me.cmsMonthNames, Me.cmsMonthShortMonthNames})
         Me.cmsMonth.Name = "cmsYear"
-        Me.cmsMonth.Size = New System.Drawing.Size(210, 92)
+        Me.cmsMonth.Size = New System.Drawing.Size(210, 70)
         '
         'cmsMonthIDs
         '
@@ -58,7 +58,7 @@ Partial Class ucrMonth
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.Name = "ucrMonth"
-        Me.Size = New System.Drawing.Size(380, 212)
+        Me.Size = New System.Drawing.Size(676, 473)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsMonth.ResumeLayout(False)
         Me.ResumeLayout(False)

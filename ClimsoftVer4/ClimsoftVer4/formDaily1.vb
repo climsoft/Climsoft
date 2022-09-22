@@ -562,6 +562,10 @@ Public Class formDaily1
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub GroupBoxCommands_Enter(sender As Object, e As EventArgs) Handles GroupBoxCommands.Enter
+
+    End Sub
+
     Private Sub formDaily1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         'If e.KeyCode = Keys.Enter Then My.Computer.Keyboard.SendKeys("{TAB}")
 

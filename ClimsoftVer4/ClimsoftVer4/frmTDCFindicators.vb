@@ -164,6 +164,14 @@
         End If
     End Sub
 
+    Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeader.Click
+
+    End Sub
+
+    Private Sub txtMsgHeader_TextChanged(sender As Object, e As EventArgs) Handles txtMsgHeader.TextChanged
+
+    End Sub
+
     Private Sub cboTemplate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTemplate.SelectedIndexChanged
 
     End Sub
