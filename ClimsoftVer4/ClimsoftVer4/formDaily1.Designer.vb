@@ -192,7 +192,7 @@ Partial Class formDaily1
         '
         Me.chkRepeatEntry.AutoSize = True
         Me.chkRepeatEntry.Enabled = False
-        Me.chkRepeatEntry.Location = New System.Drawing.Point(19, 89)
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(12, 94)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
         Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
         Me.chkRepeatEntry.TabIndex = 1187
@@ -211,7 +211,7 @@ Partial Class formDaily1
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(460, 84)
+        Me.btnUpload.Location = New System.Drawing.Point(549, 92)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
         Me.btnUpload.TabIndex = 1186
@@ -221,7 +221,7 @@ Partial Class formDaily1
         'Label37
         '
         Me.Label37.AutoSize = True
-        Me.Label37.Location = New System.Drawing.Point(197, 89)
+        Me.Label37.Location = New System.Drawing.Point(271, 95)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(59, 13)
         Me.Label37.TabIndex = 1185
@@ -229,7 +229,7 @@ Partial Class formDaily1
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(262, 86)
+        Me.txtSequencer.Location = New System.Drawing.Point(353, 92)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(175, 20)
         Me.txtSequencer.TabIndex = 1184

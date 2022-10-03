@@ -4443,6 +4443,38 @@ Err:
         End Try
     End Function
 
+    Private Sub txtStrName_TextChanged(sender As Object, e As EventArgs) Handles txtStrName.TextChanged
+
+    End Sub
+
+    Private Sub txtDelimiter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtDelimiter.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtHeaders_TextChanged(sender As Object, e As EventArgs) Handles txtHeaders.TextChanged
+
+    End Sub
+
+    Private Sub txtQualifier_TextChanged(sender As Object, e As EventArgs) Handles txtQualifier.TextChanged
+
+    End Sub
+
+    Private Sub chkOptionalSection_CheckedChanged(sender As Object, e As EventArgs) Handles chkOptionalSection.CheckedChanged
+
+    End Sub
+
+    Private Sub chkDeleteFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkDeleteFile.CheckedChanged
+
+    End Sub
+
+    Private Sub lblEncodeHrs_Click(sender As Object, e As EventArgs) Handles lblEncodeHrs.Click
+
+    End Sub
+
+    Private Sub txtTimeout_TextChanged(sender As Object, e As EventArgs) Handles txtTimeout.TextChanged
+
+    End Sub
+
     Private Sub txtTemplate_Click(sender As Object, e As EventArgs) Handles txtTemplate.Click
         load_Indicators(txtTemplate.Text)
     End Sub

@@ -54,7 +54,7 @@ Partial Class frmGeneralSettings
         '
         'txtKeyValue
         '
-        Me.txtKeyValue.Location = New System.Drawing.Point(317, 65)
+        Me.txtKeyValue.Location = New System.Drawing.Point(343, 65)
         Me.txtKeyValue.Name = "txtKeyValue"
         Me.txtKeyValue.Size = New System.Drawing.Size(357, 20)
         Me.txtKeyValue.TabIndex = 1
@@ -62,7 +62,7 @@ Partial Class frmGeneralSettings
         'txtKeyDescription
         '
         Me.txtKeyDescription.Enabled = False
-        Me.txtKeyDescription.Location = New System.Drawing.Point(134, 115)
+        Me.txtKeyDescription.Location = New System.Drawing.Point(160, 115)
         Me.txtKeyDescription.Name = "txtKeyDescription"
         Me.txtKeyDescription.Size = New System.Drawing.Size(540, 20)
         Me.txtKeyDescription.TabIndex = 2
@@ -88,7 +88,7 @@ Partial Class frmGeneralSettings
         'lblKeyDescription
         '
         Me.lblKeyDescription.AutoSize = True
-        Me.lblKeyDescription.Location = New System.Drawing.Point(25, 122)
+        Me.lblKeyDescription.Location = New System.Drawing.Point(24, 118)
         Me.lblKeyDescription.Name = "lblKeyDescription"
         Me.lblKeyDescription.Size = New System.Drawing.Size(96, 13)
         Me.lblKeyDescription.TabIndex = 5
@@ -96,7 +96,7 @@ Partial Class frmGeneralSettings
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(599, 224)
+        Me.btnHelp.Location = New System.Drawing.Point(625, 221)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 317
@@ -106,7 +106,7 @@ Partial Class frmGeneralSettings
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(356, 224)
+        Me.btnClear.Location = New System.Drawing.Point(382, 221)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 315
@@ -116,7 +116,7 @@ Partial Class frmGeneralSettings
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(113, 224)
+        Me.btnCommit.Location = New System.Drawing.Point(139, 221)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
         Me.btnCommit.TabIndex = 311
@@ -126,7 +126,7 @@ Partial Class frmGeneralSettings
         'btnDelete
         '
         Me.btnDelete.Enabled = False
-        Me.btnDelete.Location = New System.Drawing.Point(275, 224)
+        Me.btnDelete.Location = New System.Drawing.Point(301, 221)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 314
@@ -136,7 +136,7 @@ Partial Class frmGeneralSettings
         'btnAddNew
         '
         Me.btnAddNew.Enabled = False
-        Me.btnAddNew.Location = New System.Drawing.Point(32, 224)
+        Me.btnAddNew.Location = New System.Drawing.Point(58, 221)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 312
@@ -145,7 +145,7 @@ Partial Class frmGeneralSettings
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(194, 224)
+        Me.btnUpdate.Location = New System.Drawing.Point(220, 221)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 313
@@ -201,7 +201,7 @@ Partial Class frmGeneralSettings
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(518, 224)
+        Me.btnClose.Location = New System.Drawing.Point(544, 221)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 316
@@ -210,7 +210,7 @@ Partial Class frmGeneralSettings
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(437, 224)
+        Me.btnView.Location = New System.Drawing.Point(463, 221)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 662
@@ -232,7 +232,7 @@ Partial Class frmGeneralSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(711, 270)
+        Me.ClientSize = New System.Drawing.Size(764, 270)
         Me.Controls.Add(Me.lblGuidelines)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnHelp)
