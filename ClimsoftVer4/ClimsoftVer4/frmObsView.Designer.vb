@@ -136,7 +136,7 @@ Partial Class frmObsView
         '
         'cmdSelectAllElements
         '
-        Me.cmdSelectAllElements.Location = New System.Drawing.Point(509, 393)
+        Me.cmdSelectAllElements.Location = New System.Drawing.Point(509, 391)
         Me.cmdSelectAllElements.Name = "cmdSelectAllElements"
         Me.cmdSelectAllElements.Size = New System.Drawing.Size(113, 23)
         Me.cmdSelectAllElements.TabIndex = 29
@@ -145,7 +145,7 @@ Partial Class frmObsView
         '
         'cmdSelectAllStations
         '
-        Me.cmdSelectAllStations.Location = New System.Drawing.Point(171, 393)
+        Me.cmdSelectAllStations.Location = New System.Drawing.Point(147, 391)
         Me.cmdSelectAllStations.Name = "cmdSelectAllStations"
         Me.cmdSelectAllStations.Size = New System.Drawing.Size(107, 23)
         Me.cmdSelectAllStations.TabIndex = 28
@@ -154,18 +154,18 @@ Partial Class frmObsView
         '
         'cmdClearStations
         '
-        Me.cmdClearStations.Location = New System.Drawing.Point(296, 393)
+        Me.cmdClearStations.Location = New System.Drawing.Point(260, 391)
         Me.cmdClearStations.Name = "cmdClearStations"
-        Me.cmdClearStations.Size = New System.Drawing.Size(58, 23)
+        Me.cmdClearStations.Size = New System.Drawing.Size(94, 23)
         Me.cmdClearStations.TabIndex = 27
         Me.cmdClearStations.Text = "Clear List"
         Me.cmdClearStations.UseVisualStyleBackColor = True
         '
         'cmdClearElements
         '
-        Me.cmdClearElements.Location = New System.Drawing.Point(655, 393)
+        Me.cmdClearElements.Location = New System.Drawing.Point(631, 391)
         Me.cmdClearElements.Name = "cmdClearElements"
-        Me.cmdClearElements.Size = New System.Drawing.Size(58, 23)
+        Me.cmdClearElements.Size = New System.Drawing.Size(96, 23)
         Me.cmdClearElements.TabIndex = 26
         Me.cmdClearElements.Text = "Clear List"
         Me.cmdClearElements.UseVisualStyleBackColor = True
@@ -216,7 +216,7 @@ Partial Class frmObsView
         '
         'cmdDelStation
         '
-        Me.cmdDelStation.Location = New System.Drawing.Point(37, 393)
+        Me.cmdDelStation.Location = New System.Drawing.Point(14, 391)
         Me.cmdDelStation.Name = "cmdDelStation"
         Me.cmdDelStation.Size = New System.Drawing.Size(127, 23)
         Me.cmdDelStation.TabIndex = 22
@@ -225,7 +225,7 @@ Partial Class frmObsView
         '
         'cmdDelElement
         '
-        Me.cmdDelElement.Location = New System.Drawing.Point(364, 393)
+        Me.cmdDelElement.Location = New System.Drawing.Point(364, 391)
         Me.cmdDelElement.Name = "cmdDelElement"
         Me.cmdDelElement.Size = New System.Drawing.Size(139, 23)
         Me.cmdDelElement.TabIndex = 21
@@ -467,7 +467,7 @@ Partial Class frmObsView
         'lblOtherFlags
         '
         Me.lblOtherFlags.AutoSize = True
-        Me.lblOtherFlags.Location = New System.Drawing.Point(153, 84)
+        Me.lblOtherFlags.Location = New System.Drawing.Point(147, 85)
         Me.lblOtherFlags.Name = "lblOtherFlags"
         Me.lblOtherFlags.Size = New System.Drawing.Size(126, 13)
         Me.lblOtherFlags.TabIndex = 22
@@ -475,10 +475,9 @@ Partial Class frmObsView
         '
         'chkForms
         '
-        Me.chkForms.AutoSize = True
-        Me.chkForms.Location = New System.Drawing.Point(10, 171)
+        Me.chkForms.Location = New System.Drawing.Point(10, 158)
         Me.chkForms.Name = "chkForms"
-        Me.chkForms.Size = New System.Drawing.Size(102, 17)
+        Me.chkForms.Size = New System.Drawing.Size(118, 38)
         Me.chkForms.TabIndex = 21
         Me.chkForms.Text = "Key Entry Forms"
         Me.chkForms.UseVisualStyleBackColor = True
