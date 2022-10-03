@@ -714,7 +714,7 @@ Partial Class frmMonitoring
         'lblRecords
         '
         Me.lblRecords.AutoSize = True
-        Me.lblRecords.Location = New System.Drawing.Point(290, 270)
+        Me.lblRecords.Location = New System.Drawing.Point(270, 270)
         Me.lblRecords.Name = "lblRecords"
         Me.lblRecords.Size = New System.Drawing.Size(89, 13)
         Me.lblRecords.TabIndex = 11
@@ -732,18 +732,18 @@ Partial Class frmMonitoring
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(9, 262)
+        Me.cmdClose.Location = New System.Drawing.Point(13, 265)
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(86, 23)
+        Me.cmdClose.Size = New System.Drawing.Size(86, 20)
         Me.cmdClose.TabIndex = 13
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(600, 262)
+        Me.cmdHelp.Location = New System.Drawing.Point(597, 265)
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(78, 23)
+        Me.cmdHelp.Size = New System.Drawing.Size(78, 20)
         Me.cmdHelp.TabIndex = 14
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True

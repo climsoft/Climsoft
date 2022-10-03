@@ -79,25 +79,25 @@ Partial Class frmCreateEntryForm
         '
         'cmdFinish
         '
-        Me.cmdFinish.Location = New System.Drawing.Point(109, 420)
+        Me.cmdFinish.Location = New System.Drawing.Point(120, 420)
         Me.cmdFinish.Name = "cmdFinish"
-        Me.cmdFinish.Size = New System.Drawing.Size(70, 24)
+        Me.cmdFinish.Size = New System.Drawing.Size(76, 24)
         Me.cmdFinish.TabIndex = 6
         Me.cmdFinish.Text = "Save"
         Me.cmdFinish.UseVisualStyleBackColor = True
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(307, 420)
+        Me.cmdClose.Location = New System.Drawing.Point(286, 420)
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(59, 24)
+        Me.cmdClose.Size = New System.Drawing.Size(74, 24)
         Me.cmdClose.TabIndex = 7
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(400, 420)
+        Me.cmdHelp.Location = New System.Drawing.Point(366, 420)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(60, 24)
         Me.cmdHelp.TabIndex = 8
@@ -125,7 +125,7 @@ Partial Class frmCreateEntryForm
         '
         Me.butClear.Location = New System.Drawing.Point(202, 420)
         Me.butClear.Name = "butClear"
-        Me.butClear.Size = New System.Drawing.Size(59, 24)
+        Me.butClear.Size = New System.Drawing.Size(78, 24)
         Me.butClear.TabIndex = 20
         Me.butClear.Text = "Clear"
         Me.butClear.UseVisualStyleBackColor = True
