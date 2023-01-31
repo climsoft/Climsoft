@@ -100,10 +100,15 @@ Public Class formAWSRealTime
         pnlSites.Visible = False
         pnlDataStructures.Visible = False
         pnlMsgEncoding.Visible = False
-        Me.Text = topic
         pnl.Visible = True
         pnl.Dock = DockStyle.Left
 
+        'todo. after the form has been refactored. This block should be removed from here
+        Me.Text = ClsTranslations.GetTranslation(topic)
+        lblRetrieveHrs.Text = ClsTranslations.GetTranslation(lblRetrieveHrs.Text)
+        lblEncodeHrs.Text = ClsTranslations.GetTranslation(lblEncodeHrs.Text)
+        lblNextProcess.Text = ClsTranslations.GetTranslation(lblNextProcess.Text)
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub cmdSites_Click(sender As Object, e As EventArgs) Handles cmdSites.Click

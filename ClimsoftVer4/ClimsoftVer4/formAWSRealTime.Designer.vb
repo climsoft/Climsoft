@@ -58,7 +58,7 @@ Partial Class formAWSRealTime
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.txtQC = New System.Windows.Forms.TextBox()
         Me.txtNxtProcess = New System.Windows.Forms.TextBox()
-        Me.txtNextProcess = New System.Windows.Forms.Label()
+        Me.lblNextProcess = New System.Windows.Forms.Label()
         Me.txtLastProcess = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
@@ -88,7 +88,6 @@ Partial Class formAWSRealTime
         Me.lblInformation = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
         Me.pnlDataStructures = New System.Windows.Forms.Panel()
-        Me.DataGridViewStructures = New System.Windows.Forms.DataGridView()
         Me.grpStructures1 = New System.Windows.Forms.GroupBox()
         Me.lblStructure = New System.Windows.Forms.Label()
         Me.grpStructures = New System.Windows.Forms.GroupBox()
@@ -105,6 +104,7 @@ Partial Class formAWSRealTime
         Me.Label19 = New System.Windows.Forms.Label()
         Me.lblStrName = New System.Windows.Forms.Label()
         Me.cmbExistingStructures = New System.Windows.Forms.ComboBox()
+        Me.DataGridViewStructures = New System.Windows.Forms.DataGridView()
         Me.pnlSites = New System.Windows.Forms.Panel()
         Me.grpSites = New System.Windows.Forms.GroupBox()
         Me.DataGridViewSites = New System.Windows.Forms.DataGridView()
@@ -235,9 +235,9 @@ Partial Class formAWSRealTime
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.pnlDataStructures.SuspendLayout()
-        CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStructures1.SuspendLayout()
         Me.grpStructures.SuspendLayout()
+        CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSites.SuspendLayout()
         Me.grpSites.SuspendLayout()
         CType(Me.DataGridViewSites, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -587,7 +587,7 @@ Partial Class formAWSRealTime
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel4.Controls.Add(Me.txtQC)
         Me.Panel4.Controls.Add(Me.txtNxtProcess)
-        Me.Panel4.Controls.Add(Me.txtNextProcess)
+        Me.Panel4.Controls.Add(Me.lblNextProcess)
         Me.Panel4.Controls.Add(Me.txtLastProcess)
         Me.Panel4.Controls.Add(Me.Label1)
         Me.Panel4.Controls.Add(Me.ProgressBar1)
@@ -623,14 +623,14 @@ Partial Class formAWSRealTime
         Me.txtNxtProcess.Size = New System.Drawing.Size(164, 20)
         Me.txtNxtProcess.TabIndex = 19
         '
-        'txtNextProcess
+        'lblNextProcess
         '
-        Me.txtNextProcess.AutoSize = True
-        Me.txtNextProcess.Location = New System.Drawing.Point(137, 88)
-        Me.txtNextProcess.Name = "txtNextProcess"
-        Me.txtNextProcess.Size = New System.Drawing.Size(84, 13)
-        Me.txtNextProcess.TabIndex = 18
-        Me.txtNextProcess.Text = "Next Processing"
+        Me.lblNextProcess.AutoSize = True
+        Me.lblNextProcess.Location = New System.Drawing.Point(137, 88)
+        Me.lblNextProcess.Name = "lblNextProcess"
+        Me.lblNextProcess.Size = New System.Drawing.Size(84, 13)
+        Me.lblNextProcess.TabIndex = 18
+        Me.lblNextProcess.Text = "Next Processing"
         '
         'txtLastProcess
         '
@@ -920,16 +920,6 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
-        'DataGridViewStructures
-        '
-        Me.DataGridViewStructures.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.DataGridViewStructures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewStructures.Location = New System.Drawing.Point(3, 242)
-        Me.DataGridViewStructures.Name = "DataGridViewStructures"
-        Me.DataGridViewStructures.Size = New System.Drawing.Size(749, 118)
-        Me.DataGridViewStructures.TabIndex = 2
-        Me.DataGridViewStructures.Visible = False
-        '
         'grpStructures1
         '
         Me.grpStructures1.Controls.Add(Me.lblStructure)
@@ -1081,6 +1071,16 @@ Partial Class formAWSRealTime
         Me.cmbExistingStructures.Name = "cmbExistingStructures"
         Me.cmbExistingStructures.Size = New System.Drawing.Size(165, 21)
         Me.cmbExistingStructures.TabIndex = 1
+        '
+        'DataGridViewStructures
+        '
+        Me.DataGridViewStructures.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.DataGridViewStructures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewStructures.Location = New System.Drawing.Point(3, 242)
+        Me.DataGridViewStructures.Name = "DataGridViewStructures"
+        Me.DataGridViewStructures.Size = New System.Drawing.Size(749, 118)
+        Me.DataGridViewStructures.TabIndex = 2
+        Me.DataGridViewStructures.Visible = False
         '
         'pnlSites
         '
@@ -2313,10 +2313,10 @@ Partial Class formAWSRealTime
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.pnlDataStructures.ResumeLayout(False)
-        CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpStructures1.ResumeLayout(False)
         Me.grpStructures.ResumeLayout(False)
         Me.grpStructures.PerformLayout()
+        CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlSites.ResumeLayout(False)
         Me.grpSites.ResumeLayout(False)
         Me.grpSites.PerformLayout()
@@ -2377,7 +2377,7 @@ Partial Class formAWSRealTime
     Friend WithEvents lblDatetime As System.Windows.Forms.Label
     Friend WithEvents lblSatus As System.Windows.Forms.Label
     Friend WithEvents txtNxtProcess As System.Windows.Forms.TextBox
-    Friend WithEvents txtNextProcess As System.Windows.Forms.Label
+    Friend WithEvents lblNextProcess As System.Windows.Forms.Label
     Friend WithEvents txtLastProcess As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmdMSS As System.Windows.Forms.Button
