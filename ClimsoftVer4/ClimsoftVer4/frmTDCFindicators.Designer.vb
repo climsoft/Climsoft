@@ -170,7 +170,7 @@ Partial Class frmTDCFindicators
         'txtLocalTableVersionNumber
         '
         Me.txtLocalTableVersionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLocalTableVersionNumber.Location = New System.Drawing.Point(250, 273)
+        Me.txtLocalTableVersionNumber.Location = New System.Drawing.Point(271, 274)
         Me.txtLocalTableVersionNumber.Name = "txtLocalTableVersionNumber"
         Me.txtLocalTableVersionNumber.Size = New System.Drawing.Size(39, 20)
         Me.txtLocalTableVersionNumber.TabIndex = 14
@@ -190,7 +190,7 @@ Partial Class frmTDCFindicators
         '
         Me.chkOptionalSectionInclusion.AutoSize = True
         Me.chkOptionalSectionInclusion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkOptionalSectionInclusion.Location = New System.Drawing.Point(250, 139)
+        Me.chkOptionalSectionInclusion.Location = New System.Drawing.Point(271, 140)
         Me.chkOptionalSectionInclusion.Name = "chkOptionalSectionInclusion"
         Me.chkOptionalSectionInclusion.Size = New System.Drawing.Size(15, 14)
         Me.chkOptionalSectionInclusion.TabIndex = 3
@@ -210,7 +210,7 @@ Partial Class frmTDCFindicators
         'txtMastersTableVersionNumber
         '
         Me.txtMastersTableVersionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMastersTableVersionNumber.Location = New System.Drawing.Point(250, 245)
+        Me.txtMastersTableVersionNumber.Location = New System.Drawing.Point(271, 246)
         Me.txtMastersTableVersionNumber.Name = "txtMastersTableVersionNumber"
         Me.txtMastersTableVersionNumber.Size = New System.Drawing.Size(39, 20)
         Me.txtMastersTableVersionNumber.TabIndex = 2
@@ -229,7 +229,7 @@ Partial Class frmTDCFindicators
         'txtLocalDataSubCategory
         '
         Me.txtLocalDataSubCategory.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLocalDataSubCategory.Location = New System.Drawing.Point(250, 217)
+        Me.txtLocalDataSubCategory.Location = New System.Drawing.Point(271, 218)
         Me.txtLocalDataSubCategory.Name = "txtLocalDataSubCategory"
         Me.txtLocalDataSubCategory.Size = New System.Drawing.Size(39, 20)
         Me.txtLocalDataSubCategory.TabIndex = 2
@@ -237,7 +237,7 @@ Partial Class frmTDCFindicators
         'txtInternationalDataSubCategory
         '
         Me.txtInternationalDataSubCategory.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtInternationalDataSubCategory.Location = New System.Drawing.Point(250, 189)
+        Me.txtInternationalDataSubCategory.Location = New System.Drawing.Point(271, 190)
         Me.txtInternationalDataSubCategory.Name = "txtInternationalDataSubCategory"
         Me.txtInternationalDataSubCategory.Size = New System.Drawing.Size(39, 20)
         Me.txtInternationalDataSubCategory.TabIndex = 2
@@ -256,7 +256,7 @@ Partial Class frmTDCFindicators
         'txtDataCategory
         '
         Me.txtDataCategory.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDataCategory.Location = New System.Drawing.Point(250, 161)
+        Me.txtDataCategory.Location = New System.Drawing.Point(271, 162)
         Me.txtDataCategory.Name = "txtDataCategory"
         Me.txtDataCategory.Size = New System.Drawing.Size(39, 20)
         Me.txtDataCategory.TabIndex = 2
@@ -276,7 +276,7 @@ Partial Class frmTDCFindicators
         'txtUpdateSequenceNumber
         '
         Me.txtUpdateSequenceNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUpdateSequenceNumber.Location = New System.Drawing.Point(250, 111)
+        Me.txtUpdateSequenceNumber.Location = New System.Drawing.Point(271, 112)
         Me.txtUpdateSequenceNumber.Name = "txtUpdateSequenceNumber"
         Me.txtUpdateSequenceNumber.Size = New System.Drawing.Size(39, 20)
         Me.txtUpdateSequenceNumber.TabIndex = 2
@@ -306,7 +306,7 @@ Partial Class frmTDCFindicators
         'txtOriginatingGeneratingSubCentre
         '
         Me.txtOriginatingGeneratingSubCentre.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOriginatingGeneratingSubCentre.Location = New System.Drawing.Point(250, 83)
+        Me.txtOriginatingGeneratingSubCentre.Location = New System.Drawing.Point(271, 84)
         Me.txtOriginatingGeneratingSubCentre.Name = "txtOriginatingGeneratingSubCentre"
         Me.txtOriginatingGeneratingSubCentre.Size = New System.Drawing.Size(39, 20)
         Me.txtOriginatingGeneratingSubCentre.TabIndex = 2
@@ -325,7 +325,7 @@ Partial Class frmTDCFindicators
         'txtOriginatingGeneratingCentre
         '
         Me.txtOriginatingGeneratingCentre.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOriginatingGeneratingCentre.Location = New System.Drawing.Point(250, 55)
+        Me.txtOriginatingGeneratingCentre.Location = New System.Drawing.Point(271, 56)
         Me.txtOriginatingGeneratingCentre.Name = "txtOriginatingGeneratingCentre"
         Me.txtOriginatingGeneratingCentre.Size = New System.Drawing.Size(55, 20)
         Me.txtOriginatingGeneratingCentre.TabIndex = 2
@@ -344,7 +344,7 @@ Partial Class frmTDCFindicators
         'txtBUFREditionNumber
         '
         Me.txtBUFREditionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBUFREditionNumber.Location = New System.Drawing.Point(251, 27)
+        Me.txtBUFREditionNumber.Location = New System.Drawing.Point(272, 28)
         Me.txtBUFREditionNumber.Name = "txtBUFREditionNumber"
         Me.txtBUFREditionNumber.Size = New System.Drawing.Size(38, 20)
         Me.txtBUFREditionNumber.TabIndex = 2

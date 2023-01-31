@@ -307,16 +307,16 @@ Partial Class formProductsSelectCriteria
         '
         'cmdSelectAllElements
         '
-        Me.cmdSelectAllElements.Location = New System.Drawing.Point(463, 346)
+        Me.cmdSelectAllElements.Location = New System.Drawing.Point(459, 348)
         Me.cmdSelectAllElements.Name = "cmdSelectAllElements"
-        Me.cmdSelectAllElements.Size = New System.Drawing.Size(90, 36)
+        Me.cmdSelectAllElements.Size = New System.Drawing.Size(90, 35)
         Me.cmdSelectAllElements.TabIndex = 29
         Me.cmdSelectAllElements.Text = "Select All"
         Me.cmdSelectAllElements.UseVisualStyleBackColor = True
         '
         'cmdSelectAllStations
         '
-        Me.cmdSelectAllStations.Location = New System.Drawing.Point(144, 346)
+        Me.cmdSelectAllStations.Location = New System.Drawing.Point(130, 347)
         Me.cmdSelectAllStations.Name = "cmdSelectAllStations"
         Me.cmdSelectAllStations.Size = New System.Drawing.Size(90, 36)
         Me.cmdSelectAllStations.TabIndex = 28
@@ -325,18 +325,18 @@ Partial Class formProductsSelectCriteria
         '
         'cmdClearStations
         '
-        Me.cmdClearStations.Location = New System.Drawing.Point(238, 347)
+        Me.cmdClearStations.Location = New System.Drawing.Point(226, 348)
         Me.cmdClearStations.Name = "cmdClearStations"
-        Me.cmdClearStations.Size = New System.Drawing.Size(70, 36)
+        Me.cmdClearStations.Size = New System.Drawing.Size(82, 35)
         Me.cmdClearStations.TabIndex = 27
         Me.cmdClearStations.Text = "Clear List"
         Me.cmdClearStations.UseVisualStyleBackColor = True
         '
         'cmdClearElements
         '
-        Me.cmdClearElements.Location = New System.Drawing.Point(570, 346)
+        Me.cmdClearElements.Location = New System.Drawing.Point(555, 348)
         Me.cmdClearElements.Name = "cmdClearElements"
-        Me.cmdClearElements.Size = New System.Drawing.Size(70, 36)
+        Me.cmdClearElements.Size = New System.Drawing.Size(94, 35)
         Me.cmdClearElements.TabIndex = 26
         Me.cmdClearElements.Text = "Clear List"
         Me.cmdClearElements.UseVisualStyleBackColor = True
@@ -399,14 +399,14 @@ Partial Class formProductsSelectCriteria
         '
         Me.cmdDelStation.Location = New System.Drawing.Point(4, 347)
         Me.cmdDelStation.Name = "cmdDelStation"
-        Me.cmdDelStation.Size = New System.Drawing.Size(139, 36)
+        Me.cmdDelStation.Size = New System.Drawing.Size(125, 36)
         Me.cmdDelStation.TabIndex = 22
         Me.cmdDelStation.Text = "Clear Selected Station"
         Me.cmdDelStation.UseVisualStyleBackColor = True
         '
         'cmdDelElement
         '
-        Me.cmdDelElement.Location = New System.Drawing.Point(317, 347)
+        Me.cmdDelElement.Location = New System.Drawing.Point(314, 348)
         Me.cmdDelElement.Name = "cmdDelElement"
         Me.cmdDelElement.Size = New System.Drawing.Size(139, 35)
         Me.cmdDelElement.TabIndex = 21

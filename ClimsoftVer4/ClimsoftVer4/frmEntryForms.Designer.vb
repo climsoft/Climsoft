@@ -185,16 +185,16 @@ Partial Class frmEntryForms
         Me.GroupSelections.Controls.Add(Me.Label3)
         Me.GroupSelections.Controls.Add(Me.Label2)
         Me.GroupSelections.Enabled = False
-        Me.GroupSelections.Location = New System.Drawing.Point(164, 49)
+        Me.GroupSelections.Location = New System.Drawing.Point(164, 46)
         Me.GroupSelections.Name = "GroupSelections"
-        Me.GroupSelections.Size = New System.Drawing.Size(260, 62)
+        Me.GroupSelections.Size = New System.Drawing.Size(286, 65)
         Me.GroupSelections.TabIndex = 13
         Me.GroupSelections.TabStop = False
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(139, 38)
+        Me.Label6.Location = New System.Drawing.Point(158, 42)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(59, 13)
         Me.Label6.TabIndex = 19
@@ -203,7 +203,7 @@ Partial Class frmEntryForms
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(139, 9)
+        Me.Label5.Location = New System.Drawing.Point(158, 13)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(51, 13)
         Me.Label5.TabIndex = 18
@@ -211,7 +211,7 @@ Partial Class frmEntryForms
         '
         'TxtEMonth
         '
-        Me.TxtEMonth.Location = New System.Drawing.Point(210, 35)
+        Me.TxtEMonth.Location = New System.Drawing.Point(230, 39)
         Me.TxtEMonth.Name = "TxtEMonth"
         Me.TxtEMonth.Size = New System.Drawing.Size(33, 20)
         Me.TxtEMonth.TabIndex = 17
@@ -220,7 +220,7 @@ Partial Class frmEntryForms
         '
         'txtEYear
         '
-        Me.txtEYear.Location = New System.Drawing.Point(211, 6)
+        Me.txtEYear.Location = New System.Drawing.Point(230, 10)
         Me.txtEYear.Name = "txtEYear"
         Me.txtEYear.Size = New System.Drawing.Size(46, 20)
         Me.txtEYear.TabIndex = 16
@@ -228,7 +228,7 @@ Partial Class frmEntryForms
         '
         'txtBmonth
         '
-        Me.txtBmonth.Location = New System.Drawing.Point(73, 35)
+        Me.txtBmonth.Location = New System.Drawing.Point(96, 38)
         Me.txtBmonth.Name = "txtBmonth"
         Me.txtBmonth.Size = New System.Drawing.Size(33, 20)
         Me.txtBmonth.TabIndex = 15
@@ -237,7 +237,7 @@ Partial Class frmEntryForms
         '
         'txtBYear
         '
-        Me.txtBYear.Location = New System.Drawing.Point(73, 6)
+        Me.txtBYear.Location = New System.Drawing.Point(96, 9)
         Me.txtBYear.Name = "txtBYear"
         Me.txtBYear.Size = New System.Drawing.Size(46, 20)
         Me.txtBYear.TabIndex = 14
@@ -246,7 +246,7 @@ Partial Class frmEntryForms
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(11, 35)
+        Me.Label3.Location = New System.Drawing.Point(11, 38)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(62, 13)
         Me.Label3.TabIndex = 13
@@ -255,7 +255,7 @@ Partial Class frmEntryForms
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(11, 9)
+        Me.Label2.Location = New System.Drawing.Point(11, 12)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(54, 13)
         Me.Label2.TabIndex = 12

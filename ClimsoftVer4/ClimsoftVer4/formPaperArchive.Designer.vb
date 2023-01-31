@@ -812,7 +812,7 @@ Partial Class formPaperArchive
         '
         Me.cmdClear.Location = New System.Drawing.Point(804, 546)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(39, 20)
+        Me.cmdClear.Size = New System.Drawing.Size(61, 20)
         Me.cmdClear.TabIndex = 29
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True

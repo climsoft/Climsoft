@@ -33,7 +33,7 @@ Partial Class frmChangeOwnPassword
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(290, 131)
+        Me.btnHelp.Location = New System.Drawing.Point(329, 129)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(66, 23)
         Me.btnHelp.TabIndex = 17
@@ -42,7 +42,7 @@ Partial Class frmChangeOwnPassword
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(218, 131)
+        Me.btnCancel.Location = New System.Drawing.Point(257, 129)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(66, 23)
         Me.btnCancel.TabIndex = 16
@@ -52,7 +52,7 @@ Partial Class frmChangeOwnPassword
         'btnOK
         '
         Me.btnOK.Enabled = False
-        Me.btnOK.Location = New System.Drawing.Point(146, 131)
+        Me.btnOK.Location = New System.Drawing.Point(185, 129)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(66, 23)
         Me.btnOK.TabIndex = 15
@@ -70,7 +70,7 @@ Partial Class frmChangeOwnPassword
         '
         'txtConfirmPassword
         '
-        Me.txtConfirmPassword.Location = New System.Drawing.Point(189, 94)
+        Me.txtConfirmPassword.Location = New System.Drawing.Point(231, 94)
         Me.txtConfirmPassword.Name = "txtConfirmPassword"
         Me.txtConfirmPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtConfirmPassword.Size = New System.Drawing.Size(164, 20)
@@ -87,7 +87,7 @@ Partial Class frmChangeOwnPassword
         '
         'txtNewPassword
         '
-        Me.txtNewPassword.Location = New System.Drawing.Point(189, 50)
+        Me.txtNewPassword.Location = New System.Drawing.Point(231, 50)
         Me.txtNewPassword.Name = "txtNewPassword"
         Me.txtNewPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtNewPassword.Size = New System.Drawing.Size(164, 20)
@@ -97,7 +97,7 @@ Partial Class frmChangeOwnPassword
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(399, 188)
+        Me.ClientSize = New System.Drawing.Size(456, 188)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
