@@ -713,9 +713,9 @@ Partial Class formPaperArchive
         '
         'cmdList
         '
-        Me.cmdList.Location = New System.Drawing.Point(196, 427)
+        Me.cmdList.Location = New System.Drawing.Point(165, 428)
         Me.cmdList.Name = "cmdList"
-        Me.cmdList.Size = New System.Drawing.Size(142, 24)
+        Me.cmdList.Size = New System.Drawing.Size(190, 24)
         Me.cmdList.TabIndex = 19
         Me.cmdList.Text = "List Image Details"
         Me.cmdList.UseVisualStyleBackColor = True
@@ -812,7 +812,7 @@ Partial Class formPaperArchive
         '
         Me.cmdClear.Location = New System.Drawing.Point(804, 546)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(39, 20)
+        Me.cmdClear.Size = New System.Drawing.Size(61, 20)
         Me.cmdClear.TabIndex = 29
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True

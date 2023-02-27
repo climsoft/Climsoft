@@ -2347,6 +2347,14 @@
         End With
     End Sub
 
+    Private Sub txtMissingFlag_TextChanged(sender As Object, e As EventArgs) Handles txtMissingFlag.TextChanged
+
+    End Sub
+
+    Private Sub lblMissingFlag_Click(sender As Object, e As EventArgs) Handles lblMissingFlag.Click
+
+    End Sub
+
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Select Case _enumImportType
             Case ImportType.Hourly, ImportType.Daily, ImportType.MultipleElements

@@ -483,4 +483,20 @@
         End If
         Me.Cursor = Cursors.Default
     End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub ucrInputSameValue_Load(sender As Object, e As EventArgs) Handles ucrInputSameValue.Load
+
+    End Sub
 End Class

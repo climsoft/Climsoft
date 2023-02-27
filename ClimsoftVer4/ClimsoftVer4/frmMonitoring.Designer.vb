@@ -144,20 +144,20 @@ Partial Class frmMonitoring
         'cmdSave2
         '
         Me.cmdSave2.Enabled = False
-        Me.cmdSave2.Location = New System.Drawing.Point(296, 108)
+        Me.cmdSave2.Location = New System.Drawing.Point(354, 108)
         Me.cmdSave2.Name = "cmdSave2"
-        Me.cmdSave2.Size = New System.Drawing.Size(94, 28)
+        Me.cmdSave2.Size = New System.Drawing.Size(136, 28)
         Me.cmdSave2.TabIndex = 21
         Me.cmdSave2.Text = "Save Output"
         Me.cmdSave2.UseVisualStyleBackColor = True
         '
         'cmdView
         '
-        Me.cmdView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdView.ForeColor = System.Drawing.Color.Black
-        Me.cmdView.Location = New System.Drawing.Point(118, 108)
+        Me.cmdView.Location = New System.Drawing.Point(102, 108)
         Me.cmdView.Name = "cmdView"
-        Me.cmdView.Size = New System.Drawing.Size(103, 28)
+        Me.cmdView.Size = New System.Drawing.Size(189, 28)
         Me.cmdView.TabIndex = 10
         Me.cmdView.Text = "View Records"
         Me.cmdView.UseVisualStyleBackColor = True
@@ -165,7 +165,7 @@ Partial Class frmMonitoring
         'lblEndDate
         '
         Me.lblEndDate.AutoSize = True
-        Me.lblEndDate.Location = New System.Drawing.Point(373, 68)
+        Me.lblEndDate.Location = New System.Drawing.Point(354, 68)
         Me.lblEndDate.Name = "lblEndDate"
         Me.lblEndDate.Size = New System.Drawing.Size(58, 15)
         Me.lblEndDate.TabIndex = 7
@@ -174,7 +174,7 @@ Partial Class frmMonitoring
         'lblStartDate
         '
         Me.lblStartDate.AutoSize = True
-        Me.lblStartDate.Location = New System.Drawing.Point(371, 27)
+        Me.lblStartDate.Location = New System.Drawing.Point(351, 29)
         Me.lblStartDate.Name = "lblStartDate"
         Me.lblStartDate.Size = New System.Drawing.Size(61, 15)
         Me.lblStartDate.TabIndex = 6
@@ -197,7 +197,7 @@ Partial Class frmMonitoring
         'cboUser
         '
         Me.cboUser.FormattingEnabled = True
-        Me.cboUser.Location = New System.Drawing.Point(87, 25)
+        Me.cboUser.Location = New System.Drawing.Point(120, 27)
         Me.cboUser.Name = "cboUser"
         Me.cboUser.Size = New System.Drawing.Size(149, 23)
         Me.cboUser.TabIndex = 3
@@ -259,9 +259,9 @@ Partial Class frmMonitoring
         '
         'cmdSave1
         '
-        Me.cmdSave1.Location = New System.Drawing.Point(333, 130)
+        Me.cmdSave1.Location = New System.Drawing.Point(332, 120)
         Me.cmdSave1.Name = "cmdSave1"
-        Me.cmdSave1.Size = New System.Drawing.Size(97, 22)
+        Me.cmdSave1.Size = New System.Drawing.Size(127, 32)
         Me.cmdSave1.TabIndex = 20
         Me.cmdSave1.Text = "Save Output"
         Me.cmdSave1.UseVisualStyleBackColor = True
@@ -280,9 +280,9 @@ Partial Class frmMonitoring
         '
         'cmdRetrieve
         '
-        Me.cmdRetrieve.Location = New System.Drawing.Point(140, 130)
+        Me.cmdRetrieve.Location = New System.Drawing.Point(124, 120)
         Me.cmdRetrieve.Name = "cmdRetrieve"
-        Me.cmdRetrieve.Size = New System.Drawing.Size(155, 22)
+        Me.cmdRetrieve.Size = New System.Drawing.Size(172, 32)
         Me.cmdRetrieve.TabIndex = 18
         Me.cmdRetrieve.Text = "Compute Performance"
         Me.cmdRetrieve.UseVisualStyleBackColor = True
@@ -290,7 +290,7 @@ Partial Class frmMonitoring
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(285, 34)
+        Me.lblYear.Location = New System.Drawing.Point(353, 36)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 15)
         Me.lblYear.TabIndex = 17
@@ -298,7 +298,7 @@ Partial Class frmMonitoring
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(323, 31)
+        Me.txtYear.Location = New System.Drawing.Point(413, 34)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(58, 21)
         Me.txtYear.TabIndex = 16
@@ -306,7 +306,7 @@ Partial Class frmMonitoring
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(126, 34)
+        Me.lblMonth.Location = New System.Drawing.Point(135, 34)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(42, 15)
         Me.lblMonth.TabIndex = 15
@@ -315,7 +315,7 @@ Partial Class frmMonitoring
         'lblTo1
         '
         Me.lblTo1.AutoSize = True
-        Me.lblTo1.Location = New System.Drawing.Point(353, 80)
+        Me.lblTo1.Location = New System.Drawing.Point(353, 82)
         Me.lblTo1.Name = "lblTo1"
         Me.lblTo1.Size = New System.Drawing.Size(21, 15)
         Me.lblTo1.TabIndex = 14
@@ -324,7 +324,7 @@ Partial Class frmMonitoring
         'lblFrom1
         '
         Me.lblFrom1.AutoSize = True
-        Me.lblFrom1.Location = New System.Drawing.Point(126, 77)
+        Me.lblFrom1.Location = New System.Drawing.Point(135, 77)
         Me.lblFrom1.Name = "lblFrom1"
         Me.lblFrom1.Size = New System.Drawing.Size(36, 15)
         Me.lblFrom1.TabIndex = 13
@@ -332,14 +332,14 @@ Partial Class frmMonitoring
         '
         'dtpTo
         '
-        Me.dtpTo.Location = New System.Drawing.Point(380, 77)
+        Me.dtpTo.Location = New System.Drawing.Point(413, 82)
         Me.dtpTo.Name = "dtpTo"
         Me.dtpTo.Size = New System.Drawing.Size(158, 21)
         Me.dtpTo.TabIndex = 12
         '
         'dtpFrom
         '
-        Me.dtpFrom.Location = New System.Drawing.Point(168, 74)
+        Me.dtpFrom.Location = New System.Drawing.Point(177, 75)
         Me.dtpFrom.Name = "dtpFrom"
         Me.dtpFrom.Size = New System.Drawing.Size(158, 21)
         Me.dtpFrom.TabIndex = 11
@@ -349,7 +349,7 @@ Partial Class frmMonitoring
         '
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.cboMonth.Location = New System.Drawing.Point(168, 30)
+        Me.cboMonth.Location = New System.Drawing.Point(177, 31)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(51, 23)
         Me.cboMonth.TabIndex = 10
@@ -416,9 +416,9 @@ Partial Class frmMonitoring
         Me.GroupBox2.Controls.Add(Me.optNotEntered)
         Me.GroupBox2.Controls.Add(Me.optNotVerified)
         Me.GroupBox2.Controls.Add(Me.optVerified)
-        Me.GroupBox2.Location = New System.Drawing.Point(438, 15)
+        Me.GroupBox2.Location = New System.Drawing.Point(428, 15)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(176, 94)
+        Me.GroupBox2.Size = New System.Drawing.Size(195, 94)
         Me.GroupBox2.TabIndex = 33
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Records Status"
@@ -458,39 +458,39 @@ Partial Class frmMonitoring
         '
         'cmdSave
         '
-        Me.cmdSave.Location = New System.Drawing.Point(546, 122)
+        Me.cmdSave.Location = New System.Drawing.Point(531, 122)
         Me.cmdSave.Name = "cmdSave"
-        Me.cmdSave.Size = New System.Drawing.Size(63, 25)
+        Me.cmdSave.Size = New System.Drawing.Size(92, 25)
         Me.cmdSave.TabIndex = 32
         Me.cmdSave.Text = "Save"
         Me.cmdSave.UseVisualStyleBackColor = True
         '
         'cmdExtarct
         '
-        Me.cmdExtarct.Location = New System.Drawing.Point(447, 122)
+        Me.cmdExtarct.Location = New System.Drawing.Point(428, 122)
         Me.cmdExtarct.Name = "cmdExtarct"
-        Me.cmdExtarct.Size = New System.Drawing.Size(63, 25)
+        Me.cmdExtarct.Size = New System.Drawing.Size(97, 25)
         Me.cmdExtarct.TabIndex = 31
         Me.cmdExtarct.Text = "Retrieve"
         Me.cmdExtarct.UseVisualStyleBackColor = True
         '
         'txtYear2
         '
-        Me.txtYear2.Location = New System.Drawing.Point(194, 113)
+        Me.txtYear2.Location = New System.Drawing.Point(187, 122)
         Me.txtYear2.Name = "txtYear2"
         Me.txtYear2.Size = New System.Drawing.Size(42, 21)
         Me.txtYear2.TabIndex = 30
         '
         'txtYear1
         '
-        Me.txtYear1.Location = New System.Drawing.Point(194, 78)
+        Me.txtYear1.Location = New System.Drawing.Point(187, 87)
         Me.txtYear1.Name = "txtYear1"
         Me.txtYear1.Size = New System.Drawing.Size(42, 21)
         Me.txtYear1.TabIndex = 29
         '
         'txtMonth2
         '
-        Me.txtMonth2.Location = New System.Drawing.Point(332, 113)
+        Me.txtMonth2.Location = New System.Drawing.Point(340, 122)
         Me.txtMonth2.Name = "txtMonth2"
         Me.txtMonth2.Size = New System.Drawing.Size(28, 21)
         Me.txtMonth2.TabIndex = 28
@@ -498,7 +498,7 @@ Partial Class frmMonitoring
         '
         'txtMonth1
         '
-        Me.txtMonth1.Location = New System.Drawing.Point(332, 78)
+        Me.txtMonth1.Location = New System.Drawing.Point(340, 87)
         Me.txtMonth1.Name = "txtMonth1"
         Me.txtMonth1.Size = New System.Drawing.Size(28, 21)
         Me.txtMonth1.TabIndex = 27
@@ -507,7 +507,7 @@ Partial Class frmMonitoring
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(253, 116)
+        Me.Label2.Location = New System.Drawing.Point(261, 125)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(67, 15)
         Me.Label2.TabIndex = 26
@@ -516,7 +516,7 @@ Partial Class frmMonitoring
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(127, 116)
+        Me.Label1.Location = New System.Drawing.Point(104, 125)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(57, 15)
         Me.Label1.TabIndex = 25
@@ -547,7 +547,7 @@ Partial Class frmMonitoring
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(253, 81)
+        Me.lblTo.Location = New System.Drawing.Point(261, 90)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(77, 15)
         Me.lblTo.TabIndex = 21
@@ -556,7 +556,7 @@ Partial Class frmMonitoring
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(127, 81)
+        Me.lblFrom.Location = New System.Drawing.Point(104, 90)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(67, 15)
         Me.lblFrom.TabIndex = 20
@@ -674,18 +674,18 @@ Partial Class frmMonitoring
         '
         'cmdUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(98, 186)
+        Me.cmdUpdate.Location = New System.Drawing.Point(98, 187)
         Me.cmdUpdate.Name = "cmdUpdate"
-        Me.cmdUpdate.Size = New System.Drawing.Size(56, 25)
+        Me.cmdUpdate.Size = New System.Drawing.Size(96, 24)
         Me.cmdUpdate.TabIndex = 2
         Me.cmdUpdate.Text = "Update"
         Me.cmdUpdate.UseVisualStyleBackColor = True
         '
         'cmdretrieve1
         '
-        Me.cmdretrieve1.Location = New System.Drawing.Point(18, 187)
+        Me.cmdretrieve1.Location = New System.Drawing.Point(7, 187)
         Me.cmdretrieve1.Name = "cmdretrieve1"
-        Me.cmdretrieve1.Size = New System.Drawing.Size(56, 25)
+        Me.cmdretrieve1.Size = New System.Drawing.Size(85, 25)
         Me.cmdretrieve1.TabIndex = 1
         Me.cmdretrieve1.Text = "View"
         Me.cmdretrieve1.UseVisualStyleBackColor = True
@@ -714,7 +714,7 @@ Partial Class frmMonitoring
         'lblRecords
         '
         Me.lblRecords.AutoSize = True
-        Me.lblRecords.Location = New System.Drawing.Point(290, 270)
+        Me.lblRecords.Location = New System.Drawing.Point(270, 270)
         Me.lblRecords.Name = "lblRecords"
         Me.lblRecords.Size = New System.Drawing.Size(89, 13)
         Me.lblRecords.TabIndex = 11
@@ -732,18 +732,18 @@ Partial Class frmMonitoring
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(9, 262)
+        Me.cmdClose.Location = New System.Drawing.Point(13, 265)
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(78, 23)
+        Me.cmdClose.Size = New System.Drawing.Size(86, 20)
         Me.cmdClose.TabIndex = 13
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(600, 262)
+        Me.cmdHelp.Location = New System.Drawing.Point(597, 265)
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(78, 23)
+        Me.cmdHelp.Size = New System.Drawing.Size(78, 20)
         Me.cmdHelp.TabIndex = 14
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True

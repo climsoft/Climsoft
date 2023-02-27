@@ -58,9 +58,9 @@ Partial Class frmDataForms
         '
         'btnApply
         '
-        Me.btnApply.Location = New System.Drawing.Point(338, 271)
+        Me.btnApply.Location = New System.Drawing.Point(325, 271)
         Me.btnApply.Name = "btnApply"
-        Me.btnApply.Size = New System.Drawing.Size(69, 27)
+        Me.btnApply.Size = New System.Drawing.Size(82, 27)
         Me.btnApply.TabIndex = 1
         Me.btnApply.Text = "Apply"
         Me.btnApply.UseVisualStyleBackColor = True

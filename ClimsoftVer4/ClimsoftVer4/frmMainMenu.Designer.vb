@@ -130,27 +130,27 @@ Partial Class frmMainMenu
         'mnuAccessoriesDewPointRH
         '
         Me.mnuAccessoriesDewPointRH.Name = "mnuAccessoriesDewPointRH"
-        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesDewPointRH.Tag = "Calculation_of_dew_Point_and_RH"
         Me.mnuAccessoriesDewPointRH.Text = "Calculation of dew Point and RH"
         '
         'mnuAccessoriesXMLOutput
         '
         Me.mnuAccessoriesXMLOutput.Name = "mnuAccessoriesXMLOutput"
-        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
         '
         'UserRecordsToolStripMenuItem1
         '
         Me.UserRecordsToolStripMenuItem1.Name = "UserRecordsToolStripMenuItem1"
-        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(275, 24)
+        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(274, 24)
         Me.UserRecordsToolStripMenuItem1.Text = "User Records"
         '
         'MnuInventory
         '
         Me.MnuInventory.Name = "MnuInventory"
-        Me.MnuInventory.Size = New System.Drawing.Size(275, 24)
+        Me.MnuInventory.Size = New System.Drawing.Size(274, 24)
         Me.MnuInventory.Text = "Inventory"
         '
         'mnuProducts
@@ -244,7 +244,7 @@ Partial Class frmMainMenu
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.FormSynopticTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem, Me.ConfigurationForTDCFToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
-        Me.mnuTools.Size = New System.Drawing.Size(53, 23)
+        Me.mnuTools.Size = New System.Drawing.Size(52, 23)
         Me.mnuTools.Tag = "Tools"
         Me.mnuTools.Text = "Tools"
         '
@@ -262,7 +262,6 @@ Partial Class frmMainMenu
         Me.SelectLanguageToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.SelectLanguageToolStripMenuItem.Tag = "Select_Language"
         Me.SelectLanguageToolStripMenuItem.Text = "Select Language"
-        Me.SelectLanguageToolStripMenuItem.Visible = False
         '
         'GenerlSettingsToolStripMenuItem
         '
@@ -318,13 +317,13 @@ Partial Class frmMainMenu
         'AWSElementsToolStripMenuItem
         '
         Me.AWSElementsToolStripMenuItem.Name = "AWSElementsToolStripMenuItem"
-        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
+        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSElementsToolStripMenuItem.Text = "AWS Elements"
         '
         'AWSStationsToolStripMenuItem
         '
         Me.AWSStationsToolStripMenuItem.Name = "AWSStationsToolStripMenuItem"
-        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
+        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSStationsToolStripMenuItem.Text = "AWS Stations"
         '
         'ConfigurationForTDCFToolStripMenuItem
@@ -383,7 +382,7 @@ Partial Class frmMainMenu
         Me.Panel1.Location = New System.Drawing.Point(0, 27)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0, 3, 3, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(931, 521)
+        Me.Panel1.Size = New System.Drawing.Size(931, 558)
         Me.Panel1.TabIndex = 10
         '
         'Label5
@@ -413,9 +412,9 @@ Partial Class frmMainMenu
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(162, 471)
+        Me.Label9.Location = New System.Drawing.Point(165, 471)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(176, 40)
+        Me.Label9.Size = New System.Drawing.Size(148, 78)
         Me.Label9.TabIndex = 33
         Me.Label9.Tag = "AWS_Real_Time_Processing"
         Me.Label9.Text = "AWS Real Time Processing"
@@ -657,7 +656,7 @@ Partial Class frmMainMenu
         'frmMainMenu
         '
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(931, 548)
+        Me.ClientSize = New System.Drawing.Size(931, 585)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.menuStripMain)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

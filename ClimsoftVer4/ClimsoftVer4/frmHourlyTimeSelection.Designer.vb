@@ -44,16 +44,16 @@ Partial Class frmHourlyTimeSelection
         '
         Me.btnHelp.Location = New System.Drawing.Point(230, 334)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(94, 23)
         Me.btnHelp.TabIndex = 7
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(62, 334)
+        Me.btnUpdate.Location = New System.Drawing.Point(51, 334)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(86, 23)
         Me.btnUpdate.TabIndex = 6
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True

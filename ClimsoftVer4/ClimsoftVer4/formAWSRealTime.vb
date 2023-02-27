@@ -78,7 +78,7 @@ Public Class formAWSRealTime
         load_Indicators()
         Timer1.Start()
         'Timer2.Start()
-
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub cmdServers_Click(sender As Object, e As EventArgs) Handles cmdServers.Click
@@ -100,10 +100,15 @@ Public Class formAWSRealTime
         pnlSites.Visible = False
         pnlDataStructures.Visible = False
         pnlMsgEncoding.Visible = False
-        Me.Text = topic
         pnl.Visible = True
         pnl.Dock = DockStyle.Left
 
+        'todo. after the form has been refactored. This block should be removed from here
+        Me.Text = ClsTranslations.GetTranslation(topic)
+        lblRetrieveHrs.Text = ClsTranslations.GetTranslation(lblRetrieveHrs.Text)
+        lblEncodeHrs.Text = ClsTranslations.GetTranslation(lblEncodeHrs.Text)
+        lblNextProcess.Text = ClsTranslations.GetTranslation(lblNextProcess.Text)
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub cmdSites_Click(sender As Object, e As EventArgs) Handles cmdSites.Click
@@ -4442,6 +4447,38 @@ Err:
             Return dt
         End Try
     End Function
+
+    Private Sub txtStrName_TextChanged(sender As Object, e As EventArgs) Handles txtStrName.TextChanged
+
+    End Sub
+
+    Private Sub txtDelimiter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtDelimiter.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtHeaders_TextChanged(sender As Object, e As EventArgs) Handles txtHeaders.TextChanged
+
+    End Sub
+
+    Private Sub txtQualifier_TextChanged(sender As Object, e As EventArgs) Handles txtQualifier.TextChanged
+
+    End Sub
+
+    Private Sub chkOptionalSection_CheckedChanged(sender As Object, e As EventArgs) Handles chkOptionalSection.CheckedChanged
+
+    End Sub
+
+    Private Sub chkDeleteFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkDeleteFile.CheckedChanged
+
+    End Sub
+
+    Private Sub lblEncodeHrs_Click(sender As Object, e As EventArgs) Handles lblEncodeHrs.Click
+
+    End Sub
+
+    Private Sub txtTimeout_TextChanged(sender As Object, e As EventArgs) Handles txtTimeout.TextChanged
+
+    End Sub
 
     Private Sub txtTemplate_Click(sender As Object, e As EventArgs) Handles txtTemplate.Click
         load_Indicators(txtTemplate.Text)

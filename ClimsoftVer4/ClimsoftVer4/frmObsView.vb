@@ -413,6 +413,34 @@
         End If
     End Sub
 
+    Private Sub pnlAdanced_Paint(sender As Object, e As PaintEventArgs) Handles pnlAdanced.Paint
+
+    End Sub
+
+    Private Sub cboMinuteEnd_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMinuteEnd.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtSminute_Click(sender As Object, e As EventArgs) Handles txtSminute.Click
+
+    End Sub
+
+    Private Sub lblHourEnd_Click(sender As Object, e As EventArgs) Handles lblHourEnd.Click
+
+    End Sub
+
+    Private Sub cboHourStart_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboHourStart.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cboHourEnd_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboHourEnd.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cboMinuteStart_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMinuteStart.SelectedIndexChanged
+
+    End Sub
+
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         viewRecords()
     End Sub
