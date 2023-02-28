@@ -25,10 +25,11 @@ Public Class frmMainMenu
         Dim usrName, usrRole As String
         Dim i, maxRows As Integer
         usrRole = ""
-        usrName = frmLogin.txtUsername.Text
-        maxRows = dsClimsoftUserRoles.Tables("userRoles").Rows.Count
 
         Try
+            usrName = frmLogin.txtUsername.Text
+            maxRows = dsClimsoftUserRoles.Tables("userRoles").Rows.Count
+
             'Get the role for the logged in user from the climsoftusers table
             If maxRows > 0 Then
                 For i = 0 To maxRows - 1
@@ -339,5 +340,37 @@ Public Class frmMainMenu
             .Show()
             .lblProductType.Text = "Inventory"
         End With
+    End Sub
+
+    Private Sub UpdateScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateScriptToolStripMenuItem.Click
+        Dim sqlFile, sqlText As String
+        Dim sqlconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+
+        Me.Cursor = Cursors.WaitCursor
+        frmImportDaily.dlgOpenImportFile.Filter = "Script File|*.sql"
+        frmImportDaily.dlgOpenImportFile.Title = ClsTranslations.GetTranslation("Open Script File")
+        frmImportDaily.dlgOpenImportFile.ShowDialog()
+        sqlFile = frmImportDaily.dlgOpenImportFile.FileName
+
+        Try
+            'MsgBox(sqlFile)
+            sqlText = IO.File.ReadAllText(sqlFile)
+            sqlconn.ConnectionString = frmLogin.txtusrpwd.Text
+            sqlconn.Open()
+
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sqlText, sqlconn)
+            qry.CommandTimeout = 0
+
+            'Execute query
+            qry.ExecuteNonQuery()
+            sqlconn.Close()
+            Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            sqlconn.Close()
+            Me.Cursor = Cursors.Default
+        End Try
     End Sub
 End Class

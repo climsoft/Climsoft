@@ -27,9 +27,16 @@ Public Class formAWSRealTime
     Dim rec As Integer
     Dim Kount As Integer
     Dim recEdit As New dataEntryGlobalRoutines
+    Dim TDCF As New tdcfRoutines
     Dim Desc_Bits As String
+    Dim WSI As String
+    Dim WSI_Desc_Bits As String
+    Dim WSI_BUFR_Subsets_Data As String
+    Dim WSI_BUFR_Subsets_Data_WSI As String
+    Dim WSI_status As Boolean
     Dim BUFR_Subsets_Data As String
     Dim Bufr_Subst As Integer
+    Dim WSI_Bufr_Subst As Integer
     Dim BufrSection4 As String
     Dim dr, fl As String
     Dim ftp_host As String
@@ -940,14 +947,22 @@ Err:
             dps.Clear()
             dpa.Fill(dps, "aws_process_parameters")
 
-            '' Insert default values if table is empty
-            'If dps.Tables("aws_process_parameters").Rows.Count = 0 Then
-            '    sqlp = "INSERT INTO `" & mndb & "`.`aws_process_parameters` (`RetrievePeriod`, `RetrieveTimeout`, `DelinputFile`, `UTCDiff`) VALUES (2, 10, 0, 0);"
+            ' Insert default values if table is empty
+            If dps.Tables("aws_process_parameters").Rows.Count = 0 Then
+                'sqlp = "INSERT INTO `" & mndb & "`.`aws_process_parameters` (`RetrievePeriod`, `RetrieveTimeout`, `DelinputFile`, `UTCDiff`) VALUES (2, 10, 0, 0);"
+                sqlp = "INSERT INTO `aws_process_parameters` (`RetrievePeriod`, `RetrieveTimeout`, `UTCDiff`) VALUES ('2', '999', '0');"
+                qry = New MySql.Data.MySqlClient.MySqlCommand(sqlp, dbconn)
+                'Execute query
+                qry.ExecuteNonQuery()
 
-            '    qry = New MySql.Data.MySqlClient.MySqlCommand(sqlp, dbconn)
-            '    'Execute query
-            '    qry.ExecuteNonQuery()
-            'End If
+                sqlp = "SELECT * FROM aws_process_parameters"
+                dpa = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlp, dbconn)
+                ' Remove timeout requirement
+                dpa.SelectCommand.CommandTimeout = 0
+
+                dps.Clear()
+                dpa.Fill(dps, "aws_process_parameters")
+            End If
 
             Select Case LoadType
                 Case "txtlFill"
@@ -979,10 +994,6 @@ Err:
 
             End Select
         Catch ex As Exception
-            'Exit Sub
-            'Err:
-            'MsgBox(Err.Description)
-            'Log_Errors(Err.Description)
             Log_Errors(ex.Message)
         End Try
     End Sub
@@ -1169,7 +1180,7 @@ Err:
         On Error GoTo Err
 
         Dim strRecmn, siz, Tlag As Integer
-        Dim aws_input_file, aws_input_file_flds, infile, fls, aws_data, AWSsite As String
+        Dim aws_input_file, aws_input_file_flds, infile, fls, fl_wsi, aws_data, AWSsite As String
         Dim rs, rss As New DataSet
         Dim dt As DateTime
 
@@ -1185,13 +1196,11 @@ Err:
         '  Locate and processs aws input data files
         Me.Cursor = Cursors.WaitCursor
 
-        ' Compute the Template descriptor to Bianry form
-        'If Not Compute_Descriptors(Desc_Bits) Then
-        '    Me.Cursor = Cursors.Default
-        '    Exit Sub
-        'End If
+        ' Initialize Subsets data
         Bufr_Subst = 0
+        WSI_Bufr_Subst = 0
         BUFR_Subsets_Data = ""
+        WSI_BUFR_Subsets_Data = ""
         BufrSection4 = ""
 
         'Get full path for the Subsets Output file nd create folder if not existing
@@ -1203,12 +1212,19 @@ Err:
         Refresh_Folder(Dir_outFiles)
         'Refresh_Folder(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\")
         fl = Dir_outFiles & "\bufr_subsets.csv" 'Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.csv"
+        fl_wsi = Dir_outFiles & "\wsi_bufr_subsets.csv"
 
         FileOpen(30, fl, OpenMode.Output)
+        FileOpen(31, fl_wsi, OpenMode.Output)
+
+        ' Get WIGOS Station Identifications (wSI) if available
+
+        'WSI_Data()
+
         FileClose(30)
+        FileClose(31)
         FileOpen(30, fl, OpenMode.Append)
-        'WriteLine(1, "Testing")
-        'FileClose(1)
+        FileOpen(31, fl_wsi, OpenMode.Append)
 
         Dim i As Integer
 
@@ -1217,24 +1233,6 @@ Err:
             For i = 0 To .Rows.Count - 1 'Kount - 1
 
                 If IsDBNull(.Rows(i).Item("InputFile")) Or .Rows(i).Item("OperationalStatus") = 0 Then Continue For ' Data for site not in a state to be processed
-                'Log_Errors(.Rows(i).Item("FilePrefix"))
-                ' Get station data details
-                'nat_id = .Rows(i).Item("SiteID")
-
-                '' Get message header for the station if exist. It has 11 characters. Otherwise use National bulletin header
-                'If Not IsDBNull(.Rows(i).Item("GTSHeader")) And Len(.Rows(i).Item("GTSHeader")) = 11 Then
-                '    msg_header = .Rows(i).Item("GTSHeader")
-                'Else
-                '    msg_header = txtMsgHeader.Text
-                'End If
-
-                'flg = ""
-                'If Not IsDBNull(.Rows(i).Item("MissingDataFlag")) Then
-                '    If Len(.Rows(i).Item("MissingDataFlag")) <> 0 Then flg = .Rows(i).Item("MissingDataFlag") 'Get the missing data flag
-                'End If
-
-                'AWSsite = .Rows(i).Item("DataStructure")
-                'Get_Station_Settings(AWSsite, delmtr, hdrows, txtqlfr, rs)
 
                 ftp_host = .Rows(i).Item("awsServerIp")
 
@@ -1257,20 +1255,6 @@ Err:
                     End If
                 End If
 
-                '' Compute Delimiter ascii value
-                'Select Case delmtr
-                '    Case "tab"
-                '        delimiter_ascii = 9
-                '    Case "comma"
-                '        delimiter_ascii = 44
-                '    Case "space"
-                '        delimiter_ascii = 32
-                '    Case "semicolon"
-                '        delimiter_ascii = 59
-                '    Case Else
-                '        delimiter_ascii = Asc(delmtr)
-                'End Select
-
                 infile = .Rows(i).Item("InputFile")
                 'MsgBox(i & infile)
                 Process_Status("Seeking input data - " & infile)
@@ -1281,111 +1265,6 @@ Err:
                     Continue For ' If FTP call failed
                 End If
 
-                ' Assign a variable to an input file with header rows. txtinputfile  variable has been assisgned at FTP_Call function
-
-                'Process_InputFiles(rs)
-
-                'aws_input_file = txtinputfile
-
-                '' Check if the input data file was retrieved
-                'If Not File.Exists(aws_input_file) Then
-                '    Log_Errors(" Could not find " & aws_input_file)
-                '    Continue For
-                'End If
-
-                'FileClose(1)
-                'txtStatus.Text = "Organising the input file"
-
-                '' Assign a variable to an output file without header rows
-                'aws_input_file_flds = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
-
-                'FileOpen(10, aws_input_file, OpenMode.Input)
-                'FileOpen(11, aws_input_file_flds, OpenMode.Output)
-
-                '' Skip header Records if present
-                'If Val(hdrows) > 0 Then 'Retrieve header rows from station parameters
-                '    For j = 0 To Val(hdrows) - 1
-                '        aws_data = LineInput(10)
-                '    Next
-                'End If
-
-                '' Output the data rows
-                'Do While EOF(10) = False
-                '    aws_data = LineInput(10)
-                '    PrintLine(11, aws_data)
-                'Loop
-
-                'FileClose(10)
-                'FileClose(11)
-                'Dim colmn, dtCol As Integer
-                'Dim rws As Long
-                'Dim x, dtFmt As String
-                ''ChrW(delimiter_ascii)
-
-                '' Convert the input file to a data table for ease of referencing the records therein.
-                'dTable = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws)
-
-                'For k = 0 To rws - 2
-                '    Process_Status("Processing input record " & k + 1 & " of " & rws)
-                '    ' Get date and time for the current record
-                '    datestring = Get_DateStamp(AWSsite, dTable, k)
-                '    'MsgBox(datestring)
-                '    'Skip older records
-                '    If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
-
-                '    'Skip records with invalid date stamp
-                '    If IsDate(datestring) Then
-                '        'Log_Errors(datestring)
-                '        ' Compare current time with time stamp on hourly basis. Skip records outside the time range
-                '        If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
-
-                '        Process_Status("Processing AWS Record " & k + 1 & " of " & rws - 1)
-
-                '        ' Update obsv value column in the data structure
-                '        For j = 0 To colmn - 1
-                '            If Not IsDBNull(dTable.Rows(k).Item(j)) Then
-                '                x = dTable.Rows(k).Item(j)
-                '                'Log_Errors(x)
-                '                If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
-                '                    x = Strings.Mid(x, 2, Len(x) - 2)
-                '                End If
-
-                '                AwsRecord_Update(x, j, flg, AWSsite)
-                '            Else
-                '                Continue For
-                '            End If
-                '        Next j
-
-                '        ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
-                '        Dim sqlv As String
-                '        sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
-                '        rs = GetDataSet(AWSsite, sqlv)
-
-                '        'Don't process the record if having invalid datestamp
-                '        'If IsDate(datestring) Then
-
-                '        'Update the record into the database
-                '        If Val(txtPeriod.Text) = 999 Then
-
-                '            ' Process the entire input file irespective of time difference
-                '            Process_Input_Record(AWSsite, datestring)
-                '        Else
-                '            ' Process records for the last selected hours
-                '            If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
-                '                Process_Input_Record(AWSsite, datestring)
-                '            End If
-                '        End If
-                '        'End If
-                '    End If
-                'Next k
-
-                '' Delete input file from base station server if so selected
-                'If chkDeleteFile.Checked Then
-                '    If Not FTP_Delete_InputFile(infile) Then
-                '        Log_Errors("Can't Delete Input File") 'MsgBox "Can't Delete Input File"
-                '    End If
-                'End If
-
             Next i
             Process_InputFiles(ds)
             'Exit Sub
@@ -1393,104 +1272,162 @@ Err:
 
         ' Encode and compose the BUFR Bulletins
         FileClose(30)
+        FileClose(31)
 
         ' Open the output file containing the encoded BUFR Subsets data
         fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.csv"
+        fl_wsi = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\wsi_bufr_subsets.csv"
 
         FileOpen(30, fl, OpenMode.Input)
+        FileOpen(31, fl_wsi, OpenMode.Input)
 
         Dim dts(1000), subs(1000), Tdone, Tsubs, subst, yy, mm, dd, hh,mn As String
 
-        ' Load the subsets records from an output file into arrays
-        Kount = 0
-        Do While EOF(30) = False
-            Input(30, dts(Kount))
-            Input(30, subs(Kount))
-            'MsgBox(dts(Kount) & "-" & subs(Kount))
-            Kount = Kount + 1
-        Loop
+        ' Encode Bufr data for subsets having no WSI
 
-        'Compute the UTC datetime for YYGGgg
+        ' Load the subsets records from an output file into arrays 
+        If Bufr_Subst > 0 Then
+            Kount = 0
+            Do While EOF(30) = False
+                Input(30, dts(Kount))
+                Input(30, subs(Kount))
+                Kount = Kount + 1
+            Loop
 
-        'Dim YYGGgg As Date
-        'YYGGgg = DateAndTime.DateAdd("h", -1 * CDbl(txtGMTDiff.Text), Now())
-        'yy = String.Format("{0:00}", DateAndTime.Year(YYGGgg))
-        'mm = String.Format("{0:00}", DateAndTime.Month(YYGGgg))
-        'dd = String.Format("{0:00}", DateAndTime.Day(YYGGgg))
-        'hh = String.Format("{0:00}", DateAndTime.Hour(YYGGgg))
-        'mn = "00"
+            'Compute the UTC datetime for YYGGgg
 
-        If Kount = 1 Then ' Only one substest existing
-            If Len(subs(0)) <> 0 Then  'Check whether encoded data exists
-                yy = String.Format("{0:00}", DateAndTime.Year(dts(0)))
-                mm = String.Format("{0:00}", DateAndTime.Month(dts(0)))
-                dd = String.Format("{0:00}", DateAndTime.Day(dts(0)))
-                hh = String.Format("{0:00}", DateAndTime.Hour(dts(0)))
-                mn = String.Format("{0:00}", DateAndTime.Minute(dts(0)))
-                BUFR_header = msg_header & " " & dd & hh & mn '& " " & txtBBB
-                AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(0)), DateAndTime.Month(dts(0)), DateAndTime.Day(dts(0)), DateAndTime.Hour(dts(0)), DateAndTime.Minute(dts(0)), DateAndTime.Second(dts(0)), subs(0))
+            If Kount = 1 Then ' Only one substest existing
+                If Len(subs(0)) <> 0 Then  'Check whether encoded data exists
+                    yy = String.Format("{0:00}", DateAndTime.Year(dts(0)))
+                    mm = String.Format("{0:00}", DateAndTime.Month(dts(0)))
+                    dd = String.Format("{0:00}", DateAndTime.Day(dts(0)))
+                    hh = String.Format("{0:00}", DateAndTime.Hour(dts(0)))
+                    mn = String.Format("{0:00}", DateAndTime.Minute(dts(0)))
+
+                    BUFR_header = msg_header & " " & dd & hh & mn '& " " & txtBBB
+                    AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(0)), DateAndTime.Month(dts(0)), DateAndTime.Day(dts(0)), DateAndTime.Hour(dts(0)), DateAndTime.Minute(dts(0)), DateAndTime.Second(dts(0)), subs(0))
+                End If
+            End If
+
+            If Kount > 1 Then ' More than one Subset exists
+
+                ' Initialize the datetime for the compiled BUFR bulletin
+                Tdone = "00/00/0000 00:00:00"
+
+                ' Combine the Subsets for the same hour into a single bulletin
+                For i = 0 To Kount - 1
+
+                    subst = ""
+                    Bufr_Subst = 0
+                    For j = 0 To Kount - 1
+                        If dts(j) = dts(i) And InStr(Tdone, dts(j)) = 0 Then
+                            Bufr_Subst = Bufr_Subst + 1
+                            subst = subst + subs(j)
+                        End If
+                    Next
+
+                    ' Compile a bulletin for the located same hour subsets
+                    If Len(subst) <> 0 Then
+                        'Compute the observation datetime in UTC
+                        yy = String.Format("{0:00}", DateAndTime.Year(dts(i)))
+                        mm = String.Format("{0:00}", DateAndTime.Month(dts(i)))
+                        hh = String.Format("{0:00}", DateAndTime.Hour(dts(i)))
+                        dd = String.Format("{0:00}", DateAndTime.Day(dts(i)))
+                        hh = String.Format("{0:00}", DateAndTime.Hour(dts(i)))
+                        mn = String.Format("{0:00}", DateAndTime.Minute(dts(i)))
+
+                        BUFR_header = msg_header & " " & dd & hh & mn '& " " & txtBBB
+                        AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(i)), DateAndTime.Month(dts(i)), DateAndTime.Day(dts(i)), DateAndTime.Hour(dts(i)), DateAndTime.Minute(dts(i)), DateAndTime.Second(dts(i)), subst)
+
+                    End If
+                    Tdone = Tdone & dts(i)
+                Next
             End If
         End If
 
-        If Kount > 1 Then ' More than one Subset exists
+        ' Encode Bufr data for subsets having WSI
 
-            ' Initialize the datetime for the compiled BUFR bulletin
-            Tdone = "00/00/0000 00:00:00"
+        ' Load the subsets records from an output file into arrays 
+        If WSI_Bufr_Subst > 0 Then
+            If WSI_Sequence(WSI_Desc_Bits) Then
+                Desc_Bits = WSI_Desc_Bits & Desc_Bits
+                Bufr_Subst = WSI_Bufr_Subst
+            Else
+                FileClose(31)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
 
-            ' Combine the Subsets for the same hour into a single bulletin
-            For i = 0 To Kount - 1
+            Kount = 0
+            Do While EOF(31) = False
+                Input(31, dts(Kount))
+                Input(31, subs(Kount))
+                Kount = Kount + 1
+            Loop
 
-                subst = ""
-                Bufr_Subst = 0
-                For j = 0 To Kount - 1
-                    If dts(j) = dts(i) And InStr(Tdone, dts(j)) = 0 Then
-                        Bufr_Subst = Bufr_Subst + 1
-                        subst = subst + subs(j)
-                    End If
-                Next
-
-                'msg_header = txtMsgHeader.Text ' National Message Header
-
-                ' Compile a bulletin for the located same hour subsets
-                If Len(subst) <> 0 Then
-                    'Compute the observation datetime in UTC
-                    yy = String.Format("{0:00}", DateAndTime.Year(dts(i)))
-                    mm = String.Format("{0:00}", DateAndTime.Month(dts(i)))
-                    hh = String.Format("{0:00}", DateAndTime.Hour(dts(i)))
-                    dd = String.Format("{0:00}", DateAndTime.Day(dts(i)))
-                    hh = String.Format("{0:00}", DateAndTime.Hour(dts(i)))
-                    mn = String.Format("{0:00}", DateAndTime.Minute(dts(i)))
-
+            'Compute the UTC datetime for YYGGgg
+            If Kount = 1 Then ' Only one substest existing
+                If Len(subs(0)) <> 0 Then  'Check whether encoded data exists
+                    yy = String.Format("{0:00}", DateAndTime.Year(dts(0)))
+                    mm = String.Format("{0:00}", DateAndTime.Month(dts(0)))
+                    dd = String.Format("{0:00}", DateAndTime.Day(dts(0)))
+                    hh = String.Format("{0:00}", DateAndTime.Hour(dts(0)))
+                    mn = String.Format("{0:00}", DateAndTime.Minute(dts(0)))
                     BUFR_header = msg_header & " " & dd & hh & mn '& " " & txtBBB
-                    AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(i)), DateAndTime.Month(dts(i)), DateAndTime.Day(dts(i)), DateAndTime.Hour(dts(i)), DateAndTime.Minute(dts(i)), DateAndTime.Second(dts(i)), subst)
-
+                    AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(0)), DateAndTime.Month(dts(0)), DateAndTime.Day(dts(0)), DateAndTime.Hour(dts(0)), DateAndTime.Minute(dts(0)), DateAndTime.Second(dts(0)), subs(0), True)
                 End If
-                Tdone = Tdone & dts(i)
-            Next
+            End If
+
+            If Kount > 1 Then ' More than one Subset exists
+
+                ' Initialize the datetime for the compiled BUFR bulletin
+                Tdone = "00/00/0000 00:00:00"
+
+                ' Combine the Subsets for the same hour into a single bulletin
+                For i = 0 To Kount - 1
+
+                    subst = ""
+                    Bufr_Subst = 0
+                    For j = 0 To Kount - 1
+                        If dts(j) = dts(i) And InStr(Tdone, dts(j)) = 0 Then
+                            Bufr_Subst = Bufr_Subst + 1
+                            subst = subst + subs(j)
+                        End If
+                    Next
+
+                    ' Compile a bulletin for the located same hour subsets
+                    If Len(subst) <> 0 Then
+                        'Compute the observation datetime in UTC
+                        yy = String.Format("{0:00}", DateAndTime.Year(dts(i)))
+                        mm = String.Format("{0:00}", DateAndTime.Month(dts(i)))
+                        hh = String.Format("{0:00}", DateAndTime.Hour(dts(i)))
+                        dd = String.Format("{0:00}", DateAndTime.Day(dts(i)))
+                        hh = String.Format("{0:00}", DateAndTime.Hour(dts(i)))
+                        mn = String.Format("{0:00}", DateAndTime.Minute(dts(i)))
+
+                        BUFR_header = msg_header & " " & dd & hh & mn '& " " & txtBBB
+
+                        AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(i)), DateAndTime.Month(dts(i)), DateAndTime.Day(dts(i)), DateAndTime.Hour(dts(i)), DateAndTime.Minute(dts(i)), DateAndTime.Second(dts(i)), subst, True)
+
+                    End If
+                    Tdone = Tdone & dts(i)
+                Next
+            End If
         End If
 
-        FileClose(31)
+
         FileClose(30)
+        FileClose(31)
         Me.Cursor = Cursors.Default
         Exit Sub
 
 Err:
-        'MsgBox(Err.Number & " " & Err.Description)
-        'If Err.Number = 9 Then Resume Next
-        ''MsgBox(datt & " " & datestring)
-        'If Err.Number = 13 Then Resume Next
-        'If Err.Number = 62 Or Err.Number = 9 Then
+
         If Err.Number = 62 Then
             Log_Errors(Err.Description & " Can't retrieve data from " & infile)
-            'list_errors.Refresh()
-
-            'GoTo Continues
             Resume Next
         End If
-        'If Err.Number = 3349 Then Resume Next
-        ''   MsgBox Err.Number & " " & Err.description
-        'MsgBox("Process_input_data")
-        'Log_Errors(Err.Number & ": " & Err.Description & " at process_input_data")
+
         Me.Cursor = Cursors.Default
         FileClose(1)
         FileClose(10)
@@ -1554,7 +1491,15 @@ Err:
 
             Desc_Bits = Desc_Bits & f & X & Y
         Next
-        DscriptorFile.WriteLine(C1 & "," & f & X & Y)
+        DscriptorFile.WriteLine(C1 & "," & Desc_Bits)
+
+        '''' Include WSI Sequence Descriptor if WSI exists
+        'WSI_Desc_Bits = ""
+        'If WSI_Sequence(WSI_Desc_Bits) Then
+        '    Desc_Bits = WSI_Desc_Bits & Desc_Bits
+        '    DscriptorFile.WriteLine("301150," & WSI_Desc_Bits)
+        'End If
+
         DscriptorFile.Close()
         Exit Function
 Err:
@@ -2106,6 +2051,7 @@ Err:
 
                 ' Update the Template Table and Process the messages for transmission at the scheduled time
                 If Val(DateAndTime.Hour(Date_Time)) Mod ET = 0 Then update_tbltemplate(aws_rs, Date_Time)
+
             End If
             txtLastProcess.Text = datestring
 
@@ -2502,6 +2448,7 @@ Err:
                 'Update_Instruments_Details()
                 Update_Time_Periods(dbconw, qry, hh)
                 Update_observations(dbconw, qry, aws_struct)
+
                 ' Update with accumulated observations
                 ' Precipitation accumulation
                 'Select recordedFrom As ID, sum(obsValue) As Total from observationfinal where recordedFrom ='GZ008074' and describedBy='892' and (obsdatetime between '2020-09-10 08:01:00' and '2020-09-11 08:00:00') group by ID;
@@ -2564,14 +2511,34 @@ Err:
             If Not AWS_Bufr_Section4(sql, BufrSection4, "bufr_crex_data") Then
                 Log_Errors("Cant' Compute Bufr Data Section")  'MsgBox "Cant' Compute Bufr Data Section"
             Else
-                ' Update Subset Number
-                Bufr_Subst = Bufr_Subst + 1
-                ' Append Data in Section 4 with the data computed from current subset
-                BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
-                ' Output substet binary data
-                'MsgBox(BUFR_Subsets_Data)
-                'Write(30, Date_Time, BufrSection4 & Chr(13) & Chr(10))
-                PrintLine(30, Date_Time & "," & BufrSection4)
+
+                '' Update Subset Number
+                'Bufr_Subst = Bufr_Subst + 1
+
+                '' Append Data in Section 4 with the data computed from current subset
+
+                'BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
+
+                '' Compute BUFR subset with WSI
+
+                If TDCF.WSI_data(nat_id, WSI) Then
+                    WSI_BUFR_Subsets_Data = WSI_BUFR_Subsets_Data & WSI & BufrSection4
+                    WSI_Bufr_Subst = WSI_Bufr_Subst + 1
+                    PrintLine(31, Date_Time & "," & WSI & BufrSection4)
+                Else
+                    BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
+                    Bufr_Subst = Bufr_Subst + 1
+                    PrintLine(30, Date_Time & "," & BufrSection4)
+                End If
+
+                '''' Include WSI binary data in the subset
+                'If Len(WSI_BUFR_Subsets_Data) > 8 Then
+                '    'BUFR_Subsets_Data = WSI_BUFR_Subsets_Data & BUFR_Subsets_Data
+                '    BUFR_Subsets_Data = WSI_BUFR_Subsets_Data
+                'End If
+
+                '' Output substet binary data
+                'PrintLine(30, Date_Time & "," & BufrSection4)
             End If
             dbconw.Close()
             ' ' Compose the complete AWS BUFR message
@@ -2632,9 +2599,15 @@ Err:
         ' Update Template with AWS observation values
         sql = "UPDATE " & aws_struct & " INNER JOIN bufr_crex_data ON " & aws_struct & ".Bufr_Element = bufr_crex_data.Bufr_Element SET bufr_crex_data.Observation = " & aws_struct & ".obsv where " & aws_struct & ".Bufr_Element = bufr_crex_data.Bufr_Element;"
         'sql = "update aws_inam1 INNER JOIN bufr_crex_data ON aws_inam1.Bufr_Element = bufr_crex_data.Bufr_Element SET bufr_crex_data.Observation = aws_inam1.obsv where aws_inam1.Bufr_Element = bufr_crex_data.Bufr_Element;"
+
         qry.Connection = conw
         qry.CommandText = sql
-        qry.ExecuteNonQuery()
+        Try
+            qry.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Log_Errors(ex.Message)
+        End Try
     End Sub
     Sub Update_specificPeriod_Observations(conw As MySql.Data.MySqlClient.MySqlConnection, Date_Time As String, nat_id As String)
 
@@ -3070,7 +3043,7 @@ Err:
                 For i = 0 To .Rows.Count - 1
                     RecNo = .Rows(i).Item("Nos")
                     'Log_Errors(RecNo & " - " & i & " - " & .Rows(i).Item("Observation"))
-                    If Not IsDBNull(.Rows(i).Item("Observation")) Then
+                    If Not IsDBNull(.Rows(i).Item("Observation")) And Len(.Rows(i).Item("Observation")) <> 0 Then
                         If Len(.Rows(i).Item("Observation")) > 0 Then
                             bufrdata = Bufr_Data(.Rows(i).Item("Bufr_Unit"), .Rows(i).Item("Bufr_Scale"), .Rows(i).Item("Bufr_RefValue"), .Rows(i).Item("Bufr_DataWidth_Bits"), .Rows(i).Item("Observation"), .Rows(i).Item("Bufr_Data"))
                             'Log_Errors(RecNo & "-" & .Rows(i).Item("Observation") & "=" & bufrdata)
@@ -3211,6 +3184,11 @@ Err:
         End With
 
         binary_data = bufr_subset 'binary_data & bufr_subset
+
+        ''''' Include WSI binary data in the subset
+        'If Len(WSI_BUFR_Subsets_Data) > 8 Then
+        '    binary_data = WSI_BUFR_Subsets_Data & bufr_subset
+        'End If
         'Log_Errors(Len(binary_data))
         Exit Function
 Err:
@@ -3283,7 +3261,7 @@ Err:
         Log_Errors(" FTP " & ftpmethod & " error - " & Err.Description)
     End Function
 
-    Function AWS_BUFR_Code(message_header As String, yy As String, mm As String, dd As String, hh As String, min As String, ss As String, binary_data As String) As Boolean
+    Function AWS_BUFR_Code(message_header As String, yy As String, mm As String, dd As String, hh As String, min As String, ss As String, binary_data As String, Optional WSId As Boolean = False) As Boolean
 
         ' Set message header according to the hour category 
         If Val(hh) Mod 6 = 0 Then
@@ -3403,18 +3381,7 @@ Err:
         ' Dim y As String
 
         section3 = ""
-        ' C$ = Compute_Descriptors(descripts)
-        ' MsgBox C$
 
-        ' MsgBox seq_desc & " " & Len(seq_desc) / 6
-
-        ' Convert Descriptors to binary - Descriptor for the Template used. 16 bits for a descriptor = 2 Octets
-        ' data_descriptor = Right(cmbtemplate, 6)
-        ' f = Decimal_Binary(Left(data_descriptor, 1), 2)    ' Descriptor type
-        ' x = Decimal_Binary(Mid(data_descriptor, 2, 2), 6) ' Descriptor Class
-        ' y = Decimal_Binary(Mid(data_descriptor, 4, 3), 8) ' Entry in Class X
-        '
-        ' data_descriptor = f & x & y     ' Complete Descriptor in binary
         data_descriptors = Desc_Bits
         Octtets = 7 + Len(data_descriptors) / 8
         'MsgBox Octtets
@@ -3448,8 +3415,10 @@ Err:
         section4 = ""
 
         ' Compute the extra bits required to have complete octets
+        '' Just for testing WSI data encoding
+
         xtrbits = Len(binary_data) Mod 8
-        '
+
         If xtrbits = 0 Then
             siz = (Len(binary_data) - xtrbits) / 8
         Else
@@ -3561,6 +3530,8 @@ Err:
 
 
         msg_file = Strings.Right(msg_header, 4) & dy.PadLeft(2, "0"c) & hr.PadLeft(2, "0"c) & min.PadLeft(2, "0"c)
+        If WSId Then msg_file = msg_file & "_WSI"
+
         'Construct and open Bufr output text file based on the message header
 
         Dim fserial As Long
@@ -4515,17 +4486,6 @@ Err:
         End Try
     End Function
 
-    'Function FTP_FilePath(flpath As String) As String
-    '    'Dim fchar As String
-    '    FTP_FilePath = Strings.Replace(flpath, "\", "/")
-    '    'FTP_FilePath = ""
-    '    'For i = 1 To Len(flpath)
-    '    '    fchar = Strings.Mid(flpath, i, 1)
-    '    '    If fchar = "\" Then fchar = "/"
-    '    '    FTP_FilePath = FTP_FilePath & fchar
-    '    'Next
-    'End Function
-
     Function Process_InputFiles(dts As DataSet) As Boolean
         Dim hdrows As Integer
         Dim rs As New DataSet
@@ -4536,7 +4496,7 @@ Err:
 
         With dts.Tables("aws_sites")
 
-                For n = 0 To .Rows.Count - 1
+            For n = 0 To .Rows.Count - 1
                 Try
                     If IsDBNull(.Rows(n).Item("InputFile")) Or .Rows(n).Item("OperationalStatus") = 0 Then Continue For
                     fls = Path.GetFileName(.Rows(n).Item("InputFile"))
@@ -4552,6 +4512,8 @@ Err:
                     End If
 
                     nat_id = .Rows(n).Item("SiteID")
+
+                    'WSI_Data()
 
                     ' Get message header for the station if exist. It has 11 characters. Otherwise use National bulletin header
                     If Not IsDBNull(.Rows(n).Item("GTSHeader")) And Len(.Rows(n).Item("GTSHeader")) = 11 Then
@@ -4659,9 +4621,6 @@ Err:
                             sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
                             rs = GetDataSet(AWSsite, sqlv)
 
-                            'Don't process the record if having invalid datestamp
-                            'If IsDate(datestring) Then
-
                             'Update the record into the database
                             If Val(txtPeriod.Text) = 999 Then
 
@@ -4693,13 +4652,89 @@ Err:
             Next
 
         End With
-            Me.Cursor = Cursors.Default
+        Me.Cursor = Cursors.Default
+        Return True
+    End Function
+
+    Function WSI_Data(ByRef WSI_section4 As String) As Boolean
+        Dim wconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim daw As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsw As New DataSet
+        Dim WSI, seriesID, issuerID, issuerNo, localID As String
+        Dim WSIsplit As Array
+        Dim kount As Integer
+
+        WSI_section4 = ""
+
+
+        Try
+            wconn.ConnectionString = frmLogin.txtusrpwd.Text
+            wconn.Open()
+            sql = "Select wsi FROM station WHERE stationId = '" & nat_id & "';"
+
+            daw = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, wconn)
+            daw.SelectCommand.CommandTimeout = 0
+            wconn.Close()
+
+            dsw.Clear()
+            daw.Fill(dsw, "wsi")
+
+            If dsw.Tables("wsi").Rows.Count = 1 Then
+                WSI = dsw.Tables("wsi").Rows(0).Item(0)
+
+                WSIsplit = Strings.Split(WSI, "-")
+                kount = WSIsplit.Length - 1
+
+                'Check for the validity of the retrieved WSI
+                If kount = 3 Then
+                    ' Check for existence of the 4 components of WSI struecture
+                    For i = 0 To 3
+                        If Len(WSIsplit(i)) = 0 Then Return False
+                    Next
+
+                    ' Compute binary data WSI
+                    seriesID = Bufr_Data("Numeric", 0, 0, 4, WSIsplit(0), "")
+                    issuerID = Bufr_Data("Numeric", 0, 0, 16, WSIsplit(1), "")
+                    issuerNo = Bufr_Data("Numeric", 0, 0, 16, WSIsplit(2), "")
+                    localID = Bufr_Data("CCITT IA5", 0, 0, 128, WSIsplit(3), "")
+
+                    WSI_section4 = seriesID & issuerID & issuerNo & localID
+
+                    WSI_status = True
+                    Return True
+                Else
+                    Return False
+                End If
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            wconn.Close()
+            Return False
+        End Try
+    End Function
+    Function WSI_Sequence(ByRef WSI_section3 As String) As Boolean
+
+        Dim seq_desc, f, X, Y As String
+
+        Try
+            ' Compute binary WSI Sequence Descriptor "301150"
+            seq_desc = "301150"
+
+            ' Perform binary conversion
+            f = Decimal_Binary(Strings.Left(seq_desc, 1), 2)
+            X = Decimal_Binary(Strings.Mid(seq_desc, 2, 2), 6)
+            Y = Decimal_Binary(Strings.Mid(seq_desc, 4, 3), 8)
+
+            WSI_section3 = f & X & Y
             Return True
-        'Catch ex As Exception
-        'Me.Cursor = Cursors.Default
-        'Log_Errors(ex.Message & " at Process_InputFiles")
-        'Return False
-        'End Try
+
+        Catch ex As Exception
+            'Log_Errors(ex.Message)
+            Return False
+        End Try
+
     End Function
 
 End Class

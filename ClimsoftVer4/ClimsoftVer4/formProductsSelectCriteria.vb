@@ -371,14 +371,18 @@ Public Class formProductsSelectCriteria
                            Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                            group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime)
                            Order By recordedFrom, describedBy, YY, MM) As tt
-                           where DF >= 0 group by YY, MM;"
+                           where DF >= 0
+                           group by StationID, YY, MM
+                           order by StationID, YY, MM;"
 
                     '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
                     'sql = "select StationID,station_Name,Lat, Lon, Elev,YY,MM," & elmcolmn & " from (Select recordedFrom As StationID, describedBy,stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                     '       From observationfinal inner Join station On stationId = recordedFrom
                     '       Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                     '       group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime)
-                    '       Order By recordedFrom, describedBy, YY, MM) As tt group by YY, MM;"
+                    '       Order By recordedFrom, describedBy, YY, MM) As tt
+                    '       group by StationID, YY, MM
+                    '       order by StationID, YY, MM;"
 
                     ' Transpose products if so selected
                     If chkTranspose.Checked = True Then

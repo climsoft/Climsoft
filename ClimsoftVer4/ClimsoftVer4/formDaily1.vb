@@ -618,33 +618,16 @@ Public Class formDaily1
                     'Check that numeric value has been entered for observation value
                     objKeyPress.checkIsNumeric(Me.ActiveControl.Text, Me.ActiveControl)
 
-                    'Get the element limits
+                    'Get the element limits for QC checking
 
-                    elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
-                    sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
-                    '
-                    daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
-                    'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
-                    dsValueLimits.Clear()
-                    'Add row for element code associated with active control
-                    daValueLimits.Fill(dsValueLimits, "obselement")
-
+                    ' This code was included on 21/09/2022 to cater for the local (station's) limits where they exist. Otherwise the global limits will be used
                     obsValue = Me.ActiveControl.Text
-                    If dsValueLimits.Tables("obselement").Rows.Count > 0 Then ' Limits record available
-                        'Get element lower limit
+                    elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
+                    'MsgBox(obsValue & " " & cboStation.SelectedValue & " " & elemCode)
+                    objKeyPress.GetQCLimits(cboStation.SelectedValue, elemCode, valUpperLimit, valLowerLimit)
+                    'MsgBox(cboStation.SelectedValue & " " & elemCode & " " & valUpperLimit & " " & valLowerLimit)
 
-                        If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
-                            valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
-                        Else
-                            valLowerLimit = ""
-                        End If
-                        'Get element upper limit
-                        If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
-                            valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
-                        Else
-                            valUpperLimit = ""
-                        End If
-
+                    If objKeyPress.GetQCLimits(cboStation.SelectedValue, elemCode, valUpperLimit, valLowerLimit) Then
                         'Check lower limit
                         If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
                             objKeyPress.checkLowerLimit(Me.ActiveControl, obsValue, valLowerLimit)
@@ -653,7 +636,43 @@ Public Class formDaily1
                         If obsValue <> "" And valUpperLimit <> "" And tabNext = True Then
                             objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit)
                         End If
+
                     End If
+
+                    'sqlValueLimits = "Select elementId, upperLimit, lowerLimit FROM obselement WHERE elementId=" & elemCode
+                    ''MsgBox(cboStation.SelectedValue & " " & elemCode)
+
+                    'daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                    ''Clear all rows in dataset before filling dataset with new row record for element code associated with active control
+                    'dsValueLimits.Clear()
+                    ''Add row for element code associated with active control
+                    'daValueLimits.Fill(dsValueLimits, "obselement")
+
+                    'obsValue = Me.ActiveControl.Text
+                    'If dsValueLimits.Tables("obselement").Rows.Count > 0 Then ' Limits record available
+                    '    'Get element lower limit
+
+                    '    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
+                    '        valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
+                    '    Else
+                    '        valLowerLimit = ""
+                    '    End If
+                    '    'Get element upper limit
+                    '    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
+                    '        valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
+                    '    Else
+                    '        valUpperLimit = ""
+                    '    End If
+
+                    '    'Check lower limit
+                    '    If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
+                    '        objKeyPress.checkLowerLimit(Me.ActiveControl, obsValue, valLowerLimit)
+                    '    End If
+                    '    'Check upper limit
+                    '    If obsValue <> "" And valUpperLimit <> "" And tabNext = True Then
+                    '        objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit)
+                    '    End If
+                    'End If
 
                 ElseIf Me.ActiveControl.Name = "txtYear" Then
                     'Check for numeric
@@ -816,8 +835,8 @@ Public Class formDaily1
             Dim SQL_last_record, lastRecYear, lastRecMonth, lastRecDay, stn As String
             Dim lastRec, nextRec As Date
 
-            SQL_last_record = "SELECT stationId,yyyy,mm,dd,signature,entryDatetime from form_daily1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_daily1);"
-            dsLastDataRecord.Clear()
+            SQL_last_record = "Select stationId, yyyy, mm, dd, Signature, entryDatetime from form_daily1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_daily1);"
+                    dsLastDataRecord.Clear()
             daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
             daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
 

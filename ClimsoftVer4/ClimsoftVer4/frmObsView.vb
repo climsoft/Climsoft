@@ -413,6 +413,8 @@
         End If
     End Sub
 
+
+
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         viewRecords()
     End Sub
@@ -457,7 +459,7 @@
             lstvStations.Columns.Add("Station Id", 80, HorizontalAlignment.Left)
             lstvStations.Columns.Add("Station Name", 400, HorizontalAlignment.Left)
 
-            sql = "SELECT recordedFrom, stationName FROM observationfinal INNER JOIN station ON stationId = recordedFrom GROUP BY recordedFrom;"
+            sql = "SELECT recordedFrom, stationName FROM " & tblName & " INNER JOIN station ON stationId = recordedFrom GROUP BY recordedFrom;"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.SelectCommand.CommandTimeout = 0
@@ -469,8 +471,11 @@
             Dim itm = New ListViewItem
 
             For kount = 0 To maxRows - 1 Step 1
-                strs(0) = ds.Tables("stations").Rows(kount).Item("recordedFrom")
-                strs(1) = ds.Tables("stations").Rows(kount).Item("stationName")
+                With ds.Tables("stations").Rows(kount)
+                    If IsDBNull(.Item("recordedFrom")) Or IsDBNull(.Item("stationName")) Then Continue For ' Skip station with NULL values
+                    strs(0) = .Item("recordedFrom")
+                    strs(1) = .Item("stationName")
+                End With
                 itm = New ListViewItem(strs)
                 lstvStations.Items.Add(itm)
             Next
@@ -502,7 +507,8 @@
             lstvElements.Columns.Add("Element Abbrev", 100, HorizontalAlignment.Left)
             lstvElements.Columns.Add("Element Details", 400, HorizontalAlignment.Left)
 
-            sql = "SELECT describedBy, elementName,description  FROM observationfinal INNER JOIN obselement ON elementId = describedBy GROUP BY describedBy;"
+
+            sql = "SELECT describedBy, elementName,description  FROM " & tblName & " INNER JOIN obselement ON elementId = describedBy GROUP BY describedBy;"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
 
@@ -515,9 +521,12 @@
             Dim itm = New ListViewItem
 
             For kount = 0 To maxRows - 1 Step 1
-                strs(0) = ds.Tables("Elements").Rows(kount).Item("describedBy")
-                strs(1) = ds.Tables("Elements").Rows(kount).Item("elementName")
-                strs(2) = ds.Tables("Elements").Rows(kount).Item("description")
+                With ds.Tables("Elements").Rows(kount)
+                    If IsDBNull(.Item("describedBy")) Or IsDBNull(.Item("elementName")) Or IsDBNull(.Item("description")) Then Continue For ' Skip element with NULL values
+                    strs(0) = .Item("describedBy")
+                    strs(1) = .Item("elementName")
+                    strs(2) = .Item("description")
+                End With
                 itm = New ListViewItem(strs)
                 lstvElements.Items.Add(itm)
             Next
@@ -658,7 +667,6 @@
 
             'sql = "Select * From " & tblName & " Where " & stnlist & " And " & elmlist & " And " & dttPeriod & advcSelect & ";"
 
-            'MsgBox(sql)
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
