@@ -144,6 +144,7 @@ Public Class ClsTranslations
         Return strDbPath
     End Function
 
+    'used only when retrieving form controls to be added into the translations database
     Public Shared Sub UpdateTranslationsDB()
 
         'update the forms_controls tables
