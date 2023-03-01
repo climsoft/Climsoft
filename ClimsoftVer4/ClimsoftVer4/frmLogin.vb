@@ -74,6 +74,10 @@ Public Class frmLogin
     End Sub
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
+
+        'ClsTranslations.UpdateTranslationsDB()
+
+
         Dim connectionString As String
         Dim builder As New Common.DbConnectionStringBuilder()
         Dim dbChoice As String
