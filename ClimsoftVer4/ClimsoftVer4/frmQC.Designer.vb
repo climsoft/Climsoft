@@ -62,7 +62,7 @@ Partial Class frmQC
         '
         'cmdApply
         '
-        Me.cmdApply.Location = New System.Drawing.Point(195, 471)
+        Me.cmdApply.Location = New System.Drawing.Point(197, 468)
         Me.cmdApply.Name = "cmdApply"
         Me.cmdApply.Size = New System.Drawing.Size(73, 23)
         Me.cmdApply.TabIndex = 7
@@ -72,7 +72,7 @@ Partial Class frmQC
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(126, 471)
+        Me.cmdOk.Location = New System.Drawing.Point(128, 468)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(63, 23)
         Me.cmdOk.TabIndex = 6
@@ -82,7 +82,7 @@ Partial Class frmQC
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(151, 471)
+        Me.cmdCancel.Location = New System.Drawing.Point(152, 468)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(73, 23)
         Me.cmdCancel.TabIndex = 5
@@ -91,7 +91,7 @@ Partial Class frmQC
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(288, 471)
+        Me.cmdHelp.Location = New System.Drawing.Point(293, 468)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(73, 23)
         Me.cmdHelp.TabIndex = 4
@@ -207,9 +207,9 @@ Partial Class frmQC
         '
         Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.btnUpdate.Location = New System.Drawing.Point(496, 448)
+        Me.btnUpdate.Location = New System.Drawing.Point(506, 464)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(180, 30)
+        Me.btnUpdate.Size = New System.Drawing.Size(209, 30)
         Me.btnUpdate.TabIndex = 11
         Me.btnUpdate.Text = "Update With QC Report"
         Me.btnUpdate.UseVisualStyleBackColor = False
@@ -266,7 +266,7 @@ Partial Class frmQC
         '
         'cmdPerformQC
         '
-        Me.cmdPerformQC.Location = New System.Drawing.Point(14, 471)
+        Me.cmdPerformQC.Location = New System.Drawing.Point(13, 468)
         Me.cmdPerformQC.Name = "cmdPerformQC"
         Me.cmdPerformQC.Size = New System.Drawing.Size(93, 23)
         Me.cmdPerformQC.TabIndex = 18

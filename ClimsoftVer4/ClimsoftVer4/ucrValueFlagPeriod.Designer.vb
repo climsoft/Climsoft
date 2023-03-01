@@ -30,30 +30,36 @@ Partial Class ucrValueFlagPeriod
         '
         'ucrValue
         '
-        Me.ucrValue.Location = New System.Drawing.Point(0, 3)
+        Me.ucrValue.FieldName = "obsValue"
+        Me.ucrValue.KeyControl = False
+        Me.ucrValue.Location = New System.Drawing.Point(4, 2)
         Me.ucrValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValue.Name = "ucrValue"
-        Me.ucrValue.Size = New System.Drawing.Size(55, 23)
+        Me.ucrValue.Size = New System.Drawing.Size(60, 23)
         Me.ucrValue.TabIndex = 581
         Me.ucrValue.Tag = "obsValue"
         Me.ucrValue.TextboxValue = ""
         '
         'ucrFlag
         '
-        Me.ucrFlag.Location = New System.Drawing.Point(59, 3)
+        Me.ucrFlag.FieldName = "flag"
+        Me.ucrFlag.KeyControl = False
+        Me.ucrFlag.Location = New System.Drawing.Point(72, 2)
         Me.ucrFlag.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrFlag.Name = "ucrFlag"
-        Me.ucrFlag.Size = New System.Drawing.Size(29, 23)
+        Me.ucrFlag.Size = New System.Drawing.Size(41, 21)
         Me.ucrFlag.TabIndex = 582
         Me.ucrFlag.Tag = "flag"
         Me.ucrFlag.TextboxValue = ""
         '
         'ucrPeriod
         '
-        Me.ucrPeriod.Location = New System.Drawing.Point(92, 3)
+        Me.ucrPeriod.FieldName = "period"
+        Me.ucrPeriod.KeyControl = False
+        Me.ucrPeriod.Location = New System.Drawing.Point(121, 2)
         Me.ucrPeriod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrPeriod.Name = "ucrPeriod"
-        Me.ucrPeriod.Size = New System.Drawing.Size(35, 23)
+        Me.ucrPeriod.Size = New System.Drawing.Size(46, 23)
         Me.ucrPeriod.TabIndex = 583
         Me.ucrPeriod.Tag = "period"
         Me.ucrPeriod.TextboxValue = ""
@@ -67,7 +73,7 @@ Partial Class ucrValueFlagPeriod
         Me.Controls.Add(Me.ucrValue)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrValueFlagPeriod"
-        Me.Size = New System.Drawing.Size(130, 23)
+        Me.Size = New System.Drawing.Size(171, 25)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

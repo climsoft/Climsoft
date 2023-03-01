@@ -22,9 +22,9 @@ Partial Class frmCharts
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.Frame6 = New System.Windows.Forms.GroupBox()
         Me.txtchY = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -129,19 +129,19 @@ Partial Class frmCharts
         '
         'MSChart1
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.MSChart1.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.MSChart1.Legends.Add(Legend4)
+        ChartArea2.Name = "ChartArea1"
+        Me.MSChart1.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.MSChart1.Legends.Add(Legend2)
         Me.MSChart1.Location = New System.Drawing.Point(12, 3)
         Me.MSChart1.Name = "MSChart1"
-        Series4.ChartArea = "ChartArea1"
-        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series4.Legend = "Legend1"
-        Series4.Name = "Series1"
-        Series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.[Single]
-        Series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.[Single]
-        Me.MSChart1.Series.Add(Series4)
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.[Single]
+        Series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.[Single]
+        Me.MSChart1.Series.Add(Series2)
         Me.MSChart1.Size = New System.Drawing.Size(959, 407)
         Me.MSChart1.TabIndex = 0
         Me.MSChart1.Text = "Chart1"
@@ -236,16 +236,16 @@ Partial Class frmCharts
         '
         Me.cmdPlot.Location = New System.Drawing.Point(229, 540)
         Me.cmdPlot.Name = "cmdPlot"
-        Me.cmdPlot.Size = New System.Drawing.Size(56, 24)
+        Me.cmdPlot.Size = New System.Drawing.Size(70, 24)
         Me.cmdPlot.TabIndex = 3
         Me.cmdPlot.Text = "Plot"
         Me.cmdPlot.UseVisualStyleBackColor = True
         '
         'comdSave
         '
-        Me.comdSave.Location = New System.Drawing.Point(319, 540)
+        Me.comdSave.Location = New System.Drawing.Point(305, 540)
         Me.comdSave.Name = "comdSave"
-        Me.comdSave.Size = New System.Drawing.Size(50, 24)
+        Me.comdSave.Size = New System.Drawing.Size(78, 24)
         Me.comdSave.TabIndex = 4
         Me.comdSave.Text = "Save"
         Me.comdSave.UseVisualStyleBackColor = True
@@ -254,7 +254,7 @@ Partial Class frmCharts
         '
         Me.cmdPrint.Location = New System.Drawing.Point(403, 540)
         Me.cmdPrint.Name = "cmdPrint"
-        Me.cmdPrint.Size = New System.Drawing.Size(50, 24)
+        Me.cmdPrint.Size = New System.Drawing.Size(65, 24)
         Me.cmdPrint.TabIndex = 5
         Me.cmdPrint.Text = "Print"
         Me.cmdPrint.UseVisualStyleBackColor = True
@@ -263,7 +263,7 @@ Partial Class frmCharts
         '
         Me.CmdClose.Location = New System.Drawing.Point(678, 540)
         Me.CmdClose.Name = "CmdClose"
-        Me.CmdClose.Size = New System.Drawing.Size(50, 24)
+        Me.CmdClose.Size = New System.Drawing.Size(61, 24)
         Me.CmdClose.TabIndex = 6
         Me.CmdClose.Text = "Close"
         Me.CmdClose.UseVisualStyleBackColor = True
@@ -272,7 +272,7 @@ Partial Class frmCharts
         '
         Me.cmdHelp.Location = New System.Drawing.Point(594, 540)
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(50, 24)
+        Me.cmdHelp.Size = New System.Drawing.Size(68, 24)
         Me.cmdHelp.TabIndex = 7
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
@@ -282,7 +282,7 @@ Partial Class frmCharts
         Me.cmdview.Enabled = False
         Me.cmdview.Location = New System.Drawing.Point(487, 540)
         Me.cmdview.Name = "cmdview"
-        Me.cmdview.Size = New System.Drawing.Size(73, 24)
+        Me.cmdview.Size = New System.Drawing.Size(90, 24)
         Me.cmdview.TabIndex = 8
         Me.cmdview.Text = "View Data"
         Me.cmdview.UseVisualStyleBackColor = True

@@ -2265,6 +2265,9 @@ Err:
         pictureBoxInstrument.Refresh()
     End Sub
 
+    Private Sub GroupBox15_Enter(sender As Object, e As EventArgs) Handles GroupBox15.Enter
+
+    End Sub
 End Class
 Class MetadataVariables
     Public seStn, sebdate, Eecode, Iecode As String 'Variables for Station Element

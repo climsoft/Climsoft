@@ -673,4 +673,20 @@ Public Class ucrFormDaily2
         End If
         Me.Cursor = Cursors.Default
     End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+
+    End Sub
+
+    Private Sub ucrMonth_Load(sender As Object, e As EventArgs) Handles ucrMonth.Load
+
+    End Sub
+
+    Private Sub lblMonth_Click(sender As Object, e As EventArgs) Handles lblMonth.Click
+
+    End Sub
+
+    Private Sub Label16_Click(sender As Object, e As EventArgs) Handles Label16.Click
+
+    End Sub
 End Class

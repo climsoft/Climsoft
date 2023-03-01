@@ -72,7 +72,7 @@ Partial Class formSynoptic2
         'YyyyLabel
         '
         YyyyLabel.AutoSize = True
-        YyyyLabel.Location = New System.Drawing.Point(137, 56)
+        YyyyLabel.Location = New System.Drawing.Point(132, 54)
         YyyyLabel.Name = "YyyyLabel"
         YyyyLabel.Size = New System.Drawing.Size(32, 13)
         YyyyLabel.TabIndex = 210
@@ -81,7 +81,7 @@ Partial Class formSynoptic2
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(63, 18)
+        Me.Label4.Location = New System.Drawing.Point(26, 24)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(103, 13)
         Me.Label4.TabIndex = 214
@@ -90,7 +90,7 @@ Partial Class formSynoptic2
         'cboStation
         '
         Me.cboStation.FormattingEnabled = True
-        Me.cboStation.Location = New System.Drawing.Point(171, 15)
+        Me.cboStation.Location = New System.Drawing.Point(153, 18)
         Me.cboStation.Name = "cboStation"
         Me.cboStation.Size = New System.Drawing.Size(355, 21)
         Me.cboStation.TabIndex = 0
@@ -98,7 +98,7 @@ Partial Class formSynoptic2
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(437, 56)
+        Me.Label3.Location = New System.Drawing.Point(426, 54)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(33, 13)
         Me.Label3.TabIndex = 213
@@ -107,7 +107,7 @@ Partial Class formSynoptic2
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(339, 56)
+        Me.Label2.Location = New System.Drawing.Point(346, 54)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(29, 13)
         Me.Label2.TabIndex = 212
@@ -116,7 +116,7 @@ Partial Class formSynoptic2
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(234, 56)
+        Me.Label1.Location = New System.Drawing.Point(241, 54)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(40, 13)
         Me.Label1.TabIndex = 211
@@ -126,7 +126,7 @@ Partial Class formSynoptic2
         '
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.cboMonth.Location = New System.Drawing.Point(277, 52)
+        Me.cboMonth.Location = New System.Drawing.Point(287, 50)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(41, 21)
         Me.cboMonth.TabIndex = 2
@@ -135,7 +135,7 @@ Partial Class formSynoptic2
         '
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(370, 52)
+        Me.cboDay.Location = New System.Drawing.Point(381, 50)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(39, 21)
         Me.cboDay.TabIndex = 3
@@ -144,7 +144,7 @@ Partial Class formSynoptic2
         '
         Me.cboHour.FormattingEnabled = True
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", ""})
-        Me.cboHour.Location = New System.Drawing.Point(474, 52)
+        Me.cboHour.Location = New System.Drawing.Point(469, 50)
         Me.cboHour.Name = "cboHour"
         Me.cboHour.Size = New System.Drawing.Size(39, 21)
         Me.cboHour.TabIndex = 4
@@ -152,7 +152,7 @@ Partial Class formSynoptic2
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(171, 52)
+        Me.txtYear.Location = New System.Drawing.Point(175, 51)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(40, 20)
         Me.txtYear.TabIndex = 1
@@ -179,18 +179,18 @@ Partial Class formSynoptic2
         Me.GroupBoxCommands.Controls.Add(Me.btnMoveNext)
         Me.GroupBoxCommands.Controls.Add(Me.btnClose)
         Me.GroupBoxCommands.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupBoxCommands.Location = New System.Drawing.Point(0, 388)
+        Me.GroupBoxCommands.Location = New System.Drawing.Point(0, 406)
         Me.GroupBoxCommands.Margin = New System.Windows.Forms.Padding(1)
         Me.GroupBoxCommands.Name = "GroupBoxCommands"
-        Me.GroupBoxCommands.Size = New System.Drawing.Size(837, 95)
+        Me.GroupBoxCommands.Size = New System.Drawing.Size(915, 95)
         Me.GroupBoxCommands.TabIndex = 1172
         Me.GroupBoxCommands.TabStop = False
         '
         'btnPush
         '
-        Me.btnPush.Location = New System.Drawing.Point(528, 41)
+        Me.btnPush.Location = New System.Drawing.Point(611, 41)
         Me.btnPush.Name = "btnPush"
-        Me.btnPush.Size = New System.Drawing.Size(64, 23)
+        Me.btnPush.Size = New System.Drawing.Size(85, 23)
         Me.btnPush.TabIndex = 700
         Me.btnPush.Text = "Push"
         Me.btnPush.UseVisualStyleBackColor = True
@@ -208,18 +208,18 @@ Partial Class formSynoptic2
         '
         'btnTDCF
         '
-        Me.btnTDCF.Location = New System.Drawing.Point(464, 41)
+        Me.btnTDCF.Location = New System.Drawing.Point(531, 41)
         Me.btnTDCF.Name = "btnTDCF"
-        Me.btnTDCF.Size = New System.Drawing.Size(64, 23)
+        Me.btnTDCF.Size = New System.Drawing.Size(77, 23)
         Me.btnTDCF.TabIndex = 698
         Me.btnTDCF.Text = "TDCF"
         Me.btnTDCF.UseVisualStyleBackColor = True
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(400, 41)
+        Me.btnView.Location = New System.Drawing.Point(443, 41)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(64, 23)
+        Me.btnView.Size = New System.Drawing.Size(82, 23)
         Me.btnView.TabIndex = 697
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
@@ -227,9 +227,9 @@ Partial Class formSynoptic2
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(642, 67)
+        Me.btnUpload.Location = New System.Drawing.Point(662, 72)
         Me.btnUpload.Name = "btnUpload"
-        Me.btnUpload.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpload.Size = New System.Drawing.Size(85, 23)
         Me.btnUpload.TabIndex = 696
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
@@ -253,7 +253,7 @@ Partial Class formSynoptic2
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(656, 41)
+        Me.btnHelp.Location = New System.Drawing.Point(776, 41)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(64, 23)
         Me.btnHelp.TabIndex = 688
@@ -263,9 +263,9 @@ Partial Class formSynoptic2
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(336, 41)
+        Me.btnClear.Location = New System.Drawing.Point(366, 41)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(64, 23)
+        Me.btnClear.Size = New System.Drawing.Size(71, 23)
         Me.btnClear.TabIndex = 686
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
@@ -273,36 +273,36 @@ Partial Class formSynoptic2
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(144, 41)
+        Me.btnCommit.Location = New System.Drawing.Point(109, 41)
         Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(64, 23)
+        Me.btnCommit.Size = New System.Drawing.Size(80, 23)
         Me.btnCommit.TabIndex = 682
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(272, 41)
+        Me.btnDelete.Location = New System.Drawing.Point(278, 41)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(64, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(82, 23)
         Me.btnDelete.TabIndex = 685
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(80, 41)
+        Me.btnAddNew.Location = New System.Drawing.Point(29, 41)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(64, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(74, 23)
         Me.btnAddNew.TabIndex = 684
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(208, 41)
+        Me.btnUpdate.Location = New System.Drawing.Point(195, 41)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(64, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(77, 23)
         Me.btnUpdate.TabIndex = 683
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -339,7 +339,7 @@ Partial Class formSynoptic2
         '
         'recNumberTextBox
         '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(385, 16)
+        Me.recNumberTextBox.Location = New System.Drawing.Point(380, 15)
         Me.recNumberTextBox.Name = "recNumberTextBox"
         Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
         Me.recNumberTextBox.TabIndex = 690
@@ -357,9 +357,9 @@ Partial Class formSynoptic2
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(592, 41)
+        Me.btnClose.Location = New System.Drawing.Point(702, 41)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(64, 23)
+        Me.btnClose.Size = New System.Drawing.Size(68, 23)
         Me.btnClose.TabIndex = 687
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
@@ -376,9 +376,9 @@ Partial Class formSynoptic2
         Me.grpUnits.Controls.Add(Me.LblCloudheight)
         Me.grpUnits.Controls.Add(Me.lblPrecip)
         Me.grpUnits.Controls.Add(Me.lblTemperature)
-        Me.grpUnits.Location = New System.Drawing.Point(535, 7)
+        Me.grpUnits.Location = New System.Drawing.Point(514, 8)
         Me.grpUnits.Name = "grpUnits"
-        Me.grpUnits.Size = New System.Drawing.Size(287, 63)
+        Me.grpUnits.Size = New System.Drawing.Size(326, 63)
         Me.grpUnits.TabIndex = 1188
         Me.grpUnits.TabStop = False
         Me.grpUnits.Text = "Units"
@@ -387,7 +387,7 @@ Partial Class formSynoptic2
         '
         Me.cboWindSpdUnits.FormattingEnabled = True
         Me.cboWindSpdUnits.Items.AddRange(New Object() {"knots", "m/s"})
-        Me.cboWindSpdUnits.Location = New System.Drawing.Point(229, 32)
+        Me.cboWindSpdUnits.Location = New System.Drawing.Point(259, 32)
         Me.cboWindSpdUnits.Name = "cboWindSpdUnits"
         Me.cboWindSpdUnits.Size = New System.Drawing.Size(54, 21)
         Me.cboWindSpdUnits.TabIndex = 1197
@@ -397,7 +397,7 @@ Partial Class formSynoptic2
         '
         Me.cboVisibilityUnits.FormattingEnabled = True
         Me.cboVisibilityUnits.Items.AddRange(New Object() {"metres", "yards", "km", "miles"})
-        Me.cboVisibilityUnits.Location = New System.Drawing.Point(173, 32)
+        Me.cboVisibilityUnits.Location = New System.Drawing.Point(199, 32)
         Me.cboVisibilityUnits.Name = "cboVisibilityUnits"
         Me.cboVisibilityUnits.Size = New System.Drawing.Size(54, 21)
         Me.cboVisibilityUnits.TabIndex = 1196
@@ -409,7 +409,7 @@ Partial Class formSynoptic2
         Me.cboCloudheightUnits.Items.AddRange(New Object() {"metres", "feet"})
         Me.cboCloudheightUnits.Location = New System.Drawing.Point(117, 32)
         Me.cboCloudheightUnits.Name = "cboCloudheightUnits"
-        Me.cboCloudheightUnits.Size = New System.Drawing.Size(54, 21)
+        Me.cboCloudheightUnits.Size = New System.Drawing.Size(76, 21)
         Me.cboCloudheightUnits.TabIndex = 1195
         Me.cboCloudheightUnits.Text = "meters"
         '
@@ -436,7 +436,7 @@ Partial Class formSynoptic2
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(229, 18)
+        Me.Label6.Location = New System.Drawing.Point(259, 18)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(54, 13)
         Me.Label6.TabIndex = 1192
@@ -445,7 +445,7 @@ Partial Class formSynoptic2
         'lblVisibility
         '
         Me.lblVisibility.AutoSize = True
-        Me.lblVisibility.Location = New System.Drawing.Point(178, 18)
+        Me.lblVisibility.Location = New System.Drawing.Point(204, 18)
         Me.lblVisibility.Name = "lblVisibility"
         Me.lblVisibility.Size = New System.Drawing.Size(43, 13)
         Me.lblVisibility.TabIndex = 1191
@@ -482,7 +482,7 @@ Partial Class formSynoptic2
         '
         Me.lblInsDel.AutoSize = True
         Me.lblInsDel.ForeColor = System.Drawing.Color.Blue
-        Me.lblInsDel.Location = New System.Drawing.Point(540, 73)
+        Me.lblInsDel.Location = New System.Drawing.Point(511, 74)
         Me.lblInsDel.Name = "lblInsDel"
         Me.lblInsDel.Size = New System.Drawing.Size(241, 13)
         Me.lblInsDel.TabIndex = 701
@@ -492,7 +492,7 @@ Partial Class formSynoptic2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(837, 483)
+        Me.ClientSize = New System.Drawing.Size(915, 501)
         Me.Controls.Add(Me.lblInsDel)
         Me.Controls.Add(Me.grpUnits)
         Me.Controls.Add(Me.GroupBoxCommands)

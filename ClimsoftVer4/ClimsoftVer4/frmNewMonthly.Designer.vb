@@ -27,17 +27,17 @@ Partial Class frmNewMonthly
         '
         'ucrMonthlydata
         '
-        Me.ucrMonthlydata.Location = New System.Drawing.Point(15, 6)
+        Me.ucrMonthlydata.Location = New System.Drawing.Point(3, 6)
         Me.ucrMonthlydata.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrMonthlydata.Name = "ucrMonthlydata"
-        Me.ucrMonthlydata.Size = New System.Drawing.Size(651, 612)
+        Me.ucrMonthlydata.Size = New System.Drawing.Size(751, 612)
         Me.ucrMonthlydata.TabIndex = 4
         '
         'frmNewMonthly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(681, 624)
+        Me.ClientSize = New System.Drawing.Size(752, 624)
         Me.Controls.Add(Me.ucrMonthlydata)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False

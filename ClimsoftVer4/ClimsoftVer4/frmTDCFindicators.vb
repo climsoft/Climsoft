@@ -164,6 +164,54 @@
         End If
     End Sub
 
+    Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeader.Click
+
+    End Sub
+
+    Private Sub txtMsgHeader_TextChanged(sender As Object, e As EventArgs) Handles txtMsgHeader.TextChanged
+
+    End Sub
+
+    Private Sub txtLocalTableVersionNumber_TextChanged(sender As Object, e As EventArgs) Handles txtLocalTableVersionNumber.TextChanged
+
+    End Sub
+
+    Private Sub txtOriginatingGeneratingCentre_TextChanged(sender As Object, e As EventArgs) Handles txtOriginatingGeneratingCentre.TextChanged
+
+    End Sub
+
+    Private Sub txtOriginatingGeneratingSubCentre_TextChanged(sender As Object, e As EventArgs) Handles txtOriginatingGeneratingSubCentre.TextChanged
+
+    End Sub
+
+    Private Sub txtUpdateSequenceNumber_TextChanged(sender As Object, e As EventArgs) Handles txtUpdateSequenceNumber.TextChanged
+
+    End Sub
+
+    Private Sub chkOptionalSectionInclusion_CheckedChanged(sender As Object, e As EventArgs) Handles chkOptionalSectionInclusion.CheckedChanged
+
+    End Sub
+
+    Private Sub txtDataCategory_TextChanged(sender As Object, e As EventArgs) Handles txtDataCategory.TextChanged
+
+    End Sub
+
+    Private Sub txtInternationalDataSubCategory_TextChanged(sender As Object, e As EventArgs) Handles txtInternationalDataSubCategory.TextChanged
+
+    End Sub
+
+    Private Sub txtLocalDataSubCategory_TextChanged(sender As Object, e As EventArgs) Handles txtLocalDataSubCategory.TextChanged
+
+    End Sub
+
+    Private Sub txtMastersTableVersionNumber_TextChanged(sender As Object, e As EventArgs) Handles txtMastersTableVersionNumber.TextChanged
+
+    End Sub
+
+    Private Sub txtBUFREditionNumber_TextChanged(sender As Object, e As EventArgs) Handles txtBUFREditionNumber.TextChanged
+
+    End Sub
+
     Private Sub cboTemplate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTemplate.SelectedIndexChanged
 
     End Sub

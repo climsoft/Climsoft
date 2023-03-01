@@ -147,7 +147,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblPhysicalFeature.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPhysicalFeature.Location = New System.Drawing.Point(269, 15)
         Me.lblPhysicalFeature.Name = "lblPhysicalFeature"
-        Me.lblPhysicalFeature.Size = New System.Drawing.Size(124, 16)
+        Me.lblPhysicalFeature.Size = New System.Drawing.Size(123, 16)
         Me.lblPhysicalFeature.TabIndex = 0
         Me.lblPhysicalFeature.Text = "Physical Feature"
         '
@@ -167,54 +167,54 @@ Partial Class ucrMetadataPhysicalFeature
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(416, 7)
+        Me.btnClear.Location = New System.Drawing.Point(398, 7)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.Size = New System.Drawing.Size(93, 23)
         Me.btnClear.TabIndex = 4
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(515, 7)
+        Me.btnView.Location = New System.Drawing.Point(497, 7)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.Size = New System.Drawing.Size(93, 23)
         Me.btnView.TabIndex = 5
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(317, 7)
+        Me.btnDelete.Location = New System.Drawing.Point(299, 7)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(93, 23)
         Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(218, 7)
+        Me.btnUpdate.Location = New System.Drawing.Point(200, 7)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(93, 23)
         Me.btnUpdate.TabIndex = 2
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(119, 7)
+        Me.btnSave.Location = New System.Drawing.Point(101, 7)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.Size = New System.Drawing.Size(93, 23)
         Me.btnSave.TabIndex = 1
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(20, 7)
+        Me.btnAddNew.Location = New System.Drawing.Point(6, 7)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(89, 23)
         Me.btnAddNew.TabIndex = 0
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
@@ -230,6 +230,7 @@ Partial Class ucrMetadataPhysicalFeature
         'ucrStationSelector
         '
         Me.ucrStationSelector.FieldName = "associatedWith"
+        Me.ucrStationSelector.KeyControl = False
         Me.ucrStationSelector.Location = New System.Drawing.Point(141, 106)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
@@ -240,6 +241,7 @@ Partial Class ucrMetadataPhysicalFeature
         'ucrTextBoxFeatureDescription
         '
         Me.ucrTextBoxFeatureDescription.FieldName = "description"
+        Me.ucrTextBoxFeatureDescription.KeyControl = False
         Me.ucrTextBoxFeatureDescription.Location = New System.Drawing.Point(141, 204)
         Me.ucrTextBoxFeatureDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFeatureDescription.Name = "ucrTextBoxFeatureDescription"
@@ -251,6 +253,7 @@ Partial Class ucrMetadataPhysicalFeature
         'ucrTextBoxFeatureClass
         '
         Me.ucrTextBoxFeatureClass.FieldName = "classifiedInto"
+        Me.ucrTextBoxFeatureClass.KeyControl = False
         Me.ucrTextBoxFeatureClass.Location = New System.Drawing.Point(141, 234)
         Me.ucrTextBoxFeatureClass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFeatureClass.Name = "ucrTextBoxFeatureClass"
@@ -262,6 +265,7 @@ Partial Class ucrMetadataPhysicalFeature
         'ucrTextBoxFeatureImageFile
         '
         Me.ucrTextBoxFeatureImageFile.FieldName = "image"
+        Me.ucrTextBoxFeatureImageFile.KeyControl = False
         Me.ucrTextBoxFeatureImageFile.Location = New System.Drawing.Point(141, 300)
         Me.ucrTextBoxFeatureImageFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFeatureImageFile.Name = "ucrTextBoxFeatureImageFile"
@@ -273,6 +277,7 @@ Partial Class ucrMetadataPhysicalFeature
         'ucrDatePickerBeginDate
         '
         Me.ucrDatePickerBeginDate.FieldName = "beginDate"
+        Me.ucrDatePickerBeginDate.KeyControl = False
         Me.ucrDatePickerBeginDate.Location = New System.Drawing.Point(141, 140)
         Me.ucrDatePickerBeginDate.Name = "ucrDatePickerBeginDate"
         Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(154, 21)
@@ -282,6 +287,7 @@ Partial Class ucrMetadataPhysicalFeature
         'ucrDatePickerEndDate
         '
         Me.ucrDatePickerEndDate.FieldName = "endDate"
+        Me.ucrDatePickerEndDate.KeyControl = False
         Me.ucrDatePickerEndDate.Location = New System.Drawing.Point(141, 171)
         Me.ucrDatePickerEndDate.Name = "ucrDatePickerEndDate"
         Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(154, 21)

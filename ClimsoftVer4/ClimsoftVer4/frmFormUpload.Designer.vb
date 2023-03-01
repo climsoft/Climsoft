@@ -64,9 +64,9 @@ Partial Class frmFormUpload
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(537, 158)
+        Me.btnClose.Location = New System.Drawing.Point(525, 158)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(56, 23)
+        Me.btnClose.Size = New System.Drawing.Size(68, 23)
         Me.btnClose.TabIndex = 3
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
@@ -84,6 +84,7 @@ Partial Class frmFormUpload
         Me.LstViewStations.CheckBoxes = True
         Me.LstViewStations.FullRowSelect = True
         Me.LstViewStations.GridLines = True
+        Me.LstViewStations.HideSelection = False
         Me.LstViewStations.Location = New System.Drawing.Point(7, 10)
         Me.LstViewStations.Name = "LstViewStations"
         Me.LstViewStations.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -174,7 +175,7 @@ Partial Class frmFormUpload
         '
         Me.btnStart.Location = New System.Drawing.Point(371, 158)
         Me.btnStart.Name = "btnStart"
-        Me.btnStart.Size = New System.Drawing.Size(56, 23)
+        Me.btnStart.Size = New System.Drawing.Size(77, 23)
         Me.btnStart.TabIndex = 37
         Me.btnStart.Text = "Start"
         Me.btnStart.UseVisualStyleBackColor = True

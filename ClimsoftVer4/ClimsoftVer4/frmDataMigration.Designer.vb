@@ -253,12 +253,11 @@ Partial Class frmDataMigration
         '
         'optV3MysqlDb
         '
-        Me.optV3MysqlDb.AutoSize = True
         Me.optV3MysqlDb.Location = New System.Drawing.Point(25, 23)
         Me.optV3MysqlDb.Name = "optV3MysqlDb"
-        Me.optV3MysqlDb.Size = New System.Drawing.Size(301, 17)
+        Me.optV3MysqlDb.Size = New System.Drawing.Size(354, 17)
         Me.optV3MysqlDb.TabIndex = 6
-        Me.optV3MysqlDb.Text = "CLIMSOFT V3 MySQL Database - Within the same server)"
+        Me.optV3MysqlDb.Text = "CLIMSOFT V3 MySQL Database - Within the same server"
         Me.optV3MysqlDb.UseVisualStyleBackColor = True
         '
         'optV3Backup

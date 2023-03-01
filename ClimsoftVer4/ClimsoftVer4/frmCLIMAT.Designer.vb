@@ -209,9 +209,9 @@ Partial Class frmCLIMAT
         '
         'butClose
         '
-        Me.butClose.Location = New System.Drawing.Point(228, 350)
+        Me.butClose.Location = New System.Drawing.Point(219, 350)
         Me.butClose.Name = "butClose"
-        Me.butClose.Size = New System.Drawing.Size(51, 22)
+        Me.butClose.Size = New System.Drawing.Size(60, 22)
         Me.butClose.TabIndex = 31
         Me.butClose.Text = "Close"
         Me.butClose.UseVisualStyleBackColor = True
@@ -271,9 +271,9 @@ Partial Class frmCLIMAT
         '
         'butClear
         '
-        Me.butClear.Location = New System.Drawing.Point(152, 350)
+        Me.butClear.Location = New System.Drawing.Point(133, 350)
         Me.butClear.Name = "butClear"
-        Me.butClear.Size = New System.Drawing.Size(51, 22)
+        Me.butClear.Size = New System.Drawing.Size(70, 22)
         Me.butClear.TabIndex = 34
         Me.butClear.Text = "Clear"
         Me.butClear.UseVisualStyleBackColor = True
@@ -306,9 +306,9 @@ Partial Class frmCLIMAT
         '
         'butSetting
         '
-        Me.butSetting.Location = New System.Drawing.Point(591, 350)
+        Me.butSetting.Location = New System.Drawing.Point(578, 350)
         Me.butSetting.Name = "butSetting"
-        Me.butSetting.Size = New System.Drawing.Size(62, 22)
+        Me.butSetting.Size = New System.Drawing.Size(75, 22)
         Me.butSetting.TabIndex = 38
         Me.butSetting.Text = "Settings"
         Me.butSetting.UseVisualStyleBackColor = True
@@ -326,7 +326,7 @@ Partial Class frmCLIMAT
         '
         Me.btnSend.Location = New System.Drawing.Point(304, 350)
         Me.btnSend.Name = "btnSend"
-        Me.btnSend.Size = New System.Drawing.Size(51, 22)
+        Me.btnSend.Size = New System.Drawing.Size(58, 22)
         Me.btnSend.TabIndex = 40
         Me.btnSend.Text = "Send"
         Me.btnSend.UseVisualStyleBackColor = True

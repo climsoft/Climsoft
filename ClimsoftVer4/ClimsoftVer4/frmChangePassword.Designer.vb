@@ -76,10 +76,9 @@ Partial Class frmChangePassword
         '
         'lblConfirmNewPassword
         '
-        Me.lblConfirmNewPassword.AutoSize = True
         Me.lblConfirmNewPassword.Location = New System.Drawing.Point(12, 141)
         Me.lblConfirmNewPassword.Name = "lblConfirmNewPassword"
-        Me.lblConfirmNewPassword.Size = New System.Drawing.Size(122, 13)
+        Me.lblConfirmNewPassword.Size = New System.Drawing.Size(122, 31)
         Me.lblConfirmNewPassword.TabIndex = 5
         Me.lblConfirmNewPassword.Text = "Re-enter New Password"
         '
