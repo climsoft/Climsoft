@@ -68,7 +68,7 @@ Partial Class frmLogin
         Me.lblUsername.Size = New System.Drawing.Size(55, 13)
         Me.lblUsername.TabIndex = 0
         Me.lblUsername.Tag = "Username"
-        Me.lblUsername.Text = "&Username"
+        Me.lblUsername.Text = "Username"
         Me.lblUsername.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblPassword
@@ -79,7 +79,7 @@ Partial Class frmLogin
         Me.lblPassword.Size = New System.Drawing.Size(53, 13)
         Me.lblPassword.TabIndex = 2
         Me.lblPassword.Tag = "Password"
-        Me.lblPassword.Text = "&Password"
+        Me.lblPassword.Text = "Password"
         Me.lblPassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'txtUsername
@@ -166,7 +166,7 @@ Partial Class frmLogin
         Me.Label1.Size = New System.Drawing.Size(53, 13)
         Me.Label1.TabIndex = 10
         Me.Label1.Tag = "Password"
-        Me.Label1.Text = "&Database"
+        Me.Label1.Text = "Database"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'chkRememberUsername
