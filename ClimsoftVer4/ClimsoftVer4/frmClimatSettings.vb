@@ -369,6 +369,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             'conn.Close()
 
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message & " at PopulateForms")
         End Try
 

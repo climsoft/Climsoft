@@ -49,11 +49,12 @@ Partial Class frmQC
         Me.optInterElement = New System.Windows.Forms.RadioButton()
         Me.optAbsoluteLimits = New System.Windows.Forms.RadioButton()
         Me.lblStationsElementsList = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblSelectTimeRange = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.cmbstation = New System.Windows.Forms.ComboBox()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.cmbElement = New System.Windows.Forms.ComboBox()
+        Me.txtProgress = New System.Windows.Forms.TextBox()
         Me.pnlAdvanced.SuspendLayout()
         Me.pnlQcStandard.SuspendLayout()
         Me.pnlQCTypes.SuspendLayout()
@@ -101,7 +102,7 @@ Partial Class frmQC
         '
         Me.pnlAdvanced.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlAdvanced.Controls.Add(Me.lblQcAdvanced)
-        Me.pnlAdvanced.Location = New System.Drawing.Point(615, 32)
+        Me.pnlAdvanced.Location = New System.Drawing.Point(623, 32)
         Me.pnlAdvanced.Name = "pnlAdvanced"
         Me.pnlAdvanced.Size = New System.Drawing.Size(100, 25)
         Me.pnlAdvanced.TabIndex = 9
@@ -335,16 +336,16 @@ Partial Class frmQC
         Me.lblStationsElementsList.TabIndex = 24
         Me.lblStationsElementsList.Text = "Check to Select Stations and Elements for QC"
         '
-        'Label1
+        'lblSelectTimeRange
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(67, 303)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(115, 13)
-        Me.Label1.TabIndex = 25
-        Me.Label1.Text = "Select Time Range"
+        Me.lblSelectTimeRange.AutoSize = True
+        Me.lblSelectTimeRange.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSelectTimeRange.ForeColor = System.Drawing.Color.Black
+        Me.lblSelectTimeRange.Location = New System.Drawing.Point(67, 303)
+        Me.lblSelectTimeRange.Name = "lblSelectTimeRange"
+        Me.lblSelectTimeRange.Size = New System.Drawing.Size(115, 13)
+        Me.lblSelectTimeRange.TabIndex = 25
+        Me.lblSelectTimeRange.Text = "Select Time Range"
         '
         'lblStation
         '
@@ -367,7 +368,7 @@ Partial Class frmQC
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(622, 37)
+        Me.lblElement.Location = New System.Drawing.Point(629, 36)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(78, 13)
         Me.lblElement.TabIndex = 29
@@ -382,16 +383,25 @@ Partial Class frmQC
         Me.cmbElement.Size = New System.Drawing.Size(200, 21)
         Me.cmbElement.TabIndex = 28
         '
+        'txtProgress
+        '
+        Me.txtProgress.Location = New System.Drawing.Point(8, 431)
+        Me.txtProgress.Name = "txtProgress"
+        Me.txtProgress.Size = New System.Drawing.Size(297, 20)
+        Me.txtProgress.TabIndex = 30
+        Me.txtProgress.Visible = False
+        '
         'frmQC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(907, 506)
+        Me.Controls.Add(Me.txtProgress)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.cmbElement)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.cmbstation)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblSelectTimeRange)
         Me.Controls.Add(Me.lblStationsElementsList)
         Me.Controls.Add(Me.pnlQCTypes)
         Me.Controls.Add(Me.lblDataTransferProgress)
@@ -447,9 +457,10 @@ Partial Class frmQC
     Friend WithEvents optInterElement As System.Windows.Forms.RadioButton
     Friend WithEvents optAbsoluteLimits As System.Windows.Forms.RadioButton
     Friend WithEvents lblStationsElementsList As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents lblSelectTimeRange As System.Windows.Forms.Label
     Friend WithEvents lblStation As Label
     Friend WithEvents cmbstation As ComboBox
     Friend WithEvents lblElement As Label
     Friend WithEvents cmbElement As ComboBox
+    Friend WithEvents txtProgress As TextBox
 End Class

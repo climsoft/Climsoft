@@ -686,6 +686,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ClsShiftCells.vb" />
+    <Compile Include="tdcfRoutines.vb" />
     <Compile Include="ucrBaseDataLink.Designer.vb">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
     </Compile>
