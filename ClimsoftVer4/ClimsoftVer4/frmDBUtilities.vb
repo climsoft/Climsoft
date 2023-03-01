@@ -324,6 +324,7 @@ Public Class frmDBUtilities
         frmImportDaily.Setup(frmImportDaily.ImportType.ClicomDaily)
         frmImportDaily.Show()
         frmImportDaily.Text = "CLICOM Daily Data Import"
+        'frmImportDaily.cmdLoadData.Enabled = True
     End Sub
 
     Private Sub SynopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SynopToolStripMenuItem.Click

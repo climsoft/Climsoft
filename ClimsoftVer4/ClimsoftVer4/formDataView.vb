@@ -414,7 +414,7 @@ Public Class formDataView
                     End If
                     dat = dat & "," & CellValue
                 Next
-                PrintLine(111, dat)
+                Print(111, dat & Chr(10))
             Next
             FileClose(111)
 

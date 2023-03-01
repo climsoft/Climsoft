@@ -20,7 +20,7 @@ Public Class frmProducts
 
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'todo. this function is meant to update the products table everytime it's run
-        'ProductsTable_Update()
+        ProductsTable_Update()
 
         'set up the products data table
         Dim clsDataCall As New DataCall

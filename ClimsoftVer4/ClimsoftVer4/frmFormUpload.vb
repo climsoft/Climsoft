@@ -84,16 +84,14 @@ Public Class frmFormUpload
         End If
     End Sub
 
-
-
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
 
         Dim m, n, maxRows, st, ed, flds, elemCode, acquisitionType, qcStatus, obsperiod As Integer
         Dim strSQL, stnlist, code_loc, yyyy, mm, dd, hh, capturedBy, stnId, obsDatetime, obsVal, obsFlag, obsLevel, dataForm As String
         Dim stnselected As Boolean
 
-
-        frm_tbl = lblFormName.Text
+        Try
+            frm_tbl = lblFormName.Text
         lblDataTransferProgress.ForeColor = DefaultForeColor 'Color.Black
         lblDataTransferProgress.Text = ""
         txtDataTransferProgress1.Text = ""
@@ -127,15 +125,22 @@ Public Class frmFormUpload
             End If
         End If
 
-        'Create a file to save data into to be uploaded later
-        Dim fl, frmrec As String
-        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\form_2_initial_sql.csv"
+        'Create a path to save data into bufer to be uploaded later
+        Dim fl, dataDir, frmrec As String
+
+            ' Create folder 'Climsoft4\data' if it does not exist
+            dataDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
+
+            If Not IO.Directory.Exists(dataDir) Then
+                IO.Directory.CreateDirectory(dataDir)
+            End If
+
+        fl = dataDir & "\form_2_initial_sql.csv"
         FileOpen(122, fl, OpenMode.Output)
 
         ' Convert path separater to SQL format
         fl = Strings.Replace(fl, "\", "/")
 
-        Try
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
 
@@ -247,7 +252,7 @@ Public Class frmFormUpload
                             dd = dss.Tables(frm_tbl).Rows(n).Item("dd")
                             hh = rgKey.RegkeyValue("key01")
 
-                        Case "form_synoptic2_tdcf"
+                        Case "form_synoptic2_TDCF"
                             elemCode = Strings.Right(dss.Tables(frm_tbl).Columns(m).ColumnName, 3)
                             yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
                             mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
@@ -294,12 +299,12 @@ Public Class frmFormUpload
                             datetimeGTS(obsDatetime)
 
                             strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
-                                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
+                                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "');"
 
                             ' First save data into a text file to be uploaded later
                             frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
-                            Print(122, frmrec)
-                            PrintLine(122)
+                            PrintLine(122, frmrec & ",")
+                            'PrintLine(122)
 
                             elemCode = "111"
 
@@ -314,13 +319,11 @@ Public Class frmFormUpload
                             datetimeGTS(obsDatetime)
 
                             ''Generate SQL string for inserting data into observationinitial table
-                            'strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
-                            '         "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
                             ' First save data into a text file to be uploaded later
                             frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
-                            Print(122, frmrec)
-                            PrintLine(122)
+                            PrintLine(122, frmrec & ",")
+                            'PrintLine(122)
 
                             Continue For
 
@@ -335,13 +338,10 @@ Public Class frmFormUpload
                     datetimeGTS(obsDatetime)
 
                     ''Generate SQL string for inserting data into observationinitial table
-                    'strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,qcTypeLog,acquisitionType,capturedBy,dataForm) " &
-                    '    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," _
-                    '    & qcStatus & ", '0'," & acquisitionType & ",'" & capturedBy & "',-1,'" & dataForm & "')"
 
                     frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
-                    Print(122, frmrec)
-                    PrintLine(122)
+                    PrintLine(122, frmrec & ",")
+                    'PrintLine(122)
 
 
                 Next m

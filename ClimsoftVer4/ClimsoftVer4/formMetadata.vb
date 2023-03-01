@@ -161,6 +161,7 @@ Public Class formMetadata
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationName")) Then txtStationName.Text = ds.Tables("station").Rows(num).Item("stationName")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("wmoid")) Then txtwmoid.Text = ds.Tables("station").Rows(num).Item("wmoid")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("icaoid")) Then txticaoid.Text = ds.Tables("station").Rows(num).Item("icaoid")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("wsi")) Then txtWSI.Text = ds.Tables("station").Rows(num).Item("wsi")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("country")) Then txtCountry.Text = ds.Tables("station").Rows(num).Item("country")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("latitude")) Then txtLatitude.Text = ds.Tables("station").Rows(num).Item("latitude")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("longitude")) Then txtLongitude.Text = ds.Tables("station").Rows(num).Item("longitude")
@@ -172,6 +173,7 @@ Public Class formMetadata
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationaccuracy")) Then txtgeoAccuracy.Text = ds.Tables("station").Rows(num).Item("geolocationaccuracy")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationoperational")) Then txtStationOperation.CheckState = ds.Tables("station").Rows(num).Item("stationoperational")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("qualifier")) Then cboStationType.Text = ds.Tables("station").Rows(num).Item("qualifier")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("gtsWSI")) Then chkWSI_GTS.CheckState = ds.Tables("station").Rows(num).Item("gtsWSI")
 
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("openingdatetime")) Then
             txtOpeningDate.Text = ds.Tables("station").Rows(num).Item("openingdatetime")
@@ -231,6 +233,12 @@ Public Class formMetadata
         txtInstrumentCode.Text = ds.Tables(frm).Rows(num).Item("instrumentcode")
         cboScheduleClass.Text = ds.Tables(frm).Rows(num).Item("scheduledFor")
         txtHeight.Text = ds.Tables(frm).Rows(num).Item("height")
+
+        txtSeScale.Text = ds.Tables(frm).Rows(num).Item("scale")
+        txtSeUpperLimit.Text = ds.Tables(frm).Rows(num).Item("upperlimit")
+        txtSeLowerLlimit.Text = ds.Tables(frm).Rows(num).Item("lowerlimit")
+        txtSeUnit.Text = ds.Tables(frm).Rows(num).Item("units")
+
         txtBeginDate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
         txtEndate.Text = ds.Tables(frm).Rows(num).Item("endDate")
 
@@ -396,6 +404,7 @@ Public Class formMetadata
             dsNewRow.Item("stationId") = cboStationId.Text
             dsNewRow.Item("wmoid") = txtwmoid.Text
             dsNewRow.Item("icaoid") = txticaoid.Text
+            dsNewRow.Item("wsi") = txtWSI.Text
             dsNewRow.Item("stationName") = txtStationName.Text
             dsNewRow.Item("country") = txtCountry.Text
             If IsNumeric(txtLatitude.Text) Then dsNewRow.Item("latitude") = Val(txtLatitude.Text)
@@ -430,6 +439,7 @@ Public Class formMetadata
             End If
 
             dsNewRow.Item("stationoperational") = txtStationOperation.CheckState
+            dsNewRow.Item("gtsWSI") = chkWSI_GTS.CheckState
 
             'Add a new record to the data source table
             ds.Tables("station").Rows.Add(dsNewRow)
@@ -459,6 +469,7 @@ Public Class formMetadata
         txtStationName.Clear()
         txtwmoid.Clear()
         txticaoid.Clear()
+        txtWSI.Clear()
         txtCountry.Clear()
         txtAuthority.Clear()
         txtLatitude.Clear()
@@ -483,6 +494,7 @@ Public Class formMetadata
         txtMinutesLon.Text = ""
         txtSecondsLon.Text = ""
         lstEW.Text = ""
+        chkWSI_GTS.CheckState = CheckState.Unchecked
         cboStationId.Focus()
 
     End Sub
@@ -510,6 +522,10 @@ Public Class formMetadata
         txtInstrumentCode.Text = ""
         cboScheduleClass.Text = ""
         txtHeight.Text = ""
+        txtSeScale.Text = ""
+        txtSeUpperLimit.Text = ""
+        txtSeLowerLlimit.Text = ""
+        txtSeUnit.Text = ""
         txtBeginDate.Text = ""
         txtEndate.Text = ""
         cboStation.Focus()
@@ -597,8 +613,8 @@ Public Class formMetadata
             'sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = '" & txtLatitude.Text & "', qualifier = '" & txtStationType.Text & "', longitude = '" & txtLongitude.Text & "', elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
             '    ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
 
-            sql = "UPDATE station SET stationId = '" & cboStationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = " & lat & ", qualifier = '" & cboStationType.Text & "', longitude = " & lon & " , elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
-                ", adminRegion = '" & txtAdminRegion.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & cboStationId.Text & "';"
+            sql = "UPDATE station SET stationId = '" & cboStationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', wsi = '" & txtWSI.Text & "', latitude = " & lat & ", qualifier = '" & cboStationType.Text & "', longitude = " & lon & " , elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
+                ", adminRegion = '" & txtAdminRegion.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "', gtsWSI = '" & chkWSI_GTS.CheckState & "' where stationId = '" & cboStationId.Text & "';"
 
             'MsgBox(sql)
             If Not Update_Rec(sql) Then
@@ -888,6 +904,10 @@ Err:
             dsNewRow.Item("instrumentcode") = txtInstrumentCode.Text
             dsNewRow.Item("scheduledFor") = cboScheduleClass.Text
             dsNewRow.Item("height") = txtHeight.Text
+            dsNewRow.Item("scale") = txtSeScale.Text
+            dsNewRow.Item("upperlimit") = txtSeUpperLimit.Text
+            dsNewRow.Item("lowerlimit") = txtSeLowerLlimit.Text
+            dsNewRow.Item("units") = txtSeUnit.Text
             dsNewRow.Item("beginDate") = txtBeginDate.Text
             dsNewRow.Item("endDate") = txtEndate.Text
 
@@ -1337,10 +1357,19 @@ Err:
 
 
     Private Sub cmdDeleteStElement_Click(sender As Object, e As EventArgs) Handles cmdDeleteStElement.Click
-        If DeleteRecord("stationelement", rec) Then
-            SetDataSet("stationelement")
-            populatePaperArchiveDefinition("stationelement", 0, Kount)
+        sql = "DELETE FROM stationelement WHERE recordedFrom = '" & cboStation.Text & " ' AND describedBy = '" & txtElement.Text & "';"
+
+        If Update_Rec(sql) Then
+            MsgBox("Record Successfully Deleted")
+            Kount = Kount - 1
+            populateStationElement("stationelement", 0, Kount)
+        Else
+            MsgBox("Delete Failure")
         End If
+        'If DeleteRecord("stationelement", rec) Then
+        '    SetDataSet("stationelement")
+        '    populatePaperArchiveDefinition("stationelement", 0, Kount)
+        'End If
     End Sub
 
     Private Sub cmdAddInstrument_Click(sender As Object, e As EventArgs) Handles cmdAddInstrument.Click
@@ -1624,8 +1653,12 @@ Err:
                 bdate0 = "'" & txtBeginDate.Text & "'"
             End If
 
-            sql = "Update stationelement set recordedFrom = " & stn0 & ",describedBy=" & ecode0 & ", recordedWith =" & icode0 & ", instrumentcode='" & txtInstrumentCode.Text & "', scheduledFor='" & cboScheduleClass.Text & "', height='" & txtHeight.Text & "', beginDate=" & bdate0 & ", endDate='" & txtEndate.Text & "' " &
-                 "where recordedFrom " & stn & "  AND describedBy " & ecode & "  AND recordedWith " & icode & "  AND beginDate " & bdate & ";"
+            'sql = "Update stationelement set recordedFrom = " & stn0 & ",describedBy=" & ecode0 & ", recordedWith =" & icode0 & ", instrumentcode='" & txtInstrumentCode.Text & "', scheduledFor='" & cboScheduleClass.Text & "', height='" & txtHeight.Text & "', scale ='" & txtSeScale.Text & "', upperlimit ='" & txtSeUpperLimit.Text & "', lowerlimit ='" & txtSeLowerLlimit.Text & "', units ='" & txtSeUnit.Text & "', beginDate=" & bdate0 & ", endDate='" & txtEndate.Text & "' " &
+            '     "where recordedFrom " & stn & "  AND describedBy " & ecode & "  AND recordedWith " & icode & "  AND beginDate " & bdate & ";"
+
+            sql = "Update stationelement set recordedFrom = " & stn0 & ",describedBy=" & ecode0 & ", recordedWith =" & icode0 & ", instrumentcode='" & txtInstrumentCode.Text & "', scheduledFor='" & cboScheduleClass.Text & "', height='" & txtHeight.Text & "', scale ='" & txtSeScale.Text & "', upperlimit ='" & txtSeUpperLimit.Text & "', lowerlimit ='" & txtSeLowerLlimit.Text & "', units ='" & txtSeUnit.Text & "', beginDate=" & bdate0 & ", endDate='" & txtEndate.Text & "' " &
+                 "where recordedFrom " & stn & "  AND describedBy " & ecode & ";"
+
 
             'MsgBox(sql)
 

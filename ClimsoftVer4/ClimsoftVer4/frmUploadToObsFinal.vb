@@ -390,7 +390,10 @@
 
         'Upload data to observationInitial table
         Dim strSQL, stnId, elemCode, obsVal, obsFlag, period, mark1, qcStatus, obsLevel, obsDate, mm, dd, hh, mnt, ss As String
-        Dim acquisitionType, yyyy As Integer
+
+        ' Definition of other data fields
+        Dim qcTypeLog, acquisitionType, dataform, captBy, tmpUnits, precipUnits, cldUnits, visunits, datasrcTzone As String
+        Dim yyyy As Integer
 
         Dim ds As New DataSet
         Dim maxRows As Integer
@@ -475,7 +478,8 @@
 
             'First upload records with QC status =1
 
-            sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,period,qcStatus,acquisitionType,mark " &
+            'sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,period,qcStatus,acquisitionType,mark " &
+            sql = "SELECT * " &
                 "FROM observationInitial WHERE " & stnelm_selected & " year(obsDateTime) between " & beginYear & " AND " & endYear &
                 " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=1;"
 
@@ -550,30 +554,51 @@
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("period")) Then
                     period = ds.Tables("obsInitial").Rows(n).Item("period")
                 Else
-                    period = "NULL"
+                    period = "\N"
                 End If
 
                 'Types of bservation values
                 If IsDBNull(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of NULL for obs values
-                    obsVal = "NULL"
+                    obsVal = "\N"
                     obsFlag = "M"
                 ElseIf Len(ds.Tables("obsInitial").Rows(n).Item("obsValue")) = 0 Or Not IsNumeric(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of Blanks for obs values
-                    obsVal = "NULL"
+                    obsVal = "\N"
                     obsFlag = "M"
-
                 Else
                     obsVal = ds.Tables("obsInitial").Rows(n).Item("obsValue")
                     obsVal = obsVal * valScale
+                    obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
                 End If
 
                 'If obsFlag = "M" Then Continue For
 
-                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("flag")) Then obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
+                'If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("flag")) Then obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("qcStatus")) Then qcStatus = ds.Tables("obsInitial").Rows(n).Item("qcStatus")
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("acquisitionType")) Then acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
                 'If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("period")) Then period = ds.Tables("obsInitial").Rows(n).Item("period")
 
                 obsFlag = Strings.Replace(obsFlag, "\", "")
+
+                ' Other data fields not commonly used. First initialize to NULL
+                qcTypeLog = "\N"
+                acquisitionType = "\N"
+                dataform = "\N"
+                captBy = "\N"
+                tmpUnits = "\N"
+                precipUnits = "\N"
+                cldUnits = "\N"
+                visunits = "\N"
+                datasrcTzone = "\N"
+
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("qcTypeLog")) Then qcTypeLog = ds.Tables("obsInitial").Rows(n).Item("qcTypeLog")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("acquisitionType")) Then acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("dataForm")) Then dataform = ds.Tables("obsInitial").Rows(n).Item("dataForm")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("capturedBy")) Then captBy = ds.Tables("obsInitial").Rows(n).Item("capturedBy")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("temperatureUnits")) Then tmpUnits = ds.Tables("obsInitial").Rows(n).Item("temperatureUnits")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("precipitationUnits")) Then precipUnits = ds.Tables("obsInitial").Rows(n).Item("precipitationUnits")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("cloudHeightUnits")) Then cldUnits = ds.Tables("obsInitial").Rows(n).Item("cloudHeightUnits")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("visUnits")) Then visunits = ds.Tables("obsInitial").Rows(n).Item("visUnits")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("dataSourceTimeZone")) Then datasrcTzone = ds.Tables("obsInitial").Rows(n).Item("dataSourceTimeZone")
 
                 'Generate SQL string for inserting data into observationFinal table
                 If Not chkUpdateRecs.Checked Then
@@ -581,14 +606,22 @@
                     '"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
                     'period & "," & qcStatus & "," & acquisitionType & "," & mark1 & ")"
 
-                    rec = stnId & "," & elemCode & "," & obsDate & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & period & "," & qcStatus & "," & acquisitionType & "," & mark1
-                    Print(102, rec)
-                    PrintLine(102)
-                Else
-                    strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period, qcStatus,acquisitionType,mark) " &
-                    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
-                     period & "," & qcStatus & "," & acquisitionType & "," & mark1 & ")"
+                    'rec = stnId & "," & elemCode & "," & obsDate & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & period & "," & qcStatus & "," & acquisitionType & "," & mark1
+                    rec = stnId & "," & elemCode & "," & obsDate & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & period & "," & qcStatus & "," & acquisitionType & "," & mark1 & "," &
+                           qcTypeLog & "," & acquisitionType & "," & dataform & "," & captBy & "," & tmpUnits & "," & precipUnits & "," & cldUnits & "," & visunits & "," & datasrcTzone
 
+                    PrintLine(102, rec & ",")
+                    'PrintLine(102)
+                Else
+                    'strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period, qcStatus,acquisitionType,mark) " &
+                    '"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
+                    ' period & "," & qcStatus & "," & acquisitionType & "," & mark1 & ")"
+
+                    strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period, qcStatus,acquisitionType,mark," &
+                        "qcTypeLog,dataForm,capturedBy,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits,dataSourceTimeZone) " &
+                        "VALUES('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & period & "," & qcStatus & "," & acquisitionType & "," & mark1 & "," &
+                        qcTypeLog & ",'" & dataform & "','" & captBy & "'," & tmpUnits & "," & precipUnits & "," & cldUnits & "," & visunits & "," & datasrcTzone & ");"
+                    'MsgBox(strSQL)
                     ' Upload with replacing existing records 
                     ' Create the Command for executing query and set its properties
                     objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
@@ -608,7 +641,9 @@
                 txtDataTransferProgress.Refresh()
 
                 ' Create sql query
-                strSQL = "LOAD DATA local INFILE '" & fl1 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark);"
+                'strSQL = "LOAD DATA local INFILE '" & fl1 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark)"
+                strSQL = "LOAD DATA local INFILE '" & fl1 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark, " &
+                          "qcTypeLog,acquisitionType,dataForm,capturedBy,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits,dataSourceTimeZone);"
 
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
@@ -633,8 +668,8 @@
             txtDataTransferProgress.Refresh()
 
             sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,period,qcStatus,acquisitionType " &
-                "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear &
-                " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=2"
+                "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " And " & endYear &
+                " And month(obsDatetime) between " & beginMonth & " And " & endMonth & " And qcStatus=2"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
@@ -686,10 +721,10 @@
 
                 'Types of observation values
                 If IsDBNull(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of NULL for obs values
-                    obsVal = "NULL"
+                    obsVal = "\N"
                     obsFlag = "M"
                 ElseIf Len(ds.Tables("obsInitial").Rows(n).Item("obsValue")) = 0 Or Not IsNumeric(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of Blanks for obs values
-                    obsVal = "NULL"
+                    obsVal = "\N"
                     obsFlag = "M"
                 Else
                     obsVal = ds.Tables("obsInitial").Rows(n).Item("obsValue")
@@ -701,6 +736,7 @@
                 qcStatus = ds.Tables("obsInitial").Rows(n).Item("qcStatus")
 
                 obsFlag = Strings.Replace(obsFlag, "\", "")
+
 
                 ''Generate SQL string for replacing existing records of same Key with records with qcStatus 2
                 'strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType) " &
