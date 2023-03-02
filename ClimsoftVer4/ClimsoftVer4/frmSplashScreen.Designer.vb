@@ -23,7 +23,6 @@ Partial Class frmSplashScreen
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim lblWait As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSplashScreen))
         Me.MainLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
         Me.ApplicationTitle = New System.Windows.Forms.Label()
@@ -127,6 +126,7 @@ Partial Class frmSplashScreen
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents ApplicationTitle As System.Windows.Forms.Label
     Friend WithEvents lblDescription As System.Windows.Forms.Label
-    Public WithEvents MainLayoutPanel As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents MainLayoutPanel As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents lblVersion As System.Windows.Forms.Label
+    Friend WithEvents lblWait As System.Windows.Forms.Label
 End Class
