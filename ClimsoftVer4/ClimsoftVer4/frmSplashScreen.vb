@@ -14,9 +14,6 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports ClimsoftVer4.Translations
-
-
 Public NotInheritable Class frmSplashScreen
     Public DelayPeriod As Integer = 0
 
@@ -45,6 +42,8 @@ Public NotInheritable Class frmSplashScreen
         End If
 
         ClsTranslations.TranslateForm(Me)
+        'due to translations. Append the version number here
+        lblVersion.Text = lblVersion.Text & " 4.2.0"
 
         Timer1.Start()
 
@@ -73,4 +72,6 @@ Public NotInheritable Class frmSplashScreen
         End If
 
     End Sub
+
+
 End Class
