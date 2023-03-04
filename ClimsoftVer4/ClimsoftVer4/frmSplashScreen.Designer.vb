@@ -24,7 +24,6 @@ Partial Class frmSplashScreen
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSplashScreen))
-
         Me.MainLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.ApplicationTitle = New System.Windows.Forms.Label()
@@ -60,11 +59,12 @@ Partial Class frmSplashScreen
         'lblWait
         '
         Me.lblWait.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblWait.AutoSize = True
         Me.lblWait.BackColor = System.Drawing.Color.Transparent
         Me.lblWait.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWait.Location = New System.Drawing.Point(432, 460)
+        Me.lblWait.Location = New System.Drawing.Point(442, 462)
         Me.lblWait.Name = "lblWait"
-        Me.lblWait.Size = New System.Drawing.Size(122, 19)
+        Me.lblWait.Size = New System.Drawing.Size(102, 15)
         Me.lblWait.TabIndex = 8
         Me.lblWait.Tag = "Please_Wait"
         Me.lblWait.Text = "Please Wait.........."
@@ -74,9 +74,9 @@ Partial Class frmSplashScreen
         Me.lblDescription.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblDescription.BackColor = System.Drawing.Color.Transparent
         Me.lblDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescription.Location = New System.Drawing.Point(350, 210)
+        Me.lblDescription.Location = New System.Drawing.Point(182, 210)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(286, 20)
+        Me.lblDescription.Size = New System.Drawing.Size(621, 20)
         Me.lblDescription.TabIndex = 1
         Me.lblDescription.Tag = "Climate_Data_Management_System"
         Me.lblDescription.Text = "Climate Data Management System"
@@ -97,11 +97,12 @@ Partial Class frmSplashScreen
         'lblVersion
         '
         Me.lblVersion.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblVersion.AutoSize = True
         Me.lblVersion.BackColor = System.Drawing.Color.Transparent
         Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblVersion.Location = New System.Drawing.Point(443, 289)
+        Me.lblVersion.Location = New System.Drawing.Point(469, 295)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(99, 27)
+        Me.lblVersion.Size = New System.Drawing.Size(48, 15)
         Me.lblVersion.TabIndex = 6
         Me.lblVersion.Text = "Version"
         '
@@ -122,6 +123,7 @@ Partial Class frmSplashScreen
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.MainLayoutPanel.ResumeLayout(False)
+        Me.MainLayoutPanel.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
