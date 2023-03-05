@@ -75,6 +75,10 @@
 # Navigation buttons contain symbols only, should not be translated
 %_btnMove%
 
+# In the 'SplashScreen' form, the followingshould not be translated
+frmSplashScreen_MainLayoutPanel_lblVersion
+frmSplashScreen_MainLayoutPanel_ApplicationTitle
+
 # In the 'Login' form, the language label should not be translated
 frmLogin_lblLanguage
 
