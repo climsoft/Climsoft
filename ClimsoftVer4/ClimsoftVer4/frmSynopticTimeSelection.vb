@@ -14,8 +14,7 @@
             da.Fill(ds, "hours")
             Me.DataGridView1.DataSource = ds.Tables(0)
             conn.Close()
-            'Me.DataGridView1.
-
+            ClsTranslations.TranslateForm(Me)
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
