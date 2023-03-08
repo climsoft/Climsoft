@@ -6,20 +6,17 @@
 
 
     Private Sub frmElementSequencer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        On Error GoTo Err
-        conn.ConnectionString = frmLogin.txtusrpwd.Text
-        conn.Open()
-        sql = "select * from seq_element"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        da.Fill(ds, "seqElement")
-        Me.dataGridView1.DataSource = ds.Tables(0)
-        'Me.DataGridView1.
-        Exit Sub
-
-        ClsTranslations.TranslateForm(Me)
-
-Err:
-        MsgBox(Err.Description)
+        Try
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
+            sql = "select * from seq_element"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.Fill(ds, "seqElement")
+            Me.dataGridView1.DataSource = ds.Tables(0)
+            ClsTranslations.TranslateForm(Me)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
