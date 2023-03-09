@@ -153,7 +153,7 @@ Partial Class ucrHourly
         '
         Me.btnView.Location = New System.Drawing.Point(490, 527)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(74, 23)
+        Me.btnView.Size = New System.Drawing.Size(63, 23)
         Me.btnView.TabIndex = 44
         Me.btnView.Tag = ""
         Me.btnView.Text = "View"
@@ -171,9 +171,9 @@ Partial Class ucrHourly
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(718, 527)
+        Me.btnHelp.Location = New System.Drawing.Point(707, 527)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(64, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(57, 23)
         Me.btnHelp.TabIndex = 46
         Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
@@ -181,9 +181,9 @@ Partial Class ucrHourly
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(346, 527)
+        Me.btnClear.Location = New System.Drawing.Point(356, 527)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(69, 23)
+        Me.btnClear.Size = New System.Drawing.Size(59, 23)
         Me.btnClear.TabIndex = 42
         Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
@@ -191,9 +191,9 @@ Partial Class ucrHourly
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(87, 527)
+        Me.btnSave.Location = New System.Drawing.Point(116, 527)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(87, 23)
+        Me.btnSave.Size = New System.Drawing.Size(76, 23)
         Me.btnSave.TabIndex = 31
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
@@ -201,7 +201,7 @@ Partial Class ucrHourly
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(269, 527)
+        Me.btnDelete.Location = New System.Drawing.Point(279, 527)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(71, 23)
         Me.btnDelete.TabIndex = 40
@@ -211,9 +211,9 @@ Partial Class ucrHourly
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(11, 527)
+        Me.btnAddNew.Location = New System.Drawing.Point(12, 527)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(70, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(96, 23)
         Me.btnAddNew.TabIndex = 41
         Me.btnAddNew.Tag = "add"
         Me.btnAddNew.Text = "Add New"
@@ -221,9 +221,9 @@ Partial Class ucrHourly
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(180, 527)
+        Me.btnUpdate.Location = New System.Drawing.Point(198, 527)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(83, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 32
         Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
@@ -231,7 +231,7 @@ Partial Class ucrHourly
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(645, 527)
+        Me.btnClose.Location = New System.Drawing.Point(634, 527)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(67, 23)
         Me.btnClose.TabIndex = 45
@@ -969,7 +969,7 @@ Partial Class ucrHourly
         '
         'btnPush
         '
-        Me.btnPush.Location = New System.Drawing.Point(570, 527)
+        Me.btnPush.Location = New System.Drawing.Point(559, 527)
         Me.btnPush.Name = "btnPush"
         Me.btnPush.Size = New System.Drawing.Size(69, 23)
         Me.btnPush.TabIndex = 1155

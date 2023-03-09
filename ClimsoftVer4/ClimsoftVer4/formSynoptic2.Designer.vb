@@ -188,9 +188,9 @@ Partial Class formSynoptic2
         '
         'btnPush
         '
-        Me.btnPush.Location = New System.Drawing.Point(611, 41)
+        Me.btnPush.Location = New System.Drawing.Point(621, 41)
         Me.btnPush.Name = "btnPush"
-        Me.btnPush.Size = New System.Drawing.Size(85, 23)
+        Me.btnPush.Size = New System.Drawing.Size(73, 23)
         Me.btnPush.TabIndex = 700
         Me.btnPush.Text = "Push"
         Me.btnPush.UseVisualStyleBackColor = True
@@ -208,7 +208,7 @@ Partial Class formSynoptic2
         '
         'btnTDCF
         '
-        Me.btnTDCF.Location = New System.Drawing.Point(531, 41)
+        Me.btnTDCF.Location = New System.Drawing.Point(541, 41)
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(77, 23)
         Me.btnTDCF.TabIndex = 698
@@ -217,7 +217,7 @@ Partial Class formSynoptic2
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(443, 41)
+        Me.btnView.Location = New System.Drawing.Point(453, 41)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(82, 23)
         Me.btnView.TabIndex = 697
@@ -253,9 +253,9 @@ Partial Class formSynoptic2
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(776, 41)
+        Me.btnHelp.Location = New System.Drawing.Point(774, 41)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(64, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(58, 23)
         Me.btnHelp.TabIndex = 688
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -263,7 +263,7 @@ Partial Class formSynoptic2
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(366, 41)
+        Me.btnClear.Location = New System.Drawing.Point(376, 41)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(71, 23)
         Me.btnClear.TabIndex = 686
@@ -273,16 +273,16 @@ Partial Class formSynoptic2
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(109, 41)
+        Me.btnCommit.Location = New System.Drawing.Point(130, 41)
         Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(80, 23)
+        Me.btnCommit.Size = New System.Drawing.Size(69, 23)
         Me.btnCommit.TabIndex = 682
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(278, 41)
+        Me.btnDelete.Location = New System.Drawing.Point(288, 41)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(82, 23)
         Me.btnDelete.TabIndex = 685
@@ -293,14 +293,14 @@ Partial Class formSynoptic2
         '
         Me.btnAddNew.Location = New System.Drawing.Point(29, 41)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(74, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(95, 23)
         Me.btnAddNew.TabIndex = 684
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(195, 41)
+        Me.btnUpdate.Location = New System.Drawing.Point(205, 41)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(77, 23)
         Me.btnUpdate.TabIndex = 683
@@ -357,7 +357,7 @@ Partial Class formSynoptic2
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(702, 41)
+        Me.btnClose.Location = New System.Drawing.Point(700, 41)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(68, 23)
         Me.btnClose.TabIndex = 687
