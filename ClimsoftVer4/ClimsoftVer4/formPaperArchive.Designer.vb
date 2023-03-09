@@ -312,9 +312,9 @@ Partial Class formPaperArchive
         'txtFormId
         '
         Me.txtFormId.FormattingEnabled = True
-        Me.txtFormId.Location = New System.Drawing.Point(365, 68)
+        Me.txtFormId.Location = New System.Drawing.Point(370, 68)
         Me.txtFormId.Name = "txtFormId"
-        Me.txtFormId.Size = New System.Drawing.Size(148, 21)
+        Me.txtFormId.Size = New System.Drawing.Size(143, 21)
         Me.txtFormId.TabIndex = 2
         '
         'txtYear
@@ -356,24 +356,23 @@ Partial Class formPaperArchive
         '
         'lblImageFile
         '
-        Me.lblImageFile.AutoSize = True
         Me.lblImageFile.Location = New System.Drawing.Point(8, 24)
         Me.lblImageFile.Name = "lblImageFile"
-        Me.lblImageFile.Size = New System.Drawing.Size(55, 13)
+        Me.lblImageFile.Size = New System.Drawing.Size(84, 32)
         Me.lblImageFile.TabIndex = 13
         Me.lblImageFile.Text = "Image File"
         '
         'txtImageFile
         '
-        Me.txtImageFile.Location = New System.Drawing.Point(102, 20)
+        Me.txtImageFile.Location = New System.Drawing.Point(100, 21)
         Me.txtImageFile.Name = "txtImageFile"
-        Me.txtImageFile.Size = New System.Drawing.Size(342, 20)
+        Me.txtImageFile.Size = New System.Drawing.Size(357, 20)
         Me.txtImageFile.TabIndex = 0
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(298, 72)
+        Me.Label5.Location = New System.Drawing.Point(288, 72)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(44, 13)
         Me.Label5.TabIndex = 11
