@@ -386,13 +386,13 @@ Partial Class formAWSRealTime
         Me.pnlProcessSettings.Controls.Add(Me.optStop)
         Me.pnlProcessSettings.Location = New System.Drawing.Point(13, 14)
         Me.pnlProcessSettings.Name = "pnlProcessSettings"
-        Me.pnlProcessSettings.Size = New System.Drawing.Size(727, 120)
+        Me.pnlProcessSettings.Size = New System.Drawing.Size(727, 139)
         Me.pnlProcessSettings.TabIndex = 6
         '
         'lblEncodeHrs
         '
         Me.lblEncodeHrs.AutoSize = True
-        Me.lblEncodeHrs.Location = New System.Drawing.Point(687, 70)
+        Me.lblEncodeHrs.Location = New System.Drawing.Point(681, 70)
         Me.lblEncodeHrs.Name = "lblEncodeHrs"
         Me.lblEncodeHrs.Size = New System.Drawing.Size(35, 13)
         Me.lblEncodeHrs.TabIndex = 19
@@ -400,7 +400,7 @@ Partial Class formAWSRealTime
         '
         'txtEncode
         '
-        Me.txtEncode.Location = New System.Drawing.Point(656, 67)
+        Me.txtEncode.Location = New System.Drawing.Point(651, 65)
         Me.txtEncode.Name = "txtEncode"
         Me.txtEncode.Size = New System.Drawing.Size(28, 20)
         Me.txtEncode.TabIndex = 18
@@ -410,7 +410,7 @@ Partial Class formAWSRealTime
         'lblEncode
         '
         Me.lblEncode.AutoSize = True
-        Me.lblEncode.Location = New System.Drawing.Point(583, 70)
+        Me.lblEncode.Location = New System.Drawing.Point(543, 69)
         Me.lblEncode.Name = "lblEncode"
         Me.lblEncode.Size = New System.Drawing.Size(67, 13)
         Me.lblEncode.TabIndex = 17
@@ -430,7 +430,7 @@ Partial Class formAWSRealTime
         '
         Me.txtGMTDiff.BackColor = System.Drawing.Color.White
         Me.txtGMTDiff.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtGMTDiff.Location = New System.Drawing.Point(505, 93)
+        Me.txtGMTDiff.Location = New System.Drawing.Point(540, 104)
         Me.txtGMTDiff.Name = "txtGMTDiff"
         Me.txtGMTDiff.Size = New System.Drawing.Size(32, 20)
         Me.txtGMTDiff.TabIndex = 16
@@ -440,7 +440,7 @@ Partial Class formAWSRealTime
         'lblGMT
         '
         Me.lblGMT.AutoSize = True
-        Me.lblGMT.Location = New System.Drawing.Point(426, 96)
+        Me.lblGMT.Location = New System.Drawing.Point(444, 107)
         Me.lblGMT.Name = "lblGMT"
         Me.lblGMT.Size = New System.Drawing.Size(67, 13)
         Me.lblGMT.TabIndex = 15
@@ -458,7 +458,7 @@ Partial Class formAWSRealTime
         '
         'cmdSave
         '
-        Me.cmdSave.Location = New System.Drawing.Point(630, 93)
+        Me.cmdSave.Location = New System.Drawing.Point(611, 101)
         Me.cmdSave.Name = "cmdSave"
         Me.cmdSave.Size = New System.Drawing.Size(86, 24)
         Me.cmdSave.TabIndex = 12
@@ -467,17 +467,16 @@ Partial Class formAWSRealTime
         '
         'chkDeleteFile
         '
-        Me.chkDeleteFile.AutoSize = True
-        Me.chkDeleteFile.Location = New System.Drawing.Point(199, 95)
+        Me.chkDeleteFile.Location = New System.Drawing.Point(196, 97)
         Me.chkDeleteFile.Name = "chkDeleteFile"
-        Me.chkDeleteFile.Size = New System.Drawing.Size(183, 17)
+        Me.chkDeleteFile.Size = New System.Drawing.Size(196, 37)
         Me.chkDeleteFile.TabIndex = 11
         Me.chkDeleteFile.Text = "Delete Input File After Processing"
         Me.chkDeleteFile.UseVisualStyleBackColor = True
         '
         'txtTimeout
         '
-        Me.txtTimeout.Location = New System.Drawing.Point(151, 92)
+        Me.txtTimeout.Location = New System.Drawing.Point(148, 103)
         Me.txtTimeout.Name = "txtTimeout"
         Me.txtTimeout.Size = New System.Drawing.Size(33, 20)
         Me.txtTimeout.TabIndex = 10
@@ -486,7 +485,7 @@ Partial Class formAWSRealTime
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(10, 96)
+        Me.Label10.Location = New System.Drawing.Point(13, 106)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(129, 13)
         Me.Label10.TabIndex = 9
@@ -495,7 +494,7 @@ Partial Class formAWSRealTime
         'lblRetrieveHrs
         '
         Me.lblRetrieveHrs.AutoSize = True
-        Me.lblRetrieveHrs.Location = New System.Drawing.Point(538, 70)
+        Me.lblRetrieveHrs.Location = New System.Drawing.Point(496, 69)
         Me.lblRetrieveHrs.Name = "lblRetrieveHrs"
         Me.lblRetrieveHrs.Size = New System.Drawing.Size(35, 13)
         Me.lblRetrieveHrs.TabIndex = 8
@@ -503,7 +502,7 @@ Partial Class formAWSRealTime
         '
         'txtPeriod
         '
-        Me.txtPeriod.Location = New System.Drawing.Point(503, 66)
+        Me.txtPeriod.Location = New System.Drawing.Point(457, 63)
         Me.txtPeriod.Name = "txtPeriod"
         Me.txtPeriod.Size = New System.Drawing.Size(33, 20)
         Me.txtPeriod.TabIndex = 7
@@ -512,7 +511,7 @@ Partial Class formAWSRealTime
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(400, 69)
+        Me.Label12.Location = New System.Drawing.Point(345, 67)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(70, 13)
         Me.Label12.TabIndex = 6
@@ -520,7 +519,7 @@ Partial Class formAWSRealTime
         '
         'txtOffset
         '
-        Me.txtOffset.Location = New System.Drawing.Point(357, 65)
+        Me.txtOffset.Location = New System.Drawing.Point(297, 62)
         Me.txtOffset.Name = "txtOffset"
         Me.txtOffset.Size = New System.Drawing.Size(33, 20)
         Me.txtOffset.TabIndex = 5
@@ -528,16 +527,15 @@ Partial Class formAWSRealTime
         '
         'Label13
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(223, 70)
+        Me.Label13.Location = New System.Drawing.Point(191, 66)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(107, 13)
+        Me.Label13.Size = New System.Drawing.Size(107, 32)
         Me.Label13.TabIndex = 4
         Me.Label13.Text = "Hour Offset (Minutes)"
         '
         'txtInterval
         '
-        Me.txtInterval.Location = New System.Drawing.Point(182, 65)
+        Me.txtInterval.Location = New System.Drawing.Point(148, 63)
         Me.txtInterval.Name = "txtInterval"
         Me.txtInterval.Size = New System.Drawing.Size(33, 20)
         Me.txtInterval.TabIndex = 3
@@ -545,10 +543,9 @@ Partial Class formAWSRealTime
         '
         'Label14
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(13, 70)
+        Me.Label14.Location = New System.Drawing.Point(13, 65)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(133, 13)
+        Me.Label14.Size = New System.Drawing.Size(133, 32)
         Me.Label14.TabIndex = 2
         Me.Label14.Text = "Retrieval Interval (Minutes)"
         '
@@ -702,10 +699,10 @@ Partial Class formAWSRealTime
         'lblSatus
         '
         Me.lblSatus.AutoSize = True
-        Me.lblSatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSatus.Location = New System.Drawing.Point(96, 1)
         Me.lblSatus.Name = "lblSatus"
-        Me.lblSatus.Size = New System.Drawing.Size(109, 13)
+        Me.lblSatus.Size = New System.Drawing.Size(122, 15)
         Me.lblSatus.TabIndex = 1
         Me.lblSatus.Text = "Processing Status"
         '
