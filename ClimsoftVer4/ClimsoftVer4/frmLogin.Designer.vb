@@ -185,7 +185,7 @@ Partial Class frmLogin
         Me.linkLabelLanguage.ForeColor = System.Drawing.Color.Blue
         Me.linkLabelLanguage.Location = New System.Drawing.Point(262, 214)
         Me.linkLabelLanguage.Name = "linkLabelLanguage"
-        Me.linkLabelLanguage.Size = New System.Drawing.Size(98, 28)
+        Me.linkLabelLanguage.Size = New System.Drawing.Size(111, 28)
         Me.linkLabelLanguage.TabIndex = 12
         Me.linkLabelLanguage.Tag = ""
         Me.linkLabelLanguage.Text = "Change language:"
@@ -197,7 +197,7 @@ Partial Class frmLogin
         Me.lblLanguage.Size = New System.Drawing.Size(105, 28)
         Me.lblLanguage.TabIndex = 13
         Me.lblLanguage.Tag = "Password"
-        Me.lblLanguage.Text = "language"
+        Me.lblLanguage.Text = "Language"
         '
         'frmLogin
         '
