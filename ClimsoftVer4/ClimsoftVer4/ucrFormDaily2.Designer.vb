@@ -1087,9 +1087,9 @@ Partial Class ucrFormDaily2
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(459, 519)
+        Me.btnView.Location = New System.Drawing.Point(484, 519)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(76, 23)
+        Me.btnView.Size = New System.Drawing.Size(67, 23)
         Me.btnView.TabIndex = 44
         Me.btnView.Tag = ""
         Me.btnView.Text = "View"
@@ -1097,9 +1097,9 @@ Partial Class ucrFormDaily2
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(688, 518)
+        Me.btnHelp.Location = New System.Drawing.Point(704, 518)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(60, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(46, 23)
         Me.btnHelp.TabIndex = 46
         Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
@@ -1107,9 +1107,9 @@ Partial Class ucrFormDaily2
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(315, 518)
+        Me.btnClear.Location = New System.Drawing.Point(348, 518)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(72, 23)
+        Me.btnClear.Size = New System.Drawing.Size(58, 23)
         Me.btnClear.TabIndex = 42
         Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
@@ -1117,9 +1117,9 @@ Partial Class ucrFormDaily2
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(81, 518)
+        Me.btnSave.Location = New System.Drawing.Point(125, 519)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(84, 23)
+        Me.btnSave.Size = New System.Drawing.Size(73, 23)
         Me.btnSave.TabIndex = 38
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
@@ -1127,7 +1127,7 @@ Partial Class ucrFormDaily2
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(243, 518)
+        Me.btnDelete.Location = New System.Drawing.Point(276, 519)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(66, 23)
         Me.btnDelete.TabIndex = 41
@@ -1139,7 +1139,7 @@ Partial Class ucrFormDaily2
         '
         Me.btnAddNew.Location = New System.Drawing.Point(15, 518)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(60, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(104, 23)
         Me.btnAddNew.TabIndex = 40
         Me.btnAddNew.Tag = "add"
         Me.btnAddNew.Text = "Add New"
@@ -1147,7 +1147,7 @@ Partial Class ucrFormDaily2
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(171, 518)
+        Me.btnUpdate.Location = New System.Drawing.Point(204, 519)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(66, 23)
         Me.btnUpdate.TabIndex = 39
@@ -1157,7 +1157,7 @@ Partial Class ucrFormDaily2
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(622, 518)
+        Me.btnClose.Location = New System.Drawing.Point(638, 518)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(60, 23)
         Me.btnClose.TabIndex = 45
@@ -1167,7 +1167,7 @@ Partial Class ucrFormDaily2
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(392, 519)
+        Me.btnCancel.Location = New System.Drawing.Point(412, 519)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(66, 23)
         Me.btnCancel.TabIndex = 43
@@ -1287,7 +1287,7 @@ Partial Class ucrFormDaily2
         '
         'btnPush
         '
-        Me.btnPush.Location = New System.Drawing.Point(541, 519)
+        Me.btnPush.Location = New System.Drawing.Point(557, 519)
         Me.btnPush.Name = "btnPush"
         Me.btnPush.Size = New System.Drawing.Size(75, 23)
         Me.btnPush.TabIndex = 1155
