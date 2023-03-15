@@ -65,6 +65,8 @@ Public Class frmFormUpload
             MsgBox(x.Message)
         End Try
 
+        ClsTranslations.TranslateForm(Me)
+
 
     End Sub
 
