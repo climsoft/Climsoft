@@ -430,7 +430,7 @@ Partial Class formMetadata
         Me.TabMetadata.Location = New System.Drawing.Point(0, 27)
         Me.TabMetadata.Name = "TabMetadata"
         Me.TabMetadata.SelectedIndex = 0
-        Me.TabMetadata.Size = New System.Drawing.Size(786, 476)
+        Me.TabMetadata.Size = New System.Drawing.Size(931, 476)
         Me.TabMetadata.TabIndex = 0
         '
         'TabStation
@@ -440,7 +440,7 @@ Partial Class formMetadata
         Me.TabStation.Location = New System.Drawing.Point(4, 22)
         Me.TabStation.Name = "TabStation"
         Me.TabStation.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStation.Size = New System.Drawing.Size(778, 450)
+        Me.TabStation.Size = New System.Drawing.Size(923, 450)
         Me.TabStation.TabIndex = 0
         Me.TabStation.Text = "Station"
         Me.TabStation.UseVisualStyleBackColor = True
@@ -449,7 +449,7 @@ Partial Class formMetadata
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(327, 9)
+        Me.Label2.Location = New System.Drawing.Point(427, 9)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(64, 16)
         Me.Label2.TabIndex = 3
@@ -502,9 +502,9 @@ Partial Class formMetadata
         Me.grpStation.Controls.Add(Me.lblLatitude)
         Me.grpStation.Controls.Add(Me.lblStationName)
         Me.grpStation.Controls.Add(Me.lblStationId)
-        Me.grpStation.Location = New System.Drawing.Point(31, 28)
+        Me.grpStation.Location = New System.Drawing.Point(81, 28)
         Me.grpStation.Name = "grpStation"
-        Me.grpStation.Size = New System.Drawing.Size(727, 416)
+        Me.grpStation.Size = New System.Drawing.Size(751, 416)
         Me.grpStation.TabIndex = 14
         Me.grpStation.TabStop = False
         Me.grpStation.Text = "Station Details"
@@ -514,7 +514,7 @@ Partial Class formMetadata
         Me.gtsWSI.AutoSize = True
         Me.gtsWSI.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gtsWSI.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.gtsWSI.Location = New System.Drawing.Point(541, 332)
+        Me.gtsWSI.Location = New System.Drawing.Point(556, 332)
         Me.gtsWSI.Name = "gtsWSI"
         Me.gtsWSI.Size = New System.Drawing.Size(124, 12)
         Me.gtsWSI.TabIndex = 68
@@ -523,7 +523,7 @@ Partial Class formMetadata
         'chkWSI_GTS
         '
         Me.chkWSI_GTS.AutoSize = True
-        Me.chkWSI_GTS.Location = New System.Drawing.Point(694, 329)
+        Me.chkWSI_GTS.Location = New System.Drawing.Point(709, 329)
         Me.chkWSI_GTS.Name = "chkWSI_GTS"
         Me.chkWSI_GTS.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.chkWSI_GTS.Size = New System.Drawing.Size(15, 14)
@@ -542,7 +542,7 @@ Partial Class formMetadata
         '
         'txtWSI
         '
-        Me.txtWSI.Location = New System.Drawing.Point(117, 221)
+        Me.txtWSI.Location = New System.Drawing.Point(134, 221)
         Me.txtWSI.Name = "txtWSI"
         Me.txtWSI.Size = New System.Drawing.Size(171, 20)
         Me.txtWSI.TabIndex = 7
@@ -551,7 +551,7 @@ Partial Class formMetadata
         '
         Me.cboStationType.FormattingEnabled = True
         Me.cboStationType.Items.AddRange(New Object() {"AGROMET", "CLIMATE", "SYNOPTIC", "RAINFALL", "UPPER AIR"})
-        Me.cboStationType.Location = New System.Drawing.Point(518, 197)
+        Me.cboStationType.Location = New System.Drawing.Point(535, 197)
         Me.cboStationType.Name = "cboStationType"
         Me.cboStationType.Size = New System.Drawing.Size(191, 21)
         Me.cboStationType.TabIndex = 12
@@ -559,7 +559,7 @@ Partial Class formMetadata
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(382, 201)
+        Me.Label24.Location = New System.Drawing.Point(399, 201)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(45, 13)
         Me.Label24.TabIndex = 65
@@ -584,7 +584,7 @@ Partial Class formMetadata
         Me.grpComputationDD.Controls.Add(Me.lblDegreesLon)
         Me.grpComputationDD.Controls.Add(Me.txtDegreesLat)
         Me.grpComputationDD.Controls.Add(Me.lblDegreesLat)
-        Me.grpComputationDD.Location = New System.Drawing.Point(200, 95)
+        Me.grpComputationDD.Location = New System.Drawing.Point(217, 95)
         Me.grpComputationDD.Name = "grpComputationDD"
         Me.grpComputationDD.Size = New System.Drawing.Size(455, 69)
         Me.grpComputationDD.TabIndex = 63
@@ -725,28 +725,28 @@ Partial Class formMetadata
         '
         'txtClosingDate
         '
-        Me.txtClosingDate.Location = New System.Drawing.Point(518, 249)
+        Me.txtClosingDate.Location = New System.Drawing.Point(535, 249)
         Me.txtClosingDate.Name = "txtClosingDate"
         Me.txtClosingDate.Size = New System.Drawing.Size(173, 20)
         Me.txtClosingDate.TabIndex = 14
         '
         'txtOpeningDate
         '
-        Me.txtOpeningDate.Location = New System.Drawing.Point(518, 223)
+        Me.txtOpeningDate.Location = New System.Drawing.Point(535, 223)
         Me.txtOpeningDate.Name = "txtOpeningDate"
         Me.txtOpeningDate.Size = New System.Drawing.Size(173, 20)
         Me.txtOpeningDate.TabIndex = 13
         '
         'txticaoid
         '
-        Me.txticaoid.Location = New System.Drawing.Point(118, 197)
+        Me.txticaoid.Location = New System.Drawing.Point(135, 197)
         Me.txticaoid.Name = "txticaoid"
         Me.txticaoid.Size = New System.Drawing.Size(102, 20)
         Me.txticaoid.TabIndex = 6
         '
         'txtwmoid
         '
-        Me.txtwmoid.Location = New System.Drawing.Point(118, 172)
+        Me.txtwmoid.Location = New System.Drawing.Point(135, 172)
         Me.txtwmoid.Name = "txtwmoid"
         Me.txtwmoid.Size = New System.Drawing.Size(102, 20)
         Me.txtwmoid.TabIndex = 5
@@ -771,7 +771,7 @@ Partial Class formMetadata
         'cboStationId
         '
         Me.cboStationId.FormattingEnabled = True
-        Me.cboStationId.Location = New System.Drawing.Point(116, 45)
+        Me.cboStationId.Location = New System.Drawing.Point(133, 45)
         Me.cboStationId.Name = "cboStationId"
         Me.cboStationId.Size = New System.Drawing.Size(139, 21)
         Me.cboStationId.TabIndex = 0
@@ -779,7 +779,7 @@ Partial Class formMetadata
         'lblSearchStation
         '
         Me.lblSearchStation.AutoSize = True
-        Me.lblSearchStation.Location = New System.Drawing.Point(472, 20)
+        Me.lblSearchStation.Location = New System.Drawing.Point(489, 20)
         Me.lblSearchStation.Name = "lblSearchStation"
         Me.lblSearchStation.Size = New System.Drawing.Size(108, 13)
         Me.lblSearchStation.TabIndex = 39
@@ -788,7 +788,7 @@ Partial Class formMetadata
         'cboSearchStation
         '
         Me.cboSearchStation.FormattingEnabled = True
-        Me.cboSearchStation.Location = New System.Drawing.Point(471, 38)
+        Me.cboSearchStation.Location = New System.Drawing.Point(488, 38)
         Me.cboSearchStation.Name = "cboSearchStation"
         Me.cboSearchStation.Size = New System.Drawing.Size(228, 21)
         Me.cboSearchStation.TabIndex = 38
@@ -796,7 +796,7 @@ Partial Class formMetadata
         'txtStationOperation
         '
         Me.txtStationOperation.AutoSize = True
-        Me.txtStationOperation.Location = New System.Drawing.Point(505, 331)
+        Me.txtStationOperation.Location = New System.Drawing.Point(520, 331)
         Me.txtStationOperation.Name = "txtStationOperation"
         Me.txtStationOperation.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtStationOperation.Size = New System.Drawing.Size(15, 14)
@@ -816,7 +816,7 @@ Partial Class formMetadata
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel2.Location = New System.Drawing.Point(3, 361)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(721, 29)
+        Me.Panel2.Size = New System.Drawing.Size(745, 29)
         Me.Panel2.TabIndex = 18
         '
         'cmdImport
@@ -885,7 +885,7 @@ Partial Class formMetadata
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel1.Location = New System.Drawing.Point(3, 390)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(721, 23)
+        Me.Panel1.Size = New System.Drawing.Size(745, 23)
         Me.Panel1.TabIndex = 51
         '
         'btnMovePreviousStation
@@ -943,7 +943,7 @@ Partial Class formMetadata
         'ClosingDate
         '
         Me.ClosingDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.ClosingDate.Location = New System.Drawing.Point(682, 249)
+        Me.ClosingDate.Location = New System.Drawing.Point(699, 249)
         Me.ClosingDate.Name = "ClosingDate"
         Me.ClosingDate.Size = New System.Drawing.Size(27, 20)
         Me.ClosingDate.TabIndex = 52
@@ -952,77 +952,77 @@ Partial Class formMetadata
         '
         Me.OpenDate.Checked = False
         Me.OpenDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.OpenDate.Location = New System.Drawing.Point(682, 223)
+        Me.OpenDate.Location = New System.Drawing.Point(699, 223)
         Me.OpenDate.Name = "OpenDate"
         Me.OpenDate.Size = New System.Drawing.Size(27, 20)
         Me.OpenDate.TabIndex = 51
         '
         'txtgeoAccuracy
         '
-        Me.txtgeoAccuracy.Location = New System.Drawing.Point(518, 301)
+        Me.txtgeoAccuracy.Location = New System.Drawing.Point(533, 301)
         Me.txtgeoAccuracy.Name = "txtgeoAccuracy"
         Me.txtgeoAccuracy.Size = New System.Drawing.Size(191, 20)
         Me.txtgeoAccuracy.TabIndex = 16
         '
         'txtgeoMethod
         '
-        Me.txtgeoMethod.Location = New System.Drawing.Point(518, 275)
+        Me.txtgeoMethod.Location = New System.Drawing.Point(535, 275)
         Me.txtgeoMethod.Name = "txtgeoMethod"
         Me.txtgeoMethod.Size = New System.Drawing.Size(191, 20)
         Me.txtgeoMethod.TabIndex = 15
         '
         'txtElevation
         '
-        Me.txtElevation.Location = New System.Drawing.Point(117, 146)
+        Me.txtElevation.Location = New System.Drawing.Point(134, 146)
         Me.txtElevation.Name = "txtElevation"
         Me.txtElevation.Size = New System.Drawing.Size(74, 20)
         Me.txtElevation.TabIndex = 4
         '
         'txtLongitude
         '
-        Me.txtLongitude.Location = New System.Drawing.Point(117, 121)
+        Me.txtLongitude.Location = New System.Drawing.Point(134, 121)
         Me.txtLongitude.Name = "txtLongitude"
         Me.txtLongitude.Size = New System.Drawing.Size(74, 20)
         Me.txtLongitude.TabIndex = 3
         '
         'txtLatitude
         '
-        Me.txtLatitude.Location = New System.Drawing.Point(117, 96)
+        Me.txtLatitude.Location = New System.Drawing.Point(134, 96)
         Me.txtLatitude.Name = "txtLatitude"
         Me.txtLatitude.Size = New System.Drawing.Size(74, 20)
         Me.txtLatitude.TabIndex = 2
         '
         'txtDrainageBasin
         '
-        Me.txtDrainageBasin.Location = New System.Drawing.Point(117, 322)
+        Me.txtDrainageBasin.Location = New System.Drawing.Point(135, 322)
         Me.txtDrainageBasin.Name = "txtDrainageBasin"
         Me.txtDrainageBasin.Size = New System.Drawing.Size(172, 20)
         Me.txtDrainageBasin.TabIndex = 11
         '
         'txtAdminRegion
         '
-        Me.txtAdminRegion.Location = New System.Drawing.Point(118, 297)
+        Me.txtAdminRegion.Location = New System.Drawing.Point(135, 296)
         Me.txtAdminRegion.Name = "txtAdminRegion"
         Me.txtAdminRegion.Size = New System.Drawing.Size(172, 20)
         Me.txtAdminRegion.TabIndex = 10
         '
         'txtAuthority
         '
-        Me.txtAuthority.Location = New System.Drawing.Point(118, 272)
+        Me.txtAuthority.Location = New System.Drawing.Point(135, 272)
         Me.txtAuthority.Name = "txtAuthority"
         Me.txtAuthority.Size = New System.Drawing.Size(172, 20)
         Me.txtAuthority.TabIndex = 9
         '
         'txtCountry
         '
-        Me.txtCountry.Location = New System.Drawing.Point(118, 247)
+        Me.txtCountry.Location = New System.Drawing.Point(135, 247)
         Me.txtCountry.Name = "txtCountry"
         Me.txtCountry.Size = New System.Drawing.Size(171, 20)
         Me.txtCountry.TabIndex = 8
         '
         'txtStationName
         '
-        Me.txtStationName.Location = New System.Drawing.Point(116, 71)
+        Me.txtStationName.Location = New System.Drawing.Point(133, 71)
         Me.txtStationName.Name = "txtStationName"
         Me.txtStationName.Size = New System.Drawing.Size(266, 20)
         Me.txtStationName.TabIndex = 1
@@ -1030,7 +1030,7 @@ Partial Class formMetadata
         'lblStationOperation
         '
         Me.lblStationOperation.AutoSize = True
-        Me.lblStationOperation.Location = New System.Drawing.Point(382, 331)
+        Me.lblStationOperation.Location = New System.Drawing.Point(397, 331)
         Me.lblStationOperation.Name = "lblStationOperation"
         Me.lblStationOperation.Size = New System.Drawing.Size(97, 13)
         Me.lblStationOperation.TabIndex = 48
@@ -1040,7 +1040,7 @@ Partial Class formMetadata
         '
         Me.lbldarainage.Location = New System.Drawing.Point(20, 325)
         Me.lbldarainage.Name = "lbldarainage"
-        Me.lbldarainage.Size = New System.Drawing.Size(79, 33)
+        Me.lbldarainage.Size = New System.Drawing.Size(110, 20)
         Me.lbldarainage.TabIndex = 45
         Me.lbldarainage.Text = "Drainage Basin"
         '
@@ -1048,7 +1048,7 @@ Partial Class formMetadata
         '
         Me.lblAdmin.Location = New System.Drawing.Point(20, 300)
         Me.lblAdmin.Name = "lblAdmin"
-        Me.lblAdmin.Size = New System.Drawing.Size(96, 42)
+        Me.lblAdmin.Size = New System.Drawing.Size(110, 19)
         Me.lblAdmin.TabIndex = 44
         Me.lblAdmin.Text = "Admin Region"
         '
@@ -1073,7 +1073,7 @@ Partial Class formMetadata
         'lblClosingdate
         '
         Me.lblClosingdate.AutoSize = True
-        Me.lblClosingdate.Location = New System.Drawing.Point(382, 253)
+        Me.lblClosingdate.Location = New System.Drawing.Point(399, 253)
         Me.lblClosingdate.Name = "lblClosingdate"
         Me.lblClosingdate.Size = New System.Drawing.Size(67, 13)
         Me.lblClosingdate.TabIndex = 47
@@ -1082,7 +1082,7 @@ Partial Class formMetadata
         'lblOpendate
         '
         Me.lblOpendate.AutoSize = True
-        Me.lblOpendate.Location = New System.Drawing.Point(382, 227)
+        Me.lblOpendate.Location = New System.Drawing.Point(399, 227)
         Me.lblOpendate.Name = "lblOpendate"
         Me.lblOpendate.Size = New System.Drawing.Size(73, 13)
         Me.lblOpendate.TabIndex = 46
@@ -1091,7 +1091,7 @@ Partial Class formMetadata
         'lblGeoAccuracy
         '
         Me.lblGeoAccuracy.AutoSize = True
-        Me.lblGeoAccuracy.Location = New System.Drawing.Point(382, 305)
+        Me.lblGeoAccuracy.Location = New System.Drawing.Point(397, 305)
         Me.lblGeoAccuracy.Name = "lblGeoAccuracy"
         Me.lblGeoAccuracy.Size = New System.Drawing.Size(118, 13)
         Me.lblGeoAccuracy.TabIndex = 53
@@ -1100,7 +1100,7 @@ Partial Class formMetadata
         'lblGeoMethod
         '
         Me.lblGeoMethod.AutoSize = True
-        Me.lblGeoMethod.Location = New System.Drawing.Point(382, 279)
+        Me.lblGeoMethod.Location = New System.Drawing.Point(399, 279)
         Me.lblGeoMethod.Name = "lblGeoMethod"
         Me.lblGeoMethod.Size = New System.Drawing.Size(109, 13)
         Me.lblGeoMethod.TabIndex = 52
@@ -1157,7 +1157,7 @@ Partial Class formMetadata
         Me.TabElement.Location = New System.Drawing.Point(4, 22)
         Me.TabElement.Name = "TabElement"
         Me.TabElement.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabElement.Size = New System.Drawing.Size(778, 450)
+        Me.TabElement.Size = New System.Drawing.Size(923, 450)
         Me.TabElement.TabIndex = 1
         Me.TabElement.Text = "Element"
         Me.TabElement.UseVisualStyleBackColor = True
@@ -1530,7 +1530,7 @@ Partial Class formMetadata
         Me.TabStationElement.Location = New System.Drawing.Point(4, 22)
         Me.TabStationElement.Name = "TabStationElement"
         Me.TabStationElement.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationElement.Size = New System.Drawing.Size(778, 450)
+        Me.TabStationElement.Size = New System.Drawing.Size(923, 450)
         Me.TabStationElement.TabIndex = 2
         Me.TabStationElement.Text = "Station Element"
         Me.TabStationElement.UseVisualStyleBackColor = True
@@ -1935,7 +1935,7 @@ Partial Class formMetadata
         Me.TabInstrument.Location = New System.Drawing.Point(4, 22)
         Me.TabInstrument.Name = "TabInstrument"
         Me.TabInstrument.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabInstrument.Size = New System.Drawing.Size(778, 450)
+        Me.TabInstrument.Size = New System.Drawing.Size(923, 450)
         Me.TabInstrument.TabIndex = 3
         Me.TabInstrument.Text = "Instrument"
         Me.TabInstrument.UseVisualStyleBackColor = True
@@ -2370,7 +2370,7 @@ Partial Class formMetadata
         Me.TabStationLocationHistory.Location = New System.Drawing.Point(4, 22)
         Me.TabStationLocationHistory.Name = "TabStationLocationHistory"
         Me.TabStationLocationHistory.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationLocationHistory.Size = New System.Drawing.Size(778, 450)
+        Me.TabStationLocationHistory.Size = New System.Drawing.Size(923, 450)
         Me.TabStationLocationHistory.TabIndex = 4
         Me.TabStationLocationHistory.Text = "Station Location History"
         Me.TabStationLocationHistory.UseVisualStyleBackColor = True
@@ -2762,7 +2762,7 @@ Partial Class formMetadata
         Me.TabStationQualifier.Location = New System.Drawing.Point(4, 22)
         Me.TabStationQualifier.Name = "TabStationQualifier"
         Me.TabStationQualifier.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationQualifier.Size = New System.Drawing.Size(778, 450)
+        Me.TabStationQualifier.Size = New System.Drawing.Size(923, 450)
         Me.TabStationQualifier.TabIndex = 5
         Me.TabStationQualifier.Text = "Station Qualifier"
         Me.TabStationQualifier.UseVisualStyleBackColor = True
@@ -3047,7 +3047,7 @@ Partial Class formMetadata
         Me.TabScheduleClass.Location = New System.Drawing.Point(4, 22)
         Me.TabScheduleClass.Name = "TabScheduleClass"
         Me.TabScheduleClass.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabScheduleClass.Size = New System.Drawing.Size(778, 450)
+        Me.TabScheduleClass.Size = New System.Drawing.Size(923, 450)
         Me.TabScheduleClass.TabIndex = 6
         Me.TabScheduleClass.Text = "Schedule Class"
         Me.TabScheduleClass.UseVisualStyleBackColor = True
@@ -3260,7 +3260,7 @@ Partial Class formMetadata
         Me.TabPhysicalFeature.Location = New System.Drawing.Point(4, 22)
         Me.TabPhysicalFeature.Name = "TabPhysicalFeature"
         Me.TabPhysicalFeature.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPhysicalFeature.Size = New System.Drawing.Size(778, 450)
+        Me.TabPhysicalFeature.Size = New System.Drawing.Size(923, 450)
         Me.TabPhysicalFeature.TabIndex = 7
         Me.TabPhysicalFeature.Text = "Physical Feature"
         Me.TabPhysicalFeature.UseVisualStyleBackColor = True
@@ -3600,7 +3600,7 @@ Partial Class formMetadata
         Me.TabPaperArchive.Location = New System.Drawing.Point(4, 22)
         Me.TabPaperArchive.Name = "TabPaperArchive"
         Me.TabPaperArchive.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPaperArchive.Size = New System.Drawing.Size(778, 450)
+        Me.TabPaperArchive.Size = New System.Drawing.Size(923, 450)
         Me.TabPaperArchive.TabIndex = 8
         Me.TabPaperArchive.Text = "Paper Archive"
         Me.TabPaperArchive.UseVisualStyleBackColor = True
@@ -3792,7 +3792,7 @@ Partial Class formMetadata
         Me.MenuMetadata.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuMetadata.Location = New System.Drawing.Point(0, 0)
         Me.MenuMetadata.Name = "MenuMetadata"
-        Me.MenuMetadata.Size = New System.Drawing.Size(790, 24)
+        Me.MenuMetadata.Size = New System.Drawing.Size(941, 24)
         Me.MenuMetadata.TabIndex = 1
         Me.MenuMetadata.Text = "MenuStrip1"
         '
@@ -3816,7 +3816,7 @@ Partial Class formMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(790, 515)
+        Me.ClientSize = New System.Drawing.Size(941, 515)
         Me.Controls.Add(Me.TabMetadata)
         Me.Controls.Add(Me.MenuMetadata)
         Me.KeyPreview = True
