@@ -343,6 +343,7 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub UpdateScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateScriptToolStripMenuItem.Click
+
         Dim sqlFile, sqlText As String
         Dim sqlconn As New MySql.Data.MySqlClient.MySqlConnection
         Dim qry As MySql.Data.MySqlClient.MySqlCommand
@@ -352,6 +353,7 @@ Public Class frmMainMenu
         frmImportDaily.dlgOpenImportFile.Title = ClsTranslations.GetTranslation("Open Script File")
         frmImportDaily.dlgOpenImportFile.ShowDialog()
         sqlFile = frmImportDaily.dlgOpenImportFile.FileName
+
 
         Try
             'MsgBox(sqlFile)
