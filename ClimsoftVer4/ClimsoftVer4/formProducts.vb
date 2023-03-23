@@ -132,7 +132,7 @@ Public Class frmProducts
                ('01', 'Inventory', 'Details of Data Records', 'Inventory'),  
                ('02', 'Hourly', 'Summaries of Hourly Observations', 'Data'),  
                ('03', 'Daily', 'Summaries of Daily Observation', 'Data'),  
-               ('04', 'Pentad', '5 Days Summeries', 'Data'),  
+               ('04', 'Pentad', '5 Days Summaries', 'Data'),  
                ('05', 'Dekadal', '10 Days Summaries', 'Data'),  
                ('06', 'Monthly', 'Monthly Summaries', 'Data'),  
                ('07', 'Annual', 'Annual Summaries', 'Data'),  
