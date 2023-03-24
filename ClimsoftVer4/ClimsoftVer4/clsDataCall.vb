@@ -116,20 +116,20 @@ Public Class DataCall
         SetFilter(clsNewFilter:=clsNewFilter)
     End Sub
 
-    Public Function GetValues() As List(Of String)
-        Dim lstValues As New List(Of String)
-        Dim objData As Object
+    'Public Function GetValues() As List(Of String)
+    '    Dim lstValues As New List(Of String)
+    '    Dim objData As Object
 
-        objData = GetDataTable()
-        For Each entItem In objData
-            lstValues.Add(CallByName(entItem, dctFields.Keys(0), CallType.Get))
-        Next
-        Return lstValues
-    End Function
+    '    objData = GetDataTable()
+    '    For Each entItem In objData
+    '        lstValues.Add(CallByName(entItem, dctFields.Keys(0), CallType.Get))
+    '    Next
+    '    Return lstValues
+    'End Function
 
-    Public Function GetValuesAsString(Optional strSep As String = ",") As String
-        Return String.Join(strSep, GetValues())
-    End Function
+    'Public Function GetValuesAsString(Optional strSep As String = ",") As String
+    '    Return String.Join(strSep, GetValues())
+    'End Function
 
     Public Function GetFields() As Dictionary(Of String, List(Of String))
         Return dctFields
@@ -175,18 +175,19 @@ Public Class DataCall
                 End If
             End If
 
+            'initialise adapter command objects
             cmdSelect = New MySql.Data.MySqlClient.MySqlCommand()
             cmdInsert = New MySql.Data.MySqlClient.MySqlCommand()
             cmdUpdate = New MySql.Data.MySqlClient.MySqlCommand()
             cmdDelete = New MySql.Data.MySqlClient.MySqlCommand()
 
+            'get the table schema
             dtbSchema = GetTableSchema(strTable)
 
-            'Get the field names and parameter placeholders
+            'Get distinct field names and construct their parameter placeholders
             For Each lstFieldNames As List(Of String) In dctFields.Values
                 lstTempFieldNames.AddRange(lstFieldNames)
             Next
-
             lstTempFieldNames = lstTempFieldNames.Distinct().ToList
 
             For Each strName As String In lstTempFieldNames
@@ -426,9 +427,9 @@ Public Class DataCall
 
     'TODO This should return the Linq expression that goes in the Select method
 
-    Public Function GetSelectLinqExpression() As String
-        Return ""
-    End Function
+    'Public Function GetSelectLinqExpression() As String
+    '    Return ""
+    'End Function
 
     Public Function TableCount(Optional clsAdditionalFilter As TableFilter = Nothing) As Integer
         Dim iCount As Integer

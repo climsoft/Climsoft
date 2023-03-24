@@ -189,6 +189,12 @@
     <Compile Include="frmFormUpload.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmImportQCData.Designer.vb">
+      <DependentUpon>frmImportQCData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportQCData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmInventoryChart.designer.vb">
       <DependentUpon>frmInventoryChart.vb</DependentUpon>
     </Compile>
@@ -907,6 +913,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmFormUpload.resx">
       <DependentUpon>frmFormUpload.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportQCData.resx">
+      <DependentUpon>frmImportQCData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInventoryChart.resx">
       <DependentUpon>frmInventoryChart.vb</DependentUpon>
