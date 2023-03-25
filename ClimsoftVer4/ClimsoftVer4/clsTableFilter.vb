@@ -119,7 +119,7 @@ Public Class TableFilter
     End Sub
 
     Public Sub New(lstTblFilters As IEnumerable(Of TableFilter), Optional strOperator As String = "AND")
-        SetFilters(lstTblFilters, strOperator:=strOperator)
+        SetFilters(lstTblFilters, strFiltersCombination:=strOperator)
     End Sub
 
     Public Sub SetField(strNewField As String)
@@ -239,8 +239,8 @@ Public Class TableFilter
     ''' Will combine the list of filters into one filter
     ''' </summary>
     ''' <param name="lstTblFilters"></param>
-    ''' <param name="strOperator"></param>
-    Public Sub SetFilters(lstTblFilters As IEnumerable(Of TableFilter), Optional strOperator As String = "AND")
+    ''' <param name="strFiltersCombination"></param>
+    Public Sub SetFilters(lstTblFilters As IEnumerable(Of TableFilter), Optional strFiltersCombination As String = "AND")
         Dim max As Integer = lstTblFilters.Count - 1
         For i As Integer = 0 To max
             If i = 0 Then
@@ -251,7 +251,7 @@ Public Class TableFilter
 
             If i <= max - 1 Then
                 Me.SetRightFilter(lstTblFilters(i + 1))
-                Me.SetOperator(strOperator)
+                Me.SetOperator(strFiltersCombination)
                 If i + 1 = max Then
                     Exit For
                 End If
@@ -266,33 +266,33 @@ Public Class TableFilter
     '    Return Function(x) CallByName(x, "stationId", CallType.Get) = "67774010"
     'End Function
 
-    Public Function GetLinqExpression() As String
-        Dim strExpression As String
+    'Public Function GetLinqExpression() As String
+    '    Dim strExpression As String
 
-        If bIsCombinedFilter Then
-            strExpression = clsLeftFilter.GetLinqExpression() & " " & strOperator & " " & clsRightFilter.GetLinqExpression()
-        Else
-            strExpression = strField
-            If bArrayOperator Then
-                If bValuesFromDataCall Then
-                    strExpression = strExpression & "[" & clsDataCallValues.GetValuesAsString() & "]"
-                Else
-                    strExpression = strExpression & "[" & String.Join(",", lstValues) & "]"
-                End If
-            Else
-                If bValuesAsString Then
-                    strExpression = strExpression & " " & strOperator & " " & Chr(34) & objValue & Chr(34)
-                Else
-                    strExpression = strExpression & " " & strOperator & " " & objValue
-                End If
-            End If
-        End If
-        strExpression = "(" & strExpression & ")"
-        If Not bIsPositiveCondition Then
-            strExpression = "not " & strExpression
-        End If
-        Return strExpression
-    End Function
+    '    If bIsCombinedFilter Then
+    '        strExpression = clsLeftFilter.GetLinqExpression() & " " & strOperator & " " & clsRightFilter.GetLinqExpression()
+    '    Else
+    '        strExpression = strField
+    '        If bArrayOperator Then
+    '            If bValuesFromDataCall Then
+    '                strExpression = strExpression & "[" & clsDataCallValues.GetValuesAsString() & "]"
+    '            Else
+    '                strExpression = strExpression & "[" & String.Join(",", lstValues) & "]"
+    '            End If
+    '        Else
+    '            If bValuesAsString Then
+    '                strExpression = strExpression & " " & strOperator & " " & Chr(34) & objValue & Chr(34)
+    '            Else
+    '                strExpression = strExpression & " " & strOperator & " " & objValue
+    '            End If
+    '        End If
+    '    End If
+    '    strExpression = "(" & strExpression & ")"
+    '    If Not bIsPositiveCondition Then
+    '        strExpression = "not " & strExpression
+    '    End If
+    '    Return strExpression
+    'End Function
 
     Public Function GetSqlExpression() As String
         Dim strExpression As String

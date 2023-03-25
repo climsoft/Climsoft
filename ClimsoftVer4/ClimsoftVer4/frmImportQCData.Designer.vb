@@ -34,6 +34,7 @@ Partial Class frmImportQCData
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.lblFileSelection = New System.Windows.Forms.Label()
         CType(Me.dataGridFileContents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpFileContents.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -115,6 +116,7 @@ Partial Class frmImportQCData
         '
         'grpFileContents
         '
+        Me.grpFileContents.Controls.Add(Me.lblFileSelection)
         Me.grpFileContents.Controls.Add(Me.dataGridFileContents)
         Me.grpFileContents.Location = New System.Drawing.Point(7, 46)
         Me.grpFileContents.Name = "grpFileContents"
@@ -152,6 +154,16 @@ Partial Class frmImportQCData
         Me.RichTextBox1.TabIndex = 5
         Me.RichTextBox1.Text = ""
         '
+        'lblFileSelection
+        '
+        Me.lblFileSelection.AutoSize = True
+        Me.lblFileSelection.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFileSelection.Location = New System.Drawing.Point(119, 143)
+        Me.lblFileSelection.Name = "lblFileSelection"
+        Me.lblFileSelection.Size = New System.Drawing.Size(210, 29)
+        Me.lblFileSelection.TabIndex = 14
+        Me.lblFileSelection.Text = "No File Selected"
+        '
         'frmImportQCData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -170,6 +182,7 @@ Partial Class frmImportQCData
         Me.Text = "Import R-Instat Quality Controlled Data"
         CType(Me.dataGridFileContents, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpFileContents.ResumeLayout(False)
+        Me.grpFileContents.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -189,4 +202,5 @@ Partial Class frmImportQCData
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents lblFileSelection As Label
 End Class

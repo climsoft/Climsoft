@@ -1,27 +1,43 @@
-﻿Imports System.Windows.Forms.DataVisualization.Charting
+﻿Imports System.Diagnostics.Eventing
+Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class frmImportQCData
 
-    'Private dtbQCFileData As DataTable
-
     Private Sub frmImportQCData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        dataGridFileContents.Visible = False
+        lblFileSelection.Visible = True
     End Sub
 
-    Private Sub fillDataGridView(dtbQCData As DataTable)
+    Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
+        Using dlgOpen As New OpenFileDialog
+            dlgOpen.Filter = "Comma separated files|*.csv"
+            dlgOpen.Multiselect = False
+            dlgOpen.Title = "Open Data From File"
+            If DialogResult.OK = dlgOpen.ShowDialog() Then
+                txtFilePath.Text = dlgOpen.FileName
+                Dim dtbQCData As DataTable = GetQCFileDataTableDefinition()
+                FillQCFileDataFromCSV(dlgOpen.FileName, dtbQCData)
+                If dtbQCData.Rows.Count = 0 Then
+                    dataGridFileContents.Visible = False
+                    lblFileSelection.Visible = True
+                Else
+                    dataGridFileContents.Visible = True
+                    dataGridFileContents.DataSource = dtbQCData
+                End If
+            End If
+        End Using
+    End Sub
+
+    Private Sub FillDataGridView(dtbQCData As DataTable)
         dataGridFileContents.DataSource = dtbQCData
         'dataGridFileContents.Refresh()
     End Sub
 
 
-    Private Sub GetQCFileDataFromCSV(strFilePath As String)
-
-        Dim dtbQCData As DataTable = GetQCFileDataTableDefinition()
-
+    Private Sub FillQCFileDataFromCSV(strFilePath As String, dtbQCData As DataTable)
         Using fileReader As New FileIO.TextFieldParser(strFilePath)
             fileReader.TextFieldType = FileIO.FieldType.Delimited
             fileReader.SetDelimiters(",")
-
 
             'read the first line, get usable column names from it's fields 
             'dictionary of; mapped datatable column name and mapped field index
@@ -77,6 +93,7 @@ Public Class frmImportQCData
                 End Try
             End While
         End Using
+
     End Sub
 
     Private Function GetQCFileDataTableDefinition() As DataTable
@@ -135,13 +152,7 @@ Public Class frmImportQCData
 
 
     Private Sub SaveQCData(dtbQCData As DataTable)
-        Dim strSql As String
 
-
-        Dim strStationId As String
-        Dim iElementId As Integer
-        Dim iAcquisitionType As Integer
-        Dim dtObsDateTime As Date
         Dim strQCLog As String
         Dim strFlag As String
         Dim strValue As String
@@ -149,106 +160,75 @@ Public Class frmImportQCData
         Dim iCurrentQCStatus As Integer
         Dim strCurrentFlag As String
         Dim strCurrentValue As String
-        Dim strCurrentPeriod As String
-        Dim strCurrentCapturedBy As String
-        Dim strCurrentTempUnits As String
-        Dim strCurrentPrecipUnits As String
-        Dim strCurrentCloudHeightUnits As String
-        Dim strCurrentVisUnits As String
         Dim bRecordChanged As Integer
+
+        Dim dtbInitialData As DataTable
+        Dim rowInitialToUse As DataRow
+        Dim clsDataCall As New DataCall
+        clsDataCall.SetTableName("observationInitial")
+        clsDataCall.SetFields({"recordedFrom", "describedBy", "obsDatetime", "acquisitionType", "qcStatus", "obsLevel", "period", "capturedBy", "dataForm", "mark", "temperatureUnits", "precipitationUnits", "cloudHeightUnits", "visUnits", "qcTypeLog", "flag", "obsValue"})
+        clsDataCall.SetKeyFields({"recordedFrom", "describedBy", "obsDatetime", "acquisitionType", "qcStatus"})
+        'important to order by qc status
+        clsDataCall.SetOrderByFields({"qcStatus"})
 
         For Each row As DataRow In dtbQCData.Rows
 
-            strStationId = row.Field(Of String)("station_id")
-            iElementId = row.Field(Of Integer)("element_id")
-            iAcquisitionType = row.Field(Of String)("acquisition_type")
-            dtObsDateTime = row.Field(Of Date)("date_time")
+
+            'change the data call filter to get new record(s)
+            clsDataCall.SetFilter(New TableFilter({New TableFilter("recordedFrom", "=", objNewValue:=row.Field(Of String)("station_id")),
+                                                  New TableFilter("describedBy", "=", objNewValue:=row.Field(Of Integer)("element_id")),
+                                                  New TableFilter("obsDatetime", "=", objNewValue:=row.Field(Of Date)("date_time")),
+                                                  New TableFilter("acquisitionType", "=", objNewValue:=row.Field(Of String)("acquisition_type"))
+                                                  }))
+            dtbInitialData = clsDataCall.GetDataTable()
+
+            If dtbInitialData.Rows.Count = 0 Then
+                'records not found
+                Continue For
+            End If
+
             strQCLog = row.Field(Of String)("qc_log")
             strFlag = row.Field(Of String)("flag")
             strValue = row.Field(Of String)("value")
 
-            'get the record ordered by QC status. Important to order by QC status
-            strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elementId AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype ORDER BY qcStatus"
-            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
-                cmd.Parameters.AddWithValue("@stationId", strStationId)
-                cmd.Parameters.AddWithValue("@elementId", iElementId)
-                cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
-                cmd.Parameters.AddWithValue("@acquisitiontype", iAcquisitionType)
+            'use the last row
+            rowInitialToUse = dtbInitialData.Rows(dtbInitialData.Rows.Count - 1)
 
-                Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
-                    If reader.HasRows Then
-                        'go through the records in initial and get it's last updated qc status
-                        While reader.Read()
-                            iCurrentQCStatus = reader.GetInt32("qcStatus")
-                            strCurrentValue = If(String.IsNullOrEmpty(reader.GetString("obsValue")), "", reader.GetString("obsValue"))
-                            strCurrentFlag = If(String.IsNullOrEmpty(reader.GetString("flag")), "", reader.GetString("flag"))
-                            bRecordChanged = strCurrentValue <> strValue OrElse strCurrentFlag <> strFlag
-                        End While
-                    Else
-                        Continue For
-                    End If
+            iCurrentQCStatus = rowInitialToUse.Field(Of Integer)("qcStatus")
+            strCurrentValue = If(IsDBNull(rowInitialToUse.Field(Of String)("obsValue")) OrElse String.IsNullOrEmpty(rowInitialToUse.Field(Of String)("obsValue")), "", rowInitialToUse.Field(Of String)("obsValue"))
+            strCurrentFlag = If(IsDBNull(rowInitialToUse.Field(Of String)("flag")) OrElse String.IsNullOrEmpty(rowInitialToUse.Field(Of String)("flag")), "", rowInitialToUse.Field(Of String)("flag"))
 
-                End Using
-            End Using
-
-            Dim clsDataCall As New DataCall
-            clsDataCall.SetTableName("observationInitial")
-            clsDataCall.SetKeyFields({"recordedFrom", "describedBy", "obsDatetime", "qcStatus", "acquisitionType"})
-            'clsDataCall.Set
-
-
-            Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
-            Dim dtb As New DataTable
-
-            Dim cmdSelect As New MySql.Data.MySqlClient.MySqlCommand()
-            Dim cmdInsert As New MySql.Data.MySqlClient.MySqlCommand()
-            Dim cmdUpdate As New MySql.Data.MySqlClient.MySqlCommand()
-
-            cmdSelect.Connection = clsDataConnection.GetOpenedConnection
-            'important to order by QC status
-            cmdSelect.CommandText = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elementId AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype ORDER BY qcStatus"
-
-            cmdInsert.Connection = clsDataConnection.GetOpenedConnection
-            cmdInsert.CommandText = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,acquisitionType,capturedBy,dataForm,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits) " &
-                            "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@obsPeriod,@qcStatus,@acquisitiontype,@capturedBy,@dataForm,@temperatureUnits,@precipUnits,@cloudHeightUnits,@visUnits)"
-
-            cmdUpdate.Connection = clsDataConnection.GetOpenedConnection
-            cmdUpdate.CommandText = "UPDATE observationInitial SET obsValue=@obsVal,flag=@obsFlag,period=@obsPeriod,qcStatus=@qcStatus,capturedBy=@capturedBy " &
-                                " WHERE recordedFrom=@stationId And describedBy=@elementId AND acquisitionType=@acquisitiontype AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus"
-
-
-            da.SelectCommand = cmdSelect
-            da.InsertCommand = cmdInsert
-            da.UpdateCommand = cmdUpdate
-
-
-
-            da.Fill(dtb)
-
-            Dim strDatabaseAction As String
-            strDatabaseAction = ""
+            bRecordChanged = strCurrentValue <> strValue OrElse strCurrentFlag <> strFlag
 
             If iCurrentQCStatus = 0 AndAlso Not bRecordChanged Then
                 'update the record with qc status 1 and it's qc log if it's there
-                strDatabaseAction = "update"
+                rowInitialToUse.SetField(Of Integer)("qcStatus", 1)
             ElseIf iCurrentQCStatus = 1 AndAlso Not bRecordChanged Then
                 'do nothing
             ElseIf iCurrentQCStatus = 2 AndAlso Not bRecordChanged Then
                 'do nothing
             ElseIf iCurrentQCStatus = 1 AndAlso bRecordChanged Then
                 'add new record with QC status 2  and the new updated values
-                strDatabaseAction = "insert"
+                Dim newRow As DataRow = dtbInitialData.NewRow
+                newRow.ItemArray = rowInitialToUse.ItemArray
+                newRow.SetField(Of Integer)("qcStatus", 2)
+                newRow.SetField(Of String)("flag", strFlag)
+                newRow.SetField(Of String)("obsValue", strValue)
+                dtbInitialData.Rows.Add(newRow)
             ElseIf iCurrentQCStatus = 2 AndAlso bRecordChanged Then
                 'update the record with qc status 2 and the new updated values
-                strDatabaseAction = "update"
+                rowInitialToUse.SetField(Of Integer)("qcStatus", 2)
+                rowInitialToUse.SetField(Of String)("flag", strFlag)
+                rowInitialToUse.SetField(Of String)("obsValue", strValue)
+                rowInitialToUse.SetField(Of String)("qcTypeLog", strQCLog)
             End If
 
+            rowInitialToUse.SetField(Of String)("qcTypeLog", strQCLog)
 
-
+            clsDataCall.Save(dtbInitialData)
 
         Next
     End Sub
-
 
 
 End Class
