@@ -146,7 +146,8 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub cmdQC_Click(sender As Object, e As EventArgs) Handles btnMainQC.Click
-        frmQC.ShowDialog()
+        'frmQC.ShowDialog(Me)
+        frmImportQCData.ShowDialog(Me)
     End Sub
 
     Private Sub cmdProducts_Click(sender As Object, e As EventArgs) Handles btnMainProducts.Click

@@ -6,35 +6,56 @@ Public Class frmImportQCData
     Private Sub frmImportQCData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dataGridFileContents.Visible = False
         lblFileSelection.Visible = True
+        btnSave.Enabled = False
     End Sub
 
     Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
         Using dlgOpen As New OpenFileDialog
             dlgOpen.Filter = "Comma separated files|*.csv"
             dlgOpen.Multiselect = False
-            dlgOpen.Title = "Open Data From File"
+            dlgOpen.Title = "Open QC File"
             If DialogResult.OK = dlgOpen.ShowDialog() Then
                 txtFilePath.Text = dlgOpen.FileName
                 Dim dtbQCData As DataTable = GetQCFileDataTableDefinition()
                 FillQCFileDataFromCSV(dlgOpen.FileName, dtbQCData)
                 If dtbQCData.Rows.Count = 0 Then
-                    dataGridFileContents.Visible = False
+                    btnSave.Enabled = False
                     lblFileSelection.Visible = True
+                    dataGridFileContents.Visible = False
+                    dataGridFileContents.DataSource = Nothing
                 Else
+                    btnSave.Enabled = True
+                    lblFileSelection.Visible = False
                     dataGridFileContents.Visible = True
                     dataGridFileContents.DataSource = dtbQCData
+
+                    For Each col As DataGridViewColumn In dataGridFileContents.Columns
+                        col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    Next
+                    dataGridFileContents.Columns("date_time").DefaultCellStyle = New DataGridViewCellStyle With {
+                        .Format = "yyyy-MM-dd hh:mm:ss"
+                    }
                 End If
             End If
         End Using
     End Sub
 
-    Private Sub FillDataGridView(dtbQCData As DataTable)
-        dataGridFileContents.DataSource = dtbQCData
-        'dataGridFileContents.Refresh()
+    'Private Sub dataGridFileContents_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles dataGridFileContents.RowPrePaint
+    '    Dim dataGrid As DataGridView = DirectCast(sender, DataGridView)
+    '    If e.RowIndex <> dataGrid.NewRowIndex Then
+    '        Dim row As DataGridViewRow = dataGrid.Rows(e.RowIndex)
+    '        row.HeaderCell.Value = e.RowIndex
+    '    End If
+    'End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If dataGridFileContents.DataSource IsNot Nothing Then
+            SaveQCData(dataGridFileContents.DataSource)
+        End If
     End Sub
 
-
     Private Sub FillQCFileDataFromCSV(strFilePath As String, dtbQCData As DataTable)
+
         Using fileReader As New FileIO.TextFieldParser(strFilePath)
             fileReader.TextFieldType = FileIO.FieldType.Delimited
             fileReader.SetDelimiters(",")
@@ -48,13 +69,17 @@ Public Class frmImportQCData
                 Exit Sub
             End If
 
+            Dim iFileRow As Integer = 1 'start at 1 because of column names
             Dim currentRow As String()
+            Dim dataRow As DataRow
             While Not fileReader.EndOfData
                 Try
-                    'get data table row definitial
-                    Dim dataRow As DataRow = dtbQCData.NewRow
+
+                    iFileRow = iFileRow + 1
                     'get file row fields
                     currentRow = fileReader.ReadFields()
+                    'get data table row definitial
+                    dataRow = dtbQCData.NewRow
 
                     'loop through usable columns while using the mapped field index to get the file field value from the file row
                     'add the file field values in the data row
@@ -70,28 +95,37 @@ Public Class frmImportQCData
                             Case "acquisition_type"
                                 dataRow.SetField(Of Integer)(usableCol.Key, Integer.Parse(fileFieldValue))
                             Case "date_time"
-                                dataRow.SetField(Of String)(usableCol.Key, fileFieldValue)
+                                dataRow.SetField(Of Date)(usableCol.Key,
+                                                      Date.ParseExact(fileFieldValue, "yyyy-MM-dd hh:mm:ss",
+                                                                      System.Globalization.DateTimeFormatInfo.InvariantInfo))
                             Case "qc_log"
                                 dataRow.SetField(Of String)(usableCol.Key, fileFieldValue)
                             Case "flag"
                                 dataRow.SetField(Of String)(usableCol.Key, fileFieldValue)
                             Case "value"
-                                dataRow.SetField(Of Integer)(usableCol.Key, Integer.Parse(fileFieldValue))
+                                If String.IsNullOrEmpty(fileFieldValue) Then
+                                ElseIf Not IsNumeric(fileFieldValue) Then
+                                    AddText("Row " & iFileRow & " has a non numeric value. Row has been skipped.")
+                                    Continue While
+                                ElseIf fileFieldValue.Contains(".") Then
+                                    AddText("Row " & iFileRow & " has a scaled value. Row has been skipped.")
+                                    Continue While
+                                End If
+                                dataRow.SetField(Of String)(usableCol.Key, fileFieldValue)
                             Case Else
                                 Continue For
                         End Select
                     Next
 
-                    'dataRow.RowError
-
                     dtbQCData.Rows.Add(dataRow)
 
                 Catch ex As FileIO.MalformedLineException
-                    MsgBox("Line " & ex.Message & " is not valid and will be skipped.")
+                    AddText("Row " & iFileRow & " is NOT valid and has been skipped. Error: " & ex.Message)
                 Catch ex As Exception
-                    MsgBox("Error " & ex.Message & ". Exiting.")
+                    AddText("Row " & iFileRow & " is NOT valid and has been skipped. Error: " & ex.Message)
                 End Try
             End While
+
         End Using
 
     End Sub
@@ -112,44 +146,44 @@ Public Class frmImportQCData
         dtbQCFileData.Columns.Add("qc_log", GetType(String))
         dtbQCFileData.Columns.Add("flag", GetType(String))
         dtbQCFileData.Columns.Add("value", GetType(String))
-        '--------------------------------------------
 
         'PS note, intentionally
         'ignore capturedBy, dataForm because they are entered by a climsoft application
         'ignore period, obsLevel because no QC changes is expected and they don't define the record
 
+        '--------------------------------------------
+
         Return dtbQCFileData
 
     End Function
 
-
     Private Function ValidateAndGetUsableFileColumns(arrFileColNames As String(), dtb As DataTable) As Dictionary(Of String, Integer)
         Dim dctUsableColNames As New Dictionary(Of String, Integer)
 
-        For fileColNameIndex As Integer = 0 To fileColNameIndex < arrFileColNames.Length
-            For Each column As DataColumn In dtb.Columns
+        For Each column As DataColumn In dtb.Columns
+            'find column from file column names array
+            For fileColNameIndex As Integer = 0 To arrFileColNames.Length - 1
                 If column.ColumnName = arrFileColNames(fileColNameIndex) Then
-                    'column names from the file should be unique
-                    If dctUsableColNames.ContainsKey(column.ColumnName) Then
-                        MsgBox("Duplicate " & column.ColumnName & " detected")
-                    Else
-                        dctUsableColNames.Add(column.ColumnName, fileColNameIndex)
-                    End If
+                    dctUsableColNames.Add(column.ColumnName, fileColNameIndex)
+                    Exit For
                 End If
             Next
         Next
 
         'validate column number
         If dctUsableColNames.Count <> dtb.Columns.Count Then
-            MsgBox("Minimum of " & dtb.Columns.Count & " columns expected")
+            AddText("Minimum of " & dtb.Columns.Count & " columns expected.")
+            AddText("Expected columns station_id, element_id, acquisition_type, date_time, qc_log, flag and value.")
             Return Nothing
         End If
-
 
         Return dctUsableColNames
     End Function
 
+    Private Sub AddText(strText)
+        rtfSummaryReport.AppendText(strText)
 
+    End Sub
 
     Private Sub SaveQCData(dtbQCData As DataTable)
 
@@ -230,5 +264,11 @@ Public Class frmImportQCData
         Next
     End Sub
 
-
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        'dispose contents
+        dataGridFileContents.DataSource = Nothing
+        txtFilePath.Text = ""
+        rtfSummaryReport.Clear()
+        Me.Close()
+    End Sub
 End Class

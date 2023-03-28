@@ -31,37 +31,37 @@ Partial Class frmImportQCData
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.grpFileContents = New System.Windows.Forms.GroupBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.lblFileSelection = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         CType(Me.dataGridFileContents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpFileContents.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtFilePath
         '
-        Me.txtFilePath.Location = New System.Drawing.Point(116, 7)
+        Me.txtFilePath.Location = New System.Drawing.Point(171, 13)
+        Me.txtFilePath.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFilePath.Name = "txtFilePath"
-        Me.txtFilePath.Size = New System.Drawing.Size(320, 20)
+        Me.txtFilePath.Size = New System.Drawing.Size(478, 26)
         Me.txtFilePath.TabIndex = 2
         '
         'lblSelectFile
         '
         Me.lblSelectFile.AutoSize = True
-        Me.lblSelectFile.Location = New System.Drawing.Point(12, 14)
+        Me.lblSelectFile.Location = New System.Drawing.Point(15, 17)
+        Me.lblSelectFile.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSelectFile.Name = "lblSelectFile"
-        Me.lblSelectFile.Size = New System.Drawing.Size(59, 13)
+        Me.lblSelectFile.Size = New System.Drawing.Size(87, 20)
         Me.lblSelectFile.TabIndex = 3
         Me.lblSelectFile.Text = "Select File:"
         '
         'btnBrowse
         '
-        Me.btnBrowse.Location = New System.Drawing.Point(442, 5)
+        Me.btnBrowse.Location = New System.Drawing.Point(660, 8)
+        Me.btnBrowse.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(75, 23)
+        Me.btnBrowse.Size = New System.Drawing.Size(112, 35)
         Me.btnBrowse.TabIndex = 4
         Me.btnBrowse.Text = "Browse"
         Me.btnBrowse.UseVisualStyleBackColor = True
@@ -69,9 +69,10 @@ Partial Class frmImportQCData
         'rtfSummaryReport
         '
         Me.rtfSummaryReport.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.rtfSummaryReport.Location = New System.Drawing.Point(3, 16)
+        Me.rtfSummaryReport.Location = New System.Drawing.Point(4, 24)
+        Me.rtfSummaryReport.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.rtfSummaryReport.Name = "rtfSummaryReport"
-        Me.rtfSummaryReport.Size = New System.Drawing.Size(282, 172)
+        Me.rtfSummaryReport.Size = New System.Drawing.Size(416, 603)
         Me.rtfSummaryReport.TabIndex = 5
         Me.rtfSummaryReport.Text = ""
         '
@@ -81,35 +82,41 @@ Partial Class frmImportQCData
         Me.dataGridFileContents.AllowUserToDeleteRows = False
         Me.dataGridFileContents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dataGridFileContents.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dataGridFileContents.Location = New System.Drawing.Point(3, 16)
+        Me.dataGridFileContents.Location = New System.Drawing.Point(4, 24)
+        Me.dataGridFileContents.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.dataGridFileContents.Name = "dataGridFileContents"
         Me.dataGridFileContents.ReadOnly = True
-        Me.dataGridFileContents.Size = New System.Drawing.Size(504, 506)
+        Me.dataGridFileContents.RowHeadersVisible = False
+        Me.dataGridFileContents.RowHeadersWidth = 62
+        Me.dataGridFileContents.Size = New System.Drawing.Size(881, 603)
         Me.dataGridFileContents.TabIndex = 6
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(12, 583)
+        Me.btnSave.Location = New System.Drawing.Point(284, 706)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.Size = New System.Drawing.Size(112, 35)
         Me.btnSave.TabIndex = 7
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(93, 583)
+        Me.btnClose.Location = New System.Drawing.Point(405, 706)
+        Me.btnClose.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.Size = New System.Drawing.Size(112, 35)
         Me.btnClose.TabIndex = 8
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(186, 583)
+        Me.btnHelp.Location = New System.Drawing.Point(531, 706)
+        Me.btnHelp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(112, 35)
         Me.btnHelp.TabIndex = 9
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -118,58 +125,43 @@ Partial Class frmImportQCData
         '
         Me.grpFileContents.Controls.Add(Me.lblFileSelection)
         Me.grpFileContents.Controls.Add(Me.dataGridFileContents)
-        Me.grpFileContents.Location = New System.Drawing.Point(7, 46)
+        Me.grpFileContents.Location = New System.Drawing.Point(9, 71)
+        Me.grpFileContents.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.grpFileContents.Name = "grpFileContents"
-        Me.grpFileContents.Size = New System.Drawing.Size(510, 525)
+        Me.grpFileContents.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.grpFileContents.Size = New System.Drawing.Size(889, 632)
         Me.grpFileContents.TabIndex = 11
         Me.grpFileContents.TabStop = False
-        Me.grpFileContents.Text = "Slected File Contents"
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.rtfSummaryReport)
-        Me.GroupBox1.Location = New System.Drawing.Point(523, 46)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(288, 191)
-        Me.GroupBox1.TabIndex = 12
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Summary Report"
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.RichTextBox1)
-        Me.GroupBox2.Location = New System.Drawing.Point(523, 253)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(288, 318)
-        Me.GroupBox2.TabIndex = 13
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Detailed Report"
-        '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RichTextBox1.Location = New System.Drawing.Point(3, 16)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(282, 299)
-        Me.RichTextBox1.TabIndex = 5
-        Me.RichTextBox1.Text = ""
+        Me.grpFileContents.Text = "Selected File Contents"
         '
         'lblFileSelection
         '
         Me.lblFileSelection.AutoSize = True
         Me.lblFileSelection.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFileSelection.Location = New System.Drawing.Point(119, 143)
+        Me.lblFileSelection.Location = New System.Drawing.Point(293, 220)
+        Me.lblFileSelection.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFileSelection.Name = "lblFileSelection"
-        Me.lblFileSelection.Size = New System.Drawing.Size(210, 29)
+        Me.lblFileSelection.Size = New System.Drawing.Size(297, 40)
         Me.lblFileSelection.TabIndex = 14
         Me.lblFileSelection.Text = "No File Selected"
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.rtfSummaryReport)
+        Me.GroupBox1.Location = New System.Drawing.Point(905, 71)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox1.Size = New System.Drawing.Size(424, 632)
+        Me.GroupBox1.TabIndex = 12
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "File Issues Report"
+        '
         'frmImportQCData
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(819, 612)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.ClientSize = New System.Drawing.Size(1354, 749)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.grpFileContents)
         Me.Controls.Add(Me.btnHelp)
@@ -178,13 +170,15 @@ Partial Class frmImportQCData
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.lblSelectFile)
         Me.Controls.Add(Me.txtFilePath)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "frmImportQCData"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Import R-Instat Quality Controlled Data"
         CType(Me.dataGridFileContents, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpFileContents.ResumeLayout(False)
         Me.grpFileContents.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -200,7 +194,5 @@ Partial Class frmImportQCData
     Friend WithEvents btnHelp As Button
     Friend WithEvents grpFileContents As GroupBox
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents lblFileSelection As Label
 End Class
