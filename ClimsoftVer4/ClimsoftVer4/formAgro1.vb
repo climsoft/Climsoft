@@ -361,18 +361,18 @@
             dataFormRecCount = ds.Tables("form_agro1").Rows.Count
 
             If dataFormRecCount > 0 Then
-                    cboStation.SelectedValue = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("stationId")
-                    strYear = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("yyyy")
-                    strMonth = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("mm")
-                    strDay = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("dd")
-                Else
-                    cboStation.SelectedValue = cboStation.SelectedValue
-                    strYear = txtYear.Text
-                    strMonth = cboMonth.Text
-                    strDay = cboDay.Text
-                End If
+                cboStation.SelectedValue = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("stationId")
+                strYear = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("yyyy")
+                strMonth = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("mm")
+                strDay = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("dd")
+            Else
+                cboStation.SelectedValue = cboStation.SelectedValue
+                strYear = txtYear.Text
+                strMonth = cboMonth.Text
+                strDay = cboDay.Text
+            End If
 
-                Dim ctl As Control
+            Dim ctl As Control
 
             'Clear textboxes for observation values
             'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
@@ -948,17 +948,17 @@
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
 
         'Open form for displaying data transfer progress
-        frmFormUpload.lblFormName.Text = "form_agro1"
-        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
-
+        frmFormUpload.lblFormName1.Text = "form_agro1"
         frmFormUpload.Show()
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
+
         Exit Sub
 
         frmDataTransferProgress.Show()
         'Upload data to observationInitial table
-        Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String, _
+        Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String,
             dd As String, hh As String, ctl As Control, capturedBy As String
-        Dim stnId As String, elemCode As Integer, obsDatetime As String, obsVal As String, obsFlag As String, _
+        Dim stnId As String, elemCode As Integer, obsDatetime As String, obsVal As String, obsFlag As String,
             qcStatus As Integer, acquisitionType As Integer, obsLevel As String, dataForm As String
 
         Try
@@ -1009,7 +1009,7 @@
 
                     'Generate SQL string for inserting data into observationinitial table
                     If Strings.Len(obsVal) > 0 Then
-                        strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
+                        strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
                             "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                             & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 

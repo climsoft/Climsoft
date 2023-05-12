@@ -914,10 +914,9 @@ Public Class formUpperAir
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
-        frmFormUpload.lblFormName.Text = "form_upperair1"
-        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
-
+        frmFormUpload.lblFormName1.Text = "form_upperair1"
         frmFormUpload.Show()
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
 
     End Sub
 

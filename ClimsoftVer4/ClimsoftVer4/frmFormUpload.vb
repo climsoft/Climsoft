@@ -14,7 +14,8 @@ Public Class frmFormUpload
     End Sub
 
     Private Sub frmDataTransferProgress_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'MsgBox(userGroup)
+        'MsgBox(frmDataTransferProgress.Text)
+
         ' Close the form if the User has no previleges to Upload data
         If userGroup <> "ClimsoftAdmin" And userGroup <> "ClimsoftQC" And userGroup <> "ClimsoftOperatorSupervisor" And userGroup <> "ClimsoftDeveloper" And userGroup <> "" Then
             Me.Close()
@@ -35,7 +36,7 @@ Public Class frmFormUpload
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
 
-            sql = "select " & lblFormName.Text & ".stationId, stationName from " & lblFormName.Text & " inner join station on " & lblFormName.Text & ".stationId=station.stationId group by " & lblFormName.Text & ".stationId;"
+            sql = "select " & lblFormName1.Text & ".stationId, stationName from " & lblFormName1.Text & " inner join station on " & lblFormName1.Text & ".stationId=station.stationId group by " & lblFormName1.Text & ".stationId;"
             'MsgBox(sql)
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             ' Set to unlimited timeout period
@@ -93,42 +94,42 @@ Public Class frmFormUpload
         Dim stnselected As Boolean
 
         Try
-            frm_tbl = lblFormName.Text
-        lblDataTransferProgress.ForeColor = DefaultForeColor 'Color.Black
-        lblDataTransferProgress.Text = ""
-        txtDataTransferProgress1.Text = ""
-        ' List the selected stations
-        stnlist = ""
-        stnselected = False
-        If chkAllStations.Checked = False Then ' When NOT all stations are selected
-            For i = 0 To LstViewStations.Items.Count - 1
-                If LstViewStations.Items(i).Checked = True Then
-                    stnId = LstViewStations.Items(i).SubItems(0).Text
-                    stnselected = True
-                    If Len(stnlist) = 0 Then
-                        stnlist = "stationId = " & " '" & stnId & "'" 'stnid
-                    Else
-                        stnlist = stnlist & " OR stationId = " & "'" & stnId & "'"
+            frm_tbl = lblFormName1.Text
+            lblDataTransferProgress.ForeColor = DefaultForeColor 'Color.Black
+            lblDataTransferProgress.Text = ""
+            txtDataTransferProgress1.Text = ""
+            ' List the selected stations
+            stnlist = ""
+            stnselected = False
+            If chkAllStations.Checked = False Then ' When NOT all stations are selected
+                For i = 0 To LstViewStations.Items.Count - 1
+                    If LstViewStations.Items(i).Checked = True Then
+                        stnId = LstViewStations.Items(i).SubItems(0).Text
+                        stnselected = True
+                        If Len(stnlist) = 0 Then
+                            stnlist = "stationId = " & " '" & stnId & "'" 'stnid
+                        Else
+                            stnlist = stnlist & " OR stationId = " & "'" & stnId & "'"
+                        End If
+                        'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
                     End If
-                    'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
+                Next
+                If frm_tbl = "form_monthly" Then
+                    sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "')"
+                Else
+                    sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
                 End If
-            Next
-            If frm_tbl = "form_monthly" Then
-                sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "')"
-            Else
-                sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
+            Else ' When All stations are selected
+                stnselected = True
+                If frm_tbl = "form_monthly" Then
+                    sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "');"
+                Else
+                    sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
+                End If
             End If
-        Else ' When All stations are selected
-            stnselected = True
-            If frm_tbl = "form_monthly" Then
-                sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "');"
-            Else
-                sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
-            End If
-        End If
 
-        'Create a path to save data into bufer to be uploaded later
-        Dim fl, dataDir, frmrec As String
+            'Create a path to save data into bufer to be uploaded later
+            Dim fl, dataDir, frmrec As String
 
             ' Create folder 'Climsoft4\data' if it does not exist
             dataDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
@@ -137,11 +138,11 @@ Public Class frmFormUpload
                 IO.Directory.CreateDirectory(dataDir)
             End If
 
-        fl = dataDir & "\form_2_initial_sql.csv"
-        FileOpen(122, fl, OpenMode.Output)
+            fl = dataDir & "\form_2_initial_sql.csv"
+            FileOpen(122, fl, OpenMode.Output)
 
-        ' Convert path separater to SQL format
-        fl = Strings.Replace(fl, "\", "/")
+            ' Convert path separater to SQL format
+            fl = Strings.Replace(fl, "\", "/")
 
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
@@ -159,7 +160,7 @@ Public Class frmFormUpload
             qcStatus = 0
             acquisitionType = 1
             obsLevel = "surface"
-            dataForm = lblFormName.Text
+            dataForm = lblFormName1.Text
             code_loc = ""
 
             If Not Data_Fields(dataForm, st, ed, code_loc) Then Exit Sub

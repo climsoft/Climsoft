@@ -83,6 +83,7 @@ Partial Class form_monthly
         Me.txtYear = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.btnPush = New System.Windows.Forms.Button()
         YyyyLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -452,7 +453,7 @@ Partial Class form_monthly
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(585, 489)
+        Me.btnHelp.Location = New System.Drawing.Point(605, 489)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 479
@@ -462,7 +463,7 @@ Partial Class form_monthly
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(342, 489)
+        Me.btnClear.Location = New System.Drawing.Point(313, 489)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 477
@@ -472,7 +473,7 @@ Partial Class form_monthly
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(99, 489)
+        Me.btnCommit.Location = New System.Drawing.Point(85, 489)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
         Me.btnCommit.TabIndex = 15
@@ -481,7 +482,7 @@ Partial Class form_monthly
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(261, 489)
+        Me.btnDelete.Location = New System.Drawing.Point(237, 489)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 476
@@ -490,7 +491,7 @@ Partial Class form_monthly
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(18, 489)
+        Me.btnAddNew.Location = New System.Drawing.Point(9, 489)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 473
@@ -499,7 +500,7 @@ Partial Class form_monthly
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(180, 489)
+        Me.btnUpdate.Location = New System.Drawing.Point(161, 489)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 475
@@ -555,7 +556,7 @@ Partial Class form_monthly
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(504, 489)
+        Me.btnClose.Location = New System.Drawing.Point(529, 489)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 478
@@ -580,18 +581,28 @@ Partial Class form_monthly
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(423, 489)
+        Me.btnView.Location = New System.Drawing.Point(389, 489)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 661
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(465, 489)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(63, 23)
+        Me.btnPush.TabIndex = 1155
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
+        '
         'form_monthly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(689, 575)
+        Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label34)
@@ -720,4 +731,5 @@ Partial Class form_monthly
     Friend WithEvents txtYear As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents btnPush As Button
 End Class

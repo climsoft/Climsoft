@@ -1238,13 +1238,20 @@ Public Class frmQC
             'PrintLine(fp)
             ' Outputv data values
             For i = 0 To x - 1
+                'If Not IsNumeric(ds.Tables("qcabslimits").Rows(i).Item("limitValue")) Then Continue For
                 dat = ds.Tables("qcabslimits").Rows(i).Item(0)
 
                 '' Insert text qualifier ito the stationid field to ensure that it is saved as a character string in QC output text file
                 'dat = """" & dat & """"
 
                 For j = 1 To ds.Tables("qcabslimits").Columns.Count - 1
-                    dat = dat & "," & ds.Tables("qcabslimits").Rows(i).Item(j)
+                    'dat = dat & "," & ds.Tables("qcabslimits").Rows(i).Item(j)
+                    If j = 8 And Not IsNumeric(ds.Tables("qcabslimits").Rows(i).Item("limitValue")) Then
+                        dat = dat & ","
+                    Else
+                        dat = dat & "," & ds.Tables("qcabslimits").Rows(i).Item(j)
+                    End If
+
                 Next
 
                 Print(fp, dat & Chr(10))

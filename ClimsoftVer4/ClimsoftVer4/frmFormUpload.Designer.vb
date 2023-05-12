@@ -38,11 +38,11 @@ Partial Class frmFormUpload
         Me.txtBeginYear = New System.Windows.Forms.TextBox()
         Me.btnStart = New System.Windows.Forms.Button()
         Me.chkAllStations = New System.Windows.Forms.CheckBox()
-        Me.lblFormName = New System.Windows.Forms.Label()
         Me.frmUploadgroundWorker = New System.ComponentModel.BackgroundWorker()
         Me.chkUTC = New System.Windows.Forms.CheckBox()
         Me.txtTdiff = New System.Windows.Forms.TextBox()
         Me.lblDiff = New System.Windows.Forms.Label()
+        Me.lblFormName1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtDataTransferProgress1
@@ -98,7 +98,7 @@ Partial Class frmFormUpload
         '
         Me.lblProcessingStatus.AutoSize = True
         Me.lblProcessingStatus.ForeColor = System.Drawing.Color.Red
-        Me.lblProcessingStatus.Location = New System.Drawing.Point(438, 44)
+        Me.lblProcessingStatus.Location = New System.Drawing.Point(463, 44)
         Me.lblProcessingStatus.Name = "lblProcessingStatus"
         Me.lblProcessingStatus.Size = New System.Drawing.Size(0, 13)
         Me.lblProcessingStatus.TabIndex = 36
@@ -106,7 +106,7 @@ Partial Class frmFormUpload
         'lblEndMonth
         '
         Me.lblEndMonth.AutoSize = True
-        Me.lblEndMonth.Location = New System.Drawing.Point(497, 41)
+        Me.lblEndMonth.Location = New System.Drawing.Point(522, 41)
         Me.lblEndMonth.Name = "lblEndMonth"
         Me.lblEndMonth.Size = New System.Drawing.Size(59, 13)
         Me.lblEndMonth.TabIndex = 35
@@ -115,7 +115,7 @@ Partial Class frmFormUpload
         'lblBeginMonth
         '
         Me.lblBeginMonth.AutoSize = True
-        Me.lblBeginMonth.Location = New System.Drawing.Point(497, 15)
+        Me.lblBeginMonth.Location = New System.Drawing.Point(522, 15)
         Me.lblBeginMonth.Name = "lblBeginMonth"
         Me.lblBeginMonth.Size = New System.Drawing.Size(70, 13)
         Me.lblBeginMonth.TabIndex = 34
@@ -141,7 +141,7 @@ Partial Class frmFormUpload
         '
         'txtEndMonth
         '
-        Me.txtEndMonth.Location = New System.Drawing.Point(573, 37)
+        Me.txtEndMonth.Location = New System.Drawing.Point(615, 37)
         Me.txtEndMonth.Name = "txtEndMonth"
         Me.txtEndMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtEndMonth.TabIndex = 31
@@ -150,7 +150,7 @@ Partial Class frmFormUpload
         '
         'txtBeginMonth
         '
-        Me.txtBeginMonth.Location = New System.Drawing.Point(573, 11)
+        Me.txtBeginMonth.Location = New System.Drawing.Point(615, 11)
         Me.txtBeginMonth.Name = "txtBeginMonth"
         Me.txtBeginMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtBeginMonth.TabIndex = 30
@@ -159,14 +159,14 @@ Partial Class frmFormUpload
         '
         'txtEndYear
         '
-        Me.txtEndYear.Location = New System.Drawing.Point(435, 37)
+        Me.txtEndYear.Location = New System.Drawing.Point(460, 37)
         Me.txtEndYear.Name = "txtEndYear"
         Me.txtEndYear.Size = New System.Drawing.Size(48, 20)
         Me.txtEndYear.TabIndex = 29
         '
         'txtBeginYear
         '
-        Me.txtBeginYear.Location = New System.Drawing.Point(435, 11)
+        Me.txtBeginYear.Location = New System.Drawing.Point(460, 11)
         Me.txtBeginYear.Name = "txtBeginYear"
         Me.txtBeginYear.Size = New System.Drawing.Size(48, 20)
         Me.txtBeginYear.TabIndex = 28
@@ -190,16 +190,6 @@ Partial Class frmFormUpload
         Me.chkAllStations.Text = "Select All Stations"
         Me.chkAllStations.UseVisualStyleBackColor = True
         '
-        'lblFormName
-        '
-        Me.lblFormName.AutoSize = True
-        Me.lblFormName.Location = New System.Drawing.Point(374, 136)
-        Me.lblFormName.Name = "lblFormName"
-        Me.lblFormName.Size = New System.Drawing.Size(55, 13)
-        Me.lblFormName.TabIndex = 39
-        Me.lblFormName.Text = "formName"
-        Me.lblFormName.Visible = False
-        '
         'frmUploadgroundWorker
         '
         Me.frmUploadgroundWorker.WorkerReportsProgress = True
@@ -217,7 +207,7 @@ Partial Class frmFormUpload
         '
         'txtTdiff
         '
-        Me.txtTdiff.Location = New System.Drawing.Point(475, 69)
+        Me.txtTdiff.Location = New System.Drawing.Point(484, 69)
         Me.txtTdiff.Name = "txtTdiff"
         Me.txtTdiff.Size = New System.Drawing.Size(26, 20)
         Me.txtTdiff.TabIndex = 41
@@ -229,7 +219,7 @@ Partial Class frmFormUpload
         '
         Me.lblDiff.AutoSize = True
         Me.lblDiff.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDiff.Location = New System.Drawing.Point(504, 73)
+        Me.lblDiff.Location = New System.Drawing.Point(513, 73)
         Me.lblDiff.Name = "lblDiff"
         Me.lblDiff.Size = New System.Drawing.Size(117, 13)
         Me.lblDiff.TabIndex = 42
@@ -237,15 +227,24 @@ Partial Class frmFormUpload
         Me.lblDiff.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblDiff.Visible = False
         '
+        'lblFormName1
+        '
+        Me.lblFormName1.AutoSize = True
+        Me.lblFormName1.Location = New System.Drawing.Point(390, 140)
+        Me.lblFormName1.Name = "lblFormName1"
+        Me.lblFormName1.Size = New System.Drawing.Size(0, 13)
+        Me.lblFormName1.TabIndex = 43
+        Me.lblFormName1.Visible = False
+        '
         'frmFormUpload
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(625, 202)
+        Me.ClientSize = New System.Drawing.Size(705, 202)
+        Me.Controls.Add(Me.lblFormName1)
         Me.Controls.Add(Me.lblDiff)
         Me.Controls.Add(Me.txtTdiff)
         Me.Controls.Add(Me.chkUTC)
-        Me.Controls.Add(Me.lblFormName)
         Me.Controls.Add(Me.chkAllStations)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.lblProcessingStatus)
@@ -286,9 +285,9 @@ Partial Class frmFormUpload
     Friend WithEvents txtBeginYear As TextBox
     Friend WithEvents btnStart As Button
     Friend WithEvents chkAllStations As CheckBox
-    Friend WithEvents lblFormName As Label
     Friend WithEvents frmUploadgroundWorker As System.ComponentModel.BackgroundWorker
     Friend WithEvents chkUTC As CheckBox
     Friend WithEvents txtTdiff As TextBox
     Friend WithEvents lblDiff As Label
+    Friend WithEvents lblFormName1 As Label
 End Class
