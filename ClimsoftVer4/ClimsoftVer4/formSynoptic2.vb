@@ -498,10 +498,12 @@
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
-        frmFormUpload.lblFormName.Text = "form_synoptic2_TDCF"
-        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+        'frmFormUpload.lblFormName.Text = "form_synoptic2_TDCF"
 
+        'frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
+        frmFormUpload.lblFormName1.Text = "form_synoptic2_TDCF"
         frmFormUpload.Show()
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
         'Exit Sub
 
         'frmDataTransferProgress.Show()
@@ -1387,23 +1389,73 @@
 
     Private Sub cboHour_TextChanged(sender As Object, e As EventArgs) Handles cboHour.TextChanged
         Dim ctl As Control
-        Dim codi As String
+        Dim codi, hh As String
         'If RecordExist Then msgbox ("Record Exists")
+        hh = cboHour.Text.PadLeft(2, "0")
         For Each ctl In Me.Controls
             codi = Strings.Mid(ctl.Name, 12, 3)
-            If codi = "003" Or codi = "005" Or codi = "018" Or codi = "084" Or codi = "099" Or codi = "133" Then
-                If Val(cboHour.Text) = Val(FldName.RegkeyValue("key01")) Then
+
+            ' The following code is temporary to cater for special case in Cape Verde where some parameters are recorded at specific hours
+            ' Whene a universal method for doing is devised the code will be changed accordingly
+            ' Extrememe Temperaturs
+            If codi = "002" Or codi = "003" Then
+                If hh = "06" Or hh = "18" Then
                     ctl.Enabled = True
                 Else
                     ctl.Enabled = False
                 End If
-            ElseIf codi = "002" Then
-                If Val(cboHour.Text) = Val(FldName.RegkeyValue("key02")) Then
+                ' Evaporation
+            ElseIf codi = "815" Or codi = "816" Then
+                If hh = "06" Or hh = "10" Then
+                    ctl.Enabled = True
+                Else
+                    ctl.Enabled = False
+                End If
+                ' 18 - 23Z Precipitation
+            ElseIf codi = "864" Then
+                If hh = "00" Then
+                    ctl.Enabled = True
+                Else
+                    ctl.Enabled = False
+                End If
+                ' 0 - 06Z Precipitation
+            ElseIf codi = "861" Then
+                If hh = "06" Then
+                    ctl.Enabled = True
+                Else
+                    ctl.Enabled = False
+                End If
+                ' 06 - 12Z Precipitation
+            ElseIf codi = "862" Then
+                If hh = "12" Then
+                    ctl.Enabled = True
+                Else
+                    ctl.Enabled = False
+                End If
+                ' 12 - 18Z Precipitation
+            ElseIf codi = "863" Then
+                If hh = "18" Then
                     ctl.Enabled = True
                 Else
                     ctl.Enabled = False
                 End If
             End If
+
+
+
+            'If codi = "Then003" Or codi = "003" Or codi = "005" Or codi = "018" Or codi = "084" Or codi = "099" Or codi = "133" Or codi = "816" Then
+            '    If Val(cboHour.Text) = Val(FldName.RegkeyValue("key01")) Then
+            '        ctl.Enabled = True
+            '    Else
+            '        ctl.Enabled = False
+            '    End If
+            'ElseIf codi = "002" Then
+            '    If Val(cboHour.Text) = Val(FldName.RegkeyValue("key02")) Then
+            '        ctl.Enabled = True
+            '    Else
+            '        ctl.Enabled = False
+            '    End If
+            'End If
         Next
 
         '' Populate form if the record exist to avoid repeat entry
@@ -1508,14 +1560,6 @@
         Me.Cursor = Cursors.Default
     End Sub
 
-
-    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
-
-    End Sub
-
-    Private Sub cboPrecipUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPrecipUnits.SelectedIndexChanged
-
-    End Sub
 
     Private Sub cboStation_TextChanged(sender As Object, e As EventArgs) Handles cboStation.TextChanged
         'If RecordExist() Then MsgBox(cboStation.SelectedValue)

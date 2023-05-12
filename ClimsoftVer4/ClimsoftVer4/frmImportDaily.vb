@@ -132,7 +132,7 @@
 
     Private Sub cmdView_Click(sender As Object, e As EventArgs) Handles cmdView.Click
 
-        Dim rec As Integer
+        Dim rec, col1, col2 As Integer
         Dim currentRow As String()
         Dim currentField As String
 
@@ -162,26 +162,51 @@
 
                 lin = MyReader.LineNumber()
                 currentRow = MyReader.ReadFields()
+                col1 = currentRow.Count
 
-                If lin = 1 Then ' The header row
-                    ' Compute the total columns
-                    num = 0
-                    For Each currentField In currentRow
-                        'MsgBox(currentField)
-                        num = num + 1
-                    Next
-                    DataGridView1.ColumnCount = num
 
-                    'Number the column headers starting with digit 1
-                    num = 0
-                    lstColumn.Items.Clear()
-                    For Each currentField In currentRow
-                        DataGridView1.Columns(num).Name = num + 1
-                        num = num + 1
-                        lstColumn.Items.Add(num)
-                    Next
-                    DataGridView1.Refresh()
-                End If
+                'If lin = 1 Then ' The header row
+                '    ' Compute the total columns
+
+                '    For Each currentField In currentRow
+                '        'MsgBox(currentField)
+                '        num = num + 1
+                '    Next
+
+
+                '    DataGridView1.ColumnCount = num
+
+                '    'Number the column headers starting with digit 1
+                '    num = 0
+                '    lstColumn.Items.Clear()
+                '    For Each currentField In currentRow
+                '        DataGridView1.Columns(num).Name = num + 1
+                '        num = num + 1
+                '        lstColumn.Items.Add(num)
+                '    Next
+                '    DataGridView1.Refresh()
+                'End If
+
+                ' Count the total fields so as to get the required columns for the grid data view to display the data
+                Do While MyReader.EndOfData = False
+                    currentRow = MyReader.ReadFields()
+                    col2 = currentRow.Count
+                    If (col2 - col1) = 0 Then
+                        num = col2
+                        Exit Do
+                    End If
+                    col1 = col2
+                Loop
+
+                DataGridView1.ColumnCount = num
+                num = 0
+                lstColumn.Items.Clear()
+                For Each currentField In currentRow
+                    DataGridView1.Columns(num).Name = num + 1
+                    num = num + 1
+                    lstColumn.Items.Add(num)
+                Next
+                DataGridView1.Refresh()
 
                 DataGridView1.Rows.Add(currentRow)
 
@@ -197,6 +222,7 @@
 
                 'Get Total Records Number
                 lblTRecords.Text = IO.File.ReadAllLines(txtImportFile.Text).Length
+
             End Using
 
             ' Special file structures
@@ -233,7 +259,9 @@
             FileClose(200)
 
         Catch ex As Exception
-            MsgBox(ex.HResult & " " & Err.Description)
+            If ex.HResult <> -2147024891 Then
+                MsgBox(ex.HResult & " " & Err.Description)
+            End If
             Me.Cursor = Cursors.Default
         End Try
         If DataGridView1.RowCount > 0 Then

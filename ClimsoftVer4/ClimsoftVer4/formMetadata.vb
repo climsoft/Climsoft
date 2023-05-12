@@ -1192,6 +1192,9 @@ Err:
             ds.Clear()
             cboElementId.Items.Clear()
             da.Fill(ds, "obselement")
+
+            maxRows = ds.Tables("obselement").Rows.Count
+
             For i = 0 To maxRows - 1 Step 1
                 cboElementId.Items.Add(ds.Tables("obselement").Rows(i).Item("elementId"))
             Next

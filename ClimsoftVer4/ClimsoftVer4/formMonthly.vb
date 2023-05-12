@@ -789,6 +789,17 @@ Public Class form_monthly
 
     End Sub
 
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+        Dim TblName As New dataEntryGlobalRoutines
+        Me.Cursor = Cursors.WaitCursor
+        If TblName.DataPush("form_monthly") Then
+            MsgBox("Data Pushed to remote server successfully")
+        Else
+            MsgBox("Data Push Failed!")
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
+
     Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
         'In order to move to move to the last record the record index is set to the maximum number of records minus one.
         inc = maxRows - 1

@@ -132,6 +132,7 @@ Public Class formAWSRealTime
         SetDataSet("aws_sites")
         rec = 0
         PopulateForm("sites", txtSitesNavigator, rec)
+        pnlSites.Dock = DockStyle.Right
         'rec = 0
     End Sub
 

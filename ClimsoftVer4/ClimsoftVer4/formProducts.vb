@@ -161,8 +161,9 @@ Public Class frmProducts
                ('30', 'Yearly Elements Observed', 'Yearly Time Series Chart per Station', 'Inventory'),
                ('31', 'Monthly Elements Observed', 'Monthly Time Series Chart per Station', 'Inventory'),
                ('32', 'Daily Levels', 'Daily Observations', 'Upper Air'),
-               ('33', 'Monthly Levels', 'Monthly Summeries', 'Upper Air'),
-               ('34', 'Annual Levels', 'Annual Summeries', 'Upper Air');"
+               ('33', 'Monthly Levels', 'Monthly Summaries', 'Upper Air'),
+               ('34', 'Annual Levels', 'Annual Summaries', 'Upper Air'),
+               ('35', 'Seasonal Monthly', 'Monthly Seasonal Summaries', 'Data');"
         Try
             Me.Cursor = Cursors.WaitCursor
             qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)
