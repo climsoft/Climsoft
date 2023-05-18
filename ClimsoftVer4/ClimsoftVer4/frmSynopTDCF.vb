@@ -5,7 +5,7 @@
     Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
     Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
     Dim recUpdate As New dataEntryGlobalRoutines
-
+    Dim TDCF As New tdcfRoutines
     Dim ds As New DataSet
     Dim sql, msg_header, msg_file, mmm, Data_Description_Section, descriptors_file As String
     Dim rec, Kount As Integer
@@ -14,6 +14,7 @@
     Private Sub frmSynopTDCF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         sql = "CREATE TABLE IF NOT EXISTS `bufr_indicators` (`BUFR_Edition` int(11) DEFAULT '0',`Originating_Centre` int(11) DEFAULT '0',`Originating_SubCentre` int(11) DEFAULT '0',`Update_Sequence` int(11) DEFAULT '0',`Optional_Section` int(11) DEFAULT '0',`Data_Category` int(11) DEFAULT '0',`Intenational_Data_SubCategory` int(11) DEFAULT '0',`Local_Data_SubCategory` int(11) DEFAULT '0',`Master_table` int(11) DEFAULT '0',`Local_Table` int(11) DEFAULT '0') ENGINE=InnoDB DEFAULT CHARSET=latin1;"
         PopulateForms()
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Sub PopulateForms()
@@ -241,7 +242,7 @@
     End Sub
 
     Private Sub cmdEncode_Click(sender As Object, e As EventArgs) Handles cmdEncode.Click
-        Dim tmplate, hr As String
+        Dim tmplate, wsi_desc, stn_wsi_data As String
         PopulateForms()
 
         Me.Cursor = Cursors.WaitCursor
@@ -264,7 +265,7 @@
             'Execute query
             objCmd.ExecuteNonQuery()
 
-            Bufr_Crex_Initialize(dbconn)  'Set all values to missing
+            'Bufr_Crex_Initialize(dbconn)  'Set all values to missing
 
             'Set data set
             sql = "Select * from bufr_crex_data"
@@ -277,15 +278,16 @@
             da.Fill(ds, "bufr_crex_data")
 
             ' Get the number of subsets
-            Dim substs As Integer
-            Dim subsets, sss, fl2 As String
+            Dim substs, sss, wsi_sss As Integer
+            Dim subset_data, wsi_subset_data, Section4_Data, fl2 As String
 
-            substs = Val(cboStation.Items.Count)
-            subsets = Strings.Format(substs, "000")
+            substs = cboStation.Items.Count
+            sss = 0 ' Strings.Format(substs, "000")
+            wsi_sss = 0
 
             'MsgBox("Total subsets = " & substs & " > " & subsets)
-            sss = subsets 'Format(substs, "000")
-
+            'sss = subsets 'Format(substs, "000")
+            'MsgBox(sss)
             ' Create folder for output files if not there
             If Not IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data") Then
                 IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data")
@@ -302,38 +304,62 @@
             FileClose(111)
 
             'Loop through the subsets
-            Data_Description_Section = ""
-            'MsgBox(cboStation.Items.Count)
+            Section4_Data = ""
+            subset_data = ""
+            wsi_subset_data = ""
+            sss = 0
+            wsi_sss = 0
+
             For i = 0 To cboStation.Items.Count - 1
-                ' Set the replicated elements according to observations per subset
+                Bufr_Crex_Initialize(dbconn)  'Set all values to missing
                 Set_Replications(dbconn, cboStation.Items(i))
                 Update_Station_Details(dbconn, cboStation.Items(i))
                 Update_Instruments_Details(dbconn, cboStation.Items(i))
                 Update_Time_Periods(dbconn)
-                'MsgBox(4)
                 Update_Observation_data(dbconn, cboStation.Items(i), txtYear.Text, cboMonth.Text, cboDay.Text, cboHour.Text)
-                'MsgBox("Observation Data Updated")
                 Encode_Bufr(dbconn)
-                Output_Data_Code(dbconn, i + 1)
-                Data_Description_Section = Data_Description_Section & Bufr_Section4(dbconn)
+                If Bufr_Section4(dbconn, Section4_Data) Then
+                    stn_wsi_data = ""
+                    If TDCF.WSI_data(cboStation.Items(i), stn_wsi_data) Then
+                        ' Subset data for station with WSI identification
+                        wsi_subset_data = stn_wsi_data & wsi_subset_data & Section4_Data
+                        wsi_sss = wsi_sss + 1
+                    Else
+                        subset_data = subset_data & Section4_Data
+                        sss = sss + 1
+                    End If
+                    Output_Data_Code(dbconn, i + 1)
+                Else
+                    Continue For
+                End If
             Next i
 
             ' Output Bufr coded data if subsets exist
-            'MsgBox(txtMsgHeader.Text)
-            'MsgBox(cboDay.Text)
 
             msg_header = txtMsgHeader.Text & " " & cboDay.Text.PadLeft(2, "0"c) & cboHour.Text.PadLeft(2, "0"c) & "00"
 
             ' Include BBB if present
             If cboBBB.Text <> "" Then msg_header = msg_header & " " & cboBBB.Text
 
-            '            ' Structure the output file name in format CCCCNNNNNNNN.ext
-            msg_file = txtMsgHeader.Text & cboDay.Text.PadLeft(2, "0"c) & cboHour.Text.PadLeft(2, "0"c) & "00" & "00"
+            ' Structure the output file name in format CCCCNNNNNNNN.ext
+            msg_file = Strings.Right(txtMsgHeader.Text, 4) & cboDay.Text.PadLeft(2, "0"c) & cboHour.Text.PadLeft(2, "0"c) & "00" & "00"
 
-            'MsgBox(msg_header & " " & msg_file)
+            'If Int(sss) > 0 Then
+            '    If Not Compute_Descriptors() Or Not BUFR_Code(dbconn, subset_data, sss) Then
+            '        MsgBox("Encoding Error")
+            '    End If
+            'End If
 
+            ' Encode BUFR for stations without WSI identifications
             If Int(sss) > 0 Then
-                If Not BUFR_Code(dbconn, Data_Description_Section, sss) Then
+                If Not Compute_Descriptors() Or Not BUFR_Code(dbconn, subset_data, sss) Then
+                    MsgBox("Encoding Error")
+                End If
+            End If
+
+            ' Encode BUFR for stations with WSI
+            If Int(wsi_sss) > 0 Then
+                If Not Compute_Descriptors(True) Or Not BUFR_Code(dbconn, wsi_subset_data, wsi_sss, True) Then
                     MsgBox("Encoding Error")
                 End If
             End If
@@ -344,7 +370,7 @@
             MsgBox("Finished Encoding")
         Catch ex As Exception
             dbconn.Close()
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " " & " cmdEncode")
             Me.Cursor = Cursors.Default
             FileClose(20)
         End Try
@@ -458,7 +484,7 @@
             End With
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " Bufr_Crex_Initialize")
         End Try
     End Sub
     Sub Set_Replications(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
@@ -520,9 +546,8 @@
         End With
     End Sub
     Sub Update_Station_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
-        'MsgBox(stn)
         Dim station_name, wmo_block, wmo_No, lat, lon, elev, qualifier, typ As String
-        'sql = "select stationName, wmoid, latitude, longitude, elevation, qualifier from station where stationId = '" & stn & "';"
+
         sql = "select stationName, wmoid, latitude, longitude, elevation from station where stationId = '" & stn & "';"
 
         Try
@@ -533,25 +558,25 @@
             ds.Clear()
             da.Fill(ds, "stations")
 
-            station_name = ds.Tables("stations").Rows(0).Item("stationName")
+            If Not IsDBNull(ds.Tables("stations").Rows(0).Item("stationName")) Then station_name = ds.Tables("stations").Rows(0).Item("stationName")
             If Len(station_name) > 20 Then station_name = Strings.Left(station_name, 20) 'Truncate station name to the madatory maximum of 20 characters
-            wmo_block = Strings.Left(ds.Tables("stations").Rows(0).Item("wmoid"), 2)
-            wmo_No = Strings.Right(ds.Tables("stations").Rows(0).Item("wmoid"), 3)
-            lat = ds.Tables("stations").Rows(0).Item("latitude")
-            lon = ds.Tables("stations").Rows(0).Item("longitude")
-            elev = ds.Tables("stations").Rows(0).Item("elevation")
+            If Not IsDBNull(ds.Tables("stations").Rows(0).Item("wmoid")) Then wmo_block = Strings.Left(ds.Tables("stations").Rows(0).Item("wmoid"), 2)
+            If Not IsDBNull(ds.Tables("stations").Rows(0).Item("wmoid")) Then wmo_No = Strings.Right(ds.Tables("stations").Rows(0).Item("wmoid"), 3)
+            If Not IsDBNull(ds.Tables("stations").Rows(0).Item("latitude")) Then lat = ds.Tables("stations").Rows(0).Item("latitude")
+            If Not IsDBNull(ds.Tables("stations").Rows(0).Item("longitude")) Then lon = ds.Tables("stations").Rows(0).Item("longitude")
+            If Not IsDBNull(ds.Tables("stations").Rows(0).Item("elevation")) Then elev = ds.Tables("stations").Rows(0).Item("elevation")
             'qualifier = ds.Tables("stations").Rows(0).Item("qualifier")
 
-            qualifier = Get_StationQualifier(conn1, stn)
-            'MsgBox(qualifier)
-            If qualifier = "AWS" Then
-                typ = 0 ' Manual stations only
-            ElseIf qualifier = "SYNOPTIC" Or qualifier = "RAINFALL" Then
-                typ = 1 ' Automatic station observations only
-            ElseIf qualifier = "HYBRID" Then
-                typ = 2 ' Both auto and manual observations used
+            qualifier = Strings.UCase(Get_StationQualifier(conn1, stn))
+
+            If qualifier = "MISSING" Then
+                typ = 3 ' Station type not indicated
+            ElseIf (qualifier = "HYBRID") Or Len(qualifier) > 3 And InStr(qualifier, "AWS") > 0 Then
+                typ = 2 'Both auto and manual station
+            ElseIf qualifier = "AWS" Then
+                typ = 0 ' Automatic station
             Else
-                typ = 3 ' Missing qualifier value
+                typ = 1  ' Manual station
             End If
 
             'Update the station details
@@ -569,13 +594,20 @@
             Update_Observation(conn1, cboDay.Text, "datetime_day")
             Update_Observation(conn1, cboHour.Text, "datetime_hour")
             Update_Observation(conn1, "00", "datetime_minute")
+
+            ' Get WSI if available
+            ' stn_wsi_data = ""
+            'If wsi_data(stn,wsi_data) Then
+            ' stn_wsi_data = wsi_data 
+            'End If
+
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " Update_Station_Details")
         End Try
     End Sub
     Function Get_StationQualifier(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String) As String
-        sql = "select qualifier,belongsTo from stationqualifier where belongsTo = '" & stn & "';"
-
+        'sql = "select qualifier,belongsTo from stationqualifier where belongsTo = '" & stn & "';"
+        sql = "SELECT qualifier from station WHERE stationId ='" & stn & "';"
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
@@ -584,20 +616,18 @@
             ds.Clear()
             da.Fill(ds, "qualifiers")
 
-            Get_StationQualifier = "MISSING" ' Initialize Qualifer to Missing value
             With ds.Tables("qualifiers")
-                If .Rows.Count < 1 Then
-                    Get_StationQualifier = "MISSING" ' Missing qualifier because no records in qualifier t
+                If .Rows.Count > 0 Then
+                    If IsDBNull(.Rows(0).Item("qualifier")) Then Return "MISSING"
+                    If Len(.Rows(0).Item("qualifier")) = 0 Then Return "MISSING"
                 Else
-                    If Not IsDBNull(.Rows(0).Item("qualifier")) Then
-                        Get_StationQualifier = .Rows(0).Item("qualifier")
-                    End If
+                        Get_StationQualifier = "MISSING"
                 End If
+                Return .Rows(0).Item("qualifier")
             End With
-
         Catch ex As Exception
             MsgBox(ex.Message)
-            Get_StationQualifier = "MISSING"
+            Return "MISSING"
         End Try
     End Function
     Sub Update_Instruments_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
@@ -681,16 +711,17 @@
                 rep2 = 0
                 With ds.Tables("synoptic")
 
-                    For i = 0 To .Columns.Count - 1
+                    For i = 5 To 53 '.Columns.Count - 1
                         dat = ""
                         fld = .Columns(i).ColumnName
                         'MsgBox(2 & " _" & fld)
-                        If Len(fld) = 11 Then ' Fields for data values
-                            code = Int(Strings.Mid(fld, 9, 3))
+                        'If Len(fld) = 11 And IsNumeric(Int(Strings.Mid(fld, 9, 3))) Then ' Fields for data values
+                        code = Int(Strings.Mid(fld, 9, 3))
                             'MsgBox(code)
                             If Not IsDBNull(.Rows(0).Item(i)) Then dat = .Rows(0).Item(i)
                             'MsgBox(dat)
                             If Len(dat) <> 0 Then
+                                'MsgBox(0)
                                 ' Compute observations with special conditions
                                 ' Scale Radiation and Pressure
                                 If code = 133 Then
@@ -734,7 +765,7 @@
                                 'Clouds below station level
                                 If code = 612 Or code = 622 Or code = 632 Or code = 642 Then rep2 = rep2 + 1
                             End If
-
+                            'MsgBox(1)
                             ' Convert Special Cloud type data
                             If code = "169" Or code = "170" Or code = "171" Then
                                 If Len(dat) <> 0 Then
@@ -754,10 +785,10 @@
                                 End If
                                 Update_Observation(conn1, dat, code)
                             End If
-                        End If
-
-                        ' Compute value for TRACE precipitation if present
-                        If fld = "Flag005" And Not IsDBNull(.Rows(0).Item(i)) Then
+                            'End If
+                            'MsgBox(2)
+                            ' Compute value for TRACE precipitation if present
+                            If fld = "Flag005" And Not IsDBNull(.Rows(0).Item(i)) Then
                             If .Rows(0).Item(i) = "T" Then Update_Observation(conn1, -1, 5) '24Hr Precipitation
                         End If
                         If fld = "Flag174" And Not IsDBNull(.Rows(0).Item(i)) Then
@@ -776,15 +807,17 @@
                                 Update_Observation(conn1, "15", "507") ' Time of beginning or end of precipitation - Set to missing
                             End If
                         End If
-
+                        'MsgBox(3)
                     Next
 
                     ' Update Cloud Replications
+                    'MsgBox(rep1 & " " & rep2)
                     Update_Observation(conn1, rep1, "cloud_rep1")
                     Update_Observation(conn1, rep2, "cloud_rep2")
                 End With
             End If
         Catch ex As Exception
+            MsgBox(fld & " " & ex.Message)
             If ex.HResult <> -2147467262 Then MsgBox(ex.Message & " Update_Observation_data")
             'MsgBox(sql)
         End Try
@@ -801,20 +834,23 @@
             Precip_Characteristic = 2
         ElseIf Val(dat) > 500 Then
             Precip_Characteristic = 3
+        Else
+            Precip_Characteristic = 15
         End If
+
         Return Precip_Characteristic
     End Function
 
     Sub Update_Observation(conn1 As MySql.Data.MySqlClient.MySqlConnection, data As String, element As String)
 
         sql = "update bufr_crex_data set observation = '" & data & "' where Climsoft_Element='" & element & "';"
-        ' Create the Command for executing query and set its properties
-        'MsgBox(sql)
+
         Try
+            ' Create the Command for executing query and set its properties
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
             'Execute query
             objCmd.ExecuteNonQuery()
-            'MsgBox(typ)
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -838,7 +874,7 @@
             'Select replication factors
             For i = 0 To kount1 - 1
                 ' Set the relication descriptor as TRUE
-                sql = "update bufr_crex_data set Selected = '1' where Climsoft_Element = '" & rep_type & "';"
+                sql = "update bufr_crex_data Set Selected = '1' where Climsoft_Element = '" & rep_type & "';"
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
                 objCmd.ExecuteNonQuery()
 
@@ -935,62 +971,62 @@
     Sub Encode_Bufr(conn1 As MySql.Data.MySqlClient.MySqlConnection)
         Dim ds1 As New DataSet
         Dim bufr_str, climsoft_element_scale As String
-        'Try
-        sql = "Select * from bufr_crex_data"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
-        ' Set to unlimited timeout period
-        da.SelectCommand.CommandTimeout = 0
+        Try
+            'sql = "Select * from bufr_crex_data"
+            sql = "SELECT * FROM bufr_crex_data where selected = 1 ORDER BY Nos;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
 
-        ds1.Clear()
-        da.Fill(ds1, "bufr_crex_data")
-        Kount = ds1.Tables("bufr_crex_data").Rows.Count
+            ds1.Clear()
+            da.Fill(ds1, "bufr_crex_data")
+            Kount = ds1.Tables("bufr_crex_data").Rows.Count
 
-        For i = 0 To Kount - 1
-            With ds1.Tables("bufr_crex_data").Rows(i)
+            For i = 0 To Kount - 1
+                With ds1.Tables("bufr_crex_data").Rows(i)
 
-                If Len(.Item("observation")) <> 0 Then
+                    If Len(.Item("observation")) <> 0 Then
 
-                    climsoft_element_scale = ScaleFactor(conn1, .Item("climsoft_element"))
-                    'MsgBox(1 & " - " & climsoft_element_scale)
-                    bufr_str = Bufr_Data(conn1, .Item("Bufr_Unit"), .Item("Bufr_Scale"), .Item("Bufr_RefValue"), .Item("Bufr_DataWidth_Bits"), .Item("observation"), climsoft_element_scale)
-                    'MsgBox(2 & " - " & .Item("climsoft_element"))
-                    'MsgBox(bufr_str & " " & .Item("Bufr_Unit") & " " & .Item("Bufr_Scale") & " " & .Item("observation") & " " & climsoft_element_scale)
+                        climsoft_element_scale = ScaleFactor(conn1, .Item("climsoft_element"))
+                        'MsgBox(.Item("climsoft_element") & " - " & climsoft_element_scale)
+                        bufr_str = Bufr_Data(conn1, .Item("Bufr_Unit"), .Item("Bufr_Scale"), .Item("Bufr_RefValue"), .Item("Bufr_DataWidth_Bits"), .Item("observation"), climsoft_element_scale)
 
-                Else ' Compute binary stream for missing data
-                    bufr_str = "1"
-                    For k = 2 To Int(.Item("Bufr_DataWidth_Bits"))
-                        bufr_str = bufr_str & "1"
-                    Next
-                End If
+                    Else ' Compute binary stream for missing data
+                        bufr_str = "1"
+                        For k = 2 To Int(.Item("Bufr_DataWidth_Bits"))
+                            bufr_str = bufr_str & "1"
+                        Next
+                    End If
 
-                ' Update with bufr data
-                sql = "update bufr_crex_data set Bufr_Data = '" & bufr_str & "' where Climsoft_Element = '" & .Item("climsoft_element") & "';"
+                    ' Update with bufr data
+                    sql = "update bufr_crex_data set Bufr_Data = '" & bufr_str & "' where Climsoft_Element = '" & .Item("climsoft_element") & "';"
 
-                ' Create the Command for executing query to update with Bufr data
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
-                'Execute query
-                objCmd.ExecuteNonQuery()
-            End With
-        Next
+                    ' Create the Command for executing query to update with Bufr data
+                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+                    'Execute query
+                    objCmd.ExecuteNonQuery()
+                End With
+            Next
 
 
-        'Catch ex As Exception
-        '    MsgBox(ex.Message)
-        'End Try
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
     End Sub
 
     Function ScaleFactor(conn1 As MySql.Data.MySqlClient.MySqlConnection, code As String) As String
 
         ScaleFactor = 1
-
+        If Not IsNumeric(code) Then Return ScaleFactor
         Try
             sql = "Select elementId, elementScale from obselement where elementId = '" & Val(code) & "';"
+
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
-            ds.Clear()
+                ds.Clear()
             da.Fill(ds, "obselement")
             Kount = ds.Tables("obselement").Rows.Count
 
@@ -1021,9 +1057,8 @@
             'MsgBox(0)
             Bufr_Data = ""
             If Bufr_Unit = "CCITT IA5" Then
-
-                Bufr_Data = CCITT_Binary(conn1, dat, Bufr_DataWidth)
-
+                'Bufr_Data = CCITT_Binary(conn1, dat, Bufr_DataWidth)
+                Bufr_Data = TDCF.CCITT_Binary(dat, Bufr_DataWidth)
                 Exit Function
             End If
             'MsgBox(1)
@@ -1059,7 +1094,7 @@
         Decimal_Binary = "0"
         Try
 
-        For i = 2 To bts
+            For i = 2 To bts
                 Decimal_Binary = Decimal_Binary & "0"
             Next
 
@@ -1100,9 +1135,10 @@
 
     End Function
 
-    Function Bufr_Section4(conn1 As MySql.Data.MySqlClient.MySqlConnection) As String
+    Function Bufr_Section4(conn1 As MySql.Data.MySqlClient.MySqlConnection, ByRef subset_section4 As String) As Boolean
+
+        'Dim bufr_subset As String
         Try
-            Dim bufr_subset As String
 
             sql = "select * from bufr_crex_data where selected =1 order by nos;"
 
@@ -1114,14 +1150,19 @@
             da.Fill(ds, "bufr_coded")
             Kount = ds.Tables("bufr_coded").Rows.Count
 
-            ' Get the binary data stream for the Subset
-            bufr_subset = ""
-            For i = 0 To Kount - 1
-                bufr_subset = bufr_subset & ds.Tables("bufr_coded").Rows(i).Item("Bufr_Data")
-            Next
+            If Kount > 0 Then
+                ' Get the binary data stream for the Subset
+                subset_section4 = ""
+                For i = 0 To Kount - 1
+                    subset_section4 = subset_section4 & ds.Tables("bufr_coded").Rows(i).Item("Bufr_Data")
+                Next
 
-            PrintLine(20, bufr_subset)
-            Bufr_Section4 = bufr_subset
+                PrintLine(20, subset_section4)
+                'Bufr_Section4 = bufr_subset
+                Return True
+            Else
+                Return False
+            End If
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -1182,17 +1223,18 @@
     End Function
 
 
-    Function BUFR_Code(conn1 As MySql.Data.MySqlClient.MySqlConnection, binary_data As String, subsets As Integer) As Boolean
+    Function BUFR_Code(conn1 As MySql.Data.MySqlClient.MySqlConnection, binary_data As String, subsets As Integer, Optional WSId As Boolean = False) As Boolean
+
         'MsgBox(subsets)
         BUFR_Code = False
 
         Try
-            Dim octets As String
+            Dim octets, Octtets As String
             Dim section0, section1, section2, section3, section4, section5, substs, Dat_Sec As String
 
             substs = ""
-            Dat_Sec = Data_Description_Section
-            Data_Description_Section = ""
+            'Dat_Sec = Data_Description_Section
+            'Data_Description_Section = ""
 
             ' Encode Section 1 - Identification Section
             section1 = ""
@@ -1247,23 +1289,28 @@
             ' Octet 5 onwards. Reserved for use by ADP centres
 
             ' Compute Section 3 - Data Description Section.
-            Dim data_descriptor, f, x, y As String
+            ' Section 3 details to be computed in the code below
+            ' Octet 1 - 3. Length of section in octets
+            ' Octet 4. Reserved (Set to Zero)
+            ' Octet 7. Type of data. Bit 1, = 1 observed = 0 Other. Bit 2 = 1 Compressed, = 0 non-compressed. Bit 3-8 reserved (set to zero)
+            ' Octet 8 Onwards - Collection of describtors occupying 2 octets each. 1 Octet to be added to make the total even.
 
+            ' Initialize Section3 string
             section3 = ""
-            'Convert Descriptors to binary - Descriptor for the Template used. 16 bits for a descriptor = 2 Octets
-            data_descriptor = Strings.Right(cboTemplate.Text, 6)            'TM_307081
-            f = Decimal_Binary(Strings.Left(data_descriptor, 1), 2)    ' Descriptor type
-            x = Decimal_Binary(Strings.Mid(data_descriptor, 2, 2), 6) ' Descriptor Class
-            y = Decimal_Binary(Strings.Mid(data_descriptor, 4, 3), 8) ' Entry in Class X
 
-            data_descriptor = f & x & y     ' Complete Descriptor in binary
+            'Octet 1 - 3. Length of section
 
-            ' Octet 1 - 3. Length of section. Total of 9 Octets. 1 Octet to be added to make them even
-            section3 = section3 & Decimal_Binary(10, 24)
+            'section3 = section3 & Decimal_Binary(10, 24)
+
+            Octtets = 7 + Len(Data_Description_Section) / 8
+
+            If Octtets Mod 2 <> 0 Then Octtets = Octtets + 1
+            section3 = section3 & Decimal_Binary(Octtets, 24)
+
             ' Octet 4. Reserved (Set to Zero)
             section3 = section3 & Decimal_Binary(0, 8)
-            ' Octet 5 - 6. Number of Subsets
 
+            ' Octet 5 - 6. Number of Subsets
             section3 = section3 & Decimal_Binary(Val(subsets), 16)
 
             ' Octet 7. Type of data. Bit 1, = 1 observed = 0 Other. Bit 2 = 1 Compressed, = 0 non-compressed. Bit 3-8 reserved (set to zero)
@@ -1272,7 +1319,8 @@
             Mid(octets, 2) = 0
             section3 = section3 & octets
             ' Octet 8 -9 data descriptors - 2 octets
-            section3 = section3 & data_descriptor
+            section3 = section3 & Data_Description_Section
+            'MsgBox(Len(Data_Description_Section))
             ' Octet 10. An extra octet to make total octets even
             section3 = section3 & "00000000"
 
@@ -1283,7 +1331,7 @@
             'Dim binary_data As String
 
             section4 = ""
-
+            'MsgBox(Len(binary_data))
             ' Compute the extra bits required to have complete octets
             xtrbits = Len(binary_data) Mod 8
 
@@ -1375,7 +1423,8 @@
 
             'Construct and open Bufr output text file based on the message header
             'bufr_file = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & msg_file & ".f"
-            bufr_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
+            If WSId Then msg_file = msg_file & "_WSI"
+            bufr_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".tmp"
             FileOpen(2, bufr_file, OpenMode.Binary)
 
             'octsfl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_octets.txt"
@@ -1475,46 +1524,19 @@
     Private Sub cmdSend_Click(sender As Object, e As EventArgs) Handles cmdSend.Click
 
         Me.Cursor = Cursors.WaitCursor
-        ' Get server details
+
         Try
-            'dbConnectionString = frmLogin.txtusrpwd.Text
-            'dbconn.ConnectionString = dbConnectionString
-            'dbconn.Open()
-
-            sql = "SELECT * FROM aws_mss"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-            ' Set to unlimited timeout period
-            da.SelectCommand.CommandTimeout = 0
-
-            ds.Clear()
-            da.Fill(ds, "server")
-            Kount = ds.Tables("server").Rows.Count
-            'MsgBox(Kount)
-            If Kount = 0 Then
-                MsgBox("No server located")
-                Exit Sub
+            If TDCF.FTP_Put(txtMsgbFile.Text) Then
+                MsgBox("File Sent")
             Else
-                Dim bufr_file, url, login, pwd, foldr, fmode As String
-                bufr_file = txtMsgbFile.Text
-                url = ds.Tables("server").Rows(0).Item("ftpId")
-                login = ds.Tables("server").Rows(0).Item("userName")
-                pwd = ds.Tables("server").Rows(0).Item("password")
-                foldr = ds.Tables("server").Rows(0).Item("inputFolder")
-                fmode = ds.Tables("server").Rows(0).Item("ftpMode")
-
-                If Not FTP_Execute(bufr_file, url, login, pwd, foldr, fmode, "put") Then
-                    MsgBox("FTP Failure")
-                Else
-                    MsgBox("File Sent")
-                End If
-
+                MsgBox("FTP Failure")
             End If
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
             Me.Cursor = Cursors.Default
         End Try
-        ' FTP Access
 
     End Sub
 
@@ -1591,6 +1613,7 @@
                 If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_bufr.txt" & Chr(13) & Chr(10))
             Else
                 If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_bufr.txt" & Chr(13) & Chr(10))
+                'If ftpmode = "FTP" Then Print(1, "open ftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
                 'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
                 If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_bufr.txt" & Chr(13) & Chr(10))
             End If
@@ -1682,9 +1705,33 @@
             End If
 
         End With
-    End Sub
-
-    Private Sub cmdEncode_ContextMenuStripChanged(sender As Object, e As EventArgs) Handles cmdEncode.ContextMenuStripChanged
 
     End Sub
+    Function Compute_Descriptors(Optional WSId As Boolean = False) As Boolean
+        Dim descriptor_data, wsi_descriptor, f, x, y As String
+
+        Try
+            Data_Description_Section = ""
+            wsi_descriptor = " "
+            descriptor_data = Strings.Right(cboTemplate.Text, 6)            'TM_307081
+
+            f = Decimal_Binary(Strings.Left(descriptor_data, 1), 2)    ' Descriptor type
+            x = Decimal_Binary(Strings.Mid(descriptor_data, 2, 2), 6) ' Descriptor Class
+            y = Decimal_Binary(Strings.Mid(descriptor_data, 4, 3), 8) ' Entry in Class X
+
+            Data_Description_Section = f & x & y     ' Complete Descriptor in binary
+
+            If Not WSId Then Return True
+
+            If TDCF.WSI_Sequence(wsi_descriptor) Then
+                Data_Description_Section = wsi_descriptor & Data_Description_Section
+                'MsgBox(wsi_descriptor & Chr(10) & Chr(13) & Data_Description_Section & Chr(10) & Chr(13) & wsi_descriptor & Data_Description_Section)
+            End If
+            'MsgBox(descriptor_data & " " & Data_Description_Section)
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
 End Class

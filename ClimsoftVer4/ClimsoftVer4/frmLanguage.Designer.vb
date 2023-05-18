@@ -56,7 +56,7 @@ Partial Class frmLanguage
         Me.btnCancel.Size = New System.Drawing.Size(94, 23)
         Me.btnCancel.TabIndex = 7
         Me.btnCancel.Tag = "Cancel"
-        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.Text = "Cancel"
         '
         'btnOK
         '
@@ -65,7 +65,7 @@ Partial Class frmLanguage
         Me.btnOK.Size = New System.Drawing.Size(94, 23)
         Me.btnOK.TabIndex = 6
         Me.btnOK.Tag = "OK"
-        Me.btnOK.Text = "&OK"
+        Me.btnOK.Text = "OK"
         '
         'frmLanguage
         '

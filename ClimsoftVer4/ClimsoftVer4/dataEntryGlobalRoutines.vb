@@ -1026,5 +1026,52 @@ Public Class dataEntryGlobalRoutines
         Next
 
     End Sub
+    Function GetQCLimits(stn As String, ecode As String, ByRef Ulimit As String, ByRef Llimit As String) As Boolean
+        Dim connc As New MySql.Data.MySqlClient.MySqlConnection
+        Dim myConnectionString, sql As String
+        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim ds As New DataSet
 
+        Try
+
+            myConnectionString = frmLogin.txtusrpwd.Text
+            connc.ConnectionString = myConnectionString
+
+            connc.Open()
+
+            ' Check local limits
+            sql = "SELECT upperlimit, lowerlimit FROM stationelement WHERE recordedFrom = '" & stn & "' AND describedBy = '" & Val(ecode) & "';"
+            'MsgBox(sql)
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, connc)
+            ds.Clear()
+            da.Fill(ds, "flds")
+
+            If ds.Tables("flds").Rows.Count > 0 Then
+                Ulimit = ds.Tables("flds").Rows(0).Item(0)
+                Llimit = ds.Tables("flds").Rows(0).Item(1)
+                connc.Close()
+                Return True
+            End If
+
+            ' Check global limits
+            sql = "SELECT upperlimit, lowerlimit FROM obselement WHERE elementid = '" & Val(ecode) & "';"
+            'MsgBox(sql)
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, connc)
+            ds.Clear()
+            da.Fill(ds, "flds")
+
+            If ds.Tables("flds").Rows.Count > 0 Then
+                Ulimit = ds.Tables("flds").Rows(0).Item(0)
+                Llimit = ds.Tables("flds").Rows(0).Item(1)
+                Return True
+                connc.Close()
+            End If
+
+            connc.Close()
+            Return False
+        Catch ex As Exception
+            connc.Close()
+            Return False
+        End Try
+    End Function
 End Class

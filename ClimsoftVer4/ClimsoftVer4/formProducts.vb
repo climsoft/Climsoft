@@ -20,7 +20,7 @@ Public Class frmProducts
 
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'todo. this function is meant to update the products table everytime it's run
-        'ProductsTable_Update()
+        ProductsTable_Update()
 
         'set up the products data table
         Dim clsDataCall As New DataCall
@@ -132,7 +132,7 @@ Public Class frmProducts
                ('01', 'Inventory', 'Details of Data Records', 'Inventory'),  
                ('02', 'Hourly', 'Summaries of Hourly Observations', 'Data'),  
                ('03', 'Daily', 'Summaries of Daily Observation', 'Data'),  
-               ('04', 'Pentad', '5 Days Summeries', 'Data'),  
+               ('04', 'Pentad', '5 Days Summaries', 'Data'),  
                ('05', 'Dekadal', '10 Days Summaries', 'Data'),  
                ('06', 'Monthly', 'Monthly Summaries', 'Data'),  
                ('07', 'Annual', 'Annual Summaries', 'Data'),  
@@ -161,8 +161,9 @@ Public Class frmProducts
                ('30', 'Yearly Elements Observed', 'Yearly Time Series Chart per Station', 'Inventory'),
                ('31', 'Monthly Elements Observed', 'Monthly Time Series Chart per Station', 'Inventory'),
                ('32', 'Daily Levels', 'Daily Observations', 'Upper Air'),
-               ('33', 'Monthly Levels', 'Monthly Summeries', 'Upper Air'),
-               ('34', 'Annual Levels', 'Annual Summeries', 'Upper Air');"
+               ('33', 'Monthly Levels', 'Monthly Summaries', 'Upper Air'),
+               ('34', 'Annual Levels', 'Annual Summaries', 'Upper Air'),
+               ('35', 'Seasonal Monthly', 'Monthly Seasonal Summaries', 'Data');"
         Try
             Me.Cursor = Cursors.WaitCursor
             qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)

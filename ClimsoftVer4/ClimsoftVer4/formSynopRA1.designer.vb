@@ -942,7 +942,7 @@ Partial Class form_synopticRA1
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(623, 604)
+        Me.btnClose.Location = New System.Drawing.Point(653, 604)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(64, 23)
         Me.btnClose.TabIndex = 59
@@ -952,7 +952,7 @@ Partial Class form_synopticRA1
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(354, 604)
+        Me.btnClear.Location = New System.Drawing.Point(395, 604)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(73, 23)
         Me.btnClear.TabIndex = 58
@@ -962,7 +962,7 @@ Partial Class form_synopticRA1
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(95, 604)
+        Me.btnCommit.Location = New System.Drawing.Point(136, 604)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(79, 23)
         Me.btnCommit.TabIndex = 55
@@ -971,7 +971,7 @@ Partial Class form_synopticRA1
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(265, 604)
+        Me.btnDelete.Location = New System.Drawing.Point(306, 604)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(83, 23)
         Me.btnDelete.TabIndex = 57
@@ -980,16 +980,16 @@ Partial Class form_synopticRA1
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(19, 604)
+        Me.btnAddNew.Location = New System.Drawing.Point(33, 604)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(70, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(97, 23)
         Me.btnAddNew.TabIndex = 56
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(180, 604)
+        Me.btnUpdate.Location = New System.Drawing.Point(221, 604)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(79, 23)
         Me.btnUpdate.TabIndex = 56
@@ -1045,9 +1045,9 @@ Partial Class form_synopticRA1
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(699, 604)
+        Me.btnHelp.Location = New System.Drawing.Point(723, 604)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(64, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(58, 23)
         Me.btnHelp.TabIndex = 60
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -1408,16 +1408,16 @@ Partial Class form_synopticRA1
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(433, 604)
+        Me.btnView.Location = New System.Drawing.Point(474, 604)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(85, 23)
+        Me.btnView.Size = New System.Drawing.Size(80, 23)
         Me.btnView.TabIndex = 661
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnTDCF
         '
-        Me.btnTDCF.Location = New System.Drawing.Point(524, 604)
+        Me.btnTDCF.Location = New System.Drawing.Point(560, 604)
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(87, 23)
         Me.btnTDCF.TabIndex = 662

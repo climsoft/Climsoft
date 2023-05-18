@@ -87,41 +87,59 @@
 
                     ''Get the element limits
 
-                    elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
-                    sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
-                    '
-                    daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
-                    'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
-                    dsValueLimits.Clear()
-                    'Add row for element code associated with active control
-                    daValueLimits.Fill(dsValueLimits, "obselement")
+                    'elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
 
+                    ' This code was included on 21/09/2022 to cater for the local (station's) limits where they exist. Otherwise the global limits will be used
                     obsValue = Me.ActiveControl.Text
-                    If dsValueLimits.Tables("obselement").Rows.Count > 0 Then ' Limits record available
-                        'Get element lower limit
+                    elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
+                    'MsgBox(obsValue & " " & cboStation.SelectedValue & " " & elemCode)
+                    objKeyPress.GetQCLimits(cboStation.SelectedValue, elemCode, valUpperLimit, valLowerLimit)
+                    'MsgBox(cboStation.SelectedValue & " " & elemCode & " " & valUpperLimit & " " & valLowerLimit)
 
-                        If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
-                            valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
-                        Else
-                            valLowerLimit = ""
-                        End If
-                        'Get element upper limit
-                        If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
-                            valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
-                        Else
-                            valUpperLimit = ""
-                        End If
-
-                        'Check lower limit
-                        If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
-                            objKeyPress.checkLowerLimit(Me.ActiveControl, obsValue, valLowerLimit)
-                        End If
-                        'Check upper limit
-                        If obsValue <> "" And valUpperLimit <> "" And tabNext = True Then
-                            objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit)
-                        End If
-                        'MsgBox("Obs Value: " & obsValue & " Upper Limit: " & valUpperLimit & " Lower Limit: " & valLowerLimit)
+                    'Check lower limit
+                    If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
+                        objKeyPress.checkLowerLimit(Me.ActiveControl, obsValue, valLowerLimit)
                     End If
+                    'Check upper limit
+                    If obsValue <> "" And valUpperLimit <> "" And tabNext = True Then
+                        objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit)
+                    End If
+
+
+                    'sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
+                    ''
+                    'daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                    ''Clear all rows in dataset before filling dataset with new row record for element code associated with active control
+                    'dsValueLimits.Clear()
+                    ''Add row for element code associated with active control
+                    'daValueLimits.Fill(dsValueLimits, "obselement")
+
+                    'obsValue = Me.ActiveControl.Text
+                    'If dsValueLimits.Tables("obselement").Rows.Count > 0 Then ' Limits record available
+                    '    'Get element lower limit
+
+                    '    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
+                    '        valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
+                    '    Else
+                    '        valLowerLimit = ""
+                    '    End If
+                    '    'Get element upper limit
+                    '    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
+                    '        valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
+                    '    Else
+                    '        valUpperLimit = ""
+                    '    End If
+
+                    '    'Check lower limit
+                    '    If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
+                    '        objKeyPress.checkLowerLimit(Me.ActiveControl, obsValue, valLowerLimit)
+                    '    End If
+                    '    'Check upper limit
+                    '    If obsValue <> "" And valUpperLimit <> "" And tabNext = True Then
+                    '        objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit)
+                    '    End If
+                    '    'MsgBox("Obs Value: " & obsValue & " Upper Limit: " & valUpperLimit & " Lower Limit: " & valLowerLimit)
+                    'End If
 
                 ElseIf Me.ActiveControl.Name = "txtYear" Then
                     'Check for numeric
@@ -343,18 +361,18 @@
             dataFormRecCount = ds.Tables("form_agro1").Rows.Count
 
             If dataFormRecCount > 0 Then
-                    cboStation.SelectedValue = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("stationId")
-                    strYear = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("yyyy")
-                    strMonth = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("mm")
-                    strDay = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("dd")
-                Else
-                    cboStation.SelectedValue = cboStation.SelectedValue
-                    strYear = txtYear.Text
-                    strMonth = cboMonth.Text
-                    strDay = cboDay.Text
-                End If
+                cboStation.SelectedValue = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("stationId")
+                strYear = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("yyyy")
+                strMonth = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("mm")
+                strDay = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("dd")
+            Else
+                cboStation.SelectedValue = cboStation.SelectedValue
+                strYear = txtYear.Text
+                strMonth = cboMonth.Text
+                strDay = cboDay.Text
+            End If
 
-                Dim ctl As Control
+            Dim ctl As Control
 
             'Clear textboxes for observation values
             'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
@@ -930,17 +948,17 @@
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
 
         'Open form for displaying data transfer progress
-        frmFormUpload.lblFormName.Text = "form_agro1"
-        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
-
+        frmFormUpload.lblFormName1.Text = "form_agro1"
         frmFormUpload.Show()
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
+
         Exit Sub
 
         frmDataTransferProgress.Show()
         'Upload data to observationInitial table
-        Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String, _
+        Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String,
             dd As String, hh As String, ctl As Control, capturedBy As String
-        Dim stnId As String, elemCode As Integer, obsDatetime As String, obsVal As String, obsFlag As String, _
+        Dim stnId As String, elemCode As Integer, obsDatetime As String, obsVal As String, obsFlag As String,
             qcStatus As Integer, acquisitionType As Integer, obsLevel As String, dataForm As String
 
         Try
@@ -991,7 +1009,7 @@
 
                     'Generate SQL string for inserting data into observationinitial table
                     If Strings.Len(obsVal) > 0 Then
-                        strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
+                        strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
                             "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                             & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 

@@ -1177,16 +1177,14 @@ Public Class form_synopticRA1
 
     End Sub
 
-    Private Sub cboDay_LostFocus(sender As Object, e As EventArgs) Handles cboDay.LostFocus
-
-    End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
-        frmFormUpload.lblFormName.Text = "form_agro1"
-        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
 
+        frmFormUpload.lblFormName1.Text = "form_synoptic2_tdcf"
         frmFormUpload.Show()
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
+
         Exit Sub
 
         frmDataTransferProgress.Show()

@@ -32,6 +32,8 @@ Public Class formDataView
         End If
         'DataGridView.Top = 300
         'MsgBox(dsSourceTableName)
+
+        ClsTranslations.TranslateForm(Me)
     End Sub
     'Sub ViewStation()
     '    Dim sql As String = "SELECT * FROM Authors"
@@ -54,7 +56,7 @@ Public Class formDataView
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        MsgBox("Not yet implemented", MsgBoxStyle.Information)
+        MsgBox(ClsTranslations.GetTranslation("Not yet implemented"), MsgBoxStyle.Information)
     End Sub
 
     Private Sub populateDataGrid(strSQL As String)
@@ -87,13 +89,13 @@ Public Class formDataView
             End With
             'MsgBox(tblhdr)
             dlgImportFile.Filter = "Form Import file|*.*"
-            dlgImportFile.Title = "Open Import File"
+            dlgImportFile.Title = ClsTranslations.GetTranslation("Open Import File")
             dlgImportFile.FileName = dsSourceTableName
             dlgImportFile.ShowDialog()
             x = dlgImportFile.FileName
 
             If InStr(x, dsSourceTableName) = 0 Then
-                MsgBox("The selected import file name does not match the opened form: " & dsSourceTableName & ". Please confirm!")
+                MsgBox(ClsTranslations.GetTranslation("The selected import file name does not match the opened form: ") & dsSourceTableName & ClsTranslations.GetTranslation(". Please confirm!"))
                 FileClose(111)
                 conn.Close()
                 Exit Sub
@@ -130,7 +132,7 @@ Public Class formDataView
             DataGridView.Refresh()
             conn.Close()
 
-                MsgBox("File '" & x & "' Successfully Imported")
+            MsgBox("File '" & x & ClsTranslations.GetTranslation("' Successfully Imported"))
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -242,12 +244,12 @@ Public Class formDataView
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                 objCmd.ExecuteNonQuery()
 
-                MsgBox("Selected record has been deleted!", MsgBoxStyle.Information)
+                MsgBox(ClsTranslations.GetTranslation("Selected record has been deleted!"), MsgBoxStyle.Information)
 
                 populateDataGrid(Sql2)
                 conn.Close()
             Else
-                MsgBox("Deleting records not enabled for selected table datasheet!", MsgBoxStyle.Exclamation)
+                MsgBox(ClsTranslations.GetTranslation("Deleting records not enabled for selected table datasheet!"), MsgBoxStyle.Exclamation)
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -337,12 +339,12 @@ Public Class formDataView
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                 objCmd.ExecuteNonQuery()
                 '
-                MsgBox("Selected value has been updated!", MsgBoxStyle.Information)
+                MsgBox(ClsTranslations.GetTranslation("Selected value has been updated!"), MsgBoxStyle.Information)
                 '
                 conn.Close()
             Else
-                MsgBox("Updating of value not enabled for selected table datasheet or field, or field is part of a Primary Key!" &
-                       " You may try updating value in single record review mode after closing datasheet view.", MsgBoxStyle.Exclamation)
+                MsgBox(ClsTranslations.GetTranslation("Updating of value not enabled for selected table datasheet or field, or field is part of a Primary Key!") &
+                       ClsTranslations.GetTranslation(" You may try updating value in single record review mode after closing datasheet view."), MsgBoxStyle.Exclamation)
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -372,13 +374,13 @@ Public Class formDataView
             'exportfile = System.IO.Path.GetFullPath(Application.CommonAppDataPath) & "\" & dsSourceTableName & ".csv"
 
             dlgExportFile.Filter = "Form Export file|*.csv"
-            dlgExportFile.Title = "Save Export File"
+            dlgExportFile.Title = ClsTranslations.GetTranslation("Save Export File")
             dlgExportFile.FileName = dsSourceTableName
             dlgExportFile.ShowDialog()
             x = dlgExportFile.FileName
 
             If InStr(x, dsSourceTableName) = 0 Then
-                MsgBox("Improper filename. It Must contain the phrase: " & dsSourceTableName)
+                MsgBox(ClsTranslations.GetTranslation("Improper filename. It Must contain the phrase: ") & dsSourceTableName)
                 'FileClose(111)
                 conn.Close()
                 Exit Sub
@@ -406,15 +408,20 @@ Public Class formDataView
                         'dat = dat & "," & "\N"
                     Else
                         CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
+
                         If IsDate(CellValue) And InStr(CellValue, ".") = 0 Then
                             CellValue = DateAndTime.Year(CellValue) & "-" & DateAndTime.Month(CellValue) & "-" & DateAndTime.Day(CellValue) & " " & DateAndTime.Hour(CellValue) & ":" & DateAndTime.Minute(CellValue) & ":" & DateAndTime.Second(CellValue)
                             'MsgBox(CellValue)
                         End If
-                        'dat = dat & "," & CellValue
+                        ' Exclude escape characters that had been observe in some fields
+                        If InStr(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Chr(10)) > 0 Or InStr(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Chr(13)) > 0 Then
+                            CellValue = Strings.Left(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Len(ds1.Tables(dsSourceTableName).Rows(i).Item(j)) - 1)
+                        End If
                     End If
+
                     dat = dat & "," & CellValue
                 Next
-                PrintLine(111, dat)
+                Print(111, dat & Chr(10))
             Next
             FileClose(111)
 
@@ -439,7 +446,7 @@ Public Class formDataView
 
             conn.Close()
 
-            MsgBox("File '" & x & "' Successfully Exported")
+            MsgBox(ClsTranslations.GetTranslation("File") & " '" & x & "' " & ClsTranslations.GetTranslation("Successfully Exported"))
             'CommonModules.ViewFile(exportfile)
         Catch ex As Exception
             MsgBox(ex.Message)

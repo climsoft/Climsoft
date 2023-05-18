@@ -371,14 +371,18 @@ Public Class formProductsSelectCriteria
                            Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                            group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime)
                            Order By recordedFrom, describedBy, YY, MM) As tt
-                           where DF >= 0 group by YY, MM;"
+                           where DF >= 0
+                           group by StationID, YY, MM
+                           order by StationID, YY, MM;"
 
                     '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
                     'sql = "select StationID,station_Name,Lat, Lon, Elev,YY,MM," & elmcolmn & " from (Select recordedFrom As StationID, describedBy,stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                     '       From observationfinal inner Join station On stationId = recordedFrom
                     '       Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                     '       group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime)
-                    '       Order By recordedFrom, describedBy, YY, MM) As tt group by YY, MM;"
+                    '       Order By recordedFrom, describedBy, YY, MM) As tt
+                    '       group by StationID, YY, MM
+                    '       order by StationID, YY, MM;"
 
                     ' Transpose products if so selected
                     If chkTranspose.Checked = True Then
@@ -770,10 +774,69 @@ Public Class formProductsSelectCriteria
                           GROUP BY StationId,YY,Level ORDER BY recordedFrom, YY, Level DESC;"
 
                     DataProducts(sql, lblProductType.Text)
+                Case "Seasonal Monthly"
 
+                    Dim mm, startMonth, kount, yrs As Integer
+                    Dim hdr, enddate As String
+                    Dim endmonth As Date
+
+                    startMonth = DateAndTime.Month(dateFrom.Text)
+
+                    ' Compute the end seasonal date
+                    yrs = DateAndTime.Year(dateTo.Text) - DateAndTime.Year(dateFrom.Text)
+                    If yrs > 0 Then
+                        enddate = DateAdd("yyyy", yrs, dateFrom.Text)
+                        enddate = DateAdd("m", -1, enddate)
+                        If DateAndTime.Month(dateFrom.Text) = 1 Then enddate = DateAdd("m", 12, enddate)
+                        endmonth = enddate
+                            'MsgBox(endmonth)
+                            Do While endmonth.Month <> DateAndTime.Month(dateFrom.Text)
+                                endmonth = DateAndTime.DateAdd("d", 1, endmonth)
+                            Loop
+                            edate = DateAndTime.DateAdd("d", -1, endmonth)
+                            dateTo.Text = edate
+                            dateTo.Refresh()
+
+                            edate = DateAndTime.Year(edate) & "-" & DateAndTime.Month(edate) & "-" & DateAndTime.Day(edate) & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text
+                            'MsgBox(edate)
+                        End If
+
+                        kount = 0
+                    hdr = startMonth
+                    For i = 0 To 11
+
+                        kount = i + startMonth
+                        If kount > 12 Then
+                            mm = kount - 12
+                        Else
+                            mm = kount
+                        End If
+                        If i > 0 Then hdr = hdr & "," & mm
+                    Next
+
+                    'MsgBox("Seasonal Monthly - Start Month = " & hdr)
+                    'sql = "select StationID,station_Name,describedBy,Lat, Lon, Elev,YY,MM," & elmcolmn & " from (Select recordedFrom As StationID, describedBy,stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
+                    '       From observationfinal inner Join station On stationId = recordedFrom
+                    '       Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
+                    '       group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime)
+                    '       Order By recordedFrom, describedBy, YY, MM) As tt
+                    '       where DF >= 0
+                    '       group by StationID, YY, MM
+                    '       order by StationID, YY, MM;"
+
+                    sql = "select StationID,station_Name,describedBy,Lat, Lon, Elev,YY,MM, SUMMARY from (Select recordedFrom As StationID, describedBy,stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As SUMMARY, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
+                           From observationfinal inner Join station On stationId = recordedFrom
+                           Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
+                           group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime)
+                           Order By recordedFrom, describedBy, YY, MM) As tt
+                           where DF >= 0
+                           group by StationID,describedBy, YY, MM
+                           order by StationID,describedBy, YY, MM;"
+
+                    'txttest.Text = sql
+                    SeasonalProducts(sql, lblProductType.Text, hdr)
                 Case Else
-                    MsgBox("No Product found for Selection made", MsgBoxStyle.Information)
-
+                    MsgBox("No Product found For Selection made", MsgBoxStyle.Information)
             End Select
 
             Me.Cursor = Cursors.Default
@@ -824,12 +887,12 @@ Err:
             If GetWRplotPath(WrplotAppPath) Then
                 WrplotAPP = WrplotAppPath & "WRPLOT_View.exe"
             Else
-                MsgBox("WRPlot Application not found")
+                MsgBox("WRPlot Application Not found")
                 Exit Sub
             End If
 
             ' SQL statement for the selecting data for windrose plotting
-            'sql = "SELECT recordedFrom as STNID,year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,hour(obsDatetime) as HH,AVG(IF(describedBy = '112', value, NULL)) AS 'DIR',AVG(IF(describedBy = '111', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stns & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdt & "' and '" & edt & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY STNID, YY, MM, DD, HH;"
+            'sql = "Select recordedFrom As STNID,year(obsDatetime) As YY,month(obsDatetime) As MM,day(obsDatetime) As DD,hour(obsDatetime) As HH,AVG(If(describedBy = '112', value, NULL)) AS 'DIR',AVG(IF(describedBy = '111', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stns & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdt & "' and '" & edt & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY STNID, YY, MM, DD, HH;"
             If MsgBox("Is the wind data from AWS?", vbYesNo, "Wind Data Observation Type") = vbYes Then
                 'MsgBox("AWS")
                 sql = "SELECT recordedFrom as STNID,year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,hour(obsDatetime) as HH,AVG(IF(describedBy = '895', value, NULL)) AS 'DIR',AVG(IF(describedBy = '897', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " &
@@ -2092,7 +2155,7 @@ Err:
 
     Private Sub lblProductType_TextChanged(sender As Object, e As EventArgs) Handles lblProductType.TextChanged
 
-        If lblProductType.Text = "Hourly" Or lblProductType.Text = "Daily" Or lblProductType.Text = "Monthly" Or lblProductType.Text = "Annual" Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Or lblProductType.Text = "Histograms" Or lblProductType.Text = "TimeSeries" Then
+        If lblProductType.Text = "Hourly" Or lblProductType.Text = "Daily" Or lblProductType.Text = "Monthly" Or lblProductType.Text = "Annual" Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Or lblProductType.Text = "Histograms" Or lblProductType.Text = "TimeSeries" Or lblProductType.Text = "Seasonal Monthly" Then
             optMean.Enabled = True
             optTotal.Enabled = True
         Else
@@ -3290,5 +3353,207 @@ Err:
         End Try
 
     End Sub
+    Sub SeasonalProducts(sql As String, typ As String, months As String)
 
+        Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsp As New DataSet
+        Dim conp As New MySql.Data.MySqlClient.MySqlConnection
+        Dim fl, mms(), dat(), vals As String
+        Dim yr, mr, yy, mm, rec, kount As Integer
+
+        Try
+            conp.ConnectionString = MyConnectionString
+            conp.Open()
+            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
+            dap.SelectCommand.CommandTimeout = 0
+            dsp.Clear()
+            dap.Fill(dsp, "observationfinal")
+            conp.Close()
+
+            maxRows = dsp.Tables("observationfinal").Rows.Count
+
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\data_products.csv"
+
+            FileOpen(11, fl, OpenMode.Output)
+
+            ' Output the column headers
+            For j = 0 To dsp.Tables("observationfinal").Columns.Count - 2
+                If j <> 6 Then Write(11, dsp.Tables("observationfinal").Columns(j).ColumnName)
+            Next
+            ' Output Months columns
+            mms = Strings.Split(months, ",")
+            dat = Strings.Split(",,,,,,,,,,,", ",")
+
+            For i = 0 To mms.Count - 1
+                Write(11, mms(i))
+            Next
+
+            PrintLine(11)
+
+            ' Output data values
+            rec = 0
+            kount = 0
+            'mm = 0
+            yr = dsp.Tables("observationfinal").Rows(0).Item(6)
+            mr = dsp.Tables("observationfinal").Rows(0).Item(7)
+
+            'dat(0) = dsp.Tables("observationfinal").Rows(rec).Item(7)
+            'Do While rec < maxRows
+            '    yr = dsp.Tables("observationfinal").Rows(rec).Item(5)
+            '    mr = dsp.Tables("observationfinal").Rows(rec).Item(6)
+
+            '    Do While mm < 11
+            '        yy = dsp.Tables("observationfinal").Rows(rec).Item(5)
+            '        mr = dsp.Tables("observationfinal").Rows(rec).Item(6)
+            '        If mms(mm) = mr Then
+            '            dat(mr) = dsp.Tables("observationfinal").Rows(rec).Item(7)
+            '        End If
+            '        mm = mm + 1
+            '        rec = rec + 1
+            '        If yy - yr > 2 Then Exit Do
+            '    Loop
+            '    For n = 0 To 5
+            '        Write(11, dsp.Tables("observationfinal").Rows(rec).Item(n))
+            '    Next
+            '    For i = 0 To 11
+            '        Write(11, dat(i))
+            '        dat(i) = ""
+            '    Next
+            '    FileClose(11)
+            '    CommonModules.ViewFile(fl)
+            '    Exit Sub
+            'Loop
+
+            'MsgBox(yr & " " & maxRows)
+            Do While rec <= maxRows
+
+                'kount = kount + 1
+                yy = dsp.Tables("observationfinal").Rows(rec).Item(6)
+                mm = dsp.Tables("observationfinal").Rows(rec).Item(7)
+                'If (yy - yr) > 1 Then
+                '    MsgBox(yr & " " & mm)
+                'End If
+                If (yy = yr And mm >= mms(0)) Or (yy = yr + 1 And mm < mms(0)) Then
+                    'MsgBox(yy & " " & mm)
+                    'If (dsp.Tables("observationfinal").Rows(k).Item(5) = yr + 1) Then
+                    For i = 0 To mms.Count - 1
+                        If mms(i) = dsp.Tables("observationfinal").Rows(rec).Item(7) Then
+                            dat(i) = dsp.Tables("observationfinal").Rows(rec).Item(8)
+                        End If
+                    Next
+
+                    rec = rec + 1
+                Else
+
+                    vals = ""
+                    For m = 0 To 11
+                        If Len(dat(m)) > 0 Then vals = vals & dat(m)
+                        If m = 11 And Len(vals) = 0 Then
+                            kount = kount + 1
+                            rec = kount
+                            Continue Do
+                        End If
+                    Next
+
+                    ' Output metadata
+                    For n = 0 To 6
+                        If n < 6 Then
+                            Write(11, dsp.Tables("observationfinal").Rows(rec - 1).Item(n))
+                        Else
+                            If mms(0) = 1 Then
+                                Write(11, yr)
+                            Else
+                                Write(11, yr & "/" & yr + 1)
+                            End If
+                        End If
+                    Next
+
+                    ' Output data
+                    For m = 0 To 11
+                        If dat(m) = "" Then
+                            Write(11, "")
+                        Else
+                            Write(11, Format(Val(dat(m)), "0.00"))
+                        End If
+
+                        dat(m) = ""
+                    Next
+                    PrintLine(11)
+                    yr = dsp.Tables("observationfinal").Rows(rec).Item(6)
+
+                End If
+
+                ' The last record
+                If rec = maxRows - 1 Then
+
+                    For i = 0 To mms.Count - 1
+                        If mms(i) = dsp.Tables("observationfinal").Rows(rec).Item(7) Then
+                            dat(i) = dsp.Tables("observationfinal").Rows(rec).Item(8)
+                        End If
+                    Next
+
+                    For n = 0 To 6
+                        If n < 6 Then
+                            Write(11, dsp.Tables("observationfinal").Rows(rec).Item(n))
+                        Else
+                            'Write(11, yr & "/" & yr + 1)
+                            If mms(0) = 1 Then
+                                Write(11, yr)
+                            Else
+                                Write(11, yr & "/" & yr + 1)
+                            End If
+                        End If
+                    Next
+
+                    For m = 0 To 11
+                        If dat(m) = "" Then
+                            Write(11, "")
+                        Else
+                            Write(11, Format(Val(dat(m)), "0.00"))
+                        End If
+
+                        'Write(11, Format(Val(dat(m)), "0.00"))
+                        dat(m) = ""
+                    Next
+                    PrintLine(11, Chr(13))
+                    yr = dsp.Tables("observationfinal").Rows(rec).Item(6)
+                End If
+
+
+                kount = kount + 1
+            Loop
+
+
+            'For i = 0 To dsp.Tables("observationfinal").Columns.Count - 1
+            '    'MsgBox(dsp.Tables("observationfinal").Rows(k).Item(i))
+            '    FormattedOutput(11, k, i, dsp)
+            'Next
+            'PrintLine(11)
+
+            '' Output the column headers
+            'For j = 0 To dsp.Tables("observationfinal").Columns.Count - 1
+            '    Write(11, dsp.Tables("observationfinal").Columns(j).ColumnName)
+            'Next
+            'PrintLine(11)
+
+            'For k = 0 To maxRows - 1
+            '    For i = 0 To dsp.Tables("observationfinal").Columns.Count - 1
+            '        'MsgBox(dsp.Tables("observationfinal").Rows(k).Item(i))
+            '        FormattedOutput(11, k, i, dsp)
+            '    Next
+            '    PrintLine(11)
+            'Next
+
+            FileClose(11)
+                CommonModules.ViewFile(fl)
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            'If Err.Number = 13 Or Err.Number = 5 Then Resume Next
+            MsgBox("No data found. Check and confirm selections")
+            FileClose(11)
+            conp.Close()
+        End Try
+
+    End Sub
 End Class

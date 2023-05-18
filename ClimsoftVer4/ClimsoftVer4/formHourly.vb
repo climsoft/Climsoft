@@ -1294,10 +1294,11 @@ Public Class form_hourly
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
-        frmFormUpload.lblFormName.Text = "form_agro1"
-        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
 
         frmFormUpload.Show()
+        frmFormUpload.lblFormName1.Text = "form_agro1"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
+
         Exit Sub
         frmDataTransferProgress.Show()
 

@@ -121,7 +121,7 @@ Partial Class formPaperArchive
         Me.tabImageArchives.Location = New System.Drawing.Point(9, 27)
         Me.tabImageArchives.Name = "tabImageArchives"
         Me.tabImageArchives.SelectedIndex = 0
-        Me.tabImageArchives.Size = New System.Drawing.Size(546, 481)
+        Me.tabImageArchives.Size = New System.Drawing.Size(602, 481)
         Me.tabImageArchives.TabIndex = 2
         '
         'tabStructured
@@ -132,7 +132,7 @@ Partial Class formPaperArchive
         Me.tabStructured.Location = New System.Drawing.Point(4, 22)
         Me.tabStructured.Name = "tabStructured"
         Me.tabStructured.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabStructured.Size = New System.Drawing.Size(538, 455)
+        Me.tabStructured.Size = New System.Drawing.Size(594, 455)
         Me.tabStructured.TabIndex = 0
         Me.tabStructured.Text = "Structured Filenames"
         Me.tabStructured.UseVisualStyleBackColor = True
@@ -150,7 +150,7 @@ Partial Class formPaperArchive
         Me.grpInformation.Controls.Add(Me.txtSelectedFolder)
         Me.grpInformation.Location = New System.Drawing.Point(16, 6)
         Me.grpInformation.Name = "grpInformation"
-        Me.grpInformation.Size = New System.Drawing.Size(514, 440)
+        Me.grpInformation.Size = New System.Drawing.Size(570, 440)
         Me.grpInformation.TabIndex = 3
         Me.grpInformation.TabStop = False
         Me.grpInformation.Text = "Image Files"
@@ -193,7 +193,7 @@ Partial Class formPaperArchive
         Me.grpComands.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.grpComands.Location = New System.Drawing.Point(3, 406)
         Me.grpComands.Name = "grpComands"
-        Me.grpComands.Size = New System.Drawing.Size(508, 31)
+        Me.grpComands.Size = New System.Drawing.Size(564, 31)
         Me.grpComands.TabIndex = 18
         Me.grpComands.TabStop = False
         '
@@ -221,7 +221,7 @@ Partial Class formPaperArchive
         Me.lstvFiles.Location = New System.Drawing.Point(21, 98)
         Me.lstvFiles.Name = "lstvFiles"
         Me.lstvFiles.RightToLeftLayout = True
-        Me.lstvFiles.Size = New System.Drawing.Size(474, 280)
+        Me.lstvFiles.Size = New System.Drawing.Size(549, 280)
         Me.lstvFiles.TabIndex = 17
         Me.lstvFiles.UseCompatibleStateImageBehavior = False
         Me.lstvFiles.View = System.Windows.Forms.View.Details
@@ -230,7 +230,7 @@ Partial Class formPaperArchive
         '
         Me.cmdFolder.BackgroundImage = CType(resources.GetObject("cmdFolder.BackgroundImage"), System.Drawing.Image)
         Me.cmdFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdFolder.Location = New System.Drawing.Point(468, 52)
+        Me.cmdFolder.Location = New System.Drawing.Point(522, 52)
         Me.cmdFolder.Name = "cmdFolder"
         Me.cmdFolder.Size = New System.Drawing.Size(35, 26)
         Me.cmdFolder.TabIndex = 16
@@ -257,9 +257,9 @@ Partial Class formPaperArchive
         'txtSelectedFolder
         '
         Me.txtSelectedFolder.BackColor = System.Drawing.Color.Snow
-        Me.txtSelectedFolder.Location = New System.Drawing.Point(141, 55)
+        Me.txtSelectedFolder.Location = New System.Drawing.Point(135, 55)
         Me.txtSelectedFolder.Name = "txtSelectedFolder"
-        Me.txtSelectedFolder.Size = New System.Drawing.Size(323, 20)
+        Me.txtSelectedFolder.Size = New System.Drawing.Size(387, 20)
         Me.txtSelectedFolder.TabIndex = 0
         '
         'tabUnstructured
@@ -270,7 +270,7 @@ Partial Class formPaperArchive
         Me.tabUnstructured.Location = New System.Drawing.Point(4, 22)
         Me.tabUnstructured.Name = "tabUnstructured"
         Me.tabUnstructured.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabUnstructured.Size = New System.Drawing.Size(538, 455)
+        Me.tabUnstructured.Size = New System.Drawing.Size(594, 455)
         Me.tabUnstructured.TabIndex = 1
         Me.tabUnstructured.Text = "Unstructured Filenames"
         Me.tabUnstructured.UseVisualStyleBackColor = True
@@ -306,15 +306,15 @@ Partial Class formPaperArchive
         Me.pnlUnstructuredNames.Controls.Add(Me.lblStationId)
         Me.pnlUnstructuredNames.Location = New System.Drawing.Point(6, 30)
         Me.pnlUnstructuredNames.Name = "pnlUnstructuredNames"
-        Me.pnlUnstructuredNames.Size = New System.Drawing.Size(521, 327)
+        Me.pnlUnstructuredNames.Size = New System.Drawing.Size(580, 327)
         Me.pnlUnstructuredNames.TabIndex = 0
         '
         'txtFormId
         '
         Me.txtFormId.FormattingEnabled = True
-        Me.txtFormId.Location = New System.Drawing.Point(365, 68)
+        Me.txtFormId.Location = New System.Drawing.Point(370, 68)
         Me.txtFormId.Name = "txtFormId"
-        Me.txtFormId.Size = New System.Drawing.Size(148, 21)
+        Me.txtFormId.Size = New System.Drawing.Size(143, 21)
         Me.txtFormId.TabIndex = 2
         '
         'txtYear
@@ -356,24 +356,23 @@ Partial Class formPaperArchive
         '
         'lblImageFile
         '
-        Me.lblImageFile.AutoSize = True
         Me.lblImageFile.Location = New System.Drawing.Point(8, 24)
         Me.lblImageFile.Name = "lblImageFile"
-        Me.lblImageFile.Size = New System.Drawing.Size(55, 13)
+        Me.lblImageFile.Size = New System.Drawing.Size(84, 32)
         Me.lblImageFile.TabIndex = 13
         Me.lblImageFile.Text = "Image File"
         '
         'txtImageFile
         '
-        Me.txtImageFile.Location = New System.Drawing.Point(102, 20)
+        Me.txtImageFile.Location = New System.Drawing.Point(100, 21)
         Me.txtImageFile.Name = "txtImageFile"
-        Me.txtImageFile.Size = New System.Drawing.Size(342, 20)
+        Me.txtImageFile.Size = New System.Drawing.Size(357, 20)
         Me.txtImageFile.TabIndex = 0
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(298, 72)
+        Me.Label5.Location = New System.Drawing.Point(288, 72)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(44, 13)
         Me.Label5.TabIndex = 11
@@ -466,7 +465,7 @@ Partial Class formPaperArchive
         Me.TabViewArchive.Location = New System.Drawing.Point(4, 22)
         Me.TabViewArchive.Name = "TabViewArchive"
         Me.TabViewArchive.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabViewArchive.Size = New System.Drawing.Size(538, 455)
+        Me.TabViewArchive.Size = New System.Drawing.Size(594, 455)
         Me.TabViewArchive.TabIndex = 2
         Me.TabViewArchive.Text = "Retrieve Images"
         Me.TabViewArchive.UseVisualStyleBackColor = True
@@ -489,7 +488,7 @@ Partial Class formPaperArchive
         Me.grpImage.Controls.Add(Me.Label2)
         Me.grpImage.Location = New System.Drawing.Point(18, 27)
         Me.grpImage.Name = "grpImage"
-        Me.grpImage.Size = New System.Drawing.Size(499, 332)
+        Me.grpImage.Size = New System.Drawing.Size(570, 332)
         Me.grpImage.TabIndex = 0
         Me.grpImage.TabStop = False
         Me.grpImage.Text = "Image Details"
@@ -504,7 +503,7 @@ Partial Class formPaperArchive
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox1.Location = New System.Drawing.Point(3, 259)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(493, 36)
+        Me.GroupBox1.Size = New System.Drawing.Size(564, 36)
         Me.GroupBox1.TabIndex = 70
         Me.GroupBox1.TabStop = False
         '
@@ -532,7 +531,7 @@ Partial Class formPaperArchive
         '
         Me.btnLast.BackgroundImage = CType(resources.GetObject("btnLast.BackgroundImage"), System.Drawing.Image)
         Me.btnLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnLast.Location = New System.Drawing.Point(456, 6)
+        Me.btnLast.Location = New System.Drawing.Point(522, 6)
         Me.btnLast.Name = "btnLast"
         Me.btnLast.Size = New System.Drawing.Size(36, 24)
         Me.btnLast.TabIndex = 2
@@ -542,7 +541,7 @@ Partial Class formPaperArchive
         '
         Me.btnMoveNext.BackgroundImage = CType(resources.GetObject("btnMoveNext.BackgroundImage"), System.Drawing.Image)
         Me.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMoveNext.Location = New System.Drawing.Point(421, 6)
+        Me.btnMoveNext.Location = New System.Drawing.Point(487, 6)
         Me.btnMoveNext.Name = "btnMoveNext"
         Me.btnMoveNext.Size = New System.Drawing.Size(36, 24)
         Me.btnMoveNext.TabIndex = 1
@@ -552,7 +551,7 @@ Partial Class formPaperArchive
         '
         Me.txtRec.Location = New System.Drawing.Point(70, 8)
         Me.txtRec.Name = "txtRec"
-        Me.txtRec.Size = New System.Drawing.Size(351, 20)
+        Me.txtRec.Size = New System.Drawing.Size(420, 20)
         Me.txtRec.TabIndex = 0
         Me.txtRec.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -564,7 +563,7 @@ Partial Class formPaperArchive
         Me.GroupBox18.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox18.Location = New System.Drawing.Point(3, 295)
         Me.GroupBox18.Name = "GroupBox18"
-        Me.GroupBox18.Size = New System.Drawing.Size(493, 34)
+        Me.GroupBox18.Size = New System.Drawing.Size(564, 34)
         Me.GroupBox18.TabIndex = 69
         Me.GroupBox18.TabStop = False
         '
@@ -706,7 +705,7 @@ Partial Class formPaperArchive
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(538, 455)
+        Me.TabPage1.Size = New System.Drawing.Size(594, 455)
         Me.TabPage1.TabIndex = 3
         Me.TabPage1.Text = "Archival List"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -732,7 +731,7 @@ Partial Class formPaperArchive
         Me.lstArchival.Location = New System.Drawing.Point(8, 28)
         Me.lstArchival.Name = "lstArchival"
         Me.lstArchival.RightToLeftLayout = True
-        Me.lstArchival.Size = New System.Drawing.Size(524, 397)
+        Me.lstArchival.Size = New System.Drawing.Size(580, 397)
         Me.lstArchival.TabIndex = 18
         Me.lstArchival.UseCompatibleStateImageBehavior = False
         Me.lstArchival.View = System.Windows.Forms.View.Details
@@ -742,7 +741,7 @@ Partial Class formPaperArchive
         Me.MenuPaperArchive.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuPaperArchive.Location = New System.Drawing.Point(0, 0)
         Me.MenuPaperArchive.Name = "MenuPaperArchive"
-        Me.MenuPaperArchive.Size = New System.Drawing.Size(1108, 24)
+        Me.MenuPaperArchive.Size = New System.Drawing.Size(1203, 24)
         Me.MenuPaperArchive.TabIndex = 3
         Me.MenuPaperArchive.Text = "MenuStrip1"
         '
@@ -783,16 +782,16 @@ Partial Class formPaperArchive
         '
         Me.lstMessages.FormattingEnabled = True
         Me.lstMessages.HorizontalScrollbar = True
-        Me.lstMessages.Location = New System.Drawing.Point(557, 42)
+        Me.lstMessages.Location = New System.Drawing.Point(617, 42)
         Me.lstMessages.Name = "lstMessages"
         Me.lstMessages.ScrollAlwaysVisible = True
-        Me.lstMessages.Size = New System.Drawing.Size(535, 524)
+        Me.lstMessages.Size = New System.Drawing.Size(535, 498)
         Me.lstMessages.TabIndex = 26
         '
         'lblMessages
         '
         Me.lblMessages.AutoSize = True
-        Me.lblMessages.Location = New System.Drawing.Point(788, 27)
+        Me.lblMessages.Location = New System.Drawing.Point(848, 27)
         Me.lblMessages.Name = "lblMessages"
         Me.lblMessages.Size = New System.Drawing.Size(55, 13)
         Me.lblMessages.TabIndex = 27
@@ -810,7 +809,7 @@ Partial Class formPaperArchive
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(804, 546)
+        Me.cmdClear.Location = New System.Drawing.Point(863, 546)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(61, 20)
         Me.cmdClear.TabIndex = 29
@@ -824,9 +823,9 @@ Partial Class formPaperArchive
         Me.pictureBoxForm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.pictureBoxForm.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pictureBoxForm.ErrorImage = Nothing
-        Me.pictureBoxForm.Location = New System.Drawing.Point(557, 43)
+        Me.pictureBoxForm.Location = New System.Drawing.Point(617, 43)
         Me.pictureBoxForm.Name = "pictureBoxForm"
-        Me.pictureBoxForm.Size = New System.Drawing.Size(535, 523)
+        Me.pictureBoxForm.Size = New System.Drawing.Size(562, 523)
         Me.pictureBoxForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pictureBoxForm.TabIndex = 30
         Me.pictureBoxForm.TabStop = False
@@ -835,7 +834,7 @@ Partial Class formPaperArchive
         'lblZoomout
         '
         Me.lblZoomout.AutoSize = True
-        Me.lblZoomout.Location = New System.Drawing.Point(996, 27)
+        Me.lblZoomout.Location = New System.Drawing.Point(1056, 27)
         Me.lblZoomout.Name = "lblZoomout"
         Me.lblZoomout.Size = New System.Drawing.Size(66, 13)
         Me.lblZoomout.TabIndex = 31
@@ -845,7 +844,7 @@ Partial Class formPaperArchive
         'lblImageRotate
         '
         Me.lblImageRotate.AutoSize = True
-        Me.lblImageRotate.Location = New System.Drawing.Point(561, 28)
+        Me.lblImageRotate.Location = New System.Drawing.Point(621, 28)
         Me.lblImageRotate.Name = "lblImageRotate"
         Me.lblImageRotate.Size = New System.Drawing.Size(71, 13)
         Me.lblImageRotate.TabIndex = 32
@@ -856,7 +855,7 @@ Partial Class formPaperArchive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1108, 582)
+        Me.ClientSize = New System.Drawing.Size(1203, 582)
         Me.Controls.Add(Me.lblImageRotate)
         Me.Controls.Add(Me.lblZoomout)
         Me.Controls.Add(Me.pictureBoxForm)

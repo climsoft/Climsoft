@@ -84,12 +84,12 @@
 
     Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
-        frmFormUpload.lblFormName.Text = "form_hourly"
-        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
 
+        frmFormUpload.lblFormName1.Text = "form_hourly"
         frmFormUpload.Show()
-        Exit Sub
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
 
+        Exit Sub
 
         'upload code in the background thread
         Dim frm As New frmNewComputationProgress

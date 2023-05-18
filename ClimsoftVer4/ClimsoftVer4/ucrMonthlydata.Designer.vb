@@ -66,6 +66,7 @@ Partial Class ucrMonthlyData
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
+        Me.btnPush = New System.Windows.Forms.Button()
         lblYear = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -264,9 +265,9 @@ Partial Class ucrMonthlyData
         Me.lbl11.AutoSize = True
         Me.lbl11.Location = New System.Drawing.Point(166, 392)
         Me.lbl11.Name = "lbl11"
-        Me.lbl11.Size = New System.Drawing.Size(62, 13)
+        Me.lbl11.Size = New System.Drawing.Size(56, 13)
         Me.lbl11.TabIndex = 583
-        Me.lbl11.Text = "Novemeber"
+        Me.lbl11.Text = "November"
         '
         'lbl10
         '
@@ -448,9 +449,9 @@ Partial Class ucrMonthlyData
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(399, 507)
+        Me.btnCancel.Location = New System.Drawing.Point(422, 509)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(77, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(66, 23)
         Me.btnCancel.TabIndex = 21
         Me.btnCancel.Tag = "cancel"
         Me.btnCancel.Text = "Cancel"
@@ -458,9 +459,9 @@ Partial Class ucrMonthlyData
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(482, 507)
+        Me.btnView.Location = New System.Drawing.Point(491, 509)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(83, 23)
+        Me.btnView.Size = New System.Drawing.Size(63, 23)
         Me.btnView.TabIndex = 22
         Me.btnView.Tag = ""
         Me.btnView.Text = "View"
@@ -468,9 +469,9 @@ Partial Class ucrMonthlyData
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(650, 507)
+        Me.btnHelp.Location = New System.Drawing.Point(699, 509)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(66, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(57, 23)
         Me.btnHelp.TabIndex = 24
         Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
@@ -478,7 +479,7 @@ Partial Class ucrMonthlyData
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(322, 507)
+        Me.btnClear.Location = New System.Drawing.Point(348, 509)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(71, 23)
         Me.btnClear.TabIndex = 20
@@ -488,9 +489,9 @@ Partial Class ucrMonthlyData
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(82, 507)
+        Me.btnSave.Location = New System.Drawing.Point(128, 509)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(78, 23)
+        Me.btnSave.Size = New System.Drawing.Size(67, 23)
         Me.btnSave.TabIndex = 16
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
@@ -498,7 +499,7 @@ Partial Class ucrMonthlyData
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(246, 507)
+        Me.btnDelete.Location = New System.Drawing.Point(275, 509)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(70, 23)
         Me.btnDelete.TabIndex = 18
@@ -508,9 +509,9 @@ Partial Class ucrMonthlyData
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(6, 507)
+        Me.btnAddNew.Location = New System.Drawing.Point(27, 509)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(70, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(98, 23)
         Me.btnAddNew.TabIndex = 19
         Me.btnAddNew.Tag = "add"
         Me.btnAddNew.Text = "Add New"
@@ -518,7 +519,7 @@ Partial Class ucrMonthlyData
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(166, 507)
+        Me.btnUpdate.Location = New System.Drawing.Point(198, 509)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(74, 23)
         Me.btnUpdate.TabIndex = 17
@@ -528,7 +529,7 @@ Partial Class ucrMonthlyData
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(571, 507)
+        Me.btnClose.Location = New System.Drawing.Point(623, 509)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(73, 23)
         Me.btnClose.TabIndex = 23
@@ -544,9 +545,19 @@ Partial Class ucrMonthlyData
         Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigation.TabIndex = 774
         '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(557, 509)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(63, 23)
+        Me.btnPush.TabIndex = 1156
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
+        '
         'ucrMonthlyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnHelp)
@@ -649,4 +660,5 @@ Partial Class ucrMonthlyData
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnClose As Button
     Friend WithEvents ucrNavigation As ucrNavigation
+    Friend WithEvents btnPush As Button
 End Class

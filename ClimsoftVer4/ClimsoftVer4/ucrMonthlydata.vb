@@ -87,9 +87,9 @@
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             ' Upload through a dialog that allows records selection
-            frmFormUpload.lblFormName.Text = "form_monthly"
-            frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+            frmFormUpload.lblFormName1.Text = "form_monthly"
             frmFormUpload.Show()
+            frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
 
             Exit Sub
             UploadAllRecords()
@@ -323,19 +323,15 @@
 
     End Sub
 
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
 
-    End Sub
-
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-
-    End Sub
-
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-
-    End Sub
-
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+        Dim TblName As New dataEntryGlobalRoutines
+        Me.Cursor = Cursors.WaitCursor
+        If TblName.DataPush("form_monthly") Then
+            MsgBox("Data Pushed to remote server successfully")
+        Else
+            MsgBox("Data Push Failed!")
+        End If
+        Me.Cursor = Cursors.Default
     End Sub
 End Class

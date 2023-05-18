@@ -6,6 +6,7 @@
     Dim ds As New DataSet
     Dim sql, frm As String
     Dim PRESST, PRESSL, GPM, TMPMN, TMPMAX, TMPMIN, VAPPSR, PRECIP, SUNSHN, SNWDEP, WNDSPD, VISBY, DYTHND, DYHAIL, serNum As Integer
+
     Private Sub butClose_Click(sender As Object, e As EventArgs) Handles butClose.Click
         Me.Close()
     End Sub
@@ -905,6 +906,7 @@ GROUP BY StationId, MM;"
             'MsgBox(Kount)
             If Kount = 0 Then
                 MsgBox("No server located")
+                Me.Cursor = Cursors.Default
                 Exit Sub
             Else
                 Dim msg_file, url, login, pwd, foldr, ftpmode As String
@@ -925,6 +927,7 @@ GROUP BY StationId, MM;"
             End If
 
         Catch ex As Exception
+            conn.Close()
             If ex.HResult = -2147467259 Then
                 MsgBox("Permission to Send not set! Administrator should start CLIMAT opeartion, open Setting then Click on 'Grant User Permissions'.")
             Else
@@ -1665,14 +1668,24 @@ GROUP BY StationId, MM;"
                     txtinputfile = System.IO.Path.GetFileName(ftpfile)
                     If ftpmode = "psftp" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
                     If ftpmode = "FTP" Then
-                        Print(1, "open " & ftp_host & Chr(13) & Chr(10))
-                        Print(1, usr & Chr(13) & Chr(10))
-                        Print(1, pwd & Chr(13) & Chr(10))
+
+                        Print(1, "open ftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
+                        'Print(1, "cd " & flder & Chr(13) & Chr(10))
+                        'Print(1, "asc" & Chr(13) & Chr(10))
+                        'Print(111, "put" & " " & txtinputfile & Chr(13) & Chr(10))
+                        ''Print(1, "mv" & " " & fl & " " & binFile & Chr(13) & Chr(10))
+
+
+                        'Print(1, "open " & ftp_host & Chr(13) & Chr(10))
+                        'Print(1, usr & Chr(13) & Chr(10))
+                        'Print(1, pwd & Chr(13) & Chr(10))
                         Print(1, "cd " & flder & Chr(13) & Chr(10))
                         Print(1, "asc" & Chr(13) & Chr(10))
                     End If
                     Print(1, ftpmethod & " " & txtinputfile & Chr(13) & Chr(10))
                     Print(1, "bye" & Chr(13) & Chr(10))
+
+
             End Select
             FileClose(1)
             ftpbatch = local_folder & "\ftp_climat.bat"
@@ -1688,11 +1701,15 @@ GROUP BY StationId, MM;"
                 ''If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
                 'If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_bufr.txt" & Chr(13) & Chr(10))
             Else
-                If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_climat.txt" & Chr(13) & Chr(10))
+                If ftpmode = "FTP" Then
+                    'Print(1, ftpmode & " -v -s:ftp_climat.txt" & Chr(13) & Chr(10))
+                    Print(1, Chr(34) & System.IO.Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /ini=nul /script=" & System.IO.Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
+                End If
                 If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_bufr.txt" & Chr(13) & Chr(10))
             End If
 
             Print(1, "echo on" & Chr(13) & Chr(10))
+            Print(1, "close" & Chr(13) & Chr(10))
             Print(1, "EXIT" & Chr(13) & Chr(10))
             FileClose(1)
 

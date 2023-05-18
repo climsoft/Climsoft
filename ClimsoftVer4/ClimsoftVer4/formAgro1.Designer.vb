@@ -733,7 +733,7 @@ Partial Class formAgro1
         '
         'Label32
         '
-        Me.Label32.Location = New System.Drawing.Point(633, 167)
+        Me.Label32.Location = New System.Drawing.Point(627, 166)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(78, 13)
         Me.Label32.TabIndex = 1069
@@ -790,16 +790,16 @@ Partial Class formAgro1
         '
         'Label27
         '
-        Me.Label27.Location = New System.Drawing.Point(600, 217)
+        Me.Label27.Location = New System.Drawing.Point(594, 216)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(111, 13)
+        Me.Label27.Size = New System.Drawing.Size(111, 33)
         Me.Label27.TabIndex = 1072
         Me.Label27.Text = "Rain Duration (hrs)"
         Me.Label27.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label28
         '
-        Me.Label28.Location = New System.Drawing.Point(599, 192)
+        Me.Label28.Location = New System.Drawing.Point(593, 191)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(112, 13)
         Me.Label28.TabIndex = 1071
@@ -1301,9 +1301,9 @@ Partial Class formAgro1
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(465, 556)
+        Me.btnView.Location = New System.Drawing.Point(514, 555)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(76, 23)
+        Me.btnView.Size = New System.Drawing.Size(64, 23)
         Me.btnView.TabIndex = 43
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
@@ -1337,9 +1337,9 @@ Partial Class formAgro1
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(698, 556)
+        Me.btnHelp.Location = New System.Drawing.Point(735, 555)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(76, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(68, 23)
         Me.btnHelp.TabIndex = 44
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -1347,7 +1347,7 @@ Partial Class formAgro1
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(383, 556)
+        Me.btnClear.Location = New System.Drawing.Point(432, 555)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(76, 23)
         Me.btnClear.TabIndex = 42
@@ -1356,7 +1356,7 @@ Partial Class formAgro1
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(301, 556)
+        Me.btnDelete.Location = New System.Drawing.Point(350, 555)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(76, 23)
         Me.btnDelete.TabIndex = 41
@@ -1365,9 +1365,9 @@ Partial Class formAgro1
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(67, 556)
+        Me.btnAddNew.Location = New System.Drawing.Point(81, 555)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(67, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(102, 23)
         Me.btnAddNew.TabIndex = 39
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
@@ -1384,7 +1384,7 @@ Partial Class formAgro1
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(218, 556)
+        Me.btnUpdate.Location = New System.Drawing.Point(267, 555)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(77, 23)
         Me.btnUpdate.TabIndex = 40
@@ -1420,7 +1420,7 @@ Partial Class formAgro1
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(616, 556)
+        Me.btnClose.Location = New System.Drawing.Point(653, 555)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(76, 23)
         Me.btnClose.TabIndex = 45
@@ -1439,7 +1439,7 @@ Partial Class formAgro1
         '
         'btnCommit
         '
-        Me.btnCommit.Location = New System.Drawing.Point(140, 556)
+        Me.btnCommit.Location = New System.Drawing.Point(189, 555)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(76, 23)
         Me.btnCommit.TabIndex = 38
@@ -1448,7 +1448,7 @@ Partial Class formAgro1
         '
         'btnPush
         '
-        Me.btnPush.Location = New System.Drawing.Point(547, 556)
+        Me.btnPush.Location = New System.Drawing.Point(584, 555)
         Me.btnPush.Name = "btnPush"
         Me.btnPush.Size = New System.Drawing.Size(63, 23)
         Me.btnPush.TabIndex = 1154

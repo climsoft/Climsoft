@@ -540,7 +540,7 @@ Partial Class formProductsSelectCriteria
         Me.lblProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProducts.Location = New System.Drawing.Point(158, -1)
         Me.lblProducts.Name = "lblProducts"
-        Me.lblProducts.Size = New System.Drawing.Size(16, 16)
+        Me.lblProducts.Size = New System.Drawing.Size(17, 16)
         Me.lblProducts.TabIndex = 8
         Me.lblProducts.Text = "   "
         '
