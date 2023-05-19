@@ -52,8 +52,6 @@ Public Class frmProducts
 
         'translate form controls
         ClsTranslations.TranslateForm(Me)
-        'todo in future this will be done automatically by TranslateForms(Me)
-        ClsTranslations.TranslateComponent(lstViewProducts, True)
 
     End Sub
 
@@ -72,11 +70,10 @@ Public Class frmProducts
         For Each row As DataRow In dataRows
             'add product and prodcut details. List view has 2 columns
             lstViewProducts.Items.Add(New ListViewItem({row.Field(Of String)("productName"),
-                                                       row.Field(Of String)("prDetails")}))
+                                                 ClsTranslations.GetTranslation(row.Field(Of String)("prDetails"))})
+                                                 )
         Next
 
-        'todo in future this will be done automatically by TranslateForms(Me)
-        ClsTranslations.TranslateComponent(lstViewProducts, False)
     End Sub
 
     Private Sub lstvProducts_Click(sender As Object, e As EventArgs) Handles lstViewProducts.Click
