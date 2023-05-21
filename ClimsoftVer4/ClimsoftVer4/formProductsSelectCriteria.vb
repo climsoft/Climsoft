@@ -87,9 +87,13 @@ Public Class formProductsSelectCriteria
         If lblProductType.Text = "Yearly Elements Observed" Then cmdSelectAllStations.Enabled = False
 
         'translate form controls
+        Dim str As String = lblProductType.Text
         ClsTranslations.TranslateForm(Me)
-        'todo in future this will be done automatically by TranslateForms(Me)
-        'ClsTranslations.TranslateComponent(lstViewProducts, True)
+        'retain the untranslated text because it's use for selection
+        lblProductType.Text = str
+
+        ClsTranslations.TranslateComponent(lstvStations, bHeaderOnly:=True)
+        ClsTranslations.TranslateComponent(lstvElements, bHeaderOnly:=True)
     End Sub
 
 
