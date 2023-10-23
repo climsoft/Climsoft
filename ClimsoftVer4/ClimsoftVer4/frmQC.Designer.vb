@@ -46,6 +46,9 @@ Partial Class frmQC
         Me.lblQCtype = New System.Windows.Forms.Label()
         Me.lblDataTransferProgress = New System.Windows.Forms.Label()
         Me.pnlQCTypes = New System.Windows.Forms.Panel()
+        Me.opthrsconsistency = New System.Windows.Forms.RadioButton()
+        Me.optdaysconsistency = New System.Windows.Forms.RadioButton()
+        Me.optdiurnalrange = New System.Windows.Forms.RadioButton()
         Me.optInterElement = New System.Windows.Forms.RadioButton()
         Me.optAbsoluteLimits = New System.Windows.Forms.RadioButton()
         Me.lblStationsElementsList = New System.Windows.Forms.Label()
@@ -128,14 +131,14 @@ Partial Class frmQC
         Me.pnlQcStandard.Controls.Add(Me.lblBeginMonth)
         Me.pnlQcStandard.Controls.Add(Me.lblEndYear)
         Me.pnlQcStandard.Controls.Add(Me.lblBeginYear)
-        Me.pnlQcStandard.Location = New System.Drawing.Point(3, 319)
+        Me.pnlQcStandard.Location = New System.Drawing.Point(4, 296)
         Me.pnlQcStandard.Name = "pnlQcStandard"
-        Me.pnlQcStandard.Size = New System.Drawing.Size(302, 63)
+        Me.pnlQcStandard.Size = New System.Drawing.Size(302, 95)
         Me.pnlQcStandard.TabIndex = 8
         '
         'txtEndMonth
         '
-        Me.txtEndMonth.Location = New System.Drawing.Point(258, 34)
+        Me.txtEndMonth.Location = New System.Drawing.Point(258, 46)
         Me.txtEndMonth.Name = "txtEndMonth"
         Me.txtEndMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtEndMonth.TabIndex = 10
@@ -144,7 +147,7 @@ Partial Class frmQC
         '
         'txtBeginMonth
         '
-        Me.txtBeginMonth.Location = New System.Drawing.Point(258, 6)
+        Me.txtBeginMonth.Location = New System.Drawing.Point(258, 18)
         Me.txtBeginMonth.Name = "txtBeginMonth"
         Me.txtBeginMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtBeginMonth.TabIndex = 9
@@ -153,7 +156,7 @@ Partial Class frmQC
         '
         'txtEndYear
         '
-        Me.txtEndYear.Location = New System.Drawing.Point(94, 36)
+        Me.txtEndYear.Location = New System.Drawing.Point(94, 48)
         Me.txtEndYear.Name = "txtEndYear"
         Me.txtEndYear.Size = New System.Drawing.Size(44, 20)
         Me.txtEndYear.TabIndex = 8
@@ -161,7 +164,7 @@ Partial Class frmQC
         '
         'txtBeginYear
         '
-        Me.txtBeginYear.Location = New System.Drawing.Point(94, 8)
+        Me.txtBeginYear.Location = New System.Drawing.Point(94, 20)
         Me.txtBeginYear.Name = "txtBeginYear"
         Me.txtBeginYear.Size = New System.Drawing.Size(44, 20)
         Me.txtBeginYear.TabIndex = 7
@@ -170,7 +173,7 @@ Partial Class frmQC
         'lblEndMonth
         '
         Me.lblEndMonth.AutoSize = True
-        Me.lblEndMonth.Location = New System.Drawing.Point(159, 38)
+        Me.lblEndMonth.Location = New System.Drawing.Point(159, 50)
         Me.lblEndMonth.Name = "lblEndMonth"
         Me.lblEndMonth.Size = New System.Drawing.Size(59, 13)
         Me.lblEndMonth.TabIndex = 6
@@ -179,7 +182,7 @@ Partial Class frmQC
         'lblBeginMonth
         '
         Me.lblBeginMonth.AutoSize = True
-        Me.lblBeginMonth.Location = New System.Drawing.Point(159, 10)
+        Me.lblBeginMonth.Location = New System.Drawing.Point(159, 22)
         Me.lblBeginMonth.Name = "lblBeginMonth"
         Me.lblBeginMonth.Size = New System.Drawing.Size(67, 13)
         Me.lblBeginMonth.TabIndex = 5
@@ -188,7 +191,7 @@ Partial Class frmQC
         'lblEndYear
         '
         Me.lblEndYear.AutoSize = True
-        Me.lblEndYear.Location = New System.Drawing.Point(6, 40)
+        Me.lblEndYear.Location = New System.Drawing.Point(6, 52)
         Me.lblEndYear.Name = "lblEndYear"
         Me.lblEndYear.Size = New System.Drawing.Size(51, 13)
         Me.lblEndYear.TabIndex = 4
@@ -197,7 +200,7 @@ Partial Class frmQC
         'lblBeginYear
         '
         Me.lblBeginYear.AutoSize = True
-        Me.lblBeginYear.Location = New System.Drawing.Point(6, 12)
+        Me.lblBeginYear.Location = New System.Drawing.Point(6, 24)
         Me.lblBeginYear.Name = "lblBeginYear"
         Me.lblBeginYear.Size = New System.Drawing.Size(59, 13)
         Me.lblBeginYear.TabIndex = 3
@@ -288,7 +291,7 @@ Partial Class frmQC
         '
         Me.lblDataTransferProgress.AutoSize = True
         Me.lblDataTransferProgress.ForeColor = System.Drawing.Color.Red
-        Me.lblDataTransferProgress.Location = New System.Drawing.Point(37, 394)
+        Me.lblDataTransferProgress.Location = New System.Drawing.Point(13, 405)
         Me.lblDataTransferProgress.Name = "lblDataTransferProgress"
         Me.lblDataTransferProgress.Size = New System.Drawing.Size(0, 13)
         Me.lblDataTransferProgress.TabIndex = 22
@@ -296,17 +299,50 @@ Partial Class frmQC
         'pnlQCTypes
         '
         Me.pnlQCTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlQCTypes.Controls.Add(Me.opthrsconsistency)
+        Me.pnlQCTypes.Controls.Add(Me.optdaysconsistency)
+        Me.pnlQCTypes.Controls.Add(Me.optdiurnalrange)
         Me.pnlQCTypes.Controls.Add(Me.optInterElement)
         Me.pnlQCTypes.Controls.Add(Me.optAbsoluteLimits)
-        Me.pnlQCTypes.Location = New System.Drawing.Point(3, 27)
+        Me.pnlQCTypes.Location = New System.Drawing.Point(3, 37)
         Me.pnlQCTypes.Name = "pnlQCTypes"
-        Me.pnlQCTypes.Size = New System.Drawing.Size(302, 259)
+        Me.pnlQCTypes.Size = New System.Drawing.Size(302, 223)
         Me.pnlQCTypes.TabIndex = 23
+        '
+        'opthrsconsistency
+        '
+        Me.opthrsconsistency.AutoSize = True
+        Me.opthrsconsistency.Location = New System.Drawing.Point(12, 170)
+        Me.opthrsconsistency.Name = "opthrsconsistency"
+        Me.opthrsconsistency.Size = New System.Drawing.Size(205, 17)
+        Me.opthrsconsistency.TabIndex = 25
+        Me.opthrsconsistency.Text = "Consecutive hours consistency check"
+        Me.opthrsconsistency.UseVisualStyleBackColor = True
+        '
+        'optdaysconsistency
+        '
+        Me.optdaysconsistency.AutoSize = True
+        Me.optdaysconsistency.Location = New System.Drawing.Point(12, 135)
+        Me.optdaysconsistency.Name = "optdaysconsistency"
+        Me.optdaysconsistency.Size = New System.Drawing.Size(201, 17)
+        Me.optdaysconsistency.TabIndex = 24
+        Me.optdaysconsistency.Text = "Consecutive days consistency check"
+        Me.optdaysconsistency.UseVisualStyleBackColor = True
+        '
+        'optdiurnalrange
+        '
+        Me.optdiurnalrange.AutoSize = True
+        Me.optdiurnalrange.Location = New System.Drawing.Point(11, 100)
+        Me.optdiurnalrange.Name = "optdiurnalrange"
+        Me.optdiurnalrange.Size = New System.Drawing.Size(121, 17)
+        Me.optdiurnalrange.TabIndex = 23
+        Me.optdiurnalrange.Text = "Diurnal range check"
+        Me.optdiurnalrange.UseVisualStyleBackColor = True
         '
         'optInterElement
         '
         Me.optInterElement.AutoSize = True
-        Me.optInterElement.Location = New System.Drawing.Point(8, 56)
+        Me.optInterElement.Location = New System.Drawing.Point(11, 65)
         Me.optInterElement.Name = "optInterElement"
         Me.optInterElement.Size = New System.Drawing.Size(181, 17)
         Me.optInterElement.TabIndex = 22
@@ -317,7 +353,7 @@ Partial Class frmQC
         '
         Me.optAbsoluteLimits.AutoSize = True
         Me.optAbsoluteLimits.Checked = True
-        Me.optAbsoluteLimits.Location = New System.Drawing.Point(8, 21)
+        Me.optAbsoluteLimits.Location = New System.Drawing.Point(11, 30)
         Me.optAbsoluteLimits.Name = "optAbsoluteLimits"
         Me.optAbsoluteLimits.Size = New System.Drawing.Size(129, 17)
         Me.optAbsoluteLimits.TabIndex = 21
@@ -341,7 +377,7 @@ Partial Class frmQC
         Me.lblSelectTimeRange.AutoSize = True
         Me.lblSelectTimeRange.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSelectTimeRange.ForeColor = System.Drawing.Color.Black
-        Me.lblSelectTimeRange.Location = New System.Drawing.Point(67, 303)
+        Me.lblSelectTimeRange.Location = New System.Drawing.Point(70, 280)
         Me.lblSelectTimeRange.Name = "lblSelectTimeRange"
         Me.lblSelectTimeRange.Size = New System.Drawing.Size(115, 13)
         Me.lblSelectTimeRange.TabIndex = 25
@@ -463,4 +499,7 @@ Partial Class frmQC
     Friend WithEvents lblElement As Label
     Friend WithEvents cmbElement As ComboBox
     Friend WithEvents txtProgress As TextBox
+    Friend WithEvents opthrsconsistency As RadioButton
+    Friend WithEvents optdaysconsistency As RadioButton
+    Friend WithEvents optdiurnalrange As RadioButton
 End Class

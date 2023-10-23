@@ -178,6 +178,8 @@ Public Class frmQC
 
     End Sub
 
+
+
     Private Sub chkAllElements_Click(sender As Object, e As EventArgs) Handles chkAllElements.Click
         If chkAllElements.Checked = False Then
             For i = 0 To lstViewElements.Items.Count - 1
@@ -194,6 +196,7 @@ Public Class frmQC
             'lstViewElements.Enabled = False
         End If
     End Sub
+
 
     'Private Sub cmdPerformQC_Click(sender As Object, e As EventArgs) Handles cmdPerformQC.Click
 
@@ -728,13 +731,13 @@ Public Class frmQC
     Private Sub cmdPerformQC_Click(sender As Object, e As EventArgs) Handles cmdPerformQC.Click
 
         Dim m, n, elem1, elem2 As Integer
-        Dim stnid, elmcode, stnlist, elmlist, stnelm_selected, stnelm_local, QcReportFile As String
+        Dim stnid, elmcode, stnlist, elmlist, stnelm_selected, stnelm_local, QcReportFile, strSQLog, qcLog As String
         Dim stnselected, elmselected As Boolean
 
         Me.Cursor = Cursors.WaitCursor
 
         lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing....Please wait!")
-
+        lblDataTransferProgress.Refresh()
         ' List the selected stations
         stnlist = ""
         elmlist = ""
@@ -780,7 +783,7 @@ Public Class frmQC
 
         If optInterElement.Checked = True Then elmselected = True
 
-        ' Contruct the Stations and Elements selction criteria string
+        ' Construct the Stations and Elements selction criteria string
         If Len(stnlist) > 0 Then stnlist = "(" & stnlist & ")"
         If Len(elmlist) > 0 Then elmlist = "(" & elmlist & ")"
 
@@ -802,33 +805,32 @@ Public Class frmQC
         End If
 
         myConnectionString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = myConnectionString
+        conn.Open()
+
         Try
-            conn.ConnectionString = myConnectionString
-
-            conn.Open()
-
             'Get required data for QC interelement comparison
             sql1 = "SELECT * from qc_interelement_relationship_definition"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
             ' Set timeout period to unlimited
-            da1.SelectCommand.CommandTimeout = 0
+            da.SelectCommand.CommandTimeout = 0
 
-            da1.Fill(ds1, "interElement")
-            n = ds1.Tables("interElement").Rows.Count
-            conn.Close()
+            da.Fill(ds, "interElement")
+            n = ds.Tables("interElement").Rows.Count
+            'conn.Close()
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
-            conn.Close()
+            'conn.Close()
         End Try
 
         Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
 
-        myConnectionString = frmLogin.txtusrpwd.Text
+        'myConnectionString = frmLogin.txtusrpwd.Text
 
-        conn.ConnectionString = myConnectionString
-        conn.Open()
+        'conn.ConnectionString = myConnectionString
+        'conn.Open()
 
         beginYear = Val(txtBeginYear.Text)
         endYear = Val(txtEndYear.Text)
@@ -873,9 +875,15 @@ Public Class frmQC
             Me.Cursor = Cursors.Default
         End Try
 
-        'Update QC status for selected date range from 0 to 1 for Absolute Limits check
+        'Update QC status and QC Log for selected date range from 0 to 1 for Absolute Limits check which is mandatory
         If optAbsoluteLimits.Checked = True Then
-            strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+            strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
+                      UPDATE observationinitial Set qcTypeLog = CONCAT(qcTypeLog, '1') WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
+                      UPDATE observationinitial Set qcTypeLog = '1' WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " AND qcTypeLog is NULL;"
+
+            '' Update QC Type Log
+            'strSQLog = "SELECT recordedFrom,describedBy,obsDatetime,qcTypelog FROM observationinitial where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+            'UpdateqcLog(strSQLog, 1)
 
         End If
 
@@ -883,10 +891,10 @@ Public Class frmQC
         objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
         Try
-
             'Execute query
             objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
             objCmd.ExecuteNonQuery()
+
         Catch ex As MySql.Data.MySqlClient.MySqlException
             'Ignore expected error i.e. error of Duplicates in MySqlException
 
@@ -906,11 +914,12 @@ Public Class frmQC
             'Upper limits checks
             QcReportFile = qcReportsFolderWindows & "\qc_report_upperlimit_" & beginYearMonth & "_" & endYearMonth & ".csv"
 
-            'Delete the file for upper limit Qc report if already there
-            If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
-
-            ' Empty the QC values table
             Try
+                'Delete the file for upper limit Qc report if already there
+                If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
+
+                ' Empty the QC values table
+
                 strSQL = "TRUNCATE qcabslimits;"
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
                 objCmd.CommandTimeout = 0
@@ -961,17 +970,20 @@ Public Class frmQC
             End Try
 
             ' Output QC Report for Upper Limits
-            OutputQCReport(210, QcReportFile)
-            FileClose(210)
 
-            'Do QC for Lower limits checks
-            QcReportFile = qcReportsFolderWindows & "\qc_report_lowerlimit_" & beginYearMonth & "_" & endYearMonth & ".csv"
-
-            'Delete the file for lower limit Qc report if already there
-            If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
-
-            ' Empty the QC values table
             Try
+
+                OutputQCReport(210, QcReportFile, "Upper Limit")
+                FileClose(210)
+
+                'Do QC for Lower limits checks
+                QcReportFile = qcReportsFolderWindows & "\qc_report_lowerlimit_" & beginYearMonth & "_" & endYearMonth & ".csv"
+
+                'Delete the file for lower limit Qc report if already there
+                If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
+
+                ' Empty the QC values table
+
                 strSQL = "TRUNCATE qcabslimits;"
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
                 objCmd.CommandTimeout = 0
@@ -1018,25 +1030,37 @@ Public Class frmQC
             End Try
 
             ' Do QC for Lower limits checks
-            OutputQCReport(211, QcReportFile)
+            OutputQCReport(211, QcReportFile, "Lower Limit")
             FileClose(211)
 
             'Interelement comparison checks
         ElseIf optInterElement.Checked = True Then
             txtProgress.Visible = True
 
-            ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-
+            '' Update QC Status and QC Type Log
+            'strSQLog = "SELECT recordedFrom,describedBy,obsDatetime,qcTypelog FROM observationinitial where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+            'UpdateqcLog(strSQLog, 2)
 
             'Loop through the combination of elements in the [qc_interelement_relationship_definition] table
-            For m = 0 To n - 1
+            sql1 = "SELECT * from qc_interelement_relationship_definition"
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da1.SelectCommand.CommandTimeout = 0
+            ds1.Clear()
+            da1.Fill(ds1, "interElement")
+            For m = 0 To ds1.Tables("interElement").Rows.Count - 1 ' n - 1
                 elem1 = ds1.Tables("interElement").Rows(m).Item("elementId_1")
                 elem2 = ds1.Tables("interElement").Rows(m).Item("elementId_2")
                 'MsgBox("Element1=" & elem1 & "  Element2=" & elem2)
 
-                strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnlist & " and (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
-                If chkAllStations.Checked Then strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+                strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnlist & " and (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
+                          UPDATE observationinitial Set qcTypeLog = CONCAT(qcTypeLog, '2') WHERE " & stnlist & " and (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
+                          Update observationinitial Set qcTypeLog = '2'  WHERE " & stnlist & " and (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " AND qcTypeLog is NULL;"
+
+                If chkAllStations.Checked Then
+                    strSQL = "UPDATE observationinitial set qcstatus=1 WHERE (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
+                              UPDATE observationinitial Set qcTypeLog = CONCAT(qcTypeLog, '2') WHERE (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & ";
+                              UPDATE observationinitial Set qcTypeLog = '2' WHERE (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " AND qcTypeLog is NULL;"
+                End If
 
                 txtProgress.Text = "Updating QC Status to 1......"
                 txtProgress.Refresh()
@@ -1046,6 +1070,7 @@ Public Class frmQC
                 Try
                     objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
                     objCmd.ExecuteNonQuery()
+
                 Catch x As Exception
                     If x.HResult = "-2147467259" Then
                         'MsgBox("Repeat QC encountered on some records")
@@ -1061,14 +1086,15 @@ Public Class frmQC
 
                 QcReportFile = qcReportsFolderWindows & "\qc_interelement_" & elem1 & "_" & elem2 & "_" & beginYearMonth & "_" & endYearMonth & ".csv"
 
-                'Delete the Qc report file if already there
-                If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
-
-                ' Create the Command for executing query and set its properties
-                objCmd.CommandTimeout = 0
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-
                 Try
+                    'Delete the Qc report file if already there
+                    If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
+
+                    ' Create the Command for executing query and set its properties
+                    objCmd.CommandTimeout = 0
+                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+
                     'Execute query
                     txtProgress.Text = "Refreshing QC interlement tables......"
                     txtProgress.Refresh()
@@ -1116,28 +1142,10 @@ Public Class frmQC
                     objCmd.ExecuteNonQuery()
 
                 Catch ex As Exception
-
                     Me.Cursor = Cursors.Default
                     txtProgress.Visible = False
                 End Try
 
-                'Select element 2 for inter-eleent comparison
-                'strSQL = "TRUNCATE qc_interelement_2"
-
-                '' Create the Command for executing query and set its properties
-                'objCmd.CommandTimeout = 0
-                'objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-
-                'Try
-                '    'Execute query
-                '    objCmd.CommandTimeout = 0
-                '    objCmd.ExecuteNonQuery()
-                '    'MsgBox("Table qc_interelement_2 cleared!")
-                'Catch ex As Exception
-                '    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                '    MsgBox(ex.Message)
-                '    Me.Cursor = Cursors.Default
-                'End Try
                 If stnselected = True Then
 
                     strSQL = "INSERT IGNORE INTO qc_interelement_2(stationId_2,elementId_2,obsDatetime_2,obsValue_2,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2) " &
@@ -1193,20 +1201,159 @@ Public Class frmQC
 
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-
                     MsgBox(ex.Message)
                     Me.Cursor = Cursors.Default
-                    txtProgress.Visible = False
+                    'txtProgress.Visible = False
+                End Try
+                'txtProgress.Visible = False
+            Next m
+
+        ElseIf optdiurnalrange.Checked = True Then
+            txtProgress.Visible = False
+
+            strSQL = "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd,hour(obsdatetime) as hh,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
+                     "from observationinitial where " & stnelm_selected & " year(obsdatetime) " &
+                     "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and qcStatus = 1 ;"
+
+            ' Empty Qc Limits table
+            sql = "DELETE from qcabslimits"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
+            objCmd.ExecuteNonQuery()
+
+            qcDiurnalRange(strSQL)
+
+            '' Update QC Type Log
+            'strSQLog = "SELECT recordedFrom,describedBy,obsDatetime,qcTypelog FROM observationinitial where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+            'UpdateqcLog(strSQLog, 3)
+            strSQL = "UPDATE observationinitial Set qcTypeLog = CONCAT(qcTypeLog, '3') WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
+                      UPDATE observationinitial Set qcTypeLog = '3' WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " AND qcTypeLog is NULL;"
+            ' Create the Command for executing query and set its properties
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+            Try
+                'Execute query
+                objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
+                objCmd.ExecuteNonQuery()
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+            '' Update QC Type Log
+            'strSQLog = "SELECT recordedFrom,describedBy,obsDatetime,qcTypelog FROM observationinitial where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+            'UpdateqcLog(strSQLog, 1)
+
+
+            'End If
+
+
+        ElseIf optdaysconsistency.Checked = True Or opthrsconsistency.Checked Then
+            txtProgress.Visible = False
+
+            Dim QcFile, obsInterval As String
+
+            If optdaysconsistency.Checked Then
+                strSQLog = "SELECT recordedFrom,describedBy,obsDatetime,qcTypelog FROM observationinitial where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+
+                'strSQLog = "SELECT recordedFrom,describedBy,obsDatetime,qcTypelog FROM observationinitial where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+                'UpdateqcLog(strSQLog, 4)
+                ' Update QC Status and QC Log
+                strSQL = "UPDATE observationinitial Set qcTypeLog = CONCAT(qcTypeLog, '4') WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
+                         UPDATE observationinitial Set qcTypeLog = '4' WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " AND qcTypeLog is NULL;"
+                ' Create the Command for executing query and set its properties
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+                Try
+                    'Execute query
+                    objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
+                    objCmd.ExecuteNonQuery()
+
+                Catch ex As Exception
+                    MsgBox(ex.Message)
                 End Try
 
-            Next m
+                QcFile = qcReportsFolderWindows & "\qc_report_consecutivedays_" & beginYearMonth & "_" & endYearMonth & ".csv"
+                obsInterval = "Day"
+            Else
+                strSQLog = "SELECT recordedFrom,describedBy,obsDatetime,qcTypelog FROM observationinitial where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+
+                '' Update QC Type Log
+                'strSQLog = "SELECT recordedFrom,describedBy,obsDatetime,qcTypelog FROM observationinitial where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+                'UpdateqcLog(strSQLog, 5)
+
+                ' Update QC Status and QC Log
+                strSQL = "UPDATE observationinitial Set qcTypeLog = CONCAT(qcTypeLog, '5') WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
+                         UPDATE observationinitial Set qcTypeLog = '5' WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " AND qcTypeLog is NULL;"
+                ' Create the Command for executing query and set its properties
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+                Try
+                    'Execute query
+                    objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
+                    objCmd.ExecuteNonQuery()
+
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+
+                QcFile = qcReportsFolderWindows & "\qc_report_consecutivehours_" & beginYearMonth & "_" & endYearMonth & ".csv"
+                obsInterval = "Hour"
+            End If
+
+            ' Empty Qc Limits table
+            Try
+                sql = "DELETE from qcabslimits"
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
+                objCmd.ExecuteNonQuery()
+
+                ' Open QC output report file
+                FileOpen(212, QcFile, OpenMode.Output)
+                ' Print header
+                PrintLine(212, "StationId,ElementId,Datetime,YYYY,mm,dd,hh,obsValue,obsPrev" & obsInterval & ",qcStatus,acquisitionType,obsLevel,capturedBy,dataForm")
+
+                For i = 0 To LstViewStations.Items.Count - 1
+                    If LstViewStations.Items(i).Checked = True Then
+                        stnid = LstViewStations.Items(i).SubItems(0).Text
+                        For j = 0 To lstViewElements.Items.Count - 1
+                            If lstViewElements.Items(j).Checked = True Then
+                                elmcode = lstViewElements.Items(j).SubItems(0).Text
+                                strSQL = "SELECT recordedFrom AS STN, describedBy AS COD, obsDatetime AS DT,Year(obsDatetime) as YY, Month(obsDatetime) AS MM, Day(obsDatetime) AS DD, Hour(obsDatetime) AS HH, obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm AS Val FROM observationinitial " &
+                                          "where recordedFrom = " & stnid & " and describedBy ='" & elmcode & "' and year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+
+                                If optdaysconsistency.Checked Then
+                                    qcConsecutiveObs(strSQL, "d", 4)
+                                Else
+                                    qcConsecutiveObs(strSQL, "h", 5)
+                                End If
+
+                            End If
+                        Next
+                    End If
+                Next
+
+                FileClose(212)
+                CommonModules.ViewFile(QcFile)
+                Me.Cursor = Cursors.Default
+                conn.Close()
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                FileClose(212)
+                Me.Cursor = Cursors.Default
+                conn.Close()
+                lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing Failed!")
+            End Try
+
+            Exit Sub
+
         End If
         lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing complete!")
-        txtProgress.Visible = False
+        'txtProgress.Visible = False
         Me.Cursor = Cursors.Default
         conn.Close()
     End Sub
-    Sub OutputQCReport(fp As Integer, fl As String)
+    Sub OutputQCReport(fp As Integer, fl As String, limitType As String)
         Dim x As Long
         Dim dat, hder As String
         'conn.ConnectionString = myConnectionString
@@ -1224,41 +1371,43 @@ Public Class frmQC
 
             ' Not to proceed if no QC data to output
             If x = 0 Then
-                MsgBox(ClsTranslations.GetTranslation("No QC errors found"))
+                MsgBox(ClsTranslations.GetTranslation("No QC errors found for " & limitType))
                 Exit Sub
             End If
 
-            ' Output Headers
-            hder = ds.Tables("qcabslimits").Columns(0).ColumnName
-            For j = 1 To ds.Tables("qcabslimits").Columns.Count - 1
-                hder = hder & "," & ds.Tables("qcabslimits").Columns(j).ColumnName
-            Next
-
-            PrintLine(fp, hder)
-            'PrintLine(fp)
-            ' Outputv data values
-            For i = 0 To x - 1
-                'If Not IsNumeric(ds.Tables("qcabslimits").Rows(i).Item("limitValue")) Then Continue For
-                dat = ds.Tables("qcabslimits").Rows(i).Item(0)
-
-                '' Insert text qualifier ito the stationid field to ensure that it is saved as a character string in QC output text file
-                'dat = """" & dat & """"
-
-                For j = 1 To ds.Tables("qcabslimits").Columns.Count - 1
-                    'dat = dat & "," & ds.Tables("qcabslimits").Rows(i).Item(j)
-                    If j = 8 And Not IsNumeric(ds.Tables("qcabslimits").Rows(i).Item("limitValue")) Then
-                        dat = dat & ","
-                    Else
-                        dat = dat & "," & ds.Tables("qcabslimits").Rows(i).Item(j)
-                    End If
-
+            With ds.Tables("qcabslimits")
+                ' Output Headers
+                hder = .Columns(0).ColumnName
+                For j = 1 To .Columns.Count - 1
+                    hder = hder & "," & .Columns(j).ColumnName
                 Next
 
-                Print(fp, dat & Chr(10))
-                'PrintLine(fp, dat)
+                PrintLine(fp, hder)
                 'PrintLine(fp)
-            Next
+                ' Outputv data values
+                For i = 0 To x - 1
+                    'If Not IsNumeric(ds.Tables("qcabslimits").Rows(i).Item("limitValue")) Then Continue For
+                    dat = .Rows(i).Item(0)
 
+                    '' Insert text qualifier ito the stationid field to ensure that it is saved as a character string in QC output text file
+                    'dat = """" & dat & """"
+
+                    For j = 1 To .Columns.Count - 1
+                        'dat = dat & "," & ds.Tables("qcabslimits").Rows(i).Item(j)
+                        If j = 8 And Not IsNumeric(.Rows(i).Item("limitValue")) Then
+                            dat = dat & ","
+                        Else
+                            dat = dat & "," & .Rows(i).Item(j)
+                        End If
+                        ' Update the QC Type Log
+
+                    Next
+
+                    Print(fp, dat & Chr(10))
+                    'PrintLine(fp, dat)
+                    'PrintLine(fp)
+                Next
+            End With
             FileClose(fp)
             CommonModules.ViewFile(fl)
 
@@ -1299,12 +1448,12 @@ Public Class frmQC
                     'Print(111, dt)
                     'PrintLine(111)
                 Next
-                msgTxtQCReportsOutInterelement = ClsTranslations.GetTranslation("QC report for comparison of Elements") & " " & elm1 & ClsTranslations.GetTranslation("and") & " " & elm2 & " " & ClsTranslations.GetTranslation("sent to")
-                'MsgBox(msgTxtQCReportsOutInterelement & qcReportsFolderWindows, MsgBoxStyle.Information)
-                txtProgress.Text = msgTxtQCReportsOutInterelement
+                msgTxtQCReportsOutInterelement = ClsTranslations.GetTranslation("QC report for comparison of Elements ") & " " & elm1 & ClsTranslations.GetTranslation(" and ") & " " & elm2 & " " & ClsTranslations.GetTranslation(" sent to ")
+                MsgBox(msgTxtQCReportsOutInterelement & qcReportsFolderWindows, MsgBoxStyle.Information)
+                'txtProgress.Text = msgTxtQCReportsOutInterelement
                 txtProgress.Refresh()
             Else
-                txtProgress.Text = ClsTranslations.GetTranslation("No QC errors found for comparison of Elements") & " " & elm1 & " " & ClsTranslations.GetTranslation("and") & " " & elm2
+                txtProgress.Text = ClsTranslations.GetTranslation("No QC errors found for comparison of Elements ") & " " & elm1 & " " & ClsTranslations.GetTranslation(" and ") & " " & elm2
                 txtProgress.Refresh()
                 'MsgBox(ClsTranslations.GetTranslation("No QC errors found for comparison of Elements") & " " & elm1 & " " & ClsTranslations.GetTranslation("and") & " " & elm2)
             End If
@@ -1388,5 +1537,311 @@ Public Class frmQC
                 End If
             Next
         End If
+    End Sub
+
+    Sub qcDiurnalRange(sql As String)
+        Dim mean, stdev, errRec, QcFile As String
+        'Dim code, yy, mm As Integer
+        Dim dev, limitValue, stdevDiff As Double
+
+        Try
+            'txtProgress.Text = sql
+            'MsgBox(sql)
+
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da1.SelectCommand.CommandTimeout = 0
+            ds1.Clear()
+            da1.Fill(ds1, "dailyobs")
+
+            QcFile = qcReportsFolderWindows & "\qc_report_diurnalRange_" & beginYearMonth & "_" & endYearMonth & ".csv"
+
+            'Delete the QC report file for upper limit Qc report if already there
+            If IO.File.Exists(QcFile) Then IO.File.Delete(QcFile)
+
+            FileOpen(212, QcFile, OpenMode.Output)
+            ' Print headline
+            PrintLine(212, "StationId,ElementId,Datetime,YYYY,mm,dd,hh,obsValue,limitValue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm")
+
+            With ds1.Tables("dailyobs")
+
+                'Compute Statistics
+                For i = 0 To .Rows.Count - 1
+                    'qcLogUpdate(.Rows(i).Item(0), .Rows(i).Item(1), .Rows(i).Item(2), 3)
+                    'Compute monthly statistical change
+                    statitical_change(.Rows(i).Item(0), .Rows(i).Item(1), .Rows(i).Item(2), .Rows(i).Item(7), .Rows(i).Item(7))
+                Next
+
+                For i = 0 To .Rows.Count - 1
+                    errRec = ""
+                    'Monthly_MEAN_STDEV(.Rows(i).Item(0), .Rows(i).Item(1), .Rows(i).Item(3), .Rows(i).Item(4), mean, stdev)
+                    If Len(.Rows(i).Item(7)) = 0 Then Continue For
+                    Statistic_limits(.Rows(i).Item(0), .Rows(i).Item(1), DateAndTime.Year(.Rows(i).Item(2)), DateAndTime.Month(.Rows(i).Item(2)), DateAndTime.Day(.Rows(i).Item(2)), mean, stdev, "d")
+
+                    If Math.Abs(Val(.Rows(i).Item(7) - mean)) > stdev * 2 Then
+                        stdevDiff = Math.Abs(Val(.Rows(i).Item(7)) - Val(mean)) - Val(stdev)
+                        dev = Val(.Rows(i).Item(7)) - Val(mean)
+                        If dev > 0 Then
+                            limitValue = Val(mean) + stdev
+                        Else
+                            limitValue = Val(mean) - stdev
+                        End If
+                        limitValue = Math.Round(limitValue, 0)
+                        errRec = .Rows(i).Item(0) & "," & .Rows(i).Item(1) & "," & .Rows(i).Item(2) & "," & .Rows(i).Item(3) & "," & .Rows(i).Item(4) & "," & .Rows(i).Item(5) & "," & .Rows(i).Item(6) & "," & .Rows(i).Item(7) & "," & Math.Round(limitValue, 0) & "," & .Rows(i).Item(8) & "," & .Rows(i).Item(9) & "," & .Rows(i).Item(10) & "," & .Rows(i).Item(11) & "," & .Rows(i).Item(12)
+                        PrintLine(212, errRec)
+                    End If
+
+                Next
+
+                lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing complete!")
+            End With
+            'conn.Close()
+            FileClose(212)
+            CommonModules.ViewFile(QcFile)
+        Catch x As Exception
+        MsgBox(x.Message & " qcDiurnalRange")
+        'conn.Close()
+        FileClose(212)
+        lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing failed!")
+        End Try
+    End Sub
+    Sub qcConsecutiveObs(sql As String, period As String, qcType As Integer)
+        Dim ds2 As New DataSet, da2 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim prevobs, prevDate, errRec As String
+        Dim maxrows As Long
+        Dim obsDiff, stsDiff, mean, stdev As Double
+
+        Try
+            'MsgBox(sql)
+            'conn.Open()
+            'txtProgress.Visible = True
+            'txtProgress.Text = sql
+            da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da2.SelectCommand.CommandTimeout = 0
+            ds2.Clear()
+            da2.Fill(ds2, "dailyobs")
+            maxrows = ds2.Tables("dailyobs").Rows.Count
+            Dim diffValues(maxrows) As String
+
+            If ds2.Tables("dailyobs").Rows.Count > 0 Then
+
+                With ds2.Tables("dailyobs")
+
+                    ' Compute Statistics
+                    For i = 0 To .Rows.Count - 1
+
+                        If Len(.Rows(i).Item(7)) = 0 Then Continue For
+
+                        prevDate = DateAdd(period, -1, .Rows(i).Item(2))
+                        prevDate = DateAndTime.Year(prevDate) & "-" & DateAndTime.Month(prevDate) & "-" & DateAndTime.Day(prevDate) & " " & DateAndTime.Hour(prevDate) & ":" & DateAndTime.Minute(prevDate) & ":" & DateAndTime.Second(prevDate)
+
+                        prevobs = ""
+                        dailyObs(.Rows(i).Item(0), .Rows(i).Item(1), prevDate, prevobs)
+                        If prevobs = "" Then Continue For
+                        'If Len(.Rows(i).Item(7)) = 0 Or Len(prevobs) = 0 Then Continue For
+                        obsDiff = Val(.Rows(i).Item(7)) - Val((prevobs))
+
+                        ' Compute monthly statistical change
+                        statitical_change(.Rows(i).Item(0), .Rows(i).Item(1), .Rows(i).Item(2), .Rows(i).Item(7), Math.Abs(obsDiff))
+                    Next
+
+                    ' Compute Consistency QC
+                    For i = 0 To .Rows.Count - 1
+                        If Len(.Rows(i).Item(7)) = 0 Then Continue For
+                        prevDate = DateAdd(period, -1, .Rows(i).Item(2))
+                        prevDate = DateAndTime.Year(prevDate) & "-" & DateAndTime.Month(prevDate) & "-" & DateAndTime.Day(prevDate) & " " & DateAndTime.Hour(prevDate) & ":" & DateAndTime.Minute(prevDate) & ":" & DateAndTime.Second(prevDate)
+                        prevobs = ""
+
+                        dailyObs(.Rows(i).Item(0), .Rows(i).Item(1), prevDate, prevobs)
+                        If prevobs = "" Then Continue For
+                        If Len(.Rows(i).Item(7)) = 0 Or Len(prevobs) = 0 Then Continue For
+
+                        obsDiff = Val(.Rows(i).Item(7)) - Val((prevobs))
+                        'stsDiff = ""
+                        Statistic_limits(.Rows(i).Item(0), .Rows(i).Item(1), DateAndTime.Year(.Rows(i).Item(2)), DateAndTime.Month(.Rows(i).Item(2)), DateAndTime.Day(.Rows(i).Item(2)), mean, stdev, period)
+
+                        'If Len(.Rows(i).Item(7)) > 0 And Len(prevobs) > 0 And Val(stsDiff) <> 0 And Math.Abs(obsDiff) > stsDiff + 20 Then
+                        If Math.Abs(obsDiff) > (mean + stdev * 3) Then
+                            errRec = .Rows(i).Item(0)
+                            For j = 1 To 12
+                                If j = 7 Then
+                                    errRec = errRec & "," & .Rows(i).Item(j) & "," & prevobs
+                                Else
+                                    errRec = errRec & "," & .Rows(i).Item(j)
+                                End If
+                            Next
+                            'qcLogUpdate(.Rows(i).Item(0), .Rows(i).Item(1), .Rows(i).Item(2), qcType)
+                            PrintLine(212, errRec)
+                        End If
+                        'qcLogUpdate(.Rows(i).Item(0), .Rows(i).Item(1), .Rows(i).Item(2), qcType)
+                    Next
+
+                    lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing complete!")
+                End With
+            End If
+            'conn.Close()
+        Catch x As Exception
+        MsgBox(x.Message & " at qcConsecutiveObs")
+            'conn.Close()
+            lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing failed!")
+        End Try
+    End Sub
+    Sub Monthly_MEAN_STDEV(stn As String, elm As String, yy As Integer, mm As Integer, ByRef MEAN As String, ByRef STD As String)
+        Dim dsv As New DataSet
+        Dim dav As MySql.Data.MySqlClient.MySqlDataAdapter
+
+        sql = "SELECT AVG(obsvalue) As MEAN, STD(obsValue) As STDEV From observationinitial " &
+               "Where RecordedFrom = '" & stn & "' AND describedBy = '" & elm & "' and Year(obsDatetime) = " & yy & " and Month(obsDatetime) = " & mm & " GROUP by Year(obsDatetime), Month(obsDatetime);"
+        'txtProgress.Text = sql
+
+        Try
+
+            dav = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dav.SelectCommand.CommandTimeout = 0
+            dsv.Clear()
+            dav.Fill(dsv, "MEANSTDEV")
+
+            MEAN = dsv.Tables("MEANSTDEV").Rows(0).Item(0)
+            STD = dsv.Tables("MEANSTDEV").Rows(0).Item(1)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Sub dailyObs(stn As String, elm As String, dt As String, ByRef prevObs As String)
+        Dim dsf As New DataSet
+        Dim daf As MySql.Data.MySqlClient.MySqlDataAdapter
+
+        sql = "SELECT recordedFrom AS STN, describedBy AS COD, obsDatetime AS DT,Year(obsDatetime) YY, Month(obsDatetime) AS MM, Day(obsDatetime) AS DD, obsvalue AS Val FROM observationinitial " &
+               "WHERE recordedFrom = '" & stn & "' AND describedBy = '" & elm & "' AND obsDatetime = '" & dt & "';"
+        'txtProgress.Text = sql
+
+        Try
+
+            daf = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            daf.SelectCommand.CommandTimeout = 0
+            dsf.Clear()
+            daf.Fill(dsf, "dailyobs")
+
+            If dsf.Tables("dailyobs").Rows.Count <> 0 Then
+                prevObs = dsf.Tables("dailyobs").Rows(0).Item(6)
+            Else
+                prevObs = ""
+            End If
+            'STD = dsv.Tables("MEANSTDEV").Rows(0).Item(1)
+        Catch ex As Exception
+            MsgBox(ex.Message & " at dailyObs")
+        End Try
+    End Sub
+
+    Sub UpdateqcLog(sqclog As String, qcLogType As String)
+
+        Dim dslog As New DataSet, dalog As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim qcLog As String
+
+        Try
+            dalog = New MySql.Data.MySqlClient.MySqlDataAdapter(sqclog, conn)
+            ' Set timeout period to unlimited
+            dalog.SelectCommand.CommandTimeout = 0
+            dslog.Clear()
+            dalog.Fill(dslog, "qcLogs")
+            With dslog.Tables("qcLogs")
+                For i = 0 To .Rows.Count - 1
+                    If Not IsDBNull(.Rows(i).Item(3)) Then
+                        qcLog = .Rows(i).Item(3) & qcLogType
+                    Else
+                        qcLog = qcLogType
+                    End If
+
+                    qcLogUpdate(.Rows(i).Item(0), .Rows(i).Item(1), .Rows(i).Item(2), qcLog)
+                Next
+            End With
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Sub qcLogUpdate(id As String, code As Integer, dtTime As String, qcType As String)
+
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+
+        dtTime = DateAndTime.Year(dtTime) & "-" & DateAndTime.Month(dtTime) & "-" & DateAndTime.Day(dtTime) & " " & DateAndTime.Hour(dtTime) & ":" & DateAndTime.Minute(dtTime) & ":" & DateAndTime.Second(dtTime)
+
+        ' Update when no Null values exist in qcTypeLog column
+        Try
+            'sql = "UPDATE observationinitial SET qcTypeLog = Concat(qcTypeLog, '" & qcType & "') WHERE recordedFrom = '" & id & "' and describedBy = '" & code & "' AND obsDatetime = '" & dtTime & "';"
+
+            sql = "UPDATE observationinitial SET qcTypeLog = '" & qcType & "' WHERE recordedFrom = '" & id & "' and describedBy = '" & code & "' AND obsDatetime = '" & dtTime & "';"
+
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry.CommandTimeout = 0
+            'Execute query
+            qry.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        ' Update when Null values exist in qcTypeLog column
+        Try
+            sql1 = "Update observationinitial SET qcTypeLog = '" & qcType & "' WHERE  recordedFrom = '" & id & "' and describedBy = '" & code & "' AND obsDatetime = '" & dtTime & "' AND qcTypeLog IS NULL;"
+            'txtProgress.Text = sql1
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql1, conn)
+            qry.CommandTimeout = 0
+            'Execute query
+            qry.ExecuteNonQuery()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
+    Sub statitical_change(id As String, code As Integer, dttime As String, obs As String, obsDiff As String)
+
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+
+        Try
+            dttime = DateAndTime.Year(dttime) & "-" & DateAndTime.Month(dttime) & "-" & DateAndTime.Day(dttime) & " " & DateAndTime.Hour(dttime) & ":" & DateAndTime.Minute(dttime) & ":" & DateAndTime.Second(dttime)
+
+            sql = "INSERT IGNORE INTO `qcabslimits` (`StationId`, `ElementId`, `Datetime`, `obsValue`, `limitValue`) VALUES ('" & id & "', '" & code & "', '" & dttime & "', '" & obs & "', '" & obsDiff & "');"
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry.ExecuteNonQuery()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Sub Statistic_limits(id As String, cod As Integer, yy As Integer, mm As Integer, dd As Integer, ByRef avg As Double, ByRef stdev As Double, period As String)
+        Dim dst As New DataSet
+        Dim dat As MySql.Data.MySqlClient.MySqlDataAdapter
+
+        Try
+            Select Case period
+                Case "d"
+                    sql = "SELECT id, cod, YY, MM, mean,stdv AS dev FROM (SELECT stationid AS id,Elementid AS cod, YEAR(DATETIME) as YY, Month(DATETIME) as MM, AVG(limitValue) AS mean , STD(limitValue) as stdv FROM qcabslimits
+                   GROUP BY stationid,Elementid, YEAR(DATETIME),Month(DATETIME))t
+                   where id = '" & id & "' AND cod = '" & cod & "' AND YY = " & yy & " AND MM = " & mm & ";"
+                Case "h"
+                    sql = "SELECT id, cod, YY, MM, DD, mean,stdv AS dev FROM (SELECT stationid AS id,Elementid AS cod, YEAR(DATETIME) as YY, Month(DATETIME) as MM, Day(DATETIME) as DD, AVG(limitValue) AS mean , STD(limitValue) as stdv FROM qcabslimits
+                   GROUP BY stationid,Elementid, YEAR(DATETIME),Month(DATETIME),Day(DATETIME))t
+                   where id = '" & id & "' AND cod = '" & cod & "' AND YY = " & yy & " AND MM = " & mm & " AND DD = " & dd & ";"
+            End Select
+
+            'txtProgress.Text = sql
+            dat = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dat.SelectCommand.CommandTimeout = 0
+            dst.Clear()
+            dat.Fill(dst, "limits")
+            With dst.Tables("limits")
+                If .Rows.Count = 1 Then
+                    avg = .Rows(0).Item(4)
+                    stdev = .Rows(0).Item(5)
+                Else
+                    avg = ""
+                    stdev = ""
+                End If
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class
