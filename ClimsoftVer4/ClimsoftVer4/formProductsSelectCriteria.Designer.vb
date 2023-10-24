@@ -48,6 +48,8 @@ Partial Class formProductsSelectCriteria
         Me.cmdClearElements = New System.Windows.Forms.Button()
         Me.chkTranspose = New System.Windows.Forms.CheckBox()
         Me.pnlSummary = New System.Windows.Forms.Panel()
+        Me.lblDaysMissing = New System.Windows.Forms.Label()
+        Me.txtMissingDays = New System.Windows.Forms.TextBox()
         Me.optTotal = New System.Windows.Forms.RadioButton()
         Me.optMean = New System.Windows.Forms.RadioButton()
         Me.lblSummary = New System.Windows.Forms.Label()
@@ -354,18 +356,40 @@ Partial Class formProductsSelectCriteria
         'pnlSummary
         '
         Me.pnlSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlSummary.Controls.Add(Me.lblDaysMissing)
+        Me.pnlSummary.Controls.Add(Me.txtMissingDays)
         Me.pnlSummary.Controls.Add(Me.optTotal)
         Me.pnlSummary.Controls.Add(Me.optMean)
         Me.pnlSummary.Controls.Add(Me.lblSummary)
-        Me.pnlSummary.Location = New System.Drawing.Point(653, 5)
+        Me.pnlSummary.Location = New System.Drawing.Point(650, 3)
         Me.pnlSummary.Name = "pnlSummary"
         Me.pnlSummary.Size = New System.Drawing.Size(398, 48)
         Me.pnlSummary.TabIndex = 23
         '
+        'lblDaysMissing
+        '
+        Me.lblDaysMissing.AutoSize = True
+        Me.lblDaysMissing.Location = New System.Drawing.Point(244, 28)
+        Me.lblDaysMissing.Name = "lblDaysMissing"
+        Me.lblDaysMissing.Size = New System.Drawing.Size(149, 13)
+        Me.lblDaysMissing.TabIndex = 4
+        Me.lblDaysMissing.Text = "Monthly Missing Days Allowed"
+        Me.lblDaysMissing.Visible = False
+        '
+        'txtMissingDays
+        '
+        Me.txtMissingDays.Location = New System.Drawing.Point(211, 24)
+        Me.txtMissingDays.Name = "txtMissingDays"
+        Me.txtMissingDays.Size = New System.Drawing.Size(30, 20)
+        Me.txtMissingDays.TabIndex = 3
+        Me.txtMissingDays.Text = "0"
+        Me.txtMissingDays.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtMissingDays.Visible = False
+        '
         'optTotal
         '
         Me.optTotal.AutoSize = True
-        Me.optTotal.Location = New System.Drawing.Point(205, 26)
+        Me.optTotal.Location = New System.Drawing.Point(131, 26)
         Me.optTotal.Name = "optTotal"
         Me.optTotal.Size = New System.Drawing.Size(49, 17)
         Me.optTotal.TabIndex = 2
@@ -376,7 +400,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.optMean.AutoSize = True
         Me.optMean.Checked = True
-        Me.optMean.Location = New System.Drawing.Point(104, 26)
+        Me.optMean.Location = New System.Drawing.Point(28, 26)
         Me.optMean.Name = "optMean"
         Me.optMean.Size = New System.Drawing.Size(52, 17)
         Me.optMean.TabIndex = 1
@@ -548,17 +572,17 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtMinuteEnd.FormattingEnabled = True
         Me.txtMinuteEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59"})
-        Me.txtMinuteEnd.Location = New System.Drawing.Point(324, 67)
+        Me.txtMinuteEnd.Location = New System.Drawing.Point(348, 68)
         Me.txtMinuteEnd.Name = "txtMinuteEnd"
         Me.txtMinuteEnd.Size = New System.Drawing.Size(40, 21)
         Me.txtMinuteEnd.TabIndex = 15
-        Me.txtMinuteEnd.Text = "00"
+        Me.txtMinuteEnd.Text = "59"
         '
         'txtMinuteStart
         '
         Me.txtMinuteStart.FormattingEnabled = True
         Me.txtMinuteStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59", "60"})
-        Me.txtMinuteStart.Location = New System.Drawing.Point(324, 33)
+        Me.txtMinuteStart.Location = New System.Drawing.Point(348, 33)
         Me.txtMinuteStart.Name = "txtMinuteStart"
         Me.txtMinuteStart.Size = New System.Drawing.Size(40, 21)
         Me.txtMinuteStart.TabIndex = 14
@@ -568,7 +592,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtHourEnd.FormattingEnabled = True
         Me.txtHourEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHourEnd.Location = New System.Drawing.Point(278, 68)
+        Me.txtHourEnd.Location = New System.Drawing.Point(306, 68)
         Me.txtHourEnd.Name = "txtHourEnd"
         Me.txtHourEnd.Size = New System.Drawing.Size(40, 21)
         Me.txtHourEnd.TabIndex = 13
@@ -578,7 +602,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtHourStart.FormattingEnabled = True
         Me.txtHourStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHourStart.Location = New System.Drawing.Point(278, 34)
+        Me.txtHourStart.Location = New System.Drawing.Point(306, 33)
         Me.txtHourStart.Name = "txtHourStart"
         Me.txtHourStart.Size = New System.Drawing.Size(40, 21)
         Me.txtHourStart.TabIndex = 12
@@ -587,7 +611,7 @@ Partial Class formProductsSelectCriteria
         'txtSminute
         '
         Me.txtSminute.AutoSize = True
-        Me.txtSminute.Location = New System.Drawing.Point(324, 18)
+        Me.txtSminute.Location = New System.Drawing.Point(348, 17)
         Me.txtSminute.Name = "txtSminute"
         Me.txtSminute.Size = New System.Drawing.Size(39, 13)
         Me.txtSminute.TabIndex = 9
@@ -596,7 +620,7 @@ Partial Class formProductsSelectCriteria
         'lblHourEnd
         '
         Me.lblHourEnd.AutoSize = True
-        Me.lblHourEnd.Location = New System.Drawing.Point(278, 18)
+        Me.lblHourEnd.Location = New System.Drawing.Point(302, 17)
         Me.lblHourEnd.Name = "lblHourEnd"
         Me.lblHourEnd.Size = New System.Drawing.Size(30, 13)
         Me.lblHourEnd.TabIndex = 7
@@ -615,7 +639,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.dateTo.Location = New System.Drawing.Point(108, 68)
         Me.dateTo.Name = "dateTo"
-        Me.dateTo.Size = New System.Drawing.Size(164, 20)
+        Me.dateTo.Size = New System.Drawing.Size(195, 20)
         Me.dateTo.TabIndex = 4
         '
         'lblTo
@@ -631,7 +655,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.dateFrom.Location = New System.Drawing.Point(108, 33)
         Me.dateFrom.Name = "dateFrom"
-        Me.dateFrom.Size = New System.Drawing.Size(164, 20)
+        Me.dateFrom.Size = New System.Drawing.Size(195, 20)
         Me.dateFrom.TabIndex = 2
         Me.dateFrom.Value = New Date(2000, 1, 1, 0, 0, 0, 0)
         '
@@ -1043,4 +1067,6 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents ColumnHeader4 As ColumnHeader
     Friend WithEvents ColumnHeader5 As ColumnHeader
+    Friend WithEvents lblDaysMissing As Label
+    Friend WithEvents txtMissingDays As TextBox
 End Class

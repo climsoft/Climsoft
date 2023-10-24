@@ -287,7 +287,7 @@ Public Class frmUpdateDBfromQCReport
                 lblProcessStatus.Text = "Stopped"
             End Try
             'Check for changes in values for limits checks
-        ElseIf Strings.Left(strFileName1, 20) = "qc_report_lowerlimit" Or Strings.Left(strFileName1, 20) = "qc_report_upperlimit" Then
+        ElseIf Strings.Left(strFileName1, 20) = "qc_report_lowerlimit" Or Strings.Left(strFileName1, 20) = "qc_report_upperlimit" Or Strings.Left(strFileName1, 22) = "qc_report_diurnalRange" Or Strings.Left(strFileName1, 25) = "qc_report_consecutivedays" Or Strings.Left(strFileName1, 26) = "qc_report_consecutivehours" Then
 
             'Loop through all records in dataset [QCReportOriginal]
             Try
@@ -378,6 +378,8 @@ Public Class frmUpdateDBfromQCReport
                 lblProcessStatus.Text = "Stopped"
                 conn.Close()
             End Try
+        Else
+            MsgBox(Strings.Left(strFileName1, 15))
         End If
         conn.Close()
         ' Set busy Cursor pointer

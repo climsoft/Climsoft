@@ -342,36 +342,58 @@ Public Class frmMainMenu
         End With
     End Sub
 
-    Private Sub UpdateScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateScriptToolStripMenuItem.Click
-
-        Dim sqlFile, sqlText As String
+    Private Sub UpdateScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateScriptToolStripMenuItem1.Click
+        Me.Cursor = Cursors.WaitCursor
+        Dim sqlFile, sqlText, sqlStatements(), errfl As String
         Dim sqlconn As New MySql.Data.MySqlClient.MySqlConnection
         Dim qry As MySql.Data.MySqlClient.MySqlCommand
 
-        Me.Cursor = Cursors.WaitCursor
-        frmImportDaily.dlgOpenImportFile.Filter = "Script File|*.sql"
-        frmImportDaily.dlgOpenImportFile.Title = ClsTranslations.GetTranslation("Open Script File")
-        frmImportDaily.dlgOpenImportFile.ShowDialog()
-        sqlFile = frmImportDaily.dlgOpenImportFile.FileName
-
-
         Try
-            'MsgBox(sqlFile)
+            frmImportDaily.dlgOpenImportFile.Filter = "Script File|*.sql"
+            frmImportDaily.dlgOpenImportFile.Title = ClsTranslations.GetTranslation("Open Script File")
+            frmImportDaily.dlgOpenImportFile.ShowDialog()
+            errfl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\errUpgrade.txt"
+            FileOpen(111, errfl, OpenMode.Output)
+            Me.Cursor = Cursors.WaitCursor
+            sqlFile = frmImportDaily.dlgOpenImportFile.FileName
             sqlText = IO.File.ReadAllText(sqlFile)
+            sqlStatements = Strings.Split(sqlText, ";")
             sqlconn.ConnectionString = frmLogin.txtusrpwd.Text
             sqlconn.Open()
-
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sqlText, sqlconn)
-            qry.CommandTimeout = 0
-
-            'Execute query
-            qry.ExecuteNonQuery()
+            Me.Cursor = Cursors.WaitCursor
+        Catch ex As Exception
+            MsgBox("Operation Cancelled")
             sqlconn.Close()
+            FileClose(111)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End Try
+
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            For i = 0 To sqlStatements.Count - 1
+                'If sqlStatements(i) = "" Then Continue For ' For blank Statement
+
+                qry = New MySql.Data.MySqlClient.MySqlCommand(sqlStatements(i) & ";", sqlconn)
+                qry.CommandTimeout = 0
+
+                Try
+                    'Execute query
+                    qry.ExecuteNonQuery()
+
+                Catch x As Exception
+                    PrintLine(111, i & "," & sqlStatements(i) & "," & x.Message)
+                End Try
+            Next
+            MsgBox("Finished updating the database")
+            sqlconn.Close()
+            FileClose(111)
             Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             MsgBox(ex.Message)
             sqlconn.Close()
+            FileClose(111)
             Me.Cursor = Cursors.Default
         End Try
     End Sub

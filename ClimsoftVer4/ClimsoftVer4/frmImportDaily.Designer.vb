@@ -248,7 +248,7 @@ Partial Class frmImportDaily
         '
         'txtObsHour
         '
-        Me.txtObsHour.Location = New System.Drawing.Point(301, 74)
+        Me.txtObsHour.Location = New System.Drawing.Point(330, 70)
         Me.txtObsHour.Name = "txtObsHour"
         Me.txtObsHour.Size = New System.Drawing.Size(23, 20)
         Me.txtObsHour.TabIndex = 18
@@ -265,7 +265,7 @@ Partial Class frmImportDaily
         '
         'txtStartRow
         '
-        Me.txtStartRow.Location = New System.Drawing.Point(113, 71)
+        Me.txtStartRow.Location = New System.Drawing.Point(113, 70)
         Me.txtStartRow.Name = "txtStartRow"
         Me.txtStartRow.Size = New System.Drawing.Size(30, 20)
         Me.txtStartRow.TabIndex = 21
@@ -403,9 +403,9 @@ Partial Class frmImportDaily
         '
         'lblDefaultObsHour
         '
-        Me.lblDefaultObsHour.Location = New System.Drawing.Point(149, 71)
+        Me.lblDefaultObsHour.Location = New System.Drawing.Point(149, 72)
         Me.lblDefaultObsHour.Name = "lblDefaultObsHour"
-        Me.lblDefaultObsHour.Size = New System.Drawing.Size(146, 34)
+        Me.lblDefaultObsHour.Size = New System.Drawing.Size(175, 17)
         Me.lblDefaultObsHour.TabIndex = 33
         Me.lblDefaultObsHour.Text = "Default Observation Hour"
         Me.lblDefaultObsHour.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -542,7 +542,7 @@ Partial Class frmImportDaily
         '
         'txtMissingFlag
         '
-        Me.txtMissingFlag.Location = New System.Drawing.Point(144, 184)
+        Me.txtMissingFlag.Location = New System.Drawing.Point(236, 184)
         Me.txtMissingFlag.Name = "txtMissingFlag"
         Me.txtMissingFlag.Size = New System.Drawing.Size(58, 20)
         Me.txtMissingFlag.TabIndex = 45
@@ -552,10 +552,10 @@ Partial Class frmImportDaily
         Me.lblMissingFlag.ImageAlign = System.Drawing.ContentAlignment.TopLeft
         Me.lblMissingFlag.Location = New System.Drawing.Point(16, 184)
         Me.lblMissingFlag.Name = "lblMissingFlag"
-        Me.lblMissingFlag.Size = New System.Drawing.Size(116, 33)
+        Me.lblMissingFlag.Size = New System.Drawing.Size(216, 20)
         Me.lblMissingFlag.TabIndex = 46
         Me.lblMissingFlag.Text = "Missing Data Flag"
-        Me.lblMissingFlag.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.lblMissingFlag.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'grpUpperAir
         '

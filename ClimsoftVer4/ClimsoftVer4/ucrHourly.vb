@@ -48,6 +48,7 @@
 
             If FldName.Key_Entry_Mode(frmNewHourly.Text) = "Double" Then chkRepeatEntry.Checked = True
         End If
+        setHours()
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
@@ -64,6 +65,7 @@
 
             SaveEnable()
             UcrValueFlagPeriod0.Focus()
+            setHours()
 
             'Get the Station from the last record by the current login user
             Dim usrStn As New dataEntryGlobalRoutines
@@ -71,6 +73,7 @@
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+        setHours()
     End Sub
     Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
         Try
@@ -138,6 +141,7 @@
     End Sub
 
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
+
         Dim ctrVFP As ucrValueFlagPeriod
 
         If btnHourSelection.Text = "Enable all hours" Then
@@ -484,19 +488,53 @@
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+    Sub setHours()
+        Dim ctrVFP As ucrValueFlagPeriod
+        Dim clsDataDefinition As DataCall
+        Dim dtbl As DataTable
+        Dim iTagVal As Integer
+        Dim row As DataRow
+
+        clsDataDefinition = New DataCall
+        clsDataDefinition.SetTableNameAndFields("form_hourly_time_selection", {"hh", "hh_selection"})
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    iTagVal = Val(Strings.Right(ctrVFP.Tag, 2))
+                    row = dtbl.Select("hh = '" & iTagVal & "' AND hh_selection = '0'").FirstOrDefault()
+                    If row IsNot Nothing Then
+                        ctrVFP.Enabled = False
+                        ctrVFP.SetBackColor(Color.LightYellow)
+                    Else
+                        ctrVFP.Enabled = True
+                        ctrVFP.SetBackColor(Color.White)
+                    End If
+                End If
+            Next
+        End If
 
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-
+    Private Sub ucrElementSelector_Leave(sender As Object, e As EventArgs) Handles ucrElementSelector.Leave
+        setHours()
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
+    Private Sub ucrDaySelector_Leave(sender As Object, e As EventArgs) Handles ucrDaySelector.Leave
+        setHours()
     End Sub
 
-    Private Sub ucrInputSameValue_Load(sender As Object, e As EventArgs) Handles ucrInputSameValue.Load
-
+    Private Sub ucrStationSelector_Leave(sender As Object, e As EventArgs) Handles ucrStationSelector.Leave
+        setHours()
     End Sub
+
+    Private Sub ucrMonthSelector_Leave(sender As Object, e As EventArgs) Handles ucrMonthSelector.Leave
+        setHours()
+    End Sub
+
+    Private Sub ucrYearSelector_Leave(sender As Object, e As EventArgs) Handles ucrYearSelector.Leave
+        setHours()
+    End Sub
+
 End Class

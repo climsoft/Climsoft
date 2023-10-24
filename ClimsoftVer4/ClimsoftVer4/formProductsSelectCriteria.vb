@@ -86,16 +86,46 @@ Public Class formProductsSelectCriteria
         ' When only one station is to be selected
         If lblProductType.Text = "Yearly Elements Observed" Then cmdSelectAllStations.Enabled = False
 
+        ' Get the total number of monthly missing days allowed in computing the summaries
+        txtMissingDays.Text = AllowedMissingDays()
+        txtMissingDays.Refresh()
+
         'translate form controls
         Dim str As String = lblProductType.Text
         ClsTranslations.TranslateForm(Me)
         'retain the untranslated text because it's use for selection
         lblProductType.Text = str
 
+
         ClsTranslations.TranslateComponent(lstvStations, bHeaderOnly:=True)
         ClsTranslations.TranslateComponent(lstvElements, bHeaderOnly:=True)
     End Sub
+    Function AllowedMissingDays() As Integer
+        Dim darg As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsrg As New DataSet
 
+        Try
+            MyConnectionString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = MyConnectionString
+            conn.Open()
+            sql = "SELECT keyvalue FROM regkeys WHERE keyName = 'key19';"
+
+            darg = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dsrg.Clear()
+            darg.Fill(dsrg, "Key")
+            conn.Close()
+
+            If dsrg.Tables("key").Rows.Count = 0 Then
+                Return 0
+            Else
+                Return dsrg.Tables("key").Rows(0).Item("keyvalue")
+            End If
+        Catch ex As Exception
+            conn.Close()
+            MsgBox(ex.Message)
+            Return 0
+        End Try
+    End Function
 
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
         Dim prod As String
@@ -375,7 +405,7 @@ Public Class formProductsSelectCriteria
                            Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                            group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime)
                            Order By recordedFrom, describedBy, YY, MM) As tt
-                           where DF >= 0
+                           where DF > 0 or abs(DF) <= " & CInt(txtMissingDays.Text) & "
                            group by StationID, YY, MM
                            order by StationID, YY, MM;"
 
@@ -403,7 +433,7 @@ Public Class formProductsSelectCriteria
                         sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy as Element_Code, latitude As Lat, longitude As Lon, elevation As Elev, YY" & xpivot & " from (Select recordedFrom, describedBy,stationName, latitude, longitude, elevation, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                            From observationfinal inner Join station On stationId = recordedFrom
                            Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
-                           group by StationID, describedBy,year(obsDatetime),month(obsDatetime)) as t Where DF >= 0 
+                           group by StationID, describedBy,year(obsDatetime),month(obsDatetime)) as t Where DF > 0 or abs(DF) <= " & CInt(txtMissingDays.Text) & " 
                            group by StationID, Element_Code, YY order by StationID, Element_Code, YY;"
 
                         '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
@@ -455,7 +485,7 @@ Public Class formProductsSelectCriteria
                            Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                            group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime)
                            Order By recordedFrom, describedBy, YY, MM) As t
-                           where DF >= 0) as tt
+                           where DF> 0 or abs(DF) <= " & CInt(txtMissingDays.Text) & ") as tt
                            group by StationID, describedBy, YY) as ttt
                            where TM = 12 Group by StationID, YY;"
 
@@ -2214,6 +2244,7 @@ Err:
             chkTranspose.Visible = False
         End If
 
+
         If lblProductType.Text = "Dekadal Counts" Or lblProductType.Text = "Monthly Counts" Or lblProductType.Text = "Annual Counts" Then
             Dim str(3) As String
             Dim itm = New ListViewItem
@@ -2232,7 +2263,14 @@ Err:
             cmdDelElement.Enabled = False
             cmdSelectAllElements.Enabled = False
             cmdClearElements.Enabled = False
+        End If
 
+        If lblProductType.Text = "Monthly" Or lblProductType.Text = "Annual" Then
+            txtMissingDays.Visible = True
+            lblDaysMissing.Visible = True
+        Else
+            txtMissingDays.Visible = False
+            lblDaysMissing.Visible = False
         End If
     End Sub
 
