@@ -106,7 +106,7 @@ Partial Class frmFormUpload
         'lblEndMonth
         '
         Me.lblEndMonth.AutoSize = True
-        Me.lblEndMonth.Location = New System.Drawing.Point(522, 41)
+        Me.lblEndMonth.Location = New System.Drawing.Point(508, 41)
         Me.lblEndMonth.Name = "lblEndMonth"
         Me.lblEndMonth.Size = New System.Drawing.Size(59, 13)
         Me.lblEndMonth.TabIndex = 35
@@ -115,7 +115,7 @@ Partial Class frmFormUpload
         'lblBeginMonth
         '
         Me.lblBeginMonth.AutoSize = True
-        Me.lblBeginMonth.Location = New System.Drawing.Point(522, 15)
+        Me.lblBeginMonth.Location = New System.Drawing.Point(508, 15)
         Me.lblBeginMonth.Name = "lblBeginMonth"
         Me.lblBeginMonth.Size = New System.Drawing.Size(70, 13)
         Me.lblBeginMonth.TabIndex = 34
@@ -141,7 +141,7 @@ Partial Class frmFormUpload
         '
         'txtEndMonth
         '
-        Me.txtEndMonth.Location = New System.Drawing.Point(615, 37)
+        Me.txtEndMonth.Location = New System.Drawing.Point(588, 37)
         Me.txtEndMonth.Name = "txtEndMonth"
         Me.txtEndMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtEndMonth.TabIndex = 31
@@ -150,7 +150,7 @@ Partial Class frmFormUpload
         '
         'txtBeginMonth
         '
-        Me.txtBeginMonth.Location = New System.Drawing.Point(615, 11)
+        Me.txtBeginMonth.Location = New System.Drawing.Point(588, 11)
         Me.txtBeginMonth.Name = "txtBeginMonth"
         Me.txtBeginMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtBeginMonth.TabIndex = 30
@@ -159,14 +159,14 @@ Partial Class frmFormUpload
         '
         'txtEndYear
         '
-        Me.txtEndYear.Location = New System.Drawing.Point(460, 37)
+        Me.txtEndYear.Location = New System.Drawing.Point(437, 37)
         Me.txtEndYear.Name = "txtEndYear"
         Me.txtEndYear.Size = New System.Drawing.Size(48, 20)
         Me.txtEndYear.TabIndex = 29
         '
         'txtBeginYear
         '
-        Me.txtBeginYear.Location = New System.Drawing.Point(460, 11)
+        Me.txtBeginYear.Location = New System.Drawing.Point(437, 11)
         Me.txtBeginYear.Name = "txtBeginYear"
         Me.txtBeginYear.Size = New System.Drawing.Size(48, 20)
         Me.txtBeginYear.TabIndex = 28
@@ -240,7 +240,7 @@ Partial Class frmFormUpload
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(705, 202)
+        Me.ClientSize = New System.Drawing.Size(674, 202)
         Me.Controls.Add(Me.lblFormName1)
         Me.Controls.Add(Me.lblDiff)
         Me.Controls.Add(Me.txtTdiff)
