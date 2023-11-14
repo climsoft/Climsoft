@@ -100,6 +100,8 @@ Partial Class formProductsSelectCriteria
         Me.lblStations = New System.Windows.Forms.Label()
         Me.cmbElement = New System.Windows.Forms.ComboBox()
         Me.cmbstation = New System.Windows.Forms.ComboBox()
+        Me.chkOutputElements = New System.Windows.Forms.CheckBox()
+        Me.chkOutputStations = New System.Windows.Forms.CheckBox()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.cmdExtract = New System.Windows.Forms.ToolStripButton()
@@ -202,6 +204,8 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Controls.Add(Me.pnlStation)
         Me.pnlStationsElements.Controls.Add(Me.cmbElement)
         Me.pnlStationsElements.Controls.Add(Me.cmbstation)
+        Me.pnlStationsElements.Controls.Add(Me.chkOutputElements)
+        Me.pnlStationsElements.Controls.Add(Me.chkOutputStations)
         Me.pnlStationsElements.Location = New System.Drawing.Point(0, 52)
         Me.pnlStationsElements.Name = "pnlStationsElements"
         Me.pnlStationsElements.Size = New System.Drawing.Size(1058, 429)
@@ -346,7 +350,7 @@ Partial Class formProductsSelectCriteria
         'chkTranspose
         '
         Me.chkTranspose.AutoSize = True
-        Me.chkTranspose.Location = New System.Drawing.Point(658, 182)
+        Me.chkTranspose.Location = New System.Drawing.Point(658, 178)
         Me.chkTranspose.Name = "chkTranspose"
         Me.chkTranspose.Size = New System.Drawing.Size(111, 17)
         Me.chkTranspose.TabIndex = 25
@@ -450,7 +454,7 @@ Partial Class formProductsSelectCriteria
         'chkAdvancedSelection
         '
         Me.chkAdvancedSelection.AutoSize = True
-        Me.chkAdvancedSelection.Location = New System.Drawing.Point(658, 207)
+        Me.chkAdvancedSelection.Location = New System.Drawing.Point(658, 204)
         Me.chkAdvancedSelection.Name = "chkAdvancedSelection"
         Me.chkAdvancedSelection.Size = New System.Drawing.Size(167, 17)
         Me.chkAdvancedSelection.TabIndex = 19
@@ -467,7 +471,7 @@ Partial Class formProductsSelectCriteria
         Me.lstvElements.HideSelection = False
         Me.lstvElements.HoverSelection = True
         Me.lstvElements.LabelEdit = True
-        Me.lstvElements.Location = New System.Drawing.Point(314, 57)
+        Me.lstvElements.Location = New System.Drawing.Point(310, 58)
         Me.lstvElements.Name = "lstvElements"
         Me.lstvElements.RightToLeftLayout = True
         Me.lstvElements.Size = New System.Drawing.Size(335, 289)
@@ -699,7 +703,7 @@ Partial Class formProductsSelectCriteria
         Me.pnlStation.Controls.Add(Me.lstAuthority)
         Me.pnlStation.Controls.Add(Me.optAuthority)
         Me.pnlStation.Controls.Add(Me.lblStations)
-        Me.pnlStation.Location = New System.Drawing.Point(655, 234)
+        Me.pnlStation.Location = New System.Drawing.Point(655, 241)
         Me.pnlStation.Name = "pnlStation"
         Me.pnlStation.Size = New System.Drawing.Size(396, 170)
         Me.pnlStation.TabIndex = 6
@@ -880,6 +884,32 @@ Partial Class formProductsSelectCriteria
         Me.cmbstation.Name = "cmbstation"
         Me.cmbstation.Size = New System.Drawing.Size(150, 21)
         Me.cmbstation.TabIndex = 1
+        '
+        'chkOutputElements
+        '
+        Me.chkOutputElements.AutoSize = True
+        Me.chkOutputElements.Checked = True
+        Me.chkOutputElements.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkOutputElements.Location = New System.Drawing.Point(782, 242)
+        Me.chkOutputElements.Name = "chkOutputElements"
+        Me.chkOutputElements.Size = New System.Drawing.Size(164, 17)
+        Me.chkOutputElements.TabIndex = 33
+        Me.chkOutputElements.Text = "Output Observation Elements"
+        Me.chkOutputElements.UseVisualStyleBackColor = True
+        Me.chkOutputElements.Visible = False
+        '
+        'chkOutputStations
+        '
+        Me.chkOutputStations.AutoSize = True
+        Me.chkOutputStations.Checked = True
+        Me.chkOutputStations.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkOutputStations.Location = New System.Drawing.Point(659, 242)
+        Me.chkOutputStations.Name = "chkOutputStations"
+        Me.chkOutputStations.Size = New System.Drawing.Size(99, 17)
+        Me.chkOutputStations.TabIndex = 32
+        Me.chkOutputStations.Text = "Output Stations"
+        Me.chkOutputStations.UseVisualStyleBackColor = True
+        Me.chkOutputStations.Visible = False
         '
         'ToolStrip2
         '
@@ -1069,4 +1099,6 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents ColumnHeader5 As ColumnHeader
     Friend WithEvents lblDaysMissing As Label
     Friend WithEvents txtMissingDays As TextBox
+    Friend WithEvents chkOutputElements As CheckBox
+    Friend WithEvents chkOutputStations As CheckBox
 End Class
