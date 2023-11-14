@@ -1158,8 +1158,13 @@ Err:
             FileOpen(11, fl_obsfinal, OpenMode.Output)
 
             ' Output Observation data
-            sqlm = "SELECT * FROM observationfinal INNER JOIN station ON recordedFrom = stationid " &
+            'sqlm = "SELECT * FROM observationfinal INNER JOIN station ON recordedFrom = stationid " &
+            '       "WHERE length(latitude) <> 0 and length(longitude) <> 0 AND obsDatetime BETWEEN '" & stDate & "' AND '" & edDate & "';"
+
+            sqlm = "SELECT recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType,dataForm,capturedBy,mark,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits,dataSourceTimeZone " &
+                   "FROM observationfinal INNER JOIN station ON recordedFrom = stationid " &
                    "WHERE length(latitude) <> 0 and length(longitude) <> 0 AND obsDatetime BETWEEN '" & stDate & "' AND '" & edDate & "';"
+
             ClimateStationOutput(sqlm, 11, fl_obsfinal)
             FileClose(11)
 
@@ -1178,7 +1183,8 @@ Err:
 
             If chkOutputElements.Checked Then
                 'sqlm = "SELECT * from obselement"
-                sqlm = "SELECT * FROM obselement INNER JOIN observationfinal ON describedBy = elementId " &
+                sqlm = "SELECT elementId,abbreviation,elementName,description,elementScale,upperLimit,lowerLimit,units,elementtype,qcTotalRequired,Selected " &
+                       "FROM obselement INNER JOIN observationfinal ON describedBy = elementId " &
                        "WHERE obsDatetime BETWEEN '" & stDate & "' AND '" & edDate & "' GROUP BY elementId ORDER BY elementId;"
                 fl_obselement = fldr & "\obselement.csv"
                 FileOpen(11, fl_obselement, OpenMode.Output)
