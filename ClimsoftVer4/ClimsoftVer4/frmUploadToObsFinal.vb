@@ -732,11 +732,10 @@
                 End If
 
                 obsLevel = ds.Tables("obsInitial").Rows(n).Item("obslevel")
-                obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
                 qcStatus = ds.Tables("obsInitial").Rows(n).Item("qcStatus")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("flag")) Then obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
 
-                obsFlag = Strings.Replace(obsFlag, "\", "")
-
+                'obsFlag = Strings.Replace(obsFlag, "\", "")
 
                 ''Generate SQL string for replacing existing records of same Key with records with qcStatus 2
                 'strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType) " &

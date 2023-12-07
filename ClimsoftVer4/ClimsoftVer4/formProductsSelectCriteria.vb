@@ -86,16 +86,46 @@ Public Class formProductsSelectCriteria
         ' When only one station is to be selected
         If lblProductType.Text = "Yearly Elements Observed" Then cmdSelectAllStations.Enabled = False
 
+        ' Get the total number of monthly missing days allowed in computing the summaries
+        txtMissingDays.Text = AllowedMissingDays()
+        txtMissingDays.Refresh()
+
         'translate form controls
         Dim str As String = lblProductType.Text
         ClsTranslations.TranslateForm(Me)
         'retain the untranslated text because it's use for selection
         lblProductType.Text = str
 
+
         ClsTranslations.TranslateComponent(lstvStations, bHeaderOnly:=True)
         ClsTranslations.TranslateComponent(lstvElements, bHeaderOnly:=True)
     End Sub
+    Function AllowedMissingDays() As Integer
+        Dim darg As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsrg As New DataSet
 
+        Try
+            MyConnectionString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = MyConnectionString
+            conn.Open()
+            sql = "SELECT keyvalue FROM regkeys WHERE keyName = 'key19';"
+
+            darg = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dsrg.Clear()
+            darg.Fill(dsrg, "Key")
+            conn.Close()
+
+            If dsrg.Tables("key").Rows.Count = 0 Then
+                Return 0
+            Else
+                Return dsrg.Tables("key").Rows(0).Item("keyvalue")
+            End If
+        Catch ex As Exception
+            conn.Close()
+            MsgBox(ex.Message)
+            Return 0
+        End Try
+    End Function
 
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
         Dim prod As String
@@ -375,7 +405,7 @@ Public Class formProductsSelectCriteria
                            Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                            group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime)
                            Order By recordedFrom, describedBy, YY, MM) As tt
-                           where DF >= 0
+                           where DF > 0 or abs(DF) <= " & CInt(txtMissingDays.Text) & "
                            group by StationID, YY, MM
                            order by StationID, YY, MM;"
 
@@ -403,7 +433,7 @@ Public Class formProductsSelectCriteria
                         sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy as Element_Code, latitude As Lat, longitude As Lon, elevation As Elev, YY" & xpivot & " from (Select recordedFrom, describedBy,stationName, latitude, longitude, elevation, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                            From observationfinal inner Join station On stationId = recordedFrom
                            Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
-                           group by StationID, describedBy,year(obsDatetime),month(obsDatetime)) as t Where DF >= 0 
+                           group by StationID, describedBy,year(obsDatetime),month(obsDatetime)) as t Where DF > 0 or abs(DF) <= " & CInt(txtMissingDays.Text) & " 
                            group by StationID, Element_Code, YY order by StationID, Element_Code, YY;"
 
                         '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
@@ -455,7 +485,7 @@ Public Class formProductsSelectCriteria
                            Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                            group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime)
                            Order By recordedFrom, describedBy, YY, MM) As t
-                           where DF >= 0) as tt
+                           where DF> 0 or abs(DF) <= " & CInt(txtMissingDays.Text) & ") as tt
                            group by StationID, describedBy, YY) as ttt
                            where TM = 12 Group by StationID, YY;"
 
@@ -839,6 +869,17 @@ Public Class formProductsSelectCriteria
 
                     'txttest.Text = sql
                     SeasonalProducts(sql, lblProductType.Text, hdr)
+                Case "Climate Station"
+
+                    'sql = "SELECT 'recordedFrom', 'describedBy','obsDatetime', 'obsLevel', 'obsValue', 'flag', 'period', 'qcStatus', 'qcTypeLog', 'acquisitionType', 'dataForm', 'capturedBy', " &
+                    '       "'mark', 'temperatureUnits', 'precipitationUnits','cloudHeightUnits', 'visUnits', 'dataSourceTimeZone' " &
+                    '       "UNION Select * FROM observationfinal " &
+                    '       "WHERE obsDatetime between '" & sdate & "' AND '" & edate & "';"
+
+                    'sql = "SELECT * from observationfinal WHERE obsDatetime between '" & sdate & "' AND '" & edate & "';"
+
+                    'Climate_Station(sql, lblProductType.Text, sdate, edate)
+                    Climate_Station(sdate, edate)
                 Case Else
                     MsgBox("No Product found For Selection made", MsgBoxStyle.Information)
             End Select
@@ -1097,6 +1138,129 @@ Err:
             MsgBox("No data found. Check and confirm selections")
             FileClose(11)
             conp.Close()
+        End Try
+
+    End Sub
+
+    Sub Climate_Station(stDate As String, edDate As String)
+        Dim fl_obsfinal, fl_station, fl_obselement, fldr As String
+        Dim sqlm As String
+        Try
+            With formPaperArchive
+                If .folderPaperArchive.ShowDialog <> 1 Then ' Other than OK button is clicked
+                    MsgBox("Operation Cancelled")
+                    Exit Sub
+                End If
+                fldr = .folderPaperArchive.SelectedPath
+            End With
+
+            fl_obsfinal = fldr & "\observationfinal.csv"
+            FileOpen(11, fl_obsfinal, OpenMode.Output)
+
+            ' Output Observation data
+            'sqlm = "SELECT * FROM observationfinal INNER JOIN station ON recordedFrom = stationid " &
+            '       "WHERE length(latitude) <> 0 and length(longitude) <> 0 AND obsDatetime BETWEEN '" & stDate & "' AND '" & edDate & "';"
+
+            sqlm = "SELECT recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType,dataForm,capturedBy,mark,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits,dataSourceTimeZone " &
+                   "FROM observationfinal INNER JOIN station ON recordedFrom = stationid " &
+                   "WHERE length(latitude) <> 0 and length(longitude) <> 0 AND obsDatetime BETWEEN '" & stDate & "' AND '" & edDate & "';"
+
+            ClimateStationOutput(sqlm, 11, fl_obsfinal)
+            FileClose(11)
+
+            ' Output stations and elements metadata
+            If chkOutputStations.Checked Then
+                'sqlm = "SELECT stationId,stationName,latitude,longitude,elevation, qualifier,country,authority,adminRegion,drainagebasin,stationOperational FROM station;"
+                sqlm = "SELECT stationId,stationName,latitude,longitude,elevation, qualifier,country,authority,adminRegion,drainagebasin,stationOperational FROM station " &
+                       "INNER JOIN observationfinal ON recordedFrom = stationid " &
+                       "WHERE length(latitude) <> 0 and length(longitude) <> 0 AND obsDatetime BETWEEN '" & stDate & "' AND '" & edDate & "' GROUP BY stationId ORDER BY stationId;"
+
+                fl_station = fldr & "\station.csv"
+                FileOpen(11, fl_station, OpenMode.Output)
+                ClimateStationOutput(sqlm, 11, fl_station)
+                FileClose(11)
+            End If
+
+            If chkOutputElements.Checked Then
+                'sqlm = "SELECT * from obselement"
+                sqlm = "SELECT elementId,abbreviation,elementName,description,elementScale,upperLimit,lowerLimit,units,elementtype,qcTotalRequired,Selected " &
+                       "FROM obselement INNER JOIN observationfinal ON describedBy = elementId " &
+                       "WHERE obsDatetime BETWEEN '" & stDate & "' AND '" & edDate & "' GROUP BY elementId ORDER BY elementId;"
+                fl_obselement = fldr & "\obselement.csv"
+                FileOpen(11, fl_obselement, OpenMode.Output)
+                ClimateStationOutput(sqlm, 11, fl_obselement)
+                FileClose(11)
+            End If
+
+            MsgBox("Data for Climate Station saved in " & fldr)
+            'CommonModules.ViewFile(fl_obsfinal)
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " at Climate_Station")
+            'If Err.Number = 13 Or Err.Number = 5 Then Resume Next
+            'MsgBox("No data found. Check and confirm selections")
+            FileClose(11)
+        End Try
+
+    End Sub
+    Sub ClimateStationOutput(sql As String, flNo As Integer, flNm As String)
+        Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsp As New DataSet
+        Dim conp As New MySql.Data.MySqlClient.MySqlConnection
+        Dim kount As Long
+
+        Dim dat, rec As String
+        Try
+            conp.ConnectionString = MyConnectionString
+            conp.Open()
+            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
+            dap.SelectCommand.CommandTimeout = 0
+            dsp.Clear()
+            dap.Fill(dsp, "data")
+            conp.Close()
+
+            ' Output the column headers
+            rec = dsp.Tables("data").Columns(0).ColumnName
+            For j = 1 To dsp.Tables("data").Columns.Count - 1
+                rec = rec & "," & dsp.Tables("data").Columns(j).ColumnName
+            Next
+            PrintLine(flNo, rec)
+
+            kount = dsp.Tables("data").Rows.Count
+
+            ' Output data values
+            For k = 0 To kount - 1
+                rec = dsp.Tables("data").Rows(k).Item(0)
+                For i = 1 To dsp.Tables("data").Columns.Count - 1
+                    If IsDBNull(dsp.Tables("data").Rows(k).Item(i)) Then
+                        dat = "\N"
+                    Else
+                        dat = dsp.Tables("data").Rows(k).Item(i)
+
+                        ' Reconstruct datetime
+                        If IsDate(dat) And InStr(dat, ".") = 0 Then
+                            dat = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & DateAndTime.Hour(dat) & ":" & DateAndTime.Minute(dat) & ":" & DateAndTime.Second(dat)
+                        End If
+
+                        ' Exclude escape characters that had been observe in some fields
+                        If InStr(dsp.Tables("data").Rows(k).Item(i), Chr(10)) > 0 Then
+                            dat = dat.Replace(Chr(10), "")
+                        End If
+
+                        If InStr(dsp.Tables("data").Rows(k).Item(i), Chr(13)) > 0 Then
+                            dat = dat.Replace(Chr(13), "")
+                        End If
+                    End If
+
+                    rec = rec & "," & dat
+                Next
+                PrintLine(flNo, rec)
+            Next
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conp.Close()
+            FileClose(flNo)
         End Try
 
     End Sub
@@ -2214,6 +2378,7 @@ Err:
             chkTranspose.Visible = False
         End If
 
+
         If lblProductType.Text = "Dekadal Counts" Or lblProductType.Text = "Monthly Counts" Or lblProductType.Text = "Annual Counts" Then
             Dim str(3) As String
             Dim itm = New ListViewItem
@@ -2232,7 +2397,32 @@ Err:
             cmdDelElement.Enabled = False
             cmdSelectAllElements.Enabled = False
             cmdClearElements.Enabled = False
+        End If
 
+        If lblProductType.Text = "Monthly" Or lblProductType.Text = "Annual" Then
+            txtMissingDays.Visible = True
+            lblDaysMissing.Visible = True
+        Else
+            txtMissingDays.Visible = False
+            lblDaysMissing.Visible = False
+        End If
+
+        If lblProductType.Text = "Climate Station" Then
+            chkOutputStations.Visible = True
+            chkOutputElements.Visible = True
+            chkAdvancedSelection.Visible = False
+            cmbstation.Enabled = False
+            cmbElement.Enabled = False
+            cmdSelectAllStations.Enabled = False
+            cmdSelectAllElements.Enabled = False
+        Else
+            chkOutputStations.Visible = False
+            chkOutputElements.Visible = False
+            chkAdvancedSelection.Visible = True
+            cmbstation.Enabled = True
+            cmbElement.Enabled = True
+            cmdSelectAllStations.Enabled = True
+            cmdSelectAllElements.Enabled = True
         End If
     End Sub
 
@@ -2443,6 +2633,7 @@ Err:
 
     Private Sub cmdSelectAllStations_Click(sender As Object, e As EventArgs) Handles cmdSelectAllStations.Click
         Try
+            Me.Cursor = Cursors.WaitCursor
             lstvStations.Clear()
             lstvStations.Columns.Add("Station Id", 80, HorizontalAlignment.Left)
             lstvStations.Columns.Add("Station Name", 400, HorizontalAlignment.Left)
@@ -2464,13 +2655,16 @@ Err:
                 itm = New ListViewItem(strs)
                 lstvStations.Items.Add(itm)
             Next
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
+            Me.Cursor = Cursors.Default
         End Try
     End Sub
 
     Private Sub cmdSelectAllElements_Click(sender As Object, e As EventArgs) Handles cmdSelectAllElements.Click
         Try
+            Me.Cursor = Cursors.WaitCursor
             'lstvElements.Columns.Clear()
             'lstvElements.Refresh()
             lstvElements.Clear()
@@ -2497,8 +2691,10 @@ Err:
                 itm = New ListViewItem(strs)
                 lstvElements.Items.Add(itm)
             Next
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
+            Me.Cursor = Cursors.Default
         End Try
     End Sub
     Sub CDT_Dekadal(st As String, ed As String)
@@ -2972,6 +3168,10 @@ Err:
         Else
             MsgBox("Input must be numbers")
         End If
+    End Sub
+
+    Private Sub lblProductType_Click(sender As Object, e As EventArgs) Handles lblProductType.Click
+
     End Sub
 
     Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked

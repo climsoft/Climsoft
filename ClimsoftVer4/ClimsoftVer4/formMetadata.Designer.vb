@@ -3757,14 +3757,14 @@ Partial Class formMetadata
         '
         'txtFormDescription
         '
-        Me.txtFormDescription.Location = New System.Drawing.Point(204, 116)
+        Me.txtFormDescription.Location = New System.Drawing.Point(116, 116)
         Me.txtFormDescription.Name = "txtFormDescription"
-        Me.txtFormDescription.Size = New System.Drawing.Size(154, 20)
+        Me.txtFormDescription.Size = New System.Drawing.Size(400, 20)
         Me.txtFormDescription.TabIndex = 1
         '
         'txtFormId
         '
-        Me.txtFormId.Location = New System.Drawing.Point(204, 75)
+        Me.txtFormId.Location = New System.Drawing.Point(116, 75)
         Me.txtFormId.Name = "txtFormId"
         Me.txtFormId.Size = New System.Drawing.Size(152, 20)
         Me.txtFormId.TabIndex = 0
@@ -3772,7 +3772,7 @@ Partial Class formMetadata
         'lbldescri
         '
         Me.lbldescri.AutoSize = True
-        Me.lbldescri.Location = New System.Drawing.Point(123, 119)
+        Me.lbldescri.Location = New System.Drawing.Point(35, 119)
         Me.lbldescri.Name = "lbldescri"
         Me.lbldescri.Size = New System.Drawing.Size(60, 13)
         Me.lbldescri.TabIndex = 9
@@ -3781,7 +3781,7 @@ Partial Class formMetadata
         'lblFormId
         '
         Me.lblFormId.AutoSize = True
-        Me.lblFormId.Location = New System.Drawing.Point(123, 78)
+        Me.lblFormId.Location = New System.Drawing.Point(35, 78)
         Me.lblFormId.Name = "lblFormId"
         Me.lblFormId.Size = New System.Drawing.Size(44, 13)
         Me.lblFormId.TabIndex = 8
