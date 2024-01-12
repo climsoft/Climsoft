@@ -1,0 +1,1308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8D89B70E-E6D5-4383-9C2C-80F532A26F1D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>ClimsoftVer4.My.MyApplication</StartupObject>
+    <RootNamespace>ClimsoftVer4</RootNamespace>
+    <AssemblyName>ClimsoftVer4</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ClimsoftVer4.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>ClimsoftVer4.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>myweat02.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.10\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="TranslateWinForm, Version=0.1.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TranslateWinForm.1.1.3\lib\net461\TranslateWinForm.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClsCloneFunctions.vb" />
+    <Compile Include="clsDataCall.vb" />
+    <Compile Include="clsDataConnection.vb" />
+    <Compile Include="clsHelp.vb" />
+    <Compile Include="clsLanguageTranslation.vb" />
+    <Compile Include="clsProducts.vb" />
+    <Compile Include="clsTableFilter.vb" />
+    <Compile Include="ClsTranslations.vb" />
+    <Compile Include="Component1.Designer.vb">
+      <DependentUpon>Component1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Component1.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dataEntryGlobalRoutines.vb" />
+    <Compile Include="formAgro1.Designer.vb">
+      <DependentUpon>formAgro1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAgro1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSynoptic2.Designer.vb">
+      <DependentUpon>formSynoptic2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSynoptic2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSynopticCaribbean.Designer.vb">
+      <DependentUpon>formSynopticCaribbean.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSynopticCaribbean.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCharts.Designer.vb">
+      <DependentUpon>frmCharts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCharts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCLIMAT.Designer.vb">
+      <DependentUpon>frmCLIMAT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCLIMAT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClimatSettings.Designer.vb">
+      <DependentUpon>frmClimatSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmClimatSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateEntryForm.Designer.vb">
+      <DependentUpon>frmCreateEntryForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateEntryForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDatabaseConnections.Designer.vb">
+      <DependentUpon>frmDatabaseConnections.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDatabaseConnections.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmElementSequencerMonthly.Designer.vb">
+      <DependentUpon>frmElementSequencerMonthly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmElementSequencerMonthly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntryForms.Designer.vb">
+      <DependentUpon>frmEntryForms.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntryForms.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFormUpload.Designer.vb">
+      <DependentUpon>frmFormUpload.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFormUpload.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInventoryChart.designer.vb">
+      <DependentUpon>frmInventoryChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInventoryChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewAgrometKenya.Designer.vb">
+      <DependentUpon>frmNewAgrometKenya.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewAgrometKenya.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewComputationProgress.Designer.vb">
+      <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewComputationProgress.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewHourly.Designer.vb">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewHourlyWind.Designer.vb">
+      <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourlyWind.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewMetadata.Designer.vb">
+      <DependentUpon>frmNewMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewMonthly.Designer.vb">
+      <DependentUpon>frmNewMonthly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewMonthly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewSynopticRA1.Designer.vb">
+      <DependentUpon>frmNewSynopticRA1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewSynopticRA1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formAWSRealTime.Designer.vb">
+      <DependentUpon>formAWSRealTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAWSRealTime.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formClimat.Designer.vb">
+      <DependentUpon>formClimat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formClimat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDaily1.Designer.vb">
+      <DependentUpon>formDaily1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDaily1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDaily2.Designer.vb">
+      <DependentUpon>formDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDaily2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDataView.Designer.vb">
+      <DependentUpon>formDataView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDataView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formHourlyWind.designer.vb">
+      <DependentUpon>formHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formHourlyWind.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formImports.Designer.vb">
+      <DependentUpon>formImports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formImports.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMetadata.Designer.vb">
+      <DependentUpon>formMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formOptions.Designer.vb">
+      <DependentUpon>formOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPaperArchive.Designer.vb">
+      <DependentUpon>formPaperArchive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formPaperArchive.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAWSelements.Designer.vb">
+      <DependentUpon>frmAWSelements.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAWSelements.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAWSstations.Designer.vb">
+      <DependentUpon>frmAWSstations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAWSstations.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBackup.Designer.vb">
+      <DependentUpon>frmBackup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBackupRestore.Designer.vb">
+      <DependentUpon>frmBackupRestore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBackupRestore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBUFr.Designer.vb">
+      <DependentUpon>frmBUFR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBUFR.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangeOwnPassword.Designer.vb">
+      <DependentUpon>frmChangeOwnPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangeOwnPassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangePassword.Designer.vb">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangePassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConversionDewPointRh.designer.vb">
+      <DependentUpon>FrmConversionDewPointRh.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmConversionDewPointRh.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCPTSeason.Designer.vb">
+      <DependentUpon>frmCPTSeason.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCPTSeason.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCrex.designer.vb">
+      <DependentUpon>frmCrex.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCrex.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataForms.Designer.vb">
+      <DependentUpon>frmDataForms.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataForms.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataMigration.Designer.vb">
+      <DependentUpon>frmDataMigration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataMigration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataTransferProgress.Designer.vb">
+      <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataTransferProgress.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDBUtilities.Designer.vb">
+      <DependentUpon>frmDBUtilities.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDBUtilities.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formElement.designer.vb">
+      <DependentUpon>formElement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formElement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formHourly.Designer.vb">
+      <DependentUpon>formHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmElementSequencer.Designer.vb">
+      <DependentUpon>frmElementSequencer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmElementSequencer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmElementSequencerDaily.Designer.vb">
+      <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmElementSequencerDaily.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGeneralSettings.Designer.vb">
+      <DependentUpon>frmGeneralSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGeneralSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGTSNOAA.Designer.vb">
+      <DependentUpon>frmGTSNOAA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGTSNOAA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHourlyTimeSelection.Designer.vb">
+      <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHourlyTimeSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportAWS.Designer.vb">
+      <DependentUpon>frmImportAWS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportAWS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportCSV.Designer.vb">
+      <DependentUpon>frmImportCSV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportCSV.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportDaily.Designer.vb">
+      <DependentUpon>frmImportDaily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportDaily.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLanguage.Designer.vb">
+      <DependentUpon>frmLanguage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLanguage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLanguageTranslation.Designer.vb">
+      <DependentUpon>frmLanguageTranslation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLanguageTranslation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMonthly.Designer.vb">
+      <DependentUpon>formMonthly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formMonthly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formProducts.Designer.vb">
+      <DependentUpon>formProducts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formProducts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formProductsSelect.Designer.vb">
+      <DependentUpon>formProductsSelect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formProductsSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formProductsSelectCriteria.Designer.vb">
+      <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formProductsSelectCriteria.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formStation.designer.vb">
+      <DependentUpon>formStation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formStation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSynopRA1.designer.vb">
+      <DependentUpon>formSynopRA1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSynopRA1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDatabaseConnect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDatabaseConnect.Designer.vb">
+      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formUpperAir.Designer.vb">
+      <DependentUpon>formUpperAir.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formUpperAir.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formWindRose.Designer.vb">
+      <DependentUpon>formWindRose.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formWindRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAction.designer.vb">
+      <DependentUpon>frmAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataEntry.Designer.vb">
+      <DependentUpon>frmDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataOutpt.Designer.vb">
+      <DependentUpon>frmDataOutpt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataOutpt.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGeneral.designer.vb">
+      <DependentUpon>frmGeneral.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGeneral.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLaunchPad.designer.vb">
+      <DependentUpon>frmLaunchPad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLaunchPad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainMenu.Designer.vb">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewFormDaily2.Designer.vb">
+      <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewFormDaily2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModifyObservations.Designer.vb">
+      <DependentUpon>frmModifyObservations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmModifyObservations.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMonitoring.Designer.vb">
+      <DependentUpon>frmMonitoring.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMonitoring.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewUploadSelection.Designer.vb">
+      <DependentUpon>frmNewUploadSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewUploadSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmObsView.Designer.vb">
+      <DependentUpon>frmObsView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmObsView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlotter.designer.vb">
+      <DependentUpon>frmPlotter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPlotter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQC.Designer.vb">
+      <DependentUpon>frmQC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmQC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQCdatesSelection.Designer.vb">
+      <DependentUpon>frmQCdatesSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmQCdatesSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRestore.Designer.vb">
+      <DependentUpon>frmRestore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRestore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSynopTDCF.Designer.vb">
+      <DependentUpon>frmSynopTDCF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSynopTDCF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSynopticTimeSelection.Designer.vb">
+      <DependentUpon>frmSynopticTimeSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSynopticTimeSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTDCFindicators.Designer.vb">
+      <DependentUpon>frmTDCFindicators.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTDCFindicators.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateDBfromQCReport.Designer.vb">
+      <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateDBfromQCReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUploadToObsFinal.Designer.vb">
+      <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUploadToObsFinal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserManagement.Designer.vb">
+      <DependentUpon>frmUserManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsers.Designer.vb">
+      <DependentUpon>frmUsers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewImage.Designer.vb">
+      <DependentUpon>frmViewImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewImage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Application1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="frmSplashScreen.Designer.vb">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common.vb" />
+    <Compile Include="sdgFilter.Designer.vb">
+      <DependentUpon>sdgFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFilter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClsShiftCells.vb" />
+    <Compile Include="tdcfRoutines.vb" />
+    <Compile Include="ucrBaseDataLink.Designer.vb">
+      <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrBaseDataLink.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrCheck.Designer.vb">
+      <DependentUpon>ucrCheck.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrCheck.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDatePicker.Designer.vb">
+      <DependentUpon>ucrDatePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDatePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHourlyWind.Designer.vb">
+      <DependentUpon>ucrHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourlyWind.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHourly.Designer.vb">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourly.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrKenyaAgromet.Designer.vb">
+      <DependentUpon>ucrKenyaAgromet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrKenyaAgromet.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataElement.Designer.vb">
+      <DependentUpon>ucrMetadataElement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataElement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataInstrument.Designer.vb">
+      <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataInstrument.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataPaperArchive.Designer.vb">
+      <DependentUpon>ucrMetadataPaperArchive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataPaperArchive.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataPhysicalFeature.Designer.vb">
+      <DependentUpon>ucrMetadataPhysicalFeature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataPhysicalFeature.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataScheduleClass.Designer.vb">
+      <DependentUpon>ucrMetadataScheduleClass.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataScheduleClass.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataStation.Designer.vb">
+      <DependentUpon>ucrMetadataStation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataStationElement.Designer.vb">
+      <DependentUpon>ucrMetadataStationElement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStationElement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataStationLocationHistory.Designer.vb">
+      <DependentUpon>ucrMetadataStationLocationHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStationLocationHistory.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMonthlyData.Designer.vb">
+      <DependentUpon>ucrMonthlyData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMonthlyData.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrNavigation.Designer.vb">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrNavigation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDay.Designer.vb">
+      <DependentUpon>ucrDay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDay.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrFormDaily2.Designer.vb">
+      <DependentUpon>ucrFormDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFormDaily2.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHour.Designer.vb">
+      <DependentUpon>ucrHour.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHour.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMonth.Designer.vb">
+      <DependentUpon>ucrMonth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMonth.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataStationQualifier.Designer.vb">
+      <DependentUpon>ucrMetadataStationQualifier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStationQualifier.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrSynopticRA1.Designer.vb">
+      <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSynopticRA1.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrTableEntry.Designer.vb">
+      <DependentUpon>ucrTableEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTableEntry.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrTextBox.Designer.vb">
+      <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDirectionSpeedFlag.Designer.vb">
+      <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDirectionSpeedFlag.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrValueFlagPeriod.Designer.vb">
+      <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrValueFlagPeriod.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDataLinkCombobox.Designer.vb">
+      <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDataLinkCombobox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrElementSelector.Designer.vb">
+      <DependentUpon>ucrElementSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrElementSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrStationSelector.Designer.vb">
+      <DependentUpon>ucrStationSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrStationSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrValueView.Designer.vb">
+      <DependentUpon>ucrValueView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrValueView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrYearSelector.Designer.vb">
+      <DependentUpon>ucrYearSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrYearSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="formAgro1.resx">
+      <DependentUpon>formAgro1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSynoptic2.resx">
+      <DependentUpon>formSynoptic2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSynopticCaribbean.resx">
+      <DependentUpon>formSynopticCaribbean.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCharts.resx">
+      <DependentUpon>frmCharts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCLIMAT.resx">
+      <DependentUpon>frmCLIMAT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClimatSettings.resx">
+      <DependentUpon>frmClimatSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateEntryForm.resx">
+      <DependentUpon>frmCreateEntryForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDatabaseConnections.resx">
+      <DependentUpon>frmDatabaseConnections.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmElementSequencerMonthly.resx">
+      <DependentUpon>frmElementSequencerMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntryForms.resx">
+      <DependentUpon>frmEntryForms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFormUpload.resx">
+      <DependentUpon>frmFormUpload.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInventoryChart.resx">
+      <DependentUpon>frmInventoryChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewAgrometKenya.resx">
+      <DependentUpon>frmNewAgrometKenya.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewComputationProgress.resx">
+      <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewHourly.resx">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewHourlyWind.resx">
+      <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewMetadata.resx">
+      <DependentUpon>frmNewMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewMonthly.resx">
+      <DependentUpon>frmNewMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewSynopticRA1.resx">
+      <DependentUpon>frmNewSynopticRA1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formAWSRealTime.resx">
+      <DependentUpon>formAWSRealTime.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formClimat.resx">
+      <DependentUpon>formClimat.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDaily1.resx">
+      <DependentUpon>formDaily1.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDaily2.resx">
+      <DependentUpon>formDaily2.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDataView.resx">
+      <DependentUpon>formDataView.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formHourlyWind.resx">
+      <DependentUpon>formHourlyWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formImports.resx">
+      <DependentUpon>formImports.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMetadata.resx">
+      <DependentUpon>formMetadata.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formOptions.resx">
+      <DependentUpon>formOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAWSelements.resx">
+      <DependentUpon>frmAWSelements.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAWSstations.resx">
+      <DependentUpon>frmAWSstations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBackup.resx">
+      <DependentUpon>frmBackup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBackupRestore.resx">
+      <DependentUpon>frmBackupRestore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBUFr.resx">
+      <DependentUpon>frmBUFR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangeOwnPassword.resx">
+      <DependentUpon>frmChangeOwnPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConversionDewPointRh.resx">
+      <DependentUpon>FrmConversionDewPointRh.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCPTSeason.resx">
+      <DependentUpon>frmCPTSeason.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCrex.resx">
+      <DependentUpon>frmCrex.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataForms.resx">
+      <DependentUpon>frmDataForms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataMigration.resx">
+      <DependentUpon>frmDataMigration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataTransferProgress.resx">
+      <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPaperArchive.resx">
+      <DependentUpon>formPaperArchive.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDBUtilities.resx">
+      <DependentUpon>frmDBUtilities.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formElement.resx">
+      <DependentUpon>formElement.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formHourly.resx">
+      <DependentUpon>formHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmElementSequencer.resx">
+      <DependentUpon>frmElementSequencer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmElementSequencerDaily.resx">
+      <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGeneralSettings.resx">
+      <DependentUpon>frmGeneralSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGTSNOAA.resx">
+      <DependentUpon>frmGTSNOAA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHourlyTimeSelection.resx">
+      <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportAWS.resx">
+      <DependentUpon>frmImportAWS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportCSV.resx">
+      <DependentUpon>frmImportCSV.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportDaily.resx">
+      <DependentUpon>frmImportDaily.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLanguage.resx">
+      <DependentUpon>frmLanguage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLanguageTranslation.resx">
+      <DependentUpon>frmLanguageTranslation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMonthly.resx">
+      <DependentUpon>formMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProducts.resx">
+      <DependentUpon>formProducts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProductsSelect.resx">
+      <DependentUpon>formProductsSelect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProductsSelectCriteria.resx">
+      <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formStation.resx">
+      <DependentUpon>formStation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSynopRA1.resx">
+      <DependentUpon>formSynopRA1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDatabaseConnect.resx">
+      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formUpperAir.resx">
+      <DependentUpon>formUpperAir.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formWindRose.resx">
+      <DependentUpon>formWindRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAction.resx">
+      <DependentUpon>frmAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataEntry.resx">
+      <DependentUpon>frmDataEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataOutpt.resx">
+      <DependentUpon>frmDataOutpt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGeneral.resx">
+      <DependentUpon>frmGeneral.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLaunchPad.resx">
+      <DependentUpon>frmLaunchPad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainMenu.resx">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewFormDaily2.resx">
+      <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModifyObservations.resx">
+      <DependentUpon>frmModifyObservations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMonitoring.resx">
+      <DependentUpon>frmMonitoring.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmObsView.resx">
+      <DependentUpon>frmObsView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPlotter.resx">
+      <DependentUpon>frmPlotter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQC.resx">
+      <DependentUpon>frmQC.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQCdatesSelection.resx">
+      <DependentUpon>frmQCdatesSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRestore.resx">
+      <DependentUpon>frmRestore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSynopTDCF.resx">
+      <DependentUpon>frmSynopTDCF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSynopticTimeSelection.resx">
+      <DependentUpon>frmSynopticTimeSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTDCFindicators.resx">
+      <DependentUpon>frmTDCFindicators.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateDBfromQCReport.resx">
+      <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUploadToObsFinal.resx">
+      <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserManagement.resx">
+      <DependentUpon>frmUserManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewImage.resx">
+      <DependentUpon>frmViewImage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsers.resx">
+      <DependentUpon>frmUsers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplashScreen.resx">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFilter.resx">
+      <DependentUpon>sdgFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrBaseDataLink.resx">
+      <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrCheck.resx">
+      <DependentUpon>ucrCheck.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDatePicker.resx">
+      <DependentUpon>ucrDatePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourlyWind.resx">
+      <DependentUpon>ucrHourlyWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourly.resx">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrKenyaAgromet.resx">
+      <DependentUpon>ucrKenyaAgromet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataElement.resx">
+      <DependentUpon>ucrMetadataElement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataInstrument.resx">
+      <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataPaperArchive.resx">
+      <DependentUpon>ucrMetadataPaperArchive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataPhysicalFeature.resx">
+      <DependentUpon>ucrMetadataPhysicalFeature.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataScheduleClass.resx">
+      <DependentUpon>ucrMetadataScheduleClass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStation.resx">
+      <DependentUpon>ucrMetadataStation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStationElement.resx">
+      <DependentUpon>ucrMetadataStationElement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStationLocationHistory.resx">
+      <DependentUpon>ucrMetadataStationLocationHistory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStationQualifier.resx">
+      <DependentUpon>ucrMetadataStationQualifier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMonthlyData.resx">
+      <DependentUpon>ucrMonthlyData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNavigation.resx">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDay.resx">
+      <DependentUpon>ucrDay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFormDaily2.resx">
+      <DependentUpon>ucrFormDaily2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHour.resx">
+      <DependentUpon>ucrHour.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMonth.resx">
+      <DependentUpon>ucrMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSynopticRA1.resx">
+      <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrTextBox.resx">
+      <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDirectionSpeedFlag.resx">
+      <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrValueFlagPeriod.resx">
+      <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataLinkCombobox.resx">
+      <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrElementSelector.resx">
+      <DependentUpon>ucrElementSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrStationSelector.resx">
+      <DependentUpon>ucrStationSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrYearSelector.resx">
+      <DependentUpon>ucrYearSelector.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application1.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="translations\climsofttranslations.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\MySql.Data.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="myweat02.ico" />
+    <None Include="Resources\navigation-first.jpg" />
+    <None Include="Resources\navigation-left.jpg" />
+    <None Include="Resources\navigation-right.jpg" />
+    <None Include="Resources\navigation-last.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

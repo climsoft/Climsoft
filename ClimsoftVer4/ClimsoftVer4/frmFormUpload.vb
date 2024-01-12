@@ -90,14 +90,44 @@ Public Class frmFormUpload
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
 
         Dim m, n, maxRows, st, ed, flds, elemCode, acquisitionType, qcStatus, obsperiod As Integer
-        Dim strSQL, stnlist, code_loc, yyyy, mm, dd, hh, capturedBy, stnId, obsDatetime, obsVal, obsFlag, obsLevel, dataForm As String
+        Dim strSQL, stnlist, code_loc, yyyy, mm, dd, hh, capturedBy, stnId, obsDatetime, obsVal, obsFlag, obsLevel, dataForm, bdate, edate As String
         Dim stnselected As Boolean
 
         Try
+            ' Check stations selections
+            stnselected = False
+            For i = 0 To LstViewStations.Items.Count - 1
+                If LstViewStations.Items(i).Checked Then
+                    stnselected = True
+                    Exit For
+                End If
+            Next
+            If Not stnselected Then
+                MsgBox("No Station selected")
+                Exit Sub
+            End If
+
+            ' Check period selections
+            If Not chkEntrydate.Checked Then
+                bdate = Val(txtBeginYear.Text) & "-" & Val(txtBeginMonth.Text) & "-1 00:00:00"
+                edate = Val(txtEndYear.Text) & "-" & Val(txtEndMonth.Text) & "-1 00:00:00"
+
+                If Not IsDate(bdate) Or Not IsDate(edate) Then
+                    MsgBox("Period not properly selected")
+                    Exit Sub
+                End If
+            End If
+
             frm_tbl = lblFormName1.Text
             lblDataTransferProgress.ForeColor = DefaultForeColor 'Color.Black
             lblDataTransferProgress.Text = ""
             txtDataTransferProgress1.Text = ""
+
+            If chkEntrydate.Checked Then
+                bdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & DateAndTime.Day(dateFrom.Text)
+                edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & DateAndTime.Day(dateTo.Text)
+            End If
+
             ' List the selected stations
             stnlist = ""
             stnselected = False
@@ -119,6 +149,9 @@ Public Class frmFormUpload
                 Else
                     sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
                 End If
+
+                If chkEntrydate.Checked Then sql = "select * from " & frm_tbl & " where (" & stnlist & ") and entrydatetime between '" & bdate & "' and '" & edate & "';"
+
             Else ' When All stations are selected
                 stnselected = True
                 If frm_tbl = "form_monthly" Then
@@ -126,7 +159,12 @@ Public Class frmFormUpload
                 Else
                     sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
                 End If
+
+                If chkEntrydate.Checked Then sql = "select * from " & frm_tbl & " where entrydatetime between '" & bdate & "' and '" & edate & "';"
+
             End If
+
+            'MsgBox(sql)
 
             'Create a path to save data into bufer to be uploaded later
             Dim fl, dataDir, frmrec As String
@@ -154,6 +192,12 @@ Public Class frmFormUpload
             daa.Fill(dss, frm_tbl)
             'conns.Close()
             maxRows = dss.Tables(frm_tbl).Rows.Count
+            If maxRows = 0 Then
+                txtDataTransferProgress1.Text = " No data found "
+                FileClose(122)
+                conns.Close()
+                Exit Sub
+            End If
 
             Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
 
@@ -163,7 +207,11 @@ Public Class frmFormUpload
             dataForm = lblFormName1.Text
             code_loc = ""
 
-            If Not Data_Fields(dataForm, st, ed, code_loc) Then Exit Sub
+            If Not Data_Fields(dataForm, st, ed, code_loc) Then
+                FileClose(122)
+                conns.Close()
+                Exit Sub
+            End If
             'conns.Close()
             'MsgBox(st & " " & ed & " " & code_loc)
             flds = (ed - st) + 1 ' Total fields for the observation values
@@ -332,6 +380,7 @@ Public Class frmFormUpload
 
                         Case Else
                             MsgBox("No table found")
+                            FileClose(122)
                             conns.Close()
                             Exit Sub
                     End Select
@@ -345,7 +394,6 @@ Public Class frmFormUpload
                     frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
                     PrintLine(122, frmrec & ",")
                     'PrintLine(122)
-
 
                 Next m
                 'Move to next record in dataset
@@ -366,13 +414,13 @@ Public Class frmFormUpload
             objCmd.CommandTimeout = 0
             objCmd.ExecuteNonQuery()
 
-            If maxRows = 0 Then
-                txtDataTransferProgress1.Text = " No data found "
-            Else
-                lblDataTransferProgress.ForeColor = Color.Red
+            'If maxRows = 0 Then
+            '    txtDataTransferProgress1.Text = " No data found "
+            'Else
+            lblDataTransferProgress.ForeColor = Color.Red
                 lblDataTransferProgress.Text = "Total " & maxRows & " Records Transfered" 'Data transfer complete !"
                 txtDataTransferProgress1.Text = ""
-            End If
+            'End If
             conns.Close()
         Catch ex As Exception
             FileClose(122)
@@ -441,13 +489,6 @@ Public Class frmFormUpload
         End If
     End Sub
 
-    Private Sub lblDiff_Click(sender As Object, e As EventArgs) Handles lblDiff.Click
-
-    End Sub
-
-    Private Sub txtTdiff_TextChanged(sender As Object, e As EventArgs) Handles txtTdiff.TextChanged
-
-    End Sub
 
     Function datetimeGTS(ByRef dttime As String) As Boolean
         Dim diff As Integer
@@ -464,4 +505,20 @@ Public Class frmFormUpload
         End Try
 
     End Function
+
+    Private Sub chkEntrydate_Click(sender As Object, e As EventArgs) Handles chkEntrydate.Click
+        If chkEntrydate.Checked Then
+            Me.Width = 923
+            txtBeginYear.Enabled = False
+            txtEndYear.Enabled = False
+            txtBeginMonth.Enabled = False
+            txtEndMonth.Enabled = False
+        Else
+            Me.Width = 656
+            txtBeginYear.Enabled = True
+            txtEndYear.Enabled = True
+            txtBeginMonth.Enabled = True
+            txtEndMonth.Enabled = True
+        End If
+    End Sub
 End Class

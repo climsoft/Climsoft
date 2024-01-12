@@ -700,16 +700,17 @@ Public Class formProductsSelectCriteria
                     threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Dekadal Rainy Days", "0.03")
                     sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, round(day(obsDatetime)/10.5 + 0.5,0) as DEKAD, count(round(day(obsDatetime)/10.5 + 0.5,0)) AS Days
                           from station INNER JOIN observationfinal ON stationId = recordedFrom
-                          where describedBy= '5'  and obsValue >= " & threshValue & "  and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
+                          where describedBy= '5' and hour(obsDatetime) = " & RegkeyValue("key01") & " and obsValue >= " & threshValue & "  and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                           Group by recordedFrom, year(obsDatetime), Month(obsDatetime), round(day(obsDatetime)/10.5 + 0.5,0)
                           Order by recordedFrom, year(obsDatetime), Month(obsDatetime), round(day(obsDatetime)/10.5 + 0.5,0);"
 
                     DataProducts(sql, lblProductType.Text)
                 Case "Monthly Counts"
+                    'MsgBox(RegkeyValue("key01"))
                     threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Monthly Rainy Days", "0.03")
                     sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, Count(month(obsDatetime)) as Days
                            from station INNER JOIN observationfinal ON stationId = recordedFrom
-                           where describedBy= '5' and obsValue >= " & threshValue & " and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
+                           where describedBy= '5' and hour(obsDatetime) = " & RegkeyValue("key01") & " and obsValue >= " & threshValue & " and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                            Group by recordedFrom, year(obsDatetime), month(obsDatetime)
                            Order by recordedFrom, year(obsDatetime), month(obsDatetime);"
 
@@ -718,7 +719,7 @@ Public Class formProductsSelectCriteria
                     threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Annual Rainy Days", "0.03")
                     sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, Count(year(obsDatetime)) as Days
                            from station INNER JOIN observationfinal ON stationId = recordedFrom
-                           where describedBy= '5' and obsValue >= " & threshValue & "  and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
+                           where describedBy= '5' and hour(obsDatetime) = " & RegkeyValue("key01") & " and obsValue >= " & threshValue & "  and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                            Group by recordedFrom, year(obsDatetime)
                            Order by recordedFrom, year(obsDatetime);"
 
@@ -2383,11 +2384,13 @@ Err:
             Dim str(3) As String
             Dim itm = New ListViewItem
 
-            ' Add Precipitation details in the Elements list view 
+            ' Add Precipitation details in the Elements list view
+
             str(0) = "5"
             str(1) = "PRECIP"
             str(2) = "Precipitation daily total"
             itm = New ListViewItem(str)
+            lstvElements.Items.Clear()
             lstvElements.Items.Add(itm)
 
             ' Set the relevant controls appropriately
@@ -2397,6 +2400,7 @@ Err:
             cmdDelElement.Enabled = False
             cmdSelectAllElements.Enabled = False
             cmdClearElements.Enabled = False
+
         End If
 
         If lblProductType.Text = "Monthly" Or lblProductType.Text = "Annual" Then
@@ -2420,7 +2424,7 @@ Err:
             chkOutputElements.Visible = False
             chkAdvancedSelection.Visible = True
             cmbstation.Enabled = True
-            cmbElement.Enabled = True
+            'cmbElement.Enabled = True
             cmdSelectAllStations.Enabled = True
             cmdSelectAllElements.Enabled = True
         End If
@@ -2583,19 +2587,28 @@ Err:
         Dim regmax As Integer
 
         Try
-            sql = "SELECT * FROM regkeys"
+            'sql = "SELECT * FROM regkeys"
+            sql = "SELECT keyValue FROM regkeys WHERE keyName = '" & keynm & "';"
             dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             dar.Fill(dsr, "regkeys")
 
-            regmax = dsr.Tables("regkeys").Rows.Count
-            RegkeyValue = vbNull
-            ' Check for the value for the selected key
-            For i = 0 To regmax - 1
-                If dsr.Tables("regkeys").Rows(i).Item("keyName") = keynm Then
-                    RegkeyValue = dsr.Tables("regkeys").Rows(i).Item("keyValue")
-                    Exit For
-                End If
-            Next
+            If dsr.Tables("regkeys").Rows.Count = 1 Then
+                RegkeyValue = dsr.Tables("regkeys").Rows(0).Item(0)
+            Else
+                RegkeyValue = vbNull
+            End If
+
+            'regmax = dsr.Tables("regkeys").Rows.Count
+            'RegkeyValue = vbNull
+
+
+            '' Check for the value for the selected key
+            'For i = 0 To regmax - 1
+            '    If dsr.Tables("regkeys").Rows(i).Item("keyName") = keynm Then
+            '        RegkeyValue = dsr.Tables("regkeys").Rows(i).Item("keyValue")
+            '        Exit For
+            '    End If
+            'Next
 
         Catch ex As Exception
             MsgBox(ex.Message)
