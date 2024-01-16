@@ -91,6 +91,7 @@ Partial Class formAWSRealTime
         Me.grpStructures1 = New System.Windows.Forms.GroupBox()
         Me.lblStructure = New System.Windows.Forms.Label()
         Me.grpStructures = New System.Windows.Forms.GroupBox()
+        Me.cmdClone = New System.Windows.Forms.Button()
         Me.lblRecords = New System.Windows.Forms.Label()
         Me.txtDelimiter = New System.Windows.Forms.ComboBox()
         Me.txtQualifier = New System.Windows.Forms.TextBox()
@@ -266,7 +267,7 @@ Partial Class formAWSRealTime
         Me.pnlControl.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlControl.Location = New System.Drawing.Point(0, 0)
         Me.pnlControl.Name = "pnlControl"
-        Me.pnlControl.Size = New System.Drawing.Size(191, 550)
+        Me.pnlControl.Size = New System.Drawing.Size(191, 633)
         Me.pnlControl.TabIndex = 0
         '
         'cmdHelp
@@ -356,9 +357,9 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.lblErrors)
         Me.pnlProcessing.Controls.Add(Me.Panel1)
         Me.pnlProcessing.Controls.Add(Me.grpElements)
-        Me.pnlProcessing.Location = New System.Drawing.Point(194, 134)
+        Me.pnlProcessing.Location = New System.Drawing.Point(194, 29)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(757, 157)
+        Me.pnlProcessing.Size = New System.Drawing.Size(757, 274)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
         '
@@ -912,9 +913,9 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
         Me.pnlDataStructures.Controls.Add(Me.DataGridViewStructures)
-        Me.pnlDataStructures.Location = New System.Drawing.Point(191, 223)
+        Me.pnlDataStructures.Location = New System.Drawing.Point(191, 122)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(760, 101)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(760, 219)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
@@ -940,6 +941,7 @@ Partial Class formAWSRealTime
         '
         'grpStructures
         '
+        Me.grpStructures.Controls.Add(Me.cmdClone)
         Me.grpStructures.Controls.Add(Me.lblRecords)
         Me.grpStructures.Controls.Add(Me.txtDelimiter)
         Me.grpStructures.Controls.Add(Me.txtQualifier)
@@ -958,6 +960,15 @@ Partial Class formAWSRealTime
         Me.grpStructures.Size = New System.Drawing.Size(359, 149)
         Me.grpStructures.TabIndex = 7
         Me.grpStructures.TabStop = False
+        '
+        'cmdClone
+        '
+        Me.cmdClone.Location = New System.Drawing.Point(178, 120)
+        Me.cmdClone.Name = "cmdClone"
+        Me.cmdClone.Size = New System.Drawing.Size(71, 23)
+        Me.cmdClone.TabIndex = 21
+        Me.cmdClone.Text = "Clone"
+        Me.cmdClone.UseVisualStyleBackColor = True
         '
         'lblRecords
         '
@@ -1000,7 +1011,7 @@ Partial Class formAWSRealTime
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(249, 120)
+        Me.cmdDelete.Location = New System.Drawing.Point(254, 120)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(93, 23)
         Me.cmdDelete.TabIndex = 13
@@ -1009,7 +1020,7 @@ Partial Class formAWSRealTime
         '
         'cmdUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(155, 120)
+        Me.cmdUpdate.Location = New System.Drawing.Point(85, 120)
         Me.cmdUpdate.Name = "cmdUpdate"
         Me.cmdUpdate.Size = New System.Drawing.Size(88, 23)
         Me.cmdUpdate.TabIndex = 12
@@ -1018,7 +1029,7 @@ Partial Class formAWSRealTime
         '
         'cmdCreate
         '
-        Me.cmdCreate.Location = New System.Drawing.Point(78, 120)
+        Me.cmdCreate.Location = New System.Drawing.Point(9, 120)
         Me.cmdCreate.Name = "cmdCreate"
         Me.cmdCreate.Size = New System.Drawing.Size(71, 23)
         Me.cmdCreate.TabIndex = 11
@@ -1424,9 +1435,9 @@ Partial Class formAWSRealTime
         Me.pnlServers.Controls.Add(Me.cmdMSS)
         Me.pnlServers.Controls.Add(Me.cmdBaseStation)
         Me.pnlServers.Controls.Add(Me.pnlMSS)
-        Me.pnlServers.Location = New System.Drawing.Point(191, 318)
+        Me.pnlServers.Location = New System.Drawing.Point(191, 278)
         Me.pnlServers.Name = "pnlServers"
-        Me.pnlServers.Size = New System.Drawing.Size(760, 78)
+        Me.pnlServers.Size = New System.Drawing.Size(760, 118)
         Me.pnlServers.TabIndex = 2
         Me.pnlServers.Visible = False
         '
@@ -2290,7 +2301,7 @@ Partial Class formAWSRealTime
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(956, 550)
+        Me.ClientSize = New System.Drawing.Size(956, 633)
         Me.Controls.Add(Me.pnlProcessing)
         Me.Controls.Add(Me.pnlDataStructures)
         Me.Controls.Add(Me.pnlServers)
@@ -2545,4 +2556,5 @@ Partial Class formAWSRealTime
     Friend WithEvents lblEncodeHrs As Label
     Friend WithEvents txtEncode As TextBox
     Friend WithEvents lblEncode As Label
+    Friend WithEvents cmdClone As Button
 End Class
