@@ -107,6 +107,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod1 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPush = New System.Windows.Forms.Button()
+        Me.btnChangeSequencer = New System.Windows.Forms.Button()
         lblYear = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -114,9 +115,10 @@ Partial Class ucrHourly
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(473, 9)
+        lblYear.Location = New System.Drawing.Point(710, 14)
+        lblYear.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         lblYear.Name = "lblYear"
-        lblYear.Size = New System.Drawing.Size(32, 13)
+        lblYear.Size = New System.Drawing.Size(47, 20)
         lblYear.TabIndex = 758
         lblYear.Text = "Year:"
         '
@@ -124,9 +126,10 @@ Partial Class ucrHourly
         '
         Me.chkRepeatEntry.AutoSize = True
         Me.chkRepeatEntry.Enabled = False
-        Me.chkRepeatEntry.Location = New System.Drawing.Point(56, 564)
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(84, 868)
+        Me.chkRepeatEntry.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
-        Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(122, 24)
         Me.chkRepeatEntry.TabIndex = 48
         Me.chkRepeatEntry.Text = "Repeat Entry"
         Me.chkRepeatEntry.UseVisualStyleBackColor = True
@@ -134,26 +137,29 @@ Partial Class ucrHourly
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(185, 565)
+        Me.lblSequencer.Location = New System.Drawing.Point(278, 869)
+        Me.lblSequencer.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSequencer.Name = "lblSequencer"
-        Me.lblSequencer.Size = New System.Drawing.Size(62, 13)
+        Me.lblSequencer.Size = New System.Drawing.Size(91, 20)
         Me.lblSequencer.TabIndex = 779
         Me.lblSequencer.Text = "Sequencer:"
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(271, 562)
+        Me.txtSequencer.Location = New System.Drawing.Point(377, 866)
+        Me.txtSequencer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.ReadOnly = True
-        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
+        Me.txtSequencer.Size = New System.Drawing.Size(270, 26)
         Me.txtSequencer.TabIndex = 778
         Me.txtSequencer.Text = "seq_element"
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(490, 527)
+        Me.btnView.Location = New System.Drawing.Point(735, 811)
+        Me.btnView.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(63, 23)
+        Me.btnView.Size = New System.Drawing.Size(94, 35)
         Me.btnView.TabIndex = 44
         Me.btnView.Tag = ""
         Me.btnView.Text = "View"
@@ -162,18 +168,20 @@ Partial Class ucrHourly
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(570, 560)
+        Me.btnUpload.Location = New System.Drawing.Point(855, 862)
+        Me.btnUpload.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpload.Name = "btnUpload"
-        Me.btnUpload.Size = New System.Drawing.Size(69, 23)
+        Me.btnUpload.Size = New System.Drawing.Size(104, 35)
         Me.btnUpload.TabIndex = 47
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(707, 527)
+        Me.btnHelp.Location = New System.Drawing.Point(1060, 811)
+        Me.btnHelp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(57, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(86, 35)
         Me.btnHelp.TabIndex = 46
         Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
@@ -181,9 +189,10 @@ Partial Class ucrHourly
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(356, 527)
+        Me.btnClear.Location = New System.Drawing.Point(534, 811)
+        Me.btnClear.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(59, 23)
+        Me.btnClear.Size = New System.Drawing.Size(88, 35)
         Me.btnClear.TabIndex = 42
         Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
@@ -191,9 +200,10 @@ Partial Class ucrHourly
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(116, 527)
+        Me.btnSave.Location = New System.Drawing.Point(174, 811)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(76, 23)
+        Me.btnSave.Size = New System.Drawing.Size(114, 35)
         Me.btnSave.TabIndex = 31
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
@@ -201,9 +211,10 @@ Partial Class ucrHourly
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(279, 527)
+        Me.btnDelete.Location = New System.Drawing.Point(418, 811)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(71, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(106, 35)
         Me.btnDelete.TabIndex = 40
         Me.btnDelete.Tag = "delete"
         Me.btnDelete.Text = "Delete"
@@ -211,9 +222,10 @@ Partial Class ucrHourly
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(12, 527)
+        Me.btnAddNew.Location = New System.Drawing.Point(18, 811)
+        Me.btnAddNew.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(96, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(144, 35)
         Me.btnAddNew.TabIndex = 41
         Me.btnAddNew.Tag = "add"
         Me.btnAddNew.Text = "Add New"
@@ -221,9 +233,10 @@ Partial Class ucrHourly
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(198, 527)
+        Me.btnUpdate.Location = New System.Drawing.Point(297, 811)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(112, 35)
         Me.btnUpdate.TabIndex = 32
         Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
@@ -231,9 +244,10 @@ Partial Class ucrHourly
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(634, 527)
+        Me.btnClose.Location = New System.Drawing.Point(951, 811)
+        Me.btnClose.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(67, 23)
+        Me.btnClose.Size = New System.Drawing.Size(100, 35)
         Me.btnClose.TabIndex = 45
         Me.btnClose.Tag = "close"
         Me.btnClose.Text = "Close"
@@ -242,9 +256,10 @@ Partial Class ucrHourly
         'btnHourSelection
         '
         Me.btnHourSelection.ForeColor = System.Drawing.Color.Blue
-        Me.btnHourSelection.Location = New System.Drawing.Point(81, 64)
+        Me.btnHourSelection.Location = New System.Drawing.Point(122, 98)
+        Me.btnHourSelection.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnHourSelection.Name = "btnHourSelection"
-        Me.btnHourSelection.Size = New System.Drawing.Size(159, 23)
+        Me.btnHourSelection.Size = New System.Drawing.Size(238, 35)
         Me.btnHourSelection.TabIndex = 765
         Me.btnHourSelection.Text = "Enable selected hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
@@ -253,9 +268,10 @@ Partial Class ucrHourly
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.Color.Blue
-        Me.Label1.Location = New System.Drawing.Point(534, 69)
+        Me.Label1.Location = New System.Drawing.Point(801, 106)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(40, 13)
+        Me.Label1.Size = New System.Drawing.Size(59, 20)
         Me.Label1.TabIndex = 768
         Me.Label1.Text = "Value="
         '
@@ -263,39 +279,40 @@ Partial Class ucrHourly
         '
         Me.ucrInputSameValue.FieldName = Nothing
         Me.ucrInputSameValue.KeyControl = False
-        Me.ucrInputSameValue.Location = New System.Drawing.Point(581, 64)
-        Me.ucrInputSameValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrInputSameValue.Location = New System.Drawing.Point(872, 98)
+        Me.ucrInputSameValue.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputSameValue.Name = "ucrInputSameValue"
-        Me.ucrInputSameValue.Size = New System.Drawing.Size(58, 26)
+        Me.ucrInputSameValue.Size = New System.Drawing.Size(87, 40)
         Me.ucrInputSameValue.TabIndex = 766
         Me.ucrInputSameValue.TextboxValue = ""
         '
         'btnAssignSameValue
         '
         Me.btnAssignSameValue.ForeColor = System.Drawing.Color.Blue
-        Me.btnAssignSameValue.Location = New System.Drawing.Point(285, 64)
+        Me.btnAssignSameValue.Location = New System.Drawing.Point(428, 98)
+        Me.btnAssignSameValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAssignSameValue.Name = "btnAssignSameValue"
-        Me.btnAssignSameValue.Size = New System.Drawing.Size(225, 23)
+        Me.btnAssignSameValue.Size = New System.Drawing.Size(338, 35)
         Me.btnAssignSameValue.TabIndex = 767
         Me.btnAssignSameValue.Text = "Assign same value to all obs"
         Me.btnAssignSameValue.UseVisualStyleBackColor = True
         '
         'ucrNavigation
         '
-        Me.ucrNavigation.Location = New System.Drawing.Point(115, 494)
-        Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNavigation.Location = New System.Drawing.Point(172, 760)
+        Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrNavigation.Name = "ucrNavigation"
-        Me.ucrNavigation.Size = New System.Drawing.Size(369, 25)
+        Me.ucrNavigation.Size = New System.Drawing.Size(554, 38)
         Me.ucrNavigation.TabIndex = 764
         '
         'ucrDaySelector
         '
         Me.ucrDaySelector.FieldName = "dd"
         Me.ucrDaySelector.KeyControl = True
-        Me.ucrDaySelector.Location = New System.Drawing.Point(597, 28)
-        Me.ucrDaySelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.ucrDaySelector.Location = New System.Drawing.Point(896, 43)
+        Me.ucrDaySelector.Margin = New System.Windows.Forms.Padding(8, 9, 8, 9)
         Me.ucrDaySelector.Name = "ucrDaySelector"
-        Me.ucrDaySelector.Size = New System.Drawing.Size(42, 21)
+        Me.ucrDaySelector.Size = New System.Drawing.Size(63, 32)
         Me.ucrDaySelector.TabIndex = 5
         Me.ucrDaySelector.Tag = "dd"
         '
@@ -303,10 +320,10 @@ Partial Class ucrHourly
         '
         Me.ucrMonthSelector.FieldName = "mm"
         Me.ucrMonthSelector.KeyControl = True
-        Me.ucrMonthSelector.Location = New System.Drawing.Point(542, 28)
-        Me.ucrMonthSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.ucrMonthSelector.Location = New System.Drawing.Point(813, 43)
+        Me.ucrMonthSelector.Margin = New System.Windows.Forms.Padding(8, 9, 8, 9)
         Me.ucrMonthSelector.Name = "ucrMonthSelector"
-        Me.ucrMonthSelector.Size = New System.Drawing.Size(36, 25)
+        Me.ucrMonthSelector.Size = New System.Drawing.Size(54, 38)
         Me.ucrMonthSelector.TabIndex = 4
         Me.ucrMonthSelector.Tag = "mm"
         '
@@ -314,46 +331,50 @@ Partial Class ucrHourly
         '
         Me.ucrYearSelector.FieldName = "yyyy"
         Me.ucrYearSelector.KeyControl = True
-        Me.ucrYearSelector.Location = New System.Drawing.Point(476, 28)
-        Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.ucrYearSelector.Location = New System.Drawing.Point(714, 43)
+        Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(8, 9, 8, 9)
         Me.ucrYearSelector.Name = "ucrYearSelector"
-        Me.ucrYearSelector.Size = New System.Drawing.Size(49, 25)
+        Me.ucrYearSelector.Size = New System.Drawing.Size(74, 38)
         Me.ucrYearSelector.TabIndex = 3
         Me.ucrYearSelector.Tag = "yyyy"
         '
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(594, 9)
+        Me.lblDay.Location = New System.Drawing.Point(891, 14)
+        Me.lblDay.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDay.Name = "lblDay"
-        Me.lblDay.Size = New System.Drawing.Size(29, 13)
+        Me.lblDay.Size = New System.Drawing.Size(41, 20)
         Me.lblDay.TabIndex = 760
         Me.lblDay.Text = "Day:"
         '
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(539, 9)
+        Me.lblMonth.Location = New System.Drawing.Point(808, 14)
+        Me.lblMonth.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMonth.Name = "lblMonth"
-        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
+        Me.lblMonth.Size = New System.Drawing.Size(58, 20)
         Me.lblMonth.TabIndex = 759
         Me.lblMonth.Text = "Month:"
         '
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(282, 10)
+        Me.lblElement.Location = New System.Drawing.Point(423, 15)
+        Me.lblElement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblElement.Name = "lblElement"
-        Me.lblElement.Size = New System.Drawing.Size(48, 13)
+        Me.lblElement.Size = New System.Drawing.Size(72, 20)
         Me.lblElement.TabIndex = 757
         Me.lblElement.Text = "Element:"
         '
         'lblStationSelector
         '
         Me.lblStationSelector.AutoSize = True
-        Me.lblStationSelector.Location = New System.Drawing.Point(61, 10)
+        Me.lblStationSelector.Location = New System.Drawing.Point(92, 15)
+        Me.lblStationSelector.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStationSelector.Name = "lblStationSelector"
-        Me.lblStationSelector.Size = New System.Drawing.Size(43, 13)
+        Me.lblStationSelector.Size = New System.Drawing.Size(64, 20)
         Me.lblStationSelector.TabIndex = 756
         Me.lblStationSelector.Text = "Station:"
         '
@@ -361,10 +382,10 @@ Partial Class ucrHourly
         '
         Me.ucrStationSelector.FieldName = "stationId"
         Me.ucrStationSelector.KeyControl = True
-        Me.ucrStationSelector.Location = New System.Drawing.Point(64, 30)
-        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(96, 46)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(8, 9, 8, 9)
         Me.ucrStationSelector.Name = "ucrStationSelector"
-        Me.ucrStationSelector.Size = New System.Drawing.Size(212, 24)
+        Me.ucrStationSelector.Size = New System.Drawing.Size(318, 37)
         Me.ucrStationSelector.TabIndex = 1
         Me.ucrStationSelector.Tag = "stationId"
         '
@@ -372,10 +393,10 @@ Partial Class ucrHourly
         '
         Me.ucrElementSelector.FieldName = "elementId"
         Me.ucrElementSelector.KeyControl = True
-        Me.ucrElementSelector.Location = New System.Drawing.Point(285, 29)
-        Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrElementSelector.Location = New System.Drawing.Point(428, 45)
+        Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrElementSelector.Name = "ucrElementSelector"
-        Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
+        Me.ucrElementSelector.Size = New System.Drawing.Size(267, 32)
         Me.ucrElementSelector.TabIndex = 2
         Me.ucrElementSelector.Tag = "elementId"
         '
@@ -383,37 +404,40 @@ Partial Class ucrHourly
         '
         Me.ucrInputTotal.FieldName = Nothing
         Me.ucrInputTotal.KeyControl = False
-        Me.ucrInputTotal.Location = New System.Drawing.Point(452, 453)
-        Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrInputTotal.Location = New System.Drawing.Point(678, 697)
+        Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputTotal.Name = "ucrInputTotal"
-        Me.ucrInputTotal.Size = New System.Drawing.Size(58, 26)
+        Me.ucrInputTotal.Size = New System.Drawing.Size(87, 40)
         Me.ucrInputTotal.TabIndex = 30
         Me.ucrInputTotal.TextboxValue = ""
         '
         'lblTotal
         '
         Me.lblTotal.AutoSize = True
-        Me.lblTotal.Location = New System.Drawing.Point(449, 435)
+        Me.lblTotal.Location = New System.Drawing.Point(674, 669)
+        Me.lblTotal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(31, 13)
+        Me.lblTotal.Size = New System.Drawing.Size(44, 20)
         Me.lblTotal.TabIndex = 753
         Me.lblTotal.Text = "Total"
         '
         'lbl23
         '
         Me.lbl23.AutoSize = True
-        Me.lbl23.Location = New System.Drawing.Point(305, 453)
+        Me.lbl23.Location = New System.Drawing.Point(458, 697)
+        Me.lbl23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl23.Name = "lbl23"
-        Me.lbl23.Size = New System.Drawing.Size(19, 13)
+        Me.lbl23.Size = New System.Drawing.Size(27, 20)
         Me.lbl23.TabIndex = 752
         Me.lbl23.Text = "23"
         '
         'lbl22
         '
         Me.lbl22.AutoSize = True
-        Me.lbl22.Location = New System.Drawing.Point(305, 423)
+        Me.lbl22.Location = New System.Drawing.Point(458, 651)
+        Me.lbl22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl22.Name = "lbl22"
-        Me.lbl22.Size = New System.Drawing.Size(19, 13)
+        Me.lbl22.Size = New System.Drawing.Size(27, 20)
         Me.lbl22.TabIndex = 751
         Me.lbl22.Text = "22"
         '
@@ -422,10 +446,10 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod23.FieldName = "23"
         Me.UcrValueFlagPeriod23.IncludePeriod = False
         Me.UcrValueFlagPeriod23.KeyControl = False
-        Me.UcrValueFlagPeriod23.Location = New System.Drawing.Point(341, 449)
-        Me.UcrValueFlagPeriod23.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod23.Location = New System.Drawing.Point(512, 691)
+        Me.UcrValueFlagPeriod23.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod23.Name = "UcrValueFlagPeriod23"
-        Me.UcrValueFlagPeriod23.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod23.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod23.TabIndex = 29
         Me.UcrValueFlagPeriod23.Tag = "23"
         '
@@ -434,91 +458,100 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod22.FieldName = "22"
         Me.UcrValueFlagPeriod22.IncludePeriod = False
         Me.UcrValueFlagPeriod22.KeyControl = False
-        Me.UcrValueFlagPeriod22.Location = New System.Drawing.Point(341, 419)
-        Me.UcrValueFlagPeriod22.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod22.Location = New System.Drawing.Point(512, 645)
+        Me.UcrValueFlagPeriod22.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod22.Name = "UcrValueFlagPeriod22"
-        Me.UcrValueFlagPeriod22.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod22.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod22.TabIndex = 28
         Me.UcrValueFlagPeriod22.Tag = "22"
         '
         'lbl21
         '
         Me.lbl21.AutoSize = True
-        Me.lbl21.Location = New System.Drawing.Point(305, 393)
+        Me.lbl21.Location = New System.Drawing.Point(458, 605)
+        Me.lbl21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl21.Name = "lbl21"
-        Me.lbl21.Size = New System.Drawing.Size(19, 13)
+        Me.lbl21.Size = New System.Drawing.Size(27, 20)
         Me.lbl21.TabIndex = 750
         Me.lbl21.Text = "21"
         '
         'lbl20
         '
         Me.lbl20.AutoSize = True
-        Me.lbl20.Location = New System.Drawing.Point(305, 363)
+        Me.lbl20.Location = New System.Drawing.Point(458, 558)
+        Me.lbl20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl20.Name = "lbl20"
-        Me.lbl20.Size = New System.Drawing.Size(19, 13)
+        Me.lbl20.Size = New System.Drawing.Size(27, 20)
         Me.lbl20.TabIndex = 748
         Me.lbl20.Text = "20"
         '
         'lbl19
         '
         Me.lbl19.AutoSize = True
-        Me.lbl19.Location = New System.Drawing.Point(305, 333)
+        Me.lbl19.Location = New System.Drawing.Point(458, 512)
+        Me.lbl19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl19.Name = "lbl19"
-        Me.lbl19.Size = New System.Drawing.Size(19, 13)
+        Me.lbl19.Size = New System.Drawing.Size(27, 20)
         Me.lbl19.TabIndex = 747
         Me.lbl19.Text = "19"
         '
         'lbl18
         '
         Me.lbl18.AutoSize = True
-        Me.lbl18.Location = New System.Drawing.Point(305, 303)
+        Me.lbl18.Location = New System.Drawing.Point(458, 466)
+        Me.lbl18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl18.Name = "lbl18"
-        Me.lbl18.Size = New System.Drawing.Size(19, 13)
+        Me.lbl18.Size = New System.Drawing.Size(27, 20)
         Me.lbl18.TabIndex = 746
         Me.lbl18.Text = "18"
         '
         'lbl17
         '
         Me.lbl17.AutoSize = True
-        Me.lbl17.Location = New System.Drawing.Point(305, 273)
+        Me.lbl17.Location = New System.Drawing.Point(458, 420)
+        Me.lbl17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl17.Name = "lbl17"
-        Me.lbl17.Size = New System.Drawing.Size(19, 13)
+        Me.lbl17.Size = New System.Drawing.Size(27, 20)
         Me.lbl17.TabIndex = 745
         Me.lbl17.Text = "17"
         '
         'lbl16
         '
         Me.lbl16.AutoSize = True
-        Me.lbl16.Location = New System.Drawing.Point(305, 243)
+        Me.lbl16.Location = New System.Drawing.Point(458, 374)
+        Me.lbl16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl16.Name = "lbl16"
-        Me.lbl16.Size = New System.Drawing.Size(19, 13)
+        Me.lbl16.Size = New System.Drawing.Size(27, 20)
         Me.lbl16.TabIndex = 744
         Me.lbl16.Text = "16"
         '
         'lbl15
         '
         Me.lbl15.AutoSize = True
-        Me.lbl15.Location = New System.Drawing.Point(305, 213)
+        Me.lbl15.Location = New System.Drawing.Point(458, 328)
+        Me.lbl15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl15.Name = "lbl15"
-        Me.lbl15.Size = New System.Drawing.Size(19, 13)
+        Me.lbl15.Size = New System.Drawing.Size(27, 20)
         Me.lbl15.TabIndex = 743
         Me.lbl15.Text = "15"
         '
         'lbl14
         '
         Me.lbl14.AutoSize = True
-        Me.lbl14.Location = New System.Drawing.Point(305, 183)
+        Me.lbl14.Location = New System.Drawing.Point(458, 282)
+        Me.lbl14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl14.Name = "lbl14"
-        Me.lbl14.Size = New System.Drawing.Size(19, 13)
+        Me.lbl14.Size = New System.Drawing.Size(27, 20)
         Me.lbl14.TabIndex = 749
         Me.lbl14.Text = "14"
         '
         'lbl13
         '
         Me.lbl13.AutoSize = True
-        Me.lbl13.Location = New System.Drawing.Point(305, 153)
+        Me.lbl13.Location = New System.Drawing.Point(458, 235)
+        Me.lbl13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl13.Name = "lbl13"
-        Me.lbl13.Size = New System.Drawing.Size(19, 13)
+        Me.lbl13.Size = New System.Drawing.Size(27, 20)
         Me.lbl13.TabIndex = 742
         Me.lbl13.Text = "13"
         '
@@ -527,10 +560,10 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod21.FieldName = "21"
         Me.UcrValueFlagPeriod21.IncludePeriod = False
         Me.UcrValueFlagPeriod21.KeyControl = False
-        Me.UcrValueFlagPeriod21.Location = New System.Drawing.Point(341, 389)
-        Me.UcrValueFlagPeriod21.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod21.Location = New System.Drawing.Point(512, 598)
+        Me.UcrValueFlagPeriod21.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod21.Name = "UcrValueFlagPeriod21"
-        Me.UcrValueFlagPeriod21.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod21.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod21.TabIndex = 27
         Me.UcrValueFlagPeriod21.Tag = "21"
         '
@@ -539,10 +572,10 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod20.FieldName = "20"
         Me.UcrValueFlagPeriod20.IncludePeriod = False
         Me.UcrValueFlagPeriod20.KeyControl = False
-        Me.UcrValueFlagPeriod20.Location = New System.Drawing.Point(341, 359)
-        Me.UcrValueFlagPeriod20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod20.Location = New System.Drawing.Point(512, 552)
+        Me.UcrValueFlagPeriod20.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod20.Name = "UcrValueFlagPeriod20"
-        Me.UcrValueFlagPeriod20.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod20.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod20.TabIndex = 26
         Me.UcrValueFlagPeriod20.Tag = "20"
         '
@@ -551,10 +584,10 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod19.FieldName = "19"
         Me.UcrValueFlagPeriod19.IncludePeriod = False
         Me.UcrValueFlagPeriod19.KeyControl = False
-        Me.UcrValueFlagPeriod19.Location = New System.Drawing.Point(340, 329)
-        Me.UcrValueFlagPeriod19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod19.Location = New System.Drawing.Point(510, 506)
+        Me.UcrValueFlagPeriod19.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod19.Name = "UcrValueFlagPeriod19"
-        Me.UcrValueFlagPeriod19.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod19.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod19.TabIndex = 25
         Me.UcrValueFlagPeriod19.Tag = "19"
         '
@@ -563,10 +596,10 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod18.FieldName = "18"
         Me.UcrValueFlagPeriod18.IncludePeriod = False
         Me.UcrValueFlagPeriod18.KeyControl = False
-        Me.UcrValueFlagPeriod18.Location = New System.Drawing.Point(341, 299)
-        Me.UcrValueFlagPeriod18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod18.Location = New System.Drawing.Point(512, 460)
+        Me.UcrValueFlagPeriod18.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod18.Name = "UcrValueFlagPeriod18"
-        Me.UcrValueFlagPeriod18.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod18.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod18.TabIndex = 24
         Me.UcrValueFlagPeriod18.Tag = "18"
         '
@@ -575,10 +608,10 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod17.FieldName = "17"
         Me.UcrValueFlagPeriod17.IncludePeriod = False
         Me.UcrValueFlagPeriod17.KeyControl = False
-        Me.UcrValueFlagPeriod17.Location = New System.Drawing.Point(341, 269)
-        Me.UcrValueFlagPeriod17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod17.Location = New System.Drawing.Point(512, 414)
+        Me.UcrValueFlagPeriod17.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod17.Name = "UcrValueFlagPeriod17"
-        Me.UcrValueFlagPeriod17.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod17.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod17.TabIndex = 23
         Me.UcrValueFlagPeriod17.Tag = "17"
         '
@@ -587,10 +620,10 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod16.FieldName = "16"
         Me.UcrValueFlagPeriod16.IncludePeriod = False
         Me.UcrValueFlagPeriod16.KeyControl = False
-        Me.UcrValueFlagPeriod16.Location = New System.Drawing.Point(341, 239)
-        Me.UcrValueFlagPeriod16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod16.Location = New System.Drawing.Point(512, 368)
+        Me.UcrValueFlagPeriod16.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod16.Name = "UcrValueFlagPeriod16"
-        Me.UcrValueFlagPeriod16.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod16.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod16.TabIndex = 22
         Me.UcrValueFlagPeriod16.Tag = "16"
         '
@@ -599,10 +632,10 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod15.FieldName = "15"
         Me.UcrValueFlagPeriod15.IncludePeriod = False
         Me.UcrValueFlagPeriod15.KeyControl = False
-        Me.UcrValueFlagPeriod15.Location = New System.Drawing.Point(341, 209)
-        Me.UcrValueFlagPeriod15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod15.Location = New System.Drawing.Point(512, 322)
+        Me.UcrValueFlagPeriod15.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod15.Name = "UcrValueFlagPeriod15"
-        Me.UcrValueFlagPeriod15.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod15.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod15.TabIndex = 21
         Me.UcrValueFlagPeriod15.Tag = "15"
         '
@@ -611,10 +644,10 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod14.FieldName = "14"
         Me.UcrValueFlagPeriod14.IncludePeriod = False
         Me.UcrValueFlagPeriod14.KeyControl = False
-        Me.UcrValueFlagPeriod14.Location = New System.Drawing.Point(341, 179)
-        Me.UcrValueFlagPeriod14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod14.Location = New System.Drawing.Point(512, 275)
+        Me.UcrValueFlagPeriod14.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod14.Name = "UcrValueFlagPeriod14"
-        Me.UcrValueFlagPeriod14.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod14.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod14.TabIndex = 20
         Me.UcrValueFlagPeriod14.Tag = "14"
         '
@@ -623,27 +656,29 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod13.FieldName = "13"
         Me.UcrValueFlagPeriod13.IncludePeriod = False
         Me.UcrValueFlagPeriod13.KeyControl = False
-        Me.UcrValueFlagPeriod13.Location = New System.Drawing.Point(341, 149)
-        Me.UcrValueFlagPeriod13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod13.Location = New System.Drawing.Point(512, 229)
+        Me.UcrValueFlagPeriod13.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod13.Name = "UcrValueFlagPeriod13"
-        Me.UcrValueFlagPeriod13.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod13.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod13.TabIndex = 19
         Me.UcrValueFlagPeriod13.Tag = "13"
         '
         'Label12
         '
-        Me.Label12.Location = New System.Drawing.Point(401, 101)
+        Me.Label12.Location = New System.Drawing.Point(602, 155)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(57, 14)
+        Me.Label12.Size = New System.Drawing.Size(86, 22)
         Me.Label12.TabIndex = 738
         Me.Label12.Text = "Flag"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label13
         '
-        Me.Label13.Location = New System.Drawing.Point(343, 101)
+        Me.Label13.Location = New System.Drawing.Point(514, 155)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(41, 14)
+        Me.Label13.Size = New System.Drawing.Size(62, 22)
         Me.Label13.TabIndex = 739
         Me.Label13.Text = "Value"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -651,18 +686,20 @@ Partial Class ucrHourly
         'lbl12
         '
         Me.lbl12.AutoSize = True
-        Me.lbl12.Location = New System.Drawing.Point(305, 123)
+        Me.lbl12.Location = New System.Drawing.Point(458, 189)
+        Me.lbl12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl12.Name = "lbl12"
-        Me.lbl12.Size = New System.Drawing.Size(19, 13)
+        Me.lbl12.Size = New System.Drawing.Size(27, 20)
         Me.lbl12.TabIndex = 740
         Me.lbl12.Text = "12"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(303, 101)
+        Me.Label15.Location = New System.Drawing.Point(454, 155)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(30, 13)
+        Me.Label15.Size = New System.Drawing.Size(44, 20)
         Me.Label15.TabIndex = 741
         Me.Label15.Text = "Hour"
         '
@@ -671,19 +708,20 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod12.FieldName = "12"
         Me.UcrValueFlagPeriod12.IncludePeriod = False
         Me.UcrValueFlagPeriod12.KeyControl = False
-        Me.UcrValueFlagPeriod12.Location = New System.Drawing.Point(341, 119)
-        Me.UcrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod12.Location = New System.Drawing.Point(512, 183)
+        Me.UcrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod12.Name = "UcrValueFlagPeriod12"
-        Me.UcrValueFlagPeriod12.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod12.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod12.TabIndex = 18
         Me.UcrValueFlagPeriod12.Tag = "12"
         '
         'lbl11
         '
         Me.lbl11.AutoSize = True
-        Me.lbl11.Location = New System.Drawing.Point(84, 453)
+        Me.lbl11.Location = New System.Drawing.Point(126, 697)
+        Me.lbl11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl11.Name = "lbl11"
-        Me.lbl11.Size = New System.Drawing.Size(19, 13)
+        Me.lbl11.Size = New System.Drawing.Size(27, 20)
         Me.lbl11.TabIndex = 737
         Me.lbl11.Text = "11"
         '
@@ -692,91 +730,100 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod11.FieldName = "11"
         Me.ucrValueFlagPeriod11.IncludePeriod = False
         Me.ucrValueFlagPeriod11.KeyControl = False
-        Me.ucrValueFlagPeriod11.Location = New System.Drawing.Point(122, 449)
-        Me.ucrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod11.Location = New System.Drawing.Point(183, 691)
+        Me.ucrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod11.Name = "ucrValueFlagPeriod11"
-        Me.ucrValueFlagPeriod11.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod11.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod11.TabIndex = 17
         Me.ucrValueFlagPeriod11.Tag = "11"
         '
         'lbl10
         '
         Me.lbl10.AutoSize = True
-        Me.lbl10.Location = New System.Drawing.Point(84, 423)
+        Me.lbl10.Location = New System.Drawing.Point(126, 651)
+        Me.lbl10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl10.Name = "lbl10"
-        Me.lbl10.Size = New System.Drawing.Size(19, 13)
+        Me.lbl10.Size = New System.Drawing.Size(27, 20)
         Me.lbl10.TabIndex = 736
         Me.lbl10.Text = "10"
         '
         'lbl09
         '
         Me.lbl09.AutoSize = True
-        Me.lbl09.Location = New System.Drawing.Point(84, 393)
+        Me.lbl09.Location = New System.Drawing.Point(126, 605)
+        Me.lbl09.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl09.Name = "lbl09"
-        Me.lbl09.Size = New System.Drawing.Size(19, 13)
+        Me.lbl09.Size = New System.Drawing.Size(27, 20)
         Me.lbl09.TabIndex = 732
         Me.lbl09.Text = "09"
         '
         'lbl08
         '
         Me.lbl08.AutoSize = True
-        Me.lbl08.Location = New System.Drawing.Point(84, 363)
+        Me.lbl08.Location = New System.Drawing.Point(126, 558)
+        Me.lbl08.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl08.Name = "lbl08"
-        Me.lbl08.Size = New System.Drawing.Size(19, 13)
+        Me.lbl08.Size = New System.Drawing.Size(27, 20)
         Me.lbl08.TabIndex = 730
         Me.lbl08.Text = "08"
         '
         'lbl07
         '
         Me.lbl07.AutoSize = True
-        Me.lbl07.Location = New System.Drawing.Point(84, 333)
+        Me.lbl07.Location = New System.Drawing.Point(126, 512)
+        Me.lbl07.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl07.Name = "lbl07"
-        Me.lbl07.Size = New System.Drawing.Size(19, 13)
+        Me.lbl07.Size = New System.Drawing.Size(27, 20)
         Me.lbl07.TabIndex = 728
         Me.lbl07.Text = "07"
         '
         'lbl06
         '
         Me.lbl06.AutoSize = True
-        Me.lbl06.Location = New System.Drawing.Point(84, 303)
+        Me.lbl06.Location = New System.Drawing.Point(126, 466)
+        Me.lbl06.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl06.Name = "lbl06"
-        Me.lbl06.Size = New System.Drawing.Size(19, 13)
+        Me.lbl06.Size = New System.Drawing.Size(27, 20)
         Me.lbl06.TabIndex = 725
         Me.lbl06.Text = "06"
         '
         'lbl05
         '
         Me.lbl05.AutoSize = True
-        Me.lbl05.Location = New System.Drawing.Point(84, 273)
+        Me.lbl05.Location = New System.Drawing.Point(126, 420)
+        Me.lbl05.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl05.Name = "lbl05"
-        Me.lbl05.Size = New System.Drawing.Size(19, 13)
+        Me.lbl05.Size = New System.Drawing.Size(27, 20)
         Me.lbl05.TabIndex = 723
         Me.lbl05.Text = "05"
         '
         'lbl04
         '
         Me.lbl04.AutoSize = True
-        Me.lbl04.Location = New System.Drawing.Point(84, 243)
+        Me.lbl04.Location = New System.Drawing.Point(126, 374)
+        Me.lbl04.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl04.Name = "lbl04"
-        Me.lbl04.Size = New System.Drawing.Size(19, 13)
+        Me.lbl04.Size = New System.Drawing.Size(27, 20)
         Me.lbl04.TabIndex = 721
         Me.lbl04.Text = "04"
         '
         'lbl03
         '
         Me.lbl03.AutoSize = True
-        Me.lbl03.Location = New System.Drawing.Point(84, 213)
+        Me.lbl03.Location = New System.Drawing.Point(126, 328)
+        Me.lbl03.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl03.Name = "lbl03"
-        Me.lbl03.Size = New System.Drawing.Size(19, 13)
+        Me.lbl03.Size = New System.Drawing.Size(27, 20)
         Me.lbl03.TabIndex = 734
         Me.lbl03.Text = "03"
         '
         'lbl02
         '
         Me.lbl02.AutoSize = True
-        Me.lbl02.Location = New System.Drawing.Point(84, 183)
+        Me.lbl02.Location = New System.Drawing.Point(126, 282)
+        Me.lbl02.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl02.Name = "lbl02"
-        Me.lbl02.Size = New System.Drawing.Size(19, 13)
+        Me.lbl02.Size = New System.Drawing.Size(27, 20)
         Me.lbl02.TabIndex = 720
         Me.lbl02.Text = "02"
         '
@@ -785,10 +832,10 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod10.FieldName = "10"
         Me.ucrValueFlagPeriod10.IncludePeriod = False
         Me.ucrValueFlagPeriod10.KeyControl = False
-        Me.ucrValueFlagPeriod10.Location = New System.Drawing.Point(122, 419)
-        Me.ucrValueFlagPeriod10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod10.Location = New System.Drawing.Point(183, 645)
+        Me.ucrValueFlagPeriod10.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod10.Name = "ucrValueFlagPeriod10"
-        Me.ucrValueFlagPeriod10.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod10.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod10.TabIndex = 16
         Me.ucrValueFlagPeriod10.Tag = "10"
         '
@@ -797,10 +844,10 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod9.FieldName = "09"
         Me.ucrValueFlagPeriod9.IncludePeriod = False
         Me.ucrValueFlagPeriod9.KeyControl = False
-        Me.ucrValueFlagPeriod9.Location = New System.Drawing.Point(122, 389)
-        Me.ucrValueFlagPeriod9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod9.Location = New System.Drawing.Point(183, 598)
+        Me.ucrValueFlagPeriod9.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod9.Name = "ucrValueFlagPeriod9"
-        Me.ucrValueFlagPeriod9.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod9.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod9.TabIndex = 15
         Me.ucrValueFlagPeriod9.Tag = "09"
         '
@@ -809,10 +856,10 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod8.FieldName = "08"
         Me.ucrValueFlagPeriod8.IncludePeriod = False
         Me.ucrValueFlagPeriod8.KeyControl = False
-        Me.ucrValueFlagPeriod8.Location = New System.Drawing.Point(122, 359)
-        Me.ucrValueFlagPeriod8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod8.Location = New System.Drawing.Point(183, 552)
+        Me.ucrValueFlagPeriod8.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod8.Name = "ucrValueFlagPeriod8"
-        Me.ucrValueFlagPeriod8.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod8.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod8.TabIndex = 14
         Me.ucrValueFlagPeriod8.Tag = "08"
         '
@@ -821,10 +868,10 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod7.FieldName = "07"
         Me.ucrValueFlagPeriod7.IncludePeriod = False
         Me.ucrValueFlagPeriod7.KeyControl = False
-        Me.ucrValueFlagPeriod7.Location = New System.Drawing.Point(122, 329)
-        Me.ucrValueFlagPeriod7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod7.Location = New System.Drawing.Point(183, 506)
+        Me.ucrValueFlagPeriod7.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod7.Name = "ucrValueFlagPeriod7"
-        Me.ucrValueFlagPeriod7.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod7.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod7.TabIndex = 13
         Me.ucrValueFlagPeriod7.Tag = "07"
         '
@@ -833,10 +880,10 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod6.FieldName = "06"
         Me.ucrValueFlagPeriod6.IncludePeriod = False
         Me.ucrValueFlagPeriod6.KeyControl = False
-        Me.ucrValueFlagPeriod6.Location = New System.Drawing.Point(122, 299)
-        Me.ucrValueFlagPeriod6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod6.Location = New System.Drawing.Point(183, 460)
+        Me.ucrValueFlagPeriod6.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod6.Name = "ucrValueFlagPeriod6"
-        Me.ucrValueFlagPeriod6.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod6.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod6.TabIndex = 12
         Me.ucrValueFlagPeriod6.Tag = "06"
         '
@@ -845,10 +892,10 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod5.FieldName = "05"
         Me.ucrValueFlagPeriod5.IncludePeriod = False
         Me.ucrValueFlagPeriod5.KeyControl = False
-        Me.ucrValueFlagPeriod5.Location = New System.Drawing.Point(122, 269)
-        Me.ucrValueFlagPeriod5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod5.Location = New System.Drawing.Point(183, 414)
+        Me.ucrValueFlagPeriod5.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod5.Name = "ucrValueFlagPeriod5"
-        Me.ucrValueFlagPeriod5.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod5.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod5.TabIndex = 11
         Me.ucrValueFlagPeriod5.Tag = "05"
         '
@@ -857,10 +904,10 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod4.FieldName = "04"
         Me.ucrValueFlagPeriod4.IncludePeriod = False
         Me.ucrValueFlagPeriod4.KeyControl = False
-        Me.ucrValueFlagPeriod4.Location = New System.Drawing.Point(122, 239)
-        Me.ucrValueFlagPeriod4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod4.Location = New System.Drawing.Point(183, 368)
+        Me.ucrValueFlagPeriod4.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod4.Name = "ucrValueFlagPeriod4"
-        Me.ucrValueFlagPeriod4.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod4.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod4.TabIndex = 10
         Me.ucrValueFlagPeriod4.Tag = "04"
         '
@@ -869,10 +916,10 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod3.FieldName = "03"
         Me.ucrValueFlagPeriod3.IncludePeriod = False
         Me.ucrValueFlagPeriod3.KeyControl = False
-        Me.ucrValueFlagPeriod3.Location = New System.Drawing.Point(122, 209)
-        Me.ucrValueFlagPeriod3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod3.Location = New System.Drawing.Point(183, 322)
+        Me.ucrValueFlagPeriod3.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod3.Name = "ucrValueFlagPeriod3"
-        Me.ucrValueFlagPeriod3.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod3.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod3.TabIndex = 9
         Me.ucrValueFlagPeriod3.Tag = "03"
         '
@@ -881,27 +928,29 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod2.FieldName = "02"
         Me.ucrValueFlagPeriod2.IncludePeriod = False
         Me.ucrValueFlagPeriod2.KeyControl = False
-        Me.ucrValueFlagPeriod2.Location = New System.Drawing.Point(122, 179)
-        Me.ucrValueFlagPeriod2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod2.Location = New System.Drawing.Point(183, 275)
+        Me.ucrValueFlagPeriod2.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod2.Name = "ucrValueFlagPeriod2"
-        Me.ucrValueFlagPeriod2.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod2.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod2.TabIndex = 8
         Me.ucrValueFlagPeriod2.Tag = "02"
         '
         'lblFlag
         '
-        Me.lblFlag.Location = New System.Drawing.Point(180, 101)
+        Me.lblFlag.Location = New System.Drawing.Point(270, 155)
+        Me.lblFlag.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFlag.Name = "lblFlag"
-        Me.lblFlag.Size = New System.Drawing.Size(57, 14)
+        Me.lblFlag.Size = New System.Drawing.Size(86, 22)
         Me.lblFlag.TabIndex = 701
         Me.lblFlag.Text = "Flag"
         Me.lblFlag.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblValue
         '
-        Me.lblValue.Location = New System.Drawing.Point(124, 101)
+        Me.lblValue.Location = New System.Drawing.Point(186, 155)
+        Me.lblValue.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblValue.Name = "lblValue"
-        Me.lblValue.Size = New System.Drawing.Size(39, 14)
+        Me.lblValue.Size = New System.Drawing.Size(58, 22)
         Me.lblValue.TabIndex = 703
         Me.lblValue.Text = "Value"
         Me.lblValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -909,27 +958,30 @@ Partial Class ucrHourly
         'lbl00
         '
         Me.lbl00.AutoSize = True
-        Me.lbl00.Location = New System.Drawing.Point(84, 123)
+        Me.lbl00.Location = New System.Drawing.Point(126, 189)
+        Me.lbl00.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl00.Name = "lbl00"
-        Me.lbl00.Size = New System.Drawing.Size(19, 13)
+        Me.lbl00.Size = New System.Drawing.Size(27, 20)
         Me.lbl00.TabIndex = 706
         Me.lbl00.Text = "00"
         '
         'lbl01
         '
         Me.lbl01.AutoSize = True
-        Me.lbl01.Location = New System.Drawing.Point(84, 153)
+        Me.lbl01.Location = New System.Drawing.Point(126, 235)
+        Me.lbl01.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl01.Name = "lbl01"
-        Me.lbl01.Size = New System.Drawing.Size(19, 13)
+        Me.lbl01.Size = New System.Drawing.Size(27, 20)
         Me.lbl01.TabIndex = 705
         Me.lbl01.Text = "01"
         '
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(78, 101)
+        Me.lblHour.Location = New System.Drawing.Point(117, 155)
+        Me.lblHour.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHour.Name = "lblHour"
-        Me.lblHour.Size = New System.Drawing.Size(30, 13)
+        Me.lblHour.Size = New System.Drawing.Size(44, 20)
         Me.lblHour.TabIndex = 708
         Me.lblHour.Text = "Hour"
         '
@@ -938,10 +990,10 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod0.FieldName = "00"
         Me.UcrValueFlagPeriod0.IncludePeriod = False
         Me.UcrValueFlagPeriod0.KeyControl = False
-        Me.UcrValueFlagPeriod0.Location = New System.Drawing.Point(122, 119)
-        Me.UcrValueFlagPeriod0.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrValueFlagPeriod0.Location = New System.Drawing.Point(183, 183)
+        Me.UcrValueFlagPeriod0.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrValueFlagPeriod0.Name = "UcrValueFlagPeriod0"
-        Me.UcrValueFlagPeriod0.Size = New System.Drawing.Size(126, 24)
+        Me.UcrValueFlagPeriod0.Size = New System.Drawing.Size(189, 37)
         Me.UcrValueFlagPeriod0.TabIndex = 6
         Me.UcrValueFlagPeriod0.Tag = "00"
         '
@@ -950,18 +1002,19 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod1.FieldName = "01"
         Me.ucrValueFlagPeriod1.IncludePeriod = False
         Me.ucrValueFlagPeriod1.KeyControl = False
-        Me.ucrValueFlagPeriod1.Location = New System.Drawing.Point(122, 149)
-        Me.ucrValueFlagPeriod1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod1.Location = New System.Drawing.Point(183, 229)
+        Me.ucrValueFlagPeriod1.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrValueFlagPeriod1.Name = "ucrValueFlagPeriod1"
-        Me.ucrValueFlagPeriod1.Size = New System.Drawing.Size(126, 24)
+        Me.ucrValueFlagPeriod1.Size = New System.Drawing.Size(189, 37)
         Me.ucrValueFlagPeriod1.TabIndex = 7
         Me.ucrValueFlagPeriod1.Tag = "01"
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(421, 527)
+        Me.btnCancel.Location = New System.Drawing.Point(632, 811)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(63, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(94, 35)
         Me.btnCancel.TabIndex = 43
         Me.btnCancel.Tag = "cancel"
         Me.btnCancel.Text = "Cancel"
@@ -969,17 +1022,30 @@ Partial Class ucrHourly
         '
         'btnPush
         '
-        Me.btnPush.Location = New System.Drawing.Point(559, 527)
+        Me.btnPush.Location = New System.Drawing.Point(838, 811)
+        Me.btnPush.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnPush.Name = "btnPush"
-        Me.btnPush.Size = New System.Drawing.Size(69, 23)
+        Me.btnPush.Size = New System.Drawing.Size(104, 35)
         Me.btnPush.TabIndex = 1155
         Me.btnPush.Text = "Push"
         Me.btnPush.UseVisualStyleBackColor = True
         '
+        'btnChangeSequencer
+        '
+        Me.btnChangeSequencer.Location = New System.Drawing.Point(655, 862)
+        Me.btnChangeSequencer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnChangeSequencer.Name = "btnChangeSequencer"
+        Me.btnChangeSequencer.Size = New System.Drawing.Size(88, 35)
+        Me.btnChangeSequencer.TabIndex = 1156
+        Me.btnChangeSequencer.Tag = "Change Sequencer"
+        Me.btnChangeSequencer.Text = "Change"
+        Me.btnChangeSequencer.UseVisualStyleBackColor = True
+        '
         'ucrHourly
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnChangeSequencer)
         Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.chkRepeatEntry)
@@ -1065,9 +1131,9 @@ Partial Class ucrHourly
         Me.Controls.Add(Me.lblHour)
         Me.Controls.Add(Me.UcrValueFlagPeriod0)
         Me.Controls.Add(Me.ucrValueFlagPeriod1)
-        Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.Name = "ucrHourly"
-        Me.Size = New System.Drawing.Size(803, 598)
+        Me.Size = New System.Drawing.Size(1204, 920)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -1158,4 +1224,5 @@ Partial Class ucrHourly
     Friend WithEvents ucrValueFlagPeriod1 As ucrValueFlagPeriod
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnPush As Button
+    Friend WithEvents btnChangeSequencer As Button
 End Class
