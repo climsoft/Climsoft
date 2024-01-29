@@ -107,7 +107,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod1 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPush = New System.Windows.Forms.Button()
-        Me.btnChangeSequencer = New System.Windows.Forms.Button()
+        Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
         lblYear = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -137,7 +137,7 @@ Partial Class ucrHourly
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(278, 869)
+        Me.lblSequencer.Location = New System.Drawing.Point(323, 869)
         Me.lblSequencer.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSequencer.Name = "lblSequencer"
         Me.lblSequencer.Size = New System.Drawing.Size(91, 20)
@@ -146,7 +146,7 @@ Partial Class ucrHourly
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(377, 866)
+        Me.txtSequencer.Location = New System.Drawing.Point(422, 866)
         Me.txtSequencer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.ReadOnly = True
@@ -1030,22 +1030,25 @@ Partial Class ucrHourly
         Me.btnPush.Text = "Push"
         Me.btnPush.UseVisualStyleBackColor = True
         '
-        'btnChangeSequencer
+        'chkEnableSequencer
         '
-        Me.btnChangeSequencer.Location = New System.Drawing.Point(655, 862)
-        Me.btnChangeSequencer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.btnChangeSequencer.Name = "btnChangeSequencer"
-        Me.btnChangeSequencer.Size = New System.Drawing.Size(88, 35)
-        Me.btnChangeSequencer.TabIndex = 1156
-        Me.btnChangeSequencer.Tag = "Change Sequencer"
-        Me.btnChangeSequencer.Text = "Change"
-        Me.btnChangeSequencer.UseVisualStyleBackColor = True
+        Me.chkEnableSequencer.AutoSize = True
+        Me.chkEnableSequencer.Checked = True
+        Me.chkEnableSequencer.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkEnableSequencer.ForeColor = System.Drawing.Color.Red
+        Me.chkEnableSequencer.Location = New System.Drawing.Point(971, 45)
+        Me.chkEnableSequencer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.chkEnableSequencer.Name = "chkEnableSequencer"
+        Me.chkEnableSequencer.Size = New System.Drawing.Size(223, 24)
+        Me.chkEnableSequencer.TabIndex = 1157
+        Me.chkEnableSequencer.Text = "Enable Element Sequencer"
+        Me.chkEnableSequencer.UseVisualStyleBackColor = True
         '
         'ucrHourly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.btnChangeSequencer)
+        Me.Controls.Add(Me.chkEnableSequencer)
         Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.chkRepeatEntry)
@@ -1131,7 +1134,7 @@ Partial Class ucrHourly
         Me.Controls.Add(Me.lblHour)
         Me.Controls.Add(Me.UcrValueFlagPeriod0)
         Me.Controls.Add(Me.ucrValueFlagPeriod1)
-        Me.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.Margin = New System.Windows.Forms.Padding(6)
         Me.Name = "ucrHourly"
         Me.Size = New System.Drawing.Size(1204, 920)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1224,5 +1227,5 @@ Partial Class ucrHourly
     Friend WithEvents ucrValueFlagPeriod1 As ucrValueFlagPeriod
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnPush As Button
-    Friend WithEvents btnChangeSequencer As Button
+    Friend WithEvents chkEnableSequencer As CheckBox
 End Class

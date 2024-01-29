@@ -54,23 +54,21 @@
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Try
 
-            Dim dctSequencerColControls As New Dictionary(Of String, ucrValueView)()
-            Dim fieldName As String
 
-            If txtSequencer.Text = "seq_element" Then
-                fieldName = "element_code"
-            ElseIf txtSequencer.Text = "seq_daily_element" Then
-                fieldName = "elementId"
+
+
+            If chkEnableSequencer.Checked Then
+                Dim dctSequencerColControls As New Dictionary(Of String, ucrValueView)()
+
+                dctSequencerColControls.Add("element_code", ucrElementSelector)
+                ucrNavigation.NewSequencedRecord(txtSequencer.Text,
+                                                  {"element_code"}, dctSequencerColControls,
+                                                  ucrYearSelector, ucrMonthSelector, ucrDaySelector)
             Else
-                MessageBox.Show(Me, "Sequencer not supported", "Sequencer", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return
+                'TODO. Just increment date in sequence
+
             End If
 
-
-            dctSequencerColControls.Add(fieldName, ucrElementSelector)
-            ucrNavigation.NewSequencedRecord(txtSequencer.Text,
-                                              {fieldName}, dctSequencerColControls,
-                                              ucrYearSelector, ucrMonthSelector, ucrDaySelector)
 
             SaveEnable()
             UcrValueFlagPeriod0.Focus()
@@ -92,14 +90,6 @@
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Saving", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-    End Sub
-
-    Private Sub btnChangeSequencer_Click(sender As Object, e As EventArgs) Handles btnChangeSequencer.Click
-        If txtSequencer.Text = "seq_element" Then
-            txtSequencer.Text = "seq_daily_element"
-        Else
-            txtSequencer.Text = "seq_element"
-        End If
     End Sub
 
     Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
@@ -553,5 +543,4 @@
     Private Sub ucrYearSelector_Leave(sender As Object, e As EventArgs) Handles ucrYearSelector.Leave
         setHours()
     End Sub
-
 End Class
