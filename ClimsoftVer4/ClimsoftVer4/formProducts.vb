@@ -174,4 +174,7 @@ Public Class frmProducts
         End Try
     End Sub
 
+    Private Sub cboProductsCategory_SystemColorsChanged(sender As Object, e As EventArgs) Handles cboProductsCategory.SystemColorsChanged
+
+    End Sub
 End Class

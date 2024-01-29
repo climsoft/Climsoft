@@ -43,12 +43,17 @@ Partial Class frmFormUpload
         Me.txtTdiff = New System.Windows.Forms.TextBox()
         Me.lblDiff = New System.Windows.Forms.Label()
         Me.lblFormName1 = New System.Windows.Forms.Label()
+        Me.chkEntrydate = New System.Windows.Forms.CheckBox()
+        Me.dateTo = New System.Windows.Forms.DateTimePicker()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.dateFrom = New System.Windows.Forms.DateTimePicker()
+        Me.lblFrom = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtDataTransferProgress1
         '
         Me.txtDataTransferProgress1.ForeColor = System.Drawing.Color.Black
-        Me.txtDataTransferProgress1.Location = New System.Drawing.Point(370, 112)
+        Me.txtDataTransferProgress1.Location = New System.Drawing.Point(370, 161)
         Me.txtDataTransferProgress1.Name = "txtDataTransferProgress1"
         Me.txtDataTransferProgress1.Size = New System.Drawing.Size(240, 20)
         Me.txtDataTransferProgress1.TabIndex = 0
@@ -57,14 +62,14 @@ Partial Class frmFormUpload
         '
         Me.lblDataTransferProgress.AutoSize = True
         Me.lblDataTransferProgress.ForeColor = System.Drawing.Color.Black
-        Me.lblDataTransferProgress.Location = New System.Drawing.Point(373, 96)
+        Me.lblDataTransferProgress.Location = New System.Drawing.Point(373, 146)
         Me.lblDataTransferProgress.Name = "lblDataTransferProgress"
         Me.lblDataTransferProgress.Size = New System.Drawing.Size(0, 13)
         Me.lblDataTransferProgress.TabIndex = 2
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(525, 158)
+        Me.btnClose.Location = New System.Drawing.Point(525, 189)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(68, 23)
         Me.btnClose.TabIndex = 3
@@ -85,11 +90,11 @@ Partial Class frmFormUpload
         Me.LstViewStations.FullRowSelect = True
         Me.LstViewStations.GridLines = True
         Me.LstViewStations.HideSelection = False
-        Me.LstViewStations.Location = New System.Drawing.Point(7, 10)
+        Me.LstViewStations.Location = New System.Drawing.Point(7, 23)
         Me.LstViewStations.Name = "LstViewStations"
         Me.LstViewStations.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.LstViewStations.RightToLeftLayout = True
-        Me.LstViewStations.Size = New System.Drawing.Size(350, 166)
+        Me.LstViewStations.Size = New System.Drawing.Size(350, 193)
         Me.LstViewStations.TabIndex = 27
         Me.LstViewStations.UseCompatibleStateImageBehavior = False
         Me.LstViewStations.View = System.Windows.Forms.View.Details
@@ -141,7 +146,7 @@ Partial Class frmFormUpload
         '
         'txtEndMonth
         '
-        Me.txtEndMonth.Location = New System.Drawing.Point(588, 37)
+        Me.txtEndMonth.Location = New System.Drawing.Point(583, 37)
         Me.txtEndMonth.Name = "txtEndMonth"
         Me.txtEndMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtEndMonth.TabIndex = 31
@@ -150,7 +155,7 @@ Partial Class frmFormUpload
         '
         'txtBeginMonth
         '
-        Me.txtBeginMonth.Location = New System.Drawing.Point(588, 11)
+        Me.txtBeginMonth.Location = New System.Drawing.Point(582, 11)
         Me.txtBeginMonth.Name = "txtBeginMonth"
         Me.txtBeginMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtBeginMonth.TabIndex = 30
@@ -173,7 +178,7 @@ Partial Class frmFormUpload
         '
         'btnStart
         '
-        Me.btnStart.Location = New System.Drawing.Point(371, 158)
+        Me.btnStart.Location = New System.Drawing.Point(371, 189)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Size = New System.Drawing.Size(77, 23)
         Me.btnStart.TabIndex = 37
@@ -183,7 +188,7 @@ Partial Class frmFormUpload
         'chkAllStations
         '
         Me.chkAllStations.AutoSize = True
-        Me.chkAllStations.Location = New System.Drawing.Point(7, 181)
+        Me.chkAllStations.Location = New System.Drawing.Point(7, 227)
         Me.chkAllStations.Name = "chkAllStations"
         Me.chkAllStations.Size = New System.Drawing.Size(111, 17)
         Me.chkAllStations.TabIndex = 38
@@ -198,7 +203,7 @@ Partial Class frmFormUpload
         'chkUTC
         '
         Me.chkUTC.AutoSize = True
-        Me.chkUTC.Location = New System.Drawing.Point(370, 72)
+        Me.chkUTC.Location = New System.Drawing.Point(370, 113)
         Me.chkUTC.Name = "chkUTC"
         Me.chkUTC.Size = New System.Drawing.Size(100, 17)
         Me.chkUTC.TabIndex = 40
@@ -207,7 +212,7 @@ Partial Class frmFormUpload
         '
         'txtTdiff
         '
-        Me.txtTdiff.Location = New System.Drawing.Point(484, 69)
+        Me.txtTdiff.Location = New System.Drawing.Point(484, 110)
         Me.txtTdiff.Name = "txtTdiff"
         Me.txtTdiff.Size = New System.Drawing.Size(26, 20)
         Me.txtTdiff.TabIndex = 41
@@ -219,7 +224,7 @@ Partial Class frmFormUpload
         '
         Me.lblDiff.AutoSize = True
         Me.lblDiff.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDiff.Location = New System.Drawing.Point(513, 73)
+        Me.lblDiff.Location = New System.Drawing.Point(513, 114)
         Me.lblDiff.Name = "lblDiff"
         Me.lblDiff.Size = New System.Drawing.Size(117, 13)
         Me.lblDiff.TabIndex = 42
@@ -230,17 +235,65 @@ Partial Class frmFormUpload
         'lblFormName1
         '
         Me.lblFormName1.AutoSize = True
-        Me.lblFormName1.Location = New System.Drawing.Point(390, 140)
+        Me.lblFormName1.Location = New System.Drawing.Point(390, 171)
         Me.lblFormName1.Name = "lblFormName1"
         Me.lblFormName1.Size = New System.Drawing.Size(0, 13)
         Me.lblFormName1.TabIndex = 43
         Me.lblFormName1.Visible = False
         '
+        'chkEntrydate
+        '
+        Me.chkEntrydate.AutoSize = True
+        Me.chkEntrydate.Location = New System.Drawing.Point(371, 72)
+        Me.chkEntrydate.Name = "chkEntrydate"
+        Me.chkEntrydate.Size = New System.Drawing.Size(123, 17)
+        Me.chkEntrydate.TabIndex = 44
+        Me.chkEntrydate.Text = "Select by Entry Date"
+        Me.chkEntrydate.UseVisualStyleBackColor = True
+        '
+        'dateTo
+        '
+        Me.dateTo.Location = New System.Drawing.Point(695, 37)
+        Me.dateTo.Name = "dateTo"
+        Me.dateTo.Size = New System.Drawing.Size(195, 20)
+        Me.dateTo.TabIndex = 48
+        '
+        'lblTo
+        '
+        Me.lblTo.AutoSize = True
+        Me.lblTo.Location = New System.Drawing.Point(638, 41)
+        Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(52, 13)
+        Me.lblTo.TabIndex = 47
+        Me.lblTo.Text = "End Date"
+        '
+        'dateFrom
+        '
+        Me.dateFrom.Location = New System.Drawing.Point(695, 11)
+        Me.dateFrom.Name = "dateFrom"
+        Me.dateFrom.Size = New System.Drawing.Size(195, 20)
+        Me.dateFrom.TabIndex = 46
+        Me.dateFrom.Value = New Date(2023, 11, 1, 0, 0, 0, 0)
+        '
+        'lblFrom
+        '
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.Location = New System.Drawing.Point(638, 15)
+        Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(55, 13)
+        Me.lblFrom.TabIndex = 45
+        Me.lblFrom.Text = "Start Date"
+        '
         'frmFormUpload
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(674, 202)
+        Me.ClientSize = New System.Drawing.Size(640, 262)
+        Me.Controls.Add(Me.dateTo)
+        Me.Controls.Add(Me.lblTo)
+        Me.Controls.Add(Me.dateFrom)
+        Me.Controls.Add(Me.lblFrom)
+        Me.Controls.Add(Me.chkEntrydate)
         Me.Controls.Add(Me.lblFormName1)
         Me.Controls.Add(Me.lblDiff)
         Me.Controls.Add(Me.txtTdiff)
@@ -290,4 +343,9 @@ Partial Class frmFormUpload
     Friend WithEvents txtTdiff As TextBox
     Friend WithEvents lblDiff As Label
     Friend WithEvents lblFormName1 As Label
+    Friend WithEvents chkEntrydate As CheckBox
+    Friend WithEvents dateTo As DateTimePicker
+    Friend WithEvents lblTo As Label
+    Friend WithEvents dateFrom As DateTimePicker
+    Friend WithEvents lblFrom As Label
 End Class
