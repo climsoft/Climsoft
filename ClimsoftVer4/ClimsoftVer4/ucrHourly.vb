@@ -65,8 +65,8 @@
                                                   {"element_code"}, dctSequencerColControls,
                                                   ucrYearSelector, ucrMonthSelector, ucrDaySelector)
             Else
-                'TODO. Just increment date in sequence
-
+                ' Just increment date in sequence
+                ucrNavigation.IncrementDateValues(ucrYearSelector, ucrMonthSelector, ucrDaySelector)
             End If
 
 
