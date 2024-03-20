@@ -3,9 +3,11 @@
     Private strFlagFieldName As String = "flag"
     Private bTotalRequired As Boolean
     Dim FldName As New dataEntryGlobalRoutines
+    Private strSeqence As String = ""
 
     Private Sub UcrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            strSeqence = GetSequencerSetting()
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
             Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
             Dim shiftCells As New ClsShiftCells()
@@ -51,13 +53,22 @@
         setHours()
     End Sub
 
+    Private Function GetSequencerSetting() As String
+        Dim clsDataDefinition As New DataCall
+        Dim dtbl As DataTable
+        clsDataDefinition.SetTableNameAndFields("regkeys", {"keyName", "keyValue"})
+        clsDataDefinition.SetFilter("keyName", "=", "key15")
+        dtbl = clsDataDefinition.GetDataTable()
+        Return If(dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0, dtbl.Rows.Item(0).Item("keyValue"), "")
+    End Function
+
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Try
 
 
 
 
-            If chkEnableSequencer.Checked Then
+            If strSeqence <> "day" Then
                 Dim dctSequencerColControls As New Dictionary(Of String, ucrValueView)()
 
                 dctSequencerColControls.Add("element_code", ucrElementSelector)

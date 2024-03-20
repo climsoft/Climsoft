@@ -91,6 +91,8 @@ Public Class frmDataEntry
                     Case "form_hourly"
                         'form_hourly.Show()
                         frmNewHourly.Show()
+                    Case "form_hourly2"
+                        frmNewHourly2.Show(Me)
                     Case "form_monthly"
                         frmNewMonthly.Show()
                     Case "form_upperair1"

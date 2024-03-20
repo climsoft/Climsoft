@@ -269,6 +269,7 @@ Public Class frmFormUpload
                             hh = dss.Tables(frm_tbl).Rows(n).Item("hh")
 
                         Case "form_daily2"
+                        Case "form_hourly2"
                             yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
                             mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
                             dd = (m - st) + 1

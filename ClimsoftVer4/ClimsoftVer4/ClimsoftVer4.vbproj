@@ -213,6 +213,12 @@
     <Compile Include="frmNewHourly.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNewHourly2.Designer.vb">
+      <DependentUpon>frmNewHourly2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourly2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNewHourlyWind.Designer.vb">
       <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
     </Compile>
@@ -705,6 +711,12 @@
     <Compile Include="ucrDatePicker.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrFormHourly2.Designer.vb">
+      <DependentUpon>ucrFormHourly2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFormHourly2.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrHourlyWind.Designer.vb">
       <DependentUpon>ucrHourlyWind.vb</DependentUpon>
     </Compile>
@@ -919,6 +931,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewHourly.resx">
       <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewHourly2.resx">
+      <DependentUpon>frmNewHourly2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewHourlyWind.resx">
       <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
@@ -1169,6 +1184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDatePicker.resx">
       <DependentUpon>ucrDatePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFormHourly2.resx">
+      <DependentUpon>ucrFormHourly2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrHourlyWind.resx">
       <DependentUpon>ucrHourlyWind.vb</DependentUpon>
