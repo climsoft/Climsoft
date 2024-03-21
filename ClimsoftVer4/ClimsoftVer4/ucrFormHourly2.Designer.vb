@@ -52,7 +52,6 @@ Partial Class ucrFormHourly2
         Me.lblStationSelector = New System.Windows.Forms.Label()
         Me.ucrInputTotal = New ClimsoftVer4.ucrTextBox()
         Me.lblTotal = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.lblDay31 = New System.Windows.Forms.Label()
@@ -78,7 +77,6 @@ Partial Class ucrFormHourly2
         Me.ucrValueFlagPeriod23 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrValueFlagPeriod22 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrValueFlagPeriod21 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblDay20 = New System.Windows.Forms.Label()
@@ -102,7 +100,6 @@ Partial Class ucrFormHourly2
         Me.ucrValueFlagPeriod13 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrValueFlagPeriod12 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrValueFlagPeriod11 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.lblPeriod = New System.Windows.Forms.Label()
         Me.lblFlag = New System.Windows.Forms.Label()
         Me.lblValue = New System.Windows.Forms.Label()
         Me.lblDay10 = New System.Windows.Forms.Label()
@@ -430,15 +427,6 @@ Partial Class ucrFormHourly2
         Me.lblTotal.TabIndex = 1246
         Me.lblTotal.Text = "Total"
         '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(604, 140)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(37, 13)
-        Me.Label15.TabIndex = 1245
-        Me.Label15.Text = "Period"
-        '
         'Label16
         '
         Me.Label16.AutoSize = True
@@ -568,7 +556,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod31
         '
         Me.ucrValueFlagPeriod31.FieldName = "31"
-        Me.ucrValueFlagPeriod31.IncludePeriod = True
+        Me.ucrValueFlagPeriod31.IncludePeriod = False
         Me.ucrValueFlagPeriod31.KeyControl = False
         Me.ucrValueFlagPeriod31.Location = New System.Drawing.Point(484, 450)
         Me.ucrValueFlagPeriod31.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -580,7 +568,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod30
         '
         Me.ucrValueFlagPeriod30.FieldName = "30"
-        Me.ucrValueFlagPeriod30.IncludePeriod = True
+        Me.ucrValueFlagPeriod30.IncludePeriod = False
         Me.ucrValueFlagPeriod30.KeyControl = False
         Me.ucrValueFlagPeriod30.Location = New System.Drawing.Point(484, 420)
         Me.ucrValueFlagPeriod30.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -592,7 +580,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod29
         '
         Me.ucrValueFlagPeriod29.FieldName = "29"
-        Me.ucrValueFlagPeriod29.IncludePeriod = True
+        Me.ucrValueFlagPeriod29.IncludePeriod = False
         Me.ucrValueFlagPeriod29.KeyControl = False
         Me.ucrValueFlagPeriod29.Location = New System.Drawing.Point(484, 390)
         Me.ucrValueFlagPeriod29.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -604,7 +592,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod28
         '
         Me.ucrValueFlagPeriod28.FieldName = "28"
-        Me.ucrValueFlagPeriod28.IncludePeriod = True
+        Me.ucrValueFlagPeriod28.IncludePeriod = False
         Me.ucrValueFlagPeriod28.KeyControl = False
         Me.ucrValueFlagPeriod28.Location = New System.Drawing.Point(484, 360)
         Me.ucrValueFlagPeriod28.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -616,7 +604,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod27
         '
         Me.ucrValueFlagPeriod27.FieldName = "27"
-        Me.ucrValueFlagPeriod27.IncludePeriod = True
+        Me.ucrValueFlagPeriod27.IncludePeriod = False
         Me.ucrValueFlagPeriod27.KeyControl = False
         Me.ucrValueFlagPeriod27.Location = New System.Drawing.Point(484, 331)
         Me.ucrValueFlagPeriod27.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -628,7 +616,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod26
         '
         Me.ucrValueFlagPeriod26.FieldName = "26"
-        Me.ucrValueFlagPeriod26.IncludePeriod = True
+        Me.ucrValueFlagPeriod26.IncludePeriod = False
         Me.ucrValueFlagPeriod26.KeyControl = False
         Me.ucrValueFlagPeriod26.Location = New System.Drawing.Point(484, 302)
         Me.ucrValueFlagPeriod26.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -640,7 +628,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod25
         '
         Me.ucrValueFlagPeriod25.FieldName = "25"
-        Me.ucrValueFlagPeriod25.IncludePeriod = True
+        Me.ucrValueFlagPeriod25.IncludePeriod = False
         Me.ucrValueFlagPeriod25.KeyControl = False
         Me.ucrValueFlagPeriod25.Location = New System.Drawing.Point(484, 273)
         Me.ucrValueFlagPeriod25.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -652,7 +640,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod24
         '
         Me.ucrValueFlagPeriod24.FieldName = "24"
-        Me.ucrValueFlagPeriod24.IncludePeriod = True
+        Me.ucrValueFlagPeriod24.IncludePeriod = False
         Me.ucrValueFlagPeriod24.KeyControl = False
         Me.ucrValueFlagPeriod24.Location = New System.Drawing.Point(484, 244)
         Me.ucrValueFlagPeriod24.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -664,7 +652,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod23
         '
         Me.ucrValueFlagPeriod23.FieldName = "23"
-        Me.ucrValueFlagPeriod23.IncludePeriod = True
+        Me.ucrValueFlagPeriod23.IncludePeriod = False
         Me.ucrValueFlagPeriod23.KeyControl = False
         Me.ucrValueFlagPeriod23.Location = New System.Drawing.Point(484, 215)
         Me.ucrValueFlagPeriod23.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -676,7 +664,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod22
         '
         Me.ucrValueFlagPeriod22.FieldName = "22"
-        Me.ucrValueFlagPeriod22.IncludePeriod = True
+        Me.ucrValueFlagPeriod22.IncludePeriod = False
         Me.ucrValueFlagPeriod22.KeyControl = False
         Me.ucrValueFlagPeriod22.Location = New System.Drawing.Point(484, 186)
         Me.ucrValueFlagPeriod22.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -688,7 +676,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod21
         '
         Me.ucrValueFlagPeriod21.FieldName = "21"
-        Me.ucrValueFlagPeriod21.IncludePeriod = True
+        Me.ucrValueFlagPeriod21.IncludePeriod = False
         Me.ucrValueFlagPeriod21.KeyControl = False
         Me.ucrValueFlagPeriod21.Location = New System.Drawing.Point(484, 157)
         Me.ucrValueFlagPeriod21.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -696,15 +684,6 @@ Partial Class ucrFormHourly2
         Me.ucrValueFlagPeriod21.Size = New System.Drawing.Size(157, 23)
         Me.ucrValueFlagPeriod21.TabIndex = 1209
         Me.ucrValueFlagPeriod21.Tag = "21"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(374, 142)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(37, 13)
-        Me.Label1.TabIndex = 1208
-        Me.Label1.Text = "Period"
         '
         'Label2
         '
@@ -826,7 +805,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod20
         '
         Me.ucrValueFlagPeriod20.FieldName = "20"
-        Me.ucrValueFlagPeriod20.IncludePeriod = True
+        Me.ucrValueFlagPeriod20.IncludePeriod = False
         Me.ucrValueFlagPeriod20.KeyControl = False
         Me.ucrValueFlagPeriod20.Location = New System.Drawing.Point(250, 421)
         Me.ucrValueFlagPeriod20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -838,7 +817,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod19
         '
         Me.ucrValueFlagPeriod19.FieldName = "19"
-        Me.ucrValueFlagPeriod19.IncludePeriod = True
+        Me.ucrValueFlagPeriod19.IncludePeriod = False
         Me.ucrValueFlagPeriod19.KeyControl = False
         Me.ucrValueFlagPeriod19.Location = New System.Drawing.Point(250, 392)
         Me.ucrValueFlagPeriod19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -850,7 +829,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod18
         '
         Me.ucrValueFlagPeriod18.FieldName = "18"
-        Me.ucrValueFlagPeriod18.IncludePeriod = True
+        Me.ucrValueFlagPeriod18.IncludePeriod = False
         Me.ucrValueFlagPeriod18.KeyControl = False
         Me.ucrValueFlagPeriod18.Location = New System.Drawing.Point(250, 363)
         Me.ucrValueFlagPeriod18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -862,7 +841,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod17
         '
         Me.ucrValueFlagPeriod17.FieldName = "17"
-        Me.ucrValueFlagPeriod17.IncludePeriod = True
+        Me.ucrValueFlagPeriod17.IncludePeriod = False
         Me.ucrValueFlagPeriod17.KeyControl = False
         Me.ucrValueFlagPeriod17.Location = New System.Drawing.Point(251, 334)
         Me.ucrValueFlagPeriod17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -874,7 +853,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod16
         '
         Me.ucrValueFlagPeriod16.FieldName = "16"
-        Me.ucrValueFlagPeriod16.IncludePeriod = True
+        Me.ucrValueFlagPeriod16.IncludePeriod = False
         Me.ucrValueFlagPeriod16.KeyControl = False
         Me.ucrValueFlagPeriod16.Location = New System.Drawing.Point(250, 305)
         Me.ucrValueFlagPeriod16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -886,7 +865,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod15
         '
         Me.ucrValueFlagPeriod15.FieldName = "15"
-        Me.ucrValueFlagPeriod15.IncludePeriod = True
+        Me.ucrValueFlagPeriod15.IncludePeriod = False
         Me.ucrValueFlagPeriod15.KeyControl = False
         Me.ucrValueFlagPeriod15.Location = New System.Drawing.Point(250, 276)
         Me.ucrValueFlagPeriod15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -898,7 +877,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod14
         '
         Me.ucrValueFlagPeriod14.FieldName = "14"
-        Me.ucrValueFlagPeriod14.IncludePeriod = True
+        Me.ucrValueFlagPeriod14.IncludePeriod = False
         Me.ucrValueFlagPeriod14.KeyControl = False
         Me.ucrValueFlagPeriod14.Location = New System.Drawing.Point(250, 247)
         Me.ucrValueFlagPeriod14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -910,7 +889,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod13
         '
         Me.ucrValueFlagPeriod13.FieldName = "13"
-        Me.ucrValueFlagPeriod13.IncludePeriod = True
+        Me.ucrValueFlagPeriod13.IncludePeriod = False
         Me.ucrValueFlagPeriod13.KeyControl = False
         Me.ucrValueFlagPeriod13.Location = New System.Drawing.Point(250, 218)
         Me.ucrValueFlagPeriod13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -922,7 +901,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod12
         '
         Me.ucrValueFlagPeriod12.FieldName = "12"
-        Me.ucrValueFlagPeriod12.IncludePeriod = True
+        Me.ucrValueFlagPeriod12.IncludePeriod = False
         Me.ucrValueFlagPeriod12.KeyControl = False
         Me.ucrValueFlagPeriod12.Location = New System.Drawing.Point(251, 189)
         Me.ucrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -934,7 +913,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod11
         '
         Me.ucrValueFlagPeriod11.FieldName = "11"
-        Me.ucrValueFlagPeriod11.IncludePeriod = True
+        Me.ucrValueFlagPeriod11.IncludePeriod = False
         Me.ucrValueFlagPeriod11.KeyControl = False
         Me.ucrValueFlagPeriod11.Location = New System.Drawing.Point(251, 160)
         Me.ucrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -942,15 +921,6 @@ Partial Class ucrFormHourly2
         Me.ucrValueFlagPeriod11.Size = New System.Drawing.Size(161, 23)
         Me.ucrValueFlagPeriod11.TabIndex = 1190
         Me.ucrValueFlagPeriod11.Tag = "11"
-        '
-        'lblPeriod
-        '
-        Me.lblPeriod.AutoSize = True
-        Me.lblPeriod.Location = New System.Drawing.Point(156, 142)
-        Me.lblPeriod.Name = "lblPeriod"
-        Me.lblPeriod.Size = New System.Drawing.Size(37, 13)
-        Me.lblPeriod.TabIndex = 1169
-        Me.lblPeriod.Text = "Period"
         '
         'lblFlag
         '
@@ -1072,7 +1042,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod10
         '
         Me.ucrValueFlagPeriod10.FieldName = "10"
-        Me.ucrValueFlagPeriod10.IncludePeriod = True
+        Me.ucrValueFlagPeriod10.IncludePeriod = False
         Me.ucrValueFlagPeriod10.KeyControl = False
         Me.ucrValueFlagPeriod10.Location = New System.Drawing.Point(36, 420)
         Me.ucrValueFlagPeriod10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1084,7 +1054,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod9
         '
         Me.ucrValueFlagPeriod9.FieldName = "09"
-        Me.ucrValueFlagPeriod9.IncludePeriod = True
+        Me.ucrValueFlagPeriod9.IncludePeriod = False
         Me.ucrValueFlagPeriod9.KeyControl = False
         Me.ucrValueFlagPeriod9.Location = New System.Drawing.Point(36, 391)
         Me.ucrValueFlagPeriod9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1096,7 +1066,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod8
         '
         Me.ucrValueFlagPeriod8.FieldName = "08"
-        Me.ucrValueFlagPeriod8.IncludePeriod = True
+        Me.ucrValueFlagPeriod8.IncludePeriod = False
         Me.ucrValueFlagPeriod8.KeyControl = False
         Me.ucrValueFlagPeriod8.Location = New System.Drawing.Point(36, 362)
         Me.ucrValueFlagPeriod8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1108,7 +1078,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod7
         '
         Me.ucrValueFlagPeriod7.FieldName = "07"
-        Me.ucrValueFlagPeriod7.IncludePeriod = True
+        Me.ucrValueFlagPeriod7.IncludePeriod = False
         Me.ucrValueFlagPeriod7.KeyControl = False
         Me.ucrValueFlagPeriod7.Location = New System.Drawing.Point(36, 333)
         Me.ucrValueFlagPeriod7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1120,7 +1090,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod6
         '
         Me.ucrValueFlagPeriod6.FieldName = "06"
-        Me.ucrValueFlagPeriod6.IncludePeriod = True
+        Me.ucrValueFlagPeriod6.IncludePeriod = False
         Me.ucrValueFlagPeriod6.KeyControl = False
         Me.ucrValueFlagPeriod6.Location = New System.Drawing.Point(36, 304)
         Me.ucrValueFlagPeriod6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1132,7 +1102,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod5
         '
         Me.ucrValueFlagPeriod5.FieldName = "05"
-        Me.ucrValueFlagPeriod5.IncludePeriod = True
+        Me.ucrValueFlagPeriod5.IncludePeriod = False
         Me.ucrValueFlagPeriod5.KeyControl = False
         Me.ucrValueFlagPeriod5.Location = New System.Drawing.Point(36, 275)
         Me.ucrValueFlagPeriod5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1144,7 +1114,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod4
         '
         Me.ucrValueFlagPeriod4.FieldName = "04"
-        Me.ucrValueFlagPeriod4.IncludePeriod = True
+        Me.ucrValueFlagPeriod4.IncludePeriod = False
         Me.ucrValueFlagPeriod4.KeyControl = False
         Me.ucrValueFlagPeriod4.Location = New System.Drawing.Point(36, 246)
         Me.ucrValueFlagPeriod4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1156,7 +1126,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod3
         '
         Me.ucrValueFlagPeriod3.FieldName = "03"
-        Me.ucrValueFlagPeriod3.IncludePeriod = True
+        Me.ucrValueFlagPeriod3.IncludePeriod = False
         Me.ucrValueFlagPeriod3.KeyControl = False
         Me.ucrValueFlagPeriod3.Location = New System.Drawing.Point(36, 217)
         Me.ucrValueFlagPeriod3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1168,7 +1138,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod2
         '
         Me.ucrValueFlagPeriod2.FieldName = "02"
-        Me.ucrValueFlagPeriod2.IncludePeriod = True
+        Me.ucrValueFlagPeriod2.IncludePeriod = False
         Me.ucrValueFlagPeriod2.KeyControl = False
         Me.ucrValueFlagPeriod2.Location = New System.Drawing.Point(36, 188)
         Me.ucrValueFlagPeriod2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1180,7 +1150,7 @@ Partial Class ucrFormHourly2
         'ucrValueFlagPeriod1
         '
         Me.ucrValueFlagPeriod1.FieldName = "01"
-        Me.ucrValueFlagPeriod1.IncludePeriod = True
+        Me.ucrValueFlagPeriod1.IncludePeriod = False
         Me.ucrValueFlagPeriod1.KeyControl = False
         Me.ucrValueFlagPeriod1.Location = New System.Drawing.Point(36, 159)
         Me.ucrValueFlagPeriod1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1223,7 +1193,6 @@ Partial Class ucrFormHourly2
         Me.Controls.Add(Me.lblStationSelector)
         Me.Controls.Add(Me.ucrInputTotal)
         Me.Controls.Add(Me.lblTotal)
-        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.lblDay31)
@@ -1249,7 +1218,6 @@ Partial Class ucrFormHourly2
         Me.Controls.Add(Me.ucrValueFlagPeriod23)
         Me.Controls.Add(Me.ucrValueFlagPeriod22)
         Me.Controls.Add(Me.ucrValueFlagPeriod21)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lblDay20)
@@ -1273,7 +1241,6 @@ Partial Class ucrFormHourly2
         Me.Controls.Add(Me.ucrValueFlagPeriod13)
         Me.Controls.Add(Me.ucrValueFlagPeriod12)
         Me.Controls.Add(Me.ucrValueFlagPeriod11)
-        Me.Controls.Add(Me.lblPeriod)
         Me.Controls.Add(Me.lblFlag)
         Me.Controls.Add(Me.lblValue)
         Me.Controls.Add(Me.lblDay10)
@@ -1335,7 +1302,6 @@ Partial Class ucrFormHourly2
     Friend WithEvents lblStationSelector As Label
     Friend WithEvents ucrInputTotal As ucrTextBox
     Friend WithEvents lblTotal As Label
-    Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents lblDay31 As Label
@@ -1361,7 +1327,6 @@ Partial Class ucrFormHourly2
     Friend WithEvents ucrValueFlagPeriod23 As ucrValueFlagPeriod
     Friend WithEvents ucrValueFlagPeriod22 As ucrValueFlagPeriod
     Friend WithEvents ucrValueFlagPeriod21 As ucrValueFlagPeriod
-    Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents lblDay20 As Label
@@ -1385,7 +1350,6 @@ Partial Class ucrFormHourly2
     Friend WithEvents ucrValueFlagPeriod13 As ucrValueFlagPeriod
     Friend WithEvents ucrValueFlagPeriod12 As ucrValueFlagPeriod
     Friend WithEvents ucrValueFlagPeriod11 As ucrValueFlagPeriod
-    Friend WithEvents lblPeriod As Label
     Friend WithEvents lblFlag As Label
     Friend WithEvents lblValue As Label
     Friend WithEvents lblDay10 As Label
