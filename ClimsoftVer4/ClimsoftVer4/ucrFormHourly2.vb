@@ -10,7 +10,6 @@
 
             SetUpHourControl()
 
-
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
             Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
             Dim shiftCells As New ClsShiftCells()
@@ -234,23 +233,6 @@
         End If
 
         Return bValueCorrect
-    End Function
-
-    'Get the default hour settings from the database
-    Private Function GetDefaultHourValue() As Integer
-        Dim iDefaultHourValue As Integer = 0
-        Dim clsDataDefinition As New DataCall
-        Dim dtbl As DataTable
-
-        clsDataDefinition.SetTableNameAndFields("regkeys", {"keyName", "keyValue"})
-        clsDataDefinition.SetFilter("keyName", "=", "key01", bIsPositiveCondition:=True, bForceValuesAsString:=True)
-        dtbl = clsDataDefinition.GetDataTable()
-        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            Integer.TryParse(dtbl.Rows(0).Item("keyValue"), iDefaultHourValue)
-        End If
-
-        Return iDefaultHourValue
-
     End Function
 
     ''' <summary>

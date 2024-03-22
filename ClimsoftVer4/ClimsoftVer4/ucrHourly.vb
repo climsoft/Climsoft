@@ -57,7 +57,7 @@
         Dim clsDataDefinition As New DataCall
         Dim dtbl As DataTable
         clsDataDefinition.SetTableNameAndFields("regkeys", {"keyName", "keyValue"})
-        clsDataDefinition.SetFilter("keyName", "=", "key15")
+        clsDataDefinition.SetFilter("keyName", "=", "key20")
         dtbl = clsDataDefinition.GetDataTable()
         Return If(dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0, dtbl.Rows.Item(0).Item("keyValue"), "")
     End Function
