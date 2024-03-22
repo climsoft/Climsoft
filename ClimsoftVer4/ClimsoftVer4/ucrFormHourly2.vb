@@ -2,7 +2,6 @@
     'These store field names for value, flag and period
     Private strValueFieldName As String = "day"
     Private strFlagFieldName As String = "flag"
-    'Private strPeriodFieldName As String = "period"
     Private bTotalRequired As Boolean
     Private FldName As New dataEntryGlobalRoutines
 

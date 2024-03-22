@@ -189,6 +189,12 @@
     <Compile Include="frmFormUpload.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmHourly2Sequencer.Designer.vb">
+      <DependentUpon>frmHourly2Sequencer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHourly2Sequencer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmInventoryChart.designer.vb">
       <DependentUpon>frmInventoryChart.vb</DependentUpon>
     </Compile>
@@ -919,6 +925,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmFormUpload.resx">
       <DependentUpon>frmFormUpload.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHourly2Sequencer.resx">
+      <DependentUpon>frmHourly2Sequencer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInventoryChart.resx">
       <DependentUpon>frmInventoryChart.vb</DependentUpon>
