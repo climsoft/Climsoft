@@ -29,27 +29,26 @@
     End Sub
 
     Public Sub IncludeOnly(hoursToInclude As IEnumerable(Of Integer))
+        Dim rowIndex As Integer = dtbRecords.Rows.Count - 1
 
-        Dim lstRowsToRemove As New List(Of DataRow)
-        Dim bRemove As Boolean
-        For Each recordRow As DataRow In dtbRecords.Rows
-            bRemove = True
+        While rowIndex >= 0
+            Dim recordRow As DataRow = dtbRecords.Rows(rowIndex)
+            Dim bRemove As Boolean = True
+            ' Check if hour is included in the list of hours to include.
+            ' If not remove
             For Each iHourValue In hoursToInclude
                 If iHourValue = recordRow.Item(0) Then
                     bRemove = False
                     Exit For
                 End If
             Next
+
             If bRemove Then
-                lstRowsToRemove.Add(recordRow)
+                dtbRecords.Rows.RemoveAt(rowIndex)
             End If
 
-        Next
-
-        For Each rowToremove As DataRow In lstRowsToRemove
-            dtbRecords.Rows.Remove(rowToremove)
-        Next
-
+            rowIndex -= 1
+        End While
     End Sub
 
     Public Sub SetViewTypeAs24Hrs()
