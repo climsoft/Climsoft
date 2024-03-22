@@ -8,7 +8,7 @@
     Private Sub ucrFormHourly2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
 
-            ucrHour.SetDefaultValue(GetDefaultHourValue())
+            SetUpHourControl()
 
 
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
@@ -64,26 +64,29 @@
         End If
     End Sub
 
+    Private Sub SetUpHourControl()
+        ucrHour.cboValues.DropDownStyle = ComboBoxStyle.DropDownList
+        Dim dtb As DataTable = frmHourly2Sequencer.GetHourly2Sequencers(New DataCall)
+        Dim hours As New List(Of Integer)
+        For Each row As DataRow In dtb.Rows
+            hours.Add(row.Item(0))
+        Next
+        ucrHour.IncludeOnly(hours)
+    End Sub
+
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
 
         If chkEnableSequencer.Checked Then
 
             Dim dctSequencerColControls As New Dictionary(Of String, ucrValueView)()
-
             dctSequencerColControls.Add("hh", ucrHour)
-
             ucrDaily2Navigation.NewSequencedRecord(txtSequencer.Text,
                                                   {"hh"}, dctSequencerColControls,
                                                   ucrYearSelector, ucrMonth)
 
-            'ucrDaily2Navigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, {ucrMonth}, ucrYearSelector)
-
-            'SaveEnable()
-            'ucrValueFlagPeriod1.Focus()
         Else
             ' Just increment date in sequence
             ucrDaily2Navigation.IncrementDateValues(ucrYearSelector, ucrMonth, Nothing)
-
         End If
 
     End Sub

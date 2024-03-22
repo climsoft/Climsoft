@@ -49,11 +49,7 @@
     End Sub
 
     Private Sub SetUpDialog()
-
-        clsDataCall.SetTableNameAndFields("seq_hour", {"hh"})
-        clsDataCall.SetKeyFields({"hh"})
-        dtbl = clsDataCall.GetDataTable()
-
+        dtbl = GetHourly2Sequencers(clsDataCall)
         dataGridViewHours.Rows.Clear()
 
         ' Set all hours
@@ -66,5 +62,12 @@
             dataGridViewHours.Rows.Item(iRowIndex).Cells(1).Value = row IsNot Nothing
         Next
     End Sub
+
+    Public Shared Function GetHourly2Sequencers(clsDataCall As DataCall)
+        clsDataCall.SetTableNameAndFields("seq_hour", {"hh"})
+        clsDataCall.SetKeyFields({"hh"})
+        Return clsDataCall.GetDataTable()
+    End Function
+
 
 End Class

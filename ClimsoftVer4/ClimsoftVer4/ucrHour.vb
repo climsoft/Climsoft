@@ -28,16 +28,41 @@
         'OnevtValueChanged(Me, Nothing)
     End Sub
 
+    Public Sub IncludeOnly(hoursToInclude As IEnumerable(Of Integer))
 
-    Private Sub ucrHour_Load(sender As Object, e As EventArgs) Handles Me.Load
-        cboValues.ContextMenuStrip = cmsHour
+        Dim lstRowsToRemove As New List(Of DataRow)
+        Dim bRemove As Boolean
+        For Each recordRow As DataRow In dtbRecords.Rows
+            bRemove = True
+            For Each iHourValue In hoursToInclude
+                If iHourValue = recordRow.Item(0) Then
+                    bRemove = False
+                    Exit For
+                End If
+            Next
+            If bRemove Then
+                lstRowsToRemove.Add(recordRow)
+            End If
+
+        Next
+
+        For Each rowToremove As DataRow In lstRowsToRemove
+            dtbRecords.Rows.Remove(rowToremove)
+        Next
+
     End Sub
+
     Public Sub SetViewTypeAs24Hrs()
         SetDisplayMember(str24Hrs)
     End Sub
 
     Public Sub SetViewTypeAs12Hrs()
         SetDisplayMember(str12Hrs)
+    End Sub
+
+
+    Private Sub ucrHour_Load(sender As Object, e As EventArgs) Handles Me.Load
+        cboValues.ContextMenuStrip = cmsHour
     End Sub
 
     Private Sub cmsHour24_Click(sender As Object, e As EventArgs) Handles cmsHour24.Click
@@ -51,4 +76,6 @@
         cmsHour24.Checked = False
         cmsHour12.Checked = True
     End Sub
+
+
 End Class
