@@ -60,6 +60,7 @@
         clsDataDefinition.SetFilter("keyName", "=", "key20")
         dtbl = clsDataDefinition.GetDataTable()
         strSeqence = If(dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0, dtbl.Rows.Item(0).Item("keyValue"), "")
+        strSeqence = strSeqence.ToLower()
         txtSequencer.Text = If(strSeqence <> "day", "seq_element", "seq_day")
     End Sub
 
