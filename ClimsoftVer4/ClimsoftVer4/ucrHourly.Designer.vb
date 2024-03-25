@@ -134,7 +134,7 @@ Partial Class ucrHourly
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(185, 565)
+        Me.lblSequencer.Location = New System.Drawing.Point(215, 565)
         Me.lblSequencer.Name = "lblSequencer"
         Me.lblSequencer.Size = New System.Drawing.Size(62, 13)
         Me.lblSequencer.TabIndex = 779
@@ -142,10 +142,10 @@ Partial Class ucrHourly
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(271, 562)
+        Me.txtSequencer.Location = New System.Drawing.Point(281, 563)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.ReadOnly = True
-        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
+        Me.txtSequencer.Size = New System.Drawing.Size(181, 20)
         Me.txtSequencer.TabIndex = 778
         Me.txtSequencer.Text = "seq_element"
         '
@@ -1065,9 +1065,9 @@ Partial Class ucrHourly
         Me.Controls.Add(Me.lblHour)
         Me.Controls.Add(Me.UcrValueFlagPeriod0)
         Me.Controls.Add(Me.ucrValueFlagPeriod1)
-        Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "ucrHourly"
-        Me.Size = New System.Drawing.Size(803, 598)
+        Me.Size = New System.Drawing.Size(781, 598)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

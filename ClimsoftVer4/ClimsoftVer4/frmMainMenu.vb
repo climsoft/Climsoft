@@ -233,18 +233,20 @@ Public Class frmMainMenu
         frmGeneralSettings.Show()
     End Sub
 
-    Private Sub DailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem.Click
+    Private Sub seqHourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles seqHourlyToolStripMenuItem.Click
         frmElementSequencerHourly.Show()
-
     End Sub
 
     Private Sub FormHourlyTimeSelectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormHourlyTimeSelectionToolStripMenuItem.Click
         frmHourlyTimeSelection.Show()
     End Sub
 
-    Private Sub HourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem.Click
+    Private Sub seqDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles seqDailyToolStripMenuItem.Click
         frmElementSequencerDaily.Show()
+    End Sub
 
+    Private Sub seqHourly2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles seqHourly2ToolStripMenuItem.Click
+        frmHourly2Sequencer.Show()
     End Sub
 
     Private Sub LanguageTranslationToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -319,7 +321,7 @@ Public Class frmMainMenu
         End
     End Sub
 
-    Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem.Click
+    Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles seqMonthlyToolStripMenuItem.Click
         frmElementSequencerMonthly.Show()
     End Sub
 

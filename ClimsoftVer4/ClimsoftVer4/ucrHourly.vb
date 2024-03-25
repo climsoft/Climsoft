@@ -3,9 +3,11 @@
     Private strFlagFieldName As String = "flag"
     Private bTotalRequired As Boolean
     Dim FldName As New dataEntryGlobalRoutines
+    Private strSeqence As String = ""
 
     Private Sub UcrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            SetSequencerSetting()
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
             Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
             Dim shiftCells As New ClsShiftCells()
@@ -51,16 +53,31 @@
         setHours()
     End Sub
 
+    Private Sub SetSequencerSetting()
+        Dim clsDataDefinition As New DataCall
+        Dim dtbl As DataTable
+        clsDataDefinition.SetTableNameAndFields("regkeys", {"keyName", "keyValue"})
+        clsDataDefinition.SetFilter("keyName", "=", "key20")
+        dtbl = clsDataDefinition.GetDataTable()
+        strSeqence = If(dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0, dtbl.Rows.Item(0).Item("keyValue"), "")
+        strSeqence = strSeqence.ToLower()
+        txtSequencer.Text = If(strSeqence <> "day", "seq_element", "seq_day")
+    End Sub
+
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Try
 
-            'ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"element_code"}, {ucrMonthSelector, ucrDaySelector}, ucrYearSelector)
+            If strSeqence <> "day" Then
+                Dim dctSequencerColControls As New Dictionary(Of String, ucrValueView)()
 
-            Dim dctSequencerColControls As New Dictionary(Of String, ucrValueView)
-            dctSequencerColControls.Add("element_code", ucrElementSelector)
-            ucrNavigation.NewSequencedRecord(txtSequencer.Text,
-                                              {"element_code"}, dctSequencerColControls,
-                                              ucrYearSelector, ucrMonthSelector, ucrDaySelector)
+                dctSequencerColControls.Add("element_code", ucrElementSelector)
+                ucrNavigation.NewSequencedRecord(txtSequencer.Text,
+                                                  {"element_code"}, dctSequencerColControls,
+                                                  ucrYearSelector, ucrMonthSelector, ucrDaySelector)
+            Else
+                ' Just increment date in sequence
+                ucrNavigation.IncrementDateValues(ucrYearSelector, ucrMonthSelector, ucrDaySelector)
+            End If
 
 
             SaveEnable()
@@ -536,5 +553,4 @@
     Private Sub ucrYearSelector_Leave(sender As Object, e As EventArgs) Handles ucrYearSelector.Leave
         setHours()
     End Sub
-
 End Class
