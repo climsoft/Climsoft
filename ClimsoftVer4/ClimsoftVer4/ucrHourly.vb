@@ -7,7 +7,7 @@
 
     Private Sub UcrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            strSeqence = GetSequencerSetting()
+            SetSequencerSetting()
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
             Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
             Dim shiftCells As New ClsShiftCells()
@@ -53,20 +53,18 @@
         setHours()
     End Sub
 
-    Private Function GetSequencerSetting() As String
+    Private Sub SetSequencerSetting()
         Dim clsDataDefinition As New DataCall
         Dim dtbl As DataTable
         clsDataDefinition.SetTableNameAndFields("regkeys", {"keyName", "keyValue"})
         clsDataDefinition.SetFilter("keyName", "=", "key20")
         dtbl = clsDataDefinition.GetDataTable()
-        Return If(dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0, dtbl.Rows.Item(0).Item("keyValue"), "")
-    End Function
+        strSeqence = If(dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0, dtbl.Rows.Item(0).Item("keyValue"), "")
+        txtSequencer.Text = If(strSeqence <> "day", "seq_element", "seq_day")
+    End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Try
-
-
-
 
             If strSeqence <> "day" Then
                 Dim dctSequencerColControls As New Dictionary(Of String, ucrValueView)()
