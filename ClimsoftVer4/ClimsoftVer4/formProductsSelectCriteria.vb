@@ -21,7 +21,7 @@ Public Class formProductsSelectCriteria
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim MyConnectionString As String
     Dim kounts, code As Integer
-    Dim stnlist, elmlist, levlist, elmcolmn, sdate, edate, sql,abbrev As String
+    Dim stnlist, elmlist, levlist, elmcolmn, sdate, edate, sql, abbrev, WrunCode As String
     Dim SumAvg, SummaryType As String
     Public CPTstart, CPTend As String
     Dim cmd As MySql.Data.MySqlClient.MySqlCommand
@@ -92,13 +92,13 @@ Public Class formProductsSelectCriteria
 
         'translate form controls
         Dim str As String = lblProductType.Text
-        ClsTranslations.TranslateForm(Me)
+        'ClsTranslations.TranslateForm(Me)
         'retain the untranslated text because it's use for selection
         lblProductType.Text = str
 
 
-        ClsTranslations.TranslateComponent(lstvStations, bHeaderOnly:=True)
-        ClsTranslations.TranslateComponent(lstvElements, bHeaderOnly:=True)
+        'ClsTranslations.TranslateComponent(lstvStations, bHeaderOnly:=True)
+        'ClsTranslations.TranslateComponent(lstvElements, bHeaderOnly:=True)
     End Sub
     Function AllowedMissingDays() As Integer
         Dim darg As MySql.Data.MySqlClient.MySqlDataAdapter
@@ -824,19 +824,19 @@ Public Class formProductsSelectCriteria
                         enddate = DateAdd("m", -1, enddate)
                         If DateAndTime.Month(dateFrom.Text) = 1 Then enddate = DateAdd("m", 12, enddate)
                         endmonth = enddate
-                            'MsgBox(endmonth)
-                            Do While endmonth.Month <> DateAndTime.Month(dateFrom.Text)
-                                endmonth = DateAndTime.DateAdd("d", 1, endmonth)
-                            Loop
-                            edate = DateAndTime.DateAdd("d", -1, endmonth)
-                            dateTo.Text = edate
-                            dateTo.Refresh()
+                        'MsgBox(endmonth)
+                        Do While endmonth.Month <> DateAndTime.Month(dateFrom.Text)
+                            endmonth = DateAndTime.DateAdd("d", 1, endmonth)
+                        Loop
+                        edate = DateAndTime.DateAdd("d", -1, endmonth)
+                        dateTo.Text = edate
+                        dateTo.Refresh()
 
-                            edate = DateAndTime.Year(edate) & "-" & DateAndTime.Month(edate) & "-" & DateAndTime.Day(edate) & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text
-                            'MsgBox(edate)
-                        End If
+                        edate = DateAndTime.Year(edate) & "-" & DateAndTime.Month(edate) & "-" & DateAndTime.Day(edate) & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text
+                        'MsgBox(edate)
+                    End If
 
-                        kount = 0
+                    kount = 0
                     hdr = startMonth
                     For i = 0 To 11
 
@@ -881,6 +881,34 @@ Public Class formProductsSelectCriteria
 
                     'Climate_Station(sql, lblProductType.Text, sdate, edate)
                     Climate_Station(sdate, edate)
+
+                Case "Daily Wind Speed"
+
+                    'sql = "SELECT recordedFrom as StationID, describedBy as Code, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, obsDatetime, obsvalue FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                    '       "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') and hour(obsdatetime) = " & Int(RegkeyValue("key01")) & " ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+
+                    Daily_WindSpeed(stnlist, elmlist, sdate, edate, "Daily Wind Speed")
+
+                Case "Hourly Wind Speed"
+                    sql = "SELECT recordedFrom as StationID, describedBy as Code, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, obsDatetime, obsvalue FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                           "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') and hour(obsdatetime) = " & Int(RegkeyValue("key01")) & " ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+
+                    Hourly_WindSpeed(stnlist, elmlist, sdate, edate, "Hourly Wind Speed")
+                    'WrunCode = InputBox("Enter Element Code?", "Hourly Wind Totalizer Element Code")
+                    'If Len(WrunCode) > 0 Then MsgBox("Hourly " & WrunCode)
+
+                Case "Daily Mean Water Level"
+
+                    sql = "SELECT STN,NM,COD,LAT,LON,ALT,ELM,Dt1,Dt2, DATE_ADD(Dt1, INTERVAL 1 DAY) AS Dt3, MLVL FROM (SELECT recordedFrom AS STN, describedBy as COD, AVG(obsvalue) as MLVL, MIN(obsdatetime) AS Dt1,MAX(obsdatetime) AS Dt2, stationName as NM,latitude AS LAT, Longitude AS LON,elevation AS ALT,abbreviation AS ELM " &
+                           "From observationfinal INNER JOIN station ON recordedfrom = stationId INNER JOIN obselement ON describedBy = elementId " &
+                           "WHERE (recordedFrom = " & stnlist & ") AND describedBy= 613 AND (obsDatetime between '" & sdate & "' and '" & edate & "') " &
+                           "GROUP BY year(obsdatetime),month(obsdatetime),day(obsdatetime))t;"
+
+                    'sql = "SELECT STN, COD, Dt1, Dt2, DATE_ADD(Dt1, INTERVAL 1 DAY) AS Dt3, MLVL " &
+                    '       "FROM (SELECT recordedFrom AS STN, describedBy as COD, AVG(obsvalue) MLVL, MIN(obsdatetime) AS Dt1,MAX(obsdatetime) AS Dt2 FROM observationfinal " &
+                    '       "WHERE (recordedFrom = " & stnlist & ") AND describedBy= 613 " &
+                    '       "GROUP BY year(obsdatetime),month(obsdatetime),day(obsdatetime))t;"
+                    MeanWaterLevel(sql, lblProductType.Text)
                 Case Else
                     MsgBox("No Product found For Selection made", MsgBoxStyle.Information)
             End Select
@@ -1517,7 +1545,7 @@ Err:
         sql = "SELECT country as Country,stationName as Station,authority as Source,latitude as LAT,longitude as LON, elevation as Elevation,wmoid as ID,year(obsDatetime) as Year,month(obsDatetime) as Month, round(day(obsDatetime)/10.5 + 0.5,0) as  DEKAD, AVG(IF(describedBy = " & codes & ", value, NULL)) AS '" & abbrev & "' FROM (SELECT country, stationName,authority, latitude, longitude,elevation,recordedFrom, wmoid, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
                         "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & codes & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY ID,Year,Month,DEKAD;"
 
-            conn.Open()
+        conn.Open()
         Try
             dad = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             dsd.Clear()
@@ -1631,7 +1659,7 @@ Err:
             dad.Fill(dsd, "Geoclimdly")
             conn.Close()
 
-        With dsd.Tables("Geoclimdly")
+            With dsd.Tables("Geoclimdly")
 
                 ' Create a file for each type of observation element
                 fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\GEOCLMdaily_" & abbrev & ".csv"
@@ -1666,12 +1694,12 @@ Err:
                     PrintLine(11, dat)
                 Next
             End With
-        FileClose(11)
+            FileClose(11)
             CommonModules.ViewFile(fl)
 
         Catch ex As Exception
-        MsgBox(ex.Message)
-        FileClose(11)
+            MsgBox(ex.Message)
+            FileClose(11)
         End Try
     End Sub
     Sub CPTProducts(st As String, ed As String)
@@ -2263,6 +2291,359 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
+
+    Sub Daily_WindSpeed(stns As String, elms As String, sdt As String, edt As String, typ As String)
+        Dim Kount, yyyy, mm, dd As Long
+        Dim fl2, nxtdyTot, dat, hdr As String
+        Dim WR_Diff, WNDkh, WNDms, U_Limit As Double
+
+        Try
+
+            sql = "SELECT recordedFrom as StationID, describedBy as Code, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, obsDatetime, obsvalue FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                   "WHERE (RecordedFrom = " & stns & ") AND (describedBy =" & elms & ") and (obsDatetime between '" & sdt & "' and '" & edt & "') and hour(obsdatetime) = " & Int(RegkeyValue("key01")) & " ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "observationfinal")
+
+            Kount = ds.Tables("observationfinal").Rows.Count
+
+            If Kount = 0 Then
+                MsgBox("No data found")
+                Exit Sub
+            End If
+
+            fl2 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\windTot_products.csv"
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+
+            FileOpen(102, fl2, OpenMode.Output)
+            If FileLen(fl2) = 0 Then
+                hdr = "ID,Name,Lat,Lon,Elev,Year,Month,Day,PrevWindTOT, CurrWindToT,Diff,m/s,km/h"
+                '' Output the column headers
+                PrintLine(102, hdr)
+            End If
+
+            ' Get current and next day daily Win Run Total values
+            With ds.Tables("observationfinal")
+                dat = .Rows(0).Item(0)
+                For k = 0 To Kount - 1
+                    nxtdyTot = ""
+                    yyyy = DateAndTime.Year(.Rows(k).Item(6))
+                    mm = DateAndTime.Month(.Rows(k).Item(6))
+                    dd = DateAndTime.Day(.Rows(k).Item(6))
+                    If windTot_Diff(.Rows(k).Item(0), .Rows(k).Item(1), .Rows(k).Item(6), "d", nxtdyTot) Then
+                        WR_Diff = Val(nxtdyTot) - Val(.Rows(k).Item(7))
+
+                        ' Compute wind run total after counter initialization
+                        If WR_Diff < 0 Then
+                            If WindValue_Limit(elms, U_Limit) Then
+                                WR_Diff = (U_Limit - CDbl(.Rows(k).Item(7)) + CDbl(nxtdyTot))
+                            Else
+                                Continue For
+                            End If
+                        End If
+
+                        WNDkh = WR_Diff / 24
+                        WNDms = (WR_Diff * 1000) / (24 * 3600)
+
+                        ' Check if wind speed value exceeds the upper limit
+                        If WindValue_Limit(111, U_Limit) Then
+                            'MsgBox(U_Limit)
+                            If WNDms > U_Limit Then Continue For
+                        Else
+                            Continue For
+                        End If
+
+                        dat = .Rows(k).Item(0) & "," & .Rows(k).Item(2) & "," & .Rows(k).Item(3) & "," & .Rows(k).Item(4) & "," & .Rows(k).Item(5) & "," & yyyy & "," & mm & "," & dd & "," & .Rows(k).Item(7) & "," & nxtdyTot & "," & WR_Diff & "," & Math.Round(WNDms, 2) & "," & Math.Round(WNDkh, 2)
+
+                        PrintLine(102, dat)
+                    End If
+                Next
+
+            End With
+
+            FileClose(102)
+            CommonModules.ViewFile(fl2)
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+            FileClose(102)
+        End Try
+    End Sub
+
+    Sub Hourly_WindSpeed(stns As String, elms As String, sdt As String, edt As String, typ As String)
+        Dim Kount, yyyy, mm, dd, hh As Long
+        Dim fl2, nxtdyTot, dat, hdr As String
+        Dim WR_Diff, WNDkh, WNDms, U_Limit As Double
+
+        Try
+
+            sql = "SELECT recordedFrom as StationID, describedBy as Code, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, obsDatetime, obsvalue FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                   "WHERE (RecordedFrom = " & stns & ") AND (describedBy =" & elms & ") and (obsDatetime between '" & sdt & "' and '" & edt & "')  ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "observationfinal")
+
+            Kount = ds.Tables("observationfinal").Rows.Count
+
+            If Kount = 0 Then
+                MsgBox("No data found")
+                Exit Sub
+            End If
+
+            fl2 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\windTot_products.csv"
+
+            FileOpen(102, fl2, OpenMode.Output)
+            If FileLen(fl2) = 0 Then
+                hdr = "ID,Name,Lat,Lon,Elev,Year,Month,Day,hh,PrevWindTOT, CurrWindToT,Diff,m/s,km/h"
+                '' Output the column headers
+                PrintLine(102, hdr)
+            End If
+
+            ' Get current and next day daily Win Run Total values
+            With ds.Tables("observationfinal")
+                dat = .Rows(0).Item(0)
+                For k = 0 To Kount - 1
+                    nxtdyTot = ""
+                    yyyy = DateAndTime.Year(.Rows(k).Item(6))
+                    mm = DateAndTime.Month(.Rows(k).Item(6))
+                    dd = DateAndTime.Day(.Rows(k).Item(6))
+                    hh = DateAndTime.Hour(.Rows(k).Item(6))
+                    If windTot_Diff(.Rows(k).Item(0), .Rows(k).Item(1), .Rows(k).Item(6), "h", nxtdyTot) Then
+                        WR_Diff = Val(nxtdyTot) - Val(.Rows(k).Item(7))
+
+                        ' Compute wind run total after counter initialization
+                        If WR_Diff < 0 Then
+                            If WindValue_Limit(elms, U_Limit) Then
+                                WR_Diff = (U_Limit - CDbl(.Rows(k).Item(7)) + CDbl(nxtdyTot))
+                            Else
+                                Continue For
+                            End If
+                        End If
+
+                        WNDkh = WR_Diff
+                        WNDms = (WR_Diff * 1000) / 3600
+
+                        ' Check if wind speed value exceeds the upper limit
+                        If WindValue_Limit(111, U_Limit) Then
+                            If WNDms > U_Limit Then Continue For
+                        Else
+                            Continue For
+                        End If
+
+                        dat = .Rows(k).Item(0) & "," & .Rows(k).Item(2) & "," & .Rows(k).Item(3) & "," & .Rows(k).Item(4) & "," & .Rows(k).Item(5) & "," & yyyy & "," & mm & "," & dd & "," & hh & "," & .Rows(k).Item(7) & "," & nxtdyTot & "," & WR_Diff & "," & Math.Round(WNDms, 2) & "," & Math.Round(WNDkh, 2)
+
+                        PrintLine(102, dat)
+                    End If
+
+                Next
+
+            End With
+
+            FileClose(102)
+            CommonModules.ViewFile(fl2)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            FileClose(102)
+        End Try
+    End Sub
+
+    Function windTot_Diff(id As String, code As Integer, dt As String, intvl As String, ByRef nxtdyValue As String) As Boolean
+        Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsp As New DataSet
+        Dim sqlp, dt1 As String
+        Try
+            dt1 = DateAndTime.DateAdd(intvl, 1, dt)
+            dt1 = DateAndTime.Year(dt1) & "-" & DateAndTime.Month(dt1) & "-" & DateAndTime.Day(dt1) & " " & DateAndTime.Hour(dt1) & ":00:00"
+            sqlp = "Select obsvalue FROM observationfinal WHERE recordedFrom ='" & id & "' and describedBy = " & 187 & " AND obsdatetime = '" & dt1 & "';"
+
+            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlp, conn)
+            dap.SelectCommand.CommandTimeout = 0
+            dsp.Clear()
+            dap.Fill(dsp, "observationfinal")
+
+            If dsp.Tables("observationfinal").Rows.Count = 0 Then Return False
+
+            nxtdyValue = dsp.Tables("observationfinal").Rows(0).Item(0)
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Function WindValue_Limit(Ecod As String, ByRef limitValue As Double) As Boolean
+        Dim dal As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsl As New DataSet
+
+        Try
+            sql = "SELECT upperlimit * elementscale AS ULvalue FROM obselement WHERE elementId = " & Ecod & ";"
+            dal = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dal.SelectCommand.CommandTimeout = 0
+            dsl.Clear()
+            dal.Fill(dsl, "obselement")
+
+            If dsl.Tables("obselement").Rows.Count = 0 Or IsDBNull(dsl.Tables("obselement").Rows(0).Item(0)) Then
+                limitValue = 30 ' Default wind speed upper limit value if set value is NULL
+            Else
+                limitValue = CDbl(dsl.Tables("obselement").Rows(0).Item(0))
+                If limitValue = 0 Then limitValue = 30    ' Default wind speed upper limit value if db set value zero or not numeric
+            End If
+
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Sub MeanWaterLevel(sql As String, typ As String)
+
+        Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsp As New DataSet
+        Dim conp As New MySql.Data.MySqlClient.MySqlConnection
+        Dim fl, dat, stn, cod, dtt As String
+        Dim nxtDylvl, AVGlvl, AMlvl, PMlvl, wghtMean As Double
+        'Dim YY, MM, DD As Integer
+
+        Try
+            conp.ConnectionString = MyConnectionString
+            conp.Open()
+            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
+            dap.SelectCommand.CommandTimeout = 0
+            dsp.Clear()
+            dap.Fill(dsp, "observationfinal")
+            conp.Close()
+            'MsgBox(dsp.Tables("observationfinal").Columns.Count)
+
+            maxRows = dsp.Tables("observationfinal").Rows.Count
+
+            If maxRows = 0 Then Exit Sub
+
+            ' Create output file
+
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\data_products.csv"
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+
+            FileOpen(11, fl, OpenMode.Output)
+
+            '' Output the column headers
+            'For j = 0 To dsp.Tables("observationfinal").Columns.Count - 1
+            '    Write(11, dsp.Tables("observationfinal").Columns(j).ColumnName)
+            'Next
+            ''Write(11, "MLVL1")
+            PrintLine(11, "ID,Name,Abbrev,Lat,Lon,Alt,YY,MM,DD,AMLevel,PMLevel,Mean")
+
+            ' Output data values
+            With dsp.Tables("observationfinal")
+                For k = 0 To maxRows - 1
+                    If .Rows(k).Item(7) = .Rows(k).Item(8) Then Continue For ' Only one daily reading available
+                    stn = .Rows(k).Item(0)
+                    cod = .Rows(k).Item(2)
+                    dtt = .Rows(k).Item(7)
+                    dtt = DateAndTime.Year(dtt) & "," & DateAndTime.Month(dtt) & "," & DateAndTime.Day(dtt)
+                    If Not waterLevel(stn, cod, .Rows(k).Item(7), AMlvl) Then Continue For
+                    If Not waterLevel(stn, cod, .Rows(k).Item(8), PMlvl) Then Continue For
+                    If Not waterLevel(stn, cod, .Rows(k).Item(9), nxtDylvl) Then Continue For
+                    AVGlvl = .Rows(k).Item(10)
+
+                    If Not waterLevel_WeightedMean(.Rows(k).Item(10), PMlvl, nxtDylvl, wghtMean) Then Continue For
+                    'If .Rows(k).Item(7) = .Rows(k).Item(8) Then wghtMean = AVGlvl
+
+                    'dat = stn & "," & .Rows(k).Item(5) & "," & .Rows(k).Item(3) & "," & .Rows(k).Item(4) & "," & .Rows(k).Item(6) & "," & AMlvl & "," & PMlvl & "," & AVGlvl & "," & nxtDylvl & "," & wghtMean
+                    dat = stn & "," & .Rows(k).Item(1) & "," & .Rows(k).Item(6) & "," & .Rows(k).Item(3) & "," & .Rows(k).Item(4) & "," & .Rows(k).Item(5) & "," & dtt & "," & AMlvl & "," & PMlvl & "," & wghtMean
+                    'dat = .Rows(k).Item(0)
+                    'For i = 1 To dsp.Tables("observationfinal").Columns.Count - 1
+                    '    dat = dat & "," & .Rows(k).Item(i)
+                    'Next
+                    PrintLine(11, dat)
+                Next
+            End With
+            FileClose(11)
+            CommonModules.ViewFile(fl)
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            'If Err.Number = 13 Or Err.Number = 5 Then Resume Next
+            MsgBox("No data found. Check and confirm selections")
+            FileClose(11)
+            conp.Close()
+        End Try
+
+    End Sub
+
+    Function waterLevel_WeightedMean(lvlAVG As Double, lvlPM As Double, lvlnxtAM As Double, ByRef wghtMean As Double) As Boolean
+        Dim a, b As Double
+
+        Try
+
+            a = (lvlAVG) * 11
+            b = ((lvlPM + lvlnxtAM) / 2) * 13
+            wghtMean = Math.Round((a + b) / 24, 2)
+
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+    'Function waterLevel_nextDay(Stn As String, Ecod As String, dt As String, ByRef lvlValue As Double) As Boolean
+    '    Dim dal As MySql.Data.MySqlClient.MySqlDataAdapter
+    '    Dim dsl As New DataSet
+
+    '    Try
+    '        'dt = DateAdd("d", 1, dt)
+    '        dt = DateAndTime.Year(dt) & "-" & DateAndTime.Month(dt) & "-" & DateAndTime.Day(dt) & " " & DateAndTime.Hour(dt) & ":" & DateAndTime.Minute(dt) & ":" & DateAndTime.Second(dt)
+
+    '        sql = "SELECT obsvalue FROM observationfinal WHERE recordedFrom = '" & Stn & "' AND describedBy = '" & Ecod & "' AND obsdatetime ='" & dt & "';"
+    '        'MsgBox(sql)
+    '        dal = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+    '        dal.SelectCommand.CommandTimeout = 0
+    '        dsl.Clear()
+    '        dal.Fill(dsl, "obs")
+
+    '        If dsl.Tables("obs").Rows.Count > 0 Then
+    '            lvlValue = dsl.Tables("obs").Rows(0).Item(0)
+    '        End If
+
+    '        Return True
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
+    '        Return False
+    '    End Try
+    'End Function
+    Function waterLevel(Stn As String, Ecod As String, dtt As String, ByRef lvl As Double) As Boolean
+        Dim dal As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsl As New DataSet
+
+        Try
+
+            dtt = DateAndTime.Year(dtt) & "-" & DateAndTime.Month(dtt) & "-" & DateAndTime.Day(dtt) & " " & DateAndTime.Hour(dtt) & ":" & DateAndTime.Minute(dtt) & ":" & DateAndTime.Second(dtt)
+
+            sql = "SELECT obsvalue FROM observationfinal WHERE recordedFrom = '" & Stn & "' AND describedBy = '" & Ecod & "' AND obsdatetime ='" & dtt & "';"
+
+            dal = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dal.SelectCommand.CommandTimeout = 0
+            dsl.Clear()
+            dal.Fill(dsl, "obs")
+
+            If dsl.Tables("obs").Rows.Count = 0 Then Return False
+
+            If IsDBNull(dsl.Tables("obs").Rows(0).Item(0)) Then
+                Return False
+            Else
+                lvl = dsl.Tables("obs").Rows(0).Item(0)
+                Return True
+            End If
+
+            'If dsl.Tables("obs").Rows.Count = 1 Then Return dsl.Tables("obs").Rows(0).Item(0)
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
     Sub FormattedOutput(fp As Integer, rw As Long, col As Integer, dsf As DataSet)
         Try
 
@@ -2323,6 +2704,7 @@ Err:
     End Sub
 
     Private Sub lblProductType_TextChanged(sender As Object, e As EventArgs) Handles lblProductType.TextChanged
+
 
         If lblProductType.Text = "Hourly" Or lblProductType.Text = "Daily" Or lblProductType.Text = "Monthly" Or lblProductType.Text = "Annual" Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Or lblProductType.Text = "Histograms" Or lblProductType.Text = "TimeSeries" Or lblProductType.Text = "Seasonal Monthly" Then
             optMean.Enabled = True
@@ -2428,6 +2810,27 @@ Err:
             cmdSelectAllStations.Enabled = True
             cmdSelectAllElements.Enabled = True
         End If
+
+        'If lblProductType.Text = "Daily Wind Speed" Or lblProductType.Text = "Hourly Wind Speed" Then
+
+        'Dim str(3) As String
+        ''Dim Ecode As Integer
+
+        'Dim itm = New ListViewItem
+
+        ''WrunCode = InputBox("Element Code?", "Wind Totalizer Element Code")
+
+        ''Ecode = CInt(WrunCode)
+
+        'str(0) = CInt(InputBox("Element Code?", "Wind Totalizer Element Code")) 'CInt(Ecode)
+        'str(1) = "WINDTOT"
+        'str(2) = "Wind Totalizer"
+        'itm = New ListViewItem(str)
+        'lstvElements.Items.Clear()
+        'lstvElements.Items.Add(itm)
+        'End If
+
+
     End Sub
 
 
@@ -2577,8 +2980,6 @@ Err:
             End Try
         End If
     End Sub
-
-
 
     Function RegkeyValue(keynm As String) As String
         ' Get the image archiving folder
@@ -3183,13 +3584,6 @@ Err:
         End If
     End Sub
 
-    Private Sub lblProductType_Click(sender As Object, e As EventArgs) Handles lblProductType.Click
-
-    End Sub
-
-    Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
-
-    End Sub
 
     Private Sub cmbElement_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbElement.KeyPress
         If Asc(e.KeyChar) = 13 Then add_Element(cmbElement.Text)
@@ -3762,7 +4156,7 @@ Err:
             'Next
 
             FileClose(11)
-                CommonModules.ViewFile(fl)
+            CommonModules.ViewFile(fl)
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -3773,4 +4167,5 @@ Err:
         End Try
 
     End Sub
+
 End Class

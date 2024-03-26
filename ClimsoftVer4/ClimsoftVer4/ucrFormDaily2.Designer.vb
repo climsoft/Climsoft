@@ -970,6 +970,7 @@ Partial Class ucrFormDaily2
         '
         'ucrHour
         '
+        Me.ucrHour.Enabled = False
         Me.ucrHour.FieldName = "hh"
         Me.ucrHour.KeyControl = True
         Me.ucrHour.Location = New System.Drawing.Point(243, 101)
