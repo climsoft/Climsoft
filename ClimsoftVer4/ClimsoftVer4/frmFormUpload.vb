@@ -14,7 +14,8 @@ Public Class frmFormUpload
     End Sub
 
     Private Sub frmDataTransferProgress_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'MsgBox(userGroup)
+        'MsgBox(frmDataTransferProgress.Text)
+
         ' Close the form if the User has no previleges to Upload data
         If userGroup <> "ClimsoftAdmin" And userGroup <> "ClimsoftQC" And userGroup <> "ClimsoftOperatorSupervisor" And userGroup <> "ClimsoftDeveloper" And userGroup <> "" Then
             Me.Close()
@@ -35,7 +36,7 @@ Public Class frmFormUpload
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
 
-            sql = "select " & lblFormName.Text & ".stationId, stationName from " & lblFormName.Text & " inner join station on " & lblFormName.Text & ".stationId=station.stationId group by " & lblFormName.Text & ".stationId;"
+            sql = "select " & lblFormName1.Text & ".stationId, stationName from " & lblFormName1.Text & " inner join station on " & lblFormName1.Text & ".stationId=station.stationId group by " & lblFormName1.Text & ".stationId;"
             'MsgBox(sql)
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             ' Set to unlimited timeout period
@@ -89,46 +90,84 @@ Public Class frmFormUpload
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
 
         Dim m, n, maxRows, st, ed, flds, elemCode, acquisitionType, qcStatus, obsperiod As Integer
-        Dim strSQL, stnlist, code_loc, yyyy, mm, dd, hh, capturedBy, stnId, obsDatetime, obsVal, obsFlag, obsLevel, dataForm As String
+        Dim strSQL, stnlist, code_loc, yyyy, mm, dd, hh, capturedBy, stnId, obsDatetime, obsVal, obsFlag, obsLevel, dataForm, bdate, edate As String
         Dim stnselected As Boolean
 
         Try
-            frm_tbl = lblFormName.Text
-        lblDataTransferProgress.ForeColor = DefaultForeColor 'Color.Black
-        lblDataTransferProgress.Text = ""
-        txtDataTransferProgress1.Text = ""
-        ' List the selected stations
-        stnlist = ""
-        stnselected = False
-        If chkAllStations.Checked = False Then ' When NOT all stations are selected
+            ' Check stations selections
+            stnselected = False
             For i = 0 To LstViewStations.Items.Count - 1
-                If LstViewStations.Items(i).Checked = True Then
-                    stnId = LstViewStations.Items(i).SubItems(0).Text
+                If LstViewStations.Items(i).Checked Then
                     stnselected = True
-                    If Len(stnlist) = 0 Then
-                        stnlist = "stationId = " & " '" & stnId & "'" 'stnid
-                    Else
-                        stnlist = stnlist & " OR stationId = " & "'" & stnId & "'"
-                    End If
-                    'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
+                    Exit For
                 End If
             Next
-            If frm_tbl = "form_monthly" Then
-                sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "')"
-            Else
-                sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
+            If Not stnselected Then
+                MsgBox("No Station selected")
+                Exit Sub
             End If
-        Else ' When All stations are selected
-            stnselected = True
-            If frm_tbl = "form_monthly" Then
-                sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "');"
-            Else
-                sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
-            End If
-        End If
 
-        'Create a path to save data into bufer to be uploaded later
-        Dim fl, dataDir, frmrec As String
+            ' Check period selections
+            If Not chkEntrydate.Checked Then
+                bdate = Val(txtBeginYear.Text) & "-" & Val(txtBeginMonth.Text) & "-1 00:00:00"
+                edate = Val(txtEndYear.Text) & "-" & Val(txtEndMonth.Text) & "-1 00:00:00"
+
+                If Not IsDate(bdate) Or Not IsDate(edate) Then
+                    MsgBox("Period not properly selected")
+                    Exit Sub
+                End If
+            End If
+
+            frm_tbl = lblFormName1.Text
+            lblDataTransferProgress.ForeColor = DefaultForeColor 'Color.Black
+            lblDataTransferProgress.Text = ""
+            txtDataTransferProgress1.Text = ""
+
+            If chkEntrydate.Checked Then
+                bdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & DateAndTime.Day(dateFrom.Text) & " 00:00:00"
+                edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & DateAndTime.Day(dateTo.Text) & " 23:59:59"
+            End If
+
+            ' List the selected stations
+            stnlist = ""
+            stnselected = False
+            If chkAllStations.Checked = False Then ' When NOT all stations are selected
+                For i = 0 To LstViewStations.Items.Count - 1
+                    If LstViewStations.Items(i).Checked = True Then
+                        stnId = LstViewStations.Items(i).SubItems(0).Text
+                        stnselected = True
+                        If Len(stnlist) = 0 Then
+                            stnlist = "stationId = " & " '" & stnId & "'" 'stnid
+                        Else
+                            stnlist = stnlist & " OR stationId = " & "'" & stnId & "'"
+                        End If
+                        'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
+                    End If
+                Next
+                If frm_tbl = "form_monthly" Then
+                    sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "')"
+                Else
+                    sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
+                End If
+
+                If chkEntrydate.Checked Then sql = "select * from " & frm_tbl & " where (" & stnlist & ") and entrydatetime between '" & bdate & "' and '" & edate & "';"
+
+            Else ' When All stations are selected
+                stnselected = True
+                If frm_tbl = "form_monthly" Then
+                    sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "');"
+                Else
+                    sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
+                End If
+
+                If chkEntrydate.Checked Then sql = "select * from " & frm_tbl & " where entrydatetime between '" & bdate & "' and '" & edate & "';"
+
+            End If
+
+            'MsgBox(sql)
+
+            'Create a path to save data into bufer to be uploaded later
+            Dim fl, dataDir, frmrec As String
 
             ' Create folder 'Climsoft4\data' if it does not exist
             dataDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
@@ -137,11 +176,11 @@ Public Class frmFormUpload
                 IO.Directory.CreateDirectory(dataDir)
             End If
 
-        fl = dataDir & "\form_2_initial_sql.csv"
-        FileOpen(122, fl, OpenMode.Output)
+            fl = dataDir & "\form_2_initial_sql.csv"
+            FileOpen(122, fl, OpenMode.Output)
 
-        ' Convert path separater to SQL format
-        fl = Strings.Replace(fl, "\", "/")
+            ' Convert path separater to SQL format
+            fl = Strings.Replace(fl, "\", "/")
 
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
@@ -153,16 +192,26 @@ Public Class frmFormUpload
             daa.Fill(dss, frm_tbl)
             'conns.Close()
             maxRows = dss.Tables(frm_tbl).Rows.Count
+            If maxRows = 0 Then
+                txtDataTransferProgress1.Text = " No data found "
+                FileClose(122)
+                conns.Close()
+                Exit Sub
+            End If
 
             Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
 
             qcStatus = 0
             acquisitionType = 1
             obsLevel = "surface"
-            dataForm = lblFormName.Text
+            dataForm = lblFormName1.Text
             code_loc = ""
 
-            If Not Data_Fields(dataForm, st, ed, code_loc) Then Exit Sub
+            If Not Data_Fields(dataForm, st, ed, code_loc) Then
+                FileClose(122)
+                conns.Close()
+                Exit Sub
+            End If
             'conns.Close()
             'MsgBox(st & " " & ed & " " & code_loc)
             flds = (ed - st) + 1 ' Total fields for the observation values
@@ -220,6 +269,7 @@ Public Class frmFormUpload
                             hh = dss.Tables(frm_tbl).Rows(n).Item("hh")
 
                         Case "form_daily2"
+
                             yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
                             mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
                             dd = (m - st) + 1
@@ -231,6 +281,19 @@ Public Class frmFormUpload
                                 'obsperiod = ""
                                 'obsFlag = "M"
                             End If
+
+                        Case "form_hourly2"
+                            yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
+                            mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
+                            dd = (m - st) + 1
+                            hh = dss.Tables(frm_tbl).Rows(n).Item("hh")
+
+                            'If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then
+                            '    If IsNumeric(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
+                            'Else
+                            '    'obsperiod = ""
+                            '    'obsFlag = "M"
+                            'End If
 
                         Case "form_agro1"
                             elemCode = Strings.Right(dss.Tables(frm_tbl).Columns(m).ColumnName, 3)
@@ -331,6 +394,7 @@ Public Class frmFormUpload
 
                         Case Else
                             MsgBox("No table found")
+                            FileClose(122)
                             conns.Close()
                             Exit Sub
                     End Select
@@ -344,7 +408,6 @@ Public Class frmFormUpload
                     frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
                     PrintLine(122, frmrec & ",")
                     'PrintLine(122)
-
 
                 Next m
                 'Move to next record in dataset
@@ -365,13 +428,13 @@ Public Class frmFormUpload
             objCmd.CommandTimeout = 0
             objCmd.ExecuteNonQuery()
 
-            If maxRows = 0 Then
-                txtDataTransferProgress1.Text = " No data found "
-            Else
-                lblDataTransferProgress.ForeColor = Color.Red
+            'If maxRows = 0 Then
+            '    txtDataTransferProgress1.Text = " No data found "
+            'Else
+            lblDataTransferProgress.ForeColor = Color.Red
                 lblDataTransferProgress.Text = "Total " & maxRows & " Records Transfered" 'Data transfer complete !"
                 txtDataTransferProgress1.Text = ""
-            End If
+            'End If
             conns.Close()
         Catch ex As Exception
             FileClose(122)
@@ -440,13 +503,6 @@ Public Class frmFormUpload
         End If
     End Sub
 
-    Private Sub lblDiff_Click(sender As Object, e As EventArgs) Handles lblDiff.Click
-
-    End Sub
-
-    Private Sub txtTdiff_TextChanged(sender As Object, e As EventArgs) Handles txtTdiff.TextChanged
-
-    End Sub
 
     Function datetimeGTS(ByRef dttime As String) As Boolean
         Dim diff As Integer
@@ -463,4 +519,20 @@ Public Class frmFormUpload
         End Try
 
     End Function
+
+    Private Sub chkEntrydate_Click(sender As Object, e As EventArgs) Handles chkEntrydate.Click
+        If chkEntrydate.Checked Then
+            Me.Width = 923
+            txtBeginYear.Enabled = False
+            txtEndYear.Enabled = False
+            txtBeginMonth.Enabled = False
+            txtEndMonth.Enabled = False
+        Else
+            Me.Width = 656
+            txtBeginYear.Enabled = True
+            txtEndYear.Enabled = True
+            txtBeginMonth.Enabled = True
+            txtEndMonth.Enabled = True
+        End If
+    End Sub
 End Class

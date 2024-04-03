@@ -485,7 +485,7 @@ Public Class ucrNavigation
     ''' <param name="ucrYear">Null NOT allowed.</param>
     ''' <param name="ucrMonth">Null allowed. If null it's increment will be ignored</param>
     ''' <param name="ucrDay">Null allowed. If null it's increment will be ignored</param>
-    Private Sub IncrementDateValues(ucrYear As ucrYearSelector, ucrMonth As ucrMonth, ucrDay As ucrDay)
+    Public Sub IncrementDateValues(ucrYear As ucrYearSelector, ucrMonth As ucrMonth, ucrDay As ucrDay)
 
         'try increment day value
         If ucrDay IsNot Nothing AndAlso ucrDay.cboValues.SelectedIndex < ucrDay.cboValues.Items.Count - 1 Then

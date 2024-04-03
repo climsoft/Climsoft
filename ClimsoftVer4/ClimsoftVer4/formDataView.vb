@@ -408,12 +408,17 @@ Public Class formDataView
                         'dat = dat & "," & "\N"
                     Else
                         CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
+
                         If IsDate(CellValue) And InStr(CellValue, ".") = 0 Then
                             CellValue = DateAndTime.Year(CellValue) & "-" & DateAndTime.Month(CellValue) & "-" & DateAndTime.Day(CellValue) & " " & DateAndTime.Hour(CellValue) & ":" & DateAndTime.Minute(CellValue) & ":" & DateAndTime.Second(CellValue)
                             'MsgBox(CellValue)
                         End If
-                        'dat = dat & "," & CellValue
+                        ' Exclude escape characters that had been observe in some fields
+                        If InStr(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Chr(10)) > 0 Or InStr(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Chr(13)) > 0 Then
+                            CellValue = Strings.Left(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Len(ds1.Tables(dsSourceTableName).Rows(i).Item(j)) - 1)
+                        End If
                     End If
+
                     dat = dat & "," & CellValue
                 Next
                 Print(111, dat & Chr(10))

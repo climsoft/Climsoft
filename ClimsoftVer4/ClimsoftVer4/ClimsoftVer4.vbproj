@@ -193,6 +193,10 @@
       <DependentUpon>frmImportQCData.vb</DependentUpon>
     </Compile>
     <Compile Include="frmImportQCData.vb">
+    <Compile Include="frmHourly2Sequencer.Designer.vb">
+      <DependentUpon>frmHourly2Sequencer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHourly2Sequencer.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmInventoryChart.designer.vb">
@@ -217,6 +221,12 @@
       <DependentUpon>frmNewHourly.vb</DependentUpon>
     </Compile>
     <Compile Include="frmNewHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewHourly2.Designer.vb">
+      <DependentUpon>frmNewHourly2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourly2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNewHourlyWind.Designer.vb">
@@ -711,6 +721,12 @@
     <Compile Include="ucrDatePicker.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrFormHourly2.Designer.vb">
+      <DependentUpon>ucrFormHourly2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFormHourly2.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrHourlyWind.Designer.vb">
       <DependentUpon>ucrHourlyWind.vb</DependentUpon>
     </Compile>
@@ -916,6 +932,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportQCData.resx">
       <DependentUpon>frmImportQCData.vb</DependentUpon>
+    <EmbeddedResource Include="frmHourly2Sequencer.resx">
+      <DependentUpon>frmHourly2Sequencer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInventoryChart.resx">
       <DependentUpon>frmInventoryChart.vb</DependentUpon>
@@ -928,6 +946,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewHourly.resx">
       <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewHourly2.resx">
+      <DependentUpon>frmNewHourly2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewHourlyWind.resx">
       <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
@@ -1178,6 +1199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDatePicker.resx">
       <DependentUpon>ucrDatePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFormHourly2.resx">
+      <DependentUpon>ucrFormHourly2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrHourlyWind.resx">
       <DependentUpon>ucrHourlyWind.vb</DependentUpon>

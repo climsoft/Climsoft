@@ -52,8 +52,6 @@ Public Class frmProducts
 
         'translate form controls
         ClsTranslations.TranslateForm(Me)
-        'todo in future this will be done automatically by TranslateForms(Me)
-        ClsTranslations.TranslateComponent(lstViewProducts, True)
 
     End Sub
 
@@ -72,11 +70,10 @@ Public Class frmProducts
         For Each row As DataRow In dataRows
             'add product and prodcut details. List view has 2 columns
             lstViewProducts.Items.Add(New ListViewItem({row.Field(Of String)("productName"),
-                                                       row.Field(Of String)("prDetails")}))
+                                                 ClsTranslations.GetTranslation(row.Field(Of String)("prDetails"))})
+                                                 )
         Next
 
-        'todo in future this will be done automatically by TranslateForms(Me)
-        ClsTranslations.TranslateComponent(lstViewProducts, False)
     End Sub
 
     Private Sub lstvProducts_Click(sender As Object, e As EventArgs) Handles lstViewProducts.Click
@@ -86,17 +83,55 @@ Public Class frmProducts
         End If
 
         Dim selectedProductName As String = lstViewProducts.SelectedItems.Item(0).Text
+        Dim str(3), Ecode As String
+        Dim itm = New ListViewItem
+
         Select Case selectedProductName
             Case "Stations Records"
                 frmInventoryChart.Show()
             Case "CLIMAT"
                 frmCLIMAT.Show()
-            Case Else
+
+                'Case Else
+                MsgBox(selectedProductName)
                 'todo. refactor formProductsSelectCriteria to not use product type label
                 'the label should show translated text
                 formProductsSelectCriteria.lblProductType.Text = selectedProductName
                 formProductsSelectCriteria.Show()
+            Case "Daily Wind Speed"
+                Ecode = InputBox("Element Code?", "Daily Wind Totalizer Element Code")
+
+                If Ecode = "" Or Not IsNumeric(Ecode) Then Exit Sub
+                'If InputBox("Element Code?", "Daily Wind Totalizer Element Code") = "" Then Exit Sub
+                'str(0) = CInt(InputBox("Element Code?", "Daily Wind Totalizer Element Code")) 'CInt(Ecode)
+
+                str(0) = Ecode
+                str(1) = "WINDTOT"
+                str(2) = "Wind Totalizer"
+                itm = New ListViewItem(str)
+                formProductsSelectCriteria.lstvElements.Items.Clear()
+                formProductsSelectCriteria.lstvElements.Items.Add(itm)
+                formProductsSelectCriteria.lblProductType.Text = selectedProductName
+                formProductsSelectCriteria.Show()
+
+            Case "Hourly Wind Speed"
+                Ecode = InputBox("Element Code?", "Hourly Wind Totalizer Element Code")
+
+                If Ecode = "" Or Not IsNumeric(Ecode) Then Exit Sub
+
+                str(0) = Ecode
+                str(1) = "WINDTOT"
+                str(2) = "Wind Totalizer"
+                itm = New ListViewItem(str)
+                formProductsSelectCriteria.lstvElements.Items.Clear()
+                formProductsSelectCriteria.lstvElements.Items.Add(itm)
+                formProductsSelectCriteria.lblProductType.Text = selectedProductName
+                formProductsSelectCriteria.Show()
+            Case Else
+                formProductsSelectCriteria.lblProductType.Text = selectedProductName
+                formProductsSelectCriteria.Show()
         End Select
+
     End Sub
 
     Private Sub Close_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click, ToolStripButton1.Click
@@ -161,8 +196,13 @@ Public Class frmProducts
                ('30', 'Yearly Elements Observed', 'Yearly Time Series Chart per Station', 'Inventory'),
                ('31', 'Monthly Elements Observed', 'Monthly Time Series Chart per Station', 'Inventory'),
                ('32', 'Daily Levels', 'Daily Observations', 'Upper Air'),
-               ('33', 'Monthly Levels', 'Monthly Summeries', 'Upper Air'),
-               ('34', 'Annual Levels', 'Annual Summeries', 'Upper Air');"
+               ('33', 'Monthly Levels', 'Monthly Summaries', 'Upper Air'),
+               ('34', 'Annual Levels', 'Annual Summaries', 'Upper Air'),
+               ('35', 'Seasonal Monthly', 'Monthly Seasonal Summaries', 'Data'),
+               ('36', 'Daily Wind Speed', 'Wind Speed from Daily Wind Run Total', 'Data'),
+               ('37', 'Hourly Wind Speed', 'Wind Speed from Hourly Wind Run Total', 'Data'),
+               ('38', 'Climate Station', 'Data for Climate Station Tool', 'Output for other Applications'),
+               ('39', 'Daily Mean Water Level', 'Hydrological Daily Mean Water Level', 'Special Products');"
         Try
             Me.Cursor = Cursors.WaitCursor
             qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)

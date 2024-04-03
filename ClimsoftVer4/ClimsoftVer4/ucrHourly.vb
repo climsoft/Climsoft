@@ -3,9 +3,11 @@
     Private strFlagFieldName As String = "flag"
     Private bTotalRequired As Boolean
     Dim FldName As New dataEntryGlobalRoutines
+    Private strSeqence As String = ""
 
     Private Sub UcrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            SetSequencerSetting()
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
             Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
             Dim shiftCells As New ClsShiftCells()
@@ -48,22 +50,39 @@
 
             If FldName.Key_Entry_Mode(frmNewHourly.Text) = "Double" Then chkRepeatEntry.Checked = True
         End If
+        setHours()
+    End Sub
+
+    Private Sub SetSequencerSetting()
+        Dim clsDataDefinition As New DataCall
+        Dim dtbl As DataTable
+        clsDataDefinition.SetTableNameAndFields("regkeys", {"keyName", "keyValue"})
+        clsDataDefinition.SetFilter("keyName", "=", "key20")
+        dtbl = clsDataDefinition.GetDataTable()
+        strSeqence = If(dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0, dtbl.Rows.Item(0).Item("keyValue"), "")
+        strSeqence = strSeqence.ToLower()
+        txtSequencer.Text = If(strSeqence <> "day", "seq_element", "seq_day")
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Try
 
-            'ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"element_code"}, {ucrMonthSelector, ucrDaySelector}, ucrYearSelector)
+            If strSeqence <> "day" Then
+                Dim dctSequencerColControls As New Dictionary(Of String, ucrValueView)()
 
-            Dim dctSequencerColControls As New Dictionary(Of String, ucrValueView)
-            dctSequencerColControls.Add("element_code", ucrElementSelector)
-            ucrNavigation.NewSequencedRecord(txtSequencer.Text,
-                                              {"element_code"}, dctSequencerColControls,
-                                              ucrYearSelector, ucrMonthSelector, ucrDaySelector)
+                dctSequencerColControls.Add("element_code", ucrElementSelector)
+                ucrNavigation.NewSequencedRecord(txtSequencer.Text,
+                                                  {"element_code"}, dctSequencerColControls,
+                                                  ucrYearSelector, ucrMonthSelector, ucrDaySelector)
+            Else
+                ' Just increment date in sequence
+                ucrNavigation.IncrementDateValues(ucrYearSelector, ucrMonthSelector, ucrDaySelector)
+            End If
 
 
             SaveEnable()
             UcrValueFlagPeriod0.Focus()
+            setHours()
 
             'Get the Station from the last record by the current login user
             Dim usrStn As New dataEntryGlobalRoutines
@@ -71,6 +90,7 @@
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+        setHours()
     End Sub
     Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
         Try
@@ -84,12 +104,12 @@
 
     Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
-        frmFormUpload.lblFormName.Text = "form_hourly"
-        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
 
+        frmFormUpload.lblFormName1.Text = "form_hourly"
         frmFormUpload.Show()
-        Exit Sub
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
 
+        Exit Sub
 
         'upload code in the background thread
         Dim frm As New frmNewComputationProgress
@@ -138,6 +158,7 @@
     End Sub
 
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
+
         Dim ctrVFP As ucrValueFlagPeriod
 
         If btnHourSelection.Text = "Enable all hours" Then
@@ -484,19 +505,52 @@
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+    Sub setHours()
+        Dim ctrVFP As ucrValueFlagPeriod
+        Dim clsDataDefinition As DataCall
+        Dim dtbl As DataTable
+        Dim iTagVal As Integer
+        Dim row As DataRow
+
+        clsDataDefinition = New DataCall
+        clsDataDefinition.SetTableNameAndFields("form_hourly_time_selection", {"hh", "hh_selection"})
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    iTagVal = Val(Strings.Right(ctrVFP.Tag, 2))
+                    row = dtbl.Select("hh = '" & iTagVal & "' AND hh_selection = '0'").FirstOrDefault()
+                    If row IsNot Nothing Then
+                        ctrVFP.Enabled = False
+                        ctrVFP.SetBackColor(Color.LightYellow)
+                    Else
+                        ctrVFP.Enabled = True
+                        ctrVFP.SetBackColor(Color.White)
+                    End If
+                End If
+            Next
+        End If
 
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-
+    Private Sub ucrElementSelector_Leave(sender As Object, e As EventArgs) Handles ucrElementSelector.Leave
+        setHours()
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
+    Private Sub ucrDaySelector_Leave(sender As Object, e As EventArgs) Handles ucrDaySelector.Leave
+        setHours()
     End Sub
 
-    Private Sub ucrInputSameValue_Load(sender As Object, e As EventArgs) Handles ucrInputSameValue.Load
+    Private Sub ucrStationSelector_Leave(sender As Object, e As EventArgs) Handles ucrStationSelector.Leave
+        setHours()
+    End Sub
 
+    Private Sub ucrMonthSelector_Leave(sender As Object, e As EventArgs) Handles ucrMonthSelector.Leave
+        setHours()
+    End Sub
+
+    Private Sub ucrYearSelector_Leave(sender As Object, e As EventArgs) Handles ucrYearSelector.Leave
+        setHours()
     End Sub
 End Class

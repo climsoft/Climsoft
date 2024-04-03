@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmConversionDewPointRh
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmConversionDewPointRh
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.drybuld = New System.Windows.Forms.TextBox()
         Me.btnOK = New System.Windows.Forms.Button()
@@ -37,14 +37,14 @@ Partial Class FrmConversionDewPointRh
         '
         'drybuld
         '
-        Me.drybuld.Location = New System.Drawing.Point(12, 65)
+        Me.drybuld.Location = New System.Drawing.Point(73, 89)
         Me.drybuld.Name = "drybuld"
         Me.drybuld.Size = New System.Drawing.Size(51, 20)
         Me.drybuld.TabIndex = 5
         '
         'btnOK
         '
-        Me.btnOK.Location = New System.Drawing.Point(109, 112)
+        Me.btnOK.Location = New System.Drawing.Point(170, 136)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(51, 23)
         Me.btnOK.TabIndex = 9
@@ -55,7 +55,7 @@ Partial Class FrmConversionDewPointRh
         '
         Me.lblTT.AutoSize = True
         Me.lblTT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTT.Location = New System.Drawing.Point(12, 38)
+        Me.lblTT.Location = New System.Drawing.Point(73, 62)
         Me.lblTT.Name = "lblTT"
         Me.lblTT.Size = New System.Drawing.Size(45, 15)
         Me.lblTT.TabIndex = 0
@@ -63,28 +63,28 @@ Partial Class FrmConversionDewPointRh
         '
         'humidity
         '
-        Me.humidity.Location = New System.Drawing.Point(316, 65)
+        Me.humidity.Location = New System.Drawing.Point(377, 89)
         Me.humidity.Name = "humidity"
         Me.humidity.Size = New System.Drawing.Size(51, 20)
         Me.humidity.TabIndex = 8
         '
         'wetbulb
         '
-        Me.wetbulb.Location = New System.Drawing.Point(109, 65)
+        Me.wetbulb.Location = New System.Drawing.Point(170, 89)
         Me.wetbulb.Name = "wetbulb"
         Me.wetbulb.Size = New System.Drawing.Size(51, 20)
         Me.wetbulb.TabIndex = 6
         '
         'dewpoint
         '
-        Me.dewpoint.Location = New System.Drawing.Point(216, 65)
+        Me.dewpoint.Location = New System.Drawing.Point(277, 89)
         Me.dewpoint.Name = "dewpoint"
         Me.dewpoint.Size = New System.Drawing.Size(51, 20)
         Me.dewpoint.TabIndex = 7
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(216, 112)
+        Me.btnClose.Location = New System.Drawing.Point(277, 136)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(51, 23)
         Me.btnClose.TabIndex = 0
@@ -95,7 +95,7 @@ Partial Class FrmConversionDewPointRh
         '
         Me.lblTw.AutoSize = True
         Me.lblTw.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTw.Location = New System.Drawing.Point(106, 38)
+        Me.lblTw.Location = New System.Drawing.Point(167, 62)
         Me.lblTw.Name = "lblTw"
         Me.lblTw.Size = New System.Drawing.Size(47, 15)
         Me.lblTw.TabIndex = 2
@@ -105,7 +105,7 @@ Partial Class FrmConversionDewPointRh
         '
         Me.lblTd.AutoSize = True
         Me.lblTd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTd.Location = New System.Drawing.Point(213, 38)
+        Me.lblTd.Location = New System.Drawing.Point(274, 62)
         Me.lblTd.Name = "lblTd"
         Me.lblTd.Size = New System.Drawing.Size(45, 15)
         Me.lblTd.TabIndex = 3
@@ -115,7 +115,7 @@ Partial Class FrmConversionDewPointRh
         '
         Me.lblRH.AutoSize = True
         Me.lblRH.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRH.Location = New System.Drawing.Point(313, 38)
+        Me.lblRH.Location = New System.Drawing.Point(374, 62)
         Me.lblRH.Name = "lblRH"
         Me.lblRH.Size = New System.Drawing.Size(47, 15)
         Me.lblRH.TabIndex = 4
@@ -135,7 +135,7 @@ Partial Class FrmConversionDewPointRh
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 162)
+        Me.ClientSize = New System.Drawing.Size(509, 195)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblRH)
         Me.Controls.Add(Me.lblTd)

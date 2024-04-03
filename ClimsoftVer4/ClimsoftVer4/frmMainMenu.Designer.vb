@@ -47,15 +47,17 @@ Partial Class frmMainMenu
         Me.SelectLanguageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GenerlSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SequencerConfigurationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HourlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.seqDailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.seqHourlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.seqMonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.seqHourly2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormHourlyTimeSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormSynopticTimeSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSElementsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSStationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfigurationForTDCFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UpdateScriptToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
@@ -80,7 +82,6 @@ Partial Class frmMainMenu
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnMainDataEntry = New System.Windows.Forms.Button()
         Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
-        Me.UpdateScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.menuStripMain.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -141,6 +142,7 @@ Partial Class frmMainMenu
         Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
+        Me.mnuAccessoriesXMLOutput.Visible = False
         '
         'UserRecordsToolStripMenuItem1
         '
@@ -243,7 +245,7 @@ Partial Class frmMainMenu
         '
         'mnuTools
         '
-        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.FormSynopticTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem, Me.ConfigurationForTDCFToolStripMenuItem, Me.UpdateScriptToolStripMenuItem})
+        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.FormSynopticTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem, Me.ConfigurationForTDCFToolStripMenuItem, Me.UpdateScriptToolStripMenuItem1})
         Me.mnuTools.Name = "mnuTools"
         Me.mnuTools.Size = New System.Drawing.Size(52, 23)
         Me.mnuTools.Tag = "Tools"
@@ -272,28 +274,34 @@ Partial Class frmMainMenu
         '
         'SequencerConfigurationToolStripMenuItem
         '
-        Me.SequencerConfigurationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HourlyToolStripMenuItem, Me.DailyToolStripMenuItem, Me.MonthlyToolStripMenuItem})
+        Me.SequencerConfigurationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.seqDailyToolStripMenuItem, Me.seqHourlyToolStripMenuItem, Me.seqMonthlyToolStripMenuItem, Me.seqHourly2ToolStripMenuItem})
         Me.SequencerConfigurationToolStripMenuItem.Name = "SequencerConfigurationToolStripMenuItem"
         Me.SequencerConfigurationToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.SequencerConfigurationToolStripMenuItem.Text = "Sequencer Configuration"
         '
-        'HourlyToolStripMenuItem
+        'seqDailyToolStripMenuItem
         '
-        Me.HourlyToolStripMenuItem.Name = "HourlyToolStripMenuItem"
-        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
-        Me.HourlyToolStripMenuItem.Text = "Daily"
+        Me.seqDailyToolStripMenuItem.Name = "seqDailyToolStripMenuItem"
+        Me.seqDailyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.seqDailyToolStripMenuItem.Text = "Daily"
         '
-        'DailyToolStripMenuItem
+        'seqHourlyToolStripMenuItem
         '
-        Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
-        Me.DailyToolStripMenuItem.Text = "Hourly"
+        Me.seqHourlyToolStripMenuItem.Name = "seqHourlyToolStripMenuItem"
+        Me.seqHourlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.seqHourlyToolStripMenuItem.Text = "Hourly"
         '
-        'MonthlyToolStripMenuItem
+        'seqMonthlyToolStripMenuItem
         '
-        Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
-        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
-        Me.MonthlyToolStripMenuItem.Text = "Monthly"
+        Me.seqMonthlyToolStripMenuItem.Name = "seqMonthlyToolStripMenuItem"
+        Me.seqMonthlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.seqMonthlyToolStripMenuItem.Text = "Monthly"
+        '
+        'seqHourly2ToolStripMenuItem
+        '
+        Me.seqHourly2ToolStripMenuItem.Name = "seqHourly2ToolStripMenuItem"
+        Me.seqHourly2ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.seqHourly2ToolStripMenuItem.Text = "Hourly2"
         '
         'FormHourlyTimeSelectionToolStripMenuItem
         '
@@ -318,17 +326,13 @@ Partial Class frmMainMenu
         'AWSElementsToolStripMenuItem
         '
         Me.AWSElementsToolStripMenuItem.Name = "AWSElementsToolStripMenuItem"
-
-        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
-
+        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSElementsToolStripMenuItem.Text = "AWS Elements"
         '
         'AWSStationsToolStripMenuItem
         '
         Me.AWSStationsToolStripMenuItem.Name = "AWSStationsToolStripMenuItem"
-
-        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
-
+        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSStationsToolStripMenuItem.Text = "AWS Stations"
         '
         'ConfigurationForTDCFToolStripMenuItem
@@ -336,6 +340,12 @@ Partial Class frmMainMenu
         Me.ConfigurationForTDCFToolStripMenuItem.Name = "ConfigurationForTDCFToolStripMenuItem"
         Me.ConfigurationForTDCFToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.ConfigurationForTDCFToolStripMenuItem.Text = "TDCF Settings"
+        '
+        'UpdateScriptToolStripMenuItem1
+        '
+        Me.UpdateScriptToolStripMenuItem1.Name = "UpdateScriptToolStripMenuItem1"
+        Me.UpdateScriptToolStripMenuItem1.Size = New System.Drawing.Size(250, 24)
+        Me.UpdateScriptToolStripMenuItem1.Text = "Update db with Script File"
         '
         'mnuHelp
         '
@@ -658,12 +668,6 @@ Partial Class frmMainMenu
         '
         Me.HelpProvider1.HelpNamespace = "climsoft4.chm"
         '
-        'UpdateScriptToolStripMenuItem
-        '
-        Me.UpdateScriptToolStripMenuItem.Name = "UpdateScriptToolStripMenuItem"
-        Me.UpdateScriptToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
-        Me.UpdateScriptToolStripMenuItem.Text = "Update Script File"
-        '
         'frmMainMenu
         '
         Me.AutoSize = True
@@ -727,8 +731,8 @@ Partial Class frmMainMenu
     Friend WithEvents SelectLanguageToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GenerlSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SequencerConfigurationToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents HourlyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents seqDailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents seqHourlyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FormHourlyTimeSelectionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChangeOwnPasswordToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -738,11 +742,12 @@ Partial Class frmMainMenu
     Friend WithEvents UpdateObservationsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OpeartionsMonitoringToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UserRecordsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MonthlyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents seqMonthlyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EmptyKeyEntryTablesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CreateModifyKeyEntryFormToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HelpProvider1 As HelpProvider
     Friend WithEvents FormSynopticTimeSelectionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MnuInventory As ToolStripMenuItem
-    Friend WithEvents UpdateScriptToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UpdateScriptToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents seqHourly2ToolStripMenuItem As ToolStripMenuItem
 End Class

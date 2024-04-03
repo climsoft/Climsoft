@@ -48,6 +48,8 @@ Partial Class formProductsSelectCriteria
         Me.cmdClearElements = New System.Windows.Forms.Button()
         Me.chkTranspose = New System.Windows.Forms.CheckBox()
         Me.pnlSummary = New System.Windows.Forms.Panel()
+        Me.lblDaysMissing = New System.Windows.Forms.Label()
+        Me.txtMissingDays = New System.Windows.Forms.TextBox()
         Me.optTotal = New System.Windows.Forms.RadioButton()
         Me.optMean = New System.Windows.Forms.RadioButton()
         Me.lblSummary = New System.Windows.Forms.Label()
@@ -98,6 +100,8 @@ Partial Class formProductsSelectCriteria
         Me.lblStations = New System.Windows.Forms.Label()
         Me.cmbElement = New System.Windows.Forms.ComboBox()
         Me.cmbstation = New System.Windows.Forms.ComboBox()
+        Me.chkOutputElements = New System.Windows.Forms.CheckBox()
+        Me.chkOutputStations = New System.Windows.Forms.CheckBox()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.cmdExtract = New System.Windows.Forms.ToolStripButton()
@@ -200,6 +204,8 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Controls.Add(Me.pnlStation)
         Me.pnlStationsElements.Controls.Add(Me.cmbElement)
         Me.pnlStationsElements.Controls.Add(Me.cmbstation)
+        Me.pnlStationsElements.Controls.Add(Me.chkOutputElements)
+        Me.pnlStationsElements.Controls.Add(Me.chkOutputStations)
         Me.pnlStationsElements.Location = New System.Drawing.Point(0, 52)
         Me.pnlStationsElements.Name = "pnlStationsElements"
         Me.pnlStationsElements.Size = New System.Drawing.Size(1058, 429)
@@ -344,7 +350,7 @@ Partial Class formProductsSelectCriteria
         'chkTranspose
         '
         Me.chkTranspose.AutoSize = True
-        Me.chkTranspose.Location = New System.Drawing.Point(658, 182)
+        Me.chkTranspose.Location = New System.Drawing.Point(658, 178)
         Me.chkTranspose.Name = "chkTranspose"
         Me.chkTranspose.Size = New System.Drawing.Size(111, 17)
         Me.chkTranspose.TabIndex = 25
@@ -354,18 +360,40 @@ Partial Class formProductsSelectCriteria
         'pnlSummary
         '
         Me.pnlSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlSummary.Controls.Add(Me.lblDaysMissing)
+        Me.pnlSummary.Controls.Add(Me.txtMissingDays)
         Me.pnlSummary.Controls.Add(Me.optTotal)
         Me.pnlSummary.Controls.Add(Me.optMean)
         Me.pnlSummary.Controls.Add(Me.lblSummary)
-        Me.pnlSummary.Location = New System.Drawing.Point(653, 5)
+        Me.pnlSummary.Location = New System.Drawing.Point(650, 3)
         Me.pnlSummary.Name = "pnlSummary"
         Me.pnlSummary.Size = New System.Drawing.Size(398, 48)
         Me.pnlSummary.TabIndex = 23
         '
+        'lblDaysMissing
+        '
+        Me.lblDaysMissing.AutoSize = True
+        Me.lblDaysMissing.Location = New System.Drawing.Point(244, 28)
+        Me.lblDaysMissing.Name = "lblDaysMissing"
+        Me.lblDaysMissing.Size = New System.Drawing.Size(149, 13)
+        Me.lblDaysMissing.TabIndex = 4
+        Me.lblDaysMissing.Text = "Monthly Missing Days Allowed"
+        Me.lblDaysMissing.Visible = False
+        '
+        'txtMissingDays
+        '
+        Me.txtMissingDays.Location = New System.Drawing.Point(211, 24)
+        Me.txtMissingDays.Name = "txtMissingDays"
+        Me.txtMissingDays.Size = New System.Drawing.Size(30, 20)
+        Me.txtMissingDays.TabIndex = 3
+        Me.txtMissingDays.Text = "0"
+        Me.txtMissingDays.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtMissingDays.Visible = False
+        '
         'optTotal
         '
         Me.optTotal.AutoSize = True
-        Me.optTotal.Location = New System.Drawing.Point(205, 26)
+        Me.optTotal.Location = New System.Drawing.Point(131, 26)
         Me.optTotal.Name = "optTotal"
         Me.optTotal.Size = New System.Drawing.Size(49, 17)
         Me.optTotal.TabIndex = 2
@@ -376,7 +404,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.optMean.AutoSize = True
         Me.optMean.Checked = True
-        Me.optMean.Location = New System.Drawing.Point(104, 26)
+        Me.optMean.Location = New System.Drawing.Point(28, 26)
         Me.optMean.Name = "optMean"
         Me.optMean.Size = New System.Drawing.Size(52, 17)
         Me.optMean.TabIndex = 1
@@ -426,7 +454,7 @@ Partial Class formProductsSelectCriteria
         'chkAdvancedSelection
         '
         Me.chkAdvancedSelection.AutoSize = True
-        Me.chkAdvancedSelection.Location = New System.Drawing.Point(658, 207)
+        Me.chkAdvancedSelection.Location = New System.Drawing.Point(658, 204)
         Me.chkAdvancedSelection.Name = "chkAdvancedSelection"
         Me.chkAdvancedSelection.Size = New System.Drawing.Size(167, 17)
         Me.chkAdvancedSelection.TabIndex = 19
@@ -443,7 +471,7 @@ Partial Class formProductsSelectCriteria
         Me.lstvElements.HideSelection = False
         Me.lstvElements.HoverSelection = True
         Me.lstvElements.LabelEdit = True
-        Me.lstvElements.Location = New System.Drawing.Point(314, 57)
+        Me.lstvElements.Location = New System.Drawing.Point(310, 58)
         Me.lstvElements.Name = "lstvElements"
         Me.lstvElements.RightToLeftLayout = True
         Me.lstvElements.Size = New System.Drawing.Size(335, 289)
@@ -540,7 +568,7 @@ Partial Class formProductsSelectCriteria
         Me.lblProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProducts.Location = New System.Drawing.Point(158, -1)
         Me.lblProducts.Name = "lblProducts"
-        Me.lblProducts.Size = New System.Drawing.Size(16, 16)
+        Me.lblProducts.Size = New System.Drawing.Size(17, 16)
         Me.lblProducts.TabIndex = 8
         Me.lblProducts.Text = "   "
         '
@@ -548,17 +576,17 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtMinuteEnd.FormattingEnabled = True
         Me.txtMinuteEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59"})
-        Me.txtMinuteEnd.Location = New System.Drawing.Point(324, 67)
+        Me.txtMinuteEnd.Location = New System.Drawing.Point(348, 68)
         Me.txtMinuteEnd.Name = "txtMinuteEnd"
         Me.txtMinuteEnd.Size = New System.Drawing.Size(40, 21)
         Me.txtMinuteEnd.TabIndex = 15
-        Me.txtMinuteEnd.Text = "00"
+        Me.txtMinuteEnd.Text = "59"
         '
         'txtMinuteStart
         '
         Me.txtMinuteStart.FormattingEnabled = True
         Me.txtMinuteStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59", "60"})
-        Me.txtMinuteStart.Location = New System.Drawing.Point(324, 33)
+        Me.txtMinuteStart.Location = New System.Drawing.Point(348, 33)
         Me.txtMinuteStart.Name = "txtMinuteStart"
         Me.txtMinuteStart.Size = New System.Drawing.Size(40, 21)
         Me.txtMinuteStart.TabIndex = 14
@@ -568,7 +596,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtHourEnd.FormattingEnabled = True
         Me.txtHourEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHourEnd.Location = New System.Drawing.Point(278, 68)
+        Me.txtHourEnd.Location = New System.Drawing.Point(306, 68)
         Me.txtHourEnd.Name = "txtHourEnd"
         Me.txtHourEnd.Size = New System.Drawing.Size(40, 21)
         Me.txtHourEnd.TabIndex = 13
@@ -578,7 +606,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtHourStart.FormattingEnabled = True
         Me.txtHourStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHourStart.Location = New System.Drawing.Point(278, 34)
+        Me.txtHourStart.Location = New System.Drawing.Point(306, 33)
         Me.txtHourStart.Name = "txtHourStart"
         Me.txtHourStart.Size = New System.Drawing.Size(40, 21)
         Me.txtHourStart.TabIndex = 12
@@ -587,7 +615,7 @@ Partial Class formProductsSelectCriteria
         'txtSminute
         '
         Me.txtSminute.AutoSize = True
-        Me.txtSminute.Location = New System.Drawing.Point(324, 18)
+        Me.txtSminute.Location = New System.Drawing.Point(348, 17)
         Me.txtSminute.Name = "txtSminute"
         Me.txtSminute.Size = New System.Drawing.Size(39, 13)
         Me.txtSminute.TabIndex = 9
@@ -596,7 +624,7 @@ Partial Class formProductsSelectCriteria
         'lblHourEnd
         '
         Me.lblHourEnd.AutoSize = True
-        Me.lblHourEnd.Location = New System.Drawing.Point(278, 18)
+        Me.lblHourEnd.Location = New System.Drawing.Point(302, 17)
         Me.lblHourEnd.Name = "lblHourEnd"
         Me.lblHourEnd.Size = New System.Drawing.Size(30, 13)
         Me.lblHourEnd.TabIndex = 7
@@ -615,7 +643,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.dateTo.Location = New System.Drawing.Point(108, 68)
         Me.dateTo.Name = "dateTo"
-        Me.dateTo.Size = New System.Drawing.Size(164, 20)
+        Me.dateTo.Size = New System.Drawing.Size(195, 20)
         Me.dateTo.TabIndex = 4
         '
         'lblTo
@@ -631,7 +659,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.dateFrom.Location = New System.Drawing.Point(108, 33)
         Me.dateFrom.Name = "dateFrom"
-        Me.dateFrom.Size = New System.Drawing.Size(164, 20)
+        Me.dateFrom.Size = New System.Drawing.Size(195, 20)
         Me.dateFrom.TabIndex = 2
         Me.dateFrom.Value = New Date(2000, 1, 1, 0, 0, 0, 0)
         '
@@ -675,7 +703,7 @@ Partial Class formProductsSelectCriteria
         Me.pnlStation.Controls.Add(Me.lstAuthority)
         Me.pnlStation.Controls.Add(Me.optAuthority)
         Me.pnlStation.Controls.Add(Me.lblStations)
-        Me.pnlStation.Location = New System.Drawing.Point(655, 234)
+        Me.pnlStation.Location = New System.Drawing.Point(655, 241)
         Me.pnlStation.Name = "pnlStation"
         Me.pnlStation.Size = New System.Drawing.Size(396, 170)
         Me.pnlStation.TabIndex = 6
@@ -856,6 +884,32 @@ Partial Class formProductsSelectCriteria
         Me.cmbstation.Name = "cmbstation"
         Me.cmbstation.Size = New System.Drawing.Size(150, 21)
         Me.cmbstation.TabIndex = 1
+        '
+        'chkOutputElements
+        '
+        Me.chkOutputElements.AutoSize = True
+        Me.chkOutputElements.Checked = True
+        Me.chkOutputElements.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkOutputElements.Location = New System.Drawing.Point(782, 242)
+        Me.chkOutputElements.Name = "chkOutputElements"
+        Me.chkOutputElements.Size = New System.Drawing.Size(164, 17)
+        Me.chkOutputElements.TabIndex = 33
+        Me.chkOutputElements.Text = "Output Observation Elements"
+        Me.chkOutputElements.UseVisualStyleBackColor = True
+        Me.chkOutputElements.Visible = False
+        '
+        'chkOutputStations
+        '
+        Me.chkOutputStations.AutoSize = True
+        Me.chkOutputStations.Checked = True
+        Me.chkOutputStations.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkOutputStations.Location = New System.Drawing.Point(659, 242)
+        Me.chkOutputStations.Name = "chkOutputStations"
+        Me.chkOutputStations.Size = New System.Drawing.Size(99, 17)
+        Me.chkOutputStations.TabIndex = 32
+        Me.chkOutputStations.Text = "Output Stations"
+        Me.chkOutputStations.UseVisualStyleBackColor = True
+        Me.chkOutputStations.Visible = False
         '
         'ToolStrip2
         '
@@ -1043,4 +1097,8 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents ColumnHeader4 As ColumnHeader
     Friend WithEvents ColumnHeader5 As ColumnHeader
+    Friend WithEvents lblDaysMissing As Label
+    Friend WithEvents txtMissingDays As TextBox
+    Friend WithEvents chkOutputElements As CheckBox
+    Friend WithEvents chkOutputStations As CheckBox
 End Class

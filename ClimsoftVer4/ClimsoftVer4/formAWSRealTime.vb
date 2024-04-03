@@ -25,7 +25,7 @@ Public Class formAWSRealTime
     Dim ds As New DataSet
     Dim sql As String
     Dim rec As Integer
-    Dim Kount As Integer
+    Dim Kount, strRec As Integer
     Dim recEdit As New dataEntryGlobalRoutines
     Dim TDCF As New tdcfRoutines
     Dim Desc_Bits As String
@@ -132,6 +132,7 @@ Public Class formAWSRealTime
         SetDataSet("aws_sites")
         rec = 0
         PopulateForm("sites", txtSitesNavigator, rec)
+        pnlSites.Dock = DockStyle.Right
         'rec = 0
     End Sub
 
@@ -333,6 +334,7 @@ Err:
                 ds.Tables(tbl).Rows(num).Item("foldertype") = lstFolders.SelectedItem
 
             Case "pnlDataStructures"
+                'MsgBox(tbl & " " & strRec)
                 'ds.Tables(tbl).Rows(num).Item("strName") = txtStrName.Text
                 ds.Tables(tbl).Rows(num).Item("data_delimiter") = txtDelimiter.Text
                 ds.Tables(tbl).Rows(num).Item("hdrRows") = txtHeaders.Text
@@ -681,84 +683,65 @@ Err:
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
-        Try
-            'Dim comm As New MySql.Data.MySqlClient.MySqlCommand
-            'Dim sql0, Id, Nme, infl, str, flg, ip, hdr, Fpfx, chkGTS
-            'Dim opsts, chkPrfx
+        Dim sqlr As String
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
 
-            'Id = txtSiteID.Text
-            'Nme = txtSiteName.Text
-            'infl = txtInFile.Text
-            'str = txtDataStructure.Text
-            'flg = txtFlag.Text
-            'ip = txtIP.Text
-            'hdr = txtGTSHeader.Text
-            'Fpfx = txtfilePrefix.Text
-            'If chkOperational.Checked Then
-            '    opsts = 1
-            'Else
-            '    opsts = 0
-            'End If
-            'If chkGTSEncode.Checked Then
-            '    chkGTS = 1
-            'Else
-            '    chkGTS = 0
-            'End If
-            'If chkPrefix.Checked Then
-            '    chkPrfx = 1
-            'Else
-            '    chkPrfx = 0
-            'End If
-            'MsgBox(rec)
-            'MsgBox(ds.Tables("aws_sites").Rows(rec).Item("SiteID"))
-            'MsgBox(stn1)
-            'sql0 = "UPDATE `aws_sites` SET `SiteID`='" & Id & " ', `SiteName`='" & Nme & "', `InputFile`='" & infl & "', `FilePrefix`='" & Fpfx & "', `DataStructure`='" & str & "', `MissingDataFlag`=' " & flg & "', `awsServerIP`='" & ip & "', `OperationalStatus`=' " & opsts & "', `GTSEncode`='" & chkGTS & "', `GTSHeader`='" & hdr & "' WHERE  `SiteID`='" & stn1 & "';"
+        'Try
 
-            'comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
-            'comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
-            'comm.ExecuteNonQuery()   ' Execute the query
+        sqlr = "UPDATE aws_sites set SiteName = '" & txtSiteName.Text & "', InputFile= '" & txtInFile.Text & "',FilePrefix ='" & txtfilePrefix.Text & "',chkPrefix = " & chkPrefix.CheckState & ",DataStructure = '" & txtDataStructure.Text &
+                   "',MissingDataFlag = '" & txtFlag.Text & "',awsServerIP ='" & txtIP.Text & "',OperationalStatus = " & chkOperational.CheckState & ",GTSEncode = " & chkGTSEncode.CheckState & ",GTSHeader = '" & txtGTSHeader.Text & "' WHERE SiteID = '" & txtSiteID.Text & "';"
 
-            ds.Tables("aws_sites").Rows(rec).Item("SiteID") = txtSiteID.Text
-            ds.Tables("aws_sites").Rows(rec).Item("SiteName") = txtSiteName.Text
-            ds.Tables("aws_sites").Rows(rec).Item("InputFile") = txtInFile.Text
-            ds.Tables("aws_sites").Rows(rec).Item("DataStructure") = txtDataStructure.Text
-            ds.Tables("aws_sites").Rows(rec).Item("MissingDataFlag") = txtFlag.Text
-            ds.Tables("aws_sites").Rows(rec).Item("awsServerIp") = txtIP.Text
-            ds.Tables("aws_sites").Rows(rec).Item("GTSHeader") = txtGTSHeader.Text
-            ds.Tables("aws_sites").Rows(rec).Item("FilePrefix") = txtfilePrefix.Text
-            If chkOperational.Checked Then
-                ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 1
-            Else
-                ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 0
-            End If
-            If chkGTSEncode.Checked Then
-                ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 1
-            Else
-                ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 0
-            End If
-            If chkPrefix.Checked Then
-                ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 1
-            Else
-                ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 0
-            End If
+        qry = New MySql.Data.MySqlClient.MySqlCommand(sqlr, dbconn)
 
-            'Add a new record to the data source table
-            'If cmdtype = "add" Then ds.Tables("station").Rows.Add(dsNewRow)
+            Try
+                qry.ExecuteNonQuery()
+            MsgBox("Record successfully Updated")
+            'PopulateForm("sites", txtSitesNavigator, rec)
+        Catch rx As Exception
+                MsgBox(rx.Message)
+            End Try
 
-            da.Update(ds, "aws_sites")
+        '    ds.Tables("aws_sites").Rows(rec).Item("SiteID") = txtSiteID.Text
+        '             ds.Tables("aws_sites").Rows(rec).Item("SiteName") = txtSiteName.Text
+        '             ds.Tables("aws_sites").Rows(rec).Item("InputFile") = txtInFile.Text
+        '             ds.Tables("aws_sites").Rows(rec).Item("DataStructure") = txtDataStructure.Text
+        '             ds.Tables("aws_sites").Rows(rec).Item("MissingDataFlag") = txtFlag.Text
+        '             ds.Tables("aws_sites").Rows(rec).Item("awsServerIp") = txtIP.Text
+        '             ds.Tables("aws_sites").Rows(rec).Item("GTSHeader") = txtGTSHeader.Text
+        '             ds.Tables("aws_sites").Rows(rec).Item("FilePrefix") = txtfilePrefix.Text
+        '             If chkOperational.Checked Then
+        '                 ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 1
+        '             Else
+        '                 ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 0
+        '             End If
+        '             If chkGTSEncode.Checked Then
+        '                 ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 1
+        '             Else
+        '                 ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 0
+        '             End If
+        '             If chkPrefix.Checked Then
+        '                 ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 1
+        '             Else
+        '                 ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 0
+        '             End If
 
-            recUpdate.messageBoxRecordedUpdated()
-            'ClearStationForm()
-        Catch ex As Exception
-            MsgBox("Update Failure")
-        End Try
+        '             'Add a new record to the data source table
+        '             'If cmdtype = "add" Then ds.Tables("station").Rows.Add(dsNewRow)
+
+        '             da.Update(ds, "aws_sites")
+
+        '             recUpdate.messageBoxRecordedUpdated()
+        '        'ClearStationForm()
+        'Catch ex As Exception
+        '        MsgBox("Update Failure")
+        'End Try
     End Sub
 
     Sub FillList(ByRef lst As ComboBox, tbl As String, lstfld As String)
         Dim dlst As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim dstn As New DataSet
         Dim sql As String
-        sql = "SELECT * FROM  " & tbl
+        sql = "Select * FROM  " & tbl
 
         dlst = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         dstn.Clear()
@@ -782,6 +765,7 @@ Err:
                     If Not IsDBNull(ds.Tables("aws_structures").Rows(i).Item("strName")) Then txtDelimiter.Text = ds.Tables("aws_structures").Rows(i).Item("data_delimiter")
                     If Not IsDBNull(ds.Tables("aws_structures").Rows(i).Item("hdrRows")) Then txtHeaders.Text = ds.Tables("aws_structures").Rows(i).Item("hdrRows")
                     If Not IsDBNull(ds.Tables("aws_structures").Rows(i).Item("txtQualifier")) Then txtQualifier.Text = ds.Tables("aws_structures").Rows(i).Item("txtQualifier")
+                    strRec = i + 1
                     lblRecords.Text = "Rec: " & i + 1
                 End If
             Next
@@ -871,19 +855,24 @@ Err:
     End Sub
 
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
-        'MsgBox(Strings.Right(txtRecNo.Text, 1))
+        'MsgBox(Strings.Right(lblRecords.Text, 1))
         Try
             Dim recs As Integer
-            recs = Int(Strings.Right(lblRecords.Text, 1)) - 1 ' Record number for the selected structure in the aws_structures table
+            'recs = Int(Strings.Right(lblRecords.Text, 1)) - 1 ' Record number for the selected structure in the aws_structures table
+            recs = Int(Strings.Right(lblRecords.Text, Len(lblRecords.Text) - 5)) - 1
+
             RecordUpdate("aws_structures", "pnlDataStructures", recs, "update")
             FillList(cmbExistingStructures, "aws_structures", "strName")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
-
+        'cmbExistingStructures
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+        Dim tblNm As String
+        tblNm = txtStrName.Text
+        'MsgBox(tblNm)
         Try
             If Not IsNumeric(Strings.Right(lblRecords.Text, 1)) Then ' No data structure selected
                 MsgBox("Nothing to delete")
@@ -900,6 +889,18 @@ Err:
             cmbExistingStructures.Text = ""
             ' Hide Data grid view
             DataGridViewStructures.Visible = False
+
+            ' Delate the structure table
+            Dim recCommit As New dataEntryGlobalRoutines
+            Dim sql0 As String
+            Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+            comm.Connection = dbconn
+
+            sql0 = "DROP TABLE `" & tblNm & "`;"
+            'MsgBox(sql0)
+            comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            comm.ExecuteNonQuery()   ' Execute the query
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -943,6 +944,10 @@ Err:
         Dim recUpdate As New dataEntryGlobalRoutines
 
         Try
+            ' Late adjustment on table aws_process_parameters. Added to allow for saving and retrieval of Ecode period data
+            sqlp = "ALTER TABLE `aws_process_parameters` ADD COLUMN IF NOT EXISTS `EncodePeriod` INT(11) NOT NULL DEFAULT '2' AFTER `UTCDiff`;"
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sqlp, dbconn)
+            qry.ExecuteNonQuery()
 
             sqlp = "SELECT * FROM aws_process_parameters"
             dpa = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlp, dbconn)
@@ -955,7 +960,9 @@ Err:
             ' Insert default values if table is empty
             If dps.Tables("aws_process_parameters").Rows.Count = 0 Then
                 'sqlp = "INSERT INTO `" & mndb & "`.`aws_process_parameters` (`RetrievePeriod`, `RetrieveTimeout`, `DelinputFile`, `UTCDiff`) VALUES (2, 10, 0, 0);"
+
                 sqlp = "INSERT INTO `aws_process_parameters` (`RetrievePeriod`, `RetrieveTimeout`, `UTCDiff`) VALUES ('2', '999', '0');"
+
                 qry = New MySql.Data.MySqlClient.MySqlCommand(sqlp, dbconn)
                 'Execute query
                 qry.ExecuteNonQuery()
@@ -971,14 +978,17 @@ Err:
 
             Select Case LoadType
                 Case "txtlFill"
+
                     txtInterval.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveInterval")
                     txtOffset.Text = dps.Tables("aws_process_parameters").Rows(0).Item("HourOffset")
                     txtPeriod.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrievePeriod")
                     txtTimeout.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveTimeout")
                     txtGMTDiff.Text = dps.Tables("aws_process_parameters").Rows(0).Item("UTCDiff")
                     chkDeleteFile.Checked = dps.Tables("aws_process_parameters").Rows(0).Item("DelinputFile")
+                    txtEncode.Text = dps.Tables("aws_process_parameters").Rows(0).Item("EncodePeriod")
 
                 Case "dpupdate"
+
                     Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(dpa)
 
                     dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveInterval") = txtInterval.Text
@@ -986,6 +996,7 @@ Err:
                     dps.Tables("aws_process_parameters").Rows(0).Item("RetrievePeriod") = txtPeriod.Text
                     dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveTimeout") = txtTimeout.Text
                     dps.Tables("aws_process_parameters").Rows(0).Item("UTCDiff") = txtGMTDiff.Text
+                    dps.Tables("aws_process_parameters").Rows(0).Item("EncodePeriod") = txtEncode.Text
 
                     If chkDeleteFile.Checked = True Then
                         dps.Tables("aws_process_parameters").Rows(0).Item("DelinputFile") = 1
@@ -1236,10 +1247,15 @@ Err:
         With ds.Tables("aws_sites")
 
             For i = 0 To .Rows.Count - 1 'Kount - 1
+                'StnGTShdr = ""
 
                 If IsDBNull(.Rows(i).Item("InputFile")) Or .Rows(i).Item("OperationalStatus") = 0 Then Continue For ' Data for site not in a state to be processed
 
                 ftp_host = .Rows(i).Item("awsServerIp")
+
+                'If Not IsDBNull(.Rows(i).Item("GTSHeader")) Then
+                '    StnGTShdr = .Rows(i).Item("GTSHeader") ' Get the Stations GTS Message header if any
+                'End If
 
                 ' Get files prefix status
                 Dim sep As Integer
@@ -1291,6 +1307,7 @@ Err:
         ' Encode Bufr data for subsets having no WSI
 
         ' Load the subsets records from an output file into arrays 
+
         If Bufr_Subst > 0 Then
             Kount = 0
             Do While EOF(30) = False
@@ -1320,6 +1337,7 @@ Err:
                 Tdone = "00/00/0000 00:00:00"
 
                 ' Combine the Subsets for the same hour into a single bulletin
+
                 For i = 0 To Kount - 1
 
                     subst = ""
@@ -2055,7 +2073,7 @@ Err:
                 Rmd = DateAndTime.Hour(Date_Time) Mod ET
 
                 ' Update the Template Table and Process the messages for transmission at the scheduled time
-                If Val(DateAndTime.Hour(Date_Time)) Mod ET = 0 Then update_tbltemplate(aws_rs, Date_Time)
+                If Val(DateAndTime.Hour(Date_Time)) Mod ET = 0 And DateAndTime.Minute(Date_Time) = 0 Then update_tbltemplate(aws_rs, Date_Time)
 
             End If
             txtLastProcess.Text = datestring
@@ -3857,6 +3875,7 @@ Err:
                 CreateDataGridRow(ds, tbl, col, DataGridViewStructures.Rows.Count - 1)
                 DataGridViewStructures.Refresh()
             End If
+
             'MsgBox(DataGridViewStructures.Rows.Count)
         End Try
     End Sub
@@ -3889,6 +3908,7 @@ Err:
             If e.KeyCode = Keys.Delete And DataGridViewStructures.CurrentRow.Selected = True Then
                 tbl = cmbExistingStructures.Text
                 recno = DataGridViewStructures.CurrentRow.Index
+                'MsgBox(recno)
                 SetDataSet(tbl)
                 Dim cw As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
 
@@ -4630,6 +4650,14 @@ Err:
                         'Skip older records
                         If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
 
+                        If Not IsDate(datestring) Then Continue For
+                        If Val(txtPeriod.Text) <> 999 And DateDiff("h", datestring, Now()) > Val(txtPeriod.Text) Then
+                            'Log_Errors(DateDiff("h", datestring, Now()) & "--" & Val(txtPeriod.Text))
+                            Continue For
+                        End If
+
+                        'Log_Errors(datestring & " " & DateAdd("h", Val(txtPeriod.Text) * -1, Now))
+
                         'Skip records with invalid date stamp
                         If IsDate(datestring) Then
 
@@ -4774,6 +4802,84 @@ Err:
 
     End Function
 
+    'Private Sub cmdCopy_Click(sender As Object, e As EventArgs) Handles cmdClone.Click
+    '    'On Error GoTo Err
+
+    '    'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
+    '    'must be declared for the Update method to work.
+
+    '    Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+    '    Dim str As New DataSet
+    '    'Dim dsNewRow As DataRow
+    '    'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+    '    Dim recCommit As New dataEntryGlobalRoutines
+    '    Dim sql0 As String
+    '    Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+
+    '    ' Create the structure details record in aws_structures table
+    '    If Len(txtStrName.Text) = 0 Or Len(txtDelimiter.Text) = 0 Or Len(txtHeaders.Text) = 0 Then
+    '        MsgBox("Values for Structure Name, Delimiter Type and Total Header Rows must all be provided!")
+    '        Exit Sub
+    '    End If
+
+    '    Try
+    '        comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
+    '        'sql0 = "INSERT INTO `mysql_climsoft_db_v4`.`aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
+    '        sql0 = "INSERT INTO `aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
+
+    '        comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+    '        comm.ExecuteNonQuery()   ' Execute the query
+
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
+    '        Exit Sub
+    '    End Try
+    'End Sub
+
+    Private Sub cmdClone_Click(sender As Object, e As EventArgs) Handles cmdClone.Click
+
+        'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
+        'must be declared for the Update method to work.
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim str As New DataSet
+
+        Dim recCommit As New dataEntryGlobalRoutines
+        Dim sql0, tblName As String
+        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+
+        ' Create the structure details record in aws_structures table
+        If Len(txtStrName.Text) = 0 Or Len(txtDelimiter.Text) = 0 Or Len(txtHeaders.Text) = 0 Then
+            MsgBox("Values for Structure Name, Delimiter Type and Total Header Rows must all be provided!")
+            Exit Sub
+        End If
+
+        Try
+
+            tblName = InputBox("Enter name for the new table", "Clone Table " & txtStrName.Text, txtStrName.Text & "_copy")
+            comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
+
+            ' Clone a table from an existing data structure table
+            sql0 = "CREATE TABLE " & tblName & " AS SELECT * FROM " & txtStrName.Text & ";"
+            'MsgBox(sql0)
+            comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            comm.ExecuteNonQuery()   ' Execute the query
+
+            ' Insert a record in aws_structure table for the deails of the newly cloned table
+            sql0 = "INSERT INTO `aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & tblName & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
+            comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            comm.ExecuteNonQuery()   ' Execute the query
+
+            ' Create UNIQUE Key for the cloned table
+            sql0 = "ALTER TABLE `" & tblName & "`ADD UNIQUE INDEX `identification` (`Cols`);"
+            comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            comm.ExecuteNonQuery()   ' Execute the query
+            MsgBox("Data Structure " & tblName & " Created")
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
 End Class
 
 Public Class FTP
