@@ -248,6 +248,7 @@ Partial Class frmImportDaily
         '
         'txtObsHour
         '
+        Me.txtObsHour.Enabled = False
         Me.txtObsHour.Location = New System.Drawing.Point(330, 70)
         Me.txtObsHour.Name = "txtObsHour"
         Me.txtObsHour.Size = New System.Drawing.Size(23, 20)
