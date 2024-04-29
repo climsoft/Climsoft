@@ -112,6 +112,12 @@
 
         conn.Close()
         Me.Cursor = Cursors.Default
+
+        ClsTranslations.TranslateForm(Me)
+
+        'TODO. in future this will be done automatically by TranslateForms(Me)
+        ClsTranslations.TranslateComponent(lstvStations, True)
+
     End Sub
 
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
@@ -186,7 +192,7 @@
         If txtBeginYear.Text <> "" And txtEndYear.Text <> "" And stnlst <> "" Then
             Compute_Normals(stnlst)
         Else
-            MsgBox("All required input not provided")
+            MsgBox(ClsTranslations.GetTranslation("All required input not provided"))
         End If
 
     End Sub
@@ -218,7 +224,7 @@
             qry.ExecuteNonQuery()
             conn.Close()
             'MsgBox("Normals for Precipitations And Sunshine hrs computed")
-            lstMessages.Items.Add("Normals for Precipitations and Sunshine hrs computed")
+            lstMessages.Items.Add(ClsTranslations.GetTranslation("Normals for Precipitations and Sunshine hrs computed"))
             lstMessages.Refresh()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -243,7 +249,7 @@
             qry.ExecuteNonQuery()
             conn.Close()
             'MsgBox("Normals for Temperatures, Pressures computed")
-            lstMessages.Items.Add("Normals for Temperatures, Pressures computed")
+            lstMessages.Items.Add(ClsTranslations.GetTranslation("Normals for Temperatures, Pressures computed"))
             lstMessages.Refresh()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -265,7 +271,7 @@
             qry.ExecuteNonQuery()
             conn.Close()
             'MsgBox("Precipitation Quintiles computed")
-            lstMessages.Items.Add("Precipitation Quintiles computed")
+            lstMessages.Items.Add(ClsTranslations.GetTranslation("Precipitation Quintiles computed"))
             lstMessages.Refresh()
 
             ''Compute years available to compute Normals
@@ -303,7 +309,7 @@
         Dim Fl As String
         ' Ensure all input is ok
         If txtMonth.Text = "" Or txtYear.Text = "" Or lstvStations.Items.Count = 0 Then
-            MsgBox("All required input not provided")
+            MsgBox(ClsTranslations.GetTranslation("All required input not provided"))
             Exit Sub
         End If
 
@@ -320,7 +326,7 @@
                 hdr = headerCLIMAT()
 
                 If Len(hdr) = 0 Then
-                    MsgBox("Message Header not set. Administrator should open the Setting and set the header")
+                    MsgBox(ClsTranslations.GetTranslation("Message Header not set. Administrator should open the Setting and set the header"))
                     Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
@@ -879,7 +885,7 @@ GROUP BY StationId, MM;"
     Private Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnSend.Click
 
         If lstMessages.Items.Count = 0 Then
-            MsgBox("No CLIMAT message encoded")
+            MsgBox(ClsTranslations.GetTranslation("No CLIMAT message encoded"))
             Exit Sub
         End If
 
@@ -918,9 +924,9 @@ GROUP BY StationId, MM;"
                 ftpmode = ds.Tables("server").Rows(0).Item("ftpMode")
 
                 If Not FTP_Execute(msg_file, url, login, pwd, foldr, ftpmode, "put") Then
-                    MsgBox("FTP Failure")
+                    MsgBox(ClsTranslations.GetTranslation("FTP Failure"))
                 Else
-                    MsgBox("Message File Sent")
+                    MsgBox(ClsTranslations.GetTranslation("Message File Sent"))
                     serNum = serNum + 1
                 End If
 
@@ -929,7 +935,7 @@ GROUP BY StationId, MM;"
         Catch ex As Exception
             conn.Close()
             If ex.HResult = -2147467259 Then
-                MsgBox("Permission to Send not set! Administrator should start CLIMAT opeartion, open Setting then Click on 'Grant User Permissions'.")
+                MsgBox(ClsTranslations.GetTranslation("Permission to Send not set! Administrator should start CLIMAT opeartion, open Setting then Click on 'Grant User Permissions'."))
             Else
                 MsgBox(ex.Message)
             End If
@@ -1004,7 +1010,7 @@ GROUP BY StationId, MM;"
         nSUNhrs = "///"
 
         If yrs < 30 Then
-            MsgBox("Insuficient base period for Normal computations")
+            MsgBox(ClsTranslations.GetTranslation("Insuficient base period for Normal computations"))
             Return ""
         End If
 
@@ -1566,7 +1572,7 @@ GROUP BY StationId, MM;"
     Private Sub chk222_CheckedChanged(sender As Object, e As EventArgs) Handles chk222.CheckedChanged
         If chk222.Checked Then
             If txtBeginYear.Text = "" Or txtEndYear.Text = "" Then
-                MsgBox("Climate statistics base period required")
+                MsgBox(ClsTranslations.GetTranslation("Climate statistics base period required"))
                 chk222.Checked = False
             ElseIf Val(txtEndYear.Text) - Val(txtBeginYear.Text) < 29 Then
                 MsgBox("Recommended base period is 30 years")
@@ -1618,7 +1624,7 @@ GROUP BY StationId, MM;"
         If mainModule.userGroup = "ClimsoftAdmin" Or frmLogin.txtUsername.Text = "root" Then
             frmClimatSettings.Show()
         Else
-            MsgBox("Can't access Settings. No sufficient rights")
+            MsgBox(ClsTranslations.GetTranslation("Can't access Settings. No sufficient rights"))
         End If
 
         Try
@@ -1757,7 +1763,7 @@ GROUP BY StationId, MM;"
         Catch ex As Exception
             conn.Close()
             If ex.HResult = -2147467259 Then
-                MsgBox("User Permissions not set! Administrator should start CLIMAT opeartion, open Setting then Click on 'Grant User Permissions'")
+                MsgBox(ClsTranslations.GetTranslation("User Permissions not set! Administrator should start CLIMAT opeartion, open Setting then Click on 'Grant User Permissions'"))
             Else
                 MsgBox(ex.Message & " at headerCLIMAT")
             End If

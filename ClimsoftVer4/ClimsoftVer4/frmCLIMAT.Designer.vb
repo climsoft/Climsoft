@@ -68,7 +68,7 @@ Partial Class frmCLIMAT
         Me.lstvStations.Location = New System.Drawing.Point(32, 68)
         Me.lstvStations.Name = "lstvStations"
         Me.lstvStations.RightToLeftLayout = True
-        Me.lstvStations.Size = New System.Drawing.Size(354, 134)
+        Me.lstvStations.Size = New System.Drawing.Size(369, 134)
         Me.lstvStations.TabIndex = 19
         Me.lstvStations.UseCompatibleStateImageBehavior = False
         Me.lstvStations.View = System.Windows.Forms.View.Details
@@ -77,7 +77,7 @@ Partial Class frmCLIMAT
         '
         Me.cmbstation.FormattingEnabled = True
         Me.cmbstation.ItemHeight = 13
-        Me.cmbstation.Location = New System.Drawing.Point(105, 41)
+        Me.cmbstation.Location = New System.Drawing.Point(120, 41)
         Me.cmbstation.Name = "cmbstation"
         Me.cmbstation.Size = New System.Drawing.Size(281, 21)
         Me.cmbstation.TabIndex = 18
@@ -239,7 +239,7 @@ Partial Class frmCLIMAT
         '
         'txtMonth
         '
-        Me.txtMonth.Location = New System.Drawing.Point(182, 23)
+        Me.txtMonth.Location = New System.Drawing.Point(197, 23)
         Me.txtMonth.Name = "txtMonth"
         Me.txtMonth.Size = New System.Drawing.Size(34, 20)
         Me.txtMonth.TabIndex = 26
@@ -247,7 +247,7 @@ Partial Class frmCLIMAT
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(146, 27)
+        Me.lblMonth.Location = New System.Drawing.Point(138, 27)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(37, 13)
         Me.lblMonth.TabIndex = 25
@@ -255,7 +255,7 @@ Partial Class frmCLIMAT
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(58, 23)
+        Me.txtYear.Location = New System.Drawing.Point(70, 23)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(40, 20)
         Me.txtYear.TabIndex = 24

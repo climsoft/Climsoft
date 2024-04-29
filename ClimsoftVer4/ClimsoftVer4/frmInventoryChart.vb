@@ -50,9 +50,9 @@
                 .ChartAreas("ChartArea1").AxisY.MinorGrid.Enabled = True
 
                 ' Add titles
-                .Titles.Add("Annual Reporting Stations").Alignment = ContentAlignment.TopCenter
-                .ChartAreas("ChartArea1").AxisX.Title = "Years"
-                .ChartAreas("ChartArea1").AxisY.Title = "Number of Stations"
+                .Titles.Add(ClsTranslations.GetTranslation("Annual Reporting Stations")).Alignment = ContentAlignment.TopCenter
+                .ChartAreas("ChartArea1").AxisX.Title = ClsTranslations.GetTranslation("Years")
+                .ChartAreas("ChartArea1").AxisY.Title = ClsTranslations.GetTranslation("Number of Stations")
                 .Show()
 
                 With lstSeries
@@ -72,6 +72,8 @@
             c.Close()
             Me.Cursor = Cursors.Default
         End Try
+
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub comdSave_Click(sender As Object, e As EventArgs) Handles comdSave.Click
