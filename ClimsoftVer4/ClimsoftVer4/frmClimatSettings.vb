@@ -62,11 +62,14 @@
         Catch ex As Exception
             conn.Close()
             'MsgBox(ex.Message & " at show grid table")
-            MsgBox("Can't show CLIMAT parameters! Retry")
+            MsgBox(ClsTranslations.GetTranslation("Can't show CLIMAT parameters! Retry"))
             Me.Close()
         End Try
         PopulateForms()
         'conn.Close()
+
+        ClsTranslations.TranslateForm(Me)
+        ClsTranslations.TranslateComponent(DataGridViewParameters, True)
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs)
@@ -92,7 +95,7 @@
                     Next
                     da.Update(ds, "parameters")
                 Next
-                MsgBox("Update Successful")
+                MsgBox(ClsTranslations.GetTranslation("Update Successful"))
             End With
         Catch ex As Exception
             'conn.Close()
@@ -199,7 +202,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                     Next
                     da.Update(ds, "parameters")
                 Next
-                MsgBox("Update Successful")
+                MsgBox(ClsTranslations.GetTranslation("Update Successful"))
             End With
         Catch ex As Exception
             'conn.Close()
@@ -319,7 +322,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 Next
 
             End With
-            MsgBox("User permissions successfully granted")
+            MsgBox(ClsTranslations.GetTranslation("User permissions successfully granted"))
 
         Catch ex As Exception
             MsgBox(ex.Message & " at User Permissions")
@@ -461,7 +464,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                         Next
                         da.Update(ds, "parameters")
                     Next
-                    MsgBox("Update Successful")
+                    MsgBox(ClsTranslations.GetTranslation("Update Successful"))
                 End With
             Catch ex As Exception
                 conn.Close()
@@ -500,7 +503,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
 
     Private Sub txtConfirmPassword_LostFocus(sender As Object, e As EventArgs) Handles txtConfirmPassword.LostFocus
         If txtPassword.Text <> txtConfirmPassword.Text Then
-            MsgBox("Password not confirmed")
+            MsgBox(ClsTranslations.GetTranslation("Password not confirmed"))
             txtConfirmPassword.Text = ""
             'txtConfirmPassword.Focus()
         End If
@@ -540,7 +543,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
     Function confirmPassword() As Boolean
         Try
             If txtPassword.Text <> txtConfirmPassword.Text Then
-                MsgBox("Password not confirmed")
+                MsgBox(ClsTranslations.GetTranslation("Password not confirmed"))
                 txtConfirmPassword.Text = ""
                 'txtConfirmPassword.Focus()
             End If
@@ -583,7 +586,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 .Rows(0).Item("foldertype") = "ASC"
             End With
             da.Update(ds, "mss")
-            MsgBox("New Recorded Added")
+            MsgBox(ClsTranslations.GetTranslation("New Recorded Added"))
             btnAddNew.Visible = False
         Catch ex As Exception
             conn.Close()

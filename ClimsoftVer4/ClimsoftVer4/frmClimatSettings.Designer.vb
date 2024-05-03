@@ -101,7 +101,7 @@ Partial Class frmClimatSettings
         '
         Me.butGrant.Location = New System.Drawing.Point(317, 5)
         Me.butGrant.Name = "butGrant"
-        Me.butGrant.Size = New System.Drawing.Size(152, 23)
+        Me.butGrant.Size = New System.Drawing.Size(168, 23)
         Me.butGrant.TabIndex = 16
         Me.butGrant.Text = "Grant User Permissions "
         Me.butGrant.UseVisualStyleBackColor = True
@@ -110,7 +110,7 @@ Partial Class frmClimatSettings
         '
         Me.butUpdate.Location = New System.Drawing.Point(189, 5)
         Me.butUpdate.Name = "butUpdate"
-        Me.butUpdate.Size = New System.Drawing.Size(72, 23)
+        Me.butUpdate.Size = New System.Drawing.Size(84, 23)
         Me.butUpdate.TabIndex = 0
         Me.butUpdate.Text = "Update"
         Me.butUpdate.UseVisualStyleBackColor = True
@@ -173,7 +173,7 @@ Partial Class frmClimatSettings
         '
         Me.lblUTCdiff.AutoSize = True
         Me.lblUTCdiff.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUTCdiff.Location = New System.Drawing.Point(383, 21)
+        Me.lblUTCdiff.Location = New System.Drawing.Point(353, 21)
         Me.lblUTCdiff.Name = "lblUTCdiff"
         Me.lblUTCdiff.Size = New System.Drawing.Size(107, 13)
         Me.lblUTCdiff.TabIndex = 18
@@ -189,7 +189,7 @@ Partial Class frmClimatSettings
         '
         'txtMsgHeader
         '
-        Me.txtMsgHeader.Location = New System.Drawing.Point(163, 17)
+        Me.txtMsgHeader.Location = New System.Drawing.Point(182, 17)
         Me.txtMsgHeader.Name = "txtMsgHeader"
         Me.txtMsgHeader.Size = New System.Drawing.Size(150, 20)
         Me.txtMsgHeader.TabIndex = 0
@@ -238,7 +238,7 @@ Partial Class frmClimatSettings
         '
         'cmdUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(287, 233)
+        Me.cmdUpdate.Location = New System.Drawing.Point(313, 233)
         Me.cmdUpdate.Name = "cmdUpdate"
         Me.cmdUpdate.Size = New System.Drawing.Size(75, 22)
         Me.cmdUpdate.TabIndex = 26
@@ -248,7 +248,7 @@ Partial Class frmClimatSettings
         '
         'txtConfirmPassword
         '
-        Me.txtConfirmPassword.Location = New System.Drawing.Point(236, 205)
+        Me.txtConfirmPassword.Location = New System.Drawing.Point(262, 205)
         Me.txtConfirmPassword.Name = "txtConfirmPassword"
         Me.txtConfirmPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtConfirmPassword.Size = New System.Drawing.Size(157, 20)
@@ -256,7 +256,7 @@ Partial Class frmClimatSettings
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(235, 176)
+        Me.txtPassword.Location = New System.Drawing.Point(261, 176)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(157, 20)
@@ -264,14 +264,14 @@ Partial Class frmClimatSettings
         '
         'txtLogin
         '
-        Me.txtLogin.Location = New System.Drawing.Point(236, 145)
+        Me.txtLogin.Location = New System.Drawing.Point(262, 145)
         Me.txtLogin.Name = "txtLogin"
         Me.txtLogin.Size = New System.Drawing.Size(157, 20)
         Me.txtLogin.TabIndex = 5
         '
         'txtFolder
         '
-        Me.txtFolder.Location = New System.Drawing.Point(236, 115)
+        Me.txtFolder.Location = New System.Drawing.Point(262, 115)
         Me.txtFolder.Name = "txtFolder"
         Me.txtFolder.Size = New System.Drawing.Size(157, 20)
         Me.txtFolder.TabIndex = 4
@@ -280,14 +280,14 @@ Partial Class frmClimatSettings
         '
         Me.cboFTP.FormattingEnabled = True
         Me.cboFTP.Items.AddRange(New Object() {"FTP", "SFTP"})
-        Me.cboFTP.Location = New System.Drawing.Point(236, 84)
+        Me.cboFTP.Location = New System.Drawing.Point(262, 84)
         Me.cboFTP.Name = "cboFTP"
         Me.cboFTP.Size = New System.Drawing.Size(114, 21)
         Me.cboFTP.TabIndex = 3
         '
         'txtServer
         '
-        Me.txtServer.Location = New System.Drawing.Point(236, 54)
+        Me.txtServer.Location = New System.Drawing.Point(262, 54)
         Me.txtServer.Name = "txtServer"
         Me.txtServer.Size = New System.Drawing.Size(156, 20)
         Me.txtServer.TabIndex = 2

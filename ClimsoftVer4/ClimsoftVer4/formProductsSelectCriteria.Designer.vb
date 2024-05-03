@@ -218,7 +218,7 @@ Partial Class formProductsSelectCriteria
         Me.pnlExtremes.Controls.Add(Me.btnMaxDate)
         Me.pnlExtremes.Controls.Add(Me.btnLowHigh)
         Me.pnlExtremes.Controls.Add(Me.lblXtyp)
-        Me.pnlExtremes.Location = New System.Drawing.Point(648, 7)
+        Me.pnlExtremes.Location = New System.Drawing.Point(648, 5)
         Me.pnlExtremes.Name = "pnlExtremes"
         Me.pnlExtremes.Size = New System.Drawing.Size(403, 61)
         Me.pnlExtremes.TabIndex = 24
@@ -226,7 +226,7 @@ Partial Class formProductsSelectCriteria
         '
         'btnMinDate
         '
-        Me.btnMinDate.Location = New System.Drawing.Point(286, 20)
+        Me.btnMinDate.Location = New System.Drawing.Point(280, 20)
         Me.btnMinDate.Name = "btnMinDate"
         Me.btnMinDate.Size = New System.Drawing.Size(104, 36)
         Me.btnMinDate.TabIndex = 3
@@ -235,7 +235,7 @@ Partial Class formProductsSelectCriteria
         '
         'btnMaxDate
         '
-        Me.btnMaxDate.Location = New System.Drawing.Point(154, 20)
+        Me.btnMaxDate.Location = New System.Drawing.Point(148, 20)
         Me.btnMaxDate.Name = "btnMaxDate"
         Me.btnMaxDate.Size = New System.Drawing.Size(100, 36)
         Me.btnMaxDate.TabIndex = 2
@@ -268,7 +268,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.pnlLevels.Controls.Add(Me.lblLevels)
         Me.pnlLevels.Controls.Add(Me.lstvLevels)
-        Me.pnlLevels.Location = New System.Drawing.Point(654, 3)
+        Me.pnlLevels.Location = New System.Drawing.Point(651, 5)
         Me.pnlLevels.Name = "pnlLevels"
         Me.pnlLevels.Size = New System.Drawing.Size(397, 68)
         Me.pnlLevels.TabIndex = 30
@@ -295,7 +295,7 @@ Partial Class formProductsSelectCriteria
         Me.lstvLevels.HideSelection = False
         Me.lstvLevels.HoverSelection = True
         Me.lstvLevels.LabelEdit = True
-        Me.lstvLevels.Location = New System.Drawing.Point(172, -5)
+        Me.lstvLevels.Location = New System.Drawing.Point(233, -5)
         Me.lstvLevels.Name = "lstvLevels"
         Me.lstvLevels.RightToLeftLayout = True
         Me.lstvLevels.Size = New System.Drawing.Size(156, 73)
@@ -373,7 +373,7 @@ Partial Class formProductsSelectCriteria
         'lblDaysMissing
         '
         Me.lblDaysMissing.AutoSize = True
-        Me.lblDaysMissing.Location = New System.Drawing.Point(244, 28)
+        Me.lblDaysMissing.Location = New System.Drawing.Point(203, 28)
         Me.lblDaysMissing.Name = "lblDaysMissing"
         Me.lblDaysMissing.Size = New System.Drawing.Size(149, 13)
         Me.lblDaysMissing.TabIndex = 4
@@ -382,7 +382,7 @@ Partial Class formProductsSelectCriteria
         '
         'txtMissingDays
         '
-        Me.txtMissingDays.Location = New System.Drawing.Point(211, 24)
+        Me.txtMissingDays.Location = New System.Drawing.Point(170, 24)
         Me.txtMissingDays.Name = "txtMissingDays"
         Me.txtMissingDays.Size = New System.Drawing.Size(30, 20)
         Me.txtMissingDays.TabIndex = 3
@@ -393,7 +393,7 @@ Partial Class formProductsSelectCriteria
         'optTotal
         '
         Me.optTotal.AutoSize = True
-        Me.optTotal.Location = New System.Drawing.Point(131, 26)
+        Me.optTotal.Location = New System.Drawing.Point(88, 26)
         Me.optTotal.Name = "optTotal"
         Me.optTotal.Size = New System.Drawing.Size(49, 17)
         Me.optTotal.TabIndex = 2
@@ -404,7 +404,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.optMean.AutoSize = True
         Me.optMean.Checked = True
-        Me.optMean.Location = New System.Drawing.Point(28, 26)
+        Me.optMean.Location = New System.Drawing.Point(9, 26)
         Me.optMean.Name = "optMean"
         Me.optMean.Size = New System.Drawing.Size(52, 17)
         Me.optMean.TabIndex = 1

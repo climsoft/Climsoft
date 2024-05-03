@@ -44,6 +44,9 @@
 
             ClsTranslations.TranslateForm(Me)
 
+            'TODO. in future this will be done automatically by TranslateForms(Me)
+            ClsTranslations.TranslateComponent(lstViewForms, False)
+
         Catch ex As Exception
             MessageBox.Show("Error : " & ex.Message)
         End Try
@@ -57,7 +60,7 @@
             Next
             'save the changes in the datatable
             dataCall.Save(dataTable)
-            MessageBox.Show("Form selection updated successfully")
+            MessageBox.Show(ClsTranslations.GetTranslation("Form selection updated successfully"))
         Catch ex As Exception
             MessageBox.Show("Error : " & ex.Message)
         End Try

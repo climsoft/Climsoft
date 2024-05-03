@@ -93,13 +93,13 @@ Public Class frmProducts
                 frmCLIMAT.Show()
 
                 'Case Else
-                MsgBox(selectedProductName)
+                'MsgBox(selectedProductName)
                 'todo. refactor formProductsSelectCriteria to not use product type label
                 'the label should show translated text
                 formProductsSelectCriteria.lblProductType.Text = selectedProductName
                 formProductsSelectCriteria.Show()
             Case "Daily Wind Speed"
-                Ecode = InputBox("Element Code?", "Daily Wind Totalizer Element Code")
+                Ecode = InputBox(ClsTranslations.GetTranslation("Element Code?"), ClsTranslations.GetTranslation("Daily Wind Totalizer Element Code"))
 
                 If Ecode = "" Or Not IsNumeric(Ecode) Then Exit Sub
                 'If InputBox("Element Code?", "Daily Wind Totalizer Element Code") = "" Then Exit Sub
@@ -107,7 +107,7 @@ Public Class frmProducts
 
                 str(0) = Ecode
                 str(1) = "WINDTOT"
-                str(2) = "Wind Totalizer"
+                str(2) = ClsTranslations.GetTranslation("Wind Totalizer")
                 itm = New ListViewItem(str)
                 formProductsSelectCriteria.lstvElements.Items.Clear()
                 formProductsSelectCriteria.lstvElements.Items.Add(itm)
@@ -115,13 +115,13 @@ Public Class frmProducts
                 formProductsSelectCriteria.Show()
 
             Case "Hourly Wind Speed"
-                Ecode = InputBox("Element Code?", "Hourly Wind Totalizer Element Code")
+                Ecode = InputBox(ClsTranslations.GetTranslation("Element Code?"), ClsTranslations.GetTranslation("Hourly Wind Totalizer Element Code"))
 
                 If Ecode = "" Or Not IsNumeric(Ecode) Then Exit Sub
 
                 str(0) = Ecode
                 str(1) = "WINDTOT"
-                str(2) = "Wind Totalizer"
+                str(2) = ClsTranslations.GetTranslation("Wind Totalizer")
                 itm = New ListViewItem(str)
                 formProductsSelectCriteria.lstvElements.Items.Clear()
                 formProductsSelectCriteria.lstvElements.Items.Add(itm)

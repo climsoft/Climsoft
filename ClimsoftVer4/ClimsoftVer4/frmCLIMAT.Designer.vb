@@ -68,7 +68,7 @@ Partial Class frmCLIMAT
         Me.lstvStations.Location = New System.Drawing.Point(32, 68)
         Me.lstvStations.Name = "lstvStations"
         Me.lstvStations.RightToLeftLayout = True
-        Me.lstvStations.Size = New System.Drawing.Size(354, 134)
+        Me.lstvStations.Size = New System.Drawing.Size(369, 134)
         Me.lstvStations.TabIndex = 19
         Me.lstvStations.UseCompatibleStateImageBehavior = False
         Me.lstvStations.View = System.Windows.Forms.View.Details
@@ -77,7 +77,7 @@ Partial Class frmCLIMAT
         '
         Me.cmbstation.FormattingEnabled = True
         Me.cmbstation.ItemHeight = 13
-        Me.cmbstation.Location = New System.Drawing.Point(105, 41)
+        Me.cmbstation.Location = New System.Drawing.Point(33, 41)
         Me.cmbstation.Name = "cmbstation"
         Me.cmbstation.Size = New System.Drawing.Size(281, 21)
         Me.cmbstation.TabIndex = 18
@@ -85,7 +85,7 @@ Partial Class frmCLIMAT
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(26, 44)
+        Me.lblStation.Location = New System.Drawing.Point(30, 25)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(73, 13)
         Me.lblStation.TabIndex = 20
@@ -96,9 +96,9 @@ Partial Class frmCLIMAT
         Me.grpOptions.Controls.Add(Me.chk444)
         Me.grpOptions.Controls.Add(Me.chk333)
         Me.grpOptions.Controls.Add(Me.chk222)
-        Me.grpOptions.Location = New System.Drawing.Point(29, 238)
+        Me.grpOptions.Location = New System.Drawing.Point(10, 230)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(345, 106)
+        Me.grpOptions.Size = New System.Drawing.Size(356, 106)
         Me.grpOptions.TabIndex = 25
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Include Optional Sections - If sufficient climate statistics are available "
@@ -141,9 +141,9 @@ Partial Class frmCLIMAT
         Me.grpStatistics.Controls.Add(Me.txtBeginYear)
         Me.grpStatistics.Controls.Add(Me.lblBeginYear)
         Me.grpStatistics.Controls.Add(Me.lblPeriod)
-        Me.grpStatistics.Location = New System.Drawing.Point(380, 229)
+        Me.grpStatistics.Location = New System.Drawing.Point(372, 222)
         Me.grpStatistics.Name = "grpStatistics"
-        Me.grpStatistics.Size = New System.Drawing.Size(274, 115)
+        Me.grpStatistics.Size = New System.Drawing.Size(290, 115)
         Me.grpStatistics.TabIndex = 26
         Me.grpStatistics.TabStop = False
         Me.grpStatistics.Text = "Generate long term statistics for CLIMAT message"
@@ -152,7 +152,7 @@ Partial Class frmCLIMAT
         '
         Me.butStatistics.Location = New System.Drawing.Point(182, 72)
         Me.butStatistics.Name = "butStatistics"
-        Me.butStatistics.Size = New System.Drawing.Size(35, 22)
+        Me.butStatistics.Size = New System.Drawing.Size(43, 22)
         Me.butStatistics.TabIndex = 29
         Me.butStatistics.Text = "OK"
         Me.butStatistics.UseVisualStyleBackColor = True
@@ -200,18 +200,18 @@ Partial Class frmCLIMAT
         '
         'butEncode
         '
-        Me.butEncode.Location = New System.Drawing.Point(30, 350)
+        Me.butEncode.Location = New System.Drawing.Point(12, 350)
         Me.butEncode.Name = "butEncode"
-        Me.butEncode.Size = New System.Drawing.Size(97, 22)
+        Me.butEncode.Size = New System.Drawing.Size(115, 22)
         Me.butEncode.TabIndex = 30
         Me.butEncode.Text = "Encode CLIMAT "
         Me.butEncode.UseVisualStyleBackColor = True
         '
         'butClose
         '
-        Me.butClose.Location = New System.Drawing.Point(219, 350)
+        Me.butClose.Location = New System.Drawing.Point(231, 350)
         Me.butClose.Name = "butClose"
-        Me.butClose.Size = New System.Drawing.Size(60, 22)
+        Me.butClose.Size = New System.Drawing.Size(90, 22)
         Me.butClose.TabIndex = 31
         Me.butClose.Text = "Close"
         Me.butClose.UseVisualStyleBackColor = True
@@ -239,7 +239,7 @@ Partial Class frmCLIMAT
         '
         'txtMonth
         '
-        Me.txtMonth.Location = New System.Drawing.Point(182, 23)
+        Me.txtMonth.Location = New System.Drawing.Point(197, 23)
         Me.txtMonth.Name = "txtMonth"
         Me.txtMonth.Size = New System.Drawing.Size(34, 20)
         Me.txtMonth.TabIndex = 26
@@ -247,7 +247,7 @@ Partial Class frmCLIMAT
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(146, 27)
+        Me.lblMonth.Location = New System.Drawing.Point(138, 27)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(37, 13)
         Me.lblMonth.TabIndex = 25
@@ -255,7 +255,7 @@ Partial Class frmCLIMAT
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(58, 23)
+        Me.txtYear.Location = New System.Drawing.Point(70, 23)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(40, 20)
         Me.txtYear.TabIndex = 24
@@ -273,7 +273,7 @@ Partial Class frmCLIMAT
         '
         Me.butClear.Location = New System.Drawing.Point(133, 350)
         Me.butClear.Name = "butClear"
-        Me.butClear.Size = New System.Drawing.Size(70, 22)
+        Me.butClear.Size = New System.Drawing.Size(90, 22)
         Me.butClear.TabIndex = 34
         Me.butClear.Text = "Clear"
         Me.butClear.UseVisualStyleBackColor = True
@@ -289,14 +289,14 @@ Partial Class frmCLIMAT
         '
         'txtCLIMAT
         '
-        Me.txtCLIMAT.Location = New System.Drawing.Point(122, 496)
+        Me.txtCLIMAT.Location = New System.Drawing.Point(8, 516)
         Me.txtCLIMAT.Name = "txtCLIMAT"
         Me.txtCLIMAT.Size = New System.Drawing.Size(475, 20)
         Me.txtCLIMAT.TabIndex = 36
         '
         'butSend
         '
-        Me.butSend.Location = New System.Drawing.Point(600, 496)
+        Me.butSend.Location = New System.Drawing.Point(500, 515)
         Me.butSend.Name = "butSend"
         Me.butSend.Size = New System.Drawing.Size(51, 21)
         Me.butSend.TabIndex = 37
@@ -306,27 +306,27 @@ Partial Class frmCLIMAT
         '
         'butSetting
         '
-        Me.butSetting.Location = New System.Drawing.Point(578, 350)
+        Me.butSetting.Location = New System.Drawing.Point(562, 350)
         Me.butSetting.Name = "butSetting"
-        Me.butSetting.Size = New System.Drawing.Size(75, 22)
+        Me.butSetting.Size = New System.Drawing.Size(91, 22)
         Me.butSetting.TabIndex = 38
         Me.butSetting.Text = "Settings"
         Me.butSetting.UseVisualStyleBackColor = True
         '
         'butHelp
         '
-        Me.butHelp.Location = New System.Drawing.Point(380, 350)
+        Me.butHelp.Location = New System.Drawing.Point(420, 350)
         Me.butHelp.Name = "butHelp"
-        Me.butHelp.Size = New System.Drawing.Size(51, 22)
+        Me.butHelp.Size = New System.Drawing.Size(90, 22)
         Me.butHelp.TabIndex = 39
         Me.butHelp.Text = "Help"
         Me.butHelp.UseVisualStyleBackColor = True
         '
         'btnSend
         '
-        Me.btnSend.Location = New System.Drawing.Point(304, 350)
+        Me.btnSend.Location = New System.Drawing.Point(326, 350)
         Me.btnSend.Name = "btnSend"
-        Me.btnSend.Size = New System.Drawing.Size(58, 22)
+        Me.btnSend.Size = New System.Drawing.Size(90, 22)
         Me.btnSend.TabIndex = 40
         Me.btnSend.Text = "Send"
         Me.btnSend.UseVisualStyleBackColor = True
@@ -335,7 +335,7 @@ Partial Class frmCLIMAT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(666, 524)
+        Me.ClientSize = New System.Drawing.Size(666, 554)
         Me.Controls.Add(Me.btnSend)
         Me.Controls.Add(Me.butHelp)
         Me.Controls.Add(Me.butSetting)

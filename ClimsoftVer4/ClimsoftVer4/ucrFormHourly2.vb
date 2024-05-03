@@ -83,9 +83,6 @@
                                                   {"hh"}, dctSequencerColControls,
                                                   ucrYearSelector, ucrMonth)
 
-        Else
-            ' Just increment date in sequence
-            ucrDaily2Navigation.IncrementDateValues(ucrYearSelector, ucrMonth, Nothing)
         End If
 
     End Sub
