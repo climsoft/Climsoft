@@ -93,7 +93,7 @@ Public Class frmProducts
                 frmCLIMAT.Show()
 
                 'Case Else
-                MsgBox(selectedProductName)
+                'MsgBox(selectedProductName)
                 'todo. refactor formProductsSelectCriteria to not use product type label
                 'the label should show translated text
                 formProductsSelectCriteria.lblProductType.Text = selectedProductName

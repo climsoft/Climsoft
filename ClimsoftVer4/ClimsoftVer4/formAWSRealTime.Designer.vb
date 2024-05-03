@@ -140,16 +140,16 @@ Partial Class formAWSRealTime
         Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlServers = New System.Windows.Forms.Panel()
         Me.pnlBaseStation = New System.Windows.Forms.Panel()
-        Me.cmdBstAddNew = New System.Windows.Forms.Button()
-        Me.cmdRefresh = New System.Windows.Forms.Button()
-        Me.cmdReset = New System.Windows.Forms.Button()
-        Me.txtBasestationFTPMode = New System.Windows.Forms.ComboBox()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.cmdPrevRecord = New System.Windows.Forms.Button()
         Me.cmdFirstRecord = New System.Windows.Forms.Button()
         Me.cmdLastRecord = New System.Windows.Forms.Button()
         Me.cmdNextRecord = New System.Windows.Forms.Button()
         Me.txtbssNavigator = New System.Windows.Forms.TextBox()
+        Me.cmdBstAddNew = New System.Windows.Forms.Button()
+        Me.cmdRefresh = New System.Windows.Forms.Button()
+        Me.cmdReset = New System.Windows.Forms.Button()
+        Me.txtBasestationFTPMode = New System.Windows.Forms.ComboBox()
         Me.Label40 = New System.Windows.Forms.Label()
         Me.lblbaseStation = New System.Windows.Forms.Label()
         Me.cmdBstDelete = New System.Windows.Forms.Button()
@@ -165,8 +165,6 @@ Partial Class formAWSRealTime
         Me.lblInputUser = New System.Windows.Forms.Label()
         Me.lblFTPFolder = New System.Windows.Forms.Label()
         Me.lblBaseStationFTP = New System.Windows.Forms.Label()
-        Me.cmdMSS = New System.Windows.Forms.Button()
-        Me.cmdBaseStation = New System.Windows.Forms.Button()
         Me.pnlMSS = New System.Windows.Forms.Panel()
         Me.lstFolders = New System.Windows.Forms.ListBox()
         Me.cmdMssAddNew = New System.Windows.Forms.Button()
@@ -194,6 +192,8 @@ Partial Class formAWSRealTime
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.cmdMSS = New System.Windows.Forms.Button()
+        Me.cmdBaseStation = New System.Windows.Forms.Button()
         Me.pnlMsgEncoding = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.dgrdCodeFlag = New System.Windows.Forms.DataGridView()
@@ -1388,9 +1388,9 @@ Partial Class formAWSRealTime
         Me.Label16.AutoSize = True
         Me.Label16.Location = New System.Drawing.Point(31, 142)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(73, 13)
+        Me.Label16.Size = New System.Drawing.Size(76, 13)
         Me.Label16.TabIndex = 71
-        Me.Label16.Text = "Data Strucure"
+        Me.Label16.Text = "Data Structure"
         '
         'txtInFile
         '
@@ -1471,43 +1471,6 @@ Partial Class formAWSRealTime
         Me.pnlBaseStation.Size = New System.Drawing.Size(713, 287)
         Me.pnlBaseStation.TabIndex = 4
         '
-        'cmdBstAddNew
-        '
-        Me.cmdBstAddNew.Location = New System.Drawing.Point(14, 234)
-        Me.cmdBstAddNew.Name = "cmdBstAddNew"
-        Me.cmdBstAddNew.Size = New System.Drawing.Size(110, 21)
-        Me.cmdBstAddNew.TabIndex = 75
-        Me.cmdBstAddNew.Text = "Add New"
-        Me.cmdBstAddNew.UseVisualStyleBackColor = True
-        '
-        'cmdRefresh
-        '
-        Me.cmdRefresh.Location = New System.Drawing.Point(479, 234)
-        Me.cmdRefresh.Name = "cmdRefresh"
-        Me.cmdRefresh.Size = New System.Drawing.Size(110, 21)
-        Me.cmdRefresh.TabIndex = 74
-        Me.cmdRefresh.Text = "Refresh"
-        Me.cmdRefresh.UseVisualStyleBackColor = True
-        '
-        'cmdReset
-        '
-        Me.cmdReset.Location = New System.Drawing.Point(364, 234)
-        Me.cmdReset.Name = "cmdReset"
-        Me.cmdReset.Size = New System.Drawing.Size(110, 21)
-        Me.cmdReset.TabIndex = 13
-        Me.cmdReset.Text = "Reset"
-        Me.cmdReset.UseVisualStyleBackColor = True
-        '
-        'txtBasestationFTPMode
-        '
-        Me.txtBasestationFTPMode.FormattingEnabled = True
-        Me.txtBasestationFTPMode.Items.AddRange(New Object() {"FTP", "SFTP"})
-        Me.txtBasestationFTPMode.Location = New System.Drawing.Point(317, 103)
-        Me.txtBasestationFTPMode.Name = "txtBasestationFTPMode"
-        Me.txtBasestationFTPMode.Size = New System.Drawing.Size(116, 21)
-        Me.txtBasestationFTPMode.TabIndex = 73
-        Me.txtBasestationFTPMode.Text = "FTP"
-        '
         'GroupBox10
         '
         Me.GroupBox10.Controls.Add(Me.cmdPrevRecord)
@@ -1569,6 +1532,43 @@ Partial Class formAWSRealTime
         Me.txtbssNavigator.Size = New System.Drawing.Size(333, 20)
         Me.txtbssNavigator.TabIndex = 0
         Me.txtbssNavigator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'cmdBstAddNew
+        '
+        Me.cmdBstAddNew.Location = New System.Drawing.Point(14, 234)
+        Me.cmdBstAddNew.Name = "cmdBstAddNew"
+        Me.cmdBstAddNew.Size = New System.Drawing.Size(110, 21)
+        Me.cmdBstAddNew.TabIndex = 75
+        Me.cmdBstAddNew.Text = "Add New"
+        Me.cmdBstAddNew.UseVisualStyleBackColor = True
+        '
+        'cmdRefresh
+        '
+        Me.cmdRefresh.Location = New System.Drawing.Point(479, 234)
+        Me.cmdRefresh.Name = "cmdRefresh"
+        Me.cmdRefresh.Size = New System.Drawing.Size(110, 21)
+        Me.cmdRefresh.TabIndex = 74
+        Me.cmdRefresh.Text = "Refresh"
+        Me.cmdRefresh.UseVisualStyleBackColor = True
+        '
+        'cmdReset
+        '
+        Me.cmdReset.Location = New System.Drawing.Point(364, 234)
+        Me.cmdReset.Name = "cmdReset"
+        Me.cmdReset.Size = New System.Drawing.Size(110, 21)
+        Me.cmdReset.TabIndex = 13
+        Me.cmdReset.Text = "Reset"
+        Me.cmdReset.UseVisualStyleBackColor = True
+        '
+        'txtBasestationFTPMode
+        '
+        Me.txtBasestationFTPMode.FormattingEnabled = True
+        Me.txtBasestationFTPMode.Items.AddRange(New Object() {"FTP", "SFTP"})
+        Me.txtBasestationFTPMode.Location = New System.Drawing.Point(317, 103)
+        Me.txtBasestationFTPMode.Name = "txtBasestationFTPMode"
+        Me.txtBasestationFTPMode.Size = New System.Drawing.Size(116, 21)
+        Me.txtBasestationFTPMode.TabIndex = 73
+        Me.txtBasestationFTPMode.Text = "FTP"
         '
         'Label40
         '
@@ -1697,26 +1697,6 @@ Partial Class formAWSRealTime
         Me.lblBaseStationFTP.Size = New System.Drawing.Size(68, 13)
         Me.lblBaseStationFTP.TabIndex = 0
         Me.lblBaseStationFTP.Text = "FTP Address"
-        '
-        'cmdMSS
-        '
-        Me.cmdMSS.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.cmdMSS.Location = New System.Drawing.Point(347, 39)
-        Me.cmdMSS.Name = "cmdMSS"
-        Me.cmdMSS.Size = New System.Drawing.Size(146, 33)
-        Me.cmdMSS.TabIndex = 1
-        Me.cmdMSS.Text = "Message Switch"
-        Me.cmdMSS.UseVisualStyleBackColor = True
-        '
-        'cmdBaseStation
-        '
-        Me.cmdBaseStation.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.cmdBaseStation.Location = New System.Drawing.Point(201, 39)
-        Me.cmdBaseStation.Name = "cmdBaseStation"
-        Me.cmdBaseStation.Size = New System.Drawing.Size(143, 33)
-        Me.cmdBaseStation.TabIndex = 0
-        Me.cmdBaseStation.Text = "Base Station"
-        Me.cmdBaseStation.UseVisualStyleBackColor = True
         '
         'pnlMSS
         '
@@ -1984,6 +1964,26 @@ Partial Class formAWSRealTime
         Me.Label8.Size = New System.Drawing.Size(68, 13)
         Me.Label8.TabIndex = 0
         Me.Label8.Text = "FTP Address"
+        '
+        'cmdMSS
+        '
+        Me.cmdMSS.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.cmdMSS.Location = New System.Drawing.Point(347, 39)
+        Me.cmdMSS.Name = "cmdMSS"
+        Me.cmdMSS.Size = New System.Drawing.Size(146, 33)
+        Me.cmdMSS.TabIndex = 1
+        Me.cmdMSS.Text = "Message Switch"
+        Me.cmdMSS.UseVisualStyleBackColor = True
+        '
+        'cmdBaseStation
+        '
+        Me.cmdBaseStation.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.cmdBaseStation.Location = New System.Drawing.Point(201, 39)
+        Me.cmdBaseStation.Name = "cmdBaseStation"
+        Me.cmdBaseStation.Size = New System.Drawing.Size(143, 33)
+        Me.cmdBaseStation.TabIndex = 0
+        Me.cmdBaseStation.Text = "Base Station"
+        Me.cmdBaseStation.UseVisualStyleBackColor = True
         '
         'pnlMsgEncoding
         '
