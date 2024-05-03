@@ -217,7 +217,7 @@ Partial Class formAWSRealTime
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
-        Me.txtUpdateSequenceNumber = New System.Windows.Forms.Label()
+        Me.lblUpdateSequenceNumber = New System.Windows.Forms.Label()
         Me.txtOriginatingGeneratingSubCentre = New System.Windows.Forms.Label()
         Me.txtOriginatingGeneratingCentre = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
@@ -2040,7 +2040,7 @@ Partial Class formAWSRealTime
         Me.grpIndicators.Controls.Add(Me.Label27)
         Me.grpIndicators.Controls.Add(Me.Label28)
         Me.grpIndicators.Controls.Add(Me.Label29)
-        Me.grpIndicators.Controls.Add(Me.txtUpdateSequenceNumber)
+        Me.grpIndicators.Controls.Add(Me.lblUpdateSequenceNumber)
         Me.grpIndicators.Controls.Add(Me.txtOriginatingGeneratingSubCentre)
         Me.grpIndicators.Controls.Add(Me.txtOriginatingGeneratingCentre)
         Me.grpIndicators.Controls.Add(Me.Label34)
@@ -2206,14 +2206,14 @@ Partial Class formAWSRealTime
         Me.Label29.TabIndex = 5
         Me.Label29.Text = "Data Category"
         '
-        'txtUpdateSequenceNumber
+        'lblUpdateSequenceNumber
         '
-        Me.txtUpdateSequenceNumber.AutoSize = True
-        Me.txtUpdateSequenceNumber.Location = New System.Drawing.Point(15, 103)
-        Me.txtUpdateSequenceNumber.Name = "txtUpdateSequenceNumber"
-        Me.txtUpdateSequenceNumber.Size = New System.Drawing.Size(114, 13)
-        Me.txtUpdateSequenceNumber.TabIndex = 3
-        Me.txtUpdateSequenceNumber.Text = "Update Sequence No."
+        Me.lblUpdateSequenceNumber.AutoSize = True
+        Me.lblUpdateSequenceNumber.Location = New System.Drawing.Point(15, 103)
+        Me.lblUpdateSequenceNumber.Name = "lblUpdateSequenceNumber"
+        Me.lblUpdateSequenceNumber.Size = New System.Drawing.Size(114, 13)
+        Me.lblUpdateSequenceNumber.TabIndex = 3
+        Me.lblUpdateSequenceNumber.Text = "Update Sequence No."
         '
         'txtOriginatingGeneratingSubCentre
         '
@@ -2454,7 +2454,7 @@ Partial Class formAWSRealTime
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label29 As System.Windows.Forms.Label
-    Friend WithEvents txtUpdateSequenceNumber As System.Windows.Forms.Label
+    Friend WithEvents lblUpdateSequenceNumber As System.Windows.Forms.Label
     Friend WithEvents txtOriginatingGeneratingSubCentre As System.Windows.Forms.Label
     Friend WithEvents txtOriginatingGeneratingCentre As System.Windows.Forms.Label
     Friend WithEvents Label34 As System.Windows.Forms.Label
