@@ -97,8 +97,6 @@ Public Class frmProducts
                 'todo. refactor formProductsSelectCriteria to not use product type label
                 'the label should show translated text
 
-                'formProductsSelectCriteria.lblProductType.Text = selectedProductName
-                'formProductsSelectCriteria.Show()
             Case "Daily Wind Speed"
                 Ecode = InputBox(ClsTranslations.GetTranslation("Element Code?"), ClsTranslations.GetTranslation("Daily Wind Totalizer Element Code"))
 
