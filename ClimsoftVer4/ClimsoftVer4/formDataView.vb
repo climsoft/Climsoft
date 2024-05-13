@@ -224,6 +224,16 @@ Public Class formDataView
                         Sql2 = "SELECT * FROM form_agro1 ORDER by stationId,yyyy,mm,dd;"
                     End If
 
+                Case "form_hourly2"
+                    Sql = "DELETE FROM form_hourly2 where stationId='" & id & "' AND elementId=" & cd &
+                    " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
+                    '
+                    If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                        Sql2 = "SELECT * FROM form_hourly2 where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,hh;"
+                    Else
+                        Sql2 = "SELECT * FROM form_hourly2 ORDER by stationId,elementId,yyyy,mm,hh;"
+                    End If
+
             'Update metadata tables
                 Case "station"
                     Sql = "DELETE FROM station where stationId ='" & Me.DataGridView.CurrentRow.Cells(0).Value & "';"
@@ -300,6 +310,10 @@ Public Class formDataView
                     Sql = "UPDATE form_agro1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy=" & yr &
                         " AND mm= " & mn & " AND dd= " & dy & ";"
 
+                Case "form_hourly2"
+                    Sql = "UPDATE form_hourly2 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd &
+                       " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
+
                 Case "regkeys"
                     Dim keyNameValue As String
                     keyNameValue = Me.DataGridView.CurrentRow.Cells(0).Value
@@ -326,7 +340,6 @@ Public Class formDataView
                     Sql = "UPDATE obselement SET " & cellColName & "='" & cellValue & "' WHERE elementId='" & id & "';"
                     'MsgBox(Sql)
             End Select
-
 
             If Strings.Len(Sql) > 0 Then
                 connStr = frmLogin.txtusrpwd.Text
@@ -536,6 +549,12 @@ Public Class formDataView
                     yr = Me.DataGridView.CurrentRow.Cells(1).Value
                     mn = Me.DataGridView.CurrentRow.Cells(2).Value
                     dy = Me.DataGridView.CurrentRow.Cells(3).Value
+                Case "form_hourly2"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    cd = Me.DataGridView.CurrentRow.Cells(1).Value
+                    yr = Me.DataGridView.CurrentRow.Cells(2).Value
+                    mn = Me.DataGridView.CurrentRow.Cells(3).Value
+                    hr = Me.DataGridView.CurrentRow.Cells(4).Value
             End Select
         Catch ex As Exception
             If ex.HResult = -2147467262 Then Exit Sub

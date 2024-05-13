@@ -99,7 +99,7 @@
         Dim viewRecords As New dataEntryGlobalRoutines
         Dim sql, userName As String
         userName = frmLogin.txtUsername.Text
-        dsSourceTableName = "form_daily2"
+        dsSourceTableName = "form_hourly2"
         If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
             sql = "SELECT * FROM form_hourly2 where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,hh;"
         Else
@@ -109,7 +109,7 @@
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_daily2")
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_hourly2")
     End Sub
 
     Private Sub btnAssignSameValue_Click(sender As Object, e As EventArgs) Handles btnAssignSameValue.Click

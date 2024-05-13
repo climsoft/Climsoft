@@ -77,34 +77,35 @@ Public Class frmDataEntry
     Private Sub OpenSelectedForm()
         Dim idx As Integer
         Dim frm As String
+        Dim EntryTable As New dataEntryGlobalRoutines
 
         Try
             'todo. code needs to be changed. texts in the list view may be translated
             If lstViewForms.SelectedItems.Count > 0 Then
                 Select Case lstViewForms.SelectedItems.Item(0).Text
                     Case "formSynoptic2RA1"
-                        frmNewSynopticRA1.Show()
+                        If EntryTable.Valid_Table("form_synoptic_2_ra1") Then frmNewSynopticRA1.Show()
                     Case "form_daily1"
-                        formDaily1.Show()
+                        If EntryTable.Valid_Table("form_daily1") Then formDaily1.Show()
                     Case "form_daily2"
-                        frmNewFormDaily2.Show()
+                        If EntryTable.Valid_Table("form_daily2") Then frmNewFormDaily2.Show()
                     Case "form_hourly"
                         'form_hourly.Show()
-                        frmNewHourly.Show()
+                        If EntryTable.Valid_Table("form_hourly") Then frmNewHourly.Show()
                     Case "form_hourly2"
-                        frmNewHourly2.Show()
+                        If EntryTable.Valid_Table("form_hourly2") Then frmNewHourly2.Show()
                     Case "form_monthly"
-                        frmNewMonthly.Show()
+                        If EntryTable.Valid_Table("form_monthly") Then frmNewMonthly.Show()
                     Case "form_upperair1"
-                        formUpperAir.Show()
+                        If EntryTable.Valid_Table("form_upperair1") Then formUpperAir.Show()
                     Case "form_hourlywind"
-                        frmNewHourlyWind.Show()
+                        If EntryTable.Valid_Table("form_hourlywind") Then frmNewHourlyWind.Show()
                     Case "form_agro1"
-                        formAgro1.Show()
+                        If EntryTable.Valid_Table("form_agro1") Then formAgro1.Show()
                     Case "form_synoptic2_caribbean"
-                        formSynopticCaribbean.Show()
+                        If EntryTable.Valid_Table("form_synoptic2_caribbean") Then formSynopticCaribbean.Show()
                     Case "form_synoptic2_TDCF"
-                        formSynoptic2.Show()
+                        If EntryTable.Valid_Table("form_synoptic2_TDCF") Then formSynoptic2.Show()
                     Case Else
                         frm = lstViewForms.SelectedItems.Item(0).Text
                         MsgBox(ClsTranslations.GetTranslation("Form") & " " & frm & " " & ClsTranslations.GetTranslation("not yet implemented"))
@@ -114,7 +115,7 @@ Public Class frmDataEntry
                 End Select
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.HResult & ": " & ex.Message)
         End Try
     End Sub
 
