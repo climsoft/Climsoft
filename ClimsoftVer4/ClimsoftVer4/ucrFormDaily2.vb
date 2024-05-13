@@ -156,7 +156,7 @@ Public Class ucrFormDaily2
     Private Sub btnAssignSameValue_Click(sender As Object, e As EventArgs) Handles btnAssignSameValue.Click
         Dim strNewValue As String = ucrInputSameValue.GetValue
         Dim ucrVFP As ucrValueFlagPeriod
-        'Adds values to only enabled controls of the ucrHourly
+        'Adds values to only enabled controls of the ucrDaily
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 If ctr.Enabled Then

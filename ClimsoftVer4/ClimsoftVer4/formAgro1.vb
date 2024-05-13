@@ -231,6 +231,8 @@
             'FormLaunchPad.Show()
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
+            Me.Close()
+            Exit Sub
         End Try
 
         Try
@@ -331,7 +333,9 @@
             If ex.HResult = "-2146233086" Then
                 MsgBox("No Element Selected!   >>> Select them at the Metadata form")
             Else
-                MessageBox.Show(ex.Message)
+                MsgBox(Me.Name & " Can't Open")
+                Me.Close()
+                'MessageBox.Show(ex.Message)
             End If
         End Try
     End Sub
