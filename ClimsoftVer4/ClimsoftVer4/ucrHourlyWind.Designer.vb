@@ -774,7 +774,7 @@ Partial Class ucrHourlyWind
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(186, 23)
         Me.btnHourSelection.TabIndex = 42
-        Me.btnHourSelection.Text = "Enable synoptic hours only"
+        Me.btnHourSelection.Text = "Enable selected hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
         '
         'ucrDay

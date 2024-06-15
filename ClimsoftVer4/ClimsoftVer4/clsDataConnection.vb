@@ -13,8 +13,14 @@
     End Function
 
     Public Shared Sub OpenConnection(ConnectionString As String)
-        conn.ConnectionString = ConnectionString
-        conn.Open()
+        Try
+            conn.ConnectionString = ConnectionString
+            conn.Open()
+
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+            conn.Close()
+        End Try
     End Sub
 
     Public Shared Sub closeConnection()

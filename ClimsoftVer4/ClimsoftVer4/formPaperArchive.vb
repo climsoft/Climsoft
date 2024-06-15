@@ -283,7 +283,7 @@
                 lblArhiveFolder.Text = ImagesPath & "\images"
                 lblArhiveFolder.ForeColor = Color.Red
                 lblArhiveFolder.Font.Bold.Equals(True)
-                txtDefaultFolder.Text = ClsTranslations.GetTranslation("Default folder for image archiving is being used. You may go to Tools -> General Settings and choose a convinient folder for good management of image files archiving.")
+                txtDefaultFolder.Text = ClsTranslations.GetTranslation("Default folder for image archiving is being used. You may go to Tools -> General Settings and choose a convenient folder for good management of image files archiving.")
             Else
                 lblArhiveFolder.Text = dsr.Tables("regkeys").Rows(0).Item("keyValue")
             End If
