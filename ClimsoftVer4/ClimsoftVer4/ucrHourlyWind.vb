@@ -127,7 +127,7 @@ Public Class ucrHourlyWind
             Dim bNewSelectAllHours As Boolean
             If btnHourSelection.Text = "Enable all hours" Then
                 bNewSelectAllHours = True
-                btnHourSelection.Text = "Enable synoptic hours only"
+                btnHourSelection.Text = "Enable selected hours only"
             Else
                 bNewSelectAllHours = False
                 btnHourSelection.Text = "Enable all hours"

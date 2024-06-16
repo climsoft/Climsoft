@@ -24,6 +24,7 @@ Public Class frmMainMenu
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim usrName, usrRole As String
         Dim i, maxRows As Integer
+        'Dim usr As Boolean = False
         usrRole = ""
 
         Try
@@ -34,10 +35,12 @@ Public Class frmMainMenu
             If maxRows > 0 Then
                 For i = 0 To maxRows - 1
                     If dsClimsoftUserRoles.Tables("userRoles").Rows(i).Item("userName") = usrName Then
+                        'usr = True
                         usrRole = dsClimsoftUserRoles.Tables("userRoles").Rows(i).Item("userRole")
                         userGroup = usrRole
                     End If
                 Next i
+
                 'Disable controls that do not correspond to the user role
                 If usrRole = "ClimsoftOperator" Or usrRole = "ClimsoftOperatorSupervisor" Or usrRole = "ClimsoftRainfall" Then
                     mnuAdministration.Enabled = False

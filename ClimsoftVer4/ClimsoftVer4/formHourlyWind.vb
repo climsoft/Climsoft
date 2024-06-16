@@ -735,7 +735,7 @@ Public Class form_hourlywind
 
         Else
             selectAllHours = False
-            hourSelection = "Enable synoptic hours only"
+            hourSelection = "Enable selected hours only"
 
             For Each ctrl In Me.Controls
                 If Strings.Left(ctrl.name, 8) = "txt_ddff" Then

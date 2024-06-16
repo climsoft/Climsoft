@@ -219,7 +219,7 @@ Partial Class form_hourlywind
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(154, 23)
         Me.btnHourSelection.TabIndex = 571
-        Me.btnHourSelection.Text = "Enable synoptic hours only"
+        Me.btnHourSelection.Text = "Enable selected hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
         '
         'Label35

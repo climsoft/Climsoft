@@ -162,7 +162,7 @@
         Dim ctrVFP As ucrValueFlagPeriod
 
         If btnHourSelection.Text = "Enable all hours" Then
-            btnHourSelection.Text = "Enable synoptic hours only"
+            btnHourSelection.Text = "Enable selected hours only"
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
