@@ -1074,4 +1074,30 @@ Public Class dataEntryGlobalRoutines
             Return False
         End Try
     End Function
+    Public Function Valid_Table(tbl As String) As Boolean
+
+        Dim conns As New MySql.Data.MySqlClient.MySqlConnection
+        conns.ConnectionString = frmLogin.txtusrpwd.Text
+        conns.Open()
+        Try
+            Dim dst As New DataSet
+            Dim sqlt As String
+            Dim dast As MySql.Data.MySqlClient.MySqlDataAdapter
+
+            ' Test existence of the requeted key entry table
+            sqlt = "SELECT * FROM " & tbl & ";"
+            dast = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlt, conns)
+            dast.Fill(dst, "EntryTable")
+
+            conns.Close()
+            Return True
+        Catch ex As Exception
+            conns.Close()
+            If ex.HResult = -2147467259 Then
+                MsgBox("Can't locate table " & tbl)
+            End If
+            MsgBox("Failed to open " & tbl)
+            Return False
+        End Try
+    End Function
 End Class

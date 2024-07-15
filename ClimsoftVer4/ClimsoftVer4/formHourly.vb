@@ -1281,7 +1281,7 @@ Public Class form_hourly
             Next ctrl
         Else
             selectAllHours = False
-            hourSelection = "Enable synoptic hours only"
+            hourSelection = "Enable selected hours only"
             btnHourSelection.Text = hourSelection
             For Each ctrl In Me.Controls
                 If Strings.Left(ctrl.name, 6) = "txtVal" Or Strings.Left(ctrl.name, 7) = "txtFlag" Then

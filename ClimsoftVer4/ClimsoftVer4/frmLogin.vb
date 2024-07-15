@@ -74,13 +74,13 @@ Public Class frmLogin
     End Sub
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
-        Dim connectionString As String
         Dim builder As New Common.DbConnectionStringBuilder()
-        Dim dbChoice As String
-        Dim password As String
-        Dim username As String
-
+        Dim connectionString, dbChoice, password, username As String
+        'Dim dbChoice As String
+        'Dim password As String
+        'Dim username As String
         Dim parts As String()
+        Dim usr As Boolean = False
 
         username = txtUsername.Text
         password = txtPassword.Text
@@ -143,10 +143,20 @@ Public Class frmLogin
         Finally
             conn.Close()
         End Try
+
+        ' Check if the login is listed with roles in the current database except the root user
+        climsoftuserRoles(usr)
+        If Not usr And txtUsername.Text <> "root" Then
+            MsgBox("Access denied. User not found in the current database")
+            conn.Close()
+            Exit Sub
+        End If
+
         regDataInit()
         languageTableInit()
+        conn.Close()
         clsDataConnection.OpenConnection(txtusrpwd.Text) 'todo. the connection string should come from somewhere else
-        climsoftuserRoles()
+
         Path_Security()
         frmSplashScreen.Show()
         Me.Hide()
@@ -156,12 +166,21 @@ Public Class frmLogin
         Me.Close()
     End Sub
 
-    Sub climsoftuserRoles()
+    Sub climsoftuserRoles(ByRef lognusr As Boolean)
         Try
             'Set SQL for populating user roles
             rolesSQL = "SELECT * from climsoftusers"
             daClimsoftUserRoles = New MySql.Data.MySqlClient.MySqlDataAdapter(rolesSQL, conn)
             daClimsoftUserRoles.Fill(dsClimsoftUserRoles, "userRoles")
+
+            With dsClimsoftUserRoles.Tables("userRoles")
+                For i = 0 To .Rows.Count - 1
+                    If .Rows(i).Item("userName") = txtUsername.Text Then
+                        lognusr = True
+                    End If
+                Next i
+            End With
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
