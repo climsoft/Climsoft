@@ -361,6 +361,7 @@ Public Class frmFormUpload
                                 If dss.Tables(frm_tbl).Rows(n).Item(m) = "" Then obsFlag = "M"
                             End If
 
+
                             datetimeGTS(obsDatetime)
 
                             strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
@@ -380,6 +381,7 @@ Public Class frmFormUpload
                                 obsVal = ""
                                 obsFlag = "M"
                             End If
+
 
                             datetimeGTS(obsDatetime)
 
@@ -403,7 +405,10 @@ Public Class frmFormUpload
 
                     datetimeGTS(obsDatetime)
 
-                    ''Generate SQL string for inserting data into observationinitial table
+                    ' Skip records with blank observation values and without flags
+                    If Len(obsVal) = 0 And Len(obsFlag) = 0 Then
+                        Continue For
+                    End If
 
                     frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
                     PrintLine(122, frmrec & ",")
