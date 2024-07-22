@@ -92,7 +92,7 @@ Public Class formProductsSelectCriteria
 
         'translate form controls
         Dim str As String = lblProductType.Text
-        ClsTranslations.TranslateForm(Me)
+        'ClsTranslations.TranslateForm(Me)
         'retain the untranslated text because it's use for selection
         lblProductType.Text = str
 
@@ -899,15 +899,31 @@ Public Class formProductsSelectCriteria
 
                 Case "Daily Mean Water Level"
 
-                    sql = "SELECT STN,NM,COD,LAT,LON,ALT,ELM,Dt1,Dt2, DATE_ADD(Dt1, INTERVAL 1 DAY) AS Dt3, MLVL FROM (SELECT recordedFrom AS STN, describedBy as COD, AVG(obsvalue) as MLVL, MIN(obsdatetime) AS Dt1,MAX(obsdatetime) AS Dt2, stationName as NM,latitude AS LAT, Longitude AS LON,elevation AS ALT,abbreviation AS ELM " &
-                           "From observationfinal INNER JOIN station ON recordedfrom = stationId INNER JOIN obselement ON describedBy = elementId " &
-                           "WHERE (recordedFrom = " & stnlist & ") AND describedBy= 613 AND (obsDatetime between '" & sdate & "' and '" & edate & "') " &
-                           "GROUP BY year(obsdatetime),month(obsdatetime),day(obsdatetime))t;"
+                    sql = "SELECT STN,COD,Dt1,Dt2, DATE_ADD(Dt1, INTERVAL 1 DAY) AS Dt3, MLVL FROM (SELECT recordedFrom AS STN, describedBy as COD, AVG(obsvalue) as MLVL, MIN(obsdatetime) AS Dt1,MAX(obsdatetime) AS Dt2 From observationfinal " &
+                           "WHERE (recordedFrom =  " & stnlist & ") AND describedBy = " & elmlist & " AND (obsDatetime between '" & sdate & "' and '" & edate & "') " &
+                           "GROUP BY STN,COD,year(obsdatetime),month(obsdatetime),day(obsdatetime))t;"
 
-                    'sql = "SELECT STN, COD, Dt1, Dt2, DATE_ADD(Dt1, INTERVAL 1 DAY) AS Dt3, MLVL " &
-                    '       "FROM (SELECT recordedFrom AS STN, describedBy as COD, AVG(obsvalue) MLVL, MIN(obsdatetime) AS Dt1,MAX(obsdatetime) AS Dt2 FROM observationfinal " &
-                    '       "WHERE (recordedFrom = " & stnlist & ") AND describedBy= 613 " &
+                    MeanWaterLevel(sql, lblProductType.Text)
+
+                Case "Monthly Mean Water Level"
+
+                    sql = "SELECT STN,COD,Dt1,Dt2, DATE_ADD(Dt1, INTERVAL 1 DAY) AS Dt3, MLVL FROM (SELECT recordedFrom AS STN, describedBy as COD, AVG(obsvalue) as MLVL, MIN(obsdatetime) AS Dt1,MAX(obsdatetime) AS Dt2 From observationfinal " &
+                           "WHERE (recordedFrom =  " & stnlist & ") AND describedBy = " & elmlist & " AND (obsDatetime between '" & sdate & "' and '" & edate & "') " &
+                           "GROUP BY STN,COD,year(obsdatetime),month(obsdatetime),day(obsdatetime))t;"
+
+                    MeanWaterLevel(sql, lblProductType.Text)
+
+                Case "Annual Mean Water Level"
+
+                    'sql = "SELECT STN,NM,COD,LAT,LON,ALT,ELM,Dt1,Dt2, DATE_ADD(Dt1, INTERVAL 1 DAY) AS Dt3, MLVL FROM (SELECT recordedFrom AS STN, describedBy as COD, AVG(obsvalue) as MLVL, MIN(obsdatetime) AS Dt1,MAX(obsdatetime) AS Dt2, stationName as NM,latitude AS LAT, Longitude AS LON,elevation AS ALT,abbreviation AS ELM " &
+                    '       "From observationfinal INNER JOIN station ON recordedfrom = stationId INNER JOIN obselement ON describedBy = elementId " &
+                    '       "WHERE (recordedFrom = " & stnlist & ") AND describedBy= " & elmlist & " AND (obsDatetime between '" & sdate & "' and '" & edate & "') " &
                     '       "GROUP BY year(obsdatetime),month(obsdatetime),day(obsdatetime))t;"
+
+                    sql = "SELECT STN,COD,Dt1,Dt2, DATE_ADD(Dt1, INTERVAL 1 DAY) AS Dt3, MLVL FROM (SELECT recordedFrom AS STN, describedBy as COD, AVG(obsvalue) as MLVL, MIN(obsdatetime) AS Dt1,MAX(obsdatetime) AS Dt2 From observationfinal " &
+                           "WHERE (recordedFrom =  " & stnlist & ") AND describedBy = " & elmlist & " AND (obsDatetime between '" & sdate & "' and '" & edate & "') " &
+                           "GROUP BY STN,COD,year(obsdatetime),month(obsdatetime),day(obsdatetime))t;"
+
                     MeanWaterLevel(sql, lblProductType.Text)
                 Case Else
                     MsgBox("No Product found For Selection made", MsgBoxStyle.Information)
@@ -2499,13 +2515,13 @@ Err:
     End Function
 
     Sub MeanWaterLevel(sql As String, typ As String)
-
         Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim dsp As New DataSet
         Dim conp As New MySql.Data.MySqlClient.MySqlConnection
-        Dim fl, dat, stn, cod, dtt As String
-        Dim nxtDylvl, AVGlvl, AMlvl, PMlvl, wghtMean As Double
-        'Dim YY, MM, DD As Integer
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim dat, stn, cod, dtt, nxtDylvl, AVGlvl, AMlvl, PMlvl As String
+        Dim wghtMean As Double
+        'Dim nxtDylvl, AVGlvl, AMlvl, PMlvl, wghtMean As Double
 
         Try
             conp.ConnectionString = MyConnectionString
@@ -2514,64 +2530,103 @@ Err:
             dap.SelectCommand.CommandTimeout = 0
             dsp.Clear()
             dap.Fill(dsp, "observationfinal")
-            conp.Close()
-            'MsgBox(dsp.Tables("observationfinal").Columns.Count)
 
             maxRows = dsp.Tables("observationfinal").Rows.Count
 
-            If maxRows = 0 Then Exit Sub
+            If maxRows = 0 Then
+                MsgBox("No data found")
+                Exit Sub
+            End If
 
-            ' Create output file
+            ' Create a temporary table for the daily water levels
 
-            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\data_products.csv"
-            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+            sql = "drop table if exists tmpproducts; " &
+                   "create TABLE tmpproducts (ID VARCHAR(16),COD INT(4),YY INT(4),MM INT(2),DD INT(2),AMLevel DOUBLE(5,2), PMLevel double(5,2), Mean double(5,2));"
 
-            FileOpen(11, fl, OpenMode.Output)
-
-            '' Output the column headers
-            'For j = 0 To dsp.Tables("observationfinal").Columns.Count - 1
-            '    Write(11, dsp.Tables("observationfinal").Columns(j).ColumnName)
-            'Next
-            ''Write(11, "MLVL1")
-            PrintLine(11, "ID,Name,Abbrev,Lat,Lon,Alt,YY,MM,DD,AMLevel,PMLevel,Mean")
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conp)
+            qry.CommandTimeout = 0
+            qry.ExecuteNonQuery()
 
             ' Output data values
             With dsp.Tables("observationfinal")
                 For k = 0 To maxRows - 1
-                    If .Rows(k).Item(7) = .Rows(k).Item(8) Then Continue For ' Only one daily reading available
+
                     stn = .Rows(k).Item(0)
-                    cod = .Rows(k).Item(2)
-                    dtt = .Rows(k).Item(7)
+                    cod = .Rows(k).Item(1)
+                    dtt = .Rows(k).Item(2)
                     dtt = DateAndTime.Year(dtt) & "," & DateAndTime.Month(dtt) & "," & DateAndTime.Day(dtt)
-                    If Not waterLevel(stn, cod, .Rows(k).Item(7), AMlvl) Then Continue For
-                    If Not waterLevel(stn, cod, .Rows(k).Item(8), PMlvl) Then Continue For
-                    If Not waterLevel(stn, cod, .Rows(k).Item(9), nxtDylvl) Then Continue For
-                    AVGlvl = .Rows(k).Item(10)
+                    AVGlvl = .Rows(k).Item(5)
 
-                    If Not waterLevel_WeightedMean(.Rows(k).Item(10), PMlvl, nxtDylvl, wghtMean) Then Continue For
-                    'If .Rows(k).Item(7) = .Rows(k).Item(8) Then wghtMean = AVGlvl
+                    AMlvl = AVGlvl
+                    PMlvl = AVGlvl
+                    wghtMean = AVGlvl
 
-                    'dat = stn & "," & .Rows(k).Item(5) & "," & .Rows(k).Item(3) & "," & .Rows(k).Item(4) & "," & .Rows(k).Item(6) & "," & AMlvl & "," & PMlvl & "," & AVGlvl & "," & nxtDylvl & "," & wghtMean
-                    dat = stn & "," & .Rows(k).Item(1) & "," & .Rows(k).Item(6) & "," & .Rows(k).Item(3) & "," & .Rows(k).Item(4) & "," & .Rows(k).Item(5) & "," & dtt & "," & AMlvl & "," & PMlvl & "," & wghtMean
-                    'dat = .Rows(k).Item(0)
-                    'For i = 1 To dsp.Tables("observationfinal").Columns.Count - 1
-                    '    dat = dat & "," & .Rows(k).Item(i)
-                    'Next
-                    PrintLine(11, dat)
+                    If .Rows(k).Item(2) = .Rows(k).Item(3) Then ' Only one daily reading available
+                        'nxtDylvl = "NULL"
+                        If DateAndTime.Hour(.Rows(k).Item(3)) < 12 Then
+                            PMlvl = "NULL"
+                            AMlvl = AVGlvl
+                        Else
+                            AMlvl = "NULL"
+                            PMlvl = AVGlvl
+                        End If
+                    Else
+                        'Try
+                        waterLevel(stn, cod, .Rows(k).Item(2), AMlvl)
+                            waterLevel(stn, cod, .Rows(k).Item(3), PMlvl)
+                            waterLevel(stn, cod, .Rows(k).Item(4), nxtDylvl)
+                            waterLevel_WeightedMean(AVGlvl, PMlvl, nxtDylvl, wghtMean)
+                        'Catch y As Exception
+                        '    MsgBox(nxtDylvl)
+                        'End Try
+                    End If
+
+                    dat = stn & "," & cod & "," & dtt & "," & AMlvl & "," & PMlvl & "," & wghtMean
+
+                    dat = Strings.Replace(dat, ",", "','")
+                    dat = Strings.Replace(dat, "'NULL'", "NULL")
+
+                    sql = "INSERT INTO `tmpproducts` VALUES('" & dat & "');"
+
+                    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conp)
+                    qry.CommandTimeout = 0
+                    qry.ExecuteNonQuery()
+
                 Next
             End With
-            FileClose(11)
-            CommonModules.ViewFile(fl)
+            conp.Close()
+
+            Select Case typ
+                Case "Daily Mean Water Level"
+                    sql = "SELECT ID,StationName As NAME,abbreviation As Abbrev,latitude As Lat,longitude As Lon,elevation As Alt,YY,MM,DD,AMLevel,PMLevel,Mean FROM tmpproducts " &
+                              "INNER Join station ON ID = stationId INNER JOIN obselement ON COD = elementId ORDER BY ID,YY,MM,DD;"
+                    DataProducts(sql, typ)
+
+                Case "Monthly Mean Water Level"
+
+                    sql = "SELECT ID,StationName As NAME,abbreviation As Abbrev,latitude As Lat,longitude As Lon,elevation As Alt,YY,MM,AVG(AMLevel) as AMLevel,AVG(PMLevel) as PMLevel,AVG(Mean) as Mean FROM tmpproducts " &
+                              "INNER Join station ON ID = stationId INNER JOIN obselement ON COD = elementId GROUP BY ID,YY,MM ORDER BY ID,YY,MM;"
+
+                    DataProducts(sql, typ)
+                Case "Annual Mean Water Level"
+                    sql = "SELECT ID,StationName As NAME,abbreviation As Abbrev,latitude As Lat,longitude As Lon,elevation As Alt,YY,AVG(AMLevel) as AMLevel,AVG(PMLevel) as PMLevel,AVG(Mean) as Mean FROM tmpproducts " &
+                              "INNER Join station ON ID = stationId INNER JOIN obselement ON COD = elementId GROUP BY ID,YY ORDER BY ID,YY;"
+
+                    DataProducts(sql, typ)
+                Case Else
+                    MsgBox("Invalid Water Level Summary")
+            End Select
 
         Catch ex As Exception
+            'MsgBox(sql)
             MsgBox(ex.Message)
-            'If Err.Number = 13 Or Err.Number = 5 Then Resume Next
-            MsgBox("No data found. Check and confirm selections")
-            FileClose(11)
+            MsgBox("No data found. Check And confirm selections")
+
             conp.Close()
         End Try
 
     End Sub
+
 
     Function waterLevel_WeightedMean(lvlAVG As Double, lvlPM As Double, lvlnxtAM As Double, ByRef wghtMean As Double) As Boolean
         Dim a, b As Double
@@ -2613,7 +2668,7 @@ Err:
     '        Return False
     '    End Try
     'End Function
-    Function waterLevel(Stn As String, Ecod As String, dtt As String, ByRef lvl As Double) As Boolean
+    Sub waterLevel(Stn As String, Ecod As String, dtt As String, ByRef lvl As String)
         Dim dal As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim dsl As New DataSet
 
@@ -2628,22 +2683,22 @@ Err:
             dsl.Clear()
             dal.Fill(dsl, "obs")
 
-            If dsl.Tables("obs").Rows.Count = 0 Then Return False
+            If dsl.Tables("obs").Rows.Count = 0 Then Exit Sub ' Return False
 
             If IsDBNull(dsl.Tables("obs").Rows(0).Item(0)) Then
-                Return False
+                Exit Sub ' Return False
             Else
                 lvl = dsl.Tables("obs").Rows(0).Item(0)
-                Return True
+                'Return True
             End If
 
             'If dsl.Tables("obs").Rows.Count = 1 Then Return dsl.Tables("obs").Rows(0).Item(0)
 
         Catch ex As Exception
             MsgBox(ex.Message)
-            Return False
+            'Return False
         End Try
-    End Function
+    End Sub
     Sub FormattedOutput(fp As Integer, rw As Long, col As Integer, dsf As DataSet)
         Try
 
@@ -3545,6 +3600,53 @@ Err:
         Populate_StationsListView(sql)
     End Sub
 
+    Private Sub optRegion2_CheckedChanged(sender As Object, e As EventArgs) Handles optRegion2.CheckedChanged
+        If optRegion2.Checked Then
+            sql = "select adminRegion2 from Station where not isnull(adminRegion2) group by adminRegion2;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "adminRegion2")
+
+            If ds.Tables("adminRegion2").Rows.Count > 0 Then
+                lstRegion2.Size = New Drawing.Size(158, 50)
+                lstRegion2.BringToFront()
+                For i = 0 To ds.Tables("adminRegion2").Rows.Count - 1
+                    lstRegion2.Items.Add(ds.Tables("adminRegion2").Rows(i).Item(0))
+                Next
+            End If
+        Else
+            lstRegion2.Items.Clear()
+            lstvStations.Items.Clear()
+            lstRegion2.Size = New Drawing.Size(158, 17)
+        End If
+    End Sub
+
+    Private Sub lstRegion2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRegion2.SelectedIndexChanged
+        sql = "select stationId, stationName from Station where adminRegion2 ='" & lstRegion2.SelectedItem & "';"
+        Populate_StationsListView(sql)
+    End Sub
+
+    Private Sub optRegion3_CheckedChanged(sender As Object, e As EventArgs) Handles optRegion3.CheckedChanged
+        If optRegion3.Checked Then
+            sql = "select adminRegion3 from Station where not isnull(adminRegion3) group by adminRegion3;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "adminRegion3")
+
+            If ds.Tables("adminRegion3").Rows.Count > 0 Then
+                lstRegion3.Size = New Drawing.Size(158, 50)
+                lstRegion3.BringToFront()
+                For i = 0 To ds.Tables("adminRegion3").Rows.Count - 1
+                    lstRegion3.Items.Add(ds.Tables("adminRegion3").Rows(i).Item(0))
+                Next
+            End If
+        Else
+            lstRegion3.Items.Clear()
+            lstvStations.Items.Clear()
+            lstRegion3.Size = New Drawing.Size(158, 17)
+        End If
+    End Sub
+
     Private Sub OptGeography_CheckedChanged(sender As Object, e As EventArgs) Handles OptGeography.CheckedChanged
         If OptGeography.Checked Then
             txtLatitude.Enabled = True
@@ -4168,4 +4270,34 @@ Err:
 
     End Sub
 
+    Private Sub lstRegion3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRegion3.SelectedIndexChanged
+        sql = "select stationId, stationName from Station where adminRegion3 ='" & lstRegion3.SelectedItem & "';"
+        Populate_StationsListView(sql)
+    End Sub
+
+    Private Sub optRegion4_CheckedChanged(sender As Object, e As EventArgs) Handles optRegion4.CheckedChanged
+        If optRegion4.Checked Then
+            sql = "select adminRegion4 from Station where not isnull(adminRegion4) group by adminRegion4;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "adminRegion4")
+
+            If ds.Tables("adminRegion4").Rows.Count > 0 Then
+                lstRegion4.Size = New Drawing.Size(158, 50)
+                lstRegion4.BringToFront()
+                For i = 0 To ds.Tables("adminRegion4").Rows.Count - 1
+                    lstRegion4.Items.Add(ds.Tables("adminRegion4").Rows(i).Item(0))
+                Next
+            End If
+        Else
+            lstRegion4.Items.Clear()
+            lstvStations.Items.Clear()
+            lstRegion4.Size = New Drawing.Size(158, 17)
+        End If
+    End Sub
+
+    Private Sub lstRegion4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRegion4.SelectedIndexChanged
+        sql = "select stationId, stationName from Station where adminRegion4 ='" & lstRegion4.SelectedItem & "';"
+        Populate_StationsListView(sql)
+    End Sub
 End Class

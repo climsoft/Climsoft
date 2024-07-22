@@ -38,6 +38,7 @@ Partial Class formImports
         Me.listErrors = New System.Windows.Forms.ListBox()
         Me.lblErrors = New System.Windows.Forms.Label()
         Me.lblSummary = New System.Windows.Forms.Label()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -55,6 +56,7 @@ Partial Class formImports
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.btnUpdate)
         Me.Panel1.Controls.Add(Me.cmdReset)
         Me.Panel1.Controls.Add(Me.cmHelp)
         Me.Panel1.Controls.Add(Me.cmdClose)
@@ -180,6 +182,15 @@ Partial Class formImports
         Me.lblSummary.Size = New System.Drawing.Size(0, 13)
         Me.lblSummary.TabIndex = 8
         '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(466, 2)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(65, 32)
+        Me.btnUpdate.TabIndex = 9
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
         'formImports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -216,4 +227,5 @@ Partial Class formImports
     Friend WithEvents listErrors As System.Windows.Forms.ListBox
     Friend WithEvents lblErrors As System.Windows.Forms.Label
     Friend WithEvents lblSummary As System.Windows.Forms.Label
+    Friend WithEvents btnUpdate As Button
 End Class

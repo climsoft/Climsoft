@@ -201,7 +201,9 @@ Public Class frmProducts
                ('36', 'Daily Wind Speed', 'Wind Speed from Daily Wind Run Total', 'Data'),
                ('37', 'Hourly Wind Speed', 'Wind Speed from Hourly Wind Run Total', 'Data'),
                ('38', 'Climate Station', 'Data for Climate Station Tool', 'Output for other Applications'),
-               ('39', 'Daily Mean Water Level', 'Hydrological Daily Mean Water Level', 'Special Products');"
+               ('39', 'Daily Mean Water Level', 'Hydrological Daily Mean Water Level', 'Special Products'),
+               ('40', 'Monthly Mean Water Level', 'Hydrological Monthly Mean Water Level', 'Special Products'),
+               ('41', 'Annual Mean Water Level', 'Hydrological Annual Mean Water Level', 'Special Products');"
         Try
             Me.Cursor = Cursors.WaitCursor
             qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)

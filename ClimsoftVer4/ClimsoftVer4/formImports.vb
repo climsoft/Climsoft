@@ -388,4 +388,134 @@ Err:
     Private Sub cmHelp_Click(sender As Object, e As EventArgs) Handles cmHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "importstations.htm")
     End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
+        'If Len(DataGridView1.Rows(1).Cells(2).Value) <> 0 Then
+        '    MsgBox(" Blank Station Id not allowed")
+        '    Exit Sub
+        'End If
+
+        'On Error GoTo Err
+        'Try
+        Dim fails As Long
+        Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(",")
+            Dim nums As Integer
+            Dim rows As String()
+            Dim mxr As Integer = DataGridView1.Rows.Count
+
+            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
+            Dim dsNewRow As DataRow
+
+            'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+            Dim recCommit As New dataEntryGlobalRoutines
+
+            Me.Cursor = Windows.Forms.Cursors.WaitCursor
+            Dim stnsFile, fldlist, vals, sql As String
+
+            Try
+                stnsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\stn_metadata.csv"
+
+                FileOpen(222, stnsFile, OpenMode.Output)
+
+                fails = 0
+                listErrors.Items.Clear()
+                fldlist = DataGridView1.Rows(0).Cells(2).Value
+                For i = 1 To DataGridView1.Rows.Count - 1
+                    If Len(DataGridView1.Rows(i).Cells(2).Value) <> 0 Then
+                        fldlist = fldlist & "," & DataGridView1.Rows(i).Cells(2).Value
+                    End If
+                Next
+
+                If Strings.InStr(fldlist, "stationId") = 0 Then
+                    Me.Cursor = Windows.Forms.Cursors.Default
+                    MsgBox("StationId Required")
+                    FileClose(222)
+                    Exit Sub
+                End If
+
+
+                Do While MyReader.EndOfData = False
+
+                    lin = MyReader.LineNumber()
+
+                    currentRow = MyReader.ReadFields()
+
+                    If lin > 1 Then
+                        nums = 1
+                        dsNewRow = s.Tables("station").NewRow
+                        vals = ""
+                        For Each currentField In currentRow
+
+                            rows = New String() {nums, currentField}
+
+                            If Len(DataGridView1.Rows(nums - 1).Cells(2).Value) <> 0 Then
+                                If Len(currentField) = 0 Then
+                                    dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = vbNull
+                                Else
+                                    dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = currentField
+                                End If
+
+                                If nums = 1 Then
+                                    vals = dsNewRow(0)
+                                    If Len(vals) = 0 Then vals = "\N"
+                                Else
+                                    If Len(currentField) = 0 Then
+                                        vals = vals & "," & "\N"
+                                    Else
+                                        vals = vals & "," & currentField
+                                    End If
+                                End If
+                            End If
+                            nums = nums + 1
+                        Next
+                        Print(222, vals & Chr(10))
+                    End If
+                Loop
+                Me.Cursor = Windows.Forms.Cursors.Default
+                FileClose(222)
+
+                ' Update the station metadata with data from a text file
+                Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+                dbConectionString = frmLogin.txtusrpwd.Text
+                dbcon.ConnectionString = dbConectionString
+                dbcon.Open()
+
+                ' Convert the the path delimiter for the metadata file to SQL structure
+                stnsFile = Strings.Replace(stnsFile, "\", "/")
+
+                sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+                   /*!40101 SET NAMES utf8mb4 */;
+                   /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+                   /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+                   /*!40000 ALTER TABLE `station` DISABLE KEYS */;
+                   LOAD DATA LOCAL INFILE '" & stnsFile & "' REPLACE INTO TABLE station FIELDS TERMINATED BY ',' (" & fldlist & ");
+                   /*!40000 ALTER TABLE `station` ENABLE KEYS */;
+                   /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+                   /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+                   /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
+                'MsgBox(sql)
+                'Execute SQL command
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbcon)
+                objCmd.ExecuteNonQuery()
+
+                dbcon.Close()
+                FileClose(222)
+                Me.Cursor = Windows.Forms.Cursors.Default
+                lblSummary.Text = "Records Successfully Updated"
+
+            Catch ex As Exception
+                dbcon.Close()
+                FileClose(222)
+                Me.Cursor = Windows.Forms.Cursors.Default
+                listErrors.Items.Add(lin - 1 & " " & ex.Message)
+                listErrors.Refresh()
+                'fails = fails + 1
+            End Try
+        End Using
+
+    End Sub
+
 End Class
