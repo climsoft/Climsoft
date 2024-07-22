@@ -4255,6 +4255,9 @@ Err:
 
                 If IsDate(DateSerial(yyyy, mm, dd)) And hh <> "" And nn <> "" Then
                     Return DateSerial(yyyy, mm, dd) & " " & TimeSerial(hh, nn, "00")
+                ElseIf IsDate(DateSerial(yyyy, mm, dd) & " " & Time_s) Then
+                    'Log_Errors(DateSerial(yyyy, mm, dd) & " " & Time_s)
+                    Return DateSerial(yyyy, mm, dd) & " " & Time_s
                 End If
             End With
 
@@ -4643,7 +4646,10 @@ Err:
 
                         Process_Status("Processing input record " & k + 1 & " of " & rws)
                         ' Get date and time for the current record
+
                         datestring = Get_DateStamp(AWSsite, dTable, k)
+
+                        'Log_Errors(datestring)
 
                         'If datestring = "" Then Continue For
 

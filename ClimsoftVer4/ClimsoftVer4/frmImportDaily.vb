@@ -696,7 +696,10 @@
 
                                                 ' Check for missing flag data values 
                                                 If dat = txtMissingFlag.Text Then
-                                                    If dat = "" Then Continue For 'Blanks to be skipped
+                                                    If dat = "" Then
+                                                        col = col + 1
+                                                        Continue For 'Blanks to be skipped
+                                                    End If
                                                     If IsDate(dttime) Then
                                                         If Station_Element(st, cod) Then
                                                             'Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl)
@@ -717,6 +720,7 @@
                                                     If chkScale.Checked = True Then Scale_Data(cod, dat)
                                                 Else
                                                     Get_Value_Flag(cod, dat, flg)
+                                                    'MsgBox(y & "-" & m & "-" & hd & " " & h & ":00" & "  " & col & "  " & flg)
                                                 End If
 
                                                 ' Process Dekadal data if any
@@ -1936,6 +1940,12 @@
                         flgchr = ""
                     End If
 
+                    'If Strings.UCase(flgchr) = "T" And Strings.Left(dat, 1) = "0" Then
+                    '    'MsgBox(dat)
+                    '    dat = "0"
+                    '    flg = "T"
+                    'End If
+
                     dat = datstr
                     If chkScale.Checked = True Then Scale_Data(code, dat)
                     flg = Strings.UCase(flgchr)
@@ -2258,8 +2268,8 @@
 
         Catch ex As Exception
             'MsgBox(ex.Message)
-            MsgBox("Missing Metadata")
-            ImportFile = False
+            'MsgBox("Missing Metadata")
+            'ImportFile = False
             Return False
         End Try
 

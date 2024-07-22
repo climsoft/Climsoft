@@ -36,9 +36,6 @@ Public Class formMetadata
         'MsgBox(TabMetadata.SelectedIndex)
     End Sub
 
-    Private Sub formMetadata_Deactivate(sender As Object, e As EventArgs) Handles Me.Deactivate
-
-    End Sub
 
     Private Sub formMetadata_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
 
@@ -168,6 +165,9 @@ Public Class formMetadata
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("elevation")) Then txtElevation.Text = ds.Tables("station").Rows(num).Item("elevation")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("authority")) Then txtAuthority.Text = ds.Tables("station").Rows(num).Item("authority")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("adminregion")) Then txtAdminRegion.Text = ds.Tables("station").Rows(num).Item("adminregion")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("adminregion2")) Then txtAdminRegion2.Text = ds.Tables("station").Rows(num).Item("adminregion2")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("adminregion3")) Then txtAdminRegion3.Text = ds.Tables("station").Rows(num).Item("adminregion3")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("adminregion4")) Then txtAdminRegion4.Text = ds.Tables("station").Rows(num).Item("adminregion4")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("drainagebasin")) Then txtDrainageBasin.Text = ds.Tables("station").Rows(num).Item("drainagebasin")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationmethod")) Then txtgeoMethod.Text = ds.Tables("station").Rows(num).Item("geolocationmethod")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationaccuracy")) Then txtgeoAccuracy.Text = ds.Tables("station").Rows(num).Item("geolocationaccuracy")
@@ -411,6 +411,9 @@ Public Class formMetadata
             If IsNumeric(txtLongitude.Text) Then dsNewRow.Item("longitude") = Val(txtLongitude.Text)
             If IsNumeric(txtElevation.Text) Then dsNewRow.Item("elevation") = Val(txtElevation.Text)
             dsNewRow.Item("adminRegion") = txtAdminRegion.Text
+            dsNewRow.Item("adminRegion2") = txtAdminRegion2.Text
+            dsNewRow.Item("adminRegion3") = txtAdminRegion3.Text
+            dsNewRow.Item("adminRegion4") = txtAdminRegion4.Text
             dsNewRow.Item("drainageBasin") = txtDrainageBasin.Text
             dsNewRow.Item("authority") = txtAuthority.Text
             dsNewRow.Item("qualifier") = cboStationType.Text
@@ -476,6 +479,9 @@ Public Class formMetadata
         txtLongitude.Clear()
         txtElevation.Clear()
         txtAdminRegion.Clear()
+        txtAdminRegion2.Clear()
+        txtAdminRegion3.Clear()
+        txtAdminRegion4.Clear()
         txtDrainageBasin.Clear()
         txtgeoAccuracy.Clear()
         txtgeoMethod.Clear()
@@ -614,7 +620,7 @@ Public Class formMetadata
             '    ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
 
             sql = "UPDATE station SET stationId = '" & cboStationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', wsi = '" & txtWSI.Text & "', latitude = " & lat & ", qualifier = '" & cboStationType.Text & "', longitude = " & lon & " , elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
-                ", adminRegion = '" & txtAdminRegion.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "', gtsWSI = '" & chkWSI_GTS.CheckState & "' where stationId = '" & cboStationId.Text & "';"
+                ", adminRegion = '" & txtAdminRegion.Text & "', adminRegion2 = '" & txtAdminRegion2.Text & "', adminRegion3 = '" & txtAdminRegion3.Text & "', adminRegion4 = '" & txtAdminRegion4.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "', gtsWSI = '" & chkWSI_GTS.CheckState & "' where stationId = '" & cboStationId.Text & "';"
 
             'MsgBox(sql)
             If Not Update_Rec(sql) Then
@@ -2268,13 +2274,7 @@ Err:
         pictureBoxInstrument.Refresh()
     End Sub
 
-    Private Sub GroupBox15_Enter(sender As Object, e As EventArgs) Handles GroupBox15.Enter
 
-    End Sub
-
-    Private Sub grpStation_Enter(sender As Object, e As EventArgs) Handles grpStation.Enter
-
-    End Sub
 End Class
 Class MetadataVariables
     Public seStn, sebdate, Eecode, Iecode As String 'Variables for Station Element
