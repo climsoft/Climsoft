@@ -294,6 +294,8 @@
                     For Each ctr In Me.Controls
                         If TypeOf ctr Is ucrValueFlagPeriod Then
                             ctr.Enabled = If(Val(ctr.Tag) >= todaysDate.Day, False, True)
+                        ElseIf TypeOf ctr Is ucrTextBox Then
+                            ctr.Enabled = True
                         End If
                     Next
                 Else
@@ -301,6 +303,8 @@
                     For Each ctr In Me.Controls
                         If TypeOf ctr Is ucrValueFlagPeriod Then
                             ctr.Enabled = If(Val(ctr.Tag > iMonthLength), False, True)
+                        ElseIf TypeOf ctr Is ucrTextBox Then
+                            ctr.Enabled = True
                         End If
                     Next
                 End If
