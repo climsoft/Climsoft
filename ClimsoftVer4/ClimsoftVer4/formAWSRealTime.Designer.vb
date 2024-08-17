@@ -359,7 +359,7 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.grpElements)
         Me.pnlProcessing.Location = New System.Drawing.Point(194, 29)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(757, 274)
+        Me.pnlProcessing.Size = New System.Drawing.Size(757, 323)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
         '
