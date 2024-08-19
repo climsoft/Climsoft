@@ -23,7 +23,7 @@ Public Class formAWSRealTime
     Dim dbConnectionString As String
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim ds As New DataSet
-    Dim sql As String
+    Dim sql, flg As String
     Dim rec As Integer
     Dim Kount, strRec As Integer
     Dim recEdit As New dataEntryGlobalRoutines
@@ -33,7 +33,7 @@ Public Class formAWSRealTime
     Dim WSI_Desc_Bits As String
     Dim WSI_BUFR_Subsets_Data As String
     Dim WSI_BUFR_Subsets_Data_WSI As String
-    Dim WSI_status As Boolean
+    Dim EncodeBUFR, WSI_status As Boolean
     Dim BUFR_Subsets_Data As String
     Dim Bufr_Subst As Integer
     Dim WSI_Bufr_Subst As Integer
@@ -42,12 +42,7 @@ Public Class formAWSRealTime
     Dim ftp_host As String
     Dim txtinputfile As String
 
-    Dim nat_id As String
-    Dim wmo_id As String
-    Dim stn_name As String
-    Dim lat As String
-    Dim lon As String
-    Dim elv As String
+    Dim nat_id, wmo_id, stn_name, WIGOS_id, lat, lon, elv As String
     Dim BUFR_header As String
     Dim msg_header, msg_file As String
     Dim datt, flprefix, stn1 As String
@@ -1212,14 +1207,14 @@ Err:
         '  Locate and processs aws input data files
         Me.Cursor = Cursors.WaitCursor
 
-        ' Initialize Subsets data
+        ' Initialize Bufr Subsets data
         Bufr_Subst = 0
         WSI_Bufr_Subst = 0
         BUFR_Subsets_Data = ""
         WSI_BUFR_Subsets_Data = ""
         BufrSection4 = ""
 
-        'Get full path for the Subsets Output file nd create folder if not existing
+        'Get full path for the Subsets Output file and create folder if not existing
         Dim Dir_outFiles As String
         Dir_outFiles = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
         If Not Directory.Exists(Dir_outFiles) Then Directory.CreateDirectory(Dir_outFiles)
@@ -1245,6 +1240,7 @@ Err:
         Dim i As Integer
 
         With ds.Tables("aws_sites")
+            EncodeBUFR = False ' Initialize BUFR encoding process
 
             For i = 0 To .Rows.Count - 1 'Kount - 1
                 'StnGTShdr = ""
@@ -1282,18 +1278,25 @@ Err:
                 txtStatus.Refresh()
 
                 If Not FTP_Call(infile, "get") Then
+                    Process_Status("")
                     Log_Errors("Can't retrieve data from input file " & infile)
                     Continue For ' If FTP call failed
                 End If
 
-            Next i
+            Next i ' Repeat untill all the selected files are downloaded into the temporary working folder
+
             Process_InputFiles(ds)
             'Exit Sub
         End With
 
-        ' Encode and compose the BUFR Bulletins
         FileClose(30)
         FileClose(31)
+
+        ' Encode and compose the BUFR Bulletins
+        If Not EncodeBUFR Then
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
 
         ' Open the output file containing the encoded BUFR Subsets data
         fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.csv"
@@ -2009,81 +2012,81 @@ Err:
         End Try
 
     End Function
-    Sub Process_Input_Record(aws_rs As String, datestring As String)
+    'Sub Process_Input_Record(aws_rs As String, datestring As String)
 
-        Dim str As DataSet
-        Dim sql2 As String
-        Dim GMTDiff As Integer
-        Dim Date_Time As Date
-        Try
-            'sql2 = "SELECT * FROM station"
-            sql2 = "select * from station where stationId = '" & nat_id & "';"
+    '    Dim str As DataSet
+    '    Dim sql2 As String
+    '    Dim GMTDiff As Integer
+    '    Dim Date_Time As Date
+    '    Try
+    '        'sql2 = "SELECT * FROM station"
+    '        sql2 = "select * from station where stationId = '" & nat_id & "';"
 
-            str = GetDataSet("station", sql2)
+    '        str = GetDataSet("station", sql2)
 
-            'Initialize station details with blanks
-            stn_name = ""
-            lat = ""
-            lon = ""
-            elv = ""
-            wmo_id = ""
+    '        'Initialize station details with blanks
+    '        stn_name = ""
+    '        lat = ""
+    '        lon = ""
+    '        elv = ""
+    '        wmo_id = ""
 
-            With str.Tables("station")
-                If .Rows.Count <> 0 Then
-                    If Not IsDBNull(.Rows(0).Item("stationName")) Then stn_name = .Rows(0).Item("stationName")
-                    If Not IsDBNull(.Rows(0).Item("latitude")) Then lat = .Rows(0).Item("latitude")
-                    If Not IsDBNull(.Rows(0).Item("longitude")) Then lon = .Rows(0).Item("longitude")
-                    If Not IsDBNull(.Rows(0).Item("elevation")) Then elv = .Rows(0).Item("elevation")
-                    If Not IsDBNull(.Rows(0).Item("wmoid")) Then wmo_id = .Rows(0).Item("wmoid")
-                Else
-                    Log_Errors(nat_id & " ot found in Stations metadata")
-                End If
-            End With
+    '        With str.Tables("station")
+    '            If .Rows.Count <> 0 Then
+    '                If Not IsDBNull(.Rows(0).Item("stationName")) Then stn_name = .Rows(0).Item("stationName")
+    '                If Not IsDBNull(.Rows(0).Item("latitude")) Then lat = .Rows(0).Item("latitude")
+    '                If Not IsDBNull(.Rows(0).Item("longitude")) Then lon = .Rows(0).Item("longitude")
+    '                If Not IsDBNull(.Rows(0).Item("elevation")) Then elv = .Rows(0).Item("elevation")
+    '                If Not IsDBNull(.Rows(0).Item("wmoid")) Then wmo_id = .Rows(0).Item("wmoid")
+    '            Else
+    '                Log_Errors(nat_id & " not found in Stations metadata")
+    '            End If
+    '        End With
 
-            update_main_db(aws_rs, datestring, nat_id)
+    '        update_main_db(aws_rs, datestring, nat_id)
 
-            'If Val(txtInterval.Text) = 0 Or Val(txtInterval.Text) > 60 Then ' Not a valid Encoding interval set
-            '    Log_Errors(txtInterval.Text & " Not a valid Encoding time interval")
-            '    Exit Sub
-            'End If
+    '        'If Val(txtInterval.Text) = 0 Or Val(txtInterval.Text) > 60 Then ' Not a valid Encoding interval set
+    '        '    Log_Errors(txtInterval.Text & " Not a valid Encoding time interval")
+    '        '    Exit Sub
+    '        'End If
 
-            Dim ET, Rmd As Integer
+    '        Dim ET, Rmd As Integer
 
-            '' Compute Encoding time
-            'ET = CDbl(Minute(datestring)) / CDbl(Val(txtInterval.Text))
-            'If ET <> 0 And ET <> 1 Then Exit Sub ' Not an encoding time interval
+    '        '' Compute Encoding time
+    '        'ET = CDbl(Minute(datestring)) / CDbl(Val(txtInterval.Text))
+    '        'If ET <> 0 And ET <> 1 Then Exit Sub ' Not an encoding time interval
 
-            If Val(txtPeriod.Text) = 999 Or Not GTSEncode(nat_id) Then Exit Sub ' No processing of messages if entire file processing is selected or the site is NOT set for encoding GTS message
+    '        If Val(txtPeriod.Text) = 999 Or Not GTSEncode(nat_id) Then Exit Sub ' No processing of messages if entire file processing is selected or the site is NOT set for encoding GTS message
 
-            ' If Val(txtPeriod.Text) > 12 Then Exit Sub ' Not to encode messages over 12 hours old
+    '        ' If Val(txtPeriod.Text) > 12 Then Exit Sub ' Not to encode messages over 12 hours old
 
-            If IsDate(datestring) Then
+    '        If IsDate(datestring) Then
 
-                ''Do not encode old observations even if a longer retrieval period is selected. 3 hours late has been set
-                Date_Time = datestring
-                'If CLng(txtPeriod.Text) - DateDiff(DateInterval.Hour, Date_Time, Now()) > CLng(txtEncode.Text) Then Exit Sub
-                If DateDiff(DateInterval.Hour, Date_Time, Now()) > CLng(txtEncode.Text) Then Exit Sub
+    '            ''Do not encode old observations even if a longer retrieval period is selected. 3 hours late has been set
+    '            Date_Time = datestring
+    '            'If CLng(txtPeriod.Text) - DateDiff(DateInterval.Hour, Date_Time, Now()) > CLng(txtEncode.Text) Then Exit Sub
+    '            If DateDiff(DateInterval.Hour, Date_Time, Now()) > CLng(txtEncode.Text) Then Exit Sub
 
-                ' Convert time to UTC
-                GMTDiff = CDbl(txtGMTDiff.Text)
-                Date_Time = DateAdd("h", -1 * GMTDiff, datestring)
+    '            ' Convert time to UTC
+    '            GMTDiff = CDbl(txtGMTDiff.Text)
+    '            Date_Time = DateAdd("h", -1 * GMTDiff, datestring)
 
-                ' Compute Encoding interval hours 
-                ET = Math.Round(Val(txtInterval.Text) / 60)
-                Rmd = DateAndTime.Hour(Date_Time) Mod ET
+    '            ' Compute Encoding interval hours 
+    '            ET = Math.Round(Val(txtInterval.Text) / 60)
+    '            Rmd = DateAndTime.Hour(Date_Time) Mod ET
 
-                ' Update the Template Table and Process the messages for transmission at the scheduled time
-                If Val(DateAndTime.Hour(Date_Time)) Mod ET = 0 And DateAndTime.Minute(Date_Time) = 0 Then update_tbltemplate(aws_rs, Date_Time)
+    '            ' Update the Template Table and Process the messages for transmission at the scheduled time
+    '            If Val(DateAndTime.Hour(Date_Time)) Mod ET = 0 And DateAndTime.Minute(Date_Time) = 0 Then update_tbltemplate(aws_rs, Date_Time)
 
-            End If
-            txtLastProcess.Text = datestring
+    '        End If
+    '        txtLastProcess.Text = datestring
 
-            Exit Sub
-        Catch Err As Exception
-            Log_Errors(Err.HResult & ": " & Err.Message & " at Process_Input_Record")
+    '        Exit Sub
+    '    Catch Err As Exception
+    '        Log_Errors(Err.HResult & ": " & Err.Message & " at Process_Input_Record")
 
-        End Try
-    End Sub
+    '    End Try
+    'End Sub
     Function GTSEncode(nat_id As String) As Boolean
         Dim grs As DataSet
         GTSEncode = False
@@ -2237,15 +2240,17 @@ Err:
         Start_Process()
     End Sub
     Sub Process_Status(msg As String)
-        On Error GoTo Err
+        Try
 
-        txtStatus.Text = msg
-        txtStatus.Refresh()
+            txtStatus.Text = msg
+            txtStatus.Refresh()
 
-        Exit Sub
-Err:
-        Log_Errors(Err.Description)
-        ' list_errors.AddItem txttime & " " & Err.description
+            'Exit Sub
+        Catch x As Exception
+            Log_Errors(x.Message)
+            'Log_Errors(Err.Description)
+            ' list_errors.AddItem txttime & " " & Err.description
+        End Try
     End Sub
 
     Sub update_main_db(rs_aws As String, datestr As String, stn As String)
@@ -2334,19 +2339,19 @@ Err:
 
                 FileOpen(21, fl, OpenMode.Append)
 
-                    If Val(obs) < Val(L_limit) Then limittype = "Lower Limit"
-                    If Val(obs) > Val(U_limit) Then limittype = "Upper Limit"
+                If Val(obs) < Val(L_limit) Then limittype = "Lower Limit"
+                If Val(obs) > Val(U_limit) Then limittype = "Upper Limit"
 
-                    errdata = stn & "," & elms & "," & dts & "," & obs & "," & limittype
+                errdata = stn & "," & elms & "," & dts & "," & obs & "," & limittype
 
-                    PrintLine(21, errdata)
-                    FileClose(21)
+                PrintLine(21, errdata)
+                FileClose(21)
 
-                    txtQC.Text = "QC Errors saved In file: " & fl
-                    txtQC.Refresh()
+                txtQC.Text = "QC Errors saved In file: " & fl
+                txtQC.Refresh()
 
-                    'Log_Errors("QC Errors saved in file: " & fl)
-                End If
+                'Log_Errors("QC Errors saved in file: " & fl)
+            End If
             'End If
         Catch ex As Exception
             FileClose(21)
@@ -2354,34 +2359,31 @@ Err:
         End Try
 
     End Function
-    Sub update_tbltemplate(aws_struct As String, Date_Time As String)
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
-        Dim dbconw As New MySql.Data.MySqlClient.MySqlConnection
-        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    Sub update_tbltemplate(aws_obsv As DataRow, Date_Time As String, Bufr_E() As String, Abbrev_E() As String)
+        'Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        'Dim dbconw As New MySql.Data.MySqlClient.MySqlConnection
+        'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
         Dim trs As New DataSet
-        Dim sql, yy, mm, dd, hh, min, ss, Seq_Desc, tt_aws, InitValue As String
+        Dim sql, yy, mm, dd, hh, Tprd, min, ss, Seq_Desc, tt_aws, InitValue As String
         Dim stn_typ As Integer
         'Dim obsv, hdr As String
 
         Try
             'cmd.Connection = Dim dbconw
+            cmd.Connection = dbconn
 
             tt_aws = txtTemplate.Text
 
-            sql = "DROP TABLE IF EXISTS bufr_crex_data; CREATE TABLE bufr_crex_data AS SELECT " & tt_aws & ".Nos, " & tt_aws & ".Bufr_Template, " & tt_aws & ".Crex_Template, " & tt_aws & ".Sequence_Descriptor1," & tt_aws & ".Sequence_Descriptor0," & tt_aws & ".Bufr_Element, " & tt_aws & ".Crex_Element, " & tt_aws & ".Climsoft_Element, " & tt_aws & ".Element_Name, bufr_crex_master.Crex_Unit, bufr_crex_master.Crex_Scale, bufr_crex_master.Crex_DataWidth, bufr_crex_master.Bufr_Unit, bufr_crex_master.Bufr_Scale, bufr_crex_master.Bufr_RefValue, bufr_crex_master.Bufr_DataWidth_Bits, " & tt_aws & ".selected, bufr_crex_master.Observation, bufr_crex_master.Crex_Data, bufr_crex_master.Bufr_Data FROM " & tt_aws & " INNER JOIN bufr_crex_master ON " & tt_aws & ".Bufr_Element = bufr_crex_master.Bufr_FXY ORDER BY " & tt_aws & ".Nos; " &
+            ' Create a table for TDCF encoding from the selected Template and refresh previous observations except Time Displacement values as they are standard
+            sql = String.Empty
+            sql = "DROP TABLE IF EXISTS bufr_crex_data; CREATE TABLE bufr_crex_data AS SELECT " & tt_aws & ".Nos, " & tt_aws & ".Bufr_Template, " & tt_aws & ".Crex_Template, " & tt_aws & ".Sequence_Descriptor1," & tt_aws & ".Sequence_Descriptor0," & tt_aws & ".Bufr_Element, " & tt_aws & ".Crex_Element, " & tt_aws & ".Climsoft_Element, " & tt_aws & ".Element_Name, bufr_crex_master.Crex_Unit, bufr_crex_master.Crex_Scale, bufr_crex_master.Crex_DataWidth, bufr_crex_master.Bufr_Unit, bufr_crex_master.Bufr_Scale, bufr_crex_master.Bufr_RefValue, bufr_crex_master.Bufr_DataWidth_Bits, " & tt_aws & ".selected, " & tt_aws & ".Observation, bufr_crex_master.Crex_Data, bufr_crex_master.Bufr_Data FROM " & tt_aws & " INNER JOIN bufr_crex_master ON " & tt_aws & ".Bufr_Element = bufr_crex_master.Bufr_FXY ORDER BY " & tt_aws & ".Nos; " &
                 "ALTER TABLE `bufr_crex_data` ADD PRIMARY KEY (`Nos`);"
+            sql = sql & "update bufr_crex_data  set observation = '', Bufr_Data = '', Crex_Data = '' WHERE Bufr_Element != '004025';"
 
-            ' Create query Command for creating a new table 'bufr_crex_data'
-
-            dbconw.ConnectionString = frmLogin.txtusrpwd.Text
-
-            dbconw.Open()
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconw)
-
-            'Execute query
-            qry.ExecuteNonQuery()
-
+            cmd.CommandTimeout = 0
+            cmd.CommandText = sql
+            cmd.ExecuteNonQuery()
 
             tt_aws = "bufr_crex_data"
 
@@ -2390,12 +2392,15 @@ Err:
             'trs = GetDataSet(tt_aws, sql)
             'trs = GetDataSet("bufr_crex_data", sql)
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconw)
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
             ' Remove timeout requirement
             da.SelectCommand.CommandTimeout = 0
 
             trs.Clear()
             da.Fill(trs, tt_aws)
+
+            'Log_Errors(Date_Time)
+            'Exit Sub
 
             yy = DateAndTime.Year(Date_Time)
             mm = DateAndTime.Month(Date_Time)
@@ -2406,11 +2411,12 @@ Err:
             ss = DateAndTime.Second(Date_Time)
             stn_typ = 0 ' Code for AWS
 
+
             'msg_header = MsgHeaber_ByHour(hh)
 
             'BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
             BUFR_header = msg_header & " " & dd & hh & min '& " " & txtBBB
-
+            'Log_Errors(1 & " " & DateAndTime.Second(Now()))
             Process_Status("Updating TDCF Template with observations ")
 
             Seq_Desc = ""
@@ -2418,10 +2424,11 @@ Err:
             With trs.Tables(tt_aws)
 
                 'Initialize the templatate
-                For i = 0 To .Rows.Count - 1
-                    Initialize_Template(tt_aws)
-                Next
+                'For i = 0 To .Rows.Count - 1
+                '    Initialize_Template(tt_aws)
+                'Next
 
+                'Log_Errors(2 & " " & DateAndTime.Second(Now()))
                 For i = 0 To .Rows.Count - 1
                     ' If Len(.Fields("Sequence_Descriptor1")) <> 0 Then Seq_Desc = Seq_Desc & .Fields("Sequence_Descriptor1")
                     'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
@@ -2440,18 +2447,33 @@ Err:
 
                     'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
 
-                    If .Rows(i).Item("Bufr_Element") = "001001" Then .Rows(i).Item("Observation") = Strings.Left(wmo_id, 2)
-                    If .Rows(i).Item("Bufr_Element") = "001002" Then .Rows(i).Item("Observation") = Strings.Right(wmo_id, 3)
-                    If .Rows(i).Item("Bufr_Element") = "001015" Then .Rows(i).Item("Observation") = stn_name
-                    If .Rows(i).Item("Bufr_Element") = "002001" Then .Rows(i).Item("Observation") = stn_typ
-                    If .Rows(i).Item("Bufr_Element") = "005001" Then .Rows(i).Item("Observation") = lat
-                    If .Rows(i).Item("Bufr_Element") = "006001" Then .Rows(i).Item("Observation") = lon
-                    If .Rows(i).Item("Bufr_Element") = "007030" Then .Rows(i).Item("Observation") = elv
-                    If .Rows(i).Item("Bufr_Element") = "004001" Then .Rows(i).Item("Observation") = yy 'obsv = yy
-                    If .Rows(i).Item("Bufr_Element") = "004002" Then .Rows(i).Item("Observation") = mm 'obsv = mm
-                    If .Rows(i).Item("Bufr_Element") = "004003" Then .Rows(i).Item("Observation") = dd 'obsv = dd
-                    If .Rows(i).Item("Bufr_Element") = "004004" Then .Rows(i).Item("Observation") = hh 'obsv = hh
-                    If .Rows(i).Item("Bufr_Element") = "004005" Then .Rows(i).Item("Observation") = min 'obsv = min
+                    If .Rows(i).Item("Bufr_Element") = "001001" Then
+                        .Rows(i).Item("Observation") = Strings.Left(wmo_id, 2)
+                    ElseIf .Rows(i).Item("Bufr_Element") = "001002" Then
+                        .Rows(i).Item("Observation") = Strings.Right(wmo_id, 3)
+                    ElseIf .Rows(i).Item("Bufr_Element") = "001015" Then
+                        .Rows(i).Item("Observation") = stn_name
+                    ElseIf .Rows(i).Item("Bufr_Element") = "002001" Then
+                        .Rows(i).Item("Observation") = stn_typ
+                    ElseIf .Rows(i).Item("Bufr_Element") = "005001" Then
+                        .Rows(i).Item("Observation") = lat
+                    ElseIf .Rows(i).Item("Bufr_Element") = "006001" Then
+                        .Rows(i).Item("Observation") = lon
+                    ElseIf .Rows(i).Item("Bufr_Element") = "007030" Then
+                        .Rows(i).Item("Observation") = elv
+                    ElseIf .Rows(i).Item("Bufr_Element") = "004001" Then
+                        .Rows(i).Item("Observation") = yy 'obsv = yy
+                    ElseIf .Rows(i).Item("Bufr_Element") = "004002" Then
+                        .Rows(i).Item("Observation") = mm 'obsv = mm
+                    ElseIf .Rows(i).Item("Bufr_Element") = "004003" Then
+                        .Rows(i).Item("Observation") = dd 'obsv = dd
+                    ElseIf .Rows(i).Item("Bufr_Element") = "004004" Then
+                        .Rows(i).Item("Observation") = hh 'obsv = hh
+                    ElseIf .Rows(i).Item("Bufr_Element") = "004005" Then
+                        .Rows(i).Item("Observation") = min 'obsv = min
+                    Else
+                        '.Rows(i).Item("Observation") = ""
+                    End If
 
                     'MsgBox(.Rows(i).Item("Bufr_Data") & " " & .Rows(i).Item("Bufr_Element"))
                     da.Update(trs, tt_aws)
@@ -2461,50 +2483,138 @@ Err:
 
             If txtTemplate.Text = "TM_307080" Then ' Use the Synoptic data template
 
-                'Initialize Cloud Replications
-                'Delayed replication of cloud layers above station level 4 descriptors for a maximum of 4 layers
-                Initialize_Cloud_Replications(dbconw, trs, qry, "cloud_rep1", 4)
+                ''Initialize Cloud Replications
+                ''Delayed replication of cloud layers above station level 4 descriptors for a maximum of 4 layers
+                'Initialize_Replications(trs, "cloud_rep1", 4, 4)
 
-                'Delayed replication of cloud layers below station level 5 descriptors for a maximum of 4 layers
-                Initialize_Cloud_Replications(dbconw, trs, qry, "cloud_rep2", 5)
+                '(trs As DataSet, RepType As String, descrp As Integer, lyrs As Integer)
+                Initialize_Cloud_Replications(trs, "cloud_rep1", 119, 4)
 
-                'Update_Instruments_Details()
-                Update_Time_Periods(dbconw, qry, hh)
-                Update_observations(dbconw, qry, aws_struct)
+                ''Delayed replication of cloud layers below station level 5 descriptors for a maximum of 4 layers
+                'Initialize_Cloud_Replications(trs, "cloud_rep2", 5, 4)
+                Initialize_Cloud_Replications(trs, "cloud_rep2", 611, 5)
 
-                ' Update with accumulated observations
-                ' Precipitation accumulation
-                'Select recordedFrom As ID, sum(obsValue) As Total from observationfinal where recordedFrom ='GZ008074' and describedBy='892' and (obsdatetime between '2020-09-10 08:01:00' and '2020-09-11 08:00:00') group by ID;
+                'Update Time Periods
+                If CLng(hh) Mod 6 = 0 Then
+                    Tprd = -6
+                Else
+                    Tprd = -3
+                End If
+                sql = "update bufr_crex_data set observation = '" & Tprd & "' where Climsoft_Element='ww_TP';" & ' Time Period for Past and Present Weather
+                    "update bufr_crex_data set observation = '" & Tprd & "' where Climsoft_Element='tempc_t';" &  ' Time Period for Past and Present Weather 2
+                    "update bufr_crex_data set observation = '-6' where Climsoft_Element='tR_TP1';" & ' Time Period for precipitation replication 1
+                    "update bufr_crex_data set observation = '-1' where Climsoft_Element='tR_TP2';" & ' Time Period for precipitation replication 2
+                    "update bufr_crex_data set observation = '-24' where Climsoft_Element='evap_TP';" & ' Time Period for evaporation
+                    "update bufr_crex_data set observation = '-24' where Climsoft_Element='SSS_TP';" & ' Time Period for sunshine replication 1
+                    "update bufr_crex_data set observation = '-1' where Climsoft_Element='SS_TP';" & ' Time Period for sunshine replication 2
+                    "update bufr_crex_data set observation = '-12' where Climsoft_Element='xt_TP';" & ' Time Period for maximum temperature
+                    "update bufr_crex_data set observation = '-0' where Climsoft_Element='xt0_TP';" & ' Time Period for maximum temperature ending at nominal time of the report
+                    "update bufr_crex_data set observation = '-12' where Climsoft_Element='nt_TP';" & ' Time Period for minimum teperature
+                    "update bufr_crex_data set observation = '0' where Climsoft_Element='nt0_TP';" & ' Time Period for minimum teperature ending at nominal time of the report
+                    "update bufr_crex_data set observation = '2' where Climsoft_Element='w_TS';" & ' Time Significance for wind
+                    "update bufr_crex_data set observation = '-10' where Climsoft_Element='w_TP';" & ' Time Period for wind
+                    "update bufr_crex_data set observation = '-10' where Climsoft_Element='w1_TP';" & ' Time Period for wind
+                    "update bufr_crex_data set observation = '-10' where Climsoft_Element='w2_TP';" &' Time Period for wind gust
+                    "update bufr_crex_data set observation = '-1' where Climsoft_Element='rad1_TP';" & ' Time Period for radiation replication 1
+                    "update bufr_crex_data set observation = '-24' where Climsoft_Element='rad2_TP';" ' Time Period for radiation replication 2
 
-                Update_specificPeriod_Observations(dbconw, Date_Time, nat_id)
-                'Log_Errors("Start Encoding")
-                ' 3 Hour observations
-                ' Tmax and Tmin values
+                Update_data(sql)
 
-                TDCF_Encode(dbconw, qry, trs, tt_aws)
+                ' Update the template with AWS observations
+                sql = String.Empty
+                For i = 0 To Bufr_E.Count - 1
+                    If Len(Bufr_E(i).ToString) > 0 And aws_obsv(i) <> flg Then
+                        sql = sql & "update bufr_crex_data set observation = '" & aws_obsv(i) & "' where Bufr_Element='" & Bufr_E(i) & "';"
+                    End If
+                Next
 
-                'Output_Data_Code(dbconn, i + 1)
-                'Data_Description_Section = Data_Description_Section & Bufr_Section4(dbconn)
-            Else ' Use the AWS Template
+                'If sql <> String.Empty Then Update_data(sql)
+                Update_data(sql)
+                'Log_Errors(sql)
+
+                '' Update with accumulated observations
+                '' Precipitation accumulation
+                ''Select recordedFrom As ID, sum(obsValue) As Total from observationfinal where recordedFrom ='GZ008074' and describedBy='892' and (obsdatetime between '2020-09-10 08:01:00' and '2020-09-11 08:00:00') group by ID;
+
+                'Update_specificPeriod_Observations(dbconn, Date_Time, nat_id)
+
+                Update_specificPeriod_Observations(Date_Time, nat_id)
+                ''Log_Errors("Start Encoding")
+                '' 3 Hour observations
+                '' Tmax and Tmin values
+
+                TDCF_Encode(trs, tt_aws)
+
+                ''Output_Data_Code(dbconn, i + 1)
+                ''Data_Description_Section = Data_Description_Section & Bufr_Section4(dbconn)
+
+                'Exit Sub
+
+            ElseIf txtTemplate.Text = "TM_307091" Or txtTemplate.Text = "TM_307092" Then ' AWS Templates
+                ' Initialize Replication factors
+                sql = "update bufr_crex_data SET Observation = '0', selected = '1' WHERE Bufr_Element = '031000';"
+                Update_data(sql)
+
+                'Initialize Soil Temperature Replications
+                'Delayed replication of soil depth levels 2 descriptors for a maximum of 5 layers
+                'Initialize_Soil_Replications(trs, "soil_rep", 2, 5)
+                Initialize_Replications(trs, "007061", 2, 5, 1) ' Soil Temperature Replications
+                Initialize_Replications(trs, "020001", 4, 1, 4) ' Visibility Replications
+                Initialize_Replications(trs, "020031", 7, 1, 1) ' Ice Thickness Replications
+                Initialize_Replications(trs, "002176", 4, 1, 1) ' Snow Depth Replications
+                Initialize_Replications(trs, "020010", 6, 4, 1) ' Clouds Replications
+                Initialize_Replications(trs, "020004", 4, 1, 3) ' Weather Replications
+                Initialize_Replications(trs, "013155", 5, 1, 3) ' Intensity of precipitation Replications
+                Initialize_Replications(trs, "020021", 8, 1, 2) ' Precipitation, obscuration and other phenomena  Replications
+                Initialize_Replications(trs, "002175", 5, 1, 2) ' Precipitation measurement  Replications
+                Initialize_Replications(trs, "013033", 3, 1, 3) ' Evaporation Replication
+                Initialize_Replications(trs, "014031", 2, 1, 2) ' Sunshine Replication
+                Initialize_Replications(trs, "014002", 7, 1, 2) ' Radiation Replication
+                Initialize_Replications(trs, "013059", 2, 1, 2) ' Flashes Replication
+                Initialize_Replications(trs, "008023", 7, 1, 2) ' First order statistics  Replication
+
+                'trs As DataSet, stDecrpt As String, Tdescrpts As Integer, lvls As Integer, mult As Integer
+                'Initialize_Wind_Replications
+                'Replication of Wind Gust 2 descriptors 2 times
+                sql = "update bufr_crex_data SET Observation = '', selected = '0' WHERE Bufr_Element = '011041' OR  Bufr_Element = '011043';"
+                Update_data(sql)
+
 
                 ' Initialize Code and Flag Tables
-                Initialize_CodeFlag(trs, tt_aws, dbconw)
+                Initialize_CodeFlag(trs, tt_aws)
 
-                ' Update Template with AWS observation values
-                sql = "UPDATE " & aws_struct & " INNER JOIN " & tt_aws & " ON " & aws_struct & ".Bufr_Element = " & tt_aws & ".Bufr_Element SET " & tt_aws & ".Observation = " & aws_struct & ".obsv where " & aws_struct & ".Bufr_Element = " & tt_aws & ".Bufr_Element;"
+                '' Update Template with AWS observation values
+                'sql = "ThenThenUPDATE " & aws_struct & " INNER JOIN " & tt_aws & " ON " & aws_struct & ".Bufr_Element = " & tt_aws & ".Bufr_Element SET " & tt_aws & ".Observation = " & aws_struct & ".obsv where " & aws_struct & ".Bufr_Element = " & tt_aws & ".Bufr_Element;"
+                sql = String.Empty
+                For i = 0 To Bufr_E.Count - 1
+                    If Len(Bufr_E(i).ToString) > 0 And aws_obsv(i) <> flg Then
+                        sql = sql & "update bufr_crex_data set selected = '1', observation = '" & aws_obsv(i) & "' where Bufr_Element='" & Bufr_E(i) & "';"
+                    End If
+                Next
+                'Log_Errors(sql)
+                Update_data(sql)
 
-                cmd.Connection = dbconw
-                cmd.CommandText = sql
-                cmd.ExecuteNonQuery()
+                'cmd.Connection = dbconn
+                'cmd.CommandText = sql
+                'cmd.ExecuteNonQuery()
 
-                '    ' Update Template with Replicated Values
-                Replicate_SoilTemp(trs, aws_struct, tt_aws)
-                Replicate_MaxGust(trs, aws_struct, tt_aws)
-                'End If
+                ''    ' Update Template with Replicated Values
+                'Replicate_SoilTemp(trs, aws_struct, tt_aws)
+                Replicate_SoilTemp(tt_aws, aws_obsv, Bufr_E, Abbrev_E)
+                Replicate_MaxGust(aws_obsv, tt_aws, Bufr_E, Abbrev_E)
+
+                ' Set data is repeated descriptors to missing to cancel the previous value
+                sql = String.Empty
+                sql = sql & "update bufr_crex_data set Observation ='', selected = '1' where Nos = '51';"
+                sql = sql & "update bufr_crex_data set Observation ='', selected = '1' where Nos = '58' OR Nos = '59' ;"
+                sql = sql & "update bufr_crex_data set Observation ='', selected = '1' where Nos = '147';"
+                sql = sql & "update bufr_crex_data set Observation ='', selected = '1' where Nos = '155';"
+                sql = sql & "update bufr_crex_data set Observation ='9', selected = '1' where Nos = '181';"
+                Update_data(sql)
 
                 '    ' Encode observations in the template into TDCF-BUFR
-                'TDCF_Encode(trs, tt_aws)
-                TDCF_Encode(dbconw, qry, trs, "bufr_crex_data")
+                TDCF_Encode(trs, tt_aws)
+                'TDCF_Encode1(trs, "bufr_crex_data")
 
                 ' Compose data for BUFR Section 4 - Data Section
                 'sql = "Select TM_307091.Rec, TM_307091.Bufr_Template, TM_307091.CREX_Template, TM_307091.Sequence_Descriptor1, TM_307091.Sequence_Descriptor0, TM_307091.Bufr_Element, TM_307091.Crex_Element, TM_307091.Climsoft_Element, TM_307091.Element_Name, TM_307091.Crex_Unit, TM_307091.Crex_Scale, TM_307091.Crex_DataWidth, TM_307091.Bufr_Unit, TM_307091.Bufr_Scale, TM_307091.Bufr_RefValue, TM_307091.Bufr_DataWidth_Bits, TM_307091.Selected, TM_307091.Observation, TM_307091.Crex_Data, TM_307091.Bufr_Data " &
@@ -2543,7 +2653,6 @@ Err:
                 'BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
 
                 '' Compute BUFR subset with WSI
-
                 If TDCF.WSI_data(nat_id, WSI) Then
                     WSI_BUFR_Subsets_Data = WSI_BUFR_Subsets_Data & WSI & BufrSection4
                     WSI_Bufr_Subst = WSI_Bufr_Subst + 1
@@ -2555,69 +2664,333 @@ Err:
                 End If
 
                 '''' Include WSI binary data in the subset
-                'If Len(WSI_BUFR_Subsets_Data) > 8 Then
-                '    'BUFR_Subsets_Data = WSI_BUFR_Subsets_Data & BUFR_Subsets_Data
-                '    BUFR_Subsets_Data = WSI_BUFR_Subsets_Data
-                'End If
+                If Len(WSI_BUFR_Subsets_Data) > 8 Then
+                    'BUFR_Subsets_Data = WSI_BUFR_Subsets_Data & BUFR_Subsets_Data
+                    BUFR_Subsets_Data = WSI_BUFR_Subsets_Data
+                End If
 
                 '' Output substet binary data
                 'PrintLine(30, Date_Time & "," & BufrSection4)
             End If
-            dbconw.Close()
+            'dbconn.Close()
             ' ' Compose the complete AWS BUFR message
             ' Below code has been commented so that encoding is not done on individual stations but as a bulletin handle at the end of function process_input_data
             'If Not AWS_BUFR_Code(msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
             'Log_Errors(Len(BufrSection4))
 
         Catch Err As Exception
-            dbconw.Close()
+            'dbconn.Close()
             Log_Errors(Err.Message & " at update_tbltemplate")
+        End Try
+    End Sub
+    'Sub update_tbltemplate(aws_struct As String, Date_Time As String)
+    '    Dim qry As MySql.Data.MySqlClient.MySqlCommand
+    '    Dim dbconw As New MySql.Data.MySqlClient.MySqlConnection
+    '    Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
-        End Try
-    End Sub
-    Sub Update_Time_Periods(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, hr As String)
-        Dim Tprd As String
-        Try
-            If CLng(hr) Mod 6 = 0 Then
-                Tprd = "-6"
-            Else
-                Tprd = "-3"
-            End If
-            Update_data(conw, qry, Tprd, "ww_TP") ' Time Period for Past and Present Weather
-            Update_data(conw, qry, Tprd, "tempc_t")  ' Time Period for Past and Present Weather 2
-            Update_data(conw, qry, "-6", "tR_TP1") ' Time Period for precipitation replication 1
-            Update_data(conw, qry, "-1", "tR_TP2") ' Time Period for precipitation replication 2
-            Update_data(conw, qry, "-24", "evap_TP") ' Time Period for evaporation
-            Update_data(conw, qry, "-24", "SSS_TP") ' Time Period for sunshine replication 1
-            Update_data(conw, qry, "-1", "SS_TP") ' Time Period for sunshine replication 2
-            Update_data(conw, qry, "-12", "xt_TP") ' Time Period for maximum temperature
-            Update_data(conw, qry, "0", "xt0_TP") ' Time Period for maximum temperature ending at nominal time of the report
-            Update_data(conw, qry, "-12", "nt_TP") ' Time Period for minimum teperature
-            Update_data(conw, qry, "0", "nt0_TP") ' Time Period for minimum teperature ending at nominal time of the report
-            Update_data(conw, qry, "2", "w_TS") ' Time Significance for wind
-            Update_data(conw, qry, "-10", "w_TP") ' Time Period for wind
-            Update_data(conw, qry, "-10", "w1_TP") ' Time Period for wind gust
-            Update_data(conw, qry, "-10", "w2_TP") ' Time Period for wind gust
-            Update_data(conw, qry, "-1", "rad1_TP") ' Time Period for radiation replication 1
-            Update_data(conw, qry, "-24", "rad2_TP") ' Time Period for radiation replication 2
-        Catch ex As Exception
-            MsgBox(ex.Message & " at Update_Time_Periods")
-        End Try
-    End Sub
-    Sub Update_data(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, data As String, element As String)
+    '    Dim trs As New DataSet
+    '    Dim sql, yy, mm, dd, hh, min, ss, Seq_Desc, tt_aws, InitValue As String
+    '    Dim stn_typ As Integer
+    '    'Dim obsv, hdr As String
 
-        sql = "update bufr_crex_data set observation = '" & data & "' where Climsoft_Element='" & element & "';"
-        ' Create the Command for executing query and set its properties
-        'MsgBox(sql)
+    '    Try
+    '        'cmd.Connection = Dim dbconw
+
+    '        tt_aws = txtTemplate.Text
+
+    '        sql = "DROP TABLE IF EXISTS bufr_crex_data; CREATE TABLE bufr_crex_data AS SELECT " & tt_aws & ".Nos, " & tt_aws & ".Bufr_Template, " & tt_aws & ".Crex_Template, " & tt_aws & ".Sequence_Descriptor1," & tt_aws & ".Sequence_Descriptor0," & tt_aws & ".Bufr_Element, " & tt_aws & ".Crex_Element, " & tt_aws & ".Climsoft_Element, " & tt_aws & ".Element_Name, bufr_crex_master.Crex_Unit, bufr_crex_master.Crex_Scale, bufr_crex_master.Crex_DataWidth, bufr_crex_master.Bufr_Unit, bufr_crex_master.Bufr_Scale, bufr_crex_master.Bufr_RefValue, bufr_crex_master.Bufr_DataWidth_Bits, " & tt_aws & ".selected, bufr_crex_master.Observation, bufr_crex_master.Crex_Data, bufr_crex_master.Bufr_Data FROM " & tt_aws & " INNER JOIN bufr_crex_master ON " & tt_aws & ".Bufr_Element = bufr_crex_master.Bufr_FXY ORDER BY " & tt_aws & ".Nos; " &
+    '            "ALTER TABLE `bufr_crex_data` ADD PRIMARY KEY (`Nos`);"
+
+    '        ' Create query Command for creating a new table 'bufr_crex_data'
+
+    '        dbconw.ConnectionString = frmLogin.txtusrpwd.Text
+
+    '        dbconw.Open()
+    '        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconw)
+
+    '        'Execute query
+    '        qry.ExecuteNonQuery()
+
+
+    '        tt_aws = "bufr_crex_data"
+
+    '        sql = "SELECT * FROM " & tt_aws & " ORDER BY Nos"
+
+    '        'trs = GetDataSet(tt_aws, sql)
+    '        'trs = GetDataSet("bufr_crex_data", sql)
+
+    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconw)
+    '        ' Remove timeout requirement
+    '        da.SelectCommand.CommandTimeout = 0
+
+    '        trs.Clear()
+    '        da.Fill(trs, tt_aws)
+
+    '        yy = DateAndTime.Year(Date_Time)
+    '        mm = DateAndTime.Month(Date_Time)
+    '        dd = DateAndTime.Day(Date_Time)
+    '        hh = DateAndTime.Hour(Date_Time)
+    '        'hh = Val(DateAndTime.Hour(Date_Time)) - Int(txtGMTDiff.Text)
+    '        min = DateAndTime.Minute(Date_Time)
+    '        ss = DateAndTime.Second(Date_Time)
+    '        stn_typ = 0 ' Code for AWS
+
+    '        'msg_header = MsgHeaber_ByHour(hh)
+
+    '        'BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
+    '        BUFR_header = msg_header & " " & dd & hh & min '& " " & txtBBB
+
+    '        Process_Status("Updating TDCF Template with observations ")
+
+    '        Seq_Desc = ""
+
+    '        With trs.Tables(tt_aws)
+
+    '            'Initialize the templatate
+    '            For i = 0 To .Rows.Count - 1
+    '                Initialize_Template(tt_aws)
+    '            Next
+
+    '            For i = 0 To .Rows.Count - 1
+    '                ' If Len(.Fields("Sequence_Descriptor1")) <> 0 Then Seq_Desc = Seq_Desc & .Fields("Sequence_Descriptor1")
+    '                'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
+
+    '                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+    '                Dim recUpdate As New dataEntryGlobalRoutines
+
+    '                ' Initialize Bufr data with missing value i.e. all 1s
+    '                If Strings.Left(.Rows(i).Item("Bufr_Element"), 1) = 0 And .Rows(i).Item("Bufr_Element") <> "031000" And .Rows(i).Item("Bufr_Element") <> "004025" Then ' Element Descriptors only but not Delayed replication factor factor. It is preset
+    '                    InitValue = "1"
+    '                    For j = 2 To Val(.Rows(i).Item("Bufr_DataWidth_Bits"))
+    '                        InitValue = InitValue & "1"
+    '                    Next j
+    '                    .Rows(i).Item("Bufr_Data") = InitValue
+    '                End If
+
+    '                'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
+
+    '                If .Rows(i).Item("Bufr_Element") = "001001" Then .Rows(i).Item("Observation") = Strings.Left(wmo_id, 2)
+    '                If .Rows(i).Item("Bufr_Element") = "001002" Then .Rows(i).Item("Observation") = Strings.Right(wmo_id, 3)
+    '                If .Rows(i).Item("Bufr_Element") = "001015" Then .Rows(i).Item("Observation") = stn_name
+    '                If .Rows(i).Item("Bufr_Element") = "002001" Then .Rows(i).Item("Observation") = stn_typ
+    '                If .Rows(i).Item("Bufr_Element") = "005001" Then .Rows(i).Item("Observation") = lat
+    '                If .Rows(i).Item("Bufr_Element") = "006001" Then .Rows(i).Item("Observation") = lon
+    '                If .Rows(i).Item("Bufr_Element") = "007030" Then .Rows(i).Item("Observation") = elv
+    '                If .Rows(i).Item("Bufr_Element") = "004001" Then .Rows(i).Item("Observation") = yy 'obsv = yy
+    '                If .Rows(i).Item("Bufr_Element") = "004002" Then .Rows(i).Item("Observation") = mm 'obsv = mm
+    '                If .Rows(i).Item("Bufr_Element") = "004003" Then .Rows(i).Item("Observation") = dd 'obsv = dd
+    '                If .Rows(i).Item("Bufr_Element") = "004004" Then .Rows(i).Item("Observation") = hh 'obsv = hh
+    '                If .Rows(i).Item("Bufr_Element") = "004005" Then .Rows(i).Item("Observation") = min 'obsv = min
+
+    '                'MsgBox(.Rows(i).Item("Bufr_Data") & " " & .Rows(i).Item("Bufr_Element"))
+    '                da.Update(trs, tt_aws)
+
+    '            Next i
+    '        End With
+
+    '        If txtTemplate.Text = "TM_307080" Then ' Use the Synoptic data template
+
+    '            'Initialize Cloud Replications
+    '            'Delayed replication of cloud layers above station level 4 descriptors for a maximum of 4 layers
+    '            Initialize_Cloud_Replications(dbconw, trs, qry, "cloud_rep1", 4)
+
+    '            'Delayed replication of cloud layers below station level 5 descriptors for a maximum of 4 layers
+    '            Initialize_Cloud_Replications(dbconw, trs, qry, "cloud_rep2", 5)
+
+    '            'Update_Instruments_Details()
+    '            Update_Time_Periods(dbconw, qry, hh)
+    '            Update_observations(dbconw, qry, aws_struct)
+
+    '            ' Update with accumulated observations
+    '            ' Precipitation accumulation
+    '            'Select recordedFrom As ID, sum(obsValue) As Total from observationfinal where recordedFrom ='GZ008074' and describedBy='892' and (obsdatetime between '2020-09-10 08:01:00' and '2020-09-11 08:00:00') group by ID;
+
+    '            Update_specificPeriod_Observations(dbconw, Date_Time, nat_id)
+    '            'Log_Errors("Start Encoding")
+    '            ' 3 Hour observations
+    '            ' Tmax and Tmin values
+
+    '            TDCF_Encode(dbconw, qry, trs, tt_aws)
+
+    '            'Output_Data_Code(dbconn, i + 1)
+    '            'Data_Description_Section = Data_Description_Section & Bufr_Section4(dbconn)
+    '        Else ' Use the AWS Template
+
+    '            ' Initialize Code and Flag Tables
+    '            'Initialize_CodeFlag(trs, tt_aws, dbconw)
+
+    '            ' Update Template with AWS observation values
+    '            sql = "UPDATE " & aws_struct & " INNER JOIN " & tt_aws & " ON " & aws_struct & ".Bufr_Element = " & tt_aws & ".Bufr_Element SET " & tt_aws & ".Observation = " & aws_struct & ".obsv where " & aws_struct & ".Bufr_Element = " & tt_aws & ".Bufr_Element;"
+
+    '            cmd.Connection = dbconw
+    '            cmd.CommandText = sql
+    '            cmd.ExecuteNonQuery()
+
+    '            '    ' Update Template with Replicated Values
+    '            Replicate_SoilTemp(trs, aws_struct, tt_aws)
+    '            Replicate_MaxGust(trs, aws_struct, tt_aws)
+    '            'End If
+
+    '            '    ' Encode observations in the template into TDCF-BUFR
+    '            'TDCF_Encode(trs, tt_aws)
+    '            TDCF_Encode(dbconw, qry, trs, "bufr_crex_data")
+
+    '            ' Compose data for BUFR Section 4 - Data Section
+    '            'sql = "Select TM_307091.Rec, TM_307091.Bufr_Template, TM_307091.CREX_Template, TM_307091.Sequence_Descriptor1, TM_307091.Sequence_Descriptor0, TM_307091.Bufr_Element, TM_307091.Crex_Element, TM_307091.Climsoft_Element, TM_307091.Element_Name, TM_307091.Crex_Unit, TM_307091.Crex_Scale, TM_307091.Crex_DataWidth, TM_307091.Bufr_Unit, TM_307091.Bufr_Scale, TM_307091.Bufr_RefValue, TM_307091.Bufr_DataWidth_Bits, TM_307091.Selected, TM_307091.Observation, TM_307091.Crex_Data, TM_307091.Bufr_Data " &
+    '            '      "From TM_307091 Where (((TM_307091.Selected) = True)) ORDER BY TM_307091.Rec;"
+    '        End If
+
+    '        sql = "Select bufr_crex_data.Nos, bufr_crex_data.Bufr_Template, bufr_crex_data.CREX_Template, bufr_crex_data.Sequence_Descriptor1, bufr_crex_data.Sequence_Descriptor0, bufr_crex_data.Bufr_Element, bufr_crex_data.Crex_Element, bufr_crex_data.Climsoft_Element, bufr_crex_data.Element_Name, bufr_crex_data.Crex_Unit, bufr_crex_data.Crex_Scale, bufr_crex_data.Crex_DataWidth, bufr_crex_data.Bufr_Unit, bufr_crex_data.Bufr_Scale, bufr_crex_data.Bufr_RefValue, bufr_crex_data.Bufr_DataWidth_Bits, bufr_crex_data.Selected, bufr_crex_data.Observation, bufr_crex_data.Crex_Data, bufr_crex_data.Bufr_Data " &
+    '              "From bufr_crex_data Where (((bufr_crex_data.Selected) = True)) ORDER BY bufr_crex_data.Nos;"
+
+    '        ' Compute the Template descriptor to Bianry form
+    '        If Not Compute_Descriptors(tt_aws, Desc_Bits) Then
+    '            Log_Errors("Can't compute descriptors")
+    '            Me.Cursor = Cursors.Default
+    '            Exit Sub
+    '        End If
+    '        'Bufr_Subst = 0
+    '        'BUFR_Subsets_Data = ""
+    '        'Get full path for the Subsets Output file file and create the file
+    '        'Refresh_Folder(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\")
+    '        'fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.csv"
+
+    '        'FileOpen(30, fl, OpenMode.Append)
+
+    '        'MsgBox(sql)
+    '        'BufrSection4 = ""
+    '        'If Not AWS_Bufr_Section4(sql, BufrSection4, tt_aws) Then
+    '        If Not AWS_Bufr_Section4(sql, BufrSection4, "bufr_crex_data") Then
+    '            Log_Errors("Cant' Compute Bufr Data Section")  'MsgBox "Cant' Compute Bufr Data Section"
+    '        Else
+
+    '            '' Update Subset Number
+    '            'Bufr_Subst = Bufr_Subst + 1
+
+    '            '' Append Data in Section 4 with the data computed from current subset
+
+    '            'BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
+
+    '            '' Compute BUFR subset with WSI
+
+    '            If TDCF.WSI_data(nat_id, WSI) Then
+    '                WSI_BUFR_Subsets_Data = WSI_BUFR_Subsets_Data & WSI & BufrSection4
+    '                WSI_Bufr_Subst = WSI_Bufr_Subst + 1
+    '                PrintLine(31, Date_Time & "," & WSI & BufrSection4)
+    '            Else
+    '                BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
+    '                Bufr_Subst = Bufr_Subst + 1
+    '                PrintLine(30, Date_Time & "," & BufrSection4)
+    '            End If
+
+    '            '''' Include WSI binary data in the subset
+    '            'If Len(WSI_BUFR_Subsets_Data) > 8 Then
+    '            '    'BUFR_Subsets_Data = WSI_BUFR_Subsets_Data & BUFR_Subsets_Data
+    '            '    BUFR_Subsets_Data = WSI_BUFR_Subsets_Data
+    '            'End If
+
+    '            '' Output substet binary data
+    '            'PrintLine(30, Date_Time & "," & BufrSection4)
+    '        End If
+    '        dbconw.Close()
+    '        ' ' Compose the complete AWS BUFR message
+    '        ' Below code has been commented so that encoding is not done on individual stations but as a bulletin handle at the end of function process_input_data
+    '        'If Not AWS_BUFR_Code(msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
+    '        'Log_Errors(Len(BufrSection4))
+
+    '    Catch Err As Exception
+    '        dbconw.Close()
+    '        Log_Errors(Err.Message & " at update_tbltemplate")
+
+    '    End Try
+    'End Sub
+
+    'Sub Update_Time_Periods1(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, hr As String)
+    '    Dim Tprd As String
+    '    Try
+    '        If CLng(hr) Mod 6 = 0 Then
+    '            Tprd = "-6"
+    '        Else
+    '            Tprd = "-3"
+    '        End If
+    '        Update_data(conw, qry, Tprd, "ww_TP") ' Time Period for Past and Present Weather
+    '        Update_data(conw, qry, Tprd, "tempc_t")  ' Time Period for Past and Present Weather 2
+    '        Update_data(conw, qry, "-6", "tR_TP1") ' Time Period for precipitation replication 1
+    '        Update_data(conw, qry, "-1", "tR_TP2") ' Time Period for precipitation replication 2
+    '        Update_data(conw, qry, "-24", "evap_TP") ' Time Period for evaporation
+    '        Update_data(conw, qry, "-24", "SSS_TP") ' Time Period for sunshine replication 1
+    '        Update_data(conw, qry, "-1", "SS_TP") ' Time Period for sunshine replication 2
+    '        Update_data(conw, qry, "-12", "xt_TP") ' Time Period for maximum temperature
+    '        Update_data(conw, qry, "0", "xt0_TP") ' Time Period for maximum temperature ending at nominal time of the report
+    '        Update_data(conw, qry, "-12", "nt_TP") ' Time Period for minimum teperature
+    '        Update_data(conw, qry, "0", "nt0_TP") ' Time Period for minimum teperature ending at nominal time of the report
+    '        Update_data(conw, qry, "2", "w_TS") ' Time Significance for wind
+    '        Update_data(conw, qry, "-10", "w_TP") ' Time Period for wind
+    '        Update_data(conw, qry, "-10", "w1_TP") ' Time Period for wind gust
+    '        Update_data(conw, qry, "-10", "w2_TP") ' Time Period for wind gust
+    '        Update_data(conw, qry, "-1", "rad1_TP") ' Time Period for radiation replication 1
+    '        Update_data(conw, qry, "-24", "rad2_TP") ' Time Period for radiation replication 2
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message & " at Update_Time_Periods")
+    '    End Try
+    'End Sub
+
+    'Sub Update_Time_Periods(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, hr As String)
+    '    Dim Tprd As String
+    '    Try
+    '        If CLng(hr) Mod 6 = 0 Then
+    '            Tprd = "-6"
+    '        Else
+    '            Tprd = "-3"
+    '        End If
+    '        Update_data(conw, qry, Tprd, "ww_TP") ' Time Period for Past and Present Weather
+    '        Update_data(conw, qry, Tprd, "tempc_t")  ' Time Period for Past and Present Weather 2
+    '        Update_data(conw, qry, "-6", "tR_TP1") ' Time Period for precipitation replication 1
+    '        Update_data(conw, qry, "-1", "tR_TP2") ' Time Period for precipitation replication 2
+    '        Update_data(conw, qry, "-24", "evap_TP") ' Time Period for evaporation
+    '        Update_data(conw, qry, "-24", "SSS_TP") ' Time Period for sunshine replication 1
+    '        Update_data(conw, qry, "-1", "SS_TP") ' Time Period for sunshine replication 2
+    '        Update_data(conw, qry, "-12", "xt_TP") ' Time Period for maximum temperature
+    '        Update_data(conw, qry, "0", "xt0_TP") ' Time Period for maximum temperature ending at nominal time of the report
+    '        Update_data(conw, qry, "-12", "nt_TP") ' Time Period for minimum teperature
+    '        Update_data(conw, qry, "0", "nt0_TP") ' Time Period for minimum teperature ending at nominal time of the report
+    '        Update_data(conw, qry, "2", "w_TS") ' Time Significance for wind
+    '        Update_data(conw, qry, "-10", "w_TP") ' Time Period for wind
+    '        Update_data(conw, qry, "-10", "w1_TP") ' Time Period for wind gust
+    '        Update_data(conw, qry, "-10", "w2_TP") ' Time Period for wind gust
+    '        Update_data(conw, qry, "-1", "rad1_TP") ' Time Period for radiation replication 1
+    '        Update_data(conw, qry, "-24", "rad2_TP") ' Time Period for radiation replication 2
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message & " at Update_Time_Periods")
+    '    End Try
+    'End Sub
+    Sub Update_data(sql As String)
+
         Try
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
-            'Execute query
-            qry.ExecuteNonQuery()
-            'MsgBox(typ)
+            cmd.Connection = dbconn
+            cmd.CommandTimeout = 0
+            cmd.CommandText = sql
+            cmd.ExecuteNonQuery()
+
         Catch ex As Exception
-            MsgBox(ex.Message & " at update_data")
+            Log_Errors(ex.Message & " at update_data")
         End Try
     End Sub
+
+    'Sub Update_data(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, data As String, element As String)
+
+    '    sql = "update bufr_crex_data set observation = '" & data & "' where Climsoft_Element='" & element & "';"
+    '    ' Create the Command for executing query and set its properties
+    '    'MsgBox(sql)
+    '    Try
+    '        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+    '        'Execute query
+    '        qry.ExecuteNonQuery()
+    '        'MsgBox(typ)
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message & " at update_data")
+    '    End Try
+    'End Sub
     Sub Update_observations(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, aws_struct As String)
         ' Update Template with AWS observation values
         sql = "UPDATE " & aws_struct & " INNER JOIN bufr_crex_data ON " & aws_struct & ".Bufr_Element = bufr_crex_data.Bufr_Element SET bufr_crex_data.Observation = " & aws_struct & ".obsv where " & aws_struct & ".Bufr_Element = bufr_crex_data.Bufr_Element;"
@@ -2632,9 +3005,10 @@ Err:
             Log_Errors(ex.Message)
         End Try
     End Sub
-    Sub Update_specificPeriod_Observations(conw As MySql.Data.MySqlClient.MySqlConnection, Date_Time As String, nat_id As String)
 
-        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+    Sub Update_specificPeriod_Observations(Date_Time As String, nat_id As String)
+
+        'Dim comm As New MySql.Data.MySqlClient.MySqlCommand
         Dim dap As New MySql.Data.MySqlClient.MySqlDataAdapter
         Dim drp As New DataSet
 
@@ -2655,7 +3029,7 @@ Err:
             stPD = DateAndTime.Year(DTfrom) & "-" & Format(DateAndTime.Month(DTfrom), "00") & "-" & Format(DateAndTime.Day(DTfrom), "00") & " " & Format(DateAndTime.Hour(DTfrom), "00") & ":" & Format(DateAndTime.Minute(DTfrom), "00") & ":00"
 
             sql = "Select sum(obsValue) As Total from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='892' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
-            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
             ' Remove timeout requirement
             dap.SelectCommand.CommandTimeout = 0
             drp.Clear()
@@ -2664,16 +3038,14 @@ Err:
             obsv = 0
             If Not IsDBNull(drp.Tables("Tprecip").Rows(0).Item(0)) Then obsv = drp.Tables("Tprecip").Rows(0).Item(0)
             sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = 013023;"
-            comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
-            'Execute query
-            comm.ExecuteNonQuery()
+
+            Update_data(sql)
 
             ' Update Template with Regional agreed period
             ' Cancel by setting value for first replication to ''
             sql = "update bufr_crex_data set observation = '' where Bufr_Element = 013011 and Climsoft_Element <> '174';"
-            comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
-            'Execute query
-            comm.ExecuteNonQuery()
+
+            Update_data(sql)
 
             ' Update Xtreme temperatures
             DTfrom = DateAdd("h", -12, DTto)
@@ -2682,27 +3054,29 @@ Err:
             Select Case Int(Hour(Date_Time))
                 Case 18 ' Update Tmax
                     sql = "Select Max(obsValue) As Tmax from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='881' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
-                    dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+                    dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
                     drp.Clear()
                     dap.Fill(drp, "Tmax")
                     obsv = 0
                     If Not IsDBNull(drp.Tables("Tmax").Rows(0).Item(0)) Then obsv = drp.Tables("Tmax").Rows(0).Item(0)
                     sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = '012111';"
-                    comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
-                    comm.ExecuteNonQuery()
+
+                    Update_data(sql)
+
                     'Log_Errors(sql)
                 Case 6 ' Update Tmin
                     sql = "Select Min(obsValue) As Tmin from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='881' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
-                    dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+                    'Log_Errors(sql)
+                    dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
                     drp.Clear()
                     dap.Fill(drp, "Tmin")
                     obsv = 0
                     If Not IsDBNull(drp.Tables("Tmin").Rows(0).Item(0)) Then obsv = drp.Tables("Tmin").Rows(0).Item(0)
                     sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = '012112';"
-                    comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
-                    comm.ExecuteNonQuery()
 
-                    'Log_Errors(sql)
+                    Update_data(sql)
+                Case Else
+                    ' Do nothing
             End Select
 
 
@@ -2710,6 +3084,86 @@ Err:
             MsgBox(ex.Message & " Update_Precip")
         End Try
     End Sub
+
+
+    'Sub Update_specificPeriod_Observations(conw As MySql.Data.MySqlClient.MySqlConnection, Date_Time As String, nat_id As String)
+
+    '    Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+    '    Dim dap As New MySql.Data.MySqlClient.MySqlDataAdapter
+    '    Dim drp As New DataSet
+
+    '    Dim DTfrom, DTto As Date
+    '    Dim obsv As Double
+    '    Dim stPD, endPD As String
+
+    '    Try
+    '        ' Update Template with 24HR pricipitation total
+    '        DTto = Date_Time
+
+    '        ' Convert from GMT to local observation time
+    '        DTto = DateAdd("h", Val(txtGMTDiff.Text), DTto)
+    '        DTfrom = DateAdd("h", -24, DTto)
+
+    '        ' Convert Dates to SQL struncture
+    '        endPD = DateAndTime.Year(DTto) & "-" & Format(DateAndTime.Month(DTto), "00") & "-" & Format(DateAndTime.Day(DTto), "00") & " " & Format(DateAndTime.Hour(DTto), "00") & ":" & Format(DateAndTime.Minute(DTto), "00") & ":00"
+    '        stPD = DateAndTime.Year(DTfrom) & "-" & Format(DateAndTime.Month(DTfrom), "00") & "-" & Format(DateAndTime.Day(DTfrom), "00") & " " & Format(DateAndTime.Hour(DTfrom), "00") & ":" & Format(DateAndTime.Minute(DTfrom), "00") & ":00"
+
+    '        sql = "Select sum(obsValue) As Total from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='892' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
+    '        dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+    '        ' Remove timeout requirement
+    '        dap.SelectCommand.CommandTimeout = 0
+    '        drp.Clear()
+    '        dap.Fill(drp, "Tprecip")
+    '        'Log_Errors(sql)
+    '        obsv = 0
+    '        If Not IsDBNull(drp.Tables("Tprecip").Rows(0).Item(0)) Then obsv = drp.Tables("Tprecip").Rows(0).Item(0)
+    '        sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = 013023;"
+    '        comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+    '        'Execute query
+    '        comm.ExecuteNonQuery()
+
+    '        ' Update Template with Regional agreed period
+    '        ' Cancel by setting value for first replication to ''
+    '        sql = "update bufr_crex_data set observation = '' where Bufr_Element = 013011 and Climsoft_Element <> '174';"
+    '        comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+    '        'Execute query
+    '        comm.ExecuteNonQuery()
+
+    '        ' Update Xtreme temperatures
+    '        DTfrom = DateAdd("h", -12, DTto)
+    '        stPD = SQL_Datetime(DTfrom)
+
+    '        Select Case Int(Hour(Date_Time))
+    '            Case 18 ' Update Tmax
+    '                sql = "Select Max(obsValue) As Tmax from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='881' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
+    '                dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+    '                drp.Clear()
+    '                dap.Fill(drp, "Tmax")
+    '                obsv = 0
+    '                If Not IsDBNull(drp.Tables("Tmax").Rows(0).Item(0)) Then obsv = drp.Tables("Tmax").Rows(0).Item(0)
+    '                sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = '012111';"
+    '                comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+    '                comm.ExecuteNonQuery()
+    '                'Log_Errors(sql)
+    '            Case 6 ' Update Tmin
+    '                sql = "Select Min(obsValue) As Tmin from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='881' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
+    '                dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+    '                drp.Clear()
+    '                dap.Fill(drp, "Tmin")
+    '                obsv = 0
+    '                If Not IsDBNull(drp.Tables("Tmin").Rows(0).Item(0)) Then obsv = drp.Tables("Tmin").Rows(0).Item(0)
+    '                sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = '012112';"
+    '                comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+    '                comm.ExecuteNonQuery()
+
+    '                'Log_Errors(sql)
+    '        End Select
+
+
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message & " Update_Precip")
+    '    End Try
+    'End Sub
 
     Function SQL_Datetime(dtt As String) As String
         Try
@@ -2722,50 +3176,150 @@ Err:
     End Function
 
     Sub Initialize_Template(ttb As String)
-        Dim sql1 As String
-        Dim con1 As New MySql.Data.MySqlClient.MySqlConnection
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        'Dim sql1 As String
+        'Dim con1 As New MySql.Data.MySqlClient.MySqlConnection
+        'Dim qry As MySql.Data.MySqlClient.MySqlCommand
 
         Try
-            con1.ConnectionString = frmLogin.txtusrpwd.Text
-            con1.Open()
+            'con1.ConnectionString = frmLogin.txtusrpwd.Text
+            'con1.Open()
 
             'sql1 = "update " & ttb & " set observation = '', Bufr_Data = '', Crex_Data ='' where observation is not NULL and Bufr_Unit <> 'Code table';"
-            sql1 = "update " & ttb & " set observation = '', Bufr_Data = '', Crex_Data ='' where observation is not NULL;" ' and Bufr_Unit <> 'Code table';"
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql1, con1)
-            'Execute query
-            qry.ExecuteNonQuery()
-            con1.Close()
+            sql = "update " & ttb & " set observation = '', Bufr_Data = '', Crex_Data ='' where observation is not NULL;" ' and Bufr_Unit <> 'Code table';"
+
+            cmd.Connection = dbconn
+            cmd.CommandTimeout = 0
+            cmd.CommandText = sql
+            cmd.ExecuteNonQuery()
+
+            'qry = New MySql.Data.MySqlClient.MySqlCommand(sql1, con1)
+            ''Execute query
+            'qry.ExecuteNonQuery()
+            'con1.Close()
 
         Catch ex As Exception
-            con1.Close()
+            'con1.Close()
             Log_Errors(ex.Message)
         End Try
     End Sub
-
-    Sub Initialize_Cloud_Replications(dbconw As MySql.Data.MySqlClient.MySqlConnection, trs As DataSet, qry As MySql.Data.MySqlClient.MySqlCommand, RepType As String, descrp As Integer)
+    Sub Initialize_Cloud_Replications(trs As DataSet, RepType As String, startDescr As String, TotDescr As Integer)
         Dim RecNo As Integer
 
-        With trs
+        Try
+            With trs
 
-            For i = 0 To .Tables("bufr_crex_data").Rows.Count - 1
-                If .Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = RepType Then
-                    RecNo = .Tables("bufr_crex_data").Rows(i).Item("Nos")
-                    For j = RecNo To (RecNo + descrp * 4)
-                        If j = RecNo Then
-                            sql = "update bufr_crex_data set Observation ='0', selected = '1' where Nos = '" & j & "';"
-                        Else
-                            sql = "update bufr_crex_data set selected = '0' where Nos = '" & j & "';"
-                        End If
-                        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconw)
-                        qry.ExecuteNonQuery()
-                    Next
-                    Exit For
-                End If
-            Next
-        End With
+                For i = 0 To .Tables("bufr_crex_data").Rows.Count - 1
+                    If IsDBNull(.Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element")) Then Continue For
+                    If .Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = startDescr Then
+                        RecNo = Val(.Tables("bufr_crex_data").Rows(i).Item("Nos")) - 1
+                        For j = RecNo To (RecNo + TotDescr * 4)
+                            If j = RecNo Then
+                                sql = "update bufr_crex_data set Observation ='0', selected = '1' where Nos = '" & j & "';"
+                                'Log_Errors(sql)
+                            Else
+                                sql = "update bufr_crex_data set selected = '0' where Nos = '" & j & "';"
+                            End If
 
+                            Update_data(sql)
+
+                        Next
+                        Exit For
+                    End If
+                Next
+            End With
+        Catch x As Exception
+            Log_Errors(x.Message & " at Initialize_Cloud_Replications1")
+        End Try
     End Sub
+    Sub Initialize_Replications(trs As DataSet, Edecrpt As String, Tdescrpts As Integer, lvls As Integer, mult As Integer)
+        Dim RecNo As Integer
+
+        Try
+            With trs
+
+                For i = 0 To .Tables("bufr_crex_data").Rows.Count - 1
+                    'If IsDBNull(.Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element")) Then Continue For
+                    'If .Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = RepType Then
+                    If .Tables("bufr_crex_data").Rows(i).Item("Bufr_Element") = Edecrpt Then
+                        'If .Tables("bufr_crex_data").Rows(i).Item("Bufr_Element") = descrp Then
+                        RecNo = Val(.Tables("bufr_crex_data").Rows(i).Item("Nos")) - mult
+                        sql = String.Empty
+                        For j = RecNo To (RecNo + Tdescrpts * lvls)
+                            If j = RecNo Then
+                                sql = sql & "update bufr_crex_data set Observation ='0', selected = '1' where Nos = '" & j & "';"
+                            Else
+                                sql = sql & "update bufr_crex_data set selected = '0' where Nos = '" & j & "';"
+                            End If
+                        Next
+                        'If Edecrpt = "020001" Then Log_Errors(sql)
+                        Update_data(sql)
+                            Exit For
+                        End If
+                Next
+            End With
+        Catch x As Exception
+            Log_Errors(x.Message)
+        End Try
+    End Sub
+    Sub Initialize_Soil_Replications(trs As DataSet, RepType As String, descrp As Integer, lyrs As Integer)
+        Dim RecNo As Integer
+
+        Try
+            With trs
+
+                For i = 0 To .Tables("bufr_crex_data").Rows.Count - 1
+                    If IsDBNull(.Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element")) Then Continue For
+                    'If .Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = RepType Then
+                    If .Tables("bufr_crex_data").Rows(i).Item("Bufr_Element") = "007061" Then
+                        'If .Tables("bufr_crex_data").Rows(i).Item("Bufr_Element") = descrp Then
+                        RecNo = Val(.Tables("bufr_crex_data").Rows(i).Item("Nos")) - 1
+                        For j = RecNo To (RecNo + descrp * lyrs)
+                            If j = RecNo Then
+                                sql = "update bufr_crex_data set Observation ='0', selected = '1' where Nos = '" & j & "';"
+                            Else
+                                sql = "update bufr_crex_data set selected = '0' where Nos = '" & j & "';"
+                            End If
+
+                            Update_data(sql)
+                            'cmd.Connection = dbconn
+
+                            'cmd.CommandTimeout = 0
+                            'cmd.CommandText = sql
+                            'cmd.ExecuteNonQuery()
+                        Next
+                        Exit For
+                    End If
+                Next
+            End With
+        Catch x As Exception
+            Log_Errors(x.Message)
+        End Try
+    End Sub
+    'Sub Initialize_Cloud_Replications(dbconw As MySql.Data.MySqlClient.MySqlConnection, trs As DataSet, qry As MySql.Data.MySqlClient.MySqlCommand, RepType As String, descrp As Integer)
+    '    Dim RecNo As Integer
+
+    '    With trs
+
+    '        For i = 0 To .Tables("bufr_crex_data").Rows.Count - 1
+    '            If .Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = RepType Then
+    '                RecNo = .Tables("bufr_crex_data").Rows(i).Item("Nos")
+    '                For j = RecNo To (RecNo + descrp * 4)
+    '                    If j = RecNo Then
+    '                        sql = "update bufr_crex_data set Observation ='0', selected = '1' where Nos = '" & j & "';"
+    '                    Else
+    '                        sql = "update bufr_crex_data set selected = '0' where Nos = '" & j & "';"
+    '                    End If
+    '                    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconw)
+    '                    qry.ExecuteNonQuery()
+    '                Next
+    '                Exit For
+    '            End If
+    '        Next
+    '    End With
+
+    'End Sub
+
+
 
     Function Compute_Header(hdr As String, hh As String) As String
 
@@ -2786,17 +3340,94 @@ Err:
         Compute_Header = hdr
     End Function
 
-    Function Initialize_CodeFlag(cfrs As DataSet, tt_aws As String, dbconw As MySql.Data.MySqlClient.MySqlConnection) As String
+    Function Initialize_CodeFlag1(cfrs As DataSet, tt_aws As String) As String
+        'On Error GoTo Err
+
+        Dim bitstream As String
+
+        Dim flgrs As New DataSet
+        'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+
+        Try
+            flgrs = GetDataSet("flagtable", "SELECT * FROM flagtable")
+            Initialize_CodeFlag1 = ""
+            cmd.Connection = dbconn
+
+            ' Initialize with missing values
+            'With cfrs.Tables(txtTemplate.Text)
+            With cfrs.Tables(tt_aws)
+                For i = 0 To .Rows.Count - 1
+
+                    bitstream = ""
+                    If .Rows(i).Item("Bufr_Unit") = "Flag table" Then
+                        bitstream = ""
+                        For j = 1 To CInt(.Rows(i).Item("Bufr_DataWidth_Bits"))
+                            bitstream = bitstream & "1"
+                        Next
+
+                    End If
+
+                    If .Rows(i).Item("Bufr_Unit") = "Code table" Then
+
+                        For k = 0 To flgrs.Tables("flagtable").Rows.Count - 1
+                            If IsDBNull(flgrs.Tables("flagtable").Rows(k).Item("Bufr_Descriptor")) Then Exit For
+                            If flgrs.Tables("flagtable").Rows(k).Item("Bufr_Descriptor") = .Rows(i).Item("Bufr_Element") Then
+                                bitstream = Decimal_Binary(flgrs.Tables("flagtable").Rows(k).Item("Missing"), .Rows(i).Item("Bufr_DataWidth_Bits"))
+                                Exit For
+                            End If
+
+                        Next
+                    End If
+
+                    If Len(bitstream) <> 0 Then
+                        sql = "Update " & tt_aws & " SET Bufr_Data = " & bitstream & " where Nos = " & i + 1 & ";"
+                        cmd.CommandText = sql
+                        cmd.ExecuteNonQuery()
+                    End If
+
+                Next
+            End With
+
+        Catch x As Exception
+            'If Err.Number = 13 Then GoTo Continues
+            Log_Errors(x.HResult & " " & x.Message)
+        End Try
+
+
+        ' Initialize with code figures and flags of site values
+        Dim C_sql As String
+            Dim F_sql As String
+
+            ' Construct SQL statements for Mysql Query
+            C_sql = "UPDATE Code_Flag INNER JOIN TM_307091 ON Code_Flag.FXY = TM_307091.Bufr_Element SET TM_307091.Observation = Code_Flag.Bufr_Value WHERE (((TM_307091.Bufr_Unit)=" & "'code table'" & "));"
+            F_sql = "UPDATE Code_Flag INNER JOIN TM_307091 ON Code_Flag.FXY = TM_307091.Bufr_Element SET TM_307091.Bufr_Data = Code_Flag.Bufr_Value WHERE (((TM_307091.Bufr_Unit)=" & "'Flag table'" & ") AND ((Code_Flag.Bufr_Value) Is Not Null Or (Code_Flag.Bufr_Value)<>""""));"
+        Try
+            ' Execute query
+            cmd.CommandText = F_sql
+            cmd.ExecuteNonQuery()
+        Catch x1 As Exception
+            Log_Errors(x1.Message)
+        End Try
+        'Exit Function
+        'Catch x As Exception
+
+        '    If Err.Number = 13 Then GoTo Continues
+        '    Log_Errors(Err.Number & " " & Err.Description)
+        'End Try
+
+    End Function
+
+    Function Initialize_CodeFlag(cfrs As DataSet, tt_aws As String) As String
         On Error GoTo Err
 
         Dim bitstream As String
 
         Dim flgrs As New DataSet
-        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
         flgrs = GetDataSet("flagtable", "SELECT * FROM flagtable")
         Initialize_CodeFlag = ""
-        cmd.Connection = dbconw
+        cmd.Connection = dbconn
 
         ' Initialize with missing values
         'With cfrs.Tables(txtTemplate.Text)
@@ -2854,200 +3485,389 @@ Err:
         Log_Errors(Err.Number & " " & Err.Description)
 
     End Function
-
-    Sub Replicate_SoilTemp(srs As DataSet, aws_struct As String, tt_aws As String)
-        On Error GoTo Err
+    Sub Replicate_SoilTemp(tt_aws As String, aws_obvs As DataRow, Ebufr() As String, AbbrevE() As String)
+        'On Error GoTo Err
         Dim levels(10) As String
-        Dim Temps(10) As String
+        Dim Stemps(10) As String
         Dim Rep As Integer
-        Dim counts As Integer
-        Dim obsvs As String
+        Dim counts, recNo As Integer
+        Dim obsL, obsV As String
         Dim SoilTemp As Boolean
         Dim sql As String
         Dim rs1 As New DataSet
         Dim daws As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
-        cmd.Connection = dbconn
+        Try
+            cmd.Connection = dbconn
 
-        sql = "SELECT * FROM " & aws_struct & " ORDER BY Cols;"
+            sql = "SELECT * FROM " & tt_aws & " ORDER BY Nos;"
 
-        daws = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        ' Set to unlimited timeout period
-        daws.SelectCommand.CommandTimeout = 0
+            daws = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            daws.SelectCommand.CommandTimeout = 0
 
-        rs1.Clear()
-        daws.Fill(rs1, aws_struct)
+            rs1.Clear()
+            daws.Fill(rs1, tt_aws)
 
-        ' Initialize Values
-        Dim Cnull As String
-        'Cnull = ''
-        sql = "UPDATE " & tt_aws & " SET Observation = '' WHERE Bufr_Element = '007061' Or Bufr_Element = '012130';"
+            '' Initialize Values
+            'Dim Cnull As String
+            'Cnull = ''
+            sql = "UPDATE " & tt_aws & " SET Observation = '', selected = '0' WHERE Bufr_Element = '007061' Or Bufr_Element = '012130';"
+            Update_data(sql)
 
+            'cmd.CommandText = sql
+            'cmd.ExecuteNonQuery()
 
-        cmd.CommandText = sql
-        cmd.ExecuteNonQuery()
+            ' Get data from the observed Levels
+            Rep = 0
 
-        ' Get data from the observed Levels
-        Rep = 0
-        With rs1.Tables(aws_struct)
-            For i = 0 To .Rows.Count - 1
+            ''With rs1.Tables(aws_struct)
+            'Temps(0) = String.Empty
+            For i = 0 To Ebufr.Count - 1  '.Rows.Count - 1
+                If Ebufr(i) = "012130" And aws_obvs(i) <> flg Then
+                    Stemps(Rep) = aws_obvs(i)
+                    Rep = Rep + 1
+                End If
+            Next
+            ''End With
 
-                If Not IsDBNull(.Rows(i).Item("Bufr_Element")) And Not IsDBNull(.Rows(i).Item("obsv")) Then
-                    'Log_Errors(.Rows(i).Item("Bufr_Element") & " " & .Rows(i).Item("obsv"))
-                    If .Rows(i).Item("Bufr_Element") = "012130" Then
-                        Temps(Rep) = .Rows(i).Item("obsv")
-                        If InStr(.Rows(i).Item("element_name"), "10") <> 0 Then levels(Rep) = "0.1"
-                        If InStr(.Rows(i).Item("element_name"), "20") <> 0 Then levels(Rep) = "0.2"
-                        If InStr(.Rows(i).Item("element_name"), "30") <> 0 Then levels(Rep) = "0.3"
-                        If InStr(.Rows(i).Item("element_name"), "40") <> 0 Then levels(Rep) = "0.4"
-                        If InStr(.Rows(i).Item("element_name"), "50") <> 0 Then levels(Rep) = "0.5"
-                        If InStr(.Rows(i).Item("element_name"), "100") <> 0 Then levels(Rep) = "1"
-                        Rep = Rep + 1
+            '' Update the Template with data from soil Temperature Depths
+            Rep = 0
+            For i = 0 To AbbrevE.Count - 1
+                If Ebufr(i) = "012130" And aws_obvs(i) <> flg Then
+                    'Stemps(Rep) = aws_obvs(i)
+                    If InStr(AbbrevE(i), "ST10") <> 0 Then levels(Rep) = "0.1"
+                    If InStr(AbbrevE(i), "ST20") <> 0 Then levels(Rep) = "0.2"
+                    If InStr(AbbrevE(i), "ST30") <> 0 Then levels(Rep) = "0.3"
+                    If InStr(AbbrevE(i), "ST40") <> 0 Then levels(Rep) = "0.4"
+                    If InStr(AbbrevE(i), "ST50") <> 0 Then levels(Rep) = "0.5"
+                    If InStr(AbbrevE(i), "ST100") <> 0 Then levels(Rep) = "1"
+
+                    Stemps(Rep) = aws_obvs(i)
+                    'Log_Errors(i & " " & levels(Rep) & " " & Stemps(Rep))
+                    Rep = Rep + 1
+                End If
+
+            Next
+
+            ' Update Soil Temperature values and depths 
+
+            With rs1.Tables(tt_aws)
+                sql = String.Empty
+
+                ' Update Replication value
+                For i = 0 To .Rows.Count - 1
+                    If .Rows(i).Item("Bufr_Element") = "007061" Then
+                        recNo = Val(.Rows(i).Item("Nos")) - 2
+                        ' Update AWS Soil levels replication value i.e. Rep
+                        sql = "UPDATE " & tt_aws & " SET Observation = '" & Rep & "' WHERE Nos = '" & recNo & "';"
+                        Exit For
                     End If
+                Next
+
+                ' update Depths and Temperatures
+
+                If Rep > 0 Then
+                    For i = 0 To .Rows.Count - 1
+                        If .Rows(i).Item("Bufr_Element") = "007061" Then
+                            recNo = .Rows(i).Item("Nos")
+                            For j = 0 To Rep - 1
+                                obsL = levels(j)
+                                obsV = Math.Round(CDbl(Stemps(j)), 2)
+
+                                ' Update AWS Template with soil depth and temperature values
+                                sql = sql & "UPDATE " & tt_aws & " SET selected = '1',Observation = '" & obsL & "' WHERE Nos = '" & Val(recNo) + (j * 2) & "';" &
+                                 "UPDATE " & tt_aws & " SET selected = '1',Observation = '" & obsV & "' WHERE Nos = '" & Val(recNo) + (j * 2 + 1) & "';"
+                            Next j
+                            Exit For
+                        End If
+
+                        'If counts = Rep Then Exit For
+                    Next
                 End If
-            Next
-        End With
+                'Log_Errors(sql)
+                Update_data(sql)
 
-        '' Update the Template with data from soil Temperature Depths
+            End With
 
-        With srs.Tables(tt_aws)
-            counts = 0
-
-            For i = 0 To .Rows.Count - 1
-                If counts = Rep Then Exit For
-                SoilTemp = False
-
-                ' Locate Level
-
-                If .Rows(i).Item("Bufr_Element") = "007061" Then
-                    SoilTemp = True
-                    obsvs = levels(counts)
-                ElseIf .Rows(i).Item("Bufr_Element") = "012130" Then
-                    SoilTemp = True
-                    obsvs = Temps(counts)
-                    counts = counts + 1
-                End If
-
-                ' Update if Level located
-                If SoilTemp Then
-                    sql = "UPDATE " & tt_aws & " SET Observation = '" & obsvs & "' WHERE Bufr_Element = '007061';"
-                    cmd.CommandText = sql
-                    cmd.ExecuteNonQuery()
-                End If
-            Next
-        End With
-
-        Exit Sub
-Err:
-        'MsgBox("Soil Replication")
-        'MsgBox(sql)
-        Log_Errors(Err.Description)
-        'list_errors.AddItem txttime & "  " & Err.description
-        'MsgBox Err.description
+        Catch x As Exception
+            Log_Errors(x.Message & " at Replicate_SoilTemp")
+        End Try
     End Sub
 
-    Sub Replicate_MaxGust(srs As DataSet, aws_struct As String, tt_aws As String)
-        On Error GoTo Err
+    '    Sub Replicate_SoilTemp(srs As DataSet, aws_struct As String, tt_aws As String)
+    '        On Error GoTo Err
+    '        Dim levels(10) As String
+    '        Dim Temps(10) As String
+    '        Dim Rep As Integer
+    '        Dim counts As Integer
+    '        Dim obsvs As String
+    '        Dim SoilTemp As Boolean
+    '        Dim sql As String
+    '        Dim rs1 As New DataSet
+    '        Dim daws As MySql.Data.MySqlClient.MySqlDataAdapter
+    '        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+
+    '        cmd.Connection = dbconn
+
+    '        sql = "SELECT * FROM " & aws_struct & " ORDER BY Cols;"
+
+    '        daws = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+    '        ' Set to unlimited timeout period
+    '        daws.SelectCommand.CommandTimeout = 0
+
+    '        rs1.Clear()
+    '        daws.Fill(rs1, aws_struct)
+
+    '        ' Initialize Values
+    '        Dim Cnull As String
+    '        'Cnull = ''
+    '        sql = "UPDATE " & tt_aws & " SET Observation = '' WHERE Bufr_Element = '007061' Or Bufr_Element = '012130';"
+
+
+    '        cmd.CommandText = sql
+    '        cmd.ExecuteNonQuery()
+
+    '        ' Get data from the observed Levels
+    '        Rep = 0
+    '        With rs1.Tables(aws_struct)
+    '            For i = 0 To .Rows.Count - 1
+
+    '                If Not IsDBNull(.Rows(i).Item("Bufr_Element")) And Not IsDBNull(.Rows(i).Item("obsv")) Then
+    '                    'Log_Errors(.Rows(i).Item("Bufr_Element") & " " & .Rows(i).Item("obsv"))
+    '                    If .Rows(i).Item("Bufr_Element") = "012130" Then
+    '                        Temps(Rep) = .Rows(i).Item("obsv")
+    '                        If InStr(.Rows(i).Item("element_name"), "10") <> 0 Then levels(Rep) = "0.1"
+    '                        If InStr(.Rows(i).Item("element_name"), "20") <> 0 Then levels(Rep) = "0.2"
+    '                        If InStr(.Rows(i).Item("element_name"), "30") <> 0 Then levels(Rep) = "0.3"
+    '                        If InStr(.Rows(i).Item("element_name"), "40") <> 0 Then levels(Rep) = "0.4"
+    '                        If InStr(.Rows(i).Item("element_name"), "50") <> 0 Then levels(Rep) = "0.5"
+    '                        If InStr(.Rows(i).Item("element_name"), "100") <> 0 Then levels(Rep) = "1"
+    '                        Rep = Rep + 1
+    '                    End If
+    '                End If
+    '            Next
+    '        End With
+
+    '        '' Update the Template with data from soil Temperature Depths
+
+    '        With srs.Tables(tt_aws)
+    '            counts = 0
+
+    '            For i = 0 To .Rows.Count - 1
+    '                If counts = Rep Then Exit For
+    '                SoilTemp = False
+
+    '                ' Locate Level
+
+    '                If .Rows(i).Item("Bufr_Element") = "007061" Then
+    '                    SoilTemp = True
+    '                    obsvs = levels(counts)
+    '                ElseIf .Rows(i).Item("Bufr_Element") = "012130" Then
+    '                    SoilTemp = True
+    '                    obsvs = Temps(counts)
+    '                    counts = counts + 1
+    '                End If
+
+    '                ' Update if Level located
+    '                If SoilTemp Then
+    '                    sql = "UPDATE " & tt_aws & " SET Observation = '" & obsvs & "' WHERE Bufr_Element = '007061';"
+    '                    cmd.CommandText = sql
+    '                    cmd.ExecuteNonQuery()
+    '                End If
+    '            Next
+    '        End With
+
+    '        Exit Sub
+    'Err:
+    '        'MsgBox("Soil Replication")
+    '        'MsgBox(sql)
+    '        Log_Errors(Err.Description)
+    '        'list_errors.AddItem txttime & "  " & Err.description
+    '        'MsgBox Err.description
+    '    End Sub
+    Sub Replicate_MaxGust(aws_obsv As DataRow, tt_aws As String, EBufr() As String, Eabbrev() As String)
+        'On Error GoTo Err
         Dim MxGustD(2) As String
         Dim MxGustS(2) As String
         Dim Tperiod(2) As String
         Dim Rep_D As Integer
         Dim Rep_S As Integer
-        Dim counts As Integer
-        Dim obsvs As String
-        Dim MxGust As Boolean
+        'Dim counts As Integer
+        'Dim obsvs As String
+        'Dim MxGust As Boolean
         Dim rs1 As DataSet
 
+        Try
+            sql = "SELECT * FROM " & tt_aws & " ORDER BY Nos;"
 
-        sql = "SELECT * FROM " & aws_struct & " ORDER BY Cols;"
+            rs1 = GetDataSet(tt_aws, sql)
 
-        rs1 = GetDataSet(aws_struct, sql)
-
-        ' Initialize Values Wind Gust values with missing data
-        sql = "UPDATE " & tt_aws & " SET Observation = " & vbNull & " WHERE Bufr_Element = '011043' Or Bufr_Element = '011041';"
-        cmd.Connection = dbconn
-        cmd.CommandText = sql
-        cmd.ExecuteNonQuery()
+            ' Initialize Values Wind Gust values with missing data
+            sql = "UPDATE " & tt_aws & " SET selected = '0', Observation = '' WHERE Bufr_Element = '011043' Or Bufr_Element = '011041';"
+            cmd.Connection = dbconn
+            cmd.CommandText = sql
+            cmd.ExecuteNonQuery()
 
 
-        '   Get data from the observed Levels
-        With rs1.Tables(aws_struct)
+            '   Get data from the observed Levels
+            'With rs1.Tables(aws_struct)
 
             Rep_S = 0
             Rep_D = 0
 
-            For i = 0 To .Rows.Count - 1
+            For i = 0 To EBufr.Count - 1
 
                 ' Maximum Wind Gust Speed
-                If Not IsDBNull(.Rows(i).Item("Bufr_Element")) Then
-                    If .Rows(i).Item("Bufr_Element") = "011043" And Not IsDBNull(.Rows(i).Item("obsv")) Then
-                        If InStr(.Rows(i).Item("Element_Abbreviation"), "10") <> 0 Then MxGustD(Rep_D) = .Rows(i).Item("obsv")
-                        If InStr(.Rows(i).Item("Element_Abbreviation"), "60") <> 0 Then MxGustD(Rep_D) = .Rows(i).Item("obsv")
-                        Rep_D = Rep_D + 1
-                    End If
-
-                    If .Rows(i).Item("Bufr_Element") = "011041" And Not IsDBNull(.Rows(i).Item("obsv")) Then
-                        If InStr(.Rows(i).Item("Element_Abbreviation"), "10") <> 0 Then MxGustS(Rep_S) = .Rows(i).Item("obsv")
-                        If InStr(.Rows(i).Item("Element_Abbreviation"), "60") <> 0 Then MxGustS(Rep_S) = .Rows(i).Item("obsv")
-
-                        ' Compute the Time Displacement data
-                        If Rep_S = 0 Then Tperiod(0) = "-10"
-                        If Rep_S = 1 Then Tperiod(1) = "-60"
-                        Rep_S = Rep_S + 1
-                    End If
+                If EBufr(i) = "011043" Then
+                    MxGustD(Rep_D) = aws_obsv(i)
+                    Rep_D = Rep_D + 1
                 End If
+
+                ' Maximum Wind Gust Direction
+                If EBufr(i) = "011041" Then
+                    MxGustS(Rep_S) = aws_obsv(i)
+                    Rep_S = Rep_S + 1
+                End If
+
             Next
-        End With
+            ' Compute the Time Displacement data
+            Tperiod(0) = "-10"
+            Tperiod(1) = "-60"
 
-        ' Update the Template with Maximum Wind gusts data
-        Dim RecNo As Integer
-        With srs.Tables(tt_aws)
-            counts = 0
+            ' Update the Template with Maximum Wind gusts data
+            Dim RecNo As Integer
+            With rs1.Tables(tt_aws)
 
-            For i = 0 To .Rows.Count - 1
+                sql = String.Empty
+                For i = 0 To .Rows.Count - 1
+                    If .Rows(i).Item("Bufr_Element") = "011043" Then
+                        RecNo = Val(.Rows(i).Item("Nos"))
+                        sql = sql & "UPDATE " & tt_aws & " SET selected = '1', Observation = '" & Tperiod(0) & "' WHERE Nos = '" & RecNo - 1 & "';"
+                        sql = sql & "UPDATE " & tt_aws & " SET selected = '1', Observation = '" & Tperiod(1) & "' WHERE Nos = '" & RecNo + 2 & "';"
 
-                ' Locate the occurence of Maximum wind gust direction
+                        sql = sql & "UPDATE " & tt_aws & " SET selected = '1', Observation = '" & MxGustD(0) & "' WHERE Nos = '" & RecNo & "';"
+                        sql = sql & "UPDATE " & tt_aws & " SET selected = '1', Observation = '" & MxGustD(1) & "' WHERE Nos = '" & RecNo + 3 & "';"
 
-                If .Rows(i).Item("Bufr_Element") = "011043" Then
-                    RecNo = .Rows(i - 1).Item("Nos") ' Update Maximum Wind Gust Direction Time displacement
-                    sql = "UPDATE " & tt_aws & " SET Observation = '" & Tperiod(counts) & "' WHERE Nos = '" & RecNo & "';"
-                    cmd.CommandText = sql
-                    cmd.ExecuteNonQuery()
-
-                    RecNo = .Rows(i).Item("Nos") ' Update Maximum Wind Gust Direction
-                    sql = "UPDATE " & tt_aws & " SET Observation = '" & MxGustD(counts) & "' WHERE Nos = '" & RecNo & "';"
-                    cmd.CommandText = sql
-                    cmd.ExecuteNonQuery()
-
-                    RecNo = .Rows(i + 1).Item("Nos") ' Update Maximum Wind Gust Speed
-                    sql = "UPDATE " & tt_aws & " SET Observation = '" & MxGustS(counts) & "' WHERE Nos = '" & RecNo & "';"
-                    cmd.CommandText = sql
-                    cmd.ExecuteNonQuery()
-
-                    counts = counts + 1
-
-                    ' Initialize Time Period with -10 Minutes
-                    If counts = 2 Then
-                        RecNo = .Rows(i + 2).Item("Nos")
-                        sql = "UPDATE " & tt_aws & " SET Observation = '-10' WHERE Nos = '" & RecNo & "';"
-                        cmd.CommandText = sql
-                        cmd.ExecuteNonQuery()
+                        sql = sql & "UPDATE " & tt_aws & " SET selected = '1', Observation = '" & MxGustS(0) & "' WHERE Nos = '" & RecNo + 1 & "';"
+                        sql = sql & "UPDATE " & tt_aws & " SET selected = '1', Observation = '" & MxGustS(1) & "' WHERE Nos = '" & RecNo + 4 & "';"
 
                         Exit For
-                    End If
-                End If
+                        End If
+                Next
 
-            Next
+            End With
+            'Log_Errors(sql)
+            Update_data(sql)
 
-        End With
-
-        Exit Sub
-Err:
-        Log_Errors(Err.Description)
+        Catch Err As Exception
+            Log_Errors(Err.Message)
+        End Try
 
     End Sub
-    Sub TDCF_Encode(dbconw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, trs As DataSet, tt_aws As String)
+
+    '    Sub Replicate_MaxGust(srs As DataSet, aws_struct As String, tt_aws As String)
+    '        On Error GoTo Err
+    '        Dim MxGustD(2) As String
+    '        Dim MxGustS(2) As String
+    '        Dim Tperiod(2) As String
+    '        Dim Rep_D As Integer
+    '        Dim Rep_S As Integer
+    '        Dim counts As Integer
+    '        Dim obsvs As String
+    '        Dim MxGust As Boolean
+    '        Dim rs1 As DataSet
+
+
+    '        sql = "SELECT * FROM " & aws_struct & " ORDER BY Cols;"
+
+    '        rs1 = GetDataSet(aws_struct, sql)
+
+    '        ' Initialize Values Wind Gust values with missing data
+    '        sql = "UPDATE " & tt_aws & " SET Observation = " & vbNull & " WHERE Bufr_Element = '011043' Or Bufr_Element = '011041';"
+    '        cmd.Connection = dbconn
+    '        cmd.CommandText = sql
+    '        cmd.ExecuteNonQuery()
+
+
+    '        '   Get data from the observed Levels
+    '        With rs1.Tables(aws_struct)
+
+    '            Rep_S = 0
+    '            Rep_D = 0
+
+    '            For i = 0 To .Rows.Count - 1
+
+    '                ' Maximum Wind Gust Speed
+    '                If Not IsDBNull(.Rows(i).Item("Bufr_Element")) Then
+    '                    If .Rows(i).Item("Bufr_Element") = "011043" And Not IsDBNull(.Rows(i).Item("obsv")) Then
+    '                        If InStr(.Rows(i).Item("Element_Abbreviation"), "10") <> 0 Then MxGustD(Rep_D) = .Rows(i).Item("obsv")
+    '                        If InStr(.Rows(i).Item("Element_Abbreviation"), "60") <> 0 Then MxGustD(Rep_D) = .Rows(i).Item("obsv")
+    '                        Rep_D = Rep_D + 1
+    '                    End If
+
+    '                    If .Rows(i).Item("Bufr_Element") = "011041" And Not IsDBNull(.Rows(i).Item("obsv")) Then
+    '                        If InStr(.Rows(i).Item("Element_Abbreviation"), "10") <> 0 Then MxGustS(Rep_S) = .Rows(i).Item("obsv")
+    '                        If InStr(.Rows(i).Item("Element_Abbreviation"), "60") <> 0 Then MxGustS(Rep_S) = .Rows(i).Item("obsv")
+
+    '                        ' Compute the Time Displacement data
+    '                        If Rep_S = 0 Then Tperiod(0) = "-10"
+    '                        If Rep_S = 1 Then Tperiod(1) = "-60"
+    '                        Rep_S = Rep_S + 1
+    '                    End If
+    '                End If
+    '            Next
+    '        End With
+
+    '        ' Update the Template with Maximum Wind gusts data
+    '        Dim RecNo As Integer
+    '        With srs.Tables(tt_aws)
+    '            counts = 0
+
+    '            For i = 0 To .Rows.Count - 1
+
+    '                ' Locate the occurence of Maximum wind gust direction
+
+    '                If .Rows(i).Item("Bufr_Element") = "011043" Then
+    '                    RecNo = .Rows(i - 1).Item("Nos") ' Update Maximum Wind Gust Direction Time displacement
+    '                    sql = "UPDATE " & tt_aws & " SET Observation = '" & Tperiod(counts) & "' WHERE Nos = '" & RecNo & "';"
+    '                    cmd.CommandText = sql
+    '                    cmd.ExecuteNonQuery()
+
+    '                    RecNo = .Rows(i).Item("Nos") ' Update Maximum Wind Gust Direction
+    '                    sql = "UPDATE " & tt_aws & " SET Observation = '" & MxGustD(counts) & "' WHERE Nos = '" & RecNo & "';"
+    '                    cmd.CommandText = sql
+    '                    cmd.ExecuteNonQuery()
+
+    '                    RecNo = .Rows(i + 1).Item("Nos") ' Update Maximum Wind Gust Speed
+    '                    sql = "UPDATE " & tt_aws & " SET Observation = '" & MxGustS(counts) & "' WHERE Nos = '" & RecNo & "';"
+    '                    cmd.CommandText = sql
+    '                    cmd.ExecuteNonQuery()
+
+    '                    counts = counts + 1
+
+    '                    ' Initialize Time Period with -10 Minutes
+    '                    If counts = 2 Then
+    '                        RecNo = .Rows(i + 2).Item("Nos")
+    '                        sql = "UPDATE " & tt_aws & " SET Observation = '-10' WHERE Nos = '" & RecNo & "';"
+    '                        cmd.CommandText = sql
+    '                        cmd.ExecuteNonQuery()
+
+    '                        Exit For
+    '                    End If
+    '                End If
+
+    '            Next
+
+    '        End With
+
+    '        Exit Sub
+    'Err:
+    '        Log_Errors(Err.Description)
+
+    '    End Sub
+    Sub TDCF_Encode(trs As DataSet, tt_aws As String)
 
         Dim bufrdata As String
         Dim sql As String
@@ -3055,33 +3875,71 @@ Err:
 
         sql = "SELECT * FROM " & tt_aws & " ORDER BY Nos"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconw)
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         trs.Clear()
         da.Fill(trs, tt_aws)
-        qry.Connection = dbconn
+
+        'cmd.Connection = dbconn
+
         'Log_Errors(1)
         Try
-
+            sql = String.Empty
             With trs.Tables(tt_aws)
                 For i = 0 To .Rows.Count - 1
                     RecNo = .Rows(i).Item("Nos")
-                    'Log_Errors(RecNo & " - " & i & " - " & .Rows(i).Item("Observation"))
+
                     If Not IsDBNull(.Rows(i).Item("Observation")) And Len(.Rows(i).Item("Observation")) <> 0 Then
                         If Len(.Rows(i).Item("Observation")) > 0 Then
                             bufrdata = Bufr_Data(.Rows(i).Item("Bufr_Unit"), .Rows(i).Item("Bufr_Scale"), .Rows(i).Item("Bufr_RefValue"), .Rows(i).Item("Bufr_DataWidth_Bits"), .Rows(i).Item("Observation"), .Rows(i).Item("Bufr_Data"))
-                            'Log_Errors(RecNo & "-" & .Rows(i).Item("Observation") & "=" & bufrdata)
-                            sql = "UPDATE " & tt_aws & " SET Bufr_Data = '" & bufrdata & "' WHERE Nos = '" & RecNo & "';"
-                            qry.CommandText = sql
-                            qry.ExecuteNonQuery()
+                            sql = sql & "UPDATE " & tt_aws & " SET Bufr_Data = '" & bufrdata & "' WHERE Nos = '" & RecNo & "';"
+
                         End If
                     End If
                 Next
+
+                Update_data(sql)
+
             End With
             'Log_Errors(2)
         Catch Err As Exception
             Log_Errors(Err.Message)
         End Try
     End Sub
+    'Sub TDCF_Encode(dbconw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, trs As DataSet, tt_aws As String)
+
+    '    Dim bufrdata As String
+    '    Dim sql As String
+    '    Dim RecNo As String
+
+    '    sql = "SELECT * FROM " & tt_aws & " ORDER BY Nos"
+
+    '    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconw)
+    '    trs.Clear()
+    '    da.Fill(trs, tt_aws)
+    '    qry.Connection = dbconn
+    '    'Log_Errors(1)
+    '    Try
+
+    '        With trs.Tables(tt_aws)
+    '            For i = 0 To .Rows.Count - 1
+    '                RecNo = .Rows(i).Item("Nos")
+    '                'Log_Errors(RecNo & " - " & i & " - " & .Rows(i).Item("Observation"))
+    '                If Not IsDBNull(.Rows(i).Item("Observation")) And Len(.Rows(i).Item("Observation")) <> 0 Then
+    '                    If Len(.Rows(i).Item("Observation")) > 0 Then
+    '                        bufrdata = Bufr_Data(.Rows(i).Item("Bufr_Unit"), .Rows(i).Item("Bufr_Scale"), .Rows(i).Item("Bufr_RefValue"), .Rows(i).Item("Bufr_DataWidth_Bits"), .Rows(i).Item("Observation"), .Rows(i).Item("Bufr_Data"))
+    '                        'Log_Errors(RecNo & "-" & .Rows(i).Item("Observation") & "=" & bufrdata)
+    '                        sql = "UPDATE " & tt_aws & " SET Bufr_Data = '" & bufrdata & "' WHERE Nos = '" & RecNo & "';"
+    '                        qry.CommandText = sql
+    '                        qry.ExecuteNonQuery()
+    '                    End If
+    '                End If
+    '            Next
+    '        End With
+    '        'Log_Errors(2)
+    '    Catch Err As Exception
+    '        Log_Errors(Err.Message)
+    '    End Try
+    'End Sub
 
     Function Bufr_Data(Bufr_Unit As String, Bufr_Scale As Integer, Bufr_RefValue As Long, Bufr_DataWidth As Integer, dat As String, missing_data As String) As String
 
@@ -3143,7 +4001,7 @@ Err:
         ' Add leading zeroes to short data strings
         CCITT_Binary = ""
         binstr = ""
-        If Len(dat) < DataWidth / 8 Then
+        If Len(dat) <DataWidth / 8 Then
             For kount = 1 To DataWidth - Len(dat) * 8
                 binstr = binstr & "0"
             Next kount
@@ -3986,9 +4844,11 @@ Err:
         End Try
     End Sub
 
-    Function Text_To_DataTable(ByVal path As String, ByVal delimitter As Char, ByVal hdrs As Integer, ByRef flds As Integer, ByRef recs As Long) As DataTable
+    Function Text_To_DataTable(ByVal path As String, ByVal delimitter As Char, ByVal hdrs As Integer, ByRef flds As Integer, ByRef recs As Long, txtQlfy As String) As DataTable
         Dim source As String = String.Empty
         Dim dt As DataTable = New DataTable
+        'Dim txtq As String = String.Empty
+
         Try
             If IO.File.Exists(path) Then
                 source = IO.File.ReadAllText(path)
@@ -3996,10 +4856,16 @@ Err:
                 Throw New IO.FileNotFoundException("Could not find the file at " & path, path)
             End If
 
+            ' Remove any text qualifier character if exists
+            If Len(txtQlfy) > 0 Then
+                'Log_Errors(txtQlfy & " " & Len(source))
+                source = Strings.Replace(source, txtQlfy, String.Empty)
+                'Log_Errors(Len(source))
+            End If
+
             Dim rows() As String = source.Split({Environment.NewLine}, StringSplitOptions.None)
 
             For i As Integer = 0 To rows(0).Split(delimitter).Length - 1
-
                 Dim column As String = rows(0).Split(delimitter)(i)
                 dt.Columns.Add(If(False, column, "column" & i + 1))
             Next
@@ -4011,6 +4877,7 @@ Err:
 
                     If x <= dt.Columns.Count - 1 Then
                         dr(x) = rows(i).Split(delimitter)(x)
+                        dr(x) = dr(x)
                     Else
                         Throw New Exception("The number of columns on row " & i + If(False, 0, 1) & " is greater than the amount of columns in the " & If(False, "header.", "first row."))
                     End If
@@ -4018,6 +4885,17 @@ Err:
 
                 dt.Rows.Add(dr)
             Next
+
+            ''dt.Select("column0 = 2024 - 7 - 9 08:00")
+            'Dim result() As DataRow = dt.Select("column1 = '2024-07-09 00:45'")
+            ''MsgBox(result.Count)
+            ''Log_Errors(result.Count)
+
+            'For Each row As DataRow In result
+            '    'Log_Errors("{0}, {1}" & "," & row(0) & "," & row(1))
+            '    Log_Errors(row(0) & "," & row(1))
+            'Next
+
             flds = dt.Columns.Count
             recs = dt.Rows.Count
             Text_To_DataTable = dt
@@ -4188,22 +5066,24 @@ Err:
     '    stn1 = txtSiteID.Text
     'End Sub
 
-    Function Get_DateStamp(AWSsite As String, dattable As DataTable, rw As Long) As String
-
+    'Function Get_DateStamp(AWSsite As String, dattable As DataTable, rw As Long) As String
+    Function Get_DateStamp(AWSsite As String, datrow As DataRow) As String
         Dim dt, Date_s, Time_s, yyyy, mm, dd, nn, hh, ss As String
 
-        Dim dbstr As New MySql.Data.MySqlClient.MySqlConnection
+        'Dim dbstr As New MySql.Data.MySqlClient.MySqlConnection
         Dim dastr As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim dsstr As New DataSet
         Dim sqlstr As String
 
         Try
-            dbstr.ConnectionString = frmLogin.txtusrpwd.Text
-            dbstr.Open()
+            'dbstr.ConnectionString = frmLogin.txtusrpwd.Text
+            'dbstr.Open()
 
             sqlstr = "SELECT * FROM " & AWSsite
+            'dsstr = GetDataSet(AWSsite, sqlstr)
 
-            dastr = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlstr, dbstr)
+            'dastr = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlstr, dbstr)
+            dastr = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlstr, dbconn)
             ' Remove timeout requirement
             dastr.SelectCommand.CommandTimeout = 0
 
@@ -4219,8 +5099,11 @@ Err:
 
             With dsstr.Tables("struct")
                 For i = 0 To .Rows.Count - 1
-                    If IsDBNull(dattable.Rows(rw).Item(i)) Then Continue For
-                    dt = dattable.Rows(rw).Item(i)
+                    'If IsDBNull(dattable.Rows(rw).Item(i)) Then Continue For
+                    If IsDBNull(datrow(i)) Then Continue For
+
+                    'dt = dattable.Rows(rw).Item(i)
+                    dt = datrow(i)
 
                     Select Case .Rows(i).Item("Element_abbreviation")
                         Case "Date/time"
@@ -4261,11 +5144,11 @@ Err:
                 End If
             End With
 
-            dbstr.Close()
+            'dbstr.Close()
             Return ""
         Catch ex As Exception
             'Log_Errors(ex.Message & " at Get_DateStamp")
-            dbstr.Close()
+            'dbstr.Close()
             Return ""
         End Try
 
@@ -4546,24 +5429,27 @@ Err:
         End Try
     End Function
 
-    Function Process_InputFiles(dts As DataSet) As Boolean
-        Dim hdrows As Integer
-        Dim rs As New DataSet
-        Dim dTable As DataTable
-        Dim datestring, infile, delmtr, delimiter_ascii, txtqlfr, flg, aws_data, AWSsite, fls, aws_input_file, aws_input_file_flds As String
 
+    Function Process_InputFiles(dts As DataSet) As Boolean
+        Dim hdrows, kount As Integer
+        Dim rs, rstr As New DataSet
+        Dim dTable As DataTable
+        Dim datestring, infile, delmtr, delimiter_ascii, txtqlfr, aws_data, AWSsite, fls, aws_input_file, aws_input_file_flds As String
+        'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+
+        'cmd.Connection = dbconn
         'Try
 
         With dts.Tables("aws_sites")
 
             For n = 0 To .Rows.Count - 1
+                'txtStatus.Text = .Rows(n).Item("InputFile")
+                'txtStatus.Refresh()
+
                 Try
                     If IsDBNull(.Rows(n).Item("InputFile")) Or .Rows(n).Item("OperationalStatus") = 0 Then Continue For
                     fls = Path.GetFileName(.Rows(n).Item("InputFile"))
                     aws_input_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & fls
-                    'Log_Errors(fls)
-
-                    'End If
 
                     ' Check if the input data file was retrieved
                     If Not File.Exists(aws_input_file) Then
@@ -4571,9 +5457,9 @@ Err:
                         Continue For
                     End If
 
+                    ' AWS Site metadata
                     nat_id = .Rows(n).Item("SiteID")
-
-                    'WSI_Data()
+                    If Not awsSite_Metadata(nat_id) Then Continue For
 
                     ' Get message header for the station if exist. It has 11 characters. Otherwise use National bulletin header
                     If Not IsDBNull(.Rows(n).Item("GTSHeader")) And Len(.Rows(n).Item("GTSHeader")) = 11 Then
@@ -4604,13 +5490,44 @@ Err:
                             delimiter_ascii = Asc(delmtr)
                     End Select
 
-                    txtStatus.Text = "Organising the input file"
+                    'txtStatus.Text = "Organising the input file"
+
+                    ' Extract data details from AWS structure
+                    sql = "SELECT Element_Abbreviation, Climsoft_Element, Bufr_Element, Unit, Lower_limit, Upper_limit FROM " & AWSsite & ";"
+
+                    rstr = GetDataSet(AWSsite, sql)
+                    kount = rstr.Tables(AWSsite).Rows.Count - 1
+
+                    Dim Elms(0 To kount), Bufr(0 To kount), Units(0 To kount), L_limit(0 To kount), U_limit(0 To kount), E_Abbrev(0 To kount) As String
+
+                    With rstr.Tables(AWSsite)
+
+                        For k = 0 To .Rows.Count - 1
+
+                            Elms(k) = String.Empty
+                            Bufr(k) = String.Empty
+                            Units(k) = String.Empty
+                            L_limit(k) = String.Empty
+                            U_limit(k) = String.Empty
+                            E_Abbrev(k) = String.Empty
+
+                            If Not IsDBNull(.Rows(k).Item("Climsoft_Element")) And Len(.Rows(k).Item("Climsoft_Element").ToString) <> 0 Then Elms(k) = .Rows(k).Item("Climsoft_Element")
+                            If Not IsDBNull(.Rows(k).Item("Bufr_Element")) And Len(.Rows(k).Item("Bufr_Element").ToString) <> 0 Then Bufr(k) = .Rows(k).Item("Bufr_Element")
+                            If Not IsDBNull(.Rows(k).Item("Unit")) And Len(.Rows(k).Item("Unit").ToString) <> 0 Then Units(k) = .Rows(k).Item("Unit")
+                            If Not IsDBNull(.Rows(k).Item("Lower_limit")) And Len(.Rows(k).Item("Lower_limit").ToString) <> 0 Then L_limit(k) = .Rows(k).Item("Lower_limit")
+                            If Not IsDBNull(.Rows(k).Item("Upper_limit")) And Len(.Rows(k).Item("Upper_limit").ToString) <> 0 Then U_limit(k) = .Rows(k).Item("Upper_limit")
+                            If Not IsDBNull(.Rows(k).Item("Element_Abbreviation")) And Len(.Rows(k).Item("Element_Abbreviation").ToString) <> 0 Then E_Abbrev(k) = .Rows(k).Item("Element_Abbreviation")
+
+                        Next
+
+                    End With
 
                     ' Assign a variable to an output file without header rows
                     aws_input_file_flds = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
 
                     FileOpen(10, aws_input_file, OpenMode.Input)
                     FileOpen(11, aws_input_file_flds, OpenMode.Output)
+
 
                     ' Skip input file if it is empty to avoid causing EOF errors
                     If EOF(10) Then
@@ -4629,84 +5546,50 @@ Err:
                     ' Output the data rows into a file without headers
                     Do While EOF(10) = False
                         aws_data = LineInput(10)
-                        If InStr(aws_data, Chr(delimiter_ascii)) > 0 Then PrintLine(11, aws_data)
+                        PrintLine(11, aws_data)
+                        'If InStr(aws_data, Chr(delimiter_ascii)) > 0 Then PrintLine(11, aws_data)
                     Loop
 
                     FileClose(10)
                     FileClose(11)
 
-                    Dim colmn, dtCol As Integer
+                    Dim colmn As Integer
                     Dim rws As Long
-                    Dim x, dtFmt As String
+                    'Dim x As String
 
                     ' Convert the input file to a data table for ease of referencing the records therein.
-                    dTable = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws)
+                    'dTable = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws, txtqlfr).Select()
 
-                    For k = 0 To rws - 2
+                    ' For testing records selection from datatable object
+                    'dTable = Text_To_DataTable(aws_input_file, ChrW(delimiter_ascii), 0, colmn, rws, txtqlfr)
 
-                        Process_Status("Processing input record " & k + 1 & " of " & rws)
-                        ' Get date and time for the current record
+                    'aws_input_file_flds = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
+                    'tt = DateAndTime.DateAdd("h", CLng(txtPeriod.Text) * -1, Now())
 
-                        datestring = Get_DateStamp(AWSsite, dTable, k)
+                    'Dim result1() As DataRow = dTable.Select("column1 >= '2021-05-26 19:00:00' and column1 <= '2021-08-20 09:00:00'")
+                    'Dim result() As DataRow = dTable.Select("column1 >= '" & tt & "' and column1 <= '" & Now() & "'")
 
-                        'Log_Errors(datestring)
+                    'Dim result() As DataRow = dTable.Select()
+                    Dim result() As DataRow = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws, txtqlfr).Select()
 
-                        'If datestring = "" Then Continue For
+                    'Log_Errors(result1.Count)
+                    If result.Count > 0 Then
 
-                        'Skip older records
-                        If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
+                        Dim recs As Long
 
-                        If Not IsDate(datestring) Then Continue For
-                        If Val(txtPeriod.Text) <> 999 And DateDiff("h", datestring, Now()) > Val(txtPeriod.Text) Then
-                            'Log_Errors(DateDiff("h", datestring, Now()) & "--" & Val(txtPeriod.Text))
-                            Continue For
-                        End If
+                        recs = 0
 
-                        'Log_Errors(datestring & " " & DateAdd("h", Val(txtPeriod.Text) * -1, Now))
+                        For Each row As DataRow In result
 
-                        'Skip records with invalid date stamp
-                        If IsDate(datestring) Then
+                            recs = recs + 1
+                            Process_Status("Processing input record " & recs & " of " & result.Count) ' & "  From " & infile)
+                            txtStatus.Refresh()
+                            If Not update_db(row, colmn, nat_id, flg, AWSsite, Elms, Units, L_limit, U_limit, Bufr, E_Abbrev) Then Continue For
 
-                            ' Compare current time with time stamp on hourly basis. Skip records outside the time range
-                            If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
+                        Next
 
-                            Process_Status("Processing AWS Record " & k + 1 & " of " & rws - 1)
-
-                            ' Update obsv value column in the data structure
-                            For j = 0 To colmn - 1
-                                If Not IsDBNull(dTable.Rows(k).Item(j)) Then
-                                    x = dTable.Rows(k).Item(j)
-
-                                    If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
-                                        x = Strings.Mid(x, 2, Len(x) - 2)
-                                    End If
-
-                                    AwsRecord_Update(x, j, flg, AWSsite)
-                                Else
-                                    Continue For
-                                End If
-                            Next j
-
-                            ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
-                            Dim sqlv As String
-                            sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
-                            rs = GetDataSet(AWSsite, sqlv)
-
-                            'Update the record into the database
-                            If Val(txtPeriod.Text) = 999 Then
-
-                                ' Process the entire input file irespective of time difference
-                                Process_Input_Record(AWSsite, datestring)
-                            Else
-                                ' Process records for the last selected hours
-                                If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
-                                    Process_Input_Record(AWSsite, datestring)
-                                End If
-                            End If
-                            'End If
-                        End If
-
-                    Next k
+                    End If
+                    'Continue For
 
                     ' Delete input file from base station server if so selected
                     If chkDeleteFile.Checked Then
@@ -4715,17 +5598,294 @@ Err:
                         End If
                     End If
 
+                    'Log_Errors("Processed.... " & infile)
                 Catch ex As Exception
+                    FileClose(10)
+                    FileClose(11)
                     Me.Cursor = Cursors.Default
                     Log_Errors(ex.Message & " at Process_InputFiles")
                     'Return False
                 End Try
-            Next
+            Next n
+
+            '        ' The following code is skipped
+
+            '        For k = 0 To rws - 2
+            '            'For k = 0 To result.Count
+
+            '            'Process_Status("Processing input record " & k + 1 & " of " & rws)
+            '            ' Get date and time for the current record
+
+            '            'datestring = Get_DateStamp(AWSsite, dTable, k)
+            '            DateString = Get_DateStamp(AWSsite, result(k))
+
+
+            '            If InStr(DateString, txtqlfr) > 0 And Len(txtqlfr) > 0 Then DateString = Strings.Mid(DateString, 2, Len(DateString) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
+
+            '            'Skip older records unless 999 to procesising of all records
+            '            If Not IsDate(DateString) Then Continue For
+            '            If Val(txtPeriod.Text) <> 999 And DateDiff("h", DateString, Now()) > Val(txtPeriod.Text) Then
+            '                'Log_Errors(DateDiff("h", datestring, Now()) & "--" & Val(txtPeriod.Text))
+            '                Continue For
+            '            End If
+
+            '            'Log_Errors(datestring & " " & DateAdd("h", Val(txtPeriod.Text) * -1, Now))
+
+            '            'Skip records with invalid date stamp
+            '            If IsDate(DateString) Then
+            '                Dim x As String
+
+            '                ' Compare current time with time stamp on hourly basis. Skip records outside the time range
+            '                If DateDiff("h", DateString, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
+
+            '                'Process_Status("Processing AWS Record " & k + 1 & " of " & rws - 1)
+
+            '                ' Update obsv value column in the data structure
+            '                For j = 0 To colmn - 1
+            '                    If Not IsDBNull(dTable.Rows(k).Item(j)) Then
+            '                        x = dTable.Rows(k).Item(j)
+
+            '                        If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
+            '                            x = Strings.Mid(x, 2, Len(x) - 2)
+            '                        End If
+
+            '                        AwsRecord_Update(x, j, flg, AWSsite)
+            '                    Else
+            '                        Continue For
+            '                    End If
+            '                Next j
+
+            '                ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
+            '                Dim sqlv As String
+            '                sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
+            '                rs = GetDataSet(AWSsite, sqlv)
+
+            '                'Update the record into the database
+            '                If Val(txtPeriod.Text) = 999 Then
+
+            '                    ' Process the entire input file irespective of time difference
+            '                    Process_Input_Record(AWSsite, DateString)
+            '                Else
+            '                    ' Process records for the last selected hours
+            '                    If DateDiff("h", DateString, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
+            '                        Process_Input_Record(AWSsite, DateString)
+            '                    End If
+            '                End If
+            '                'End If
+            '            End If
+
+            '        Next k
+
+            '        ' Delete input file from base station server if so selected
+            '        If chkDeleteFile.Checked Then
+            '            If Not FTP_Delete_InputFile(infile) Then
+            '                Log_Errors("Can't Delete Input File") 'MsgBox "Can't Delete Input File"
+            '            End If
+            '        End If
+
+            '    Catch ex As Exception
+            '        FileClose(10)
+            '        FileClose(11)
+            '        Me.Cursor = Cursors.Default
+            '        Log_Errors(ex.Message & " at Process_InputFiles")
+            '        'Return False
+            '    End Try
+            'Next n
 
         End With
         Me.Cursor = Cursors.Default
         Return True
     End Function
+    Function awsSite_Metadata(id As String) As Boolean
+        Dim stnr As New DataSet
+
+        Try
+            sql = "select * from station where stationId = '" & id & "';"
+            stnr = GetDataSet("station", sql)
+
+            'Initialize station details with blanks
+            stn_name = ""
+            lat = ""
+            lon = ""
+            elv = ""
+            wmo_id = ""
+
+            With stnr.Tables("station")
+                If .Rows.Count <> 0 Then
+                    If Not IsDBNull(.Rows(0).Item("stationName")) Then stn_name = .Rows(0).Item("stationName")
+                    If Not IsDBNull(.Rows(0).Item("latitude")) Then lat = .Rows(0).Item("latitude")
+                    If Not IsDBNull(.Rows(0).Item("longitude")) Then lon = .Rows(0).Item("longitude")
+                    If Not IsDBNull(.Rows(0).Item("elevation")) Then elv = .Rows(0).Item("elevation")
+                    If Not IsDBNull(.Rows(0).Item("wmoid")) Then wmo_id = .Rows(0).Item("wmoid")
+                    If Not IsDBNull(.Rows(0).Item("wsi")) Then WIGOS_id = .Rows(0).Item("wsi")
+                Else
+                    Log_Errors(nat_id & " not found in Stations metadata")
+                End If
+            End With
+            Return True
+
+        Catch x As Exception
+            Log_Errors(x.Message)
+            Return False
+        End Try
+    End Function
+
+    Function update_db(drws As DataRow, colmn As Integer, stn As String, flg As String, AWSsite As String, elm() As String, unitt() As String, Llimit() As String, Ulimit() As String, EBufr() As String, AbbrevE() As String) As Boolean
+        Dim dtt, x, aws_sql_input_file As String
+        Dim GMTDiff, ET, Rmd As Integer
+
+        Try
+
+            dtt = Get_DateStamp(AWSsite, drws)
+
+            ' Check for valid date
+            If Not IsDate(dtt) Then Return False
+
+            ' Check whether the current record can be updated into the database
+            If DateDiff("h", dtt, txtDateTime.Text) > Val(txtPeriod.Text - 1) And Val(txtPeriod.Text) <> 999 Then Return False
+
+            'Update the record into the database
+
+            aws_sql_input_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_output.sql" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
+            FileOpen(12, aws_sql_input_file, OpenMode.Output)
+
+            x = String.Empty
+
+            For j = 0 To colmn - 1
+
+                '' Convert wind speed to SI units
+                'If Strings.LCase(unitt(j)) = "knots" Then drws(j) = Val(drws(j)) / 2
+
+                If QC_Limits(stn, elm(j), dtt, drws(j), Llimit(j), Ulimit(j)) Then
+                    FileClose(12)
+                    Return False
+                End If
+
+                '' Convert Pressure to SI units
+                'If Strings.LCase(unitt(j)) = "hpa" Then drws(j) = Val(drws(j)) * 100
+
+                If IsNumeric(elm(j)) Then
+                    x = stn & "," & elm(j) & "," & dtt & ",surface" & "," & drws(j) & ",\N" & ",1" & ",4"
+                    PrintLine(12, x)
+                End If
+
+            Next j
+            FileClose(12)
+            aws_sql_input_file = Strings.Replace(aws_sql_input_file, "\", "/")
+
+            sql = "LOAD DATA local INFILE '" & aws_sql_input_file & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType);"
+
+            'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+            cmd.Connection = dbconn
+
+            cmd.CommandTimeout = 0
+            cmd.CommandText = sql
+            cmd.ExecuteNonQuery()
+
+
+            ' Update TDCF Template and Encode to BUFR for GTS Transmission
+            ' Test if any BUFR Element is set
+            Kount = 0
+            For i = 0 To EBufr.Count - 1
+                If Len(EBufr(i).ToString) > 0 Then Kount = Kount + 1
+            Next
+
+            If GTSEncode(nat_id) And Val(txtPeriod.Text) <> 999 And Kount > 0 Then
+                ' Check records due for Encoding
+                'Log_Errors(DateDiff("h", dtt, Now()) & "=" & CInt(txtEncode.Text))
+
+                If DateDiff("h", dtt, Now()) <= CInt(txtEncode.Text) Then
+
+                    ' Convert time to UTC
+                    GMTDiff = CInt(txtGMTDiff.Text)
+                    dtt = DateAdd("h", -1 * GMTDiff, dtt)
+
+                    'Compute Encoding interval hours 
+                    ET = Math.Round(Val(txtInterval.Text) / 60)
+                    Rmd = DateAndTime.Hour(dtt) Mod ET 'Check when the encoding interval is reached @ Rmd is Zero 
+
+                    If Rmd = 0 Then
+                        update_tbltemplate(drws, dtt, EBufr, AbbrevE)
+                        EncodeBUFR = True
+                    End If
+                End If
+            End If
+
+                Return True
+        Catch ex As Exception
+            FileClose(12)
+            Log_Errors(ex.Message)
+            Return False
+        End Try
+    End Function
+    'Function update_db(drws As DataRow, colmn As Integer, txtqlfr As String, flg As String, AWSsite As String, rs As DataSet, rstr As DataSet, elm() As String) As Boolean
+
+    '    Dim x, dtt As String
+    '    'Dim rs1 As New DataSet
+
+    '    'sqlaws = "SELECT Climsoft_Element FROM " & AWSsite & ";"
+
+    '    'rs1 = GetDataSet(AWSsite, "SELECT Climsoft_Element FROM " & AWSsite & ";")
+    '    'Log_Errors(rstr.Tables(AWSsite).Rows.Count)
+
+    '    Try
+
+    '        dtt = Get_DateStamp(AWSsite, drws)
+
+    '        '' Remove text qualifier on datestamp if it exists
+    '        'If InStr(dtt, txtqlfr) > 0 And Len(txtqlfr) > 0 Then dtt = Strings.Mid(dtt, 2, Len(dtt) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
+
+    '        ' Check for valid date
+
+    '        ''Skip older records
+    '        'If Val(txtPeriod.Text) <> 999 And DateDiff("h", dtt, Now()) > Val(txtPeriod.Text) Then Return True
+
+
+    '        ' Update obsv value column in the data structure
+
+    '        For j = 0 To colmn - 1
+    '            If Not IsDBNull(drws(j)) Then
+    '                x = drws(j)
+
+    '                'If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then x = Strings.Mid(x, 2, Len(x) - 2)
+
+    '                AwsRecord_Update(x, j, flg, AWSsite)
+    '            Else
+    '                Continue For
+    '            End If
+    '        Next j
+
+    '        '' Analyse the datetime string and process the data if the encoding time interval matches datetime value
+    '        'Dim sqlv As String
+    '        'sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
+    '        'rs = GetDataSet(AWSsite, sqlv)
+
+    '        'Update the record into the database
+    '        If Val(txtPeriod.Text) = 999 Then
+
+    '            ' Process the entire input file irespective of time difference
+    '            Process_Input_Record(AWSsite, dtt)
+    '        Else
+    '            ' Process records for the last selected hours
+    '            If DateDiff("h", dtt, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
+    '                Process_Input_Record(AWSsite, dtt)
+    '            End If
+    '        End If
+    '        'End If
+    '        'End If
+
+    '        'Next k
+
+
+    '        Return True
+    '    Catch ex As Exception
+    '        Log_Errors(ex.Message)
+    '        Return False
+    '    End Try
+    'End Function
+
+
+
 
     Function WSI_Data(ByRef WSI_section4 As String) As Boolean
         Dim wconn As New MySql.Data.MySqlClient.MySqlConnection
