@@ -1168,6 +1168,7 @@ Err:
             Next
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
+            dbconn.Close()
             MessageBox.Show(ex.Message)
         End Try
     End Sub
@@ -1209,6 +1210,7 @@ Err:
 
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
+            dbconn.Close()
             MessageBox.Show(ex.Message)
         End Try
     End Sub
@@ -1252,6 +1254,7 @@ Err:
             End If
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
+            dbconn.Close()
             MessageBox.Show(ex.Message)
         End Try
     End Sub
@@ -1269,7 +1272,7 @@ Err:
             sql = "SELECT * FROM obselement"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
-
+            dbconn.Close()
             da.Fill(ds, "obselement")
             maxRows = ds.Tables("obselement").Rows.Count
             For i = 0 To maxRows - 1 Step 1
@@ -1291,6 +1294,7 @@ Err:
             Next
 
         Catch ex As Exception
+            dbconn.Close()
             MsgBox(ex.Message)
         End Try
 
@@ -2176,14 +2180,18 @@ Err:
     End Sub
 
     Function Update_Rec(sq As String) As Boolean
-        dbConnectionString = frmLogin.txtusrpwd.Text
-        dbconn.ConnectionString = dbConnectionString
-        dbconn.Open()
+        'dbConnectionString = frmLogin.txtusrpwd.Text
+        'dbconn.ConnectionString = dbConnectionString
+
+
 
         Try
             Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
 
             ' Create the Command for executing query and set its properties
+
+            dbconn.Open()
+
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sq, dbconn)
 
             'Execute query
@@ -2191,11 +2199,12 @@ Err:
             'MsgBox("Record Successfully Updated")
 
             dbconn.Close()
-            Update_Rec = True
+            Return True
         Catch ex As Exception
-            MsgBox(ex.Message)
-            Update_Rec = False
             dbconn.Close()
+            MsgBox(ex.Message)
+            Return False
+
         End Try
     End Function
 
@@ -2216,10 +2225,6 @@ Err:
         txtFeatureEdate.Text = txtFeaturedEdate.Text
     End Sub
 
-
-    Private Sub txtfeaturepic_Click(sender As Object, e As EventArgs) Handles pictureBoxFeaturepic.Click
-
-    End Sub
 
     Private Sub txtImageFile_TextChanged(sender As Object, e As EventArgs) Handles txtImageFile.TextChanged
         pictureBoxFeaturepic.ImageLocation = txtImageFile.Text

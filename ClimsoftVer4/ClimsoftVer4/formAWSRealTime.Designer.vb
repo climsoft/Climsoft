@@ -108,6 +108,10 @@ Partial Class formAWSRealTime
         Me.DataGridViewStructures = New System.Windows.Forms.DataGridView()
         Me.pnlSites = New System.Windows.Forms.Panel()
         Me.grpSites = New System.Windows.Forms.GroupBox()
+        Me.txtHrs = New System.Windows.Forms.TextBox()
+        Me.chkHrsAdjust = New System.Windows.Forms.CheckBox()
+        Me.txtUTCdiff = New System.Windows.Forms.TextBox()
+        Me.lblUTCdiff = New System.Windows.Forms.Label()
         Me.DataGridViewSites = New System.Windows.Forms.DataGridView()
         Me.chkPrefix = New System.Windows.Forms.CheckBox()
         Me.txtfilePrefix = New System.Windows.Forms.TextBox()
@@ -437,6 +441,7 @@ Partial Class formAWSRealTime
         Me.txtGMTDiff.TabIndex = 16
         Me.txtGMTDiff.Text = "0"
         Me.txtGMTDiff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtGMTDiff.Visible = False
         '
         'lblGMT
         '
@@ -446,6 +451,7 @@ Partial Class formAWSRealTime
         Me.lblGMT.Size = New System.Drawing.Size(67, 13)
         Me.lblGMT.TabIndex = 15
         Me.lblGMT.Text = "GMT Diff +/-"
+        Me.lblGMT.Visible = False
         '
         'Label9
         '
@@ -1098,7 +1104,7 @@ Partial Class formAWSRealTime
         Me.pnlSites.AutoSize = True
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
         Me.pnlSites.Controls.Add(Me.grpSites)
-        Me.pnlSites.Location = New System.Drawing.Point(187, 0)
+        Me.pnlSites.Location = New System.Drawing.Point(187, 17)
         Me.pnlSites.Name = "pnlSites"
         Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.pnlSites.Size = New System.Drawing.Size(764, 550)
@@ -1106,6 +1112,10 @@ Partial Class formAWSRealTime
         '
         'grpSites
         '
+        Me.grpSites.Controls.Add(Me.txtHrs)
+        Me.grpSites.Controls.Add(Me.chkHrsAdjust)
+        Me.grpSites.Controls.Add(Me.txtUTCdiff)
+        Me.grpSites.Controls.Add(Me.lblUTCdiff)
         Me.grpSites.Controls.Add(Me.DataGridViewSites)
         Me.grpSites.Controls.Add(Me.chkPrefix)
         Me.grpSites.Controls.Add(Me.txtfilePrefix)
@@ -1142,6 +1152,52 @@ Partial Class formAWSRealTime
         Me.grpSites.TabIndex = 67
         Me.grpSites.TabStop = False
         '
+        'txtHrs
+        '
+        Me.txtHrs.BackColor = System.Drawing.Color.White
+        Me.txtHrs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHrs.Location = New System.Drawing.Point(564, 138)
+        Me.txtHrs.Name = "txtHrs"
+        Me.txtHrs.Size = New System.Drawing.Size(32, 20)
+        Me.txtHrs.TabIndex = 105
+        Me.txtHrs.Text = "0"
+        Me.txtHrs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtHrs.Visible = False
+        '
+        'chkHrsAdjust
+        '
+        Me.chkHrsAdjust.AutoSize = True
+        Me.chkHrsAdjust.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkHrsAdjust.Location = New System.Drawing.Point(410, 140)
+        Me.chkHrsAdjust.Name = "chkHrsAdjust"
+        Me.chkHrsAdjust.Size = New System.Drawing.Size(148, 17)
+        Me.chkHrsAdjust.TabIndex = 104
+        Me.chkHrsAdjust.Text = "Adjust Archiva Hours (+/-)"
+        Me.chkHrsAdjust.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkHrsAdjust.UseVisualStyleBackColor = True
+        '
+        'txtUTCdiff
+        '
+        Me.txtUTCdiff.BackColor = System.Drawing.Color.White
+        Me.txtUTCdiff.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUTCdiff.Location = New System.Drawing.Point(228, 273)
+        Me.txtUTCdiff.Name = "txtUTCdiff"
+        Me.txtUTCdiff.Size = New System.Drawing.Size(32, 20)
+        Me.txtUTCdiff.TabIndex = 103
+        Me.txtUTCdiff.Text = "0"
+        Me.txtUTCdiff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtUTCdiff.Visible = False
+        '
+        'lblUTCdiff
+        '
+        Me.lblUTCdiff.AutoSize = True
+        Me.lblUTCdiff.Location = New System.Drawing.Point(155, 277)
+        Me.lblUTCdiff.Name = "lblUTCdiff"
+        Me.lblUTCdiff.Size = New System.Drawing.Size(67, 13)
+        Me.lblUTCdiff.TabIndex = 102
+        Me.lblUTCdiff.Text = "GMT Diff +/-"
+        Me.lblUTCdiff.Visible = False
+        '
         'DataGridViewSites
         '
         Me.DataGridViewSites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -1157,7 +1213,7 @@ Partial Class formAWSRealTime
         '
         Me.chkPrefix.AutoSize = True
         Me.chkPrefix.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkPrefix.Location = New System.Drawing.Point(406, 108)
+        Me.chkPrefix.Location = New System.Drawing.Point(406, 113)
         Me.chkPrefix.Name = "chkPrefix"
         Me.chkPrefix.Size = New System.Drawing.Size(107, 17)
         Me.chkPrefix.TabIndex = 101
@@ -1167,7 +1223,7 @@ Partial Class formAWSRealTime
         '
         'txtfilePrefix
         '
-        Me.txtfilePrefix.Location = New System.Drawing.Point(583, 106)
+        Me.txtfilePrefix.Location = New System.Drawing.Point(583, 111)
         Me.txtfilePrefix.Name = "txtfilePrefix"
         Me.txtfilePrefix.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtfilePrefix.Size = New System.Drawing.Size(145, 20)
@@ -1176,7 +1232,7 @@ Partial Class formAWSRealTime
         '
         'txtGTSHeader
         '
-        Me.txtGTSHeader.Location = New System.Drawing.Point(211, 214)
+        Me.txtGTSHeader.Location = New System.Drawing.Point(211, 216)
         Me.txtGTSHeader.Name = "txtGTSHeader"
         Me.txtGTSHeader.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtGTSHeader.Size = New System.Drawing.Size(137, 20)
@@ -1195,7 +1251,7 @@ Partial Class formAWSRealTime
         '
         Me.chkGTSEncode.AutoSize = True
         Me.chkGTSEncode.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkGTSEncode.Location = New System.Drawing.Point(31, 270)
+        Me.chkGTSEncode.Location = New System.Drawing.Point(31, 275)
         Me.chkGTSEncode.Name = "chkGTSEncode"
         Me.chkGTSEncode.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.chkGTSEncode.Size = New System.Drawing.Size(109, 17)
@@ -1207,7 +1263,7 @@ Partial Class formAWSRealTime
         'txtSiteName
         '
         Me.txtSiteName.FormattingEnabled = True
-        Me.txtSiteName.Location = New System.Drawing.Point(211, 81)
+        Me.txtSiteName.Location = New System.Drawing.Point(211, 83)
         Me.txtSiteName.Name = "txtSiteName"
         Me.txtSiteName.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtSiteName.Size = New System.Drawing.Size(280, 21)
@@ -1331,7 +1387,7 @@ Partial Class formAWSRealTime
         'txtIP
         '
         Me.txtIP.FormattingEnabled = True
-        Me.txtIP.Location = New System.Drawing.Point(210, 187)
+        Me.txtIP.Location = New System.Drawing.Point(210, 191)
         Me.txtIP.Name = "txtIP"
         Me.txtIP.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtIP.Size = New System.Drawing.Size(137, 21)
@@ -1340,7 +1396,7 @@ Partial Class formAWSRealTime
         'txtDataStructure
         '
         Me.txtDataStructure.FormattingEnabled = True
-        Me.txtDataStructure.Location = New System.Drawing.Point(211, 134)
+        Me.txtDataStructure.Location = New System.Drawing.Point(211, 138)
         Me.txtDataStructure.Name = "txtDataStructure"
         Me.txtDataStructure.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtDataStructure.Size = New System.Drawing.Size(185, 21)
@@ -1348,7 +1404,7 @@ Partial Class formAWSRealTime
         '
         'txtFlag
         '
-        Me.txtFlag.Location = New System.Drawing.Point(211, 161)
+        Me.txtFlag.Location = New System.Drawing.Point(211, 163)
         Me.txtFlag.Name = "txtFlag"
         Me.txtFlag.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtFlag.Size = New System.Drawing.Size(137, 20)
@@ -1358,7 +1414,7 @@ Partial Class formAWSRealTime
         '
         Me.chkOperational.AutoSize = True
         Me.chkOperational.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkOperational.Location = New System.Drawing.Point(125, 250)
+        Me.chkOperational.Location = New System.Drawing.Point(125, 248)
         Me.chkOperational.Name = "chkOperational"
         Me.chkOperational.Size = New System.Drawing.Size(15, 14)
         Me.chkOperational.TabIndex = 74
@@ -1394,7 +1450,7 @@ Partial Class formAWSRealTime
         '
         'txtInFile
         '
-        Me.txtInFile.Location = New System.Drawing.Point(210, 108)
+        Me.txtInFile.Location = New System.Drawing.Point(210, 111)
         Me.txtInFile.Name = "txtInFile"
         Me.txtInFile.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtInFile.Size = New System.Drawing.Size(186, 20)
@@ -2557,4 +2613,8 @@ Partial Class formAWSRealTime
     Friend WithEvents txtEncode As TextBox
     Friend WithEvents lblEncode As Label
     Friend WithEvents cmdClone As Button
+    Friend WithEvents txtHrs As TextBox
+    Friend WithEvents chkHrsAdjust As CheckBox
+    Friend WithEvents txtUTCdiff As TextBox
+    Friend WithEvents lblUTCdiff As Label
 End Class

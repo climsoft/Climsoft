@@ -55,6 +55,8 @@ Partial Class frmObsView
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblPeriod = New System.Windows.Forms.Label()
         Me.pnlAdanced = New System.Windows.Forms.Panel()
+        Me.lstViewStations = New System.Windows.Forms.ListView()
+        Me.chkStations = New System.Windows.Forms.CheckBox()
         Me.txtOtherflag = New System.Windows.Forms.TextBox()
         Me.lblOtherFlags = New System.Windows.Forms.Label()
         Me.chkForms = New System.Windows.Forms.CheckBox()
@@ -95,7 +97,7 @@ Partial Class frmObsView
         Me.TabObservations.Location = New System.Drawing.Point(-1, -3)
         Me.TabObservations.Name = "TabObservations"
         Me.TabObservations.SelectedIndex = 0
-        Me.TabObservations.Size = New System.Drawing.Size(1118, 513)
+        Me.TabObservations.Size = New System.Drawing.Size(1118, 528)
         Me.TabObservations.TabIndex = 0
         '
         'TabSelect
@@ -104,7 +106,7 @@ Partial Class frmObsView
         Me.TabSelect.Location = New System.Drawing.Point(4, 22)
         Me.TabSelect.Name = "TabSelect"
         Me.TabSelect.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabSelect.Size = New System.Drawing.Size(1110, 487)
+        Me.TabSelect.Size = New System.Drawing.Size(1110, 502)
         Me.TabSelect.TabIndex = 0
         Me.TabSelect.Text = "Selection Details"
         Me.TabSelect.UseVisualStyleBackColor = True
@@ -131,12 +133,12 @@ Partial Class frmObsView
         Me.pnlStationsElements.Controls.Add(Me.cmbstation)
         Me.pnlStationsElements.Location = New System.Drawing.Point(9, 31)
         Me.pnlStationsElements.Name = "pnlStationsElements"
-        Me.pnlStationsElements.Size = New System.Drawing.Size(1105, 426)
+        Me.pnlStationsElements.Size = New System.Drawing.Size(1105, 475)
         Me.pnlStationsElements.TabIndex = 5
         '
         'cmdSelectAllElements
         '
-        Me.cmdSelectAllElements.Location = New System.Drawing.Point(509, 391)
+        Me.cmdSelectAllElements.Location = New System.Drawing.Point(509, 447)
         Me.cmdSelectAllElements.Name = "cmdSelectAllElements"
         Me.cmdSelectAllElements.Size = New System.Drawing.Size(113, 23)
         Me.cmdSelectAllElements.TabIndex = 29
@@ -145,7 +147,7 @@ Partial Class frmObsView
         '
         'cmdSelectAllStations
         '
-        Me.cmdSelectAllStations.Location = New System.Drawing.Point(147, 391)
+        Me.cmdSelectAllStations.Location = New System.Drawing.Point(147, 447)
         Me.cmdSelectAllStations.Name = "cmdSelectAllStations"
         Me.cmdSelectAllStations.Size = New System.Drawing.Size(107, 23)
         Me.cmdSelectAllStations.TabIndex = 28
@@ -154,7 +156,7 @@ Partial Class frmObsView
         '
         'cmdClearStations
         '
-        Me.cmdClearStations.Location = New System.Drawing.Point(260, 391)
+        Me.cmdClearStations.Location = New System.Drawing.Point(260, 447)
         Me.cmdClearStations.Name = "cmdClearStations"
         Me.cmdClearStations.Size = New System.Drawing.Size(94, 23)
         Me.cmdClearStations.TabIndex = 27
@@ -163,7 +165,7 @@ Partial Class frmObsView
         '
         'cmdClearElements
         '
-        Me.cmdClearElements.Location = New System.Drawing.Point(631, 391)
+        Me.cmdClearElements.Location = New System.Drawing.Point(631, 447)
         Me.cmdClearElements.Name = "cmdClearElements"
         Me.cmdClearElements.Size = New System.Drawing.Size(96, 23)
         Me.cmdClearElements.TabIndex = 26
@@ -216,7 +218,7 @@ Partial Class frmObsView
         '
         'cmdDelStation
         '
-        Me.cmdDelStation.Location = New System.Drawing.Point(14, 391)
+        Me.cmdDelStation.Location = New System.Drawing.Point(14, 447)
         Me.cmdDelStation.Name = "cmdDelStation"
         Me.cmdDelStation.Size = New System.Drawing.Size(127, 23)
         Me.cmdDelStation.TabIndex = 22
@@ -225,7 +227,7 @@ Partial Class frmObsView
         '
         'cmdDelElement
         '
-        Me.cmdDelElement.Location = New System.Drawing.Point(364, 391)
+        Me.cmdDelElement.Location = New System.Drawing.Point(364, 447)
         Me.cmdDelElement.Name = "cmdDelElement"
         Me.cmdDelElement.Size = New System.Drawing.Size(139, 23)
         Me.cmdDelElement.TabIndex = 21
@@ -235,7 +237,7 @@ Partial Class frmObsView
         'chkAdvancedSelection
         '
         Me.chkAdvancedSelection.AutoSize = True
-        Me.chkAdvancedSelection.Location = New System.Drawing.Point(740, 181)
+        Me.chkAdvancedSelection.Location = New System.Drawing.Point(747, 177)
         Me.chkAdvancedSelection.Name = "chkAdvancedSelection"
         Me.chkAdvancedSelection.Size = New System.Drawing.Size(122, 17)
         Me.chkAdvancedSelection.TabIndex = 19
@@ -254,7 +256,7 @@ Partial Class frmObsView
         Me.lstvElements.Location = New System.Drawing.Point(364, 34)
         Me.lstvElements.Name = "lstvElements"
         Me.lstvElements.RightToLeftLayout = True
-        Me.lstvElements.Size = New System.Drawing.Size(363, 351)
+        Me.lstvElements.Size = New System.Drawing.Size(363, 407)
         Me.lstvElements.TabIndex = 18
         Me.lstvElements.UseCompatibleStateImageBehavior = False
         Me.lstvElements.View = System.Windows.Forms.View.Details
@@ -271,7 +273,7 @@ Partial Class frmObsView
         Me.lstvStations.Location = New System.Drawing.Point(14, 33)
         Me.lstvStations.Name = "lstvStations"
         Me.lstvStations.RightToLeftLayout = True
-        Me.lstvStations.Size = New System.Drawing.Size(340, 352)
+        Me.lstvStations.Size = New System.Drawing.Size(340, 408)
         Me.lstvStations.TabIndex = 17
         Me.lstvStations.UseCompatibleStateImageBehavior = False
         Me.lstvStations.View = System.Windows.Forms.View.Details
@@ -322,7 +324,7 @@ Partial Class frmObsView
         Me.lblProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProducts.Location = New System.Drawing.Point(158, -1)
         Me.lblProducts.Name = "lblProducts"
-        Me.lblProducts.Size = New System.Drawing.Size(16, 16)
+        Me.lblProducts.Size = New System.Drawing.Size(17, 16)
         Me.lblProducts.TabIndex = 8
         Me.lblProducts.Text = "   "
         '
@@ -440,6 +442,8 @@ Partial Class frmObsView
         'pnlAdanced
         '
         Me.pnlAdanced.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlAdanced.Controls.Add(Me.lstViewStations)
+        Me.pnlAdanced.Controls.Add(Me.chkStations)
         Me.pnlAdanced.Controls.Add(Me.txtOtherflag)
         Me.pnlAdanced.Controls.Add(Me.lblOtherFlags)
         Me.pnlAdanced.Controls.Add(Me.chkForms)
@@ -453,9 +457,33 @@ Partial Class frmObsView
         Me.pnlAdanced.Controls.Add(Me.lblStations)
         Me.pnlAdanced.Location = New System.Drawing.Point(743, 200)
         Me.pnlAdanced.Name = "pnlAdanced"
-        Me.pnlAdanced.Size = New System.Drawing.Size(350, 214)
+        Me.pnlAdanced.Size = New System.Drawing.Size(350, 241)
         Me.pnlAdanced.TabIndex = 6
         Me.pnlAdanced.Visible = False
+        '
+        'lstViewStations
+        '
+        Me.lstViewStations.CheckBoxes = True
+        Me.lstViewStations.FullRowSelect = True
+        Me.lstViewStations.GridLines = True
+        Me.lstViewStations.HideSelection = False
+        Me.lstViewStations.Location = New System.Drawing.Point(150, 202)
+        Me.lstViewStations.Name = "lstViewStations"
+        Me.lstViewStations.Size = New System.Drawing.Size(189, 34)
+        Me.lstViewStations.TabIndex = 25
+        Me.lstViewStations.UseCompatibleStateImageBehavior = False
+        Me.lstViewStations.Visible = False
+        '
+        'chkStations
+        '
+        Me.chkStations.AutoSize = True
+        Me.chkStations.Location = New System.Drawing.Point(9, 202)
+        Me.chkStations.Name = "chkStations"
+        Me.chkStations.Size = New System.Drawing.Size(110, 17)
+        Me.chkStations.TabIndex = 24
+        Me.chkStations.Text = "Stations Grouping"
+        Me.chkStations.UseVisualStyleBackColor = True
+        Me.chkStations.Visible = False
         '
         'txtOtherflag
         '
@@ -488,7 +516,7 @@ Partial Class frmObsView
         Me.lstBoxForms.FormattingEnabled = True
         Me.lstBoxForms.Location = New System.Drawing.Point(151, 153)
         Me.lstBoxForms.Name = "lstBoxForms"
-        Me.lstBoxForms.Size = New System.Drawing.Size(185, 43)
+        Me.lstBoxForms.Size = New System.Drawing.Size(185, 82)
         Me.lstBoxForms.TabIndex = 20
         '
         'chkAcquisitionType
@@ -586,7 +614,7 @@ Partial Class frmObsView
         Me.tabView.Location = New System.Drawing.Point(4, 22)
         Me.tabView.Name = "tabView"
         Me.tabView.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabView.Size = New System.Drawing.Size(1110, 487)
+        Me.tabView.Size = New System.Drawing.Size(1110, 502)
         Me.tabView.TabIndex = 1
         Me.tabView.Text = "View Records"
         Me.tabView.UseVisualStyleBackColor = True
@@ -609,7 +637,7 @@ Partial Class frmObsView
         Me.grpButtons.Controls.Add(Me.btnDelete)
         Me.grpButtons.Controls.Add(Me.btnUpdate)
         Me.grpButtons.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.grpButtons.Location = New System.Drawing.Point(3, 458)
+        Me.grpButtons.Location = New System.Drawing.Point(3, 473)
         Me.grpButtons.Name = "grpButtons"
         Me.grpButtons.Size = New System.Drawing.Size(1104, 26)
         Me.grpButtons.TabIndex = 0
@@ -644,7 +672,7 @@ Partial Class frmObsView
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(495, 510)
+        Me.btnClose.Location = New System.Drawing.Point(495, 539)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(66, 23)
         Me.btnClose.TabIndex = 6
@@ -653,7 +681,7 @@ Partial Class frmObsView
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(637, 510)
+        Me.btnHelp.Location = New System.Drawing.Point(637, 539)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(66, 23)
         Me.btnHelp.TabIndex = 5
@@ -662,7 +690,7 @@ Partial Class frmObsView
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(312, 510)
+        Me.btnView.Location = New System.Drawing.Point(312, 539)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(66, 23)
         Me.btnView.TabIndex = 7
@@ -674,7 +702,7 @@ Partial Class frmObsView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1140, 532)
+        Me.ClientSize = New System.Drawing.Size(1140, 569)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnHelp)
@@ -754,4 +782,6 @@ Partial Class frmObsView
     Friend WithEvents lblOtherFlags As Label
     Friend WithEvents lstBoxFlags As ListBox
     Friend WithEvents btnView As Button
+    Friend WithEvents lstViewStations As ListView
+    Friend WithEvents chkStations As CheckBox
 End Class

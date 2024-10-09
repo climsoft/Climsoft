@@ -277,7 +277,7 @@
             dbcon.ConnectionString = dbConnectionString
             dbcon.Open()
 
-            sql = "select elementId, abbreviation from obselement;" ' where elementId > 880 ;"
+            sql = "select elementId, abbreviation from obselement where Selected = 1;" ' where elementId > 880 ;"
 
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
@@ -348,6 +348,9 @@
             cmbFields.Items.Clear()
             ' Add station, date and time headers whichever exist
             cmbFields.Items.Add("station_id")
+            cmbFields.Items.Add("date_time")
+            cmbFields.Items.Add("date")
+            cmbFields.Items.Add("time")
             cmbFields.Items.Add("yyyy")
             cmbFields.Items.Add("mm")
             cmbFields.Items.Add("dd")
@@ -359,7 +362,7 @@
             dbcon.ConnectionString = dbConnectionString
             dbcon.Open()
 
-            sql = "select elementId, abbreviation from obselement where elementId < 881;"
+            sql = "select elementId, abbreviation from obselement where selected = 1;" 'elementId < 881;"
 
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
@@ -799,6 +802,8 @@
                                             cod = dat
                                         ElseIf .Columns(col).Name = "date_time" Then  ' Year column found
                                             dttime = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & DateAndTime.Hour(dat) & ":" & DateAndTime.Minute(dat) & ":" & DateAndTime.Second(dat)
+                                        ElseIf .Columns(col).Name = "date" Then  ' Year column found
+                                            dttime = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & h & ":00:00"
                                         ElseIf .Columns(col).Name = "level" Then
                                             lvl = dat
                                         ElseIf .Columns(col).Name = "yyyy" Then
@@ -1292,6 +1297,7 @@
                                             dt_tm = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & DateAndTime.Hour(dat) & ":" & DateAndTime.Minute(dat) & ":" & DateAndTime.Second(dat)
                                         ElseIf .Columns(col).Name = "date" Then  ' Year column found
                                             dt_tm = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & h & ":00:00"
+
                                         ElseIf .Columns(col).Name = "yyyy" Then  ' Year column found
                                             y = dat
                                             dttcom = dttcom + 1
@@ -1308,8 +1314,10 @@
                                         ElseIf .Columns(col).Name = "NA" Then ' Not Required
                                             'Column labeled NA will be skipped
                                         Else
+
                                             ' Data column follows
                                             cod = hd
+
                                             ' Days For Monthly accumulated data if any
                                             If optMonthly.Checked = True Then d = DateTime.DaysInMonth(y, m)
 
@@ -1324,8 +1332,10 @@
 
                                             ' Check for missing flag data values 
                                             If dat = txtMissingFlag.Text Then
+                                                'MsgBox(dt_tm & " " & dat)
                                                 If dat = "" Then Continue For 'Blanks to be skipped
                                                 If IsDate(dt_tm) Then
+
                                                     'MsgBox(st & " " & cod)
                                                     If Station_Element(st, cod) Then
                                                         Add_Record(st, cod, dt_tm, "", "M", acquisitiontype)
@@ -1371,7 +1381,9 @@
                                             'Else
                                             '    If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
                                             'End If
+                                            'MsgBox(st & " " & dt_tm & " " & cod & " " & dat)
                                             If Station_Element(st, cod) Then
+                                                'MsgBox(st & " " & dt_tm & " " & cod & " " & dat)
                                                 Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
                                                 lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
                                                 lblRecords.Refresh()
@@ -1379,6 +1391,7 @@
                                                 If ImportFile = False Then Exit Sub
                                             End If
                                         End If
+
                                     End If
                                 End With
 
@@ -1760,7 +1773,7 @@
             dbcon.ConnectionString = dbConnectionString
             dbcon.Open()
 
-            sql = "select elementId, abbreviation from obselement where elementId < 881 ;"
+            sql = "select elementId, abbreviation from obselement where selected = 1;" 'elementId < 881 ;"
 
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
@@ -2062,6 +2075,11 @@
 
         'If obsVal = "" Then Exit Function
         Try
+            If chkAdjustHH.Checked And Val(txtHH.Text) <> 0 Then
+                datetime = DateAdd("h", CInt(txtHH.Text), datetime)
+                datetime = DateAndTime.Year(datetime) & "-" & DateAndTime.Month(datetime) & "-" & DateAndTime.Day(datetime) & " " & DateAndTime.Hour(datetime) & ":" & DateAndTime.Minute(datetime) & ":" & DateAndTime.Second(datetime)
+            End If
+
             If Val(cprd) < 1 Then cprd = "NULL" ' No cummulative values
 
             dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & acqTyp
@@ -2325,7 +2343,7 @@
 
     End Function
     Private Sub cmdSaveSpecs_Click(sender As Object, e As EventArgs) Handles cmdSaveSpecs.Click
-        Dim hdr, schemafile, dlt, strw, obshr, scal, id, code, flg As String
+        Dim hdr, schemafile, dlt, strw, obshr, scal, id, code, flg, adjust As String
         'Dim configFilename As String = Application.StartupPath & "\schema.sch"
         Try
             dlgSaveSchema.Filter = ClsTranslations.GetTranslation("Schema file|*.sch")
@@ -2358,7 +2376,8 @@
             'code = txtElmCode.Text
             code = cboElement.SelectedValue
             flg = txtMissingFlag.Text
-            PrintLine(100, dlt & "," & strw & "," & obshr & "," & scal & "," & id & "," & code & "," & flg)
+            adjust = txtHH.Text
+            PrintLine(100, dlt & "," & strw & "," & obshr & "," & scal & "," & id & "," & code & "," & flg & "," & adjust)
             lblSpecs.Text = schemafile
         Catch ex As Exception
             FileClose(100)
@@ -2425,6 +2444,7 @@
                     Else
                         txtMissingFlag.Text = ""
                     End If
+                    txtHH.Text = hdr(7)
                 End If
             End Using
             lblSpecs.Text = sch
@@ -2510,6 +2530,15 @@
             Case Else
                 Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#procedures")
         End Select
+    End Sub
+
+    Private Sub chkAdjustHH_CheckedChanged(sender As Object, e As EventArgs) Handles chkAdjustHH.CheckedChanged
+        If chkAdjustHH.Checked Then
+            txtHH.Visible = True
+        Else
+            txtHH.Visible = False
+        End If
+
     End Sub
 
     Private Sub txtOther_GotFocus(sender As Object, e As EventArgs) Handles txtOther.GotFocus

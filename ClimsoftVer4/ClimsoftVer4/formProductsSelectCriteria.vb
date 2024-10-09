@@ -4138,7 +4138,7 @@ Err:
             'Loop
 
             'MsgBox(yr & " " & maxRows)
-            Do While rec <= maxRows
+            Do While rec <= maxRows - 1
 
                 'kount = kount + 1
                 yy = dsp.Tables("observationfinal").Rows(rec).Item(6)
