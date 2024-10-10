@@ -1137,7 +1137,11 @@
                         txtflag.BorderStyle = BorderStyle.FixedSingle
                         txtflag.Enabled = False
 
-                        If eCode = 2 Or eCode = 3 Or eCode = 5 Or eCode = 18 Or eCode = 84 Or eCode = 99 Then
+                        'If eCode = 2 Or eCode = 3 Or eCode = 5 Or eCode = 18 Or eCode = 84 Or eCode = 99 Then
+                        '    txtvalue.Enabled = False
+                        'End If
+
+                        If eCode <= 100 Then '2 Or eCode = 3 Or eCode = 5 Or eCode = 18 Or eCode = 84 Or eCode = 99 Then
                             txtvalue.Enabled = False
                         End If
 
@@ -1398,12 +1402,17 @@
             ' The following code is temporary to cater for special case in Cape Verde where some parameters are recorded at specific hours
             ' Whene a universal method for doing is devised the code will be changed accordingly
             ' Extrememe Temperaturs
-            If codi = "002" Or codi = "003" Then
-                If hh = "06" Or hh = "18" Then
+
+            ' Management of text boxes for daily observations that are entered through the synoptic form
+            'If codi = "002" Or codi = "003" Then
+            If Val(codi) <= 100 And Strings.Left(ctl.Name, 3) = "txt" Then
+                'hh = Val(FldName.RegkeyValue("key01"))
+                If Val(hh) = Val(FldName.RegkeyValue("key01")) Then ' Or hh = "18" Then
                     ctl.Enabled = True
                 Else
                     ctl.Enabled = False
                 End If
+
                 ' Evaporation
             ElseIf codi = "815" Or codi = "816" Then
                 If hh = "06" Or hh = "10" Then
@@ -1548,6 +1557,7 @@
             Return False
         End Try
     End Function
+
 
     Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
 

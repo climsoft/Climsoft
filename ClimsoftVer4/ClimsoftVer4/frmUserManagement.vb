@@ -1640,8 +1640,10 @@
             End If
             conn.Close()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'MsgBox(ex.Message)
+            MsgBox("Can't set password for " & usrName)
             conn.Close()
+            Exit Sub
         End Try
 
         ' Update User Role
@@ -1717,7 +1719,11 @@
             ds.Clear()
             da.Fill(ds, "Users")
 
-            If ds.Tables("Users").Rows.Count = 0 Then Exit Sub
+            If ds.Tables("Users").Rows.Count = 0 Then
+                conn.Close()
+                Exit Sub
+            End If
+
             'MsgBox(ds.Tables("Users").Rows.Count)
             With ds.Tables("Users")
                 For i = 0 To .Rows.Count - 1
@@ -1727,23 +1733,15 @@
                     'Modify user details in [climsoftusers] table in operational databases
                     Sql = "Update climsoftusers SET userRole ='" & usrRole & "' WHERE userName LIKE '" & usrName & "';"
                     objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+
                     objCmd.ExecuteNonQuery()
 
                     'Modify user details in [climsoftusers] table in test database
                     Sql = "USE mariadb_climsoft_test_db_v4; UPDATE climsoftusers set userRole ='" & usrRole & "' WHERE userName LIKE '" & usrName & "';"
                     objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+
                     objCmd.ExecuteNonQuery()
 
-                    '' Revoke all the current privileges
-                    ' The code below has been commented in order to include the custom renamed databases in previleges list
-
-                    'Sql = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '" & usrName & "'@'%'; FLUSH PRIVILEGES;"
-                    'objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                    'objCmd.ExecuteNonQuery()
-
-                    'Sql = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '" & usrName & "'@'localhost'; FLUSH PRIVILEGES;"
-                    'objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                    'conn.Close()
                     ' Set new privileges according to the new roles
                     If Not SetPrivileges(usrName, usrRole) Then Continue For
                 Next
@@ -3406,4 +3404,11 @@ Err:
         Return False
     End Function
 
+    Private Sub txtConfirmPassword_GotFocus(sender As Object, e As EventArgs) Handles txtConfirmPassword.GotFocus
+        Clipboard.Clear()
+    End Sub
+
+    Private Sub txtPassword_GotFocus(sender As Object, e As EventArgs) Handles txtPassword.GotFocus
+        Clipboard.Clear()
+    End Sub
 End Class

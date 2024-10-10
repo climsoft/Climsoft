@@ -30,16 +30,19 @@ Partial Class formDataView
         Me.cmdExport = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
+        Me.cboMonth = New System.Windows.Forms.ComboBox()
+        Me.cboYear = New System.Windows.Forms.ComboBox()
+        Me.cboStnId = New System.Windows.Forms.ComboBox()
+        Me.cboStName = New System.Windows.Forms.ComboBox()
+        Me.lblStName = New System.Windows.Forms.Label()
         Me.cmdSearch = New System.Windows.Forms.Button()
-        Me.txtMM = New System.Windows.Forms.TextBox()
-        Me.txtYY = New System.Windows.Forms.TextBox()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtStn = New System.Windows.Forms.TextBox()
+        Me.lblStnId = New System.Windows.Forms.Label()
         Me.cmdImport = New System.Windows.Forms.Button()
         Me.dlgImportFile = New System.Windows.Forms.OpenFileDialog()
         Me.dlgExportFile = New System.Windows.Forms.SaveFileDialog()
+        Me.btRefresh = New System.Windows.Forms.Button()
         CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSearch.SuspendLayout()
         Me.SuspendLayout()
@@ -55,7 +58,7 @@ Partial Class formDataView
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(701, 475)
+        Me.btnHelp.Location = New System.Drawing.Point(740, 475)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(73, 23)
         Me.btnHelp.TabIndex = 8
@@ -65,7 +68,7 @@ Partial Class formDataView
         'btnDelete
         '
         Me.btnDelete.Enabled = False
-        Me.btnDelete.Location = New System.Drawing.Point(77, 475)
+        Me.btnDelete.Location = New System.Drawing.Point(12, 475)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(87, 23)
         Me.btnDelete.TabIndex = 7
@@ -75,7 +78,7 @@ Partial Class formDataView
         'btnUpdate
         '
         Me.btnUpdate.Enabled = False
-        Me.btnUpdate.Location = New System.Drawing.Point(170, 475)
+        Me.btnUpdate.Location = New System.Drawing.Point(110, 475)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(82, 23)
         Me.btnUpdate.TabIndex = 6
@@ -84,7 +87,7 @@ Partial Class formDataView
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(609, 475)
+        Me.btnClose.Location = New System.Drawing.Point(643, 475)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(86, 23)
         Me.btnClose.TabIndex = 5
@@ -93,7 +96,7 @@ Partial Class formDataView
         '
         'cmdExport
         '
-        Me.cmdExport.Location = New System.Drawing.Point(258, 475)
+        Me.cmdExport.Location = New System.Drawing.Point(203, 475)
         Me.cmdExport.Name = "cmdExport"
         Me.cmdExport.Size = New System.Drawing.Size(99, 23)
         Me.cmdExport.TabIndex = 9
@@ -102,7 +105,7 @@ Partial Class formDataView
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(466, 475)
+        Me.cmdEdit.Location = New System.Drawing.Point(421, 475)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(127, 23)
         Me.cmdEdit.TabIndex = 10
@@ -111,46 +114,75 @@ Partial Class formDataView
         '
         'grpSearch
         '
+        Me.grpSearch.Controls.Add(Me.cboMonth)
+        Me.grpSearch.Controls.Add(Me.cboYear)
+        Me.grpSearch.Controls.Add(Me.cboStnId)
+        Me.grpSearch.Controls.Add(Me.cboStName)
+        Me.grpSearch.Controls.Add(Me.lblStName)
         Me.grpSearch.Controls.Add(Me.cmdSearch)
-        Me.grpSearch.Controls.Add(Me.txtMM)
-        Me.grpSearch.Controls.Add(Me.txtYY)
         Me.grpSearch.Controls.Add(Me.lblMonth)
         Me.grpSearch.Controls.Add(Me.lblYear)
-        Me.grpSearch.Controls.Add(Me.Label1)
-        Me.grpSearch.Controls.Add(Me.txtStn)
-        Me.grpSearch.Location = New System.Drawing.Point(542, 5)
+        Me.grpSearch.Controls.Add(Me.lblStnId)
+        Me.grpSearch.Location = New System.Drawing.Point(3, 5)
         Me.grpSearch.Name = "grpSearch"
-        Me.grpSearch.Size = New System.Drawing.Size(294, 44)
+        Me.grpSearch.Size = New System.Drawing.Size(833, 44)
         Me.grpSearch.TabIndex = 17
         Me.grpSearch.TabStop = False
         '
+        'cboMonth
+        '
+        Me.cboMonth.FormattingEnabled = True
+        Me.cboMonth.Location = New System.Drawing.Point(539, 16)
+        Me.cboMonth.Name = "cboMonth"
+        Me.cboMonth.Size = New System.Drawing.Size(51, 21)
+        Me.cboMonth.TabIndex = 35
+        '
+        'cboYear
+        '
+        Me.cboYear.FormattingEnabled = True
+        Me.cboYear.Location = New System.Drawing.Point(480, 16)
+        Me.cboYear.Name = "cboYear"
+        Me.cboYear.Size = New System.Drawing.Size(52, 21)
+        Me.cboYear.TabIndex = 34
+        '
+        'cboStnId
+        '
+        Me.cboStnId.FormattingEnabled = True
+        Me.cboStnId.Location = New System.Drawing.Point(387, 16)
+        Me.cboStnId.Name = "cboStnId"
+        Me.cboStnId.Size = New System.Drawing.Size(87, 21)
+        Me.cboStnId.TabIndex = 33
+        '
+        'cboStName
+        '
+        Me.cboStName.FormattingEnabled = True
+        Me.cboStName.Location = New System.Drawing.Point(9, 16)
+        Me.cboStName.Name = "cboStName"
+        Me.cboStName.Size = New System.Drawing.Size(359, 21)
+        Me.cboStName.TabIndex = 32
+        '
+        'lblStName
+        '
+        Me.lblStName.AutoSize = True
+        Me.lblStName.Location = New System.Drawing.Point(71, 2)
+        Me.lblStName.Name = "lblStName"
+        Me.lblStName.Size = New System.Drawing.Size(71, 13)
+        Me.lblStName.TabIndex = 31
+        Me.lblStName.Text = "Station Name"
+        '
         'cmdSearch
         '
-        Me.cmdSearch.Location = New System.Drawing.Point(212, 15)
+        Me.cmdSearch.Location = New System.Drawing.Point(742, 13)
         Me.cmdSearch.Name = "cmdSearch"
-        Me.cmdSearch.Size = New System.Drawing.Size(76, 20)
+        Me.cmdSearch.Size = New System.Drawing.Size(76, 26)
         Me.cmdSearch.TabIndex = 30
         Me.cmdSearch.Text = "Search"
         Me.cmdSearch.UseVisualStyleBackColor = True
         '
-        'txtMM
-        '
-        Me.txtMM.Location = New System.Drawing.Point(172, 16)
-        Me.txtMM.Name = "txtMM"
-        Me.txtMM.Size = New System.Drawing.Size(28, 20)
-        Me.txtMM.TabIndex = 28
-        '
-        'txtYY
-        '
-        Me.txtYY.Location = New System.Drawing.Point(117, 16)
-        Me.txtYY.Name = "txtYY"
-        Me.txtYY.Size = New System.Drawing.Size(43, 20)
-        Me.txtYY.TabIndex = 27
-        '
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(169, 2)
+        Me.lblMonth.Location = New System.Drawing.Point(547, 2)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(37, 13)
         Me.lblMonth.TabIndex = 25
@@ -159,42 +191,45 @@ Partial Class formDataView
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(124, 2)
+        Me.lblYear.Location = New System.Drawing.Point(488, 2)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(29, 13)
         Me.lblYear.TabIndex = 24
         Me.lblYear.Text = "Year"
         '
-        'Label1
+        'lblStnId
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(25, 2)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(52, 13)
-        Me.Label1.TabIndex = 23
-        Me.Label1.Text = "Station Id"
-        '
-        'txtStn
-        '
-        Me.txtStn.Location = New System.Drawing.Point(11, 16)
-        Me.txtStn.Name = "txtStn"
-        Me.txtStn.Size = New System.Drawing.Size(100, 20)
-        Me.txtStn.TabIndex = 22
+        Me.lblStnId.AutoSize = True
+        Me.lblStnId.Location = New System.Drawing.Point(388, 2)
+        Me.lblStnId.Name = "lblStnId"
+        Me.lblStnId.Size = New System.Drawing.Size(52, 13)
+        Me.lblStnId.TabIndex = 23
+        Me.lblStnId.Text = "Station Id"
         '
         'cmdImport
         '
-        Me.cmdImport.Location = New System.Drawing.Point(363, 475)
+        Me.cmdImport.Location = New System.Drawing.Point(313, 475)
         Me.cmdImport.Name = "cmdImport"
         Me.cmdImport.Size = New System.Drawing.Size(97, 23)
         Me.cmdImport.TabIndex = 18
         Me.cmdImport.Text = "Import"
         Me.cmdImport.UseVisualStyleBackColor = True
         '
+        'btRefresh
+        '
+        Me.btRefresh.Location = New System.Drawing.Point(559, 475)
+        Me.btRefresh.Name = "btRefresh"
+        Me.btRefresh.Size = New System.Drawing.Size(73, 23)
+        Me.btRefresh.TabIndex = 19
+        Me.btRefresh.Text = "Refresh"
+        Me.btRefresh.UseVisualStyleBackColor = True
+        '
         'formDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(851, 510)
+        Me.Controls.Add(Me.btRefresh)
         Me.Controls.Add(Me.cmdImport)
         Me.Controls.Add(Me.grpSearch)
         Me.Controls.Add(Me.cmdEdit)
@@ -221,13 +256,16 @@ Partial Class formDataView
     Friend WithEvents cmdEdit As System.Windows.Forms.Button
     Friend WithEvents grpSearch As System.Windows.Forms.GroupBox
     Friend WithEvents cmdSearch As System.Windows.Forms.Button
-    Friend WithEvents txtMM As System.Windows.Forms.TextBox
-    Friend WithEvents txtYY As System.Windows.Forms.TextBox
     Friend WithEvents lblMonth As System.Windows.Forms.Label
     Friend WithEvents lblYear As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents txtStn As System.Windows.Forms.TextBox
+    Friend WithEvents lblStnId As System.Windows.Forms.Label
     Friend WithEvents cmdImport As Button
     Friend WithEvents dlgImportFile As OpenFileDialog
     Friend WithEvents dlgExportFile As SaveFileDialog
+    Friend WithEvents cboStName As ComboBox
+    Friend WithEvents lblStName As Label
+    Friend WithEvents cboStnId As ComboBox
+    Friend WithEvents cboYear As ComboBox
+    Friend WithEvents cboMonth As ComboBox
+    Friend WithEvents btRefresh As Button
 End Class

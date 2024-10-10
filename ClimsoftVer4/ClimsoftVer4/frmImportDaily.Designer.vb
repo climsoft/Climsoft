@@ -86,6 +86,8 @@ Partial Class frmImportDaily
         Me.lblDbTable = New System.Windows.Forms.Label()
         Me.rbtnFinal = New System.Windows.Forms.RadioButton()
         Me.rbtnInitial = New System.Windows.Forms.RadioButton()
+        Me.chkAdjustHH = New System.Windows.Forms.CheckBox()
+        Me.txtHH = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.grpSummary.SuspendLayout()
@@ -193,7 +195,7 @@ Partial Class frmImportDaily
         'cmbFields
         '
         Me.cmbFields.FormattingEnabled = True
-        Me.cmbFields.Items.AddRange(New Object() {"station_id", "element_code", "date_time", "time", "yyyy", "mm", "dd", "hh", "level", "value", "NA", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
+        Me.cmbFields.Items.AddRange(New Object() {"station_id", "element_code", "date_time", "date", "time", "yyyy", "mm", "dd", "hh", "level", "value", "NA", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
         Me.cmbFields.Location = New System.Drawing.Point(194, 53)
         Me.cmbFields.Name = "cmbFields"
         Me.cmbFields.Size = New System.Drawing.Size(147, 21)
@@ -700,11 +702,33 @@ Partial Class frmImportDaily
         Me.rbtnInitial.Text = "Observation Initial"
         Me.rbtnInitial.UseVisualStyleBackColor = True
         '
+        'chkAdjustHH
+        '
+        Me.chkAdjustHH.AutoSize = True
+        Me.chkAdjustHH.Location = New System.Drawing.Point(189, 100)
+        Me.chkAdjustHH.Name = "chkAdjustHH"
+        Me.chkAdjustHH.Size = New System.Drawing.Size(141, 17)
+        Me.chkAdjustHH.TabIndex = 57
+        Me.chkAdjustHH.Text = "Adjust Observation Hour"
+        Me.chkAdjustHH.UseVisualStyleBackColor = True
+        '
+        'txtHH
+        '
+        Me.txtHH.Location = New System.Drawing.Point(332, 98)
+        Me.txtHH.Name = "txtHH"
+        Me.txtHH.Size = New System.Drawing.Size(23, 20)
+        Me.txtHH.TabIndex = 0
+        Me.txtHH.Text = "0"
+        Me.txtHH.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtHH.Visible = False
+        '
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1096, 693)
+        Me.Controls.Add(Me.txtHH)
+        Me.Controls.Add(Me.chkAdjustHH)
         Me.Controls.Add(Me.pnlDbTable)
         Me.Controls.Add(Me.cboElement)
         Me.Controls.Add(Me.cboStns)
@@ -824,4 +848,6 @@ Partial Class frmImportDaily
     Friend WithEvents lblElmErr As Label
     Friend WithEvents lblStnErr As Label
     Friend WithEvents lblTRecords As Label
+    Friend WithEvents chkAdjustHH As CheckBox
+    Friend WithEvents txtHH As TextBox
 End Class

@@ -996,11 +996,16 @@ Public Class frmQC
             ' QC for local limits
             Try
                 strSQL = "INSERT IGNORE INTO qcabslimits(StationId,ElementId,DateTime,yyyy,mm,dd,hh,ObsValue,limitValue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm) " &
-                     "select stationelement.recordedfrom,stationelement.describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,upperlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
+                     "select stationelement.recordedfrom,stationelement.describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,lowerlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
                      "From observationinitial, stationelement " &
                      "Where observationinitial.recordedfrom = stationelement.recordedfrom And observationinitial.describedBy = stationelement.describedBy And " & stnelm_local & " year(obsdatetime) " &
                      "between " & beginYear & " And " & endYear & " And month(obsdatetime) between " & beginMonth & " And " & endMonth & " And  " &
-                     "lowerLimit <> '' and cast(obsValue as SIGNED) > cast(lowerlimit as SIGNED);"
+                     "lowerLimit <> '' and cast(obsValue as SIGNED) < cast(lowerlimit as SIGNED);"
+
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                'Execute query
+                objCmd.CommandTimeout = 0
+                objCmd.ExecuteNonQuery()
 
             Catch ex As Exception
                 'Dispaly error message if it is different from the one trapped in 'Catch' execption above
