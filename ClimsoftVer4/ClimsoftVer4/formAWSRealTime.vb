@@ -279,15 +279,31 @@ Err:
                 chkPrefix.Checked = ds.Tables("aws_sites").Rows(num).Item("chkPrefix")
                 chkOperational.Checked = ds.Tables("aws_sites").Rows(num).Item("OperationalStatus")
                 chkGTSEncode.Checked = ds.Tables("aws_sites").Rows(num).Item("GTSEncode")
+
+                chkHrsAdjust.Checked = ds.Tables("aws_sites").Rows(num).Item("AdjustHr")
+
                 If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("GTSHeader")) Then
                     txtGTSHeader.Text = ds.Tables("aws_sites").Rows(num).Item("GTSHeader")
                 Else
                     txtGTSHeader.Text = ""
                 End If
+
                 If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("FilePrefix")) Then
                     txtfilePrefix.Text = ds.Tables("aws_sites").Rows(num).Item("FilePrefix")
                 Else
                     txtfilePrefix.Text = ""
+                End If
+
+                If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("UTCDiff")) Then
+                    txtUTCdiff.Text = ds.Tables("aws_sites").Rows(num).Item("UTCDiff")
+                Else
+                    txtUTCdiff.Text = ""
+                End If
+
+                If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("AdjustHH")) Then
+                    txtHrs.Text = ds.Tables("aws_sites").Rows(num).Item("AdjustHH")
+                Else
+                    txtHrs.Text = ""
                 End If
 
             Case "pnlDataStructures"
@@ -414,16 +430,16 @@ Err:
         DeleteRecord = False
     End Function
 
-    Private Sub cmdBstDelete_Click(sender As Object, e As EventArgs) Handles cmdBstDelete.Click
-        DeleteRecord("aws_basestation", "bss", txtbssNavigator)
-        'If DeleteRecord("aws_basestation", rec) Then
+    'Private Sub cmdBstDelete_Click(sender As Object, e As EventArgs) Handles cmdBstDelete.Click
+    '    DeleteRecord("aws_basestation", "bss", txtbssNavigator)
+    '    If DeleteRecord("aws_basestation", rec) Then
 
-        '    If Kount > 0 Then
-        '        Kount = Kount - 1
-        '        PopulateForm("bss", txtmssNavigator, rec - 1)
-        '    End If
-        'End If
-    End Sub
+    '        If Kount > 0 Then
+    '            Kount = Kount - 1
+    '            PopulateForm("bss", txtmssNavigator, rec - 1)
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub cmdRefresh_Click(sender As Object, e As EventArgs) Handles cmdRefresh.Click
         SetDataSet("aws_basestation")
@@ -469,6 +485,11 @@ Err:
                 txtGTSHeader.Text = ""
                 txtfilePrefix.Text = ""
                 chkPrefix.Checked = False
+
+                chkHrsAdjust.Checked = False
+                txtHrs.Text = ""
+                chkGTSEncode.Checked = False
+                txtUTCdiff.Text = ""
         End Select
     End Sub
 
@@ -527,6 +548,7 @@ Err:
         txtMSSConfirm.Visible = False
         lblmssConfirmPassword.Visible = False
     End Sub
+
     Sub DeleteRecord(tbl As String, pnl As String, Navbar As TextBox)
         If DeleteRecord(tbl, rec) Then
 
@@ -623,6 +645,9 @@ Err:
         dsNewRow.Item("awsServerIp") = txtIP.Text
         dsNewRow.Item("GTSHeader") = txtGTSHeader.Text
         dsNewRow.Item("FilePrefix") = txtfilePrefix.Text
+        dsNewRow.Item("AdjustHH") = txtHrs.Text
+        dsNewRow.Item("UTCDiff") = txtUTCdiff.Text
+
         If chkOperational.Checked Then
             dsNewRow.Item("OperationalStatus") = 1
         Else
@@ -633,10 +658,17 @@ Err:
         Else
             dsNewRow.Item("GTSEncode") = 0
         End If
+
         If chkPrefix.Checked Then
             dsNewRow.Item("chkPrefix") = 1
         Else
             dsNewRow.Item("chkPrefix") = 0
+        End If
+
+        If chkHrsAdjust.Checked Then
+            dsNewRow.Item("AdjustHr") = 1
+        Else
+            dsNewRow.Item("AdjustHr") = 0
         End If
 
         'Add a new record to the data source table
@@ -683,12 +715,12 @@ Err:
 
         'Try
 
-        sqlr = "UPDATE aws_sites set SiteName = '" & txtSiteName.Text & "', InputFile= '" & txtInFile.Text & "',FilePrefix ='" & txtfilePrefix.Text & "',chkPrefix = " & chkPrefix.CheckState & ",DataStructure = '" & txtDataStructure.Text &
+        sqlr = "UPDATE aws_sites set SiteName = '" & txtSiteName.Text & "', InputFile= '" & txtInFile.Text & "',FilePrefix ='" & txtfilePrefix.Text & "',chkPrefix = " & chkPrefix.CheckState & ",DataStructure = '" & txtDataStructure.Text & "',UTCDiff = '" & txtUTCdiff.Text & "',AdjustHH = '" & txtHrs.Text & "',AdjustHr = '" & chkHrsAdjust.CheckState &
                    "',MissingDataFlag = '" & txtFlag.Text & "',awsServerIP ='" & txtIP.Text & "',OperationalStatus = " & chkOperational.CheckState & ",GTSEncode = " & chkGTSEncode.CheckState & ",GTSHeader = '" & txtGTSHeader.Text & "' WHERE SiteID = '" & txtSiteID.Text & "';"
 
         qry = New MySql.Data.MySqlClient.MySqlCommand(sqlr, dbconn)
 
-            Try
+        Try
                 qry.ExecuteNonQuery()
             MsgBox("Record successfully Updated")
             'PopulateForm("sites", txtSitesNavigator, rec)
@@ -2555,8 +2587,6 @@ Err:
                 sql = "update bufr_crex_data SET Observation = '0', selected = '1' WHERE Bufr_Element = '031000';"
                 Update_data(sql)
 
-                'Initialize Soil Temperature Replications
-                'Delayed replication of soil depth levels 2 descriptors for a maximum of 5 layers
                 'Initialize_Soil_Replications(trs, "soil_rep", 2, 5)
                 Initialize_Replications(trs, "007061", 2, 5, 1) ' Soil Temperature Replications
                 Initialize_Replications(trs, "020001", 4, 1, 4) ' Visibility Replications
@@ -2573,7 +2603,6 @@ Err:
                 Initialize_Replications(trs, "013059", 2, 1, 2) ' Flashes Replication
                 Initialize_Replications(trs, "008023", 7, 1, 2) ' First order statistics  Replication
 
-                'trs As DataSet, stDecrpt As String, Tdescrpts As Integer, lvls As Integer, mult As Integer
                 'Initialize_Wind_Replications
                 'Replication of Wind Gust 2 descriptors 2 times
                 sql = "update bufr_crex_data SET Observation = '', selected = '0' WHERE Bufr_Element = '011041' OR  Bufr_Element = '011043';"
@@ -2603,7 +2632,7 @@ Err:
                 Replicate_SoilTemp(tt_aws, aws_obsv, Bufr_E, Abbrev_E)
                 Replicate_MaxGust(aws_obsv, tt_aws, Bufr_E, Abbrev_E)
 
-                ' Set data is repeated descriptors to missing to cancel the previous value
+                ' Set data in repeated descriptors to missing to cancel the previous value
                 sql = String.Empty
                 sql = sql & "update bufr_crex_data set Observation ='', selected = '1' where Nos = '51';"
                 sql = sql & "update bufr_crex_data set Observation ='', selected = '1' where Nos = '58' OR Nos = '59' ;"
@@ -2612,13 +2641,10 @@ Err:
                 sql = sql & "update bufr_crex_data set Observation ='9', selected = '1' where Nos = '181';"
                 Update_data(sql)
 
-                '    ' Encode observations in the template into TDCF-BUFR
+                '   Encode observations in the template into TDCF-BUFR
                 TDCF_Encode(trs, tt_aws)
                 'TDCF_Encode1(trs, "bufr_crex_data")
 
-                ' Compose data for BUFR Section 4 - Data Section
-                'sql = "Select TM_307091.Rec, TM_307091.Bufr_Template, TM_307091.CREX_Template, TM_307091.Sequence_Descriptor1, TM_307091.Sequence_Descriptor0, TM_307091.Bufr_Element, TM_307091.Crex_Element, TM_307091.Climsoft_Element, TM_307091.Element_Name, TM_307091.Crex_Unit, TM_307091.Crex_Scale, TM_307091.Crex_DataWidth, TM_307091.Bufr_Unit, TM_307091.Bufr_Scale, TM_307091.Bufr_RefValue, TM_307091.Bufr_DataWidth_Bits, TM_307091.Selected, TM_307091.Observation, TM_307091.Crex_Data, TM_307091.Bufr_Data " &
-                '      "From TM_307091 Where (((TM_307091.Selected) = True)) ORDER BY TM_307091.Rec;"
             End If
 
             sql = "Select bufr_crex_data.Nos, bufr_crex_data.Bufr_Template, bufr_crex_data.CREX_Template, bufr_crex_data.Sequence_Descriptor1, bufr_crex_data.Sequence_Descriptor0, bufr_crex_data.Bufr_Element, bufr_crex_data.Crex_Element, bufr_crex_data.Climsoft_Element, bufr_crex_data.Element_Name, bufr_crex_data.Crex_Unit, bufr_crex_data.Crex_Scale, bufr_crex_data.Crex_DataWidth, bufr_crex_data.Bufr_Unit, bufr_crex_data.Bufr_Scale, bufr_crex_data.Bufr_RefValue, bufr_crex_data.Bufr_DataWidth_Bits, bufr_crex_data.Selected, bufr_crex_data.Observation, bufr_crex_data.Crex_Data, bufr_crex_data.Bufr_Data " &
@@ -5256,6 +5282,15 @@ Err:
         End Try
     End Sub
 
+    Private Sub chkHrsAdjust_CheckedChanged(sender As Object, e As EventArgs) Handles chkHrsAdjust.CheckedChanged
+        If chkHrsAdjust.Checked Then
+            txtHrs.Visible = True
+        Else
+            txtHrs.Visible = False
+            txtHrs.Text = 0
+        End If
+    End Sub
+
     Sub Get_Datetime(AWSsite As String, ByRef dtCol As Integer, ByRef dtFmt As String)
 
         Dim dbstr As New MySql.Data.MySqlClient.MySqlConnection
@@ -5294,6 +5329,18 @@ Err:
 
     End Sub
 
+    Private Sub txtHrs_TextChanged(sender As Object, e As EventArgs) Handles txtHrs.TextChanged
+        Try
+            If txtHrs.Text.ToString = 0 Then
+                chkHrsAdjust.Checked = False
+            Else
+                chkHrsAdjust.Checked = True
+            End If
+        Catch x As Exception
+            If x.HResult <> -2147467262 Then MsgBox(x.HResult)
+        End Try
+    End Sub
+
     Private Sub cmdMssAddNew_Click_1(sender As Object, e As EventArgs) Handles cmdMssAddNew.Click
         txtMSSAddress.Text = ""
         txtMSSFolder.Text = ""
@@ -5325,37 +5372,16 @@ Err:
         End Try
     End Function
 
-    Private Sub txtStrName_TextChanged(sender As Object, e As EventArgs) Handles txtStrName.TextChanged
-
+    Private Sub chkGTSEncode_CheckedChanged(sender As Object, e As EventArgs) Handles chkGTSEncode.CheckedChanged
+        If chkGTSEncode.Checked Then
+            lblUTCdiff.Visible = True
+            txtUTCdiff.Visible = True
+        Else
+            lblUTCdiff.Visible = False
+            txtUTCdiff.Visible = False
+        End If
     End Sub
 
-    Private Sub txtDelimiter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtDelimiter.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub txtHeaders_TextChanged(sender As Object, e As EventArgs) Handles txtHeaders.TextChanged
-
-    End Sub
-
-    Private Sub txtQualifier_TextChanged(sender As Object, e As EventArgs) Handles txtQualifier.TextChanged
-
-    End Sub
-
-    Private Sub chkOptionalSection_CheckedChanged(sender As Object, e As EventArgs) Handles chkOptionalSection.CheckedChanged
-
-    End Sub
-
-    Private Sub chkDeleteFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkDeleteFile.CheckedChanged
-
-    End Sub
-
-    Private Sub lblEncodeHrs_Click(sender As Object, e As EventArgs) Handles lblEncodeHrs.Click
-
-    End Sub
-
-    Private Sub txtTimeout_TextChanged(sender As Object, e As EventArgs) Handles txtTimeout.TextChanged
-
-    End Sub
 
     Private Sub txtTemplate_Click(sender As Object, e As EventArgs) Handles txtTemplate.Click
         load_Indicators(txtTemplate.Text)
@@ -5429,6 +5455,8 @@ Err:
         End Try
     End Function
 
+    ' Definition for data hours adjustment requirements
+    Dim AdjustHr, AdjustHH, UTCDiff, UTCHH As Integer
 
     Function Process_InputFiles(dts As DataSet) As Boolean
         Dim hdrows, kount As Integer
@@ -5447,6 +5475,9 @@ Err:
                 'txtStatus.Refresh()
 
                 Try
+                    AdjustHH = .Rows(n).Item("AdjustHH")
+                    AdjustHr = .Rows(n).Item("AdjustHr")
+
                     If IsDBNull(.Rows(n).Item("InputFile")) Or .Rows(n).Item("OperationalStatus") = 0 Then Continue For
                     fls = Path.GetFileName(.Rows(n).Item("InputFile"))
                     aws_input_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & fls
@@ -5731,7 +5762,7 @@ Err:
     End Function
 
     Function update_db(drws As DataRow, colmn As Integer, stn As String, flg As String, AWSsite As String, elm() As String, unitt() As String, Llimit() As String, Ulimit() As String, EBufr() As String, AbbrevE() As String) As Boolean
-        Dim dtt, x, aws_sql_input_file As String
+        Dim dtt, dttdb, x, aws_sql_input_file As String
         Dim GMTDiff, ET, Rmd As Integer
 
         Try
@@ -5751,30 +5782,43 @@ Err:
 
             x = String.Empty
 
+            dtt = DateAndTime.Year(dtt) & "-" & DateAndTime.Month(dtt) & "-" & DateAndTime.Day(dtt) & " " & DateAndTime.Hour(dtt) & ":" & DateAndTime.Minute(dtt) & ":" & DateAndTime.Second(dtt)
+            dttdb = dtt
+
+            ' Adjust the hour in archiving data where the recived data has different hour to the one used.
+            If AdjustHr <> 0 Then
+                'Log_Errors(AdjustHr & " " & AdjustHH)
+                'dttdb = DateAdd("h", CInt(txtHrs.Text), dttdb)
+                dttdb = DateAdd("h", AdjustHH, dttdb)
+                dttdb = DateAndTime.Year(dttdb) & "-" & DateAndTime.Month(dttdb) & "-" & DateAndTime.Day(dttdb) & " " & DateAndTime.Hour(dttdb) & ":" & DateAndTime.Minute(dttdb) & ":" & DateAndTime.Second(dttdb)
+                'Log_Errors(dttdb)
+            End If
+
             For j = 0 To colmn - 1
 
                 '' Convert wind speed to SI units
                 'If Strings.LCase(unitt(j)) = "knots" Then drws(j) = Val(drws(j)) / 2
 
-                If QC_Limits(stn, elm(j), dtt, drws(j), Llimit(j), Ulimit(j)) Then
-                    FileClose(12)
-                    Return False
+                If QC_Limits(stn, elm(j), dttdb, drws(j), Llimit(j), Ulimit(j)) Then
+                    'FileClose(12)
+                    'Return False
+                    Continue For
                 End If
 
                 '' Convert Pressure to SI units
                 'If Strings.LCase(unitt(j)) = "hpa" Then drws(j) = Val(drws(j)) * 100
 
                 If IsNumeric(elm(j)) Then
-                    x = stn & "," & elm(j) & "," & dtt & ",surface" & "," & drws(j) & ",\N" & ",1" & ",4"
+                    x = stn & "," & elm(j) & "," & dttdb & ",surface" & "," & drws(j) & ",\N" & ",1" & ",4"
                     PrintLine(12, x)
                 End If
-
             Next j
+
             FileClose(12)
             aws_sql_input_file = Strings.Replace(aws_sql_input_file, "\", "/")
 
             sql = "LOAD DATA local INFILE '" & aws_sql_input_file & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType);"
-
+            'Log_Errors(sql)
             'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
             cmd.Connection = dbconn
 
@@ -5790,14 +5834,16 @@ Err:
                 If Len(EBufr(i).ToString) > 0 Then Kount = Kount + 1
             Next
 
-            If GTSEncode(nat_id) And Val(txtPeriod.Text) <> 999 And Kount > 0 Then
+            If GTSEncode(nat_id) And Val(txtPeriod.Text) <> 999 And Kount > 0 And DateAndTime.Minute(dtt) = 0 Then
                 ' Check records due for Encoding
                 'Log_Errors(DateDiff("h", dtt, Now()) & "=" & CInt(txtEncode.Text))
 
                 If DateDiff("h", dtt, Now()) <= CInt(txtEncode.Text) Then
 
                     ' Convert time to UTC
-                    GMTDiff = CInt(txtGMTDiff.Text)
+                    'GMTDiff = CInt(txtGMTDiff.Text)
+                    GMTDiff = CInt(txtUTCdiff.Text)
+
                     dtt = DateAdd("h", -1 * GMTDiff, dtt)
 
                     'Compute Encoding interval hours 
@@ -5811,7 +5857,7 @@ Err:
                 End If
             End If
 
-                Return True
+            Return True
         Catch ex As Exception
             FileClose(12)
             Log_Errors(ex.Message)
@@ -6044,6 +6090,19 @@ Err:
 
         Catch ex As Exception
             MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub txtHrs_LostFocus(sender As Object, e As EventArgs) Handles txtHrs.LostFocus
+        Try
+            If txtHrs.Text.ToString = 0 Then
+                chkHrsAdjust.Checked = 0
+            Else
+                chkHrsAdjust.Checked = 1
+            End If
+
+        Catch x As Exception
+            If x.HResult <> -2147467262 Then MsgBox(x.HResult)
         End Try
     End Sub
 End Class

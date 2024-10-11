@@ -324,8 +324,8 @@ Public Class dataEntryGlobalRoutines
     End Function
     Public Sub viewTableRecords(strSQL As String)
 
-        Dim tblRecords As New DataSet
-        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsv As New DataSet
+        Dim dav As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
         Dim dbConnectionString As String
         Try
@@ -336,20 +336,20 @@ Public Class dataEntryGlobalRoutines
             dbconn.Open()
             ' strSQL = "SELECT * FROM  " & tbl
             'strSQL = strSQL & tblName
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSQL, dbconn)
+            dav = New MySql.Data.MySqlClient.MySqlDataAdapter(strSQL, dbconn)
             ' Set to unlimited timeout period
-            da.SelectCommand.CommandTimeout = 0
+            dav.SelectCommand.CommandTimeout = 0
 
-            tblRecords.Clear()
+            dsv.Clear()
 
             'tblName = "form_hourly"
             ' dsSourceTableName = tblName
             ' da.Fill(tblRecords, tblName)
-            da.Fill(tblRecords, "recordsView")
+            dav.Fill(dsv, "recordsView")
             'MsgBox(tblRecords.Tables("recordsView").Rows.Count)
             formDataView.Show()
             'formDataView.DataGridView.DataSource = tblRecords
-            formDataView.DataGridView.DataSource = tblRecords.Tables(0)
+            formDataView.DataGridView.DataSource = dsv.Tables(0)
             'formDataView.DataGridView.DataMember = "recordsView"
             formDataView.DataGridView.Refresh()
 
