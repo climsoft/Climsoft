@@ -17,23 +17,59 @@
 
 Public Class formDataView
     Dim connStr As String
-    Dim Sql, Sql2, userName, id, cd, yr, mn, dy, hr As String
+    Dim Sql, Sql2, userName, id, Nm, cd, yr, mn, dy, hr As String
     Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim ds, dsn, dsi, dsy, dsm As New DataSet
+    Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
 
     Private Sub formDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                cmdExport.Enabled = False
+                cmdImport.Enabled = False
+            Else
+                cmdExport.Enabled = True
+                cmdImport.Enabled = True
+            End If
+            'DataGridView.Top = 300
+            'MsgBox(dsSourceTableName)
 
-        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-            cmdExport.Enabled = False
-            cmdImport.Enabled = False
-        Else
-            cmdExport.Enabled = True
-            cmdImport.Enabled = True
-        End If
-        'DataGridView.Top = 300
-        'MsgBox(dsSourceTableName)
+            'Populate boxes for key entry forms
+            If InStr(dsSourceTableName, "form") > 0 Then
+                'Populate Station Names
+                If Populate_Lists("stationName", dsn) Then
+                    For i = 0 To dsn.Tables(dsSourceTableName).Rows.Count - 1
+                        cboStName.Items.Add(dsn.Tables(dsSourceTableName).Rows(i).Item(0))
+                    Next
+                End If
 
-        ClsTranslations.TranslateForm(Me)
+                ''Populate Station IDs
+                If Populate_Lists("stationId", dsi) Then
+                    For i = 0 To dsi.Tables(dsSourceTableName).Rows.Count - 1
+                        cboStnId.Items.Add(dsi.Tables(dsSourceTableName).Rows(i).Item(0).ToString)
+                    Next
+                End If
+
+                'Populate Station Years
+                If Populate_Lists("yyyy", dsy) Then
+                    For i = 0 To dsy.Tables(dsSourceTableName).Rows.Count - 1
+                        cboYear.Items.Add((dsy.Tables(dsSourceTableName).Rows(i).Item(0)).ToString)
+                    Next
+                End If
+
+                'Populate Station Months
+                If Populate_Lists("mm", dsm) Then
+                    For i = 0 To dsm.Tables(dsSourceTableName).Rows.Count - 1
+                        cboMonth.Items.Add((dsm.Tables(dsSourceTableName).Rows(i).Item(0)).ToString)
+                    Next
+                End If
+
+                ClsTranslations.TranslateForm(Me)
+            End If
+        Catch x As Exception
+            MsgBox(x.Message)
+        End Try
     End Sub
     'Sub ViewStation()
     '    Dim sql As String = "SELECT * FROM Authors"
@@ -48,8 +84,8 @@ Public Class formDataView
 
     'End Sub
     '------------
-    Dim ds As New DataSet
-    Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
+
+
     '----------
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
@@ -138,6 +174,24 @@ Public Class formDataView
             MsgBox(ex.Message)
             conn.Close()
         End Try
+    End Sub
+
+    Private Sub btRefresh_Click(sender As Object, e As EventArgs) Handles btRefresh.Click
+
+        Dim RefreshRecords As New dataEntryGlobalRoutines
+
+        'Sql = "Select * FROM  " & dsSourceTableName & ";"
+        RefreshRecords.viewTableRecords("Select * FROM  " & dsSourceTableName & ";")
+
+    End Sub
+
+    Private Sub cboStnId_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStnId.SelectedIndexChanged
+        Nm = String.Empty
+
+        If Stn_Nm(cboStnId.SelectedItem, Nm) Then
+            cboStName.Text = Nm
+        End If
+
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -266,61 +320,103 @@ Public Class formDataView
         End Try
     End Sub
 
+    Private Sub cboStName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStName.SelectedIndexChanged
+        Try
+            'MsgBox(cboStName.SelectedItem)
+            id = String.Empty
+            If Stn_Id(cboStName.SelectedItem, id) Then
+                cboStnId.Text = id
+            Else
+                MsgBox(cboStName.SelectedItem)
+            End If
+        Catch x As Exception
+            MsgBox(x.Message)
+        End Try
+    End Sub
+
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         ''Added June 2016. ASM
+        Dim cellValue, cellColName, updateStr As String, k, r As Integer
 
         Try
-            Dim cellValue As String, cellColName As String, k As Integer
-            'MsgBox("Source Table: " & dsSourceTableName)
-            Sql = ""
 
-            k = Me.DataGridView.CurrentCell.ColumnIndex
-            cellColName = Me.DataGridView.Columns(k).HeaderText
-            cellValue = Me.DataGridView.CurrentCell.Value
+            r = Me.DataGridView.CurrentRow.Index
+
+            If InStr(dsSourceTableName, "form") = 0 Then ' And Not Get_tblIDX(r) Then
+                Exit Sub
+            End If
+
+            Get_RecordIdx(dsSourceTableName)
+
+            Sql = ""
+            updateStr = String.Empty
+            For k = 0 To Me.DataGridView.Columns.Count - 1
+
+                cellColName = Me.DataGridView.Columns(k).HeaderText
+
+                If Not IsDBNull(Me.DataGridView.Rows(r).Cells(k).Value) Then
+                    cellValue = Me.DataGridView.Rows(r).Cells(k).Value
+                Else
+                    'cellValue = vbNullString
+                    cellValue = "\N"
+                End If
+
+                If cellColName = "signature" Or cellColName = "entryDatetime" Then Continue For
+
+                ' Create the fields update string
+                If k = 0 Then
+                    updateStr = "SET " & cellColName & " ='" & cellValue & "'"
+                Else
+                    updateStr = updateStr & "," & cellColName & " ='" & cellValue & "'"
+                End If
+
+                'MsgBox(updateStr)
+            Next
 
             Select Case dsSourceTableName
                     'Generate SQL string for updating the selected value
                 Case "form_hourly"
-                    Sql = "UPDATE form_hourly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd &
-                        " AND yyyy=" & yr & " AND mm= " & mn & " AND dd=" & dy & ";"
+                    Sql = "UPDATE form_hourly " & updateStr & " WHERE stationId='" & id & "' AND elementId=" & cd &
+                            " AND yyyy=" & yr & " AND mm= " & mn & " AND dd=" & dy & ";"
 
                 Case "form_hourlywind"
-                    Sql = "UPDATE form_hourlywind SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy='" & yr & "' AND mm= '" & mn & "' AND dd='" & dy & "';"
+                    Sql = "UPDATE form_hourlywind " & updateStr & " WHERE stationId='" & id & "' AND yyyy='" & yr & "' AND mm= '" & mn & "' AND dd='" & dy & "';"
 
                 Case "form_daily1"
-                    Sql = "update form_daily1 set " & cellColName & " = '" & cellValue & "' where stationId = '" & id &
-                        "' and yyyy = '" & yr & "' and mm = '" & mn & "' and dd = '" & dy & "';"
+                    Sql = "update form_daily1 " & updateStr & "  where stationId = '" & id &
+                            "' and yyyy = '" & yr & "' and mm = '" & mn & "' and dd = '" & dy & "';"
 
                 Case "form_daily2"
-                    Sql = "UPDATE form_daily2 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd &
-                       " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
+
+                    Sql = "UPDATE form_daily2 " & updateStr & " WHERE stationId='" & id & "' AND elementId=" & cd &
+                           " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
 
                 Case "form_synoptic_2_ra1"
-                    Sql = "UPDATE form_synoptic_2_ra1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy=" & yr &
-                        " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
+                    Sql = "UPDATE form_synoptic_2_ra1 " & updateStr & "  WHERE stationId='" & id & "' AND yyyy=" & yr &
+                            " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
 
                 Case "form_synoptic2_tdcf"
-                    Sql = "UPDATE form_synoptic2_tdcf SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy=" & yr &
-                        " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
+                    Sql = "Update() form_synoptic2_tdcf " & updateStr & " WHERE stationId='" & id & "' AND yyyy=" & yr &
+                            " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
 
                 Case "form_monthly"
-                    Sql = "UPDATE form_monthly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd &
-                        " AND yyyy=" & yr & ";"
+                    Sql = "UPDATE form_monthly " & updateStr & "  WHERE stationId='" & id & "' AND elementId=" & cd &
+                            " AND yyyy=" & yr & ";"
                 Case "form_agro1"
-                    Sql = "UPDATE form_agro1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy=" & yr &
-                        " AND mm= " & mn & " AND dd= " & dy & ";"
+                    Sql = "UPDATE form_agro1 " & updateStr & " WHERE stationId='" & id & "' AND yyyy=" & yr &
+                            " AND mm= " & mn & " AND dd= " & dy & ";"
 
                 Case "form_hourly2"
-                    Sql = "UPDATE form_hourly2 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd &
-                       " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
+                    Sql = "UPDATE form_hourly2 " & updateStr & " WHERE stationId='" & id & "' AND elementId=" & cd &
+                           " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
 
                 Case "regkeys"
-                    Dim keyNameValue As String
+                    Dim keyNameValue As String, reg As Integer
                     keyNameValue = Me.DataGridView.CurrentRow.Cells(0).Value
-                    k = Me.DataGridView.CurrentCell.ColumnIndex
-                    cellColName = Me.DataGridView.Columns(k).HeaderText
+                    reg = Me.DataGridView.CurrentCell.ColumnIndex
+                    cellColName = Me.DataGridView.Columns(reg).HeaderText
                     cellValue = Me.DataGridView.CurrentCell.Value
-                    If k = 1 Then
+                    If reg = 1 Then
                         'Check if there is a backslash "\" in the case of folder locations
                         If InStr(cellValue, "\") > 0 Then
                             'If string value contains a backslash "\" replace it with "\\". 
@@ -329,38 +425,41 @@ Public Class formDataView
                         End If
                         'Generate SQL string for updating the selected value 
                     End If
-                    Sql = "UPDATE regkeys SET " & cellColName & "='" & cellValue & "' WHERE keyName='" & keyNameValue & "';"
+                    Sql = "UPDATE regkeys " & updateStr & " WHERE keyName='" & keyNameValue & "';"
                 ' Update metadata tables
                 Case "station"
                     id = Me.DataGridView.CurrentRow.Cells(0).Value
-                    Sql = "UPDATE station SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "';"
+                    Sql = "UPDATE station " & updateStr & " WHERE stationId='" & id & "';"
 
+                    'MsgBox(Sql)
                 Case "obselement"
                     id = Me.DataGridView.CurrentRow.Cells(0).Value
-                    Sql = "UPDATE obselement SET " & cellColName & "='" & cellValue & "' WHERE elementId='" & id & "';"
+                    Sql = "UPDATE obselement " & updateStr & " WHERE elementId='" & id & "';"
                     'MsgBox(Sql)
             End Select
+
 
             If Strings.Len(Sql) > 0 Then
                 connStr = frmLogin.txtusrpwd.Text
                 conn.ConnectionString = connStr
-                'Open connection to database
                 conn.Open()
 
                 'Execute SQL command
-
+                Sql = Strings.Replace(Sql, "'\N'", "\N")
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                 objCmd.ExecuteNonQuery()
-                '
+                conn.Close()           '
                 MsgBox(ClsTranslations.GetTranslation("Selected value has been updated!"), MsgBoxStyle.Information)
-                '
-                conn.Close()
+
             Else
                 MsgBox(ClsTranslations.GetTranslation("Updating of value not enabled for selected table datasheet or field, or field is part of a Primary Key!") &
                        ClsTranslations.GetTranslation(" You may try updating value in single record review mode after closing datasheet view."), MsgBoxStyle.Exclamation)
             End If
+
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            conn.Close()
+            If ex.HResult = -2147467261 Then Exit Sub
+            MessageBox.Show(ex.HResult & " " & ex.Message)
         End Try
 
     End Sub
@@ -487,7 +586,7 @@ Public Class formDataView
         Dim showRecords As New dataEntryGlobalRoutines
         Dim sqlr As String
 
-        sqlr = "Select * from " & dsSourceTableName & " where stationId ='" & txtStn.Text & "' and yyyy ='" & txtYY.Text & "' and mm ='" & txtMM.Text & "';"
+        sqlr = "Select * from " & dsSourceTableName & " where stationId ='" & cboStnId.Text & "' and yyyy ='" & cboYear.Text & "' and mm ='" & cboMonth.Text & "';"
         'MsgBox(sqlr)
         showRecords.viewTableRecords(sqlr)
     End Sub
@@ -561,5 +660,179 @@ Public Class formDataView
             MsgBox(ex.Message)
         End Try
     End Sub
+    'Function Get_tblIDX(recNo As Long) As Boolean
+    '    Dim dsx As New DataSet
+    '    Dim dax As MySql.Data.MySqlClient.MySqlDataAdapter
 
+    '    Try
+    '        Sql = "select * from " & dsSourceTableName & ";"
+
+    '        'connStr = frmLogin.txtusrpwd.Text
+    '        'conn.ConnectionString = connStr
+    '        conn.Open()
+
+    '        dax = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+    '        conn.Close()
+
+    '        dsx.Clear()
+    '        dax.Fill(dsx, dsSourceTableName)
+
+    '        With dsx.Tables(dsSourceTableName)
+    '            If .Rows.Count = 0 Then Return False
+    '            Select Case dsSourceTableName
+    '                Case "form_daily2"
+    '                    id = .Rows(recNo).Item(0)
+    '                    cd = .Rows(recNo).Item(1)
+    '                    yr = .Rows(recNo).Item(2)
+    '                    mn = .Rows(recNo).Item(3)
+    '                    hr = .Rows(recNo).Item(4)
+    '                Case "form_daily1"
+    '                    id = .Rows(recNo).Item(0)
+    '                    yr = .Rows(recNo).Item(1)
+    '                    mn = .Rows(recNo).Item(2)
+    '                    dy = .Rows(recNo).Item(3)
+    '                Case "form_hourly"
+    '                    id = .Rows(recNo).Item(0)
+    '                    cd = .Rows(recNo).Item(1)
+    '                    yr = .Rows(recNo).Item(2)
+    '                    mn = .Rows(recNo).Item(3)
+    '                    dy = .Rows(recNo).Item(4)
+    '                Case "form_hourlywind"
+    '                    id = .Rows(recNo).Item(0)
+    '                    yr = .Rows(recNo).Item(1)
+    '                    mn = .Rows(recNo).Item(2)
+    '                    dy = .Rows(recNo).Item(3)
+    '                Case "form_synoptic_2_ra1"
+    '                    id = .Rows(recNo).Item(0)
+    '                    yr = .Rows(recNo).Item(1)
+    '                    mn = .Rows(recNo).Item(2)
+    '                    dy = .Rows(recNo).Item(3)
+    '                    hr = .Rows(recNo).Item(4)
+    '                Case "form_synoptic2_tdcf"
+    '                    id = .Rows(recNo).Item(0)
+    '                    yr = .Rows(recNo).Item(1)
+    '                    mn = .Rows(recNo).Item(2)
+    '                    dy = .Rows(recNo).Item(3)
+    '                    hr = .Rows(recNo).Item(4)
+    '                Case "form_monthly"
+    '                    id = .Rows(recNo).Item(0)
+    '                    cd = .Rows(recNo).Item(1)
+    '                    yr = .Rows(recNo).Item(2)
+    '                Case "form_agro1"
+    '                    id = .Rows(recNo).Item(0)
+    '                    yr = .Rows(recNo).Item(1)
+    '                    mn = .Rows(recNo).Item(2)
+    '                    dy = .Rows(recNo).Item(3)
+    '                Case "form_hourly2"
+    '                    id = .Rows(recNo).Item(0)
+    '                    cd = .Rows(recNo).Item(1)
+    '                    yr = .Rows(recNo).Item(2)
+    '                    mn = .Rows(recNo).Item(3)
+    '                    hr = .Rows(recNo).Item(4)
+    '                    'Case "station"
+    '                    '    id = .Rows(recNo).Item(0)
+    '                    'Case "regkeys"
+    '                    '    id = .Rows(recNo).Item(0)
+    '            End Select
+    '        End With
+    '        Return True
+    '    Catch ex As Exception
+    '        conn.Close()
+    '        'If ex.HResult = -2147467262 Then Exit Sub
+    '        MsgBox(ex.Message & " at Get_tblIDX")
+    '        Return False
+    '    End Try
+    'End Function
+
+
+
+    Function Populate_Lists(fld As String, ByRef dss As DataSet) As Boolean
+
+        Try
+            Sql = String.Empty
+            Select Case fld
+                Case "stationName"
+                    Sql = "Select stationName FROM  " & dsSourceTableName & " INNER JOIN station On " & dsSourceTableName & ".stationId = station.stationId GROUP BY stationName ORDER BY stationName;"
+                Case "stationId"
+                    Sql = "SELECT stationId FROM  " & dsSourceTableName & " GROUP BY stationId ORDER BY stationId;"
+                Case "yyyy"
+                    Sql = "SELECT yyyy FROM  " & dsSourceTableName & " GROUP BY yyyy ORDER BY yyyy;"
+                Case "mm"
+                    Sql = "SELECT mm FROM  " & dsSourceTableName & " GROUP BY mm ORDER BY mm;"
+            End Select
+
+            connStr = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = connStr
+            conn.Open()
+
+            Dim daa = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            dss.Clear()
+            daa.Fill(dss, dsSourceTableName)
+            conn.Close()
+
+            'MsgBox(dss.Tables(dsSourceTableName).Rows(0).Item(0))
+
+            Return True
+
+        Catch x As Exception
+            MsgBox(x.Message)
+            conn.Close()
+            Return False
+        End Try
+    End Function
+
+
+    Function Stn_Id(stNm As String, ByRef stId As String) As Boolean
+        Dim dsi As New DataSet
+        Try
+            Sql = "Select stationId FROM station WHERE stationName= '" & stNm & "';"
+
+            connStr = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = connStr
+            conn.Open()
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            dsi.Clear()
+            da.Fill(dsi, "station")
+            conn.Close()
+            'MsgBox(ds.Tables("station").Rows(0).Item(0))
+            If Not IsDBNull(dsi.Tables("station").Rows(0).Item(0)) Then stId = dsi.Tables("station").Rows(0).Item(0)
+
+            Return True
+
+        Catch x As Exception
+            conn.Close()
+            MsgBox(x.Message)
+            Return False
+        End Try
+    End Function
+
+    Function Stn_Nm(stnId As String, ByRef StnNm As String) As Boolean
+        Dim dsn As New DataSet
+        Try
+            Sql = "Select stationName FROM station WHERE stationId = '" & stnId & "';"
+
+            connStr = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = connStr
+            conn.Open()
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            dsn.Clear()
+            da.Fill(dsn, "station")
+            conn.Close()
+
+            If Not IsDBNull(dsn.Tables("station").Rows(0).Item(0)) Then StnNm = dsn.Tables("station").Rows(0).Item(0)
+
+            Return True
+
+        Catch x As Exception
+            conn.Close()
+            MsgBox(x.Message)
+            Return False
+        End Try
+    End Function
+
+    'Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView.CellValueChanged
+    '    MsgBox(id & " " & yr & " " & mn & " " & Me.DataGridView.CurrentCell.Value)
+    'End Sub
 End Class

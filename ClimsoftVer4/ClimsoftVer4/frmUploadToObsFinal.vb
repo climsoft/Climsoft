@@ -457,6 +457,8 @@
             ' Set the stations and elements selection conditions
             If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
                 Me.Cursor = Cursors.Default
+                conn.Close()
+                FileClose(102)
                 MsgBox(" Selections not properly done. Check values!", MsgBoxStyle.Exclamation, "Selection Error")
                 Exit Sub
             Else
