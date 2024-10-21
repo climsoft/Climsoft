@@ -796,6 +796,7 @@ Public Class formDataView
             da.Fill(dsi, "station")
             conn.Close()
             'MsgBox(ds.Tables("station").Rows(0).Item(0))
+            If dsi.Tables("station").Rows.Count = 0 Then Return False
             If Not IsDBNull(dsi.Tables("station").Rows(0).Item(0)) Then stId = dsi.Tables("station").Rows(0).Item(0)
 
             Return True
@@ -821,6 +822,7 @@ Public Class formDataView
             da.Fill(dsn, "station")
             conn.Close()
 
+            If dsn.Tables("station").Rows.Count = 0 Then Return False
             If Not IsDBNull(dsn.Tables("station").Rows(0).Item(0)) Then StnNm = dsn.Tables("station").Rows(0).Item(0)
 
             Return True

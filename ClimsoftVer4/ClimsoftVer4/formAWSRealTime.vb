@@ -645,8 +645,8 @@ Err:
         dsNewRow.Item("awsServerIp") = txtIP.Text
         dsNewRow.Item("GTSHeader") = txtGTSHeader.Text
         dsNewRow.Item("FilePrefix") = txtfilePrefix.Text
-        dsNewRow.Item("AdjustHH") = txtHrs.Text
-        dsNewRow.Item("UTCDiff") = txtUTCdiff.Text
+        dsNewRow.Item("AdjustHH") = Val(txtHrs.Text)
+        dsNewRow.Item("UTCDiff") = Val(txtUTCdiff.Text)
 
         If chkOperational.Checked Then
             dsNewRow.Item("OperationalStatus") = 1
@@ -5031,9 +5031,6 @@ Err:
 
     End Sub
 
-    Private Sub txtSiteName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtSiteName.SelectedIndexChanged
-
-    End Sub
 
     Private Sub chkPrefix_CheckedChanged(sender As Object, e As EventArgs) Handles chkPrefix.CheckedChanged
 
@@ -5043,6 +5040,8 @@ Err:
         Else
             txtfilePrefix.Visible = False
         End If
+
+
     End Sub
 
     Private Sub cmdBstAddNew_Click(sender As Object, e As EventArgs) Handles cmdBstAddNew.Click
@@ -5066,23 +5065,75 @@ Err:
     End Sub
 
     Private Sub txtSiteID_TextChanged(sender As Object, e As EventArgs) Handles txtSiteID.TextChanged
+        Dim siteFound As Boolean = False
+        Dim stI, stN As String
+        stI = txtSiteID.Text
+        'stN = txtSiteName.Text
         For i = 0 To ds.Tables("aws_sites").Rows.Count - 1
             If txtSiteID.Text = ds.Tables("aws_sites").Rows(i).Item("SiteID") Then
+                siteFound = True
                 PopulateForm("sites", txtSitesNavigator, i)
                 'rec = i - 1
+                Exit For
             End If
         Next
+
+        If siteFound Then
+            Exit Sub
+        Else
+            'FormReset("sites")
+            'txtSitesNavigator.Clear()
+            formDataView.Stn_Nm(stI, stN)
+            txtSiteName.Text = stN
+
+            txtInFile.Clear()
+            txtDataStructure.Text = ""
+            txtFlag.Clear()
+            chkOperational.Checked = False
+            txtIP.Text = ""
+            txtGTSHeader.Text = ""
+            txtfilePrefix.Text = ""
+            chkPrefix.Checked = False
+            chkHrsAdjust.Checked = False
+            txtHrs.Text = ""
+            chkGTSEncode.Checked = False
+            txtUTCdiff.Text = ""
+        End If
 
     End Sub
 
     Private Sub txtSiteName_TextChanged(sender As Object, e As EventArgs) Handles txtSiteName.TextChanged
+
         For i = 0 To ds.Tables("aws_sites").Rows.Count - 1
             If txtSiteName.Text = ds.Tables("aws_sites").Rows(i).Item("SiteName") Then
                 PopulateForm("sites", txtSitesNavigator, i)
-                'rec = i - 1
+                Exit For
             End If
         Next
 
+        'Dim siteFound As Boolean = False
+        'Dim stN As String = txtSiteName.Text
+        'Dim ID As String
+        'siteFound = False
+        'For i = 0 To ds.Tables("aws_sites").Rows.Count - 1
+        '    If txtSiteName.Text = ds.Tables("aws_sites").Rows(i).Item("SiteName") Then
+        '        siteFound = True
+        '        PopulateForm("sites", txtSitesNavigator, i)
+        '        'rec = i - 1
+        '        Exit For
+        '    End If
+        'Next
+
+        'If siteFound Then
+        '    Exit Sub
+        'Else
+        '    'MsgBox(stN)
+        '    FormReset("sites")
+        '    txtSitesNavigator.Clear()
+        '    formDataView.Stn_Id(stN, ID)
+        '    'MsgBox(ID)
+        '    txtSiteID.Text = ID
+        'End If
     End Sub
 
 
@@ -5347,6 +5398,35 @@ Err:
         txtmssFTPMode.Text = ""
         txtmssUser.Text = ""
         txtMSSPW.Text = ""
+    End Sub
+
+    Private Sub txtSiteID_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtSiteID.SelectedIndexChanged
+        'MsgBox(txtSiteID.Text)
+    End Sub
+
+    Private Sub txtSiteName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtSiteName.SelectedIndexChanged
+        Dim siteFound As Boolean = False
+        Dim stN As String = txtSiteName.Text
+
+        siteFound = False
+        For i = 0 To ds.Tables("aws_sites").Rows.Count - 1
+            If txtSiteName.Text = ds.Tables("aws_sites").Rows(i).Item("SiteName") Then
+                siteFound = True
+                PopulateForm("sites", txtSitesNavigator, i)
+                Exit For
+            End If
+        Next
+
+        'If siteFound Then
+        '    Exit Sub
+        'Else
+        '    ''MsgBox(stN)
+        '    'FormReset("sites")
+        '    ''txtSitesNavigator.Clear()
+        '    'formDataView.Stn_Id(stN, txtSiteID.Text)
+        '    ''MsgBox(ID)
+        '    ''txtSiteID.Text = ID
+        'End If
     End Sub
 
     Function Format_Datetime(dt As String, fmt As String) As String
