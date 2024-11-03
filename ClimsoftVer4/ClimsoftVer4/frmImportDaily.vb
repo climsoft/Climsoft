@@ -139,7 +139,7 @@
         'Dim delimit As String
         'Set cursor to busy mood
         Me.Cursor = Cursors.WaitCursor
-
+        lblQCfile.Visible = False
         'Try
 
         'Assign delimiter for the text file
@@ -437,6 +437,7 @@
         cmdSaveErrors.Visible = False
         lblStnEror.Visible = False
         lblElmeror.Visible = False
+        lblQCfile.Visible = False
     End Sub
 
     Private Sub cmdRename_Click(sender As Object, e As EventArgs) Handles cmdRename.Click
@@ -551,26 +552,14 @@
             End Select
 
             FileClose(101)
-            ' load data into observationinitial table
 
-            ' Create sql query
-            sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,acquisitionType);"
+            ' Create sql query to upload data from SQL file
 
-            'If DataCat = "NOAAGTS" Then sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,acquisitionType);"
-
-            If DataCat = "NOAAGTS" Then
-                If rbtnFinal.Checked Then
-                    sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType);"
-                Else
-                    sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType);"
-                End If
+            If rbtnFinal.Checked Then ' load data into observationfinal table
+                sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType);"
+            Else ' load data into observationinitial table
+                sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType);"
             End If
-
-            'objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql0, dbcon)
-
-            '' Create sql query
-            'sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,acquisitionType);"
-
 
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql0, dbcon)
 
@@ -1020,20 +1009,28 @@
     End Sub
 
     Sub Load_Aws()
-        'MsgBox("Aws")
-        Dim st, cod, dttim, h, n, s, tt, dt, dat, hd, flg As String
+
+        Dim st, cod, dttim, h, n, s, tt, dt, dat, hd, flg, qc_folder, LimitErr, qcFile As String
         Dim dt_tm, tt_tm As Boolean
-        Dim acquisitiontype As Integer
+        Dim acquisitiontype, ErRecord As Integer
 
-        'Try
+
+        'Create file for errors output in the QC folder as per the registry settings
+        qc_folder = recCommit.RegkeyValue("key07")
+        qcFile = qc_folder & "\qc_" & IO.Path.GetFileNameWithoutExtension(txtImportFile.Text) & ".csv"
+        'MsgBox(fl)
+
+        FileOpen(31, qcFile, OpenMode.Output)
+
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(delimit)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(delimit)
 
-                Do While MyReader.EndOfData = False
-                    Try
-                        currentRow = MyReader.ReadFields()
-                        If MyReader.LineNumber > Val(txtStartRow.Text) Then
+            ErRecord = 0
+            Do While MyReader.EndOfData = False
+                Try
+                    currentRow = MyReader.ReadFields()
+                    If MyReader.LineNumber > Val(txtStartRow.Text) Then
 
                         ' Initialize values
                         col = 0
@@ -1056,105 +1053,121 @@
 
                                 dat = currentField
 
-                            With DataGridView1
-                                If col < .ColumnCount Then
-                                    If .Columns(col).Name = "station_id" Then ' Station column found
-                                        st = dat
-                                    ElseIf .Columns(col).Name = "date_time" Then ' Combined Date and Timme column found
-                                        dttim = dat
-                                        dt_tm = True
-                                    ElseIf .Columns(col).Name = "date" Then ' Separate Date column found 
-                                        dt = dat
-                                    ElseIf .Columns(col).Name = "time" Then ' Separate Time column found 
-                                        tt = dat
-                                        tt_tm = True
-                                    ElseIf .Columns(col).Name = "hh" Then ' Separate Time column found 
-                                        h = dat
-                                    ElseIf .Columns(col).Name = "nn" Then ' Separate Minut column found 
-                                        n = dat
-                                    ElseIf .Columns(col).Name = "ss" Then ' Separate Second column found 
-                                        s = dat
-                                    ElseIf .Columns(col).Name = "NA" Then ' Not Required
-                                        'Do nothing
-                                    Else ' Data Column found
+                                With DataGridView1
+                                    If col < .ColumnCount Then
+                                        If .Columns(col).Name = "station_id" Then ' Station column found
+                                            st = dat
+                                        ElseIf .Columns(col).Name = "date_time" Then ' Combined Date and Timme column found
+                                            dttim = dat
+                                            dt_tm = True
+                                        ElseIf .Columns(col).Name = "date" Then ' Separate Date column found 
+                                            dt = dat
+                                        ElseIf .Columns(col).Name = "time" Then ' Separate Time column found 
+                                            tt = dat
+                                            tt_tm = True
+                                        ElseIf .Columns(col).Name = "hh" Then ' Separate Time column found 
+                                            h = dat
+                                        ElseIf .Columns(col).Name = "nn" Then ' Separate Minut column found 
+                                            n = dat
+                                        ElseIf .Columns(col).Name = "ss" Then ' Separate Second column found 
+                                            s = dat
+                                        ElseIf .Columns(col).Name = "NA" Then ' Not Required
+                                            'Do nothing
+                                        Else ' Data Column found
 
-                                        cod = .Columns(col).Name
-                                        '    dat = .Rows(i).Cells(j).Value
-                                        If dt_tm = False Then ' Date and Time field does not exist
-                                            If tt_tm = False Then ' Time field is not there
-                                                If Len(n) = 0 Then n = "00"
-                                                If Len(s) = 0 Then s = "00"
-                                                dttim = dt & " " & h & ":" & n & ":" & s
-                                            Else
-                                                dttim = dt & " " & tt
+                                            cod = .Columns(col).Name
+                                            '    dat = .Rows(i).Cells(j).Value
+                                            If dt_tm = False Then ' Date and Time field does not exist
+                                                If tt_tm = False Then ' Time field is not there
+                                                    If Len(n) = 0 Then n = "00"
+                                                    If Len(s) = 0 Then s = "00"
+                                                    dttim = dt & " " & h & ":" & n & ":" & s
+                                                Else
+                                                    dttim = dt & " " & tt
+                                                End If
                                             End If
-                                        End If
 
-                                        If InStr(dttim, " 24") <> 0 Then
-                                            dttim = Strings.Replace(dttim, " 24", " 00")
-                                            dttim = DateAndTime.DateAdd("d", 1, dttim)
-                                            dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & DateAndTime.Hour(dttim) & ":" & DateAndTime.Minute(dttim) & ":" & DateAndTime.Second(dttim)
-                                        End If
+                                            If InStr(dttim, " 24") <> 0 Then
+                                                dttim = Strings.Replace(dttim, " 24", " 00")
+                                                dttim = DateAndTime.DateAdd("d", 1, dttim)
+                                                dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & DateAndTime.Hour(dttim) & ":" & DateAndTime.Minute(dttim) & ":" & DateAndTime.Second(dttim)
+                                            End If
 
-                                        If IsDate(dttim) Then
+                                            If IsDate(dttim) Then
 
-                                            dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
+                                                dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
 
-                                            ' Check for missing flag data values 
-                                            If dat = txtMissingFlag.Text Then
-                                                If dat = "" Then Continue For 'Blanks to be skipped
-                                                If IsDate(dttim) Then
-                                                    If Station_Element(st, cod) Then
-                                                        If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
-                                                        lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
-                                                        lblRecords.Refresh()
+                                                ' Check for missing flag data values 
+                                                If dat = txtMissingFlag.Text Then
+                                                    col = col + 1
+                                                    If dat = "" Then Continue For 'Blanks to be skipped
+
+                                                    If IsDate(dttim) Then
+                                                        If Station_Element(st, cod) Then
+
+                                                            If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
+                                                            lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                            lblRecords.Refresh()
+                                                        End If
+                                                    End If
+                                                    Continue For
+                                                End If
+
+                                                flg = ""
+                                                If IsNumeric(dat) Then
+                                                    If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                                Else
+                                                    ' Treat string data values as missing data
+                                                    If dat = "" Then 'Blanks to be skipped
                                                         col = col + 1
+                                                        Continue For
+                                                    End If
+                                                    flg = "M"
+                                                    dat = ""
+                                                End If
+
+                                                If Station_Element(st, cod) Then
+                                                    If rbtnFinal.Checked And QC_DataErr(cod, dat, LimitErr) Then
+                                                        PrintLine(31, st & "," & cod & "," & dttim & "," & dat & "," & LimitErr)
+                                                        ErRecord = ErRecord + 1
+                                                        'col = col + 1
+                                                        'Continue For
+                                                    Else
+                                                        Add_Record(st, cod, dttim, dat, flg, acquisitiontype)
+                                                    End If
+                                                Else
+                                                    If Not ImportFile Then
+                                                        FileClose(31)
+                                                        Exit Sub
                                                     End If
                                                 End If
-                                                Continue For
-                                            End If
-
-                                            flg = ""
-                                            If IsNumeric(dat) Then
-                                                If chkScale.Checked = True Then Scale_Data(cod, dat)
-                                            Else
-                                                ' Treat string data values as missing data
-                                                If dat = "" Then Continue For 'Blanks to be skipped
-                                                flg = "M"
-                                                dat = ""
-                                            End If
-
-                                            If Station_Element(st, cod) Then
-                                                Add_Record(st, cod, dttim, dat, flg, acquisitiontype)
-                                            Else
-                                                If Not ImportFile Then Exit Sub
                                             End If
                                         End If
                                     End If
-                                End If
-                            End With
+                                End With
 
-                            col = col + 1
-                            ' Show upload progress
-                            lblRecords.Text = LoadingCount(MyReader.LineNumber)
-                            'lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - Val(txtStartRow.Text) & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
-                            lblRecords.Refresh()
-                                        Catch x As Exception
-            'MsgBox(col & " " & x.Message)
-            Exit For
-        End Try
-        Next
-        End If
-                    Catch ex As Exception
-            'MsgBox(col & " " & ex.Message)
-            'MsgBox(ex.HResult & " " & ex.Message & " at Load_AWS")
-            Continue Do
-        End Try
-        Loop
+                                col = col + 1
+                                ' Show upload progress
+                                lblRecords.Text = LoadingCount(MyReader.LineNumber)
+                                lblRecords.Refresh()
+                            Catch x As Exception
+
+                                Exit For
+                            End Try
+                        Next
+                    End If
+                Catch ex As Exception
+                    Continue Do
+                End Try
+            Loop
         End Using
-        'Catch ex As Exception
-        '    MsgBox(ex.HResult & " " & ex.Message & " at Load_AWS")
-        'End Try
+        FileClose(31)
+        'MsgBox(ErRecord)
+        If ErRecord > 0 Then
+            lblQCfile.Visible = True
+            lblQCfile.Text = ErRecord & "  QC errors saved in: " & qcFile
+
+        End If
     End Sub
     Sub Load_Aws_special()
         'MsgBox(1)
@@ -1868,7 +1881,7 @@
                                                 End If
 
                                                 If Station_Element(st, cod) Then
-                                                    Add_Record_NOAGTS(st, cod, dttim, dat, flg, acquisitiontype)
+                                                    Add_Record(st, cod, dttim, dat, flg, acquisitiontype)
                                                 Else
                                                     If Not ImportFile Then Exit Sub
                                                 End If
@@ -2071,7 +2084,7 @@
 
 
     Function Add_Record(stn As String, code As String, datetime As String, obsVal As String, flg As String, acqTyp As Integer, Optional levels As String = "surface") As Boolean
-        Dim dat As String
+        Dim dat, qcStatus, qcLog As String
 
         'If obsVal = "" Then Exit Function
         Try
@@ -2080,9 +2093,18 @@
                 datetime = DateAndTime.Year(datetime) & "-" & DateAndTime.Month(datetime) & "-" & DateAndTime.Day(datetime) & " " & DateAndTime.Hour(datetime) & ":" & DateAndTime.Minute(datetime) & ":" & DateAndTime.Second(datetime)
             End If
 
-            If Val(cprd) < 1 Then cprd = "NULL" ' No cummulative values
+            If Val(cprd) < 1 Then cprd = "\N" ' No cummulative values
 
-            dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & acqTyp
+            If rbtnFinal.Checked Then ' Set for upload to observationfinal table
+                qcStatus = 1
+                qcLog = 1
+            Else ' Set for upload to observationinitial table
+                qcStatus = 0
+                qcLog = "\N"
+                'dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & acqTyp
+            End If
+
+            dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & qcStatus & "," & qcLog & "," & acqTyp
 
             Print(101, dat)
             PrintLine(101)
@@ -2102,6 +2124,10 @@
         Dim dat As String
 
         Try
+            If chkAdjustHH.Checked And Val(txtHH.Text) <> 0 Then
+                datetime = DateAdd("h", CInt(txtHH.Text), datetime)
+                datetime = DateAndTime.Year(datetime) & "-" & DateAndTime.Month(datetime) & "-" & DateAndTime.Day(datetime) & " " & DateAndTime.Hour(datetime) & ":" & DateAndTime.Minute(datetime) & ":" & DateAndTime.Second(datetime)
+            End If
 
             If rbtnFinal.Checked Then
                 dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & ",1," & acqTyp
@@ -2342,6 +2368,53 @@
         End Try
 
     End Function
+    Function QC_DataErr(code As String, obsv As String, ByRef Limittype As String) As Boolean
+
+        Try
+
+            If Not IsNumeric(obsv) Then Return False
+
+
+            sql = "select elementScale,lowerLimit,upperLimit from obselement where elementId like " & Val(code) & ";"
+
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            ds1.Clear()
+            da1.Fill(ds1, "obselement")
+
+            With ds1.Tables("obselement")
+
+                If ds1.Tables("obselement").Rows.Count = 0 Then
+                    ' No Element found
+                    Limittype = code & "," & Now() & "," & obsv & "," & "Element Not in Metadata"
+                    Return True
+                Else
+                    If IsNumeric(.Rows(0).Item("lowerLimit")) And IsNumeric(.Rows(0).Item("upperLimit")) And IsNumeric(.Rows(0).Item("upperLimit")) And IsNumeric(.Rows(0).Item("upperLimit")) Then
+                        obsv = obsv / Val(.Rows(0).Item("elementScale"))
+                        If obsv < Val(.Rows(0).Item("lowerLimit")) Then
+                            ' Lower Limit Error
+                            Limittype = "lowerLimit"
+                            Return True
+                        ElseIf obsv > Val(.Rows(0).Item("upperLimit")) Then
+                            '  Upper Limit Error
+                            Limittype = "upperLimit"
+                            Return True
+                        End If
+                    Else
+                        ' Limit or Scale value missing
+                        Limittype = "Limit or Scale value missing"
+                        Return True
+                    End If
+                End If
+            End With
+            Return False
+        Catch ex As Exception
+            ' Unknown data error
+            MsgBox(ex.Message)
+            Limittype = "Unknown data error"
+            Return True
+        End Try
+
+    End Function
     Private Sub cmdSaveSpecs_Click(sender As Object, e As EventArgs) Handles cmdSaveSpecs.Click
         Dim hdr, schemafile, dlt, strw, obshr, scal, id, code, flg, adjust As String
         'Dim configFilename As String = Application.StartupPath & "\schema.sch"
@@ -2471,8 +2544,11 @@
     Private Sub rbtnFinal_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnFinal.CheckedChanged
         If rbtnFinal.Checked = True Then
             chkScale.Checked = False
+            chkScale.Enabled = False
+            'chkScale.Checked = True
         Else
             chkScale.Checked = True
+            chkScale.Enabled = True
         End If
     End Sub
 

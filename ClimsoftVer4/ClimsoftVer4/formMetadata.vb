@@ -771,12 +771,22 @@ Public Class formMetadata
         Dim recCommit As New dataEntryGlobalRoutines
         Try
 
+            If cboElementId.Text = "" Then
+                MsgBox("No record Selected")
+                Exit Sub
+            End If
+
+            If txtScale.Text = "0" Then
+                MsgBox("Scale value of 0 not allowed")
+                Exit Sub
+            End If
+
             dsNewRow = ds.Tables("obselement").NewRow
             dsNewRow.Item("elementId") = cboElementId.Text
             dsNewRow.Item("abbreviation") = txtAbbreviation.Text
             dsNewRow.Item("elementName") = txtName.Text
             dsNewRow.Item("description") = txtDescription.Text
-            dsNewRow.Item("elementScale") = txtScale.Text
+            If txtScale.Text <> "0" Then dsNewRow.Item("elementScale") = txtScale.Text
             dsNewRow.Item("upperLimit") = txtUpperLimit.Text
             dsNewRow.Item("lowerLimit") = txtLowerLimit.Text
             dsNewRow.Item("units") = txtUnit.Text
@@ -818,11 +828,16 @@ Public Class formMetadata
             Exit Sub
         End If
 
+        If txtScale.Text = "0" Then
+            MsgBox("Scale value of 0 not allowed")
+            Exit Sub
+        End If
+
         ds.Tables("obselement").Rows(rec).Item("elementId") = cboElementId.Text
         ds.Tables("obselement").Rows(rec).Item("elementName") = txtName.Text
         ds.Tables("obselement").Rows(rec).Item("abbreviation") = txtAbbreviation.Text
         ds.Tables("obselement").Rows(rec).Item("description") = txtDescription.Text
-        ds.Tables("obselement").Rows(rec).Item("elementScale") = txtScale.Text
+        If txtScale.Text <> "0" Then ds.Tables("obselement").Rows(rec).Item("elementScale") = txtScale.Text
         ds.Tables("obselement").Rows(rec).Item("upperLimit") = txtUpperLimit.Text
         ds.Tables("obselement").Rows(rec).Item("lowerLimit") = txtLowerLimit.Text
         ds.Tables("obselement").Rows(rec).Item("units") = txtUnit.Text
@@ -2279,7 +2294,12 @@ Err:
         pictureBoxInstrument.Refresh()
     End Sub
 
-
+    Private Sub txtSeScale_LostFocus(sender As Object, e As EventArgs) Handles txtSeScale.LostFocus
+        If txtScale.Text = "0" Then
+            MsgBox("Scale value of 0 not allowed")
+            'txtScale.Text = ""
+        End If
+    End Sub
 End Class
 Class MetadataVariables
     Public seStn, sebdate, Eecode, Iecode As String 'Variables for Station Element
