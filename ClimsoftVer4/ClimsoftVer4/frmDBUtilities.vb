@@ -259,7 +259,8 @@ Public Class frmDBUtilities
         frmImportDaily.Setup(frmImportDaily.ImportType.AWSData)
         frmImportDaily.Show()
         frmImportDaily.Text = "AWS Data Import"
-        'frmImportDaily.pnlDbTable.Visible = True
+        frmImportDaily.pnlDbTable.Visible = True
+        frmImportDaily.rbtnFinal.Checked = True
     End Sub
 
 
