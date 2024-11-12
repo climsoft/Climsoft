@@ -203,7 +203,8 @@ Public Class frmProducts
                ('38', 'Climate Station', 'Data for Climate Station Tool', 'Output for other Applications'),
                ('39', 'Daily Mean Water Level', 'Hydrological Daily Mean Water Level', 'Special Products'),
                ('40', 'Monthly Mean Water Level', 'Hydrological Monthly Mean Water Level', 'Special Products'),
-               ('41', 'Annual Mean Water Level', 'Hydrological Annual Mean Water Level', 'Special Products');"
+               ('41', 'Annual Mean Water Level', 'Hydrological Annual Mean Water Level', 'Special Products'),
+               ('42', 'AWS Precip Daily 06-06Z', 'AWS Daily Precipitation Total 06-06UTC', 'Special Products');"
         Try
             Me.Cursor = Cursors.WaitCursor
             qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)

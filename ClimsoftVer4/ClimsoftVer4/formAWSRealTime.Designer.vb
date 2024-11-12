@@ -108,8 +108,6 @@ Partial Class formAWSRealTime
         Me.DataGridViewStructures = New System.Windows.Forms.DataGridView()
         Me.pnlSites = New System.Windows.Forms.Panel()
         Me.grpSites = New System.Windows.Forms.GroupBox()
-        Me.txtHrs = New System.Windows.Forms.TextBox()
-        Me.chkHrsAdjust = New System.Windows.Forms.CheckBox()
         Me.txtUTCdiff = New System.Windows.Forms.TextBox()
         Me.lblUTCdiff = New System.Windows.Forms.Label()
         Me.DataGridViewSites = New System.Windows.Forms.DataGridView()
@@ -142,6 +140,8 @@ Partial Class formAWSRealTime
         Me.lblInfile = New System.Windows.Forms.Label()
         Me.txtSiteID = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtHrs = New System.Windows.Forms.TextBox()
+        Me.chkHrsAdjust = New System.Windows.Forms.CheckBox()
         Me.pnlServers = New System.Windows.Forms.Panel()
         Me.pnlBaseStation = New System.Windows.Forms.Panel()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
@@ -1112,8 +1112,6 @@ Partial Class formAWSRealTime
         '
         'grpSites
         '
-        Me.grpSites.Controls.Add(Me.txtHrs)
-        Me.grpSites.Controls.Add(Me.chkHrsAdjust)
         Me.grpSites.Controls.Add(Me.txtUTCdiff)
         Me.grpSites.Controls.Add(Me.lblUTCdiff)
         Me.grpSites.Controls.Add(Me.DataGridViewSites)
@@ -1146,35 +1144,13 @@ Partial Class formAWSRealTime
         Me.grpSites.Controls.Add(Me.lblInfile)
         Me.grpSites.Controls.Add(Me.txtSiteID)
         Me.grpSites.Controls.Add(Me.Label15)
+        Me.grpSites.Controls.Add(Me.txtHrs)
+        Me.grpSites.Controls.Add(Me.chkHrsAdjust)
         Me.grpSites.Location = New System.Drawing.Point(6, 13)
         Me.grpSites.Name = "grpSites"
         Me.grpSites.Size = New System.Drawing.Size(746, 383)
         Me.grpSites.TabIndex = 67
         Me.grpSites.TabStop = False
-        '
-        'txtHrs
-        '
-        Me.txtHrs.BackColor = System.Drawing.Color.White
-        Me.txtHrs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHrs.Location = New System.Drawing.Point(564, 138)
-        Me.txtHrs.Name = "txtHrs"
-        Me.txtHrs.Size = New System.Drawing.Size(32, 20)
-        Me.txtHrs.TabIndex = 105
-        Me.txtHrs.Text = "0"
-        Me.txtHrs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtHrs.Visible = False
-        '
-        'chkHrsAdjust
-        '
-        Me.chkHrsAdjust.AutoSize = True
-        Me.chkHrsAdjust.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkHrsAdjust.Location = New System.Drawing.Point(410, 140)
-        Me.chkHrsAdjust.Name = "chkHrsAdjust"
-        Me.chkHrsAdjust.Size = New System.Drawing.Size(148, 17)
-        Me.chkHrsAdjust.TabIndex = 104
-        Me.chkHrsAdjust.Text = "Adjust Archiva Hours (+/-)"
-        Me.chkHrsAdjust.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkHrsAdjust.UseVisualStyleBackColor = True
         '
         'txtUTCdiff
         '
@@ -1482,6 +1458,30 @@ Partial Class formAWSRealTime
         Me.Label15.Size = New System.Drawing.Size(39, 13)
         Me.Label15.TabIndex = 67
         Me.Label15.Text = "Site ID"
+        '
+        'txtHrs
+        '
+        Me.txtHrs.BackColor = System.Drawing.Color.White
+        Me.txtHrs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHrs.Location = New System.Drawing.Point(564, 138)
+        Me.txtHrs.Name = "txtHrs"
+        Me.txtHrs.Size = New System.Drawing.Size(32, 20)
+        Me.txtHrs.TabIndex = 105
+        Me.txtHrs.Text = "0"
+        Me.txtHrs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtHrs.Visible = False
+        '
+        'chkHrsAdjust
+        '
+        Me.chkHrsAdjust.AutoSize = True
+        Me.chkHrsAdjust.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkHrsAdjust.Location = New System.Drawing.Point(410, 140)
+        Me.chkHrsAdjust.Name = "chkHrsAdjust"
+        Me.chkHrsAdjust.Size = New System.Drawing.Size(148, 17)
+        Me.chkHrsAdjust.TabIndex = 104
+        Me.chkHrsAdjust.Text = "Adjust Archiva Hours (+/-)"
+        Me.chkHrsAdjust.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkHrsAdjust.UseVisualStyleBackColor = True
         '
         'pnlServers
         '
@@ -2358,12 +2358,12 @@ Partial Class formAWSRealTime
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(956, 633)
+        Me.Controls.Add(Me.pnlSites)
         Me.Controls.Add(Me.pnlProcessing)
         Me.Controls.Add(Me.pnlDataStructures)
         Me.Controls.Add(Me.pnlServers)
         Me.Controls.Add(Me.pnlMsgEncoding)
         Me.Controls.Add(Me.pnlControl)
-        Me.Controls.Add(Me.pnlSites)
         Me.KeyPreview = True
         Me.Name = "formAWSRealTime"
         Me.Text = "AWS Real Time"

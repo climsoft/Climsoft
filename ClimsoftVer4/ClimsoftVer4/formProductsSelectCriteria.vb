@@ -925,6 +925,22 @@ Public Class formProductsSelectCriteria
                            "GROUP BY STN,COD,year(obsdatetime),month(obsdatetime),day(obsdatetime))t;"
 
                     MeanWaterLevel(sql, lblProductType.Text)
+
+                Case "AWS Precip Daily 06-06Z"
+                    ' Compute start and end date for the daily reainfall period
+                    sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & DateAndTime.Day(dateFrom.Text) & " " & RegkeyValue("key01").PadLeft(2, "0") & ":00:00"
+                    edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & DateAndTime.Day(dateTo.Text) & " " & RegkeyValue("key01").PadLeft(2, "0") & ":00:00"
+
+                    edate = DateAndTime.DateAdd("s", -1, edate) ' Reduce end date by 1 second so as not toinclude precipitation for the following day
+                    edate = Year(edate) & "-" & Month(edate) & "-" & DateAndTime.Day(edate) & " " & DateAndTime.Hour(edate) & ":" & DateAndTime.Minute(edate) & ":" & DateAndTime.Second(edate) ' convert date and time to SQL format
+
+                    'MsgBox(sdate & " " & edate)
+                    sql = "SELECT STN,stationName,latitude,longitude,elevation,min(Y) AS YYYY,min(M) AS MM,D as DD,sum(obsvalue) AS obsv FROM (SELECT recordedFrom AS STN, obsdatetime AS dtt, YEAR(obsDatetime) AS Y, MONTH(obsDatetime) AS M, DAY(obsDatetime) AS D, TIMESTAMPDIFF(DAY,'" & sdate & "',obsdatetime) AS dys,obsvalue
+                           FROM observationfinal WHERE describedBy = " & elmlist & " AND (recordedFrom =  " & stnlist & ") AND (obsDatetime BETWEEN '" & sdate & "' AND '" & edate & "'))t
+                           INNER JOIN station on STN = stationId
+                           GROUP BY STN, dys;"
+
+                    DataProducts(sql, lblProductType.Text)
                 Case Else
                     MsgBox("No Product found For Selection made", MsgBoxStyle.Information)
             End Select
@@ -2081,6 +2097,7 @@ Err:
             FileClose(11)
             CommonModules.ViewFile(f1)
         Catch ex As Exception
+            FileClose(11)
             MsgBox(ex.Message)
         End Try
     End Sub
@@ -2158,6 +2175,7 @@ Err:
             FileClose(11)
             CommonModules.ViewFile(f1)
         Catch ex As Exception
+            FileClose(11)
             conn.Close()
             MsgBox(ex.Message)
         End Try
@@ -2303,6 +2321,7 @@ Err:
 
         Exit Sub
 Err:
+        FileClose(11)
         If Err.Number = 13 Or Err.Number = 5 Then Resume Next
         MsgBox(Err.Number & " " & Err.Description)
 
