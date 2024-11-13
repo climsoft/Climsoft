@@ -51,7 +51,7 @@
 
 
             'add extra filters for none admin users
-            If Not userGroup = "ClimsoftAdmin" Then
+            If Not (userGroup = "ClimsoftAdmin" OrElse userGroup = "ClimsoftOperatorSupervisor") Then
                 AddExtraFilters("signature", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=True)
             End If
 
