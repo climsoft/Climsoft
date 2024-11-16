@@ -5555,8 +5555,10 @@ Err:
                 'txtStatus.Refresh()
 
                 Try
+
                     AdjustHH = .Rows(n).Item("AdjustHH")
                     AdjustHr = .Rows(n).Item("AdjustHr")
+                    UTCDiff = .Rows(n).Item("UTCDiff")
 
                     If IsDBNull(.Rows(n).Item("InputFile")) Or .Rows(n).Item("OperationalStatus") = 0 Then Continue For
                     fls = Path.GetFileName(.Rows(n).Item("InputFile"))
@@ -5852,27 +5854,20 @@ Err:
             ' Check for valid date
             If Not IsDate(dtt) Then Return False
 
+            'Adjust the observation hour if data in AWS file has has different time setting from that in database e.g. UTC and Local time
+            dttdb = DateAdd("h", AdjustHH, dtt)
+
             ' Check whether the current record can be updated into the database
-            If DateDiff("h", dtt, txtDateTime.Text) > Val(txtPeriod.Text - 1) And Val(txtPeriod.Text) <> 999 Then Return False
+            If DateDiff("h", dttdb, txtDateTime.Text) > Val(txtPeriod.Text - 1) And Val(txtPeriod.Text) <> 999 Then Return False
 
             'Update the record into the database
-
             aws_sql_input_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_output.sql" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
             FileOpen(12, aws_sql_input_file, OpenMode.Output)
 
             x = String.Empty
 
-            dtt = DateAndTime.Year(dtt) & "-" & DateAndTime.Month(dtt) & "-" & DateAndTime.Day(dtt) & " " & DateAndTime.Hour(dtt) & ":" & DateAndTime.Minute(dtt) & ":" & DateAndTime.Second(dtt)
-            dttdb = dtt
-
-            ' Adjust the hour in archiving data where the recived data has different hour to the one used.
-            If AdjustHr <> 0 Then
-                'Log_Errors(AdjustHr & " " & AdjustHH)
-                'dttdb = DateAdd("h", CInt(txtHrs.Text), dttdb)
-                dttdb = DateAdd("h", AdjustHH, dttdb)
-                dttdb = DateAndTime.Year(dttdb) & "-" & DateAndTime.Month(dttdb) & "-" & DateAndTime.Day(dttdb) & " " & DateAndTime.Hour(dttdb) & ":" & DateAndTime.Minute(dttdb) & ":" & DateAndTime.Second(dttdb)
-                'Log_Errors(dttdb)
-            End If
+            dttdb = DateAndTime.Year(dttdb) & "-" & DateAndTime.Month(dttdb) & "-" & DateAndTime.Day(dttdb) & " " & DateAndTime.Hour(dttdb) & ":" & DateAndTime.Minute(dttdb) & ":" & DateAndTime.Second(dttdb)
+            'dttdb = dtt
 
             For j = 0 To colmn - 1
 
@@ -5880,8 +5875,6 @@ Err:
                 'If Strings.LCase(unitt(j)) = "knots" Then drws(j) = Val(drws(j)) / 2
 
                 If QC_Limits(stn, elm(j), dttdb, drws(j), Llimit(j), Ulimit(j)) Then
-                    'FileClose(12)
-                    'Return False
                     Continue For
                 End If
 
@@ -5916,15 +5909,12 @@ Err:
 
             If GTSEncode(nat_id) And Val(txtPeriod.Text) <> 999 And Kount > 0 And DateAndTime.Minute(dtt) = 0 Then
                 ' Check records due for Encoding
-                'Log_Errors(DateDiff("h", dtt, Now()) & "=" & CInt(txtEncode.Text))
 
-                If DateDiff("h", dtt, Now()) <= CInt(txtEncode.Text) Then
+                If DateDiff("h", dttdb, Now()) <= CInt(txtEncode.Text) Then
 
                     ' Convert time to UTC
-                    'GMTDiff = CInt(txtGMTDiff.Text)
-                    GMTDiff = CInt(txtUTCdiff.Text)
 
-                    dtt = DateAdd("h", -1 * GMTDiff, dtt)
+                    dtt = DateAdd("h", -1 * CInt(UTCDiff), dtt)
 
                     'Compute Encoding interval hours 
                     ET = Math.Round(Val(txtInterval.Text) / 60)
