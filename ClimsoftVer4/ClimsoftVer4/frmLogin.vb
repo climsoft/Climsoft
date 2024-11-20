@@ -87,7 +87,6 @@ Public Class frmLogin
         username = txtUsername.Text
         password = txtPassword.Text
 
-        ClsTranslations.UpdateTranslationsDB()
 
         ' Ensure username and password are not empty
         If String.IsNullOrEmpty(username) Or String.IsNullOrEmpty(password) Then
