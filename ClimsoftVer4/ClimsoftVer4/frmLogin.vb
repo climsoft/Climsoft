@@ -74,6 +74,8 @@ Public Class frmLogin
     End Sub
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
+
+
         Dim builder As New Common.DbConnectionStringBuilder()
         Dim connectionString, dbChoice, password, username As String
         'Dim dbChoice As String
@@ -84,6 +86,8 @@ Public Class frmLogin
 
         username = txtUsername.Text
         password = txtPassword.Text
+
+        ClsTranslations.UpdateTranslationsDB()
 
         ' Ensure username and password are not empty
         If String.IsNullOrEmpty(username) Or String.IsNullOrEmpty(password) Then
