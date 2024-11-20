@@ -282,25 +282,25 @@ Partial Class frmMainMenu
         'seqDailyToolStripMenuItem
         '
         Me.seqDailyToolStripMenuItem.Name = "seqDailyToolStripMenuItem"
-        Me.seqDailyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.seqDailyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.seqDailyToolStripMenuItem.Text = "Daily"
         '
         'seqHourlyToolStripMenuItem
         '
         Me.seqHourlyToolStripMenuItem.Name = "seqHourlyToolStripMenuItem"
-        Me.seqHourlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.seqHourlyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.seqHourlyToolStripMenuItem.Text = "Hourly"
         '
         'seqMonthlyToolStripMenuItem
         '
         Me.seqMonthlyToolStripMenuItem.Name = "seqMonthlyToolStripMenuItem"
-        Me.seqMonthlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.seqMonthlyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.seqMonthlyToolStripMenuItem.Text = "Monthly"
         '
         'seqHourly2ToolStripMenuItem
         '
         Me.seqHourly2ToolStripMenuItem.Name = "seqHourly2ToolStripMenuItem"
-        Me.seqHourly2ToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.seqHourly2ToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.seqHourly2ToolStripMenuItem.Text = "Hourly2"
         '
         'FormHourlyTimeSelectionToolStripMenuItem
@@ -358,14 +358,14 @@ Partial Class frmMainMenu
         'mnuHelpContents
         '
         Me.mnuHelpContents.Name = "mnuHelpContents"
-        Me.mnuHelpContents.Size = New System.Drawing.Size(134, 24)
+        Me.mnuHelpContents.Size = New System.Drawing.Size(180, 24)
         Me.mnuHelpContents.Tag = "Contents"
         Me.mnuHelpContents.Text = "Contents"
         '
         'mnuHelpAbout
         '
         Me.mnuHelpAbout.Name = "mnuHelpAbout"
-        Me.mnuHelpAbout.Size = New System.Drawing.Size(134, 24)
+        Me.mnuHelpAbout.Size = New System.Drawing.Size(180, 24)
         Me.mnuHelpAbout.Tag = "About"
         Me.mnuHelpAbout.Text = "About"
         '

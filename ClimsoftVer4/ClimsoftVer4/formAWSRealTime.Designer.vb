@@ -1477,9 +1477,9 @@ Partial Class formAWSRealTime
         Me.chkHrsAdjust.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chkHrsAdjust.Location = New System.Drawing.Point(410, 140)
         Me.chkHrsAdjust.Name = "chkHrsAdjust"
-        Me.chkHrsAdjust.Size = New System.Drawing.Size(148, 17)
+        Me.chkHrsAdjust.Size = New System.Drawing.Size(150, 17)
         Me.chkHrsAdjust.TabIndex = 104
-        Me.chkHrsAdjust.Text = "Adjust Archiva Hours (+/-)"
+        Me.chkHrsAdjust.Text = "Adjust Archival Hours (+/-)"
         Me.chkHrsAdjust.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chkHrsAdjust.UseVisualStyleBackColor = True
         '
