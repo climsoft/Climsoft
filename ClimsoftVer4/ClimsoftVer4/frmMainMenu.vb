@@ -402,4 +402,8 @@ Public Class frmMainMenu
             Me.Cursor = Cursors.Default
         End Try
     End Sub
+
+    Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "aboutclimsoft4.htm")
+    End Sub
 End Class
