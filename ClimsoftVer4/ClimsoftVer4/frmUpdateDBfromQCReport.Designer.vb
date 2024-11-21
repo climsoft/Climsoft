@@ -36,7 +36,7 @@ Partial Class frmUpdateDBfromQCReport
         '
         'txtQCReportOriginal
         '
-        Me.txtQCReportOriginal.Location = New System.Drawing.Point(171, 47)
+        Me.txtQCReportOriginal.Location = New System.Drawing.Point(186, 47)
         Me.txtQCReportOriginal.Name = "txtQCReportOriginal"
         Me.txtQCReportOriginal.Size = New System.Drawing.Size(310, 20)
         Me.txtQCReportOriginal.TabIndex = 0
@@ -52,7 +52,7 @@ Partial Class frmUpdateDBfromQCReport
         '
         'txtQCReportUpdated
         '
-        Me.txtQCReportUpdated.Location = New System.Drawing.Point(171, 94)
+        Me.txtQCReportUpdated.Location = New System.Drawing.Point(186, 94)
         Me.txtQCReportUpdated.Name = "txtQCReportUpdated"
         Me.txtQCReportUpdated.Size = New System.Drawing.Size(310, 20)
         Me.txtQCReportUpdated.TabIndex = 1
@@ -96,7 +96,7 @@ Partial Class frmUpdateDBfromQCReport
         '
         'btnBrowseQCOriginal
         '
-        Me.btnBrowseQCOriginal.Location = New System.Drawing.Point(487, 45)
+        Me.btnBrowseQCOriginal.Location = New System.Drawing.Point(502, 45)
         Me.btnBrowseQCOriginal.Name = "btnBrowseQCOriginal"
         Me.btnBrowseQCOriginal.Size = New System.Drawing.Size(75, 23)
         Me.btnBrowseQCOriginal.TabIndex = 10
@@ -105,7 +105,7 @@ Partial Class frmUpdateDBfromQCReport
         '
         'btnQCUpdated
         '
-        Me.btnQCUpdated.Location = New System.Drawing.Point(487, 92)
+        Me.btnQCUpdated.Location = New System.Drawing.Point(502, 92)
         Me.btnQCUpdated.Name = "btnQCUpdated"
         Me.btnQCUpdated.Size = New System.Drawing.Size(75, 23)
         Me.btnQCUpdated.TabIndex = 11

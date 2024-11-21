@@ -168,7 +168,7 @@ Partial Class frmProducts
         '
         Me.cboProductsCategory.FormattingEnabled = True
         Me.cboProductsCategory.ItemHeight = 13
-        Me.cboProductsCategory.Location = New System.Drawing.Point(238, 14)
+        Me.cboProductsCategory.Location = New System.Drawing.Point(264, 14)
         Me.cboProductsCategory.Name = "cboProductsCategory"
         Me.cboProductsCategory.Size = New System.Drawing.Size(217, 21)
         Me.cboProductsCategory.TabIndex = 18
