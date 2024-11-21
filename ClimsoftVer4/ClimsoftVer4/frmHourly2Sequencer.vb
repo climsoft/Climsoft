@@ -4,6 +4,9 @@
 
     Private Sub frmHourly2Sequencer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetUpDialog()
+
+        'translate form controls
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub dataGridViewHours_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridViewHours.CellContentClick

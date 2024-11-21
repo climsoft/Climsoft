@@ -23,6 +23,9 @@
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "AWSstations")
         Me.DataGridView1.DataSource = ds.Tables(0)
+
+        'translate form controls
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click

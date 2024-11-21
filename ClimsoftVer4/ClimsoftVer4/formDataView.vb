@@ -65,11 +65,13 @@ Public Class formDataView
                     Next
                 End If
 
-                ClsTranslations.TranslateForm(Me)
             End If
         Catch x As Exception
             MsgBox(x.Message)
         End Try
+
+        'translate form controls
+        ClsTranslations.TranslateForm(Me)
     End Sub
     'Sub ViewStation()
     '    Dim sql As String = "SELECT * FROM Authors"

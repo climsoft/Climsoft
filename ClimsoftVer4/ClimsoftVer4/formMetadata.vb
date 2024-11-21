@@ -1127,9 +1127,9 @@ Err:
 
 
 
-        Exit Sub
-Err:
-        MsgBox(Err.Number & " " & Err.Description)
+        'Exit Sub
+        'Err:
+        'MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
 

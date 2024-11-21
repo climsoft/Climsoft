@@ -346,9 +346,9 @@ Public Class frmGeneralSettings
         formDataView.grpSearch.Visible = False
         If userGroup = "ClimsoftAdmin" Or userName = "root" Then
             sql = "SELECT * FROM regkeys ORDER by keyName;"
-            viewRecords.viewTableRecords(sql)
+            viewRecords.viewTableRecords(sql, translateContents:=True)
         Else
-            MsgBox("You don't have permission to view the information!", MsgBoxStyle.Exclamation)
+            MsgBox(ClsTranslations.GetTranslation("You don't have permission to view the information!"), MsgBoxStyle.Exclamation)
         End If
         'MsgBox("When updating folder locations, Please keep forward slash'/' for QC output folder locations " &
         '    "and backslash for other folder locations '\'. ", MsgBoxStyle.Information, "Folder Locations")
