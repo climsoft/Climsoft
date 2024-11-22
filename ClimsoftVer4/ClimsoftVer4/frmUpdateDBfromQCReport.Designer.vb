@@ -36,7 +36,7 @@ Partial Class frmUpdateDBfromQCReport
         '
         'txtQCReportOriginal
         '
-        Me.txtQCReportOriginal.Location = New System.Drawing.Point(186, 47)
+        Me.txtQCReportOriginal.Location = New System.Drawing.Point(212, 47)
         Me.txtQCReportOriginal.Name = "txtQCReportOriginal"
         Me.txtQCReportOriginal.Size = New System.Drawing.Size(310, 20)
         Me.txtQCReportOriginal.TabIndex = 0
@@ -52,7 +52,7 @@ Partial Class frmUpdateDBfromQCReport
         '
         'txtQCReportUpdated
         '
-        Me.txtQCReportUpdated.Location = New System.Drawing.Point(186, 94)
+        Me.txtQCReportUpdated.Location = New System.Drawing.Point(212, 94)
         Me.txtQCReportUpdated.Name = "txtQCReportUpdated"
         Me.txtQCReportUpdated.Size = New System.Drawing.Size(310, 20)
         Me.txtQCReportUpdated.TabIndex = 1
@@ -96,7 +96,7 @@ Partial Class frmUpdateDBfromQCReport
         '
         'btnBrowseQCOriginal
         '
-        Me.btnBrowseQCOriginal.Location = New System.Drawing.Point(502, 45)
+        Me.btnBrowseQCOriginal.Location = New System.Drawing.Point(528, 45)
         Me.btnBrowseQCOriginal.Name = "btnBrowseQCOriginal"
         Me.btnBrowseQCOriginal.Size = New System.Drawing.Size(75, 23)
         Me.btnBrowseQCOriginal.TabIndex = 10
@@ -105,7 +105,7 @@ Partial Class frmUpdateDBfromQCReport
         '
         'btnQCUpdated
         '
-        Me.btnQCUpdated.Location = New System.Drawing.Point(502, 92)
+        Me.btnQCUpdated.Location = New System.Drawing.Point(528, 92)
         Me.btnQCUpdated.Name = "btnQCUpdated"
         Me.btnQCUpdated.Size = New System.Drawing.Size(75, 23)
         Me.btnQCUpdated.TabIndex = 11
@@ -125,7 +125,7 @@ Partial Class frmUpdateDBfromQCReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(594, 200)
+        Me.ClientSize = New System.Drawing.Size(614, 200)
         Me.Controls.Add(Me.lblProcessStatus)
         Me.Controls.Add(Me.btnQCUpdated)
         Me.Controls.Add(Me.btnBrowseQCOriginal)

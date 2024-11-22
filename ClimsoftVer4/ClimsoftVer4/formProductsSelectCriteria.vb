@@ -92,14 +92,12 @@ Public Class formProductsSelectCriteria
 
         'translate form controls
         Dim str As String = lblProductType.Text
-        'ClsTranslations.TranslateForm(Me)
+        ClsTranslations.TranslateForm(Me)
         'retain the untranslated text because it's use for selection
         lblProductType.Text = str
 
         ClsTranslations.TranslateComponent(lstvStations, bHeaderOnly:=True)
         ClsTranslations.TranslateComponent(lstvElements, bHeaderOnly:=True)
-        'translate form controls
-        ClsTranslations.TranslateForm(Me)
     End Sub
     Function AllowedMissingDays() As Integer
         Dim darg As MySql.Data.MySqlClient.MySqlDataAdapter

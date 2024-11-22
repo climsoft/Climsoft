@@ -523,7 +523,7 @@ Partial Class formMetadata
         '
         'txtAdminRegion4
         '
-        Me.txtAdminRegion4.Location = New System.Drawing.Point(152, 372)
+        Me.txtAdminRegion4.Location = New System.Drawing.Point(166, 372)
         Me.txtAdminRegion4.Name = "txtAdminRegion4"
         Me.txtAdminRegion4.Size = New System.Drawing.Size(172, 20)
         Me.txtAdminRegion4.TabIndex = 73
@@ -538,7 +538,7 @@ Partial Class formMetadata
         '
         'txtAdminRegion3
         '
-        Me.txtAdminRegion3.Location = New System.Drawing.Point(152, 346)
+        Me.txtAdminRegion3.Location = New System.Drawing.Point(166, 346)
         Me.txtAdminRegion3.Name = "txtAdminRegion3"
         Me.txtAdminRegion3.Size = New System.Drawing.Size(172, 20)
         Me.txtAdminRegion3.TabIndex = 71
@@ -553,7 +553,7 @@ Partial Class formMetadata
         '
         'txtAdminRegion2
         '
-        Me.txtAdminRegion2.Location = New System.Drawing.Point(152, 321)
+        Me.txtAdminRegion2.Location = New System.Drawing.Point(166, 321)
         Me.txtAdminRegion2.Name = "txtAdminRegion2"
         Me.txtAdminRegion2.Size = New System.Drawing.Size(172, 20)
         Me.txtAdminRegion2.TabIndex = 69
@@ -599,7 +599,7 @@ Partial Class formMetadata
         '
         'txtWSI
         '
-        Me.txtWSI.Location = New System.Drawing.Point(151, 221)
+        Me.txtWSI.Location = New System.Drawing.Point(165, 221)
         Me.txtWSI.Name = "txtWSI"
         Me.txtWSI.Size = New System.Drawing.Size(171, 20)
         Me.txtWSI.TabIndex = 7
@@ -641,7 +641,7 @@ Partial Class formMetadata
         Me.grpComputationDD.Controls.Add(Me.lblDegreesLon)
         Me.grpComputationDD.Controls.Add(Me.txtDegreesLat)
         Me.grpComputationDD.Controls.Add(Me.lblDegreesLat)
-        Me.grpComputationDD.Location = New System.Drawing.Point(234, 95)
+        Me.grpComputationDD.Location = New System.Drawing.Point(248, 95)
         Me.grpComputationDD.Name = "grpComputationDD"
         Me.grpComputationDD.Size = New System.Drawing.Size(455, 69)
         Me.grpComputationDD.TabIndex = 63
@@ -796,14 +796,14 @@ Partial Class formMetadata
         '
         'txticaoid
         '
-        Me.txticaoid.Location = New System.Drawing.Point(152, 196)
+        Me.txticaoid.Location = New System.Drawing.Point(166, 196)
         Me.txticaoid.Name = "txticaoid"
         Me.txticaoid.Size = New System.Drawing.Size(102, 20)
         Me.txticaoid.TabIndex = 6
         '
         'txtwmoid
         '
-        Me.txtwmoid.Location = New System.Drawing.Point(152, 171)
+        Me.txtwmoid.Location = New System.Drawing.Point(166, 171)
         Me.txtwmoid.Name = "txtwmoid"
         Me.txtwmoid.Size = New System.Drawing.Size(102, 20)
         Me.txtwmoid.TabIndex = 5
@@ -828,7 +828,7 @@ Partial Class formMetadata
         'cboStationId
         '
         Me.cboStationId.FormattingEnabled = True
-        Me.cboStationId.Location = New System.Drawing.Point(150, 45)
+        Me.cboStationId.Location = New System.Drawing.Point(164, 45)
         Me.cboStationId.Name = "cboStationId"
         Me.cboStationId.Size = New System.Drawing.Size(139, 21)
         Me.cboStationId.TabIndex = 0
@@ -1030,21 +1030,21 @@ Partial Class formMetadata
         '
         'txtElevation
         '
-        Me.txtElevation.Location = New System.Drawing.Point(151, 146)
+        Me.txtElevation.Location = New System.Drawing.Point(165, 146)
         Me.txtElevation.Name = "txtElevation"
         Me.txtElevation.Size = New System.Drawing.Size(74, 20)
         Me.txtElevation.TabIndex = 4
         '
         'txtLongitude
         '
-        Me.txtLongitude.Location = New System.Drawing.Point(151, 121)
+        Me.txtLongitude.Location = New System.Drawing.Point(165, 121)
         Me.txtLongitude.Name = "txtLongitude"
         Me.txtLongitude.Size = New System.Drawing.Size(74, 20)
         Me.txtLongitude.TabIndex = 3
         '
         'txtLatitude
         '
-        Me.txtLatitude.Location = New System.Drawing.Point(151, 96)
+        Me.txtLatitude.Location = New System.Drawing.Point(165, 96)
         Me.txtLatitude.Name = "txtLatitude"
         Me.txtLatitude.Size = New System.Drawing.Size(74, 20)
         Me.txtLatitude.TabIndex = 2
@@ -1058,28 +1058,28 @@ Partial Class formMetadata
         '
         'txtAdminRegion
         '
-        Me.txtAdminRegion.Location = New System.Drawing.Point(152, 296)
+        Me.txtAdminRegion.Location = New System.Drawing.Point(166, 296)
         Me.txtAdminRegion.Name = "txtAdminRegion"
         Me.txtAdminRegion.Size = New System.Drawing.Size(172, 20)
         Me.txtAdminRegion.TabIndex = 10
         '
         'txtAuthority
         '
-        Me.txtAuthority.Location = New System.Drawing.Point(152, 271)
+        Me.txtAuthority.Location = New System.Drawing.Point(166, 271)
         Me.txtAuthority.Name = "txtAuthority"
         Me.txtAuthority.Size = New System.Drawing.Size(172, 20)
         Me.txtAuthority.TabIndex = 9
         '
         'txtCountry
         '
-        Me.txtCountry.Location = New System.Drawing.Point(152, 246)
+        Me.txtCountry.Location = New System.Drawing.Point(166, 246)
         Me.txtCountry.Name = "txtCountry"
         Me.txtCountry.Size = New System.Drawing.Size(171, 20)
         Me.txtCountry.TabIndex = 8
         '
         'txtStationName
         '
-        Me.txtStationName.Location = New System.Drawing.Point(150, 71)
+        Me.txtStationName.Location = New System.Drawing.Point(164, 71)
         Me.txtStationName.Name = "txtStationName"
         Me.txtStationName.Size = New System.Drawing.Size(266, 20)
         Me.txtStationName.TabIndex = 1
