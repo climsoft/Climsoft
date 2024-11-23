@@ -35,13 +35,13 @@ Public Class frmGeneralSettings
         'cboElement.Text = ds.Tables("form_hourly").Rows(inc).Item("elementId")
         txtKeyName.Text = ds.Tables("regkeys").Rows(inc).Item("keyName")
         txtKeyValue.Text = ds.Tables("regkeys").Rows(inc).Item("keyValue")
-        txtKeyDescription.Text = ds.Tables("regkeys").Rows(inc).Item("keyDescription")
+        txtKeyDescription.Text = ClsTranslations.GetTranslation(ds.Tables("regkeys").Rows(inc).Item("keyDescription"))
 
         displayRecordNumber()
     End Sub
     Private Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
-        recNumberTextBox.Text = "Record " & inc + 1 & " of " & maxRows
+        recNumberTextBox.Text = ClsTranslations.GetTranslation("Record") & " " & inc + 1 & ClsTranslations.GetTranslation("of") & " " & maxRows
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -110,7 +110,7 @@ Public Class frmGeneralSettings
         If maxRows > 0 Then
             txtKeyName.Text = ds.Tables("regkeys").Rows(inc).Item("keyName")
             txtKeyValue.Text = ds.Tables("regkeys").Rows(inc).Item("keyValue")
-            txtKeyDescription.Text = ds.Tables("regkeys").Rows(inc).Item("keyDescription")
+            txtKeyDescription.Text = ClsTranslations.GetTranslation(ds.Tables("regkeys").Rows(inc).Item("keyDescription"))
 
             displayRecordNumber()
         Else
@@ -125,7 +125,7 @@ Public Class frmGeneralSettings
             btnMovePrevious.Enabled = False
             btnMoveLast.Enabled = False
 
-            recNumberTextBox.Text = "Record 1 of 1"
+            recNumberTextBox.Text = ClsTranslations.GetTranslation("Record") & " 1 " & ClsTranslations.GetTranslation("of") & " 1"
         End If
 
         ClsTranslations.TranslateForm(Me)
@@ -346,9 +346,9 @@ Public Class frmGeneralSettings
         formDataView.grpSearch.Visible = False
         If userGroup = "ClimsoftAdmin" Or userName = "root" Then
             sql = "SELECT * FROM regkeys ORDER by keyName;"
-            viewRecords.viewTableRecords(sql)
+            viewRecords.viewTableRecords(sql, translateContents:=True)
         Else
-            MsgBox("You don't have permission to view the information!", MsgBoxStyle.Exclamation)
+            MsgBox(ClsTranslations.GetTranslation("You don't have permission to view the information!"), MsgBoxStyle.Exclamation)
         End If
         'MsgBox("When updating folder locations, Please keep forward slash'/' for QC output folder locations " &
         '    "and backslash for other folder locations '\'. ", MsgBoxStyle.Information, "Folder Locations")

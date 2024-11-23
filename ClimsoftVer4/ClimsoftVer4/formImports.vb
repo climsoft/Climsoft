@@ -126,7 +126,7 @@ Err:
 
 
     Private Sub formImports_Load(sender As Object, e As EventArgs) Handles Me.Load
-        On Error GoTo Err
+        'On Error GoTo Err
 
         'dbConectionString = frmLogin.txtusrpwd.Text
         'dbcon.ConnectionString = dbConectionString
@@ -188,9 +188,12 @@ Err:
 
 
         'End Using
-        Exit Sub
-Err:
-        MsgBox(Err.Number & " " & Err.Description)
+        'Exit Sub
+        'Err:
+        'MsgBox(Err.Number & " " & Err.Description)
+
+        'translate form controls
+        ClsTranslations.TranslateForm(Me)
     End Sub
     Sub ListFields()
         On Error GoTo Err

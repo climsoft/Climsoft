@@ -25,6 +25,7 @@ Partial Class formImports
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formImports))
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
         Me.cmHelp = New System.Windows.Forms.Button()
         Me.cmdClose = New System.Windows.Forms.Button()
@@ -38,7 +39,6 @@ Partial Class formImports
         Me.listErrors = New System.Windows.Forms.ListBox()
         Me.lblErrors = New System.Windows.Forms.Label()
         Me.lblSummary = New System.Windows.Forms.Label()
-        Me.btnUpdate = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -49,7 +49,7 @@ Partial Class formImports
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.Snow
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(29, 64)
+        Me.DataGridView1.Location = New System.Drawing.Point(29, 68)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(487, 357)
         Me.DataGridView1.TabIndex = 0
@@ -68,47 +68,56 @@ Partial Class formImports
         Me.Panel1.Size = New System.Drawing.Size(911, 34)
         Me.Panel1.TabIndex = 4
         '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(654, 2)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(106, 32)
+        Me.btnUpdate.TabIndex = 9
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(207, 2)
+        Me.cmdReset.Location = New System.Drawing.Point(298, 2)
         Me.cmdReset.Name = "cmdReset"
-        Me.cmdReset.Size = New System.Drawing.Size(94, 32)
+        Me.cmdReset.Size = New System.Drawing.Size(106, 32)
         Me.cmdReset.TabIndex = 8
         Me.cmdReset.Text = "Reset"
         Me.cmdReset.UseVisualStyleBackColor = True
         '
         'cmHelp
         '
-        Me.cmHelp.Location = New System.Drawing.Point(378, 2)
+        Me.cmHelp.Location = New System.Drawing.Point(533, 2)
         Me.cmHelp.Name = "cmHelp"
-        Me.cmHelp.Size = New System.Drawing.Size(65, 32)
+        Me.cmHelp.Size = New System.Drawing.Size(106, 32)
         Me.cmHelp.TabIndex = 7
         Me.cmHelp.Text = "Help"
         Me.cmHelp.UseVisualStyleBackColor = True
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(307, 1)
+        Me.cmdClose.Location = New System.Drawing.Point(415, 1)
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(65, 33)
+        Me.cmdClose.Size = New System.Drawing.Size(106, 32)
         Me.cmdClose.TabIndex = 6
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
         'cmdProcess
         '
-        Me.cmdProcess.Location = New System.Drawing.Point(116, 2)
+        Me.cmdProcess.Location = New System.Drawing.Point(182, 2)
         Me.cmdProcess.Name = "cmdProcess"
-        Me.cmdProcess.Size = New System.Drawing.Size(87, 32)
+        Me.cmdProcess.Size = New System.Drawing.Size(106, 32)
         Me.cmdProcess.TabIndex = 5
         Me.cmdProcess.Text = "Import"
         Me.cmdProcess.UseVisualStyleBackColor = True
         '
         'cmdStart
         '
-        Me.cmdStart.Location = New System.Drawing.Point(19, 2)
+        Me.cmdStart.Location = New System.Drawing.Point(63, 2)
         Me.cmdStart.Name = "cmdStart"
-        Me.cmdStart.Size = New System.Drawing.Size(91, 29)
+        Me.cmdStart.Size = New System.Drawing.Size(106, 32)
         Me.cmdStart.TabIndex = 4
         Me.cmdStart.Text = "Open File"
         Me.cmdStart.UseVisualStyleBackColor = True
@@ -120,9 +129,9 @@ Partial Class formImports
         Me.GroupBox1.Controls.Add(Me.cmdCSV)
         Me.GroupBox1.Controls.Add(Me.txtCSV)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(29, 24)
+        Me.GroupBox1.Location = New System.Drawing.Point(29, 1)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(487, 42)
+        Me.GroupBox1.Size = New System.Drawing.Size(487, 62)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         '
@@ -139,7 +148,7 @@ Partial Class formImports
         '
         Me.cmdCSV.BackgroundImage = CType(resources.GetObject("cmdCSV.BackgroundImage"), System.Drawing.Image)
         Me.cmdCSV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdCSV.Location = New System.Drawing.Point(445, 9)
+        Me.cmdCSV.Location = New System.Drawing.Point(373, 27)
         Me.cmdCSV.Name = "cmdCSV"
         Me.cmdCSV.Size = New System.Drawing.Size(36, 29)
         Me.cmdCSV.TabIndex = 5
@@ -147,7 +156,7 @@ Partial Class formImports
         '
         'txtCSV
         '
-        Me.txtCSV.Location = New System.Drawing.Point(87, 14)
+        Me.txtCSV.Location = New System.Drawing.Point(9, 34)
         Me.txtCSV.Name = "txtCSV"
         Me.txtCSV.Size = New System.Drawing.Size(358, 20)
         Me.txtCSV.TabIndex = 4
@@ -161,7 +170,7 @@ Partial Class formImports
         Me.listErrors.FormattingEnabled = True
         Me.listErrors.Location = New System.Drawing.Point(522, 69)
         Me.listErrors.Name = "listErrors"
-        Me.listErrors.Size = New System.Drawing.Size(361, 329)
+        Me.listErrors.Size = New System.Drawing.Size(361, 355)
         Me.listErrors.TabIndex = 6
         '
         'lblErrors
@@ -181,15 +190,6 @@ Partial Class formImports
         Me.lblSummary.Name = "lblSummary"
         Me.lblSummary.Size = New System.Drawing.Size(0, 13)
         Me.lblSummary.TabIndex = 8
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.Location = New System.Drawing.Point(466, 2)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(65, 32)
-        Me.btnUpdate.TabIndex = 9
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'formImports
         '

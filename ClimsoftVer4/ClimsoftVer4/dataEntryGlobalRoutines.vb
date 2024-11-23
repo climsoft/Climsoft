@@ -322,7 +322,7 @@ Public Class dataEntryGlobalRoutines
             MsgBox(msgTxt, MsgBoxStyle.Exclamation)
         End If
     End Function
-    Public Sub viewTableRecords(strSQL As String)
+    Public Sub viewTableRecords(strSQL As String, Optional translateContents As Boolean = False)
 
         Dim dsv As New DataSet
         Dim dav As MySql.Data.MySqlClient.MySqlDataAdapter
@@ -359,6 +359,10 @@ Public Class dataEntryGlobalRoutines
             MsgBox(ex.Message)
             dbconn.Close()
         End Try
+
+        If translateContents Then
+            ClsTranslations.TranslateComponent(formDataView.DataGridView, False)
+        End If
     End Sub
     Public Function Valid_Stn(ctrl As Control) As Boolean
 

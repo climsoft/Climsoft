@@ -127,6 +127,7 @@ Public Class frmQC
         End Try
         conns.Close()
 
+        'translate form controls
         ClsTranslations.TranslateForm(Me)
         'todo in future this will be done automatically by TranslateForms(Me)
         ClsTranslations.TranslateComponent(LstViewStations, True)

@@ -23,6 +23,12 @@ Public Class frmUpdateDBfromQCReport
     Dim da As OleDb.OleDbDataAdapter, da1 As OleDb.OleDbDataAdapter
     Dim fd As OpenFileDialog = New OpenFileDialog()
     Dim elemId1 As Integer, yyyy1 As String, mm1 As String, dd1 As String, hh1 As String, obsVal1 As String, qcStatus1 As String
+
+    Private Sub frmUpdateDBfromQCReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'translate form controls
+        ClsTranslations.TranslateForm(Me)
+    End Sub
+
     Dim elemId2 As Integer, yyyy2 As String, mm2 As String, dd2 As String, hh2 As String, obsVal2 As String, qcStatus2 As String
     Dim m As Integer, n As Integer, obsValue As String, qcStatus As Integer
     Dim strSQL As String, stnId As String, elemCode As String, obsDatetime As String, obsLevel As String, obsVal As String, obsFlag As String, _
