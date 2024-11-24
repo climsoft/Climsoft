@@ -196,73 +196,73 @@ Err:
         ClsTranslations.TranslateForm(Me)
     End Sub
     Sub ListFields()
-        On Error GoTo Err
-        dbConectionString = frmLogin.txtusrpwd.Text
-        dbcon.ConnectionString = dbConectionString
-        dbcon.Open()
+        Try
+            dbConectionString = frmLogin.txtusrpwd.Text
+            dbcon.ConnectionString = dbConectionString
+            dbcon.Open()
 
-        sql1 = "SELECT * FROM station"
-        d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, dbcon)
-        d.Fill(s, "station")
+            sql1 = "SELECT * FROM station"
+            d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, dbcon)
+            d.Fill(s, "station")
 
-        dbcon.Close()
+            dbcon.Close()
 
-        Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
-            MyReader.TextFieldType = FileIO.FieldType.Delimited
-            MyReader.SetDelimiters(",")
-            Dim currentField As String
+            Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
+                MyReader.TextFieldType = FileIO.FieldType.Delimited
+                MyReader.SetDelimiters(",")
+                Dim currentField As String
 
-            Dim num As Integer = 1
+                Dim num As Integer = 1
 
 
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
-            Dim dsNewRow As DataRow
-            'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
-            Dim recCommit As New dataEntryGlobalRoutines
+                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
+                Dim dsNewRow As DataRow
+                'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+                Dim recCommit As New dataEntryGlobalRoutines
 
-            ' Define the Data GridView Columns
-            DataGridView1.ColumnCount = 2
-            DataGridView1.Columns(0).Name = "Import Field No"
-            DataGridView1.Columns(1).Name = "Import Field Name"
+                ' Define the Data GridView Columns
+                DataGridView1.ColumnCount = 2
+                DataGridView1.Columns(0).Name = "Import Field No"
+                DataGridView1.Columns(1).Name = "Import Field Name"
 
-            ' Populate the Data GridView with column headers from the import station text file
+                ' Populate the Data GridView with column headers from the import station text file
 
-            lin = MyReader.LineNumber()
-            currentRow = MyReader.ReadFields()
+                lin = MyReader.LineNumber()
+                currentRow = MyReader.ReadFields()
 
-            If lin = 1 Then ' The header row
-                For Each currentField In currentRow
-                    row = New String() {num, currentField}
-                    DataGridView1.Rows.Add(row)
-                    num = num + 1
+                If lin = 1 Then ' The header row
+                    For Each currentField In currentRow
+                        row = New String() {num, currentField}
+                        DataGridView1.Rows.Add(row)
+                        num = num + 1
+                    Next
+                End If
+
+
+                ' Populate the Data GridView with column headers from the db station table
+                formMetadata.SetDataSet("station")
+                Dim maxfields, mxrows As Integer
+                maxfields = s.Tables("station").Columns.Count
+                mxrows = DataGridView1.Rows.Count
+
+                ' Define the new column
+                Dim cmb As New DataGridViewComboBoxColumn()
+                cmb.HeaderText = "Select Fields"
+                cmb.Name = "cmb"
+                cmb.MaxDropDownItems = maxfields
+
+                ' Add ComboList and populate it
+                cmb.Items.Add("")
+                For i = 0 To maxfields - 1
+                    cmb.Items.Add(s.Tables("station").Columns(i).ColumnName)
                 Next
-            End If
+                DataGridView1.Columns.Add(cmb)
+                DataGridView1.Refresh()
 
-
-            ' Populate the Data GridView with column headers from the db station table
-            formMetadata.SetDataSet("station")
-            Dim maxfields, mxrows As Integer
-            maxfields = s.Tables("station").Columns.Count
-            mxrows = DataGridView1.Rows.Count
-
-            ' Define the new column
-            Dim cmb As New DataGridViewComboBoxColumn()
-            cmb.HeaderText = "Select Fields"
-            cmb.Name = "cmb"
-            cmb.MaxDropDownItems = maxfields
-
-            ' Add ComboList and populate it
-            cmb.Items.Add("")
-            For i = 0 To maxfields - 1
-                cmb.Items.Add(s.Tables("station").Columns(i).ColumnName)
-            Next
-            DataGridView1.Columns.Add(cmb)
-            DataGridView1.Refresh()
-
-        End Using
-        Exit Sub
-Err:
-        MsgBox(Err.Number & " " & Err.Description)
+            End Using
+        Catch ex As Exception
+            MsgBox("No metadata file selected")
+        End Try
     End Sub
 
     Private Sub cmdProcess_Click(sender As Object, e As EventArgs) Handles cmdProcess.Click
@@ -393,103 +393,97 @@ Err:
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-
-        'If Len(DataGridView1.Rows(1).Cells(2).Value) <> 0 Then
-        '    MsgBox(" Blank Station Id not allowed")
-        '    Exit Sub
-        'End If
-
-        'On Error GoTo Err
-        'Try
         Dim fails As Long
-        Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
-            MyReader.TextFieldType = FileIO.FieldType.Delimited
-            MyReader.SetDelimiters(",")
-            Dim nums As Integer
-            Dim rows As String()
-            Dim mxr As Integer = DataGridView1.Rows.Count
+        Try
+            Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
 
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
-            Dim dsNewRow As DataRow
+                MyReader.TextFieldType = FileIO.FieldType.Delimited
+                MyReader.SetDelimiters(",")
+                Dim nums As Integer
+                Dim rows As String()
+                Dim mxr As Integer = DataGridView1.Rows.Count
 
-            'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
-            Dim recCommit As New dataEntryGlobalRoutines
+                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
+                Dim dsNewRow As DataRow
 
-            Me.Cursor = Windows.Forms.Cursors.WaitCursor
-            Dim stnsFile, fldlist, vals, sql As String
+                'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+                Dim recCommit As New dataEntryGlobalRoutines
 
-            Try
-                stnsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\stn_metadata.csv"
+                Me.Cursor = Windows.Forms.Cursors.WaitCursor
+                Dim stnsFile, fldlist, vals, sql As String
 
-                FileOpen(222, stnsFile, OpenMode.Output)
+                Try
+                    stnsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\stn_metadata.csv"
 
-                fails = 0
-                listErrors.Items.Clear()
-                fldlist = DataGridView1.Rows(0).Cells(2).Value
-                For i = 1 To DataGridView1.Rows.Count - 1
-                    If Len(DataGridView1.Rows(i).Cells(2).Value) <> 0 Then
-                        fldlist = fldlist & "," & DataGridView1.Rows(i).Cells(2).Value
+                    FileOpen(222, stnsFile, OpenMode.Output)
+
+                    fails = 0
+                    listErrors.Items.Clear()
+                    fldlist = DataGridView1.Rows(0).Cells(2).Value
+                    For i = 1 To DataGridView1.Rows.Count - 1
+                        If Len(DataGridView1.Rows(i).Cells(2).Value) <> 0 Then
+                            fldlist = fldlist & "," & DataGridView1.Rows(i).Cells(2).Value
+                        End If
+                    Next
+
+                    If Strings.InStr(fldlist, "stationId") = 0 Then
+                        Me.Cursor = Windows.Forms.Cursors.Default
+                        MsgBox("StationId Required")
+                        FileClose(222)
+                        Exit Sub
                     End If
-                Next
-
-                If Strings.InStr(fldlist, "stationId") = 0 Then
-                    Me.Cursor = Windows.Forms.Cursors.Default
-                    MsgBox("StationId Required")
-                    FileClose(222)
-                    Exit Sub
-                End If
 
 
-                Do While MyReader.EndOfData = False
+                    Do While MyReader.EndOfData = False
 
-                    lin = MyReader.LineNumber()
+                        lin = MyReader.LineNumber()
 
-                    currentRow = MyReader.ReadFields()
+                        currentRow = MyReader.ReadFields()
 
-                    If lin > 1 Then
-                        nums = 1
-                        dsNewRow = s.Tables("station").NewRow
-                        vals = ""
-                        For Each currentField In currentRow
+                        If lin > 1 Then
+                            nums = 1
+                            dsNewRow = s.Tables("station").NewRow
+                            vals = ""
+                            For Each currentField In currentRow
 
-                            rows = New String() {nums, currentField}
+                                rows = New String() {nums, currentField}
 
-                            If Len(DataGridView1.Rows(nums - 1).Cells(2).Value) <> 0 Then
-                                If Len(currentField) = 0 Then
-                                    dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = vbNull
-                                Else
-                                    dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = currentField
-                                End If
-
-                                If nums = 1 Then
-                                    vals = dsNewRow(0)
-                                    If Len(vals) = 0 Then vals = "\N"
-                                Else
+                                If Len(DataGridView1.Rows(nums - 1).Cells(2).Value) <> 0 Then
                                     If Len(currentField) = 0 Then
-                                        vals = vals & "," & "\N"
+                                        dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = vbNull
                                     Else
-                                        vals = vals & "," & currentField
+                                        dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = currentField
+                                    End If
+
+                                    If nums = 1 Then
+                                        vals = dsNewRow(0)
+                                        If Len(vals) = 0 Then vals = "\N"
+                                    Else
+                                        If Len(currentField) = 0 Then
+                                            vals = vals & "," & "\N"
+                                        Else
+                                            vals = vals & "," & currentField
+                                        End If
                                     End If
                                 End If
-                            End If
-                            nums = nums + 1
-                        Next
-                        Print(222, vals & Chr(10))
-                    End If
-                Loop
-                Me.Cursor = Windows.Forms.Cursors.Default
-                FileClose(222)
+                                nums = nums + 1
+                            Next
+                            Print(222, vals & Chr(10))
+                        End If
+                    Loop
+                    Me.Cursor = Windows.Forms.Cursors.Default
+                    FileClose(222)
 
-                ' Update the station metadata with data from a text file
-                Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-                dbConectionString = frmLogin.txtusrpwd.Text
-                dbcon.ConnectionString = dbConectionString
-                dbcon.Open()
+                    ' Update the station metadata with data from a text file
+                    Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+                    dbConectionString = frmLogin.txtusrpwd.Text
+                    dbcon.ConnectionString = dbConectionString
+                    dbcon.Open()
 
-                ' Convert the the path delimiter for the metadata file to SQL structure
-                stnsFile = Strings.Replace(stnsFile, "\", "/")
+                    ' Convert the the path delimiter for the metadata file to SQL structure
+                    stnsFile = Strings.Replace(stnsFile, "\", "/")
 
-                sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+                    sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
                    /*!40101 SET NAMES utf8mb4 */;
                    /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
                    /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
@@ -499,25 +493,39 @@ Err:
                    /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
                    /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
                    /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
-                'MsgBox(sql)
-                'Execute SQL command
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbcon)
-                objCmd.ExecuteNonQuery()
+                    'MsgBox(sql)
+                    'Execute SQL command
+                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbcon)
+                    objCmd.ExecuteNonQuery()
 
-                dbcon.Close()
-                FileClose(222)
-                Me.Cursor = Windows.Forms.Cursors.Default
-                lblSummary.Text = "Records Successfully Updated"
+                    dbcon.Close()
+                    FileClose(222)
+                    Me.Cursor = Windows.Forms.Cursors.Default
+                    lblSummary.Text = "Records Successfully Updated"
 
-            Catch ex As Exception
-                dbcon.Close()
-                FileClose(222)
-                Me.Cursor = Windows.Forms.Cursors.Default
-                listErrors.Items.Add(lin - 1 & " " & ex.Message)
-                listErrors.Refresh()
-                'fails = fails + 1
-            End Try
-        End Using
+                Catch ex As Exception
+                    dbcon.Close()
+                    FileClose(222)
+                    Me.Cursor = Windows.Forms.Cursors.Default
+
+                    If lin > 0 Then
+                        listErrors.Items.Add(lin - 1 & " " & ex.Message)
+                        listErrors.Refresh()
+                    Else
+                        MsgBox(ex.Message)
+                    End If
+
+                    'fails = fails + 1
+                End Try
+            End Using
+        Catch x As Exception
+            If x.HResult = -2147467261 Or x.HResult = -2147024894 Then
+                MsgBox("No valid metadata file found")
+            Else
+                MsgBox(x.Message)
+            End If
+
+        End Try
 
     End Sub
 
