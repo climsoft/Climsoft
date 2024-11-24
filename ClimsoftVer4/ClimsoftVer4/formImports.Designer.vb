@@ -161,10 +161,6 @@ Partial Class formImports
         Me.txtCSV.Size = New System.Drawing.Size(358, 20)
         Me.txtCSV.TabIndex = 4
         '
-        'OpenFileImport
-        '
-        Me.OpenFileImport.FileName = "imports"
-        '
         'listErrors
         '
         Me.listErrors.FormattingEnabled = True
