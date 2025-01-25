@@ -2300,6 +2300,16 @@ Err:
             'txtScale.Text = ""
         End If
     End Sub
+
+    Private Sub butpgr_Click(sender As Object, e As EventArgs) Handles butpgr.Click
+        Dim pstgrConstr As String
+
+        pstgrConstr = "server=localhost;database=public;port=3307"
+        pstgrConstr = "Server=localhost;Port=3307;Database=public;UID=postgres;PWD=admin123"
+        pstgrConstr = "postgresql://username:password@host: port/ dbname[?paramspec]"
+        pstgrConstr = "postgresql://postgres:postgrespassword@host.docker.internal: 5432/postgres"
+
+    End Sub
 End Class
 Class MetadataVariables
     Public seStn, sebdate, Eecode, Iecode As String 'Variables for Station Element

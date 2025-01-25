@@ -67,6 +67,7 @@ Partial Class formMetadata
         Me.cboSearchStation = New System.Windows.Forms.ComboBox()
         Me.txtStationOperation = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.butpgr = New System.Windows.Forms.Button()
         Me.cmdImport = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdViewStation = New System.Windows.Forms.Button()
@@ -867,6 +868,7 @@ Partial Class formMetadata
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Panel2.Controls.Add(Me.butpgr)
         Me.Panel2.Controls.Add(Me.cmdImport)
         Me.Panel2.Controls.Add(Me.cmdClear)
         Me.Panel2.Controls.Add(Me.cmdViewStation)
@@ -878,6 +880,16 @@ Partial Class formMetadata
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(766, 29)
         Me.Panel2.TabIndex = 18
+        '
+        'butpgr
+        '
+        Me.butpgr.Location = New System.Drawing.Point(703, 6)
+        Me.butpgr.Name = "butpgr"
+        Me.butpgr.Size = New System.Drawing.Size(62, 22)
+        Me.butpgr.TabIndex = 24
+        Me.butpgr.Text = "PostGres"
+        Me.butpgr.UseVisualStyleBackColor = True
+        Me.butpgr.Visible = False
         '
         'cmdImport
         '
@@ -4314,4 +4326,5 @@ Partial Class formMetadata
     Friend WithEvents lblAdmin3 As Label
     Friend WithEvents txtAdminRegion4 As TextBox
     Friend WithEvents lblAdmin4 As Label
+    Friend WithEvents butpgr As Button
 End Class

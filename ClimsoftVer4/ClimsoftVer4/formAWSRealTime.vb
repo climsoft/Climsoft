@@ -2991,12 +2991,23 @@ Err:
     '    End Try
     'End Sub
     Sub Update_data(sql As String)
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim conndb As New MySql.Data.MySqlClient.MySqlConnection
 
         Try
-            cmd.Connection = dbconn
-            cmd.CommandTimeout = 0
-            cmd.CommandText = sql
-            cmd.ExecuteNonQuery()
+            'cmd.Connection = dbconn
+            'cmd.CommandTimeout = 0
+            'cmd.CommandText = sql
+            'cmd.ExecuteNonQuery()
+
+            conndb.ConnectionString = frmLogin.txtusrpwd.Text
+            conndb.Open()
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conndb)
+            'qry = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
+
+            'Execute query
+            qry.ExecuteNonQuery()
+            conndb.Close()
 
         Catch ex As Exception
             Log_Errors(ex.Message & " at update_data")
