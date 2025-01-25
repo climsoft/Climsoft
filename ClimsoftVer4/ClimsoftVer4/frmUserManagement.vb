@@ -196,6 +196,10 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_daily1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_hourly TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
@@ -310,6 +314,11 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_daily1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_hourly TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
@@ -426,6 +435,11 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_daily1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_hourly TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
@@ -536,6 +550,11 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_daily1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_hourly TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
@@ -652,6 +671,11 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_daily1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_hourly TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
@@ -766,6 +790,11 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_daily1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_hourly TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
@@ -901,6 +930,11 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_daily1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_hourly TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
@@ -1038,6 +1072,11 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_daily1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_hourly TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
@@ -1867,6 +1906,11 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_daily1 TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_hourly TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2134,6 +2178,10 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_daily1 TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_hourly TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2247,6 +2295,10 @@
             'execute command
             objCmd.ExecuteNonQuery()
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_daily2 TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_daily1 TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
@@ -2372,6 +2424,10 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_daily1 TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_hourly TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2489,6 +2545,10 @@
             'execute command
             objCmd.ExecuteNonQuery()
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_daily2 TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_daily1 TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
@@ -2632,6 +2692,10 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_daily1 TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_hourly TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2771,6 +2835,10 @@
             'execute command
             objCmd.ExecuteNonQuery()
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_daily2 TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_daily1 TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()

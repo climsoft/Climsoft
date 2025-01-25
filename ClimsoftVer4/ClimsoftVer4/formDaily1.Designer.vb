@@ -29,7 +29,6 @@ Partial Class formDaily1
         Me.cboStation = New System.Windows.Forms.ComboBox()
         Me.cboMonth = New System.Windows.Forms.ComboBox()
         Me.cboDay = New System.Windows.Forms.ComboBox()
-        Me.txtYear = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cboHour = New System.Windows.Forms.ComboBox()
         Me.GroupBoxCommands = New System.Windows.Forms.GroupBox()
@@ -52,13 +51,15 @@ Partial Class formDaily1
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnMoveFirst = New System.Windows.Forms.Button()
         Me.lblInsDel = New System.Windows.Forms.Label()
+        Me.cboYear = New System.Windows.Forms.ComboBox()
+        Me.lblInvaliDate = New System.Windows.Forms.Label()
         Me.GroupBoxCommands.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label62
         '
         Me.Label62.AutoSize = True
-        Me.Label62.Location = New System.Drawing.Point(391, 74)
+        Me.Label62.Location = New System.Drawing.Point(398, 74)
         Me.Label62.Name = "Label62"
         Me.Label62.Size = New System.Drawing.Size(26, 13)
         Me.Label62.TabIndex = 1018
@@ -67,7 +68,7 @@ Partial Class formDaily1
         'Label61
         '
         Me.Label61.AutoSize = True
-        Me.Label61.Location = New System.Drawing.Point(267, 74)
+        Me.Label61.Location = New System.Drawing.Point(280, 74)
         Me.Label61.Name = "Label61"
         Me.Label61.Size = New System.Drawing.Size(37, 13)
         Me.Label61.TabIndex = 1017
@@ -103,7 +104,7 @@ Partial Class formDaily1
         '
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.cboMonth.Location = New System.Drawing.Point(310, 70)
+        Me.cboMonth.Location = New System.Drawing.Point(323, 70)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(41, 21)
         Me.cboMonth.TabIndex = 2
@@ -112,22 +113,15 @@ Partial Class formDaily1
         '
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(440, 71)
+        Me.cboDay.Location = New System.Drawing.Point(443, 70)
         Me.cboDay.Name = "cboDay"
-        Me.cboDay.Size = New System.Drawing.Size(39, 21)
+        Me.cboDay.Size = New System.Drawing.Size(41, 21)
         Me.cboDay.TabIndex = 3
-        '
-        'txtYear
-        '
-        Me.txtYear.Location = New System.Drawing.Point(200, 72)
-        Me.txtYear.Name = "txtYear"
-        Me.txtYear.Size = New System.Drawing.Size(40, 20)
-        Me.txtYear.TabIndex = 1
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(485, 74)
+        Me.Label3.Location = New System.Drawing.Point(525, 74)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(30, 13)
         Me.Label3.TabIndex = 1020
@@ -135,9 +129,10 @@ Partial Class formDaily1
         '
         'cboHour
         '
+        Me.cboHour.Enabled = False
         Me.cboHour.FormattingEnabled = True
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboHour.Location = New System.Drawing.Point(524, 72)
+        Me.cboHour.Location = New System.Drawing.Point(570, 70)
         Me.cboHour.Name = "cboHour"
         Me.cboHour.Size = New System.Drawing.Size(39, 21)
         Me.cboHour.TabIndex = 4
@@ -307,6 +302,7 @@ Partial Class formDaily1
         Me.recNumberTextBox.Name = "recNumberTextBox"
         Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
         Me.recNumberTextBox.TabIndex = 1180
+        Me.recNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'btnMoveNext
         '
@@ -341,17 +337,36 @@ Partial Class formDaily1
         '
         Me.lblInsDel.AutoSize = True
         Me.lblInsDel.ForeColor = System.Drawing.Color.Blue
-        Me.lblInsDel.Location = New System.Drawing.Point(391, 104)
+        Me.lblInsDel.Location = New System.Drawing.Point(391, 102)
         Me.lblInsDel.Name = "lblInsDel"
         Me.lblInsDel.Size = New System.Drawing.Size(241, 13)
         Me.lblInsDel.TabIndex = 1172
         Me.lblInsDel.Text = "Press Pg Down to Insert Cell and Pg Up to Delete"
+        '
+        'cboYear
+        '
+        Me.cboYear.FormattingEnabled = True
+        Me.cboYear.Location = New System.Drawing.Point(193, 70)
+        Me.cboYear.Name = "cboYear"
+        Me.cboYear.Size = New System.Drawing.Size(55, 21)
+        Me.cboYear.TabIndex = 1
+        '
+        'lblInvaliDate
+        '
+        Me.lblInvaliDate.AutoSize = True
+        Me.lblInvaliDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInvaliDate.Location = New System.Drawing.Point(207, 52)
+        Me.lblInvaliDate.Name = "lblInvaliDate"
+        Me.lblInvaliDate.Size = New System.Drawing.Size(0, 15)
+        Me.lblInvaliDate.TabIndex = 1173
         '
         'formDaily1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(888, 479)
+        Me.Controls.Add(Me.lblInvaliDate)
+        Me.Controls.Add(Me.cboYear)
         Me.Controls.Add(Me.lblInsDel)
         Me.Controls.Add(Me.GroupBoxCommands)
         Me.Controls.Add(Me.Label3)
@@ -363,7 +378,6 @@ Partial Class formDaily1
         Me.Controls.Add(Me.cboStation)
         Me.Controls.Add(Me.cboMonth)
         Me.Controls.Add(Me.cboDay)
-        Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
         Me.Name = "formDaily1"
         Me.Text = "Data for some elements for one day"
@@ -381,7 +395,6 @@ Partial Class formDaily1
     Friend WithEvents cboStation As ComboBox
     Friend WithEvents cboMonth As ComboBox
     Friend WithEvents cboDay As ComboBox
-    Friend WithEvents txtYear As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents cboHour As ComboBox
     Friend WithEvents GroupBoxCommands As GroupBox
@@ -404,5 +417,6 @@ Partial Class formDaily1
     Friend WithEvents btnMoveFirst As Button
     Friend WithEvents btnPush As Button
     Friend WithEvents lblInsDel As Label
-
+    Friend WithEvents cboYear As ComboBox
+    Friend WithEvents lblInvaliDate As Label
 End Class

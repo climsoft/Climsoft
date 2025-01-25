@@ -251,19 +251,19 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim img As String
 
-        'img = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.Png"
-        img = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Gaps.Png"
-        'img = "C:\Users\UNDP\Desktop\Gaps.Png"
+        frmCharts.SaveImageFormat(invChart)
 
-        With invChart
-            .Dock = DockStyle.None
-            .SaveImage(img, System.Drawing.Imaging.ImageFormat.Png)
-        End With
+        'Dim img As String
+
+        ''img = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.Png"
+        'img = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Gaps.Png"
+        ''img = "C:\Users\UNDP\Desktop\Gaps.Png"
+
+        'With invChart
+        '    .Dock = DockStyle.None
+        '    .SaveImage(img, System.Drawing.Imaging.ImageFormat.Png)
+        'End With
     End Sub
 
-    Private Sub FontDialog1_Apply(sender As Object, e As EventArgs)
-
-    End Sub
 End Class

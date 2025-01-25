@@ -34,6 +34,11 @@ Public Class formDaily1
             Exit Sub
         End If
 
+        ' Populate the Year Combobox with the last 5 years from the current
+        For i = 0 To 5
+            cboYear.Items.Add(DateAndTime.Year(Now()) - i)
+        Next
+
         'Populate the form with data from the first record if there is any
         tabNext = True
 
@@ -87,7 +92,7 @@ Public Class formDaily1
 
             If maxrows > 0 Then
                 cboStation.SelectedValue = ds.Tables("form_daily1").Rows(inc).Item("stationId")
-                txtYear.Text = ds.Tables("form_daily1").Rows(inc).Item("yyyy")
+                cboYear.Text = ds.Tables("form_daily1").Rows(inc).Item("yyyy")
                 cboMonth.Text = ds.Tables("form_daily1").Rows(inc).Item("mm")
                 cboDay.Text = ds.Tables("form_daily1").Rows(inc).Item("dd")
                 cboHour.Text = ds.Tables("form_daily1").Rows(inc).Item("hh")
@@ -176,11 +181,13 @@ Public Class formDaily1
             End If
 
             Me.CenterToScreen()
-
+            conn.Close()
         Catch ex As Exception
+            conn.Close()
             MessageBox.Show(ex.Message)
+
         End Try
-        conn.Close()
+
 
         ClsTranslations.TranslateForm(Me)
 
@@ -217,7 +224,8 @@ Public Class formDaily1
                 Next
 
                 For i = 0 To .Columns.Count - 1
-                    posY1 = 127
+                    'posY1 = 127
+                    posY1 = 137
                     eName = Strings.Left(.Columns(i).ColumnName, 8)
                     If eName = "Val_Elem" Then
 
@@ -228,13 +236,13 @@ Public Class formDaily1
 
                         If fldsValue Mod 16 = 0 Then
                             edx = 0
-                            posY1 = 127
+                            posY1 = 137
 
                             ' Draw Values Column header
                             lblVheader = New Windows.Forms.Label
                             lblVheader.Name = "lblValue" & colmn
                             lblVheader.Text = "Value"
-                            lblVheader.Location = New System.Drawing.Point(277 + 243 * colmn, 111)
+                            lblVheader.Location = New System.Drawing.Point(277 + 243 * colmn, 119)
                             lblVheader.Size = New System.Drawing.Size(34, 13)
                             Me.Controls.Add(lblVheader)
 
@@ -242,7 +250,7 @@ Public Class formDaily1
                             lblFheader = New Windows.Forms.Label
                             lblFheader.Name = "lblFlag" & colmn
                             lblFheader.Text = "Flag"
-                            lblFheader.Location = New System.Drawing.Point(322 + 243 * colmn, 111)
+                            lblFheader.Location = New System.Drawing.Point(322 + 243 * colmn, 119)
                             lblFheader.Size = New System.Drawing.Size(27, 13)
                             Me.Controls.Add(lblFheader)
                         End If
@@ -283,16 +291,16 @@ Public Class formDaily1
             End With
             'compute Form height
             If fldsValue > 16 Then
-                Me.Height = 293 + 16 * 25 'Maximum height attained
+                Me.Height = 300 + 16 * 25 'Maximum height attained
             Else
-                Me.Height = 293 + fldsValue * 25
+                Me.Height = 300 + fldsValue * 25
             End If
 
             'compute Form width
             If colmn > 1 Then
-                Me.Width = 640 + 243 * (colmn - 1)
+                Me.Width = 740 + 243 * (colmn - 1)
             Else
-                Me.Width = 640        ' Minimum width at 2 columns only
+                Me.Width = 740        ' Minimum width at 2 columns only
             End If
             conn.Close()
             Return True
@@ -334,6 +342,17 @@ Public Class formDaily1
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
+        conn.ConnectionString = myConnectionString
+        conn.Open()
+
+        sql = "SELECT * FROM form_daily1;"
+        'where stationId ='" & cboStation.SelectedValue & "' and yyyy = " & txtYear.Text & " and mm = " & cboMonth.Text & " and dd = " & cboDay.Text & ";"
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        ds.Clear()
+        da.Fill(ds, "form_daily1")
+
+
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
@@ -344,7 +363,7 @@ Public Class formDaily1
         Try
             'Update header fields for form in database
             ds.Tables("form_daily1").Rows(inc).Item("stationId") = cboStation.SelectedValue
-            ds.Tables("form_daily1").Rows(inc).Item("yyyy") = txtYear.Text
+            ds.Tables("form_daily1").Rows(inc).Item("yyyy") = cboYear.Text
             ds.Tables("form_daily1").Rows(inc).Item("mm") = cboMonth.Text
             ds.Tables("form_daily1").Rows(inc).Item("dd") = cboDay.Text
 
@@ -373,8 +392,10 @@ Public Class formDaily1
 
             'Show message for successful updating or record.
             recUpdate.messageBoxRecordedUpdated()
+            conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message)
+            conn.Close()
         End Try
     End Sub
 
@@ -384,57 +405,75 @@ Public Class formDaily1
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
-        If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
+        Try
+            If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
 
-            'Display message to show that delete operation has been cancelled
-            recDelete.messageBoxOperationCancelled()
-            Exit Sub
-        End If
+                'Display message to show that delete operation has been cancelled
+                recDelete.messageBoxOperationCancelled()
+                Exit Sub
+            End If
 
-        ds.Tables("form_daily1").Rows(inc).Delete()
-        da.Update(ds, "form_daily1")
-        maxrows = maxrows - 1
-        inc = 0
+            'MsgBox(inc)
 
-        'Call subroutine for record navigation
-        navigateRecords()
+            ds.Tables("form_daily1").Rows(inc).Delete()
+            da.Update(ds, "form_daily1")
+            MsgBox("Record Successfully Deleted!")
+            maxrows = maxrows - 1
+
+            If ds.Tables("form_daily1").Rows.Count > 0 Then
+                inc = inc - 1
+                If inc < 0 Then inc = 0
+            Else
+                formPopulate()
+                Exit Sub
+            End If
+
+            'Call subroutine for records navigation
+            navigateRecords()
+
+        Catch ex As Exception
+            MsgBox("Deleted Record Failed!. Close and reopen the form. Then browse for the desired record. Repeat the Delete action")
+        End Try
+
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        Dim n As Integer, ctl As Control
-        n = 0
-        For Each ctl In Me.Controls
-            'Check if some observation values have been entered
-            'If Strings.Left(ctl.Name, 6) = "txtVal" And IsNumeric(ctl.Text) Then n = 1
-            If Strings.Left(ctl.Name, 6) = "txtVal" Then n = 1
-        Next ctl
+        ClearTboxes()
 
-        'Check if header information is complete. If the header information is complete and there is at least on obs value then,
-        'carry out the next actions, otherwise bring up message showing that there is insufficient data
-        If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(txtYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 Then
+        'Dim n As Integer, ctl As Control
+        'n = 0
+        'For Each ctl In Me.Controls
+        '    'Check if some observation values have been entered
+        '    'If Strings.Left(ctl.Name, 6) = "txtVal" And IsNumeric(ctl.Text) Then n = 1
+        '    If Strings.Left(ctl.Name, 6) = "txtVal" Then n = 1
+        'Next ctl
 
-            'The "btnClear" when clicked is meant to clear the form of any new data entered after clicking the Addnew button or in other words 
-            'to undo the AddNew button process before the record can be committed to the datasource table linked to the DataSet.
-            'So all the buttons that were disabled after the AddNew button was clicked should be enabled back again and the Commit button
-            'disabled until the AddNew button is clicked
+        ''Check if header information is complete. If the header information is complete and there is at least on obs value then,
+        ''carry out the next actions, otherwise bring up message showing that there is insufficient data
+        'If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(cboYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 Then
 
-            btnAddNew.Enabled = True
-            btnCommit.Enabled = False
-            btnDelete.Enabled = True
-            btnUpdate.Enabled = True
-            btnMoveFirst.Enabled = True
-            btnMoveLast.Enabled = True
-            btnMoveNext.Enabled = True
-            btnMovePrevious.Enabled = True
+        '    'The "btnClear" when clicked is meant to clear the form of any new data entered after clicking the Addnew button or in other words 
+        '    'to undo the AddNew button process before the record can be committed to the datasource table linked to the DataSet.
+        '    'So all the buttons that were disabled after the AddNew button was clicked should be enabled back again and the Commit button
+        '    'disabled until the AddNew button is clicked
 
-            'Set Record position index to first record
-            inc = 0
+        '    btnAddNew.Enabled = True
+        '    btnCommit.Enabled = False
+        '    btnDelete.Enabled = True
+        '    btnUpdate.Enabled = True
+        '    btnMoveFirst.Enabled = True
+        '    btnMoveLast.Enabled = True
+        '    btnMoveNext.Enabled = True
+        '    btnMovePrevious.Enabled = True
 
-            'Call subroutine for record navigation
-            navigateRecords()
-        Else
-            MsgBox("Incomplete header information and insufficient observation data!", MsgBoxStyle.Exclamation)
-        End If
+        '    'Set Record position index to first record
+        '    inc = 0
+
+        '    'Call subroutine for record navigation
+        '    navigateRecords()
+        'Else
+        '    MsgBox("Incomplete header information and insufficient observation data!", MsgBoxStyle.Exclamation)
+        'End If
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -549,10 +588,6 @@ Public Class formDaily1
         frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
     End Sub
 
-    Private Sub cboDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged
-        'If Len(cboDay.Text) > 0 Then formPopulate()
-    End Sub
-
     Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
         Me.Cursor = Cursors.WaitCursor
         If FldName.DataPush("form_daily1") Then
@@ -563,8 +598,8 @@ Public Class formDaily1
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub GroupBoxCommands_Enter(sender As Object, e As EventArgs) Handles GroupBoxCommands.Enter
-
+    Private Sub txtYear_TextChanged(sender As Object, e As EventArgs)
+        'formPopulate()
     End Sub
 
     Private Sub formDaily1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
@@ -580,6 +615,7 @@ Public Class formDaily1
         flagtextBoxSuffix = ""
         flagIndexDiff = valueFldsTotal
 
+        'MsgBox(e.KeyCode)
         Try
             'If {ENTER} key is pressed
             If e.KeyCode = Keys.Enter Then
@@ -593,7 +629,7 @@ Public Class formDaily1
 
                     Dim elmcode As String
                     elmcode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
-                    If Not objKeyPress.Entry_Verification(conn, Me, cboStation.SelectedValue, elmcode, txtYear.Text, cboMonth.Text, cboDay.Text, "06") Then
+                    If Not objKeyPress.Entry_Verification(conn, Me, cboStation.SelectedValue, elmcode, cboYear.Text, cboMonth.Text, cboDay.Text, "06") Then
                         MsgBox("Can't derify data")
                     End If
                 End If
@@ -679,12 +715,12 @@ Public Class formDaily1
                     '    End If
                     'End If
 
-                ElseIf Me.ActiveControl.Name = "txtYear" Then
+                ElseIf Me.ActiveControl.Name = "cboYear" Then
                     'Check for numeric
-                    objKeyPress.checkIsNumeric(txtYear.Text, txtYear)
+                    objKeyPress.checkIsNumeric(cboYear.Text, cboYear)
                     'Check valid year
                     If tabNext = True Then
-                        objKeyPress.checkValidYear(txtYear.Text, txtYear)
+                        objKeyPress.checkValidYear(cboYear.Text, cboYear)
                     End If
                 ElseIf Me.ActiveControl.Name = "cboMonth" Then
                     'Check for numeric
@@ -699,10 +735,10 @@ Public Class formDaily1
                         objKeyPress.checkValidDay(cboDay.Text, cboDay)
                     End If
                     If tabNext = True Then
-                        objKeyPress.checkValidDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
+                        objKeyPress.checkValidDate(cboDay.Text, cboMonth.Text, cboYear.Text, cboDay)
                     End If
                     If tabNext = True Then
-                        objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
+                        objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, cboYear.Text, cboDay)
                     End If
                 ElseIf Me.ActiveControl.Name = "cboHour" Then
                     'Check for numeric
@@ -763,7 +799,16 @@ Public Class formDaily1
         navigateRecords()
     End Sub
 
+    'Private Sub cboDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged
+    '    formPopulate()
+    'End Sub
+
+    'Private Sub cboStation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStation.SelectedIndexChanged
+    '    formPopulate()
+    'End Sub
+
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+
         btnMoveFirst.Enabled = False
         btnMoveLast.Enabled = False
         btnMoveNext.Enabled = False
@@ -774,13 +819,14 @@ Public Class formDaily1
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        Dim dataFormRecCount, seqRecCount As Integer
+        Dim dataFormRecCount As Integer
         Dim strStation, strYear, strMonth, strDay, Sql As String
 
         strStation = cboStation.SelectedValue
         Try
             dataFormRecCount = ds.Tables("form_daily1").Rows.Count
-
+            'MsgBox(dataFormRecCount & " " & inc)
+            'MsgBox(ds.Tables("form_daily1").Rows(dataFormRecCount - 1).Item("stationId"))
             If dataFormRecCount > 0 Then
                 cboStation.SelectedValue = ds.Tables("form_daily1").Rows(dataFormRecCount - 1).Item("stationId")
                 strYear = ds.Tables("form_daily1").Rows(dataFormRecCount - 1).Item("yyyy")
@@ -789,7 +835,7 @@ Public Class formDaily1
 
             Else
                 cboStation.SelectedValue = cboStation.SelectedValue
-                strYear = txtYear.Text
+                strYear = cboYear.Text
                 strMonth = cboMonth.Text
                 strDay = cboDay.Text
             End If
@@ -825,9 +871,9 @@ Public Class formDaily1
                 btnClear.Enabled = False
                 ' Compute the new header entries for the next record
                 cboStation.SelectedValue = strStation
-                recdate = DateSerial(txtYear.Text, cboMonth.Text, cboDay.Text)
+                recdate = DateSerial(cboYear.Text, cboMonth.Text, cboDay.Text)
                 recdate = DateAdd("d", 1, recdate)
-                txtYear.Text = DateAndTime.Year(recdate)
+                cboYear.Text = DateAndTime.Year(recdate)
                 cboMonth.Text = DateAndTime.Month(recdate)
                 cboDay.Text = DateAndTime.Day(recdate)
                 'txtVal_Elem101Field004.Focus()
@@ -841,7 +887,8 @@ Public Class formDaily1
             Dim lastRec, nextRec As Date
 
             SQL_last_record = "Select stationId, yyyy, mm, dd, Signature, entryDatetime from form_daily1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_daily1);"
-                    dsLastDataRecord.Clear()
+
+            dsLastDataRecord.Clear()
             daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
             daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
 
@@ -850,7 +897,7 @@ Public Class formDaily1
             cboStation.SelectedValue = stn
             lastRecDay = cboDay.Text
             lastRecMonth = cboMonth.Text
-            lastRecYear = txtYear.Text
+            lastRecYear = cboYear.Text
 
             If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
                 stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
@@ -865,21 +912,23 @@ Public Class formDaily1
             lastRec = DateSerial(lastRecYear, lastRecMonth, lastRecDay)
             nextRec = DateAdd("d", 1, lastRec)
 
-            txtYear.Text = DateAndTime.Year(nextRec)
+            cboYear.Text = DateAndTime.Year(nextRec)
             cboMonth.Text = DateAndTime.Month(nextRec)
             cboDay.Text = DateAndTime.Day(nextRec)
 
-            ' Sequencer code Ends there
 
-            'Clear textboxes for observation values
-            'Observation values range from column 6 i.e. column index 5 to column 29 i.e. column index 28
-            For m = 5 To (valueFldsTotal + 4)
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        ctl.Text = ""
-                    End If
-                Next ctl
-            Next m
+
+            '' Sequencer code Ends there
+
+            ''Clear textboxes for observation values
+            ''Observation values range from column 6 i.e. column index 5 to column 29 i.e. column index 28
+            'For m = 5 To (valueFldsTotal + 4)
+            '    For Each ctl In Me.Controls
+            '        If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+            '            ctl.Text = ""
+            '        End If
+            '    Next ctl
+            'Next m
 
             'Clear textboxes for observation flags
             'Observation flags range from column 30 i.e. column index 29 to column 53 i.e. column index 52
@@ -894,16 +943,23 @@ Public Class formDaily1
             'Set record index to last record
             inc = maxrows
 
-            'Display record position in record navigation Text Box
-            recNumberTextBox.Text = "Record " & maxrows + 1 & " of " & maxrows + 1
-            'txtVal_Elem101Field004.Focus()
+            formPopulate()
+
+
+            ''Display record position in record navigation Text Box
+            'recNumberTextBox.Text = "Record " & maxrows + 1 & " of " & maxrows + 1
+            ''txtVal_Elem101Field004.Focus()
+            ''formPopulate()
             txtbox1Focus()
+            'recNumberTextBox.Text = "New Record"
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+
     End Sub
 
     Private Sub btnMovePrevious_Click(sender As Object, e As EventArgs) Handles btnMovePrevious.Click
+
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim noPreviousRec As New dataEntryGlobalRoutines
 
@@ -936,6 +992,7 @@ Public Class formDaily1
     Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
         'In order to move to move to the last record the record index is set to the maximum number of records minus one.
         inc = maxrows - 1
+
         'Call subroutine for record navigation
         navigateRecords()
     End Sub
@@ -948,30 +1005,30 @@ Public Class formDaily1
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
 
         ' Confirm the validaty of the observation date
-        If Not IsDate(cboDay.Text & "/" & cboMonth.Text & "/" & txtYear.Text) Or Not objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay) Then
+        If Not IsDate(cboDay.Text & "/" & cboMonth.Text & "/" & cboYear.Text) Or Not objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, cboYear.Text, cboDay) Then
             MsgBox("Confirm observation date")
-            txtYear.Focus()
+            cboYear.Focus()
             Exit Sub
         End If
 
         Dim n As Integer, ctl As Control, msgTxtInsufficientData As String
         n = 0
-        'Try
-        For Each ctl In Me.Controls
+        Try
+            For Each ctl In Me.Controls
                 'Check if some observation values have been entered
                 If Strings.Left(ctl.Name, 6) = "txtVal" And IsNumeric(ctl.Text) Then n = 1
             Next ctl
 
             'Check if header information is complete. If the header information is complete and there is at least one obs value then,
             'carry out the next actions, otherwise bring up message showing that there is insufficient data
-            If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(txtYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 Then
+            If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(cboYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 Then
 
-            '-----------------------------------------
-            'Carry out QC checks before saving data
-            'Dim objKeyPress As New dataEntryGlobalRoutines
+                '-----------------------------------------
+                'Carry out QC checks before saving data
+                'Dim objKeyPress As New dataEntryGlobalRoutines
 
-            'Check item exists
-            For Each ctl In Me.Controls
+                'Check item exists
+                For Each ctl In Me.Controls
                     If ctl.Name = "cboStation" Then
                         If Not objKeyPress.checkExists(True, ctl) Then
                             ctl.Focus()
@@ -982,7 +1039,7 @@ Public Class formDaily1
                 'Check for numeric
                 For Each ctl In Me.Controls
                     obsValue = ctl.Text
-                    If ctl.Name = "txtYear" Or ctl.Name = "cboMonth" Or ctl.Name = "cboDay" Or ctl.Name = "cboHour" _
+                    If ctl.Name = "cboYear" Or ctl.Name = "cboMonth" Or ctl.Name = "cboDay" Or ctl.Name = "cboHour" _
                         Or (Strings.Left(ctl.Name, 6) = "txtVal" And Strings.Len(ctl.Text)) > 0 Then
                         If Not objKeyPress.checkIsNumeric(obsValue, Me.ActiveControl) Then
                             ctl.Focus()
@@ -993,7 +1050,7 @@ Public Class formDaily1
                 'Check valid year
                 For Each ctl In Me.Controls
                     obsValue = ctl.Text
-                    If ctl.Name = "txtYear" Then
+                    If ctl.Name = "cboYear" Then
                         If Not objKeyPress.checkValidYear(obsValue, ctl) Then
                             ctl.Focus()
                         End If
@@ -1031,7 +1088,7 @@ Public Class formDaily1
                 Next ctl
 
                 'Check future date
-                If Not objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay) Then
+                If Not objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, cboYear.Text, cboDay) Then
                     cboDay.Focus()
                 End If
 
@@ -1093,25 +1150,28 @@ Public Class formDaily1
                 'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
                 'must be declared for the Update method to work.
                 Dim m As Integer
-                'Dim ctl As Control
+
                 Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
                 Dim dsNewRow As DataRow
                 'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
                 Dim recCommit As New dataEntryGlobalRoutines
-                'Try
 
                 dsNewRow = ds.Tables("form_daily1").NewRow
                 'Add a new record to the data source table
                 ds.Tables("form_daily1").Rows.Add(dsNewRow)
+
+                maxrows = ds.Tables("form_daily1").Rows.Count
+                inc = maxrows - 1
+
                 'Commit observation header information to database
                 ds.Tables("form_daily1").Rows(inc).Item("stationId") = cboStation.SelectedValue
-                ds.Tables("form_daily1").Rows(inc).Item("yyyy") = txtYear.Text
+                ds.Tables("form_daily1").Rows(inc).Item("yyyy") = cboYear.Text
                 ds.Tables("form_daily1").Rows(inc).Item("mm") = cboMonth.Text
                 ds.Tables("form_daily1").Rows(inc).Item("dd") = cboDay.Text
                 ds.Tables("form_daily1").Rows(inc).Item("hh") = cboHour.Text
 
-            ' txtSignature.Text = frmLogin.txtUser.Text
-            ds.Tables("form_daily1").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
+                ' txtSignature.Text = frmLogin.txtUser.Text
+                ds.Tables("form_daily1").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
 
                 'Added field for timestamp to allow recording when data was entered. 20160419, ASM.
                 ds.Tables("form_daily1").Rows(inc).Item("entryDatetime") = Now()
@@ -1138,7 +1198,7 @@ Public Class formDaily1
 
                 da.Update(ds, "form_daily1")
 
-                ''Display message for successful record commit to table
+                'Display message for successful record commit to table
                 recCommit.messageBoxCommit()
 
                 btnAddNew.Enabled = True
@@ -1159,73 +1219,77 @@ Public Class formDaily1
                 maxrows = ds.Tables("form_daily1").Rows.Count
                 inc = maxrows - 1
 
-                'Call subroutine for record navigation
                 navigateRecords()
-                'Catch ex As Exception
-                '    MessageBox.Show(ex.Message)
-                'End Try
+                btnAddNew.Focus()
             Else
-            msgTxtInsufficientData = "Incomplete header information or insufficient observation data!"
-            MsgBox(msgTxtInsufficientData, MsgBoxStyle.Exclamation)
+                msgTxtInsufficientData = "Incomplete header information or insufficient observation data!"
+                MsgBox(msgTxtInsufficientData, MsgBoxStyle.Exclamation)
             End If
 
-        'Catch ex As Exception
-        'MsgBox(ex.Message)
-        'End Try
+        Catch ex As Exception
+            MsgBox(ex.Message & " at btnCommit")
+        End Try
     End Sub
 
     Private Sub navigateRecords()
+
+
         'Display the values of data fields from the dataset in the corresponding textboxes on the form.
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
         '--------------------------
-        Dim stn As String
-        stn = ds.Tables("form_daily1").Rows(inc).Item("stationId")
-        cboStation.SelectedValue = stn
-        '--------------------------
-        'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
-        'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
+        Try
+            Dim stn As String
 
-        txtYear.Text = ds.Tables("form_daily1").Rows(inc).Item("yyyy")
-        cboMonth.Text = ds.Tables("form_daily1").Rows(inc).Item("mm")
-        cboDay.Text = ds.Tables("form_daily1").Rows(inc).Item("dd")
-        cboHour.Text = ds.Tables("form_daily1").Rows(inc).Item("hh")
+            stn = ds.Tables("form_daily1").Rows(inc).Item("stationId")
+            cboStation.SelectedValue = stn
+            '--------------------------
+            'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
+            'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
 
-        Dim m As Integer
-        Dim ctl As Control
+            'cboStation.SelectedValue = ds.Tables("form_daily1").Rows(inc).Item("stationId")
+            cboYear.Text = ds.Tables("form_daily1").Rows(inc).Item("yyyy")
+            cboMonth.Text = ds.Tables("form_daily1").Rows(inc).Item("mm")
+            cboDay.Text = ds.Tables("form_daily1").Rows(inc).Item("dd")
+            cboHour.Text = ds.Tables("form_daily1").Rows(inc).Item("hh")
 
-        'Display observation values in coressponding textboxes
-        'Observation values start in column 6 i.e. column index 5, and end in column 54 i.e. column Index 53
-        For m = 5 To (valueFldsTotal + 4)
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_daily1").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("form_daily1").Rows(inc).Item(m)
-                    Else
-                        ctl.Text = ""
+            Dim m As Integer
+            Dim ctl As Control
+
+            'Display observation values in coressponding textboxes
+            'Observation values start in column 6 i.e. column index 5, and end in column 54 i.e. column Index 53
+            For m = 5 To (valueFldsTotal + 4)
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        If Not IsDBNull(ds.Tables("form_daily1").Rows(inc).Item(m)) Then
+                            ctl.Text = ds.Tables("form_daily1").Rows(inc).Item(m)
+                        Else
+                            ctl.Text = ""
+                        End If
+
                     End If
+                Next ctl
+            Next m
 
-                End If
-            Next ctl
-        Next m
+            'Display observation flags in coressponding textboxes
+            'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
+            For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        If Not IsDBNull(ds.Tables("form_daily1").Rows(inc).Item(m)) Then
+                            ctl.Text = ds.Tables("form_daily1").Rows(inc).Item(m)
+                        Else
+                            ctl.Text = ""
+                        End If
 
-        'Display observation flags in coressponding textboxes
-        'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
-        For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_daily1").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("form_daily1").Rows(inc).Item(m)
-                    Else
-                        ctl.Text = ""
                     End If
-
-                End If
-            Next ctl
-        Next m
-
-        displayRecordNumber()
+                Next ctl
+            Next m
+            displayRecordNumber()
+        Catch ex As Exception
+            MsgBox(ex.Message & " at navigateRecord")
+        End Try
     End Sub
 
     Sub txtbox1Focus()
@@ -1241,31 +1305,273 @@ Public Class formDaily1
         Next
     End Sub
 
-    'Sub formPopulate()
-    '    Dim Ctrl As Control
+    Sub formPopulate()
+        Dim Ctrl As Control
+        Dim dattime, dtt As String
 
-    '    Try
-    '        sql = "select * from form_daily1 where stationId ='" & cboStation.Text & "' and yyyy = " & txtYear.Text & " and mm = " & cboMonth.Text & " and dd = " & cboDay.Text & ";"
-    '        'MsgBox(sql)
-    '        ds.Clear()
-    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-    '        da.Fill(ds, "records")
+        Try
 
-    '        With ds.Tables("records")
-    '            If .Rows.Count > 0 Then
-    '                For i = 5 To .Columns.Count - 1
-    '                    For Each Ctrl In Me.Controls
-    '                        If Strings.Left(Ctrl.Name, 6) = "txtVal" And Val(Strings.Right(Ctrl.Name, 3)) = i Then
-    '                            Ctrl.Text = .Rows(0).Item(i)
-    '                        End If
-    '                    Next
-    '                Next
-    '            End If
-    '        End With
-    '    Catch ex As Exception
-    '        'MsgBox(ex.Message)
-    '    End Try
+            dattime = DateSerial(cboYear.Text, cboMonth.Text, cboDay.Text) & " " & cboHour.Text.PadLeft(2, "0") & ":00:00"
+            dtt = cboYear.Text & "-" & cboMonth.Text & "-" & cboDay.Text & " " & cboHour.Text.PadLeft(2, "0") & ":00:00"
+
+            If DateDiff("h", Now(), dattime) >= 0 Or Not IsDate(dtt) Then
+
+                'MsgBox("Observations for future date not allowed")
+
+                ' dissable text boxes
+                DisableTboxes()
+                lblInvaliDate.Text = "Invalid Date Entry! Check Values"
+                lblInvaliDate.ForeColor = Color.Red
+                cboYear.Focus()
+                Exit Sub
+            Else
+                ' enable text boxes
+                lblInvaliDate.Text = ""
+                EnablableTboxes()
+            End If
+
+            Dim conn1 As New MySql.Data.MySqlClient.MySqlConnection
+            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim ds1 As New DataSet
+
+
+            conn1.ConnectionString = myConnectionString
+            conn1.Open()
+            sql = "select * from form_daily1 where stationId ='" & cboStation.SelectedValue & "' and yyyy = " & cboYear.Text & " and mm = " & cboMonth.Text & " and dd = " & cboDay.Text & " and hh = " & cboHour.Text & ";"
+
+            ds1.Clear()
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da1.Fill(ds1, "form_daily1")
+            conn1.Close()
+
+
+            With ds1.Tables("form_daily1")
+                If .Rows.Count = 0 Then
+
+                    btnAddNew.Enabled = True
+                    btnCommit.Enabled = True
+                    btnUpdate.Enabled = False
+                    btnDelete.Enabled = False
+                    btnClear.Enabled = True
+                    btnMoveFirst.Enabled = False
+                    btnMoveNext.Enabled = False
+                    btnMovePrevious.Enabled = False
+                    btnMoveLast.Enabled = False
+                    recNumberTextBox.Text = "New Record"
+
+                Else
+                    btnAddNew.Enabled = True
+                    btnCommit.Enabled = False
+                    btnUpdate.Enabled = True
+                    btnDelete.Enabled = True
+                    btnClear.Enabled = False
+                    btnMoveFirst.Enabled = True
+                    btnMoveNext.Enabled = True
+                    btnMovePrevious.Enabled = True
+                    btnMoveLast.Enabled = True
+                    GetRecordNo(cboStation.SelectedValue, cboYear.Text, cboMonth.Text, cboDay.Text, cboHour.Text)
+                End If
+
+                If .Rows.Count > 0 Then
+                    ' Populate Values
+                    For i = 5 To .Columns.Count - 1
+                        For Each Ctrl In Me.Controls
+                            If Strings.Left(Ctrl.Name, 6) = "txtVal" And Val(Strings.Right(Ctrl.Name, 3)) = i Then
+                                If Not IsDBNull(.Rows(0).Item(i)) Then
+                                    Ctrl.Text = .Rows(0).Item(i)
+                                Else
+                                    Ctrl.Text = ""
+                                End If
+
+                            End If
+                        Next
+                    Next
+                    ' Populate Flags
+                    For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
+                        For Each ctl In Me.Controls
+                            If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                                If Not IsDBNull(.Rows(0).Item(m)) Then
+                                    ctl.Text = .Rows(0).Item(m)
+                                Else
+                                    ctl.Text = ""
+                                End If
+                            End If
+                        Next ctl
+                    Next m
+                Else
+                    ' Clear Values
+                    For i = 5 To .Columns.Count - 1
+                        For Each Ctrl In Me.Controls
+                            If Strings.Left(Ctrl.Name, 6) = "txtVal" And Val(Strings.Right(Ctrl.Name, 3)) = i Then
+                                Ctrl.Text = ""
+                            End If
+                        Next
+                    Next
+
+                    ' Clear Flags
+                    For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
+                        For Each ctl In Me.Controls
+                            If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                                ctl.Text = ""
+                            End If
+                        Next ctl
+                    Next m
+                End If
+            End With
+
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+            'conn1.Close()
+        End Try
+    End Sub
+
+    Private Sub cboYear_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboYear.SelectedIndexChanged
+        formPopulate()
+    End Sub
+
+
+    Private Sub cboMonth_TextChanged(sender As Object, e As EventArgs) Handles cboMonth.TextChanged
+        formPopulate()
+    End Sub
+
+
+
+    'Private Sub cboDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged
+
     'End Sub
+
+    Private Sub cboDay_TextChanged(sender As Object, e As EventArgs) Handles cboDay.TextChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboStation_TextChanged(sender As Object, e As EventArgs) Handles cboStation.TextChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboStation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStation.SelectedIndexChanged
+        formPopulate()
+    End Sub
+
+
+    'Private Sub cboDay_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedValueChanged
+    '    formPopulate()
+    'End Sub
+
+    Sub GetRecordNo(stn As String, yyyy As Long, mm As Integer, dd As Integer, hh As Integer)
+        Dim conn2 As New MySql.Data.MySqlClient.MySqlConnection
+        Dim da2 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim ds2 As New DataSet
+
+        Try
+            conn2.ConnectionString = myConnectionString
+            conn2.Open()
+
+            sql = "SELECT * FROM form_daily1"
+            da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn2)
+            ds2.Clear()
+            da2.Fill(ds2, "records")
+            conn2.Close()
+
+            With ds2.Tables("records")
+                For i = 0 To .Rows.Count - 1
+                    If .Rows(i).Item("stationId") = stn And .Rows(i).Item("yyyy") = yyyy And .Rows(i).Item("mm") = mm And .Rows(i).Item("dd") = dd And .Rows(i).Item("dd") = dd Then
+                        inc = i
+                        'recNumberTextBox.Text = "Record " & inc + 1 & " of " & .Rows.Count + 1
+                        displayRecordNumber()
+                        'MsgBox(inc)
+                        Exit For
+                    End If
+                Next
+            End With
+
+        Catch ex As Exception
+            conn2.Close()
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    'Private Sub cboHour_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboHour.SelectedIndexChanged
+    '    formPopulate()
+    'End Sub
+
+    Private Sub cboHour_TextChanged(sender As Object, e As EventArgs) Handles cboHour.TextChanged
+        formPopulate()
+    End Sub
+
+    'Private Sub cboHour_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboHour.SelectedValueChanged
+    '    formPopulate()
+    'End Sub
+
+    Sub DisableTboxes()
+        Dim Ctl As Control
+
+        For Each Ctl In Me.Controls
+            If Strings.Left(Ctl.Name, 6) = "txtVal" Or Strings.Left(Ctl.Name, 7) = "txtFlag" Then
+                Ctl.Text = ""
+                Ctl.Enabled = False
+            End If
+        Next
+
+        btnAddNew.Enabled = False
+        btnCommit.Enabled = False
+        btnUpdate.Enabled = False
+        btnDelete.Enabled = False
+        btnClear.Enabled = False
+
+        recNumberTextBox.Text = ""
+
+    End Sub
+
+    Sub EnablableTboxes()
+        Dim Ctl As Control
+        For Each Ctl In Me.Controls
+            If Strings.Left(Ctl.Name, 6) = "txtVal" Or Strings.Left(Ctl.Name, 7) = "txtFlag" Then
+                Ctl.Enabled = True
+            End If
+        Next
+    End Sub
+
+    Private Sub cboYear_TextChanged(sender As Object, e As EventArgs) Handles cboYear.TextChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboYear_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboYear.SelectedValueChanged
+        formPopulate()
+    End Sub
+
+    Sub ClearTboxes()
+        Dim Ctl As Control
+        For Each Ctl In Me.Controls
+            If Strings.Left(Ctl.Name, 6) = "txtVal" Or Strings.Left(Ctl.Name, 7) = "txtFlag" Then
+                Ctl.Text = ""
+            End If
+        Next
+    End Sub
+
+    Private Sub cboMonth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMonth.SelectedIndexChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboMonth_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMonth.SelectedValueChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboDay_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedValueChanged
+        formPopulate()
+    End Sub
+
+    'Private Sub cboDay_LostFocus(sender As Object, e As EventArgs) Handles cboDay.LostFocus
+    '    If txtYear.Text <> "" And cboMonth.Text <> "" And cboDay.Text <> "" Then
+    '        'MsgBox(Me.Height)
+    '        'MsgBox(cboDay.Text)
+    '        formPopulate()
+    '    End If
+    'End Sub
+
     'Sub shiftFlags()
     '    Dim flagIndexDiff As Integer
     '    Dim ctls As Control
@@ -1361,7 +1667,7 @@ Public Class formDaily1
     '        conn.Open()
     '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
     '        ds.Clear()
-    '        da.Fill(ds, "flds")
+    '        da3.Fill(ds, "flds")
     '        conn.Close()
 
     '        With ds.Tables("flds")

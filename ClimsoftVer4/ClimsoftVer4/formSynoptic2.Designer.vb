@@ -31,7 +31,6 @@ Partial Class formSynoptic2
         Me.cboMonth = New System.Windows.Forms.ComboBox()
         Me.cboDay = New System.Windows.Forms.ComboBox()
         Me.cboHour = New System.Windows.Forms.ComboBox()
-        Me.txtYear = New System.Windows.Forms.TextBox()
         Me.GroupBoxCommands = New System.Windows.Forms.GroupBox()
         Me.btnPush = New System.Windows.Forms.Button()
         Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
@@ -64,6 +63,8 @@ Partial Class formSynoptic2
         Me.lblPrecip = New System.Windows.Forms.Label()
         Me.lblTemperature = New System.Windows.Forms.Label()
         Me.lblInsDel = New System.Windows.Forms.Label()
+        Me.cboYear = New System.Windows.Forms.ComboBox()
+        Me.lblInvaliDate = New System.Windows.Forms.Label()
         YyyyLabel = New System.Windows.Forms.Label()
         Me.GroupBoxCommands.SuspendLayout()
         Me.grpUnits.SuspendLayout()
@@ -149,13 +150,6 @@ Partial Class formSynoptic2
         Me.cboHour.Size = New System.Drawing.Size(39, 21)
         Me.cboHour.TabIndex = 4
         Me.cboHour.Text = "0"
-        '
-        'txtYear
-        '
-        Me.txtYear.Location = New System.Drawing.Point(175, 51)
-        Me.txtYear.Name = "txtYear"
-        Me.txtYear.Size = New System.Drawing.Size(40, 20)
-        Me.txtYear.TabIndex = 1
         '
         'GroupBoxCommands
         '
@@ -488,11 +482,31 @@ Partial Class formSynoptic2
         Me.lblInsDel.TabIndex = 701
         Me.lblInsDel.Text = "Press Pg Down to Insert Cell and Pg Up to Delete"
         '
+        'cboYear
+        '
+        Me.cboYear.FormattingEnabled = True
+        Me.cboYear.Location = New System.Drawing.Point(175, 50)
+        Me.cboYear.Name = "cboYear"
+        Me.cboYear.Size = New System.Drawing.Size(55, 21)
+        Me.cboYear.TabIndex = 1
+        '
+        'lblInvaliDate
+        '
+        Me.lblInvaliDate.AutoSize = True
+        Me.lblInvaliDate.BackColor = System.Drawing.Color.Transparent
+        Me.lblInvaliDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInvaliDate.Location = New System.Drawing.Point(193, 77)
+        Me.lblInvaliDate.Name = "lblInvaliDate"
+        Me.lblInvaliDate.Size = New System.Drawing.Size(0, 15)
+        Me.lblInvaliDate.TabIndex = 1189
+        '
         'formSynoptic2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(915, 501)
+        Me.Controls.Add(Me.lblInvaliDate)
+        Me.Controls.Add(Me.cboYear)
         Me.Controls.Add(Me.lblInsDel)
         Me.Controls.Add(Me.grpUnits)
         Me.Controls.Add(Me.GroupBoxCommands)
@@ -505,7 +519,6 @@ Partial Class formSynoptic2
         Me.Controls.Add(Me.cboDay)
         Me.Controls.Add(Me.cboHour)
         Me.Controls.Add(YyyyLabel)
-        Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
         Me.Name = "formSynoptic2"
         Me.RightToLeftLayout = True
@@ -527,7 +540,6 @@ Partial Class formSynoptic2
     Friend WithEvents cboMonth As ComboBox
     Friend WithEvents cboDay As ComboBox
     Friend WithEvents cboHour As ComboBox
-    Friend WithEvents txtYear As TextBox
     Friend WithEvents GroupBoxCommands As GroupBox
     Friend WithEvents chkRepeatEntry As CheckBox
     Friend WithEvents btnTDCF As Button
@@ -560,4 +572,6 @@ Partial Class formSynoptic2
     Friend WithEvents lblTemperature As Label
     Friend WithEvents lblInsDel As Label
     Friend WithEvents btnPush As Button
+    Friend WithEvents cboYear As ComboBox
+    Friend WithEvents lblInvaliDate As Label
 End Class

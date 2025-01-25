@@ -11,9 +11,9 @@
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
         'MsgBox(inc)
         ' Confirm the validaty of the observation date
-        If Not IsDate(cboDay.Text & "/" & cboMonth.Text & "/" & txtYear.Text) Or Not objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay) Then
+        If Not IsDate(cboDay.Text & "/" & cboMonth.Text & "/" & cboYear.Text) Or Not objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, cboYear.Text, cboDay) Then
             MsgBox("Confirm observation date")
-            txtYear.Focus()
+            cboYear.Focus()
             Exit Sub
         End If
 
@@ -27,166 +27,167 @@
 
             'Check if header information is complete. If the header information is complete and there is at least one obs value then,
             'carry out the next actions, otherwise bring up message showing that there is insufficient data
-            If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(txtYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 Then
+            If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(cboYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 And Strings.Len(cboHour.Text) > 0 Then
 
-            '-----------------------------------------
-            'Carry out QC checks before saving data
-            'Dim objKeyPress As New dataEntryGlobalRoutines
+                '-----------------------------------------
+                'Carry out QC checks before saving data
+                'Dim objKeyPress As New dataEntryGlobalRoutines
 
-            'Check item exists
-            For Each ctl In Me.Controls
-                If ctl.Name = "cboStation" Then
-                    If Not objKeyPress.checkExists(True, ctl) Then
-                        ctl.Focus()
+                'Check item exists
+                For Each ctl In Me.Controls
+                    If ctl.Name = "cboStation" Then
+                        If Not objKeyPress.checkExists(True, ctl) Then
+                            ctl.Focus()
+                        End If
                     End If
-                End If
-            Next ctl
+                Next ctl
 
-            'Check for numeric
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If ctl.Name = "txtYear" Or ctl.Name = "cboMonth" Or ctl.Name = "cboDay" Or ctl.Name = "cboHour" _
+                'Check for numeric
+                For Each ctl In Me.Controls
+                    obsValue = ctl.Text
+                    If ctl.Name = "txtYear" Or ctl.Name = "cboMonth" Or ctl.Name = "cboDay" Or ctl.Name = "cboHour" _
                             Or (Strings.Left(ctl.Name, 6) = "txtVal" And Strings.Len(ctl.Text)) > 0 Then
-                    If Not objKeyPress.checkIsNumeric(obsValue, Me.ActiveControl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check valid year
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If ctl.Name = "txtYear" Then
-                    If Not objKeyPress.checkValidYear(obsValue, ctl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check valid month
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If ctl.Name = "cboMonth" Then
-                    If Not objKeyPress.checkValidMonth(obsValue, ctl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check valid day
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If ctl.Name = "cboDay" Then
-                    If Not objKeyPress.checkValidDay(obsValue, ctl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check valid hour
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If ctl.Name = "cboHour" Then
-                    If Not objKeyPress.checkValidHour(obsValue, ctl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check future date
-            If Not objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay) Then
-                cboDay.Focus()
-            End If
-
-            'Check limits
-            'Dim elemCode As Integer
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If Strings.Left(ctl.Name, 6) = "txtVal" Then
-
-
-                    elemCode = Val(Strings.Mid(ctl.Name, 12, 3))
-
-                    sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
-
-                    daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
-                    'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
-                    dsValueLimits.Clear()
-                    'Add row for element code associated with active control
-                    daValueLimits.Fill(dsValueLimits, "obselement")
-
-                    'Get element upper limit
-                    If dsValueLimits.Tables("obselement").Rows.Count < 0 Then
-                        If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
-                            valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
-                        Else
-                            valUpperLimit = ""
+                        If Not objKeyPress.checkIsNumeric(obsValue, Me.ActiveControl) Then
+                            ctl.Focus()
                         End If
+                    End If
+                Next ctl
 
-                        'Get element lower limit
-                        If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
-                            valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
-                        Else
-                            valLowerLimit = ""
+                'Check valid year
+                For Each ctl In Me.Controls
+                    obsValue = ctl.Text
+                    If ctl.Name = "txtYear" Then
+                        If Not objKeyPress.checkValidYear(obsValue, ctl) Then
+                            ctl.Focus()
                         End If
+                    End If
+                Next ctl
 
-                        'Check upper limit
-                        If ctl.Text <> "" And valUpperLimit <> "" Then
-                            If Not objKeyPress.checkUpperLimit(ctl, obsValue, valUpperLimit) Then
-                                ctl.Focus()
+                'Check valid month
+                For Each ctl In Me.Controls
+                    obsValue = ctl.Text
+                    If ctl.Name = "cboMonth" Then
+                        If Not objKeyPress.checkValidMonth(obsValue, ctl) Then
+                            ctl.Focus()
+                        End If
+                    End If
+                Next ctl
+
+                'Check valid day
+                For Each ctl In Me.Controls
+                    obsValue = ctl.Text
+                    If ctl.Name = "cboDay" Then
+                        If Not objKeyPress.checkValidDay(obsValue, ctl) Then
+                            ctl.Focus()
+                        End If
+                    End If
+                Next ctl
+
+                'Check valid hour
+                For Each ctl In Me.Controls
+                    obsValue = ctl.Text
+                    If ctl.Name = "cboHour" Then
+                        If Not objKeyPress.checkValidHour(obsValue, ctl) Then
+                            ctl.Focus()
+                        End If
+                    End If
+                Next ctl
+
+                'Check future date
+                If Not objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, cboYear.Text, cboDay) Then
+                    cboDay.Focus()
+                End If
+
+                'Check limits
+                'Dim elemCode As Integer
+                For Each ctl In Me.Controls
+                    obsValue = ctl.Text
+                    If Strings.Left(ctl.Name, 6) = "txtVal" Then
+
+
+                        elemCode = Val(Strings.Mid(ctl.Name, 12, 3))
+
+                        sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
+
+                        daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                        'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
+                        dsValueLimits.Clear()
+                        'Add row for element code associated with active control
+                        daValueLimits.Fill(dsValueLimits, "obselement")
+
+                        'Get element upper limit
+                        If dsValueLimits.Tables("obselement").Rows.Count < 0 Then
+                            If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
+                                valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
+                            Else
+                                valUpperLimit = ""
+                            End If
+
+                            'Get element lower limit
+                            If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
+                                valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
+                            Else
+                                valLowerLimit = ""
+                            End If
+
+                            'Check upper limit
+                            If ctl.Text <> "" And valUpperLimit <> "" Then
+                                If Not objKeyPress.checkUpperLimit(ctl, obsValue, valUpperLimit) Then
+                                    ctl.Focus()
+                                End If
+                            End If
+
+                            'Check lower limit
+                            If ctl.Text <> "" And valLowerLimit <> "" Then
+                                If Not objKeyPress.checkLowerLimit(ctl, obsValue, valLowerLimit) Then
+                                    ctl.Focus()
+                                End If
                             End If
                         End If
-
-                        'Check lower limit
-                        If ctl.Text <> "" And valLowerLimit <> "" Then
-                            If Not objKeyPress.checkLowerLimit(ctl, obsValue, valLowerLimit) Then
-                                ctl.Focus()
-                            End If
-                        End If
                     End If
-                End If
-            Next ctl
+                Next ctl
 
-            '---------------------------------------
-            'Confirm if you want to continue and save data from key-entry form to database table
-            Dim msgTxtContinue As String
-            msgTxtContinue = "Do you want to continue and commit to database table?"
-            If MsgBox(msgTxtContinue, MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
+                '---------------------------------------
+                'Confirm if you want to continue and save data from key-entry form to database table
+                Dim msgTxtContinue As String
+                msgTxtContinue = "Do you want to continue and commit to database table?"
+                If MsgBox(msgTxtContinue, MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
 
 
-            'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
-            'must be declared for the Update method to work.
-            Dim m As Integer
-            'Dim ctl As Control
-            Dim conr As New MySql.Data.MySqlClient.MySqlConnection
-            Dim dsr As New DataSet
-            Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
+                'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
+                'must be declared for the Update method to work.
+                Dim m As Integer
+                'Dim ctl As Control
+                Dim conr As New MySql.Data.MySqlClient.MySqlConnection
+                Dim dsr As New DataSet
+                Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
                 'Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(dar)
 
                 'Try
 
-                myConnectionString = frmLogin.txtusrpwd.Text
                 conr.ConnectionString = myConnectionString
-            conr.Open()
+                conr.Open()
 
-                sql = "SELECT * from form_synoptic2_TDCF;"
+                    sql = "SELECT * from form_synoptic2_TDCF;"
                 dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conr)
-            dsr.Clear()
+                dsr.Clear()
                 dar.Fill(dsr, "form_synoptic2_TDCF")
                 conr.Close()
 
                 With dsr.Tables("form_synoptic2_TDCF")
-                    inc = .Rows.Count
+                    'inc = .Rows.Count
                     Dim dsNewRow As DataRow
                     Dim recCommit As New dataEntryGlobalRoutines
                     Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(dar)
 
                     dsNewRow = .NewRow
-                    'Add a new record to the data source table
+                    ''Add a new record to the data source table
                     .Rows.Add(dsNewRow)
+                    inc = .Rows.Count - 1
+
                     'Commit observation header information to database
                     .Rows(inc).Item("stationId") = cboStation.SelectedValue
-                    .Rows(inc).Item("yyyy") = txtYear.Text
+                    .Rows(inc).Item("yyyy") = cboYear.Text
                     .Rows(inc).Item("mm") = cboMonth.Text
                     .Rows(inc).Item("dd") = cboDay.Text
                     .Rows(inc).Item("hh") = cboHour.Text
@@ -229,6 +230,7 @@
                     ''Display message for successful record commit to table
                     recCommit.messageBoxCommit()
 
+
                     btnAddNew.Enabled = True
                     btnClear.Enabled = False
                     btnCommit.Enabled = False
@@ -246,22 +248,24 @@
 
                     maxrows = .Rows.Count
                     inc = maxrows - 1
+
+
+                    'Call subroutine for record navigation
+                    'MsgBox(inc)
+
+                    navigateRecords()
+                    btnAddNew.Focus()
+                    '    Catch ex As Exception
+                    '    MessageBox.Show(ex.Message)
+                    'End Try
                 End With
-
-                'Call subroutine for record navigation
-
-                navigateRecords()
-            btnAddNew.Focus()
-            '    Catch ex As Exception
-            '    MessageBox.Show(ex.Message)
-            'End Try
-        Else
-            msgTxtInsufficientData = "Incomplete header information or insufficient observation data!"
+            Else
+                msgTxtInsufficientData = "Incomplete header information or insufficient observation data!"
             MsgBox(msgTxtInsufficientData, MsgBoxStyle.Exclamation)
         End If
 
         Catch ex As Exception
-        MsgBox(ex.Message)
+            MsgBox(ex.Message & " at btnComit")
         End Try
     End Sub
 
@@ -276,8 +280,8 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        Dim dataFormRecCount, seqRecCount As Integer
-        Dim strStation, strYear, strMonth, strDay, strHour, Sql As String
+        Dim dataFormRecCount As Integer
+        Dim strStation, strYear, strMonth, strDay, strHour As String
 
         strStation = cboStation.SelectedValue
         Try
@@ -293,7 +297,7 @@
 
                 Else
                     cboStation.SelectedValue = cboStation.SelectedValue
-                    strYear = txtYear.Text
+                    strYear = cboYear.Text
                     strMonth = cboMonth.Text
                     strDay = cboDay.Text
                     strHour = cboHour.Text
@@ -332,9 +336,9 @@
                 btnClear.Enabled = False
                 ' Compute the new header entries for the next record
                 cboStation.SelectedValue = strStation
-                recdate = DateSerial(txtYear.Text, cboMonth.Text, cboDay.Text)
+                recdate = DateSerial(cboYear.Text, cboMonth.Text, cboDay.Text)
                 recdate = DateAdd("d", 1, recdate)
-                txtYear.Text = DateAndTime.Year(recdate)
+                cboYear.Text = DateAndTime.Year(recdate)
                 cboMonth.Text = DateAndTime.Month(recdate)
                 cboDay.Text = DateAndTime.Day(recdate)
                 'txtVal_Elem101Field004.Focus()
@@ -359,7 +363,7 @@
             lastRecHour = cboHour.Text
             lastRecDay = cboDay.Text
             lastRecMonth = cboMonth.Text
-            lastRecYear = txtYear.Text
+            lastRecYear = cboYear.Text
 
             If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
                 stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
@@ -375,7 +379,7 @@
 
             nextRec = lastRec
             If DateAdd_Hour(nextRec, hh) Then
-                txtYear.Text = DateAndTime.Year(nextRec)
+                cboYear.Text = DateAndTime.Year(nextRec)
                 cboMonth.Text = DateAndTime.Month(nextRec)
                 cboDay.Text = DateAndTime.Day(nextRec)
                 cboHour.Text = hh
@@ -383,10 +387,27 @@
                 cboHour.Text = hh
             End If
 
+            'inc = maxrows
+
+            ''Display record position in record navigation Text Box
+            'recNumberTextBox.Text = "Record " & maxrows + 1 & " of " & maxrows + 1
+            'txtbox1Focus()
+
+            'Clear textboxes for observation flags
+            'Observation flags range from column 30 i.e. column index 29 to column 53 i.e. column index 52
+            For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ctl.Text = ""
+                    End If
+                Next ctl
+            Next m
+
+            'Set record index to last record
             inc = maxrows
 
-            'Display record position in record navigation Text Box
-            recNumberTextBox.Text = "Record " & maxrows + 1 & " of " & maxrows + 1
+            formPopulate()
+
             txtbox1Focus()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -396,39 +417,43 @@
     Dim inc, maxrows, valueFldsTotal As Integer
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        Dim n As Integer, ctl As Control
-        n = 0
-        For Each ctl In Me.Controls
-            'Check if some observation values have been entered
-            If Strings.Left(ctl.Name, 6) = "txtVal" Then n = 1
-        Next ctl
 
-        'Check if header information is complete. If the header information is complete and there is at least on obs value then,
-        'carry out the next actions, otherwise bring up message showing that there is insufficient data
-        If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(txtYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 Then
+        ClearTboxes()
 
-            'The "btnClear" when clicked is meant to clear the form of any new data entered after clicking the Addnew button or in other words 
-            'to undo the AddNew button process before the record can be committed to the datasource table linked to the DataSet.
-            'So all the buttons that were disabled after the AddNew button was clicked should be enabled back again and the Commit button
-            'disabled until the AddNew button is clicked
 
-            btnAddNew.Enabled = True
-            btnCommit.Enabled = False
-            btnDelete.Enabled = True
-            btnUpdate.Enabled = True
-            btnMoveFirst.Enabled = True
-            btnMoveLast.Enabled = True
-            btnMoveNext.Enabled = True
-            btnMovePrevious.Enabled = True
+        'Dim n As Integer, ctl As Control
+        'n = 0
+        'For Each ctl In Me.Controls
+        '    'Check if some observation values have been entered
+        '    If Strings.Left(ctl.Name, 6) = "txtVal" Then n = 1
+        'Next ctl
 
-            'Set Record position index to first record
-            inc = 0
+        ''Check if header information is complete. If the header information is complete and there is at least on obs value then,
+        ''carry out the next actions, otherwise bring up message showing that there is insufficient data
+        'If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(cboYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 Then
 
-            'Call subroutine for record navigation
-            navigateRecords()
-        Else
-            MsgBox("Incomplete header information and insufficient observation data!", MsgBoxStyle.Exclamation)
-        End If
+        '    'The "btnClear" when clicked is meant to clear the form of any new data entered after clicking the Addnew button or in other words 
+        '    'to undo the AddNew button process before the record can be committed to the datasource table linked to the DataSet.
+        '    'So all the buttons that were disabled after the AddNew button was clicked should be enabled back again and the Commit button
+        '    'disabled until the AddNew button is clicked
+
+        '    btnAddNew.Enabled = True
+        '    btnCommit.Enabled = False
+        '    btnDelete.Enabled = True
+        '    btnUpdate.Enabled = True
+        '    btnMoveFirst.Enabled = True
+        '    btnMoveLast.Enabled = True
+        '    btnMoveNext.Enabled = True
+        '    btnMovePrevious.Enabled = True
+
+        '    'Set Record position index to first record
+        '    inc = 0
+
+        '    'Call subroutine for record navigation
+        '    navigateRecords()
+        'Else
+        '    MsgBox("Incomplete header information and insufficient observation data!", MsgBoxStyle.Exclamation)
+        'End If
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -445,6 +470,7 @@
     End Sub
 
     Private Sub btnMovePrevious_Click(sender As Object, e As EventArgs) Handles btnMovePrevious.Click
+
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim noPreviousRec As New dataEntryGlobalRoutines
 
@@ -457,39 +483,57 @@
             'instantiate the "dataEntryCommonRoutines" class in the Declaration above.
             noPreviousRec.messageBoxNoPreviousRecord()
         End If
+
+
+        ''Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        'Dim noPreviousRec As New dataEntryGlobalRoutines
+
+        'If inc > 0 Then
+        '    inc = inc - 1
+        '    navigateRecords()
+        'Else
+        '    'If the record Index is equal to zero an error message must be displayed to show that there is no more previous record.
+        '    'The message to be displayed is provided by a subroutine in the "dataEntryCommonRoutines" class hence the need to
+        '    'instantiate the "dataEntryCommonRoutines" class in the Declaration above.
+        '    noPreviousRec.messageBoxNoPreviousRecord()
+        'End If
     End Sub
 
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
+
         'In order to move to move to the first record the record index is set to zero.
         inc = 0
         'Call subroutine for record navigation
+
         navigateRecords()
+
     End Sub
 
     Private Sub btnMoveNext_Click(sender As Object, e As EventArgs) Handles btnMoveNext.Click
+
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim noNextRec As New dataEntryGlobalRoutines
         If inc < (maxrows - 1) Then
             inc = inc + 1
             'Call subroutine for record navigation
-            'MsgBox(inc)
             navigateRecords()
-            'MsgBox(1 & " " & inc)
         Else
             'If the record Index is equal to maximum number of rows minus one, an error message must be displayed to show that
             'there is no more next record.The message to be displayed is provided by a subroutine in the "dataEntryCommonRoutines" class
             'hence the need to instantiate the "dataEntryCommonRoutines" class in the Declaration above.
-            'MsgBox(2)
             noNextRec.messageBoxNoNextRecord()
-            'MsgBox(2 & " " & inc)
         End If
+
     End Sub
 
     Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
         'In order to move to move to the last record the record index is set to the maximum number of records minus one.
         inc = maxrows - 1
+
         'Call subroutine for record navigation
         navigateRecords()
+
+
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
@@ -598,23 +642,41 @@
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
-        If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
-
-            'Display message to show that delete operation has been cancelled
-            recDelete.messageBoxOperationCancelled()
-            Exit Sub
-        End If
 
         Try
+            If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
+
+                'Display message to show that delete operation has been cancelled
+                recDelete.messageBoxOperationCancelled()
+                Exit Sub
+            End If
+
+
             ds.Tables("form_synoptic2_TDCF").Rows(inc).Delete()
             da.Update(ds, "form_synoptic2_TDCF")
+
+            MsgBox("Record Successfully Deleted")
             maxrows = maxrows - 1
-            inc = 0
+
+            If ds.Tables("form_synoptic2_TDCF").Rows.Count > 0 Then
+                inc = inc - 1
+                If inc < 0 Then inc = 0
+            Else
+                formPopulate()
+                Exit Sub
+            End If
+            'inc = 0
+
+            'Call subroutine for records navigation
+            navigateRecords()
+
+            'maxrows = maxrows - 1
+            'inc = 0
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox("Deleted Record Failed!. Close and reopen the form. Then browse for the desired record. Repeat the Delete action")
         End Try
-        'Call subroutine for record navigation
-        navigateRecords()
+        ''Call subroutine for record navigation
+        'navigateRecords()
     End Sub
 
 
@@ -638,6 +700,11 @@
             Exit Sub
         End If
 
+        ' Populate the Year Combobox with the last 5 years from the current
+        For i = 0 To 5
+            cboYear.Items.Add(DateAndTime.Year(Now()) - i)
+        Next
+
         'Populate the form with data from the first record if there is any
         tabNext = True
 
@@ -654,6 +721,46 @@
         inc = 0
         myConnectionString = frmLogin.txtusrpwd.Text
 
+
+        'conn.ConnectionString = myConnectionString
+        'conn.Open()
+
+        'sql = "SELECT * FROM form_synoptic2_TDCF"
+        'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        'da.Fill(ds, "form_synoptic2_TDCF")
+        'conn.Close()
+
+        'maxrows = ds.Tables("form_synoptic2_TDCF").Rows.Count
+
+        '--------------------------------
+        'Fill ComboBox for station identifier with station list from station table
+        Try
+                Dim m As Integer
+                Dim ctl As Control
+                Dim ds1 As New DataSet
+                Dim sql1 As String
+                Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+
+                sql1 = "SELECT stationId,stationName FROM station"
+                da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+
+                conn.Close()
+
+                da1.Fill(ds1, "station")
+                If ds1.Tables("station").Rows.Count > 0 Then
+                    With cboStation
+                        .DataSource = ds1.Tables("station")
+                        .DisplayMember = "stationName"
+                        .ValueMember = "stationId"
+                        .SelectedIndex = 0
+                    End With
+                Else
+                    MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+                End If
+            Catch x1 As Exception
+                MsgBox(x1.Message)
+            End Try
+
         Try
             conn.ConnectionString = myConnectionString
             conn.Open()
@@ -664,35 +771,11 @@
             conn.Close()
 
             maxrows = ds.Tables("form_synoptic2_TDCF").Rows.Count
-
-            '--------------------------------
-            'Fill ComboBox for station identifier with station list from station table
-            Dim m As Integer
-            Dim ctl As Control
-            Dim ds1 As New DataSet
-            Dim sql1 As String
-            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
-
-            sql1 = "SELECT stationId,stationName FROM station"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
-
-            da1.Fill(ds1, "station")
-            If ds1.Tables("station").Rows.Count > 0 Then
-                With cboStation
-                    .DataSource = ds1.Tables("station")
-                    .DisplayMember = "stationName"
-                    .ValueMember = "stationId"
-                    .SelectedIndex = 0
-                End With
-            Else
-                MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
-            End If
-
             'Initialize header information for data-entry form
             With ds.Tables("form_synoptic2_TDCF")
                 If maxrows > 0 Then
                     cboStation.SelectedValue = .Rows(inc).Item("stationId")
-                    txtYear.Text = .Rows(inc).Item("yyyy")
+                    cboYear.Text = .Rows(inc).Item("yyyy")
                     cboMonth.Text = .Rows(inc).Item("mm")
                     cboDay.Text = .Rows(inc).Item("dd")
                     cboHour.Text = .Rows(inc).Item("hh")
@@ -794,6 +877,8 @@
         'End Try
         'conn.Close()
         'inc = 0
+
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub formSynoptic2_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
@@ -823,7 +908,7 @@
 
                     Dim elmcode As String
                     elmcode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
-                    If Not objKeyPress.Entry_Verification(conn, Me, cboStation.SelectedValue, elmcode, txtYear.Text, cboMonth.Text, cboDay.Text, "06") Then
+                    If Not objKeyPress.Entry_Verification(conn, Me, cboStation.SelectedValue, elmcode, cboYear.Text, cboMonth.Text, cboDay.Text, "06") Then
                         MsgBox("Can't derify data")
                     End If
                 End If
@@ -972,12 +1057,12 @@
                         End If
                     Next
 
-                ElseIf Me.ActiveControl.Name = "txtYear" Then
+                ElseIf Me.ActiveControl.Name = "cboYear" Then
                     'Check for numeric
-                    objKeyPress.checkIsNumeric(txtYear.Text, txtYear)
+                    objKeyPress.checkIsNumeric(cboYear.Text, cboYear)
                     'Check valid year
                     If tabNext = True Then
-                        objKeyPress.checkValidYear(txtYear.Text, txtYear)
+                        objKeyPress.checkValidYear(cboYear.Text, cboYear)
                     End If
                 ElseIf Me.ActiveControl.Name = "cboMonth" Then
                     'Check for numeric
@@ -992,10 +1077,10 @@
                         objKeyPress.checkValidDay(cboDay.Text, cboDay)
                     End If
                     If tabNext = True Then
-                        objKeyPress.checkValidDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
+                        objKeyPress.checkValidDate(cboDay.Text, cboMonth.Text, cboYear.Text, cboDay)
                     End If
                     If tabNext = True Then
-                        objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
+                        objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, cboYear.Text, cboDay)
                     End If
                 ElseIf Me.ActiveControl.Name = "cboHour" Then
                     'Check for numeric
@@ -1160,9 +1245,9 @@
             End With
             'compute Form height
             If fldsValue > 19 Then
-                Me.Height = 210 + 19 * 25 'Maximum height attained
+                Me.Height = 220 + 19 * 25 'Maximum height attained
             Else
-                Me.Height = 210 + fldsValue * 25
+                Me.Height = 220 + fldsValue * 25
             End If
 
             'compute Form width
@@ -1207,6 +1292,7 @@
 
     Public Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
+
         recNumberTextBox.Text = "Record " & inc + 1 & " of " & maxrows
     End Sub
 
@@ -1223,88 +1309,90 @@
     End Sub
 
     Private Sub navigateRecords()
+
         'Display the values of data fields from the dataset in the corresponding textboxes on the form.
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
         '--------------------------
-        Dim stn As String
-
-        conn.ConnectionString = myConnectionString
-        conn.Open()
-
-
         Try
+            Dim stn As String
+            'Dim danv As MySql.Data.MySqlClient.MySqlDataAdapter
+
+            conn.Open()
+
+
             sql = "SELECT * from form_synoptic2_TDCF;"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "form_synoptic2_TDCF")
             conn.Close()
 
-
             With ds.Tables("form_synoptic2_TDCF")
-                If ds.Tables("form_synoptic2_TDCF").Rows.Count > 0 Then
-                    stn = .Rows(inc).Item("stationId")
-                    cboStation.SelectedValue = stn
-                    '--------------------------
-                    'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
-                    'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
 
-                    txtYear.Text = .Rows(inc).Item("yyyy")
-                    cboMonth.Text = .Rows(inc).Item("mm")
-                    cboDay.Text = .Rows(inc).Item("dd")
-                    cboHour.Text = .Rows(inc).Item("hh")
+                'MsgBox(.Rows(inc).Item("stationId") & " " & .Rows(inc).Item("yyyy") & " " & .Rows(inc).Item("mm") & " " & .Rows(inc).Item("dd") & " " & .Rows(inc).Item("hh"))
+                stn = .Rows(inc).Item("stationId")
 
-                    Dim m As Integer
-                    Dim ctl As Control
+                cboStation.SelectedValue = stn
+                '--------------------------
+                'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
+                'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
 
-                    'Display observation values in coressponding textboxes
-                    'Observation values start in column 6 i.e. column index 5, and end in column 54 i.e. column Index 53
-                    For m = 5 To (valueFldsTotal + 4)
-                        For Each ctl In Me.Controls
-                            If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                                If Not IsDBNull(.Rows(inc).Item(m)) Then
-                                    ctl.Text = .Rows(inc).Item(m)
-                                Else
-                                    ctl.Text = ""
-                                End If
+                'cboStation.SelectedValue = ds.Tables("form_daily1").Rows(inc).Item("stationId")
 
+                cboYear.Text = .Rows(inc).Item("yyyy")
+                cboMonth.Text = .Rows(inc).Item("mm")
+                cboDay.Text = .Rows(inc).Item("dd")
+                cboHour.Text = .Rows(inc).Item("hh")
+
+                'MsgBox(.Rows(inc).Item("stationId") & " " & .Rows(inc).Item("yyyy") & " " & .Rows(inc).Item("mm") & " " & .Rows(inc).Item("dd") & " " & .Rows(inc).Item("hh"))
+
+                Dim m As Integer
+                Dim ctl As Control
+
+                'Display observation values in coressponding textboxes
+                'Observation values start in column 6 i.e. column index 5, and end in column 54 i.e. column Index 53
+
+                For m = 5 To (valueFldsTotal + 4)
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(.Rows(inc).Item(m)) Then
+                                ctl.Text = .Rows(inc).Item(m)
+                            Else
+                                ctl.Text = ""
                             End If
-                        Next ctl
-                    Next m
 
-                    'Display observation flags in coressponding textboxes
-                    'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
-                    For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
-                        For Each ctl In Me.Controls
-                            If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                                If Not IsDBNull(.Rows(inc).Item(m)) Then
-                                    ctl.Text = .Rows(inc).Item(m)
-                                Else
-                                    ctl.Text = ""
-                                End If
+                        End If
+                    Next ctl
+                Next m
 
+                'Display observation flags in coressponding textboxes
+                'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
+                For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(.Rows(inc).Item(m)) Then
+                                ctl.Text = .Rows(inc).Item(m)
+                            Else
+                                ctl.Text = ""
                             End If
-                        Next ctl
-                    Next m
 
-                    'Display observation units to database
-                    cboTempUnits.Text = .Rows(inc).Item("temperatureUnits")
-                    cboPrecipUnits.Text = .Rows(inc).Item("precipUnits")
-                    cboCloudheightUnits.Text = .Rows(inc).Item("cloudHeightUnits")
-                    cboVisibilityUnits.Text = .Rows(inc).Item("visUnits")
-                    cboWindSpdUnits.Text = .Rows(inc).Item("windspdUnits")
-                Else
-                    inc = 0
-                    recNumberTextBox.Text = "Record " & inc & " of " & maxrows
-                    Exit Sub
-                End If
-
+                        End If
+                    Next ctl
+                Next m
+                'Display observation units to database
+                cboTempUnits.Text = .Rows(inc).Item("temperatureUnits")
+                cboPrecipUnits.Text = .Rows(inc).Item("precipUnits")
+                cboCloudheightUnits.Text = .Rows(inc).Item("cloudHeightUnits")
+                cboVisibilityUnits.Text = .Rows(inc).Item("visUnits")
+                cboWindSpdUnits.Text = .Rows(inc).Item("windspdUnits")
             End With
+
             displayRecordNumber()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at navigateRecords")
         End Try
+
     End Sub
 
     Sub txtbox1Focus()
@@ -1332,6 +1420,8 @@
         conu.Open()
 
         sql = "SELECT * from form_synoptic2_TDCF;"
+        sql = "SELECT * from form_synoptic2_TDCF where yyyy = '" & cboYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
+
         dau = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conu)
         dsu.Clear()
         dau.Fill(dsu, "form_synoptic2_TDCF")
@@ -1346,18 +1436,18 @@
 
         Try
             With dsu.Tables("form_synoptic2_TDCF")
-                .Rows(inc).Item("stationId") = cboStation.SelectedValue
-                .Rows(inc).Item("yyyy") = txtYear.Text
-                .Rows(inc).Item("mm") = cboMonth.Text
-                .Rows(inc).Item("dd") = cboDay.Text
-                .Rows(inc).Item("hh") = cboHour.Text
+                .Rows(.Rows.Count - 1).Item("stationId") = cboStation.SelectedValue
+                .Rows(.Rows.Count - 1).Item("yyyy") = cboYear.Text
+                .Rows(.Rows.Count - 1).Item("mm") = cboMonth.Text
+                .Rows(.Rows.Count - 1).Item("dd") = cboDay.Text
+                .Rows(.Rows.Count - 1).Item("hh") = cboHour.Text
 
                 'Update observation values in database
                 'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
                 For m = 5 To (valueFldsTotal + 4) 'm = 5 To 53
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                            .Rows(inc).Item(m) = ctl.Text
+                            .Rows(.Rows.Count - 1).Item(m) = ctl.Text
                         End If
                     Next ctl
                 Next m
@@ -1367,17 +1457,17 @@
                 For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4 'm = 54 To 102
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                            .Rows(inc).Item(m) = ctl.Text
+                            .Rows(.Rows.Count - 1).Item(m) = ctl.Text
                         End If
                     Next ctl
                 Next m
 
                 'Update observation units to database
-                .Rows(inc).Item("temperatureUnits") = cboTempUnits.Text
-                .Rows(inc).Item("precipUnits") = cboPrecipUnits.Text
-                .Rows(inc).Item("cloudHeightUnits") = cboCloudheightUnits.Text
-                .Rows(inc).Item("visUnits") = cboVisibilityUnits.Text
-                .Rows(inc).Item("windspdUnits") = cboWindSpdUnits.Text
+                .Rows(.Rows.Count - 1).Item("temperatureUnits") = cboTempUnits.Text
+                .Rows(.Rows.Count - 1).Item("precipUnits") = cboPrecipUnits.Text
+                .Rows(.Rows.Count - 1).Item("cloudHeightUnits") = cboCloudheightUnits.Text
+                .Rows(.Rows.Count - 1).Item("visUnits") = cboVisibilityUnits.Text
+                .Rows(.Rows.Count - 1).Item("windspdUnits") = cboWindSpdUnits.Text
 
             End With
             'The data adapter is used to update the record in the data source table
@@ -1395,6 +1485,9 @@
         Dim ctl As Control
         Dim codi, hh As String
         'If RecordExist Then msgbox ("Record Exists")
+
+        formPopulate()
+
         hh = cboHour.Text.PadLeft(2, "0")
         For Each ctl In Me.Controls
             codi = Strings.Mid(ctl.Name, 12, 3)
@@ -1405,7 +1498,7 @@
 
             ' Management of text boxes for daily observations that are entered through the synoptic form
             'If codi = "002" Or codi = "003" Then
-            If Val(codi) <= 100 And Strings.Left(ctl.Name, 3) = "txt" Then
+            If Val(codi) <= 100 And Strings.Left(ctl.Name, 3) = "txtval" Then
                 'hh = Val(FldName.RegkeyValue("key01"))
                 If Val(hh) = Val(FldName.RegkeyValue("key01")) Then ' Or hh = "18" Then
                     ctl.Enabled = True
@@ -1466,9 +1559,9 @@
             '    End If
             'End If
         Next
-
+        'formPopulate()
         '' Populate form if the record exist to avoid repeat entry
-        If RecordExist() Then Exit Sub
+        'If RecordExist() Then Exit Sub
         'populateForm()
         'End If
     End Sub
@@ -1481,7 +1574,7 @@
             conn.Open()
 
             ' Get all stations with the same observation time to constitute the subset of stations for encoding
-            sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic2_TDCF where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
+            sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic2_TDCF where yyyy = '" & cboYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
 
             'MsgBox(sql)
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -1490,7 +1583,7 @@
             kount = ds.Tables("form_synoptic2_TDCF").Rows.Count
 
             frmSynopTDCF.cboStation.Text = cboStation.Text
-            frmSynopTDCF.txtYear.Text = txtYear.Text
+            frmSynopTDCF.txtYear.Text = cboYear.Text
             frmSynopTDCF.cboMonth.Text = cboMonth.Text
             frmSynopTDCF.cboDay.Text = cboDay.Text
             frmSynopTDCF.cboHour.Text = cboHour.Text
@@ -1507,56 +1600,72 @@
         conn.Close()
     End Sub
 
-    Function RecordExist() As Boolean
-        Dim stn, yr, mn, dy, hr, sqlrec As String
-        Dim conr As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim dsr As New DataSet
+    'Function RecordExist() As Boolean
+    '    Dim stn, yr, mn, dy, hr, dattime, sqlrec As String
+    '    Dim conr As New MySql.Data.MySqlClient.MySqlConnection
+    '    Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
+    '    Dim dsr As New DataSet
 
-        Try
-            myConnectionString = frmLogin.txtusrpwd.Text
-            conr.ConnectionString = myConnectionString
-            conr.Open()
+    '    Try
+    '        dattime = DateSerial(cboYear.Text, cboMonth.Text, cboDay.Text) & " " & cboHour.Text.PadLeft(2, "0") & ":00:00"
 
-            stn = cboStation.SelectedValue
-            yr = txtYear.Text
-            mn = cboMonth.Text
-            dy = cboDay.Text
-            hr = cboHour.Text
+    '        If DateDiff("h", Now(), dattime) >= 0 Then
+    '            MsgBox("Observations for future date not allowed")
+    '            txtBoxesDisable()
+    '            Return False
+    '        Else
+    '            txtBoxesEnable()
+    '        End If
 
-            If Len(stn) > 0 And Len(yr) > 0 And Len(mn) > 0 And Len(dy) > 0 And Len(hr) > 0 Then
-                sqlrec = "select * from form_synoptic2_TDCF
-                          where stationId = '" & stn & "' and yyyy = '" & yr & "' and mm = '" & mn & "' and dd ='" & dy & "' and hh ='" & hr & "';"
+    '    Catch x1 As Exception
+    '        Return False
+    '    End Try
 
-                dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlrec, conn)
-                dsr.Clear()
-                dar.Fill(dsr, "Records")
-                conr.Close()
-                If dsr.Tables("Records").Rows.Count <> 0 Then
-                    PopulateForm(dsr)
-                    btnCommit.Enabled = False
-                    btnAddNew.Enabled = True
-                    btnUpdate.Enabled = True
-                    Return True
-                Else
-                    ClearValues()
-                    btnCommit.Enabled = True
-                    btnAddNew.Enabled = False
-                    btnUpdate.Enabled = False
-                    recNumberTextBox.Text = "New Record"
-                    Return False
-                End If
-                'MsgBox(stn & yr & mn & dy & hr)
-            End If
+    '    Try
+    '        myConnectionString = frmLogin.txtusrpwd.Text
+    '        conr.ConnectionString = myConnectionString
+    '        conr.Open()
 
-            conr.Close()
-            Return False
+    '        stn = cboStation.SelectedValue
+    '        yr = cboYear.Text 'cboYear.Text
+    '        mn = cboMonth.Text
+    '        dy = cboDay.Text
+    '        hr = cboHour.Text
 
-        Catch ex As Exception
-            conr.Close()
-            Return False
-        End Try
-    End Function
+    '        If Len(stn) > 0 And Len(yr) > 0 And Len(mn) > 0 And Len(dy) > 0 And Len(hr) > 0 Then
+    '            sqlrec = "select * from form_synoptic2_TDCF where stationId = '" & stn & "' and yyyy = '" & yr & "' and mm = '" & mn & "' and dd ='" & dy & "' and hh ='" & hr & "';"
+
+    '            dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlrec, conn)
+    '            dsr.Clear()
+    '            dar.Fill(dsr, "Records")
+    '            conr.Close()
+    '            If dsr.Tables("Records").Rows.Count <> 0 Then
+    '                PopulateForm(dsr)
+    '                btnCommit.Enabled = False
+    '                btnAddNew.Enabled = True
+    '                btnUpdate.Enabled = True
+    '                GetRecordNo(stn, yr, mn, dy, hr)
+
+    '                Return True
+    '            Else
+    '                ClearValues()
+    '                btnCommit.Enabled = True
+    '                btnAddNew.Enabled = False
+    '                btnUpdate.Enabled = False
+    '                recNumberTextBox.Text = "New Record"
+    '                Return False
+    '            End If
+    '            'MsgBox(stn & yr & mn & dy & hr)
+    '        End If
+
+    '        conr.Close()
+    '        Return False
+
+    '    Catch ex As Exception
+    '        conr.Close()
+    '        Return False
+    '    End Try
+    'End Function
 
 
     Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
@@ -1573,57 +1682,58 @@
 
     Private Sub cboStation_TextChanged(sender As Object, e As EventArgs) Handles cboStation.TextChanged
         'If RecordExist() Then MsgBox(cboStation.SelectedValue)
-        If RecordExist() Then Exit Sub
+        'If RecordExist() Then Exit Sub
+        formPopulate()
     End Sub
 
 
-    Sub PopulateForm(sr As DataSet)
+    'Sub PopulateForm(sr As DataSet)
 
-        Try
-            With sr.Tables("Records")
+    '    Try
+    '        With sr.Tables("Records")
 
-                Dim m As Integer
-                Dim ctl As Control
+    '            Dim m As Integer
+    '            Dim ctl As Control
 
-                For m = 5 To (valueFldsTotal + 4)
-                    For Each ctl In Me.Controls
-                        If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                            If Not IsDBNull(.Rows(0).Item(m)) Then
-                                ctl.Text = .Rows(0).Item(m)
-                            Else
-                                ctl.Text = ""
-                            End If
+    '            For m = 5 To (valueFldsTotal + 4)
+    '                For Each ctl In Me.Controls
+    '                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+    '                        If Not IsDBNull(.Rows(inc).Item(m)) Then
+    '                            ctl.Text = .Rows(inc).Item(m)
+    '                        Else
+    '                            ctl.Text = ""
+    '                        End If
 
-                        End If
-                    Next ctl
-                Next m
+    '                    End If
+    '                Next ctl
+    '            Next m
 
-                For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
-                    For Each ctl In Me.Controls
-                        If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                            If Not IsDBNull(.Rows(0).Item(m)) Then
-                                ctl.Text = .Rows(0).Item(m)
-                            Else
-                                ctl.Text = ""
-                            End If
+    '            For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
+    '                For Each ctl In Me.Controls
+    '                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+    '                        If Not IsDBNull(.Rows(inc).Item(m)) Then
+    '                            ctl.Text = .Rows(inc).Item(m)
+    '                        Else
+    '                            ctl.Text = ""
+    '                        End If
 
-                        End If
-                    Next ctl
-                Next m
+    '                    End If
+    '                Next ctl
+    '            Next m
 
-                'Display observation units to database
-                cboTempUnits.Text = .Rows(0).Item("temperatureUnits")
-                cboPrecipUnits.Text = .Rows(0).Item("precipUnits")
-                cboCloudheightUnits.Text = .Rows(0).Item("cloudHeightUnits")
-                cboVisibilityUnits.Text = .Rows(0).Item("visUnits")
-                cboWindSpdUnits.Text = .Rows(0).Item("windspdUnits")
+    '            'Display observation units to database
+    '            cboTempUnits.Text = .Rows(inc).Item("temperatureUnits")
+    '            cboPrecipUnits.Text = .Rows(inc).Item("precipUnits")
+    '            cboCloudheightUnits.Text = .Rows(inc).Item("cloudHeightUnits")
+    '            cboVisibilityUnits.Text = .Rows(inc).Item("visUnits")
+    '            cboWindSpdUnits.Text = .Rows(inc).Item("windspdUnits")
 
-            End With
-            displayRecordNumber()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-    End Sub
+    '        End With
+    '        displayRecordNumber()
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
+    '    End Try
+    'End Sub
 
     Sub ClearValues()
         Dim ctl As Control
@@ -1654,40 +1764,57 @@
         'btnUpdate.Enabled = False
     End Sub
 
-    Private Sub cboMonth_TextChanged(sender As Object, e As EventArgs) Handles cboMonth.TextChanged
-        If RecordExist() Then Exit Sub
+    Private Sub cboYear_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboYear.SelectedIndexChanged
+        formPopulate()
     End Sub
+
+    Private Sub cboStation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStation.SelectedIndexChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboHour_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboHour.SelectedIndexChanged
+        formPopulate()
+    End Sub
+
+
+    Private Sub cboMonth_TextChanged(sender As Object, e As EventArgs) Handles cboMonth.TextChanged
+        'If RecordExist() Then Exit Sub
+        formPopulate()
+    End Sub
+
 
     Private Sub cboDay_TextChanged(sender As Object, e As EventArgs) Handles cboDay.TextChanged
-        If RecordExist() Then Exit Sub
+        'If RecordExist() Then Exit Sub
+        formPopulate()
     End Sub
 
-    Private Sub txtYear_TextChanged(sender As Object, e As EventArgs) Handles txtYear.TextChanged
-        If RecordExist() Then Exit Sub
+    Private Sub cboYear_TextChanged(sender As Object, e As EventArgs) Handles cboYear.TextChanged
+        'If RecordExist() Then Exit Sub
+        formPopulate()
     End Sub
 
-    Sub txtBoxesDisable()
+    'Sub txtBoxesDisable()
 
-        Dim ctl As Control
+    '    Dim ctl As Control
 
-        'Disable textboxes for observation values
-        For Each ctl In Me.Controls
-            If Strings.Left(ctl.Name, 6) = "txtVal" Then
-                ctl.Enabled = False
-            End If
-        Next ctl
-    End Sub
-    Sub txtBoxesEnable()
+    '    'Disable textboxes for observation values
+    '    For Each ctl In Me.Controls
+    '        If Strings.Left(ctl.Name, 6) = "txtVal" Then
+    '            ctl.Enabled = False
+    '        End If
+    '    Next ctl
+    'End Sub
+    'Sub txtBoxesEnable()
 
-        Dim ctl As Control
+    '    Dim ctl As Control
 
-        'Enable textboxes for observation values
-        For Each ctl In Me.Controls
-            If Strings.Left(ctl.Name, 6) = "txtVal" Then
-                ctl.Enabled = True
-            End If
-        Next ctl
-    End Sub
+    '    'Enable textboxes for observation values
+    '    For Each ctl In Me.Controls
+    '        If Strings.Left(ctl.Name, 6) = "txtVal" Then
+    '            ctl.Enabled = True
+    '        End If
+    '    Next ctl
+    'End Sub
     'Sub shiftEntries(kycode As Integer)
     '    Select Case kycode
     '        Case 34 ' Insert
@@ -1902,4 +2029,243 @@
             Return False
         End Try
     End Function
+    Sub DisableTboxes()
+        Dim Ctl As Control
+
+        For Each Ctl In Me.Controls
+            If Strings.Left(Ctl.Name, 6) = "txtVal" Or Strings.Left(Ctl.Name, 7) = "txtFlag" Then
+                Ctl.Text = ""
+                Ctl.Enabled = False
+            End If
+        Next
+
+        btnAddNew.Enabled = False
+        btnCommit.Enabled = False
+        btnUpdate.Enabled = False
+        btnDelete.Enabled = False
+        btnClear.Enabled = False
+
+        recNumberTextBox.Text = ""
+
+    End Sub
+
+    Sub EnablableTboxes()
+        Dim Ctl As Control
+        For Each Ctl In Me.Controls
+            If Strings.Left(Ctl.Name, 6) = "txtVal" Or Strings.Left(Ctl.Name, 7) = "txtFlag" Then
+                Ctl.Enabled = True
+            End If
+        Next
+    End Sub
+    Sub GetRecordNo(stn As String, yyyy As Long, mm As Integer, dd As Integer, hh As Integer)
+        Dim conn2 As New MySql.Data.MySqlClient.MySqlConnection
+        Dim da2 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim ds2 As New DataSet
+
+        Try
+            conn2.ConnectionString = myConnectionString
+            conn2.Open()
+
+            sql = "SELECT * FROM form_synoptic2_tdcf"
+            da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn2)
+            ds2.Clear()
+            da2.Fill(ds2, "records")
+            conn2.Close()
+
+            With ds2.Tables("records")
+                For i = 0 To .Rows.Count - 1
+                    If .Rows(i).Item("stationId") = stn And .Rows(i).Item("yyyy") = yyyy And .Rows(i).Item("mm") = mm And .Rows(i).Item("dd") = dd And .Rows(i).Item("hh") = hh Then
+                        inc = i
+                        'recNumberTextBox.Text = "Record " & inc + 1 & " of " & .Rows.Count + 1
+                        displayRecordNumber()
+                        'MsgBox(inc)
+                        Exit For
+                    End If
+                Next
+            End With
+
+        Catch ex As Exception
+            conn2.Close()
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Sub formPopulate()
+        Dim Ctl As Control
+        Dim dattime, dtt As String
+        Dim conn1 As New MySql.Data.MySqlClient.MySqlConnection
+        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim ds1 As New DataSet
+        Dim m As Integer
+
+        Try
+
+            dattime = DateSerial(cboYear.Text, cboMonth.Text, cboDay.Text) & " " & cboHour.Text.PadLeft(2, "0") & ":00:00"
+            dtt = cboYear.Text & "-" & cboMonth.Text & "-" & cboDay.Text & " " & cboHour.Text.PadLeft(2, "0") & ":00:00"
+
+            If DateDiff("h", Now(), dattime) >= 0 Or Not IsDate(dtt) Then
+
+                'MsgBox("Observations for future date not allowed")
+                ' dissable text boxes
+                DisableTboxes()
+                lblInvaliDate.Text = "Invalid Date Entry! Check Values"
+                lblInvaliDate.ForeColor = Color.Red
+                'txtYear.Focus()
+                cboYear.Focus()
+                Exit Sub
+
+            Else
+                EnablableTboxes()
+                lblInvaliDate.Text = ""
+                'txtBoxesEnable()
+            End If
+
+        Catch x1 As Exception
+            If x1.HResult <> -2147467262 Then
+                MsgBox(x1.Message)
+            End If
+            Exit Sub
+        End Try
+
+
+
+        Try
+            conn1.ConnectionString = myConnectionString
+            conn1.Open()
+            sql = "select * from form_synoptic2_tdcf where stationId ='" & cboStation.SelectedValue & "' and yyyy = " & cboYear.Text & " and mm = " & cboMonth.Text & " and dd = " & cboDay.Text & " and hh = " & cboHour.Text & ";"
+
+            ds1.Clear()
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da1.Fill(ds1, "form_synoptic2_tdcf")
+            conn1.Close()
+
+
+            With ds1.Tables("form_synoptic2_tdcf")
+                If .Rows.Count = 0 Then
+
+                    btnAddNew.Enabled = True
+                    btnCommit.Enabled = True
+                    btnUpdate.Enabled = False
+                    btnDelete.Enabled = False
+                    btnClear.Enabled = True
+                    btnMoveFirst.Enabled = False
+                    btnMoveNext.Enabled = False
+                    btnMovePrevious.Enabled = False
+                    btnMoveLast.Enabled = False
+                    recNumberTextBox.Text = "New Record"
+
+                Else
+                    btnAddNew.Enabled = True
+                    btnCommit.Enabled = False
+                    btnUpdate.Enabled = True
+                    btnDelete.Enabled = True
+                    btnClear.Enabled = False
+                    btnMoveFirst.Enabled = True
+                    btnMoveNext.Enabled = True
+                    btnMovePrevious.Enabled = True
+                    btnMoveLast.Enabled = True
+                    GetRecordNo(cboStation.SelectedValue, cboYear.Text, cboMonth.Text, cboDay.Text, cboHour.Text)
+                End If
+
+                If .Rows.Count > 0 Then
+
+                    ' Populate Values
+                    For m = 5 To (valueFldsTotal + 4)
+                        For Each Ctl In Me.Controls
+                            If Strings.Left(Ctl.Name, 6) = "txtVal" And Val(Strings.Right(Ctl.Name, 3)) = m Then
+                                If Not IsDBNull(.Rows(0).Item(m)) Then
+                                    Ctl.Text = .Rows(0).Item(m)
+                                Else
+                                    Ctl.Text = ""
+                                End If
+
+                            End If
+                        Next Ctl
+                    Next m
+
+                    ' Populate Flags
+                    For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
+                        For Each Ctl In Me.Controls
+                            If Strings.Left(Ctl.Name, 7) = "txtFlag" And Val(Strings.Right(Ctl.Name, 3)) = m Then
+                                If Not IsDBNull(.Rows(0).Item(m)) Then
+                                    Ctl.Text = .Rows(0).Item(m)
+                                Else
+                                    Ctl.Text = ""
+                                End If
+
+                            End If
+                        Next Ctl
+                    Next m
+
+                    'Display observation units to database
+                    cboTempUnits.Text = .Rows(inc).Item("temperatureUnits")
+                    cboPrecipUnits.Text = .Rows(inc).Item("precipUnits")
+                    cboCloudheightUnits.Text = .Rows(inc).Item("cloudHeightUnits")
+                    cboVisibilityUnits.Text = .Rows(inc).Item("visUnits")
+                    cboWindSpdUnits.Text = .Rows(inc).Item("windspdUnits")
+
+                Else
+                    ' Clear Values
+                    For i = 5 To .Columns.Count - 1
+                        For Each Ctrl In Me.Controls
+                            If Strings.Left(Ctrl.Name, 6) = "txtVal" And Val(Strings.Right(Ctrl.Name, 3)) = i Then
+                                Ctrl.Text = ""
+                            End If
+                        Next
+                    Next
+
+                    ' Clear Flags
+                    For m = (valueFldsTotal + 5) To valueFldsTotal * 2 + 4
+                        For Each Ctl In Me.Controls
+                            If Strings.Left(Ctl.Name, 7) = "txtFlag" And Val(Strings.Right(Ctl.Name, 3)) = m Then
+                                Ctl.Text = ""
+                            End If
+                        Next Ctl
+                    Next m
+
+                End If
+            End With
+
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+            'conn1.Close()
+        End Try
+    End Sub
+
+    Private Sub cboYear_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboYear.SelectedValueChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboStation_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboStation.SelectedValueChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboMonth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMonth.SelectedIndexChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboMonth_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMonth.SelectedValueChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboDay_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedValueChanged
+        formPopulate()
+    End Sub
+
+    Private Sub cboHour_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboHour.SelectedValueChanged
+        formPopulate()
+    End Sub
+
+    Sub ClearTboxes()
+        Dim Ctl As Control
+        For Each Ctl In Me.Controls
+            If Strings.Left(Ctl.Name, 6) = "txtVal" Or Strings.Left(Ctl.Name, 7) = "txtFlag" Then
+                Ctl.Text = ""
+            End If
+        Next
+    End Sub
 End Class

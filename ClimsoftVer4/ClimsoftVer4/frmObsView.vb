@@ -29,7 +29,7 @@
             conn.ConnectionString = MyConnectionString
             conn.Open()
 
-            Sql = "SELECT * FROM station ORDER BY stationName"
+            sql = "SELECT * FROM station where stationName IS NOT NULL ORDER BY stationName"
 
             'sql = "SELECT recordedFrom, stationName from observationfinal INNER JOIN station ON recordedFrom = stationId group by recordedFrom  ORDER BY stationName;"
 
@@ -40,37 +40,39 @@
             da.Fill(ds, "station")
             'conn.Close()
 
+            'Catch ex As MySql.Data.MySqlClient.MySqlException
+            '    MessageBox.Show(ex.Message)
+            'End Try
+
+            maxRows = ds.Tables("station").Rows.Count
+            'MsgBox(maxRows)
+            For kount = 0 To maxRows - 1 Step 1
+                If Len(ds.Tables("station").Rows(kount).Item("stationName")) > 0 Then cmbstation.Items.Add(ds.Tables("station").Rows(kount).Item("stationName"))
+            Next
+
+            ds.Clear()
+
+            Sql = "SELECT * FROM obselement where selected = '1' ORDER BY description"
+
+            'sql = "select describedBy, description from observationfinal INNER JOIN obselement on describedBy = elementId group by describedBy  order by description;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            da.Fill(ds, "obselement")
+
+            maxRows = ds.Tables("obselement").Rows.Count
+            For kount = 0 To maxRows - 1 Step 1
+                cmbElement.Items.Add(ds.Tables("obselement").Rows(kount).Item("description"))
+            Next
+
+            'populateFlags()
+            populateForms()
+            conn.Close()
+
+            ClsTranslations.TranslateForm(Me)
+
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
         End Try
-
-        maxRows = ds.Tables("station").Rows.Count
-        'MsgBox(maxRows)
-        For kount = 0 To maxRows - 1 Step 1
-
-            cmbstation.Items.Add(ds.Tables("station").Rows(kount).Item("stationName"))
-
-        Next
-
-        ds.Clear()
-
-        Sql = "SELECT * FROM obselement where selected = '1' ORDER BY description"
-
-        'sql = "select describedBy, description from observationfinal INNER JOIN obselement on describedBy = elementId group by describedBy  order by description;"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
-        da.SelectCommand.CommandTimeout = 0
-        da.Fill(ds, "obselement")
-
-        maxRows = ds.Tables("obselement").Rows.Count
-        For kount = 0 To maxRows - 1 Step 1
-            cmbElement.Items.Add(ds.Tables("obselement").Rows(kount).Item("description"))
-        Next
-
-        'populateFlags()
-        populateForms()
-        conn.Close()
-
-        ClsTranslations.TranslateForm(Me)
     End Sub
     Sub populateForms()
         sql = "select table_name from data_forms where selected =1;"
@@ -266,9 +268,9 @@
 
     Private Sub chkAdvancedSelection_CheckedChanged(sender As Object, e As EventArgs) Handles chkAdvancedSelection.CheckedChanged
         If chkAdvancedSelection.Checked = True Then
-            pnlAdanced.Visible = True
+            txtQualifier.Visible = True
         Else
-            pnlAdanced.Visible = False
+            txtQualifier.Visible = False
         End If
     End Sub
 
@@ -413,8 +415,98 @@
         End If
     End Sub
 
+
+    Private Sub chkQaulifier_CheckedChanged(sender As Object, e As EventArgs) Handles chkQaulifier.CheckedChanged
+        If chkQaulifier.Checked And lstQualifier.Items.Count > 0 Then
+            lstQualifier.Enabled = True
+        Else
+            lstQualifier.Enabled = False
+            chkQaulifier.Checked = False
+        End If
+    End Sub
+
+    Private Sub chkDbasin_CheckedChanged(sender As Object, e As EventArgs) Handles chkDbasin.CheckedChanged
+        If chkDbasin.Checked And lstDBasin.Items.Count > 0 Then
+            lstDBasin.Enabled = True
+        Else
+            lstDBasin.Enabled = False
+            chkDbasin.Checked = False
+        End If
+
+    End Sub
+
+    Private Sub chkCountry_CheckedChanged(sender As Object, e As EventArgs) Handles chkCountry.CheckedChanged
+        If chkCountry.Checked Then
+            lstCountry.Enabled = True
+            ListStationMetadata("country")
+        Else
+            lstCountry.Enabled = False
+            lstCountry.Items.Clear()
+        End If
+    End Sub
+
+    Private Sub chkAuthority_CheckedChanged(sender As Object, e As EventArgs) Handles chkAuthority.CheckedChanged
+        If chkAuthority.Checked And lstAuthority.Items.Count > 0 Then
+            lstAuthority.Enabled = True
+        Else
+            lstAuthority.Enabled = False
+            chkAuthority.Checked = False
+        End If
+    End Sub
+
+    Private Sub chkAdmin1_CheckedChanged(sender As Object, e As EventArgs) Handles chkAdmin1.CheckedChanged
+        If chkAdmin1.Checked And lstAdmin1.Items.Count > 0 Then
+            lstAdmin1.Enabled = True
+        Else
+            lstAdmin1.Enabled = False
+            chkAdmin1.Checked = False
+        End If
+    End Sub
+
+    Private Sub chkAdmin2_CheckedChanged(sender As Object, e As EventArgs) Handles chkAdmin2.CheckedChanged
+        If chkAdmin2.Checked And lstAdmin2.Items.Count > 0 Then
+            lstAdmin2.Enabled = True
+        Else
+            lstAdmin2.Enabled = False
+            chkAdmin2.Checked = False
+        End If
+    End Sub
+
+    Private Sub chkAdmin3_CheckedChanged(sender As Object, e As EventArgs) Handles chkAdmin3.CheckedChanged
+        If chkAdmin3.Checked And lstAdmin3.Items.Count > 0 Then
+            lstAdmin3.Enabled = True
+        Else
+            lstAdmin3.Enabled = False
+            chkAdmin3.Checked = False
+        End If
+    End Sub
+
+    Private Sub chkAdmin4_CheckedChanged(sender As Object, e As EventArgs) Handles chkAdmin4.CheckedChanged
+        If chkAdmin4.Checked And lstAdmin4.Items.Count > 0 Then
+            lstAdmin4.Enabled = True
+        Else
+            lstAdmin4.Enabled = False
+            chkAdmin4.Checked = False
+        End If
+    End Sub
+
+    Private Sub lstCountry_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCountry.SelectedIndexChanged
+        PopulateMetadataItem("authority", lstAuthority, chkAuthority) ' Authority
+        PopulateMetadataItem("qualifier", lstQualifier, chkQaulifier)  ' Qualifier
+        PopulateMetadataItem("drainageBasin", lstDBasin, chkDbasin)  ' Drainage Basin
+        PopulateMetadataItem("adminRegion", lstAdmin1, chkAdmin1)  ' Admin Region1
+        PopulateMetadataItem("adminRegion2", lstAdmin2, chkAdmin2)  ' Admin Region2
+        PopulateMetadataItem("adminRegion3", lstAdmin3, chkAdmin3)  ' Admin Region3
+        PopulateMetadataItem("adminRegion4", lstAdmin4, chkAdmin4)  ' Admin Region4
+
+        sql = "SELECT stationId, stationName FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND StationName IS NOT NULL AND LENGTH(StationName) > 0 ORDER BY  StationName;"
+
+        PopulateStations(sql)
+    End Sub
+
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
-        viewRecords()
+        'viewRecords()
+
     End Sub
 
     Private Sub optInitial_CheckedChanged(sender As Object, e As EventArgs) Handles optInitial.CheckedChanged
@@ -431,6 +523,43 @@
         Else
             lstBoxQC.Enabled = False
         End If
+    End Sub
+
+    Private Sub lstAuthority_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAuthority.SelectedIndexChanged
+        sql = "SELECT stationId, stationName FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND StationName IS NOT NULL AND LENGTH(StationName) and authority = '" & lstAuthority.SelectedItem & "' > 0 ORDER BY authority;"
+
+        PopulateStations(sql)
+    End Sub
+
+    Private Sub lstQualifier_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstQualifier.SelectedIndexChanged
+        sql = "SELECT stationId, stationName FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND StationName IS NOT NULL AND LENGTH(StationName) > 0 and qualifier = '" & lstQualifier.SelectedItem & "' ORDER BY qualifier;"
+        PopulateStations(sql)
+    End Sub
+
+    Private Sub lstDBasin_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstDBasin.SelectedIndexChanged
+        sql = "SELECT stationId, stationName FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND StationName IS NOT NULL AND LENGTH(StationName) > 0 and drainageBasin = '" & lstDBasin.SelectedItem & "' ORDER BY drainageBasin;"
+        PopulateStations(sql)
+    End Sub
+
+    Private Sub lstAdmin1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAdmin1.SelectedIndexChanged
+        sql = "SELECT stationId, stationName FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND StationName IS NOT NULL AND LENGTH(StationName) > 0 and AdminRegion = '" & lstAdmin1.SelectedItem & "' ORDER BY AdminRegion;"
+        PopulateStations(sql)
+
+    End Sub
+
+    Private Sub lstAdmin2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAdmin2.SelectedIndexChanged
+        sql = "SELECT stationId, stationName FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND StationName IS NOT NULL AND LENGTH(StationName) > 0 and AdminRegion2 = '" & lstAdmin2.SelectedItem & "' ORDER BY AdminRegion2;"
+        PopulateStations(sql)
+    End Sub
+
+    Private Sub lstAdmin3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAdmin3.SelectedIndexChanged
+        sql = "SELECT stationId, stationName FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND StationName IS NOT NULL AND LENGTH(StationName) > 0 and AdminRegion3 = '" & lstAdmin3.SelectedItem & "' ORDER BY AdminRegion3;"
+        PopulateStations(sql)
+    End Sub
+
+    Private Sub lstAdmin4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAdmin4.SelectedIndexChanged
+        sql = "SELECT stationId, stationName FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND StationName IS NOT NULL AND LENGTH(StationName) > 0 and AdminRegion4 = '" & lstAdmin4.SelectedItem & "' ORDER BY AdminRegion4;"
+        PopulateStations(sql)
     End Sub
 
     Private Sub chkFlags_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlags.CheckedChanged
@@ -545,16 +674,19 @@
 
         Try
             sql = "SELECT stationId, stationName FROM station WHERE stationId= '" & id & "';"
-
+            'MsgBox(sql)
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "station")
 
             maxRows = (ds.Tables("station").Rows.Count)
             'MsgBox(maxRows)
+            'MsgBox(ds.Tables("station").Rows(0).Item("stationId") & " " & ds.Tables("station").Rows(0).Item("stationName"))
+
             If maxRows > 0 Then
-                cmbstation.Text = ""
+                'cmbstation.Text = ""
                 cmbstation.BackColor = Color.White
+                'MsgBox(ds.Tables("station").Rows(0).Item("stationId") & " " & ds.Tables("station").Rows(0).Item("stationName"))
             Else
                 cmbstation.BackColor = Color.Red
                 Exit Sub
@@ -563,6 +695,7 @@
             str(0) = ds.Tables("station").Rows(0).Item("stationId")
             str(1) = ds.Tables("station").Rows(0).Item("stationName")
 
+            'MsgBox(str(0) & " " & str(1))
             itm = New ListViewItem(str)
 
             ItmExist = False
@@ -578,7 +711,7 @@
                 Next
                 If Not ItmExist Then lstvStations.Items.Add(itm)
             End If
-
+            cmbstation.Text = ""
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -645,12 +778,20 @@
                     advcSelect = advcSelect & " And dataForm = " & frm
                 End If
 
+                ' Select stations grouping
+                ' Check if country is selected
+                'If lstCountry.SelectedItem <> String.Empty Then
+                '    advcSelect = advcSelect & " AND country = '" & lstCountry.SelectedItem & "'"
+                'End If
+
                 If Not showRecords() Then
                     MsgBox("Can't show any record")
                     grpButtons.Enabled = False
                 Else
                     grpButtons.Enabled = True
                 End If
+
+
             End If
         End With
         ' Show records
@@ -661,7 +802,7 @@
             Me.Cursor = Cursors.WaitCursor
             'sql1 = sql1 & ";"
             Selectflds = "select recordedFrom as Station_id,describedBy as Element_code,year(obsDatetime) as 'Year',month(obsDatetime) as 'Month',day(obsDatetime) as 'Day',time(obsDatetime) as 'Time',obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType,dataForm,capturedBy,mark,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits,dataSourceTimeZone"
-            sql = Selectflds & " From " & tblName & " Where " & stnlist & " And " & elmlist & " And " & dttPeriod & advcSelect & ";"
+            sql = Selectflds & " From " & tblName & " INNER JOIN station ON recordedFrom = stationId WHERE " & stnlist & " And " & elmlist & " And " & dttPeriod & advcSelect & ";"
 
             'sql = "Select * From " & tblName & " Where " & stnlist & " And " & elmlist & " And " & dttPeriod & advcSelect & ";"
 
@@ -783,70 +924,172 @@
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
+    Function ListStationMetadata(lstn As String) As Boolean
 
-    Sub viewRecords()
+        Try
+            sql = "SELECT country FROM station WHERE country IS NOT NULL AND LENGTH(country) > 0 GROUP BY country order BY country ;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "stations")
 
-        'sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & DateAndTime.Day(dateFrom.Text) & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
-        'edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & DateAndTime.Day(dateTo.Text) & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+            With ds.Tables("stations")
+                For i = 0 To .Rows.Count
+                    If .Rows(i).Item(0) <> String.Empty Then lstCountry.Items.Add(.Rows(i).Item(0))
+                Next
+
+            End With
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Function PopulateMetadataItem(itm As String, lst As ListBox, chk As CheckBox) As Boolean
+
+        Try
+
+            sql = "SELECT " & itm & " FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND " & itm & " IS NOT NULL AND LENGTH( " & itm & ") > 0 GROUP BY  " & itm & " ORDER BY  " & itm & ";"
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "stations")
 
 
-        'stnlist = ""
-        'If lstvStations.Items.Count > 0 Then
-        '    stnlist = "recordedFrom = '" & lstvStations.Items(0).Text & "'"
-        '    For i = 1 To lstvStations.Items.Count - 1
-        '        '  MsgBox(lstvStations.Items(i).Text)
-        '        stnlist = stnlist & " OR RecordedFrom = " & "'" & lstvStations.Items(i).Text & "'"
-        '    Next
-        'End If
-        'stnlist = "(" & stnlist & ")"
-        ''MsgBox(stnlist)
+            lst.Items.Clear()
 
-        '' Get the Element list
-        'elmlist = ""
-        'If lstvElements.Items.Count > 0 Then
-        '    elmlist = "describedBy = " & lstvElements.Items(0).Text
-        '    For i = 1 To lstvElements.Items.Count - 1
-        '        elmlist = elmlist & " OR  describedBy = " & lstvElements.Items(i).Text
-        '    Next
-        'End If
-        'elmlist = "(" & elmlist & ")"
+            With ds.Tables("stations")
 
-        'dttPeriod = "(obsDatetime between '" & sdate & "' and '" & edate & "') "
-        ''sql = "Select * from " & tblName & " where " & stnlist & " AND " & elmlist
+                For i = 0 To .Rows.Count - 1
+                    If .Rows(i).Item(itm) <> String.Empty Then lst.Items.Add(.Rows(i).Item(itm))
+                Next
+                lst.Refresh()
+                If .Rows.Count = 0 Then
+                    chk.Checked = False
+                End If
 
-        'sql = sql & " AND (obsDatetime between '" & sdate & "' and '" & edate & "') "
+            End With
 
-        'advcSelect = ""
-
-        ''Check if any QC status is selected
-        'If setQCstatus(qcStatus) Then
-        '    'sql = sql & " AND qcStatus = " & qcStatus
-        '    advcSelect = advcSelect & " And qcStatus = " & qcStatus
-        'End If
-
-        ''Check if any acquisitionStatus is selected
-        'If setAQstatus(acquisitionStatus) Then
-        '    'sql = sql & " AND acquisitionType = " & acquisitionStatus
-        '    advcSelect = advcSelect & " And acquisitionType = " & acquisitionStatus
-        'End If
-
-        '' Check if any flag is selected
-        'If selectFlag(flag) Then
-        '    'sql = sql & " AND flag = " & flag
-        '    advcSelect = advcSelect & " And right(flag,1) = " & flag
-        'End If
-
-        ''Check if any key entry form is selected
-        'If selectForm(frm) Then
-        '    'sql = sql & " AND acquisitionType = " & acquisitionStatus
-        '    advcSelect = advcSelect & " And dataForm = " & frm
-        'End If
-
-        'If Not showRecords() Then
-        '    MsgBox("Can't show any record")
-        '    grpButtons.Enabled = False
-        'Else
-        '    grpButtons.Enabled = True
-        'End If
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+    Private Sub lstCountry_Click(sender As Object, e As EventArgs) Handles lstCountry.Click
+        'PopulateMetadataItem("authority", lstCountry.SelectedItem, lstAuthority)
     End Sub
+
+    Sub PopulateStations(sql As String)
+        Dim Str(2) As String
+        Dim itm = New ListViewItem
+        Try
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "metadata")
+
+            With ds.Tables("metadata")
+                lstvStations.Items.Clear()
+                If .Rows.Count > 0 Then
+                    For i = 0 To .Rows.Count - 1
+                        Str(0) = ds.Tables("metadata").Rows(i).Item("stationId")
+                        Str(1) = ds.Tables("metadata").Rows(i).Item("stationName")
+                        itm = New ListViewItem(Str)
+
+                        ItmExist = False
+                        If lstvStations.Items.Count = 0 Then ' Alawys add the first selected item 
+                            lstvStations.Items.Add(itm)
+                        Else
+                            For j = 0 To lstvStations.Items.Count - 1
+                                ' Check if the item has been added in the list and skip it if so
+                                If Str(0) = lstvStations.Items(j).Text Then
+                                    ItmExist = True
+                                    Exit For
+                                End If
+                            Next
+                            If Not ItmExist Then lstvStations.Items.Add(itm)
+                        End If
+                    Next
+                End If
+            End With
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    'Private Sub lstQualifier_SelectedValueChanged(sender As Object, e As EventArgs) Handles lstQualifier.SelectedValueChanged
+    '    sql = "SELECT stationId, stationName FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND StationName IS NOT NULL AND LENGTH(StationName) > 0 and qualifier = '" & lstQualifier.SelectedItem & "' ORDER BY qualifier;"
+    '    PopulateStations(sql)
+    'End Sub
+
+
+    'Sub viewRecords()
+
+    'sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & DateAndTime.Day(dateFrom.Text) & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
+    'edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & DateAndTime.Day(dateTo.Text) & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+
+
+    'stnlist = ""
+    'If lstvStations.Items.Count > 0 Then
+    '    stnlist = "recordedFrom = '" & lstvStations.Items(0).Text & "'"
+    '    For i = 1 To lstvStations.Items.Count - 1
+    '        '  MsgBox(lstvStations.Items(i).Text)
+    '        stnlist = stnlist & " OR RecordedFrom = " & "'" & lstvStations.Items(i).Text & "'"
+    '    Next
+    'End If
+    'stnlist = "(" & stnlist & ")"
+    ''MsgBox(stnlist)
+
+    '' Get the Element list
+    'elmlist = ""
+    'If lstvElements.Items.Count > 0 Then
+    '    elmlist = "describedBy = " & lstvElements.Items(0).Text
+    '    For i = 1 To lstvElements.Items.Count - 1
+    '        elmlist = elmlist & " OR  describedBy = " & lstvElements.Items(i).Text
+    '    Next
+    'End If
+    'elmlist = "(" & elmlist & ")"
+
+    'dttPeriod = "(obsDatetime between '" & sdate & "' and '" & edate & "') "
+    ''sql = "Select * from " & tblName & " where " & stnlist & " AND " & elmlist
+
+    'sql = sql & " AND (obsDatetime between '" & sdate & "' and '" & edate & "') "
+
+    'advcSelect = ""
+
+    ''Check if any QC status is selected
+    'If setQCstatus(qcStatus) Then
+    '    'sql = sql & " AND qcStatus = " & qcStatus
+    '    advcSelect = advcSelect & " And qcStatus = " & qcStatus
+    'End If
+
+    ''Check if any acquisitionStatus is selected
+    'If setAQstatus(acquisitionStatus) Then
+    '    'sql = sql & " AND acquisitionType = " & acquisitionStatus
+    '    advcSelect = advcSelect & " And acquisitionType = " & acquisitionStatus
+    'End If
+
+    '' Check if any flag is selected
+    'If selectFlag(flag) Then
+    '    'sql = sql & " AND flag = " & flag
+    '    advcSelect = advcSelect & " And right(flag,1) = " & flag
+    'End If
+
+    ''Check if any key entry form is selected
+    'If selectForm(frm) Then
+    '    'sql = sql & " AND acquisitionType = " & acquisitionStatus
+    '    advcSelect = advcSelect & " And dataForm = " & frm
+    'End If
+
+    'If Not showRecords() Then
+    '    MsgBox("Can't show any record")
+    '    grpButtons.Enabled = False
+    'Else
+    '    grpButtons.Enabled = True
+    'End If
+
 End Class

@@ -837,7 +837,8 @@ Public Class dataEntryGlobalRoutines
                         Else
                             xt = .Rows(i).Item(j)
                         End If
-                        If .Columns(j).ColumnName = "entryDatetime" Then xt = DateAndTime.Year(xt) & "-" & DateAndTime.Month(xt) & "-" & DateAndTime.Day(xt) & " " & DateAndTime.TimeValue(xt)
+
+                        If .Columns(j).ColumnName = "entryDatetime" And IsDate(xt) Then xt = DateAndTime.Year(xt) & "-" & DateAndTime.Month(xt) & "-" & DateAndTime.Day(xt) & " " & DateAndTime.TimeValue(xt)
 
                         dat = dat & "," & xt
 
