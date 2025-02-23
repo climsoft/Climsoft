@@ -66,8 +66,6 @@ Public Class formProductsSelectCriteria
             cmbstation.Items.Add(ds.Tables("station").Rows(kount).Item("stationName"))
         Next
 
-        ds.Clear()
-
         sql = "SELECT * FROM obselement where selected = '1' ORDER BY description"
         If lblProductType.Text = "Daily Levels" Or lblProductType.Text = "Monthly Levels" Or lblProductType.Text = "Annual Levels" Then
             sql = "select * from obsElement where elementId between 301 and 311 order by description;"
@@ -75,6 +73,7 @@ Public Class formProductsSelectCriteria
         'sql = "select describedBy, description from observationfinal INNER JOIN obselement on describedBy = elementId group by describedBy  order by description;"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.SelectCommand.CommandTimeout = 0
+        ds.Clear()
         da.Fill(ds, "obselement")
         conn.Close()
 
@@ -3707,6 +3706,10 @@ Err:
 
     Private Sub cmbElement_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbElement.KeyPress
         If Asc(e.KeyChar) = 13 Then add_Element(cmbElement.Text)
+
+    End Sub
+
+    Private Sub lstvStations_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvStations.SelectedIndexChanged
 
     End Sub
 

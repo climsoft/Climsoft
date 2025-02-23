@@ -570,6 +570,36 @@
         End If
     End Sub
 
+    Private Sub btnBackup_Click(sender As Object, e As EventArgs) Handles btnBackup.Click
+        SelectRecords()
+
+        ' Backup stations
+        sql = "SELECT * FROM station;"
+        If Not BackupRecords("station", sql) Then
+            MsgBox("Backup Failure")
+            Exit Sub
+        Else
+            'MsgBox("Backup of stations Successfully Completed")
+        End If
+
+        ' Backup elements
+        sql = "SELECT * FROM obselement;"
+        If Not BackupRecords("obselement", sql) Then
+            MsgBox("Backup Failure")
+            Exit Sub
+        Else
+            'MsgBox("Backup of Elements Successfully Completed")
+        End If
+
+        ' Backup observations
+        sql = "SELECT * From " & tblName & " WHERE " & stnlist & " And " & elmlist & " And " & dttPeriod & advcSelect & ";"
+        If Not BackupRecords(tblName, sql) Then
+            MsgBox("Backup Failure")
+        Else
+            'MsgBox("Backup of observations Successfully Completed")
+            MsgBox("Backup Successfully Completed")
+        End If
+    End Sub
 
     Private Sub chkAcquisitionType_CheckedChanged(sender As Object, e As EventArgs) Handles chkAcquisitionType.CheckedChanged
         If chkAcquisitionType.Checked Then
@@ -797,6 +827,68 @@
         ' Show records
 
     End Sub
+    Sub SelectRecords()
+        'With TabObservations.SelectedTab
+        '    If .TabIndex = 1 Then
+
+        sdate = Year(dtpDateFrom.Text) & "-" & Month(dtpDateFrom.Text) & "-" & DateAndTime.Day(dtpDateFrom.Text) & " " & cboHourStart.Text & ":" & cboMinuteStart.Text & ":00"
+                edate = Year(dtpDateTo.Text) & "-" & Month(dtpDateTo.Text) & "-" & DateAndTime.Day(dtpDateTo.Text) & " " & cboHourEnd.Text & ":" & cboMinuteEnd.Text & ":00"
+
+
+                stnlist = ""
+                If lstvStations.Items.Count > 0 Then
+                    stnlist = "recordedFrom = '" & lstvStations.Items(0).Text & "'"
+                    For i = 1 To lstvStations.Items.Count - 1
+                        stnlist = stnlist & " OR RecordedFrom = " & "'" & lstvStations.Items(i).Text & "'"
+                    Next
+                End If
+                stnlist = "(" & stnlist & ")"
+
+                ' Get the Element list
+                elmlist = ""
+                If lstvElements.Items.Count > 0 Then
+                    elmlist = "describedBy = " & lstvElements.Items(0).Text
+                    For i = 1 To lstvElements.Items.Count - 1
+                        elmlist = elmlist & " OR  describedBy = " & lstvElements.Items(i).Text
+                    Next
+                End If
+                elmlist = "(" & elmlist & ")"
+
+                dttPeriod = "(obsDatetime between '" & sdate & "' and '" & edate & "') "
+
+                sql = sql & " AND (obsDatetime between '" & sdate & "' and '" & edate & "') "
+        'MsgBox(sql)
+        advcSelect = ""
+
+                'Check if any QC status is selected
+                If setQCstatus(qcStatus) Then
+                    'sql = sql & " AND qcStatus = " & qcStatus
+                    advcSelect = advcSelect & " And qcStatus = " & qcStatus
+                End If
+
+                'Check if any acquisitionStatus is selected
+                If setAQstatus(acquisitionStatus) Then
+                    'sql = sql & " AND acquisitionType = " & acquisitionStatus
+                    advcSelect = advcSelect & " And acquisitionType = " & acquisitionStatus
+                End If
+
+                ' Check if any flag is selected
+                If selectFlag(flag) Then
+                    'sql = sql & " AND flag = " & flag
+                    advcSelect = advcSelect & " And right(flag,1) = " & flag
+                End If
+
+                'Check if any key entry form is selected
+                If selectForm(frm) Then
+                    'sql = sql & " AND acquisitionType = " & acquisitionStatus
+                    advcSelect = advcSelect & " And dataForm = " & frm
+                End If
+
+        'MsgBox(advcSelect)
+
+
+    End Sub
+
     Function showRecords() As Boolean
         Try
             Me.Cursor = Cursors.WaitCursor
@@ -823,10 +915,139 @@
             Return True
         Catch ex As Exception
             'MsgBox(ex.Message & " " & ex.HResult)
-            MsgBox(ex.Message)
+            If ex.HResult = -2147467259 Then
+                MsgBox("Check Selections")
+            Else
+                MsgBox(ex.Message & "showRecords")
+            End If
+
             Me.Cursor = Cursors.Default
             Return False
         End Try
+    End Function
+    Function BackupRecords(tbl As String, sql As String) As Boolean
+        Dim con0 As New MySql.Data.MySqlClient.MySqlConnection
+        Dim a As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim s As New DataSet
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim outDataDir, outDataFile, connstr, dat, xt As String
+        Dim objcommon As New dataEntryGlobalRoutines
+
+        Try
+            Me.Cursor = Cursors.WaitCursor
+
+            outDataDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
+            ' Create the directory if not existing
+            If Not IO.Directory.Exists(outDataDir) Then
+                IO.Directory.CreateDirectory(outDataDir)
+            End If
+            outDataFile = outDataDir & "\" & tbl & ".csv"
+
+            If IO.File.Exists(outDataFile) Then
+                IO.File.Delete(outDataFile)
+            End If
+            FileOpen(17, outDataFile, OpenMode.Output)
+
+            connstr = frmLogin.txtusrpwd.Text
+            con0.ConnectionString = connstr
+            con0.Open()
+
+            'sql = "SELECT * From " & tbl & " WHERE " & stnlist & " And " & elmlist & " And " & dttPeriod & advcSelect & ";"
+            'MsgBox(sql)
+
+            a = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, con0)
+            a.SelectCommand.CommandTimeout = 0
+            s.Clear()
+            a.Fill(s, "backup")
+            con0.Close()
+
+            If s.Tables("backup").Rows.Count = 0 Then ' No records to backup
+                Me.Cursor = Cursors.Default
+                MsgBox("No data found to backup")
+                FileClose(17)
+                Return False
+            End If
+
+            'MsgBox(s.Tables("backup").Rows.Count)
+
+            With s.Tables("backup")
+                For i = 0 To .Rows.Count - 1
+                    dat = .Rows(i).Item(0)
+
+                    For j = 1 To .Columns.Count - 1
+                        If IsDBNull(.Rows(i).Item(j)) Then
+                            xt = "\N"
+                        Else
+                            xt = .Rows(i).Item(j)
+                        End If
+                        If .Columns(j).ColumnName = "obsDatetime" And IsDate(xt) Then xt = DateAndTime.Year(xt) & "-" & DateAndTime.Month(xt) & "-" & DateAndTime.Day(xt) & " " & DateAndTime.TimeValue(xt)
+                        dat = dat & "," & xt
+                    Next
+                    PrintLine(17, dat)
+                Next
+            End With
+            FileClose(17)
+            Me.Cursor = Cursors.Default
+            'Return True
+
+        Catch ex As Exception
+            FileClose(17)
+            con0.Close()
+            MsgBox("Check Selections!")
+            Me.Cursor = Cursors.Default
+            Return False
+        End Try
+
+        ' Connect to remote server and backup the selected data
+        Dim conn0 As New MySql.Data.MySqlClient.MySqlConnection
+        Dim builder As New Common.DbConnectionStringBuilder()
+
+        Try
+            ' Build the connection to the remote server
+            builder.ConnectionString = ""
+            builder("server") = objcommon.RegkeyValue("key13") '"localhost"
+            builder("database") = "mariadb_climsoft_db_v4"
+            builder("port") = objcommon.RegkeyValue("key18") '"3308"
+            builder("uid") = frmLogin.txtUsername.Text
+            builder("pwd") = frmLogin.txtPassword.Text
+
+            connstr = builder.ConnectionString & ";Convert Zero Datetime=True"
+            'MsgBox(connstr)
+            conn0.ConnectionString = connstr
+            conn0.Open()
+
+            outDataFile = Strings.Replace(outDataFile, "\", "/")
+
+            If tbl = tblName Then
+                sql = "LOAD DATA LOCAL INFILE '" & outDataFile & "' REPLACE INTO TABLE " & tbl & " FIELDS TERMINATED BY ',';" ' (" & flds & ");"
+                'MsgBox(sql)
+            Else
+                sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+                   /*!40101 SET NAMES utf8mb4 */;
+                   /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+                   /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+                   /*!40000 ALTER TABLE `" & tbl & "` DISABLE KEYS */;
+                   LOAD DATA LOCAL INFILE '" & outDataFile & "' REPLACE INTO TABLE " & tbl & " FIELDS TERMINATED BY ',';
+                   /*!40000 ALTER TABLE `" & tbl & "` ENABLE KEYS */;
+                   /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+                   /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+                   /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
+            End If
+
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn0)
+            qry.CommandTimeout = 0
+
+            'Execute query
+            qry.ExecuteNonQuery()
+            conn0.Close()
+
+        Catch ex As Exception
+            conn0.Close()
+            MsgBox(ex.Message & " at BackupRecords")
+            Return False
+        End Try
+        Return True
+
     End Function
 
     Function setQCstatus(ByRef qcStts As Integer) As Boolean

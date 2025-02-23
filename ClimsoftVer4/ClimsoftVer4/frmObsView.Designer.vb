@@ -95,6 +95,7 @@ Partial Class frmObsView
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.btnBackup = New System.Windows.Forms.Button()
         Me.TabObservations.SuspendLayout()
         Me.TabSelect.SuspendLayout()
         Me.pnlStationsElements.SuspendLayout()
@@ -868,7 +869,7 @@ Partial Class frmObsView
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(312, 574)
+        Me.btnView.Location = New System.Drawing.Point(256, 574)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(66, 23)
         Me.btnView.TabIndex = 7
@@ -876,11 +877,21 @@ Partial Class frmObsView
         Me.btnView.UseVisualStyleBackColor = True
         Me.btnView.Visible = False
         '
+        'btnBackup
+        '
+        Me.btnBackup.Location = New System.Drawing.Point(361, 574)
+        Me.btnBackup.Name = "btnBackup"
+        Me.btnBackup.Size = New System.Drawing.Size(108, 23)
+        Me.btnBackup.TabIndex = 8
+        Me.btnBackup.Text = "Backup to Remote"
+        Me.btnBackup.UseVisualStyleBackColor = True
+        '
         'frmObsView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1218, 607)
+        Me.Controls.Add(Me.btnBackup)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnHelp)
@@ -978,4 +989,5 @@ Partial Class frmObsView
     Friend WithEvents lstAdmin4 As ListBox
     Friend WithEvents lstAdmin3 As ListBox
     Friend WithEvents lstAdmin2 As ListBox
+    Friend WithEvents btnBackup As Button
 End Class
