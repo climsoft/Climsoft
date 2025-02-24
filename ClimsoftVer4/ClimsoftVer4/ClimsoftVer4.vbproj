@@ -183,6 +183,12 @@
     <Compile Include="frmEntryForms.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmFormsExport.Designer.vb">
+      <DependentUpon>frmFormsExport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFormsExport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmFormUpload.Designer.vb">
       <DependentUpon>frmFormUpload.vb</DependentUpon>
     </Compile>
@@ -922,6 +928,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEntryForms.resx">
       <DependentUpon>frmEntryForms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFormsExport.resx">
+      <DependentUpon>frmFormsExport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmFormUpload.resx">
       <DependentUpon>frmFormUpload.vb</DependentUpon>

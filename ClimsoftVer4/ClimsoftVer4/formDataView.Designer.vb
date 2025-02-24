@@ -43,6 +43,7 @@ Partial Class formDataView
         Me.dlgImportFile = New System.Windows.Forms.OpenFileDialog()
         Me.dlgExportFile = New System.Windows.Forms.SaveFileDialog()
         Me.btRefresh = New System.Windows.Forms.Button()
+        Me.btnExport = New System.Windows.Forms.Button()
         CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSearch.SuspendLayout()
         Me.SuspendLayout()
@@ -58,7 +59,7 @@ Partial Class formDataView
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(740, 475)
+        Me.btnHelp.Location = New System.Drawing.Point(758, 475)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(73, 23)
         Me.btnHelp.TabIndex = 8
@@ -68,7 +69,7 @@ Partial Class formDataView
         'btnDelete
         '
         Me.btnDelete.Enabled = False
-        Me.btnDelete.Location = New System.Drawing.Point(12, 475)
+        Me.btnDelete.Location = New System.Drawing.Point(7, 475)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(87, 23)
         Me.btnDelete.TabIndex = 7
@@ -78,7 +79,7 @@ Partial Class formDataView
         'btnUpdate
         '
         Me.btnUpdate.Enabled = False
-        Me.btnUpdate.Location = New System.Drawing.Point(110, 475)
+        Me.btnUpdate.Location = New System.Drawing.Point(98, 475)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(82, 23)
         Me.btnUpdate.TabIndex = 6
@@ -87,7 +88,7 @@ Partial Class formDataView
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(643, 475)
+        Me.btnClose.Location = New System.Drawing.Point(668, 475)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(86, 23)
         Me.btnClose.TabIndex = 5
@@ -96,16 +97,16 @@ Partial Class formDataView
         '
         'cmdExport
         '
-        Me.cmdExport.Location = New System.Drawing.Point(203, 475)
+        Me.cmdExport.Location = New System.Drawing.Point(184, 475)
         Me.cmdExport.Name = "cmdExport"
-        Me.cmdExport.Size = New System.Drawing.Size(99, 23)
+        Me.cmdExport.Size = New System.Drawing.Size(84, 23)
         Me.cmdExport.TabIndex = 9
-        Me.cmdExport.Text = "Export"
+        Me.cmdExport.Text = "Backup"
         Me.cmdExport.UseVisualStyleBackColor = True
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(421, 475)
+        Me.cmdEdit.Location = New System.Drawing.Point(460, 475)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(127, 23)
         Me.cmdEdit.TabIndex = 10
@@ -208,7 +209,7 @@ Partial Class formDataView
         '
         'cmdImport
         '
-        Me.cmdImport.Location = New System.Drawing.Point(313, 475)
+        Me.cmdImport.Location = New System.Drawing.Point(359, 475)
         Me.cmdImport.Name = "cmdImport"
         Me.cmdImport.Size = New System.Drawing.Size(97, 23)
         Me.cmdImport.TabIndex = 18
@@ -217,18 +218,28 @@ Partial Class formDataView
         '
         'btRefresh
         '
-        Me.btRefresh.Location = New System.Drawing.Point(559, 475)
+        Me.btRefresh.Location = New System.Drawing.Point(591, 475)
         Me.btRefresh.Name = "btRefresh"
         Me.btRefresh.Size = New System.Drawing.Size(73, 23)
         Me.btRefresh.TabIndex = 19
         Me.btRefresh.Text = "Refresh"
         Me.btRefresh.UseVisualStyleBackColor = True
         '
+        'btnExport
+        '
+        Me.btnExport.Location = New System.Drawing.Point(272, 475)
+        Me.btnExport.Name = "btnExport"
+        Me.btnExport.Size = New System.Drawing.Size(83, 24)
+        Me.btnExport.TabIndex = 1190
+        Me.btnExport.Text = "Export Plus"
+        Me.btnExport.UseVisualStyleBackColor = True
+        '
         'formDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(851, 510)
+        Me.Controls.Add(Me.btnExport)
         Me.Controls.Add(Me.btRefresh)
         Me.Controls.Add(Me.cmdImport)
         Me.Controls.Add(Me.grpSearch)
@@ -268,4 +279,5 @@ Partial Class formDataView
     Friend WithEvents cboYear As ComboBox
     Friend WithEvents cboMonth As ComboBox
     Friend WithEvents btRefresh As Button
+    Friend WithEvents btnExport As Button
 End Class

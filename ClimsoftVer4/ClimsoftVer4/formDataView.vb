@@ -41,6 +41,7 @@ Public Class formDataView
                 If Populate_Lists("stationName", dsn) Then
                     For i = 0 To dsn.Tables(dsSourceTableName).Rows.Count - 1
                         cboStName.Items.Add(dsn.Tables(dsSourceTableName).Rows(i).Item(0))
+                        'frmFormsExport.cmbstation.Items.Add(dsn.Tables(dsSourceTableName).Rows(i).Item(0))
                     Next
                 End If
 
@@ -50,6 +51,15 @@ Public Class formDataView
                         cboStnId.Items.Add(dsi.Tables(dsSourceTableName).Rows(i).Item(0).ToString)
                     Next
                 End If
+
+                '' Populate Element Names
+                'If Populate_Lists("elementName", dsi) Then
+                '    'MsgBox(dsi.Tables(dsSourceTableName).Rows.Count)
+                '    For i = 0 To dsi.Tables(dsSourceTableName).Rows.Count - 1
+                '        'MsgBox(dsi.Tables(dsSourceTableName).Rows(i).Item(0).ToString)
+                '        frmFormsExport.cmbElement.Items.Add(dsi.Tables(dsSourceTableName).Rows(i).Item(0).ToString)
+                '    Next
+                'End If
 
                 'Populate Station Years
                 If Populate_Lists("yyyy", dsy) Then
@@ -185,6 +195,10 @@ Public Class formDataView
         'Sql = "Select * FROM  " & dsSourceTableName & ";"
         RefreshRecords.viewTableRecords("Select * FROM  " & dsSourceTableName & ";")
 
+    End Sub
+
+    Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+        frmFormsExport.Show()
     End Sub
 
     Private Sub cboStnId_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStnId.SelectedIndexChanged
@@ -476,11 +490,7 @@ Public Class formDataView
             conn.ConnectionString = connStr
             conn.Open()
 
-            'hdr = DataGridView.Columns(0).Name
 
-            'For i = 1 To DataGridView.ColumnCount - 1
-            '    hdr = hdr & "," & DataGridView.Columns(i).Name
-            'Next
 
             'MsgBox(System.IO.Path.GetFullPath(Application.CommonAppDataPath))
             'exportfile = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & dsSourceTableName & ".csv"
@@ -502,7 +512,13 @@ Public Class formDataView
 
             FileOpen(111, x, OpenMode.Output)
 
-            ''PrintLine(111, hdr)
+            hdr = DataGridView.Columns(0).Name
+
+            For i = 1 To DataGridView.ColumnCount - 1
+                hdr = hdr & "," & DataGridView.Columns(i).Name
+            Next
+            PrintLine(111, hdr)
+
             'FileClose(111)
 
             Sql = "Select * from " & dsSourceTableName & ";"
@@ -757,6 +773,8 @@ Public Class formDataView
                     Sql = "Select stationName FROM  " & dsSourceTableName & " INNER JOIN station On " & dsSourceTableName & ".stationId = station.stationId GROUP BY stationName ORDER BY stationName;"
                 Case "stationId"
                     Sql = "SELECT stationId FROM  " & dsSourceTableName & " GROUP BY stationId ORDER BY stationId;"
+                'Case "elementName"
+                '    Sql = "SELECT elementName FROM " & dsSourceTableName & " INNER JOIN obselement ON obselement.elementId =  " & dsSourceTableName & ".elementId GROUP BY elementName order BY elementName;"
                 Case "yyyy"
                     Sql = "SELECT yyyy FROM  " & dsSourceTableName & " GROUP BY yyyy ORDER BY yyyy;"
                 Case "mm"
@@ -770,15 +788,15 @@ Public Class formDataView
             Dim daa = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
             dss.Clear()
             daa.Fill(dss, dsSourceTableName)
-            conn.Close()
 
+            'MsgBox(dss.Tables(dsSourceTableName).Rows.Count)
             'MsgBox(dss.Tables(dsSourceTableName).Rows(0).Item(0))
-
+            conn.Close()
             Return True
 
         Catch x As Exception
-            MsgBox(x.Message)
             conn.Close()
+            'MsgBox(x.Message & " at Populate_Lists")
             Return False
         End Try
     End Function

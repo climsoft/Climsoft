@@ -231,7 +231,7 @@ Partial Class formSynoptic2
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(315, 72)
+        Me.Label5.Location = New System.Drawing.Point(327, 72)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 695
@@ -239,11 +239,12 @@ Partial Class formSynoptic2
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(380, 68)
+        Me.txtSequencer.Location = New System.Drawing.Point(392, 68)
         Me.txtSequencer.Name = "txtSequencer"
-        Me.txtSequencer.Size = New System.Drawing.Size(175, 20)
+        Me.txtSequencer.Size = New System.Drawing.Size(67, 20)
         Me.txtSequencer.TabIndex = 694
-        Me.txtSequencer.Text = "seq_month_day_synoptime"
+        Me.txtSequencer.Text = "seq_hour"
+        Me.txtSequencer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'btnHelp
         '

@@ -1452,6 +1452,10 @@ Public Class formDaily1
         formPopulate()
     End Sub
 
+    Private Sub btnExport_Click(sender As Object, e As EventArgs) 
+        frmFormsExport.Show()
+    End Sub
+
 
     'Private Sub cboDay_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedValueChanged
     '    formPopulate()
