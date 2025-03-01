@@ -14,9 +14,6 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports ClimsoftVer4.Translations
-
-
 Public Class frmMainMenu
 
     Public HTMLHelp As New clsHelp
@@ -152,7 +149,8 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub cmdQC_Click(sender As Object, e As EventArgs) Handles btnMainQC.Click
-        frmQC.ShowDialog()
+        'frmQC.ShowDialog(Me)
+        frmImportQCData.ShowDialog(Me)
     End Sub
 
     Private Sub cmdProducts_Click(sender As Object, e As EventArgs) Handles btnMainProducts.Click
