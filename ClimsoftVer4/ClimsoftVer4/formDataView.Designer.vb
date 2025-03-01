@@ -101,7 +101,7 @@ Partial Class formDataView
         Me.cmdExport.Name = "cmdExport"
         Me.cmdExport.Size = New System.Drawing.Size(84, 23)
         Me.cmdExport.TabIndex = 9
-        Me.cmdExport.Text = "Backup"
+        Me.cmdExport.Text = "Export"
         Me.cmdExport.UseVisualStyleBackColor = True
         '
         'cmdEdit

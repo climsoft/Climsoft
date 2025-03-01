@@ -82,6 +82,7 @@ Partial Class frmMainMenu
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnMainDataEntry = New System.Windows.Forms.Button()
         Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
+        Me.verTlStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.menuStripMain.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -349,7 +350,7 @@ Partial Class frmMainMenu
         '
         'mnuHelp
         '
-        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpContents, Me.mnuHelpAbout})
+        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpContents, Me.mnuHelpAbout, Me.verTlStripMenuItem})
         Me.mnuHelp.Name = "mnuHelp"
         Me.mnuHelp.Size = New System.Drawing.Size(49, 23)
         Me.mnuHelp.Tag = "Help"
@@ -668,6 +669,12 @@ Partial Class frmMainMenu
         '
         Me.HelpProvider1.HelpNamespace = "climsoft4.chm"
         '
+        'verTlStripMenuItem
+        '
+        Me.verTlStripMenuItem.Name = "verTlStripMenuItem"
+        Me.verTlStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.verTlStripMenuItem.Text = "Version"
+        '
         'frmMainMenu
         '
         Me.AutoSize = True
@@ -750,4 +757,5 @@ Partial Class frmMainMenu
     Friend WithEvents MnuInventory As ToolStripMenuItem
     Friend WithEvents UpdateScriptToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents seqHourly2ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents verTlStripMenuItem As ToolStripMenuItem
 End Class
