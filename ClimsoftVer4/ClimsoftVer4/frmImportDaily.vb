@@ -140,11 +140,11 @@
         'Set cursor to busy mood
         Me.Cursor = Cursors.WaitCursor
         lblQCfile.Visible = False
-        'Try
+        Try
 
-        'Assign delimiter for the text file
-        ' Comma delimited
-        If optComma.Checked Then
+            'Assign delimiter for the text file
+            ' Comma delimited
+            If optComma.Checked Then
                 delimit = ","
                 'Tab delimited
             ElseIf OptTAB.Checked Then
@@ -153,52 +153,58 @@
             ElseIf OptOthers.Checked Then
                 delimit = txtOther.Text
             End If
-        DataGridView1.Columns.Clear()
+            DataGridView1.Columns.Clear()
 
-        Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
+            Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
 
-            MyReader.TextFieldType = FileIO.FieldType.Delimited
-            MyReader.SetDelimiters(delimit)
+                MyReader.TextFieldType = FileIO.FieldType.Delimited
+                MyReader.SetDelimiters(delimit)
 
-            ' Fill the DataGrid with few records for the file structure to be understood
-            rec = 0
-            fld = 0
-            Do While MyReader.EndOfData = False 'Or rec < 30
-                rec = rec + 1
-                Try
-                    currentRow = MyReader.ReadFields()
-                    'MsgBox(currentRow.Count)
-                    If currentRow.Count > fld Then DataGridView1.ColumnCount = currentRow.Count
-                    fld = currentRow.Count
-                    DataGridView1.Rows.Add(currentRow)
-                    'rec = rec + 1
-                Catch ex As Exception
-                    If ex.HResult = -2147467261 Then
-                        Exit Do
-                    Else
-                        MsgBox("The selected delimiter doesn't match the file")
-                        Me.Cursor = Cursors.Default
-                        Exit Sub
-                    End If
-                End Try
-                If rec > 99 Then Exit Do ' It's expected that with about 100 records on the Grid View the data structure will be well captured
+                ' Fill the DataGrid with few records for the file structure to be understood
+                rec = 0
+                fld = 0
+                Do While MyReader.EndOfData = False 'Or rec < 30
+                    rec = rec + 1
+                    Try
+                        currentRow = MyReader.ReadFields()
+                        'MsgBox(currentRow.Count)
+                        If currentRow.Count > fld Then DataGridView1.ColumnCount = currentRow.Count
+                        fld = currentRow.Count
+                        DataGridView1.Rows.Add(currentRow)
+                        'rec = rec + 1
+                    Catch ex As Exception
+                        If ex.HResult = -2147467261 Then
+                            Exit Do
+                        Else
+                            MsgBox("The selected delimiter doesn't match the file")
+                            Me.Cursor = Cursors.Default
+                            Exit Sub
+                        End If
+                    End Try
+                    If rec > 99 Then Exit Do ' It's expected that with about 100 records on the Grid View the data structure will be well captured
 
-            Loop
-            'MsgBox(rec)
-            ' Adjust the Columns list and the Data Grid View according to the current record fields
-            lstColumn.Items.Clear()
-            For i = 1 To DataGridView1.ColumnCount
-                DataGridView1.Columns(i - 1).Name = i
-                lstColumn.Items.Add(i)
-            Next
+                Loop
+                'MsgBox(rec)
+                ' Adjust the Columns list and the Data Grid View according to the current record fields
+                lstColumn.Items.Clear()
+                For i = 1 To DataGridView1.ColumnCount
+                    DataGridView1.Columns(i - 1).Name = i
+                    lstColumn.Items.Add(i)
+                Next
 
-            ''Get Total Records Number
-            'lblTRecords.Text = IO.File.ReadAllLines(txtImportFile.Text).Length
-            'lblTRecords.Refresh()
-        End Using
-        'Get Total Records Number
-        lblTRecords.Text = IO.File.ReadAllLines(txtImportFile.Text).Length
-        lblTRecords.Refresh()
+                ''Get Total Records Number
+                'lblTRecords.Text = IO.File.ReadAllLines(txtImportFile.Text).Length
+                'lblTRecords.Refresh()
+            End Using
+            'Get Total Records Number
+            lblTRecords.Text = IO.File.ReadAllLines(txtImportFile.Text).Length
+            lblTRecords.Refresh()
+
+        Catch x As Exception
+            MsgBox(x.Message)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End Try
 
         Try
             ' Special file structures
@@ -240,19 +246,25 @@
             End If
             Me.Cursor = Cursors.Default
         End Try
-        If DataGridView1.RowCount > 0 Then
-            'cmdLoadData.Enabled = True
 
-            ' CLICOM imports have fixed structure hence the panel for header specifications should not be used hence it's not enabled
-            If InStr(Text, ClsTranslations.GetTranslation("CLICOM")) < 1 Then pnlHeaders.Enabled = True
-        Else
-            cmdLoadData.Enabled = False
-            pnlHeaders.Enabled = False
-        End If
-        Me.Cursor = Cursors.Default
-        lstStations.Items.Clear()
-        lstElements.Items.Clear()
-        pnlErrors.Visible = False
+        Try
+            If DataGridView1.RowCount > 0 Then
+                'cmdLoadData.Enabled = True
+
+                ' CLICOM imports have fixed structure hence the panel for header specifications should not be used hence it's not enabled
+                If InStr(Text, ClsTranslations.GetTranslation("CLICOM")) < 1 Then pnlHeaders.Enabled = True
+            Else
+                cmdLoadData.Enabled = False
+                pnlHeaders.Enabled = False
+            End If
+            Me.Cursor = Cursors.Default
+            lstStations.Items.Clear()
+            lstElements.Items.Clear()
+            pnlErrors.Visible = False
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            MsgBox(Ex.message)
+        End Try
     End Sub
 
     Sub List_AWSFields()

@@ -33,6 +33,7 @@ Partial Class formAWSRealTime
         Me.cmdServers = New System.Windows.Forms.Button()
         Me.cmdProcess = New System.Windows.Forms.Button()
         Me.pnlProcessing = New System.Windows.Forms.Panel()
+        Me.list_errors = New System.Windows.Forms.ListBox()
         Me.pnlProcessSettings = New System.Windows.Forms.Panel()
         Me.lblEncodeHrs = New System.Windows.Forms.Label()
         Me.txtEncode = New System.Windows.Forms.TextBox()
@@ -53,7 +54,6 @@ Partial Class formAWSRealTime
         Me.txtInterval = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.optStop = New System.Windows.Forms.RadioButton()
-        Me.list_errors = New System.Windows.Forms.ListBox()
         Me.Ltime = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.txtQC = New System.Windows.Forms.TextBox()
@@ -354,8 +354,8 @@ Partial Class formAWSRealTime
         '
         Me.pnlProcessing.BackColor = System.Drawing.Color.MistyRose
         Me.pnlProcessing.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlProcessing.Controls.Add(Me.pnlProcessSettings)
         Me.pnlProcessing.Controls.Add(Me.list_errors)
+        Me.pnlProcessing.Controls.Add(Me.pnlProcessSettings)
         Me.pnlProcessing.Controls.Add(Me.Ltime)
         Me.pnlProcessing.Controls.Add(Me.Panel4)
         Me.pnlProcessing.Controls.Add(Me.lblErrors)
@@ -363,9 +363,17 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.grpElements)
         Me.pnlProcessing.Location = New System.Drawing.Point(194, 29)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(757, 323)
+        Me.pnlProcessing.Size = New System.Drawing.Size(757, 336)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
+        '
+        'list_errors
+        '
+        Me.list_errors.FormattingEnabled = True
+        Me.list_errors.Location = New System.Drawing.Point(11, 450)
+        Me.list_errors.Name = "list_errors"
+        Me.list_errors.Size = New System.Drawing.Size(729, 82)
+        Me.list_errors.TabIndex = 8
         '
         'pnlProcessSettings
         '
@@ -389,9 +397,9 @@ Partial Class formAWSRealTime
         Me.pnlProcessSettings.Controls.Add(Me.txtInterval)
         Me.pnlProcessSettings.Controls.Add(Me.Label14)
         Me.pnlProcessSettings.Controls.Add(Me.optStop)
-        Me.pnlProcessSettings.Location = New System.Drawing.Point(13, 14)
+        Me.pnlProcessSettings.Location = New System.Drawing.Point(11, 5)
         Me.pnlProcessSettings.Name = "pnlProcessSettings"
-        Me.pnlProcessSettings.Size = New System.Drawing.Size(727, 139)
+        Me.pnlProcessSettings.Size = New System.Drawing.Size(727, 152)
         Me.pnlProcessSettings.TabIndex = 6
         '
         'lblEncodeHrs
@@ -567,14 +575,6 @@ Partial Class formAWSRealTime
         Me.optStop.TabStop = True
         Me.optStop.Text = "Stop"
         Me.optStop.UseVisualStyleBackColor = True
-        '
-        'list_errors
-        '
-        Me.list_errors.FormattingEnabled = True
-        Me.list_errors.Location = New System.Drawing.Point(11, 450)
-        Me.list_errors.Name = "list_errors"
-        Me.list_errors.Size = New System.Drawing.Size(729, 82)
-        Me.list_errors.TabIndex = 8
         '
         'Ltime
         '
@@ -1146,7 +1146,7 @@ Partial Class formAWSRealTime
         Me.grpSites.Controls.Add(Me.Label15)
         Me.grpSites.Controls.Add(Me.txtHrs)
         Me.grpSites.Controls.Add(Me.chkHrsAdjust)
-        Me.grpSites.Location = New System.Drawing.Point(6, 13)
+        Me.grpSites.Location = New System.Drawing.Point(8, 81)
         Me.grpSites.Name = "grpSites"
         Me.grpSites.Size = New System.Drawing.Size(746, 383)
         Me.grpSites.TabIndex = 67
@@ -2358,12 +2358,12 @@ Partial Class formAWSRealTime
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(956, 633)
-        Me.Controls.Add(Me.pnlSites)
         Me.Controls.Add(Me.pnlProcessing)
         Me.Controls.Add(Me.pnlDataStructures)
         Me.Controls.Add(Me.pnlServers)
         Me.Controls.Add(Me.pnlMsgEncoding)
         Me.Controls.Add(Me.pnlControl)
+        Me.Controls.Add(Me.pnlSites)
         Me.KeyPreview = True
         Me.Name = "formAWSRealTime"
         Me.Text = "AWS Real Time"

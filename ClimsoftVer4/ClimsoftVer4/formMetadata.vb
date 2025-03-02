@@ -990,7 +990,7 @@ Err:
     Private Sub cmdViewStation_Click(sender As Object, e As EventArgs) Handles cmdViewStation.Click
         dsSourceTableName = "station"
         RecordsView("station")
-
+        'formDataView.btnExport.Enabled = False
     End Sub
     Sub RecordsView(tbl As String)
 
@@ -1002,13 +1002,15 @@ Err:
 
         da.Fill(dstn, tbl)
 
-        formDataView.Show()
-        formDataView.DataGridView.DataSource = dstn
-        formDataView.DataGridView.DataMember = tbl
-        formDataView.DataGridView.Refresh()
-        formDataView.grpSearch.Visible = False
-        formDataView.DataGridView.Dock = DockStyle.Top
-
+        With formDataView
+            formDataView.Show()
+            .DataGridView.DataSource = dstn
+            .DataGridView.DataMember = tbl
+            .DataGridView.Refresh()
+            .grpSearch.Visible = False
+            .DataGridView.Dock = DockStyle.Top
+            .btnExport.Enabled = False
+        End With
     End Sub
 
 

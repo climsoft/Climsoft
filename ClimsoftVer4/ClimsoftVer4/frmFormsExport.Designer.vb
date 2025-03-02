@@ -50,6 +50,7 @@ Partial Class frmFormsExport
         Me.tlstrpBtn = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.pnlPeriod.SuspendLayout()
         Me.tlstrpButtom.SuspendLayout()
         Me.SuspendLayout()
@@ -267,7 +268,7 @@ Partial Class frmFormsExport
         Me.tlstrpButtom.AutoSize = False
         Me.tlstrpButtom.BackColor = System.Drawing.SystemColors.ControlLight
         Me.tlstrpButtom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.tlstrpButtom.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlstrpBtn, Me.ToolStripSeparator1, Me.ToolStripButton2})
+        Me.tlstrpButtom.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.tlstrpBtn, Me.ToolStripSeparator1, Me.ToolStripButton2})
         Me.tlstrpButtom.Location = New System.Drawing.Point(0, 428)
         Me.tlstrpButtom.Name = "tlstrpButtom"
         Me.tlstrpButtom.Size = New System.Drawing.Size(681, 25)
@@ -291,7 +292,7 @@ Partial Class frmFormsExport
         '
         Me.ToolStripSeparator1.AutoSize = False
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(10, 25)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(12, 25)
         '
         'ToolStripButton2
         '
@@ -303,6 +304,12 @@ Partial Class frmFormsExport
         Me.ToolStripButton2.Name = "ToolStripButton2"
         Me.ToolStripButton2.Size = New System.Drawing.Size(50, 22)
         Me.ToolStripButton2.Text = "&Close"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.AutoSize = False
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(12, 25)
         '
         'frmFormsExport
         '
@@ -362,4 +369,5 @@ Partial Class frmFormsExport
     Friend WithEvents tlstrpBtn As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripButton2 As ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
 End Class

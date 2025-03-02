@@ -1697,14 +1697,12 @@ Err:
                         'Exit
                     End If
 
-                    ' Where file prefix is used
+                    ' Check and consider where file prefix is used
                     If Len(flprefix) = 0 Then
+                        ftpfile = Chr(34) & ftpfile & Chr(34)
                         Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
-                    Else
+                    Else                    ' Where file prefix is used
                         ' Get input files path
-
-                        'fldr = flder & ftpfile
-                        'fldr = (IO.Path.GetDirectoryName(fldr))
 
                         fldr = (IO.Path.GetDirectoryName(ftpfile))
                         fldr = Strings.Replace(fldr, "\", "/") ' Convert file path dlimiters to FTP structure
@@ -1719,7 +1717,7 @@ Err:
                     End If
                     'Print(1, "bye" & Chr(13) & Chr(10))
 
-                    ' Improved FTP method that uses WinSCP commands and works even in Filezilla servers
+                    ' Improved FTP method that uses WinSCP commands and works even in Filezilla
                     Print(1, "Close" & Chr(13) & Chr(10))
                     Print(1, "Exit" & Chr(13) & Chr(10))
                     FileClose(1)
@@ -1742,6 +1740,7 @@ Err:
             FileClose(1)
             FileClose(3)
 
+            'Log_Errors(ftpfile)
             ' Create batch file to execute FTP script
             'ftpbatch = local_folder & "\ftp_tdcf.bat"
             ftpbatch = local_folder & "\ftp_getFiles.bat"
@@ -1825,6 +1824,7 @@ Err:
                     FileClose(100)
 
                 End If
+                ftpfile = Strings.Replace(ftpfile, Chr(34), "")
 
                 txtInputServer.Text = ftp_host
                 txtInputfolder.Text = flder
@@ -1836,14 +1836,17 @@ Err:
 
 
             Else
-                'txtOutputServer.Text = ftp_host
-                'txtOutputFolder.Text = flder
 
-                '' List the processed output file
-                'lstOutputFiles.Items.Add(System.IO.Path.GetFileName(ftpfile))
-                'txtOutputServer.Refresh()
-                'txtOutputFolder.Refresh()
-                'lstOutputFiles.Refresh()
+                'Log_Errors(ftpfile)
+                txtOutputServer.Text = ftp_host
+                txtOutputFolder.Text = flder
+
+                ' List the processed output file
+                ftpfile = Strings.Replace(ftpfile, Chr(34), "")
+                lstOutputFiles.Items.Add(System.IO.Path.GetFileName(ftpfile))
+                txtOutputServer.Refresh()
+                txtOutputFolder.Refresh()
+                lstOutputFiles.Refresh()
             End If
             FileClose(1)
 
@@ -1856,8 +1859,14 @@ Err:
             FileClose(3)
             FileClose(100)
             FileClose(200)
-            Log_Errors(ex.Message & " at FTP_Call")
-            FTP_Call = False
+
+            'If ex.HResult = -2147024809 Then ' Where double quote (") characters have been to deal with filenames have white spaces
+            '    Return True
+            'Else
+            Log_Errors(ex.HResult & "-" & ex.Message & " at FTP_Call")
+                FTP_Call = False
+            'End If
+
         End Try
     End Function
     Sub Refresh_Folder(flder As String)
@@ -4927,6 +4936,7 @@ Err:
     Function Text_To_DataTable(ByVal path As String, ByVal delimitter As Char, ByVal hdrs As Integer, ByRef flds As Integer, ByRef recs As Long, txtQlfy As String) As DataTable
         Dim source As String = String.Empty
         Dim dt As DataTable = New DataTable
+        Dim validRow As Boolean
         'Dim txtq As String = String.Empty
 
         Try
@@ -4952,18 +4962,20 @@ Err:
 
             For i As Integer = If(False, 1, 0) To rows.Length - 1
                 Dim dr As DataRow = dt.NewRow
-
+                validRow = True
                 For x As Integer = hdrs To rows(i).Split(delimitter).Length - 1
 
                     If x <= dt.Columns.Count - 1 Then
                         dr(x) = rows(i).Split(delimitter)(x)
                         dr(x) = dr(x)
                     Else
-                        Throw New Exception("The number of columns on row " & i + If(False, 0, 1) & " is greater than the amount of columns in the " & If(False, "header.", "first row."))
+                        'Throw New Exception("The number of columns on row " & i + If(False, 0, 1) & " is greater than the amount of columns in the " & If(False, "header.", "first row."))
+                        validRow = False
+                        Exit For
                     End If
                 Next
 
-                dt.Rows.Add(dr)
+                If validRow Then dt.Rows.Add(dr)
             Next
 
             ''dt.Select("column0 = 2024 - 7 - 9 08:00")
@@ -5963,6 +5975,8 @@ Err:
 
             If GTSEncode(nat_id) And Val(txtPeriod.Text) <> 999 And Kount > 0 And DateAndTime.Minute(dtt) = 0 Then
                 ' Check records due for Encoding
+
+                'Log_Errors(DateDiff("h", dttdb, Now()) & " <=  " & CInt(txtEncode.Text))
 
                 If DateDiff("h", dttdb, Now()) <= CInt(txtEncode.Text) Then
                     ' Convert time to UTC

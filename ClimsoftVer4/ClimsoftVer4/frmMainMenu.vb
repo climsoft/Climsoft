@@ -406,4 +406,8 @@ Public Class frmMainMenu
     Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "aboutclimsoft4.htm")
     End Sub
+
+    Private Sub verTlStripMenuItem_Click(sender As Object, e As EventArgs) Handles verTlStripMenuItem.Click
+        MsgBox("Climsft " & frmSplashScreen.lblVersion.Text,, "Version Details")
+    End Sub
 End Class
