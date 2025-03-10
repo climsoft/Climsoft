@@ -556,7 +556,8 @@ Public Class ucrNavigation
         End If
 
         'fill all the sequencer values from the database
-        clsSeqDataCall.SetTableNameAndFields(strSequencerTable, dctTableFields)
+        clsSeqDataCall.SetTableName(strSequencerTable)
+        clsSeqDataCall.SetFields(dctTableFields)
         dtbSequencer = clsSeqDataCall.GetDataTable()
 
         'create the select filter statement to be used against the datatable
