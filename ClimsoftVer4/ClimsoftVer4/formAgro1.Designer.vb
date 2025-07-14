@@ -174,6 +174,7 @@ Partial Class formAgro1
         Me.btnMoveFirst = New System.Windows.Forms.Button()
         Me.btnCommit = New System.Windows.Forms.Button()
         Me.btnPush = New System.Windows.Forms.Button()
+        Me.lblInvaliDate = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label62
@@ -1455,11 +1456,21 @@ Partial Class formAgro1
         Me.btnPush.Text = "Push"
         Me.btnPush.UseVisualStyleBackColor = True
         '
+        'lblInvaliDate
+        '
+        Me.lblInvaliDate.AutoSize = True
+        Me.lblInvaliDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInvaliDate.Location = New System.Drawing.Point(253, 46)
+        Me.lblInvaliDate.Name = "lblInvaliDate"
+        Me.lblInvaliDate.Size = New System.Drawing.Size(0, 15)
+        Me.lblInvaliDate.TabIndex = 1174
+        '
         'formAgro1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(950, 644)
+        Me.Controls.Add(Me.lblInvaliDate)
         Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.btnCommit)
         Me.Controls.Add(Me.chkRepeatEntry)
@@ -1771,4 +1782,5 @@ Partial Class formAgro1
     Friend WithEvents btnMoveFirst As System.Windows.Forms.Button
     Friend WithEvents btnCommit As System.Windows.Forms.Button
     Friend WithEvents btnPush As Button
+    Friend WithEvents lblInvaliDate As Label
 End Class

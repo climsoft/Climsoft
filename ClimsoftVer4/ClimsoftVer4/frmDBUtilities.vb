@@ -17,12 +17,12 @@
 Imports System.Windows.Forms
 
 Public Class frmDBUtilities
-    'Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    'Dim da As MySqlConnector.MySqlDataAdapter
     'Dim ds As New DataSet
     'Dim sql As String
-    'Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    'Dim conn As New MySqlConnector.MySqlConnection
     'Dim MyConnectionString As String
-    'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    'Dim cmd As New MySqlConnector.MySqlCommand
     'Public Curr_db As String
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
@@ -64,7 +64,7 @@ Public Class frmDBUtilities
         '        conn.Open()
 
         '        sql = "SELECT selected,form_name, description FROM data_forms;"
-        '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        '        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         '        ds.Clear()
         '        da.Fill(ds, "data_forms")
 
@@ -78,7 +78,7 @@ Public Class frmDBUtilities
         '            End If
         '            'If ds.Tables("data_forms").Rows(i).Item(0) = 1 Then lstvForms.Items(i).Checked = True
         '        Next
-        '    Catch ex As MySql.Data.MySqlClient.MySqlException
+        '    Catch ex As MySqlConnector.MySqlException
         '        MessageBox.Show(ex.Message)
         '    End Try
         'End Sub
@@ -107,11 +107,11 @@ Public Class frmDBUtilities
         '    dd As String, hh As String, ctl As Control, capturedBy As String
         'Dim stnId As String, elemCode As Integer, obsDatetime As String, obsVal As String, obsFlag As String, _
         '    qcStatus As Integer, acquisitionType As Integer, obsLevel As String, dataForm As String
-        'Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        'Dim objCmd As MySqlConnector.MySqlCommand
 
         'Try
         '    sql = "SELECT * FROM form_synoptic_2_RA1"
-        '    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        '    da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         '    ds.Clear()
         '    da.Fill(ds, "form_synoptic_2_RA1")
 
@@ -160,7 +160,7 @@ Public Class frmDBUtilities
         '                    & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
         '                ' Create the Command for executing query and set its properties
-        '                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+        '                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
         '                'Execute query
         '                objCmd.ExecuteNonQuery()
@@ -209,7 +209,7 @@ Public Class frmDBUtilities
         frmDataMigration.Show()
         '        On Error GoTo Err
         '        Dim sql_obsv, dbstr, svrstr, prtusrpwd, myconnectstr, tmpbkpfile, bkpfile, fchar As String
-        '        Dim Cmd As MySql.Data.MySqlClient.MySqlCommand
+        '        Dim Cmd As MySqlConnector.MySqlCommand
 
         '        ' Export CLIMSOFT 4 Mysql db to text (CSV) backup
         '        dbstr = "mysql_main_climsoft_database_v3"
@@ -232,7 +232,7 @@ Public Class frmDBUtilities
         '        conn.ConnectionString = frmLogin.txtusrpwd.Text
         '        conn.Open()
 
-        '        Cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_obsv, conn)
+        '        Cmd = New MySqlConnector.MySqlCommand(sql_obsv, conn)
 
         '        'Execute query for making a V3 db backup
         '        Cmd.ExecuteNonQuery()
@@ -243,7 +243,7 @@ Public Class frmDBUtilities
         '        sql_obsv = "use " & dbstr & "; LOAD DATA INFILE '" & bkpfile & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType,dataForm,capturedBy,mark);"
 
         '        'Execute query for migrating data to V4 db
-        '        Cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_obsv, conn)
+        '        Cmd = New MySqlConnector.MySqlCommand(sql_obsv, conn)
         '        Cmd.ExecuteNonQuery()
 
         '        MsgBox("CLIMSOFT V3 migration completed")

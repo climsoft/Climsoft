@@ -15,16 +15,16 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class formProductsSelectCriteria
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim maxRows, maxColumns As Integer
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim MyConnectionString As String
     Dim kounts, code As Integer
     Dim stnlist, elmlist, levlist, elmcolmn, sdate, edate, sql, abbrev, WrunCode As String
     Dim SumAvg, SummaryType As String
     Public CPTstart, CPTend As String
-    Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+    Dim cmd As MySqlConnector.MySqlCommand
     Dim ItmExist As Boolean
 
     Private Sub formProducts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -43,7 +43,7 @@ Public Class formProductsSelectCriteria
 
         MyConnectionString = frmLogin.txtusrpwd.Text
         Try
-            conn.ConnectionString = MyConnectionString
+            conn.ConnectionString = MyConnectionString ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             conn.Open()
 
             sql = "SELECT * FROM station ORDER BY stationName"
@@ -51,12 +51,12 @@ Public Class formProductsSelectCriteria
             'sql = "SELECT recordedFrom, stationName from observationfinal INNER JOIN station ON recordedFrom = stationId group by recordedFrom  ORDER BY stationName;"
 
             'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "station")
             'conn.Close()
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MessageBox.Show(ex.Message)
         End Try
 
@@ -71,7 +71,7 @@ Public Class formProductsSelectCriteria
             sql = "select * from obsElement where elementId between 301 and 311 order by description;"
         End If
         'sql = "select describedBy, description from observationfinal INNER JOIN obselement on describedBy = elementId group by describedBy  order by description;"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         da.SelectCommand.CommandTimeout = 0
         ds.Clear()
         da.Fill(ds, "obselement")
@@ -97,18 +97,22 @@ Public Class formProductsSelectCriteria
 
         ClsTranslations.TranslateComponent(lstvStations, bHeaderOnly:=True)
         ClsTranslations.TranslateComponent(lstvElements, bHeaderOnly:=True)
+
+        'Me.Height = 858
+        'Me.Width = 1626
+
     End Sub
     Function AllowedMissingDays() As Integer
-        Dim darg As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim darg As MySqlConnector.MySqlDataAdapter
         Dim dsrg As New DataSet
 
         Try
             MyConnectionString = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = MyConnectionString
+            conn.ConnectionString = MyConnectionString ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             conn.Open()
             sql = "SELECT keyvalue FROM regkeys WHERE keyName = 'key19';"
 
-            darg = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            darg = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dsrg.Clear()
             darg.Fill(dsrg, "Key")
             conn.Close()
@@ -132,7 +136,7 @@ Public Class formProductsSelectCriteria
 
         sql = "SELECT stationId, stationName FROM station WHERE stationName='" & prod & "';"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "station")
 
@@ -183,7 +187,7 @@ Public Class formProductsSelectCriteria
 
             sql = "SELECT elementId, abbreviation, description FROM obselement WHERE description='" & prod & "';"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "obselement")
 
@@ -406,7 +410,7 @@ Public Class formProductsSelectCriteria
                            where DF > 0 or abs(DF) <= " & CInt(txtMissingDays.Text) & "
                            group by StationID, YY, MM
                            order by StationID, YY, MM;"
-
+                    txttest.Text = sql
                     '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
                     'sql = "select StationID,station_Name,Lat, Lon, Elev,YY,MM," & elmcolmn & " from (Select recordedFrom As StationID, describedBy,stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                     '       From observationfinal inner Join station On stationId = recordedFrom
@@ -498,7 +502,7 @@ Public Class formProductsSelectCriteria
                     DataProducts(sql, lblProductType.Text)
 
                 Case "Means"
-                    'Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+                    'Dim cmd As MySqlConnector.MySqlCommand
                     'conn.ConnectionString = frmLogin.txtusrpwd.Text
 
                     elmcolmn = ""
@@ -520,7 +524,7 @@ Public Class formProductsSelectCriteria
                     '      "WHERE(RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") AND (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, year(obsDatetime), month(obsDatetime)) t GROUP BY StationId,Years, Months;"
 
                     'conn.Open()
-                    'cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                    'cmd = New MySqlConnector.MySqlCommand(sql, conn)
                     'cmd.CommandTimeout = 0
 
                     ''Execute query
@@ -956,7 +960,7 @@ Public Class formProductsSelectCriteria
         Dim clmnstr As String
 
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "observationfinal")
         maxRows = ds.Tables("observationfinal").Rows.Count
@@ -1007,7 +1011,7 @@ Err:
                 "WHERE (RecordedFrom = " & stns & ") AND (describedBy = '111' OR describedBy = '112') and (year(obsDatetime) between '" & Year(sdt) & "' and '" & Year(edt) & "') and (month(obsDatetime) between '" & Month(sdt) & "' and '" & Month(edt) & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY STNID, YY, MM, DD, HH;"
             End If
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "observationfinal")
 
@@ -1083,7 +1087,7 @@ Err:
         frmCharts.SummaryType = SummaryType
         frmCharts.graphType = graphType
         'Try
-        '    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        '    da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         '    ds.Clear()
         '    da.Fill(ds, "charts")
         '    recmx = ds.Tables("charts").Rows.Count
@@ -1145,15 +1149,15 @@ Err:
 
     Sub DataProducts(sql As String, typ As String)
 
-        Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dap As MySqlConnector.MySqlDataAdapter
         Dim dsp As New DataSet
-        Dim conp As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conp As New MySqlConnector.MySqlConnection
         Dim fl As String
 
         Try
             conp.ConnectionString = MyConnectionString
             conp.Open()
-            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
+            dap = New MySqlConnector.MySqlDataAdapter(sql, conp)
             dap.SelectCommand.CommandTimeout = 0
             dsp.Clear()
             dap.Fill(dsp, "observationfinal")
@@ -1263,16 +1267,16 @@ Err:
 
     End Sub
     Sub ClimateStationOutput(sql As String, flNo As Integer, flNm As String)
-        Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dap As MySqlConnector.MySqlDataAdapter
         Dim dsp As New DataSet
-        Dim conp As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conp As New MySqlConnector.MySqlConnection
         Dim kount As Long
 
         Dim dat, rec As String
         Try
             conp.ConnectionString = MyConnectionString
             conp.Open()
-            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
+            dap = New MySqlConnector.MySqlDataAdapter(sql, conp)
             dap.SelectCommand.CommandTimeout = 0
             dsp.Clear()
             dap.Fill(dsp, "data")
@@ -1327,7 +1331,7 @@ Err:
         Dim Kount As Long
 
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "observationfinal")
@@ -1521,7 +1525,7 @@ Err:
 
             End If
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
 
             ds.Clear()
             da.Fill(ds, "observationfinal")
@@ -1566,7 +1570,7 @@ Err:
 
     Sub GeoCLIMDekadalProducts(stnlist As String, codes As Integer, abbrev As String, sdate As String, edate As String)
 
-        Dim dad As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dad As MySqlConnector.MySqlDataAdapter
         Dim dsd As New DataSet
         Dim fl, yy, hdr, dat1, dat2, tst As String
         Dim k As Long
@@ -1577,7 +1581,7 @@ Err:
 
         conn.Open()
         Try
-            dad = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dad = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dsd.Clear()
             dad.Fill(dsd, "geodekadal")
             conn.Close()
@@ -1673,7 +1677,7 @@ Err:
     End Sub
     Sub GeoCLIMDailyProducts(stnlist As String, codes As Integer, abbrev As String, sdate As String, edate As String, xpivot As String)
 
-        Dim dad As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dad As MySqlConnector.MySqlDataAdapter
         Dim dsd As New DataSet
         Dim fl As String
         Dim k As Long
@@ -1684,7 +1688,7 @@ Err:
 
         Try
             conn.Open()
-            dad = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dad = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dsd.Clear()
             dad.Fill(dsd, "Geoclimdly")
             conn.Close()
@@ -1780,7 +1784,7 @@ Err:
             sql = "SELECT year(obsDatetime) as YY," & stnscolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " &
                 "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & lstvElements.Items(k).Text & ") and (year(obsDatetime) between '" & DateAndTime.Year(sdate) & "' And '" & DateAndTime.Year(edate) & "') and (month(obsDatetime) between '" & st & "' And '" & ed & "') ORDER BY year(obsDatetime)) t GROUP BY YY;"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
 
             da.Fill(ds, "observationfinal")
@@ -1795,7 +1799,7 @@ Err:
             ' Get station locations 
             sql1 = "SELECT * FROM station"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql1, conn)
             dstn.Clear()
             da.Fill(dstn, "station")
             ''MsgBox(1)
@@ -1900,7 +1904,7 @@ Err:
 
                 sql = "SELECT recordedFrom as StationId,dayofyear(obsdatetime) as YearDay," & yrcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = '" & stns & "') AND (describedBy ='" & codes & "') and (obsDatetime between '" & dt1 & "' and '" & dt2 & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, YearDay;"
 
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
 
                 ds.Clear()
                 da.Fill(ds, "observationfinal")
@@ -1983,7 +1987,7 @@ Err:
         For stns = 0 To lstvStations.Items.Count - 1
             sql = "SELECT year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,SUM(IF(describedBy = '5', value, NULL)) AS 'Precip', SUM(IF(describedBy ='2', value, NULL)) AS 'Tmax', SUM(IF(describedBy ='3', value, NULL)) AS 'Tmin' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = '" & lstvStations.Items(stns).SubItems(0).Text & "') AND (describedBy ='5' OR describedBy ='2' OR describedBy ='3') and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY YY,MM,DD;"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
 
             da.Fill(ds, "observationfinal")
@@ -1996,7 +2000,7 @@ Err:
             FileOpen(11, f1, OpenMode.Output)
 
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "observationfinal")
 
@@ -2019,13 +2023,13 @@ Err:
         ''On Error GoTo Err
         'Dim flds1, flds2, flds3 As String
         'Dim fl As String
-        'Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        'Dim qry As MySqlConnector.MySqlCommand
 
         Try
 
             'conn.ConnectionString = frmLogin.txtusrpwd.Text
             'conn.Open()
-            'qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            'qry = New MySqlConnector.MySqlCommand(sql, conn)
             'qry.CommandTimeout = 0
 
             ''Execute query
@@ -2077,7 +2081,7 @@ Err:
                            Having stationId ='" & lstvStations.Items(stns).SubItems(0).Text & "' and elementId =" & lstvElements.Items(elms).Text & ");"
 
 
-                    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                    da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                     ds.Clear()
                     da.Fill(ds, "observationfinal")
 
@@ -2103,10 +2107,10 @@ Err:
     Sub XtremesWithDates(Xvalue As String, Xtype As String)
         Dim f1 As String
         Dim stns, elms As Integer
-        'Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        'Dim qry As MySqlConnector.MySqlCommand
 
         Try
-            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = frmLogin.txtusrpwd.Text ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             conn.Open()
 
 
@@ -2137,7 +2141,7 @@ Err:
                     '           Where ((RecordedFrom='" & lstvStations.Items(stns).SubItems(0).Text & "') AND (describedBy=" & lstvElements.Items(elms).SubItems(0).Text & ") and (obsDatetime between '" & sdate & "' and '" & edate & "'));"
 
 
-                    'qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                    'qry = New MySqlConnector.MySqlCommand(sql, conn)
                     'qry.CommandTimeout = 0
 
                     ''Execute query
@@ -2154,7 +2158,7 @@ Err:
                            Having stationId ='" & lstvStations.Items(stns).SubItems(0).Text & "' and elementId =" & lstvElements.Items(elms).SubItems(0).Text & ");"
 
 
-                    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                    da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                     ds.Clear()
                     da.Fill(ds, "observationfinal")
                     maxRows = ds.Tables("observationfinal").Rows.Count
@@ -2187,7 +2191,7 @@ Err:
 
         On Error GoTo Err
         Me.Cursor = Cursors.WaitCursor
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "observationfinal")
 
@@ -2283,7 +2287,7 @@ Err:
         Dim flds1, flds2, flds3 As String
         Dim fl As String
         'MsgBox(sql)
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
 
         ds.Clear()
         da.Fill(ds, "observationfinal")
@@ -2335,7 +2339,7 @@ Err:
             sql = "SELECT recordedFrom as StationID, describedBy as Code, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, obsDatetime, obsvalue FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
                    "WHERE (RecordedFrom = " & stns & ") AND (describedBy =" & elms & ") and (obsDatetime between '" & sdt & "' and '" & edt & "') and hour(obsdatetime) = " & Int(RegkeyValue("key01")) & " ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "observationfinal")
@@ -2414,7 +2418,7 @@ Err:
             sql = "SELECT recordedFrom as StationID, describedBy as Code, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, obsDatetime, obsvalue FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
                    "WHERE (RecordedFrom = " & stns & ") AND (describedBy =" & elms & ") and (obsDatetime between '" & sdt & "' and '" & edt & "')  ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "observationfinal")
@@ -2484,7 +2488,7 @@ Err:
     End Sub
 
     Function windTot_Diff(id As String, code As Integer, dt As String, intvl As String, ByRef nxtdyValue As String) As Boolean
-        Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dap As MySqlConnector.MySqlDataAdapter
         Dim dsp As New DataSet
         Dim sqlp, dt1 As String
         Try
@@ -2492,7 +2496,7 @@ Err:
             dt1 = DateAndTime.Year(dt1) & "-" & DateAndTime.Month(dt1) & "-" & DateAndTime.Day(dt1) & " " & DateAndTime.Hour(dt1) & ":00:00"
             sqlp = "Select obsvalue FROM observationfinal WHERE recordedFrom ='" & id & "' and describedBy = " & 187 & " AND obsdatetime = '" & dt1 & "';"
 
-            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlp, conn)
+            dap = New MySqlConnector.MySqlDataAdapter(sqlp, conn)
             dap.SelectCommand.CommandTimeout = 0
             dsp.Clear()
             dap.Fill(dsp, "observationfinal")
@@ -2507,12 +2511,12 @@ Err:
         End Try
     End Function
     Function WindValue_Limit(Ecod As String, ByRef limitValue As Double) As Boolean
-        Dim dal As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dal As MySqlConnector.MySqlDataAdapter
         Dim dsl As New DataSet
 
         Try
             sql = "SELECT upperlimit * elementscale AS ULvalue FROM obselement WHERE elementId = " & Ecod & ";"
-            dal = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dal = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dal.SelectCommand.CommandTimeout = 0
             dsl.Clear()
             dal.Fill(dsl, "obselement")
@@ -2532,10 +2536,10 @@ Err:
     End Function
 
     Sub MeanWaterLevel(sql As String, typ As String)
-        Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dap As MySqlConnector.MySqlDataAdapter
         Dim dsp As New DataSet
-        Dim conp As New MySql.Data.MySqlClient.MySqlConnection
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim conp As New MySqlConnector.MySqlConnection
+        Dim qry As MySqlConnector.MySqlCommand
         Dim dat, stn, cod, dtt, nxtDylvl, AVGlvl, AMlvl, PMlvl As String
         Dim wghtMean As Double
         'Dim nxtDylvl, AVGlvl, AMlvl, PMlvl, wghtMean As Double
@@ -2543,7 +2547,7 @@ Err:
         Try
             conp.ConnectionString = MyConnectionString
             conp.Open()
-            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
+            dap = New MySqlConnector.MySqlDataAdapter(sql, conp)
             dap.SelectCommand.CommandTimeout = 0
             dsp.Clear()
             dap.Fill(dsp, "observationfinal")
@@ -2560,7 +2564,7 @@ Err:
             sql = "drop table if exists tmpproducts; " &
                    "create TABLE tmpproducts (ID VARCHAR(16),COD INT(4),YY INT(4),MM INT(2),DD INT(2),AMLevel DOUBLE(5,2), PMLevel double(5,2), Mean double(5,2));"
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conp)
+            qry = New MySqlConnector.MySqlCommand(sql, conp)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
@@ -2605,7 +2609,7 @@ Err:
 
                     sql = "INSERT INTO `tmpproducts` VALUES('" & dat & "');"
 
-                    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conp)
+                    qry = New MySqlConnector.MySqlCommand(sql, conp)
                     qry.CommandTimeout = 0
                     qry.ExecuteNonQuery()
 
@@ -2661,7 +2665,7 @@ Err:
         End Try
     End Function
     'Function waterLevel_nextDay(Stn As String, Ecod As String, dt As String, ByRef lvlValue As Double) As Boolean
-    '    Dim dal As MySql.Data.MySqlClient.MySqlDataAdapter
+    '    Dim dal As MySqlConnector.MySqlDataAdapter
     '    Dim dsl As New DataSet
 
     '    Try
@@ -2670,7 +2674,7 @@ Err:
 
     '        sql = "SELECT obsvalue FROM observationfinal WHERE recordedFrom = '" & Stn & "' AND describedBy = '" & Ecod & "' AND obsdatetime ='" & dt & "';"
     '        'MsgBox(sql)
-    '        dal = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+    '        dal = New MySqlConnector.MySqlDataAdapter(sql, conn)
     '        dal.SelectCommand.CommandTimeout = 0
     '        dsl.Clear()
     '        dal.Fill(dsl, "obs")
@@ -2686,7 +2690,7 @@ Err:
     '    End Try
     'End Function
     Sub waterLevel(Stn As String, Ecod As String, dtt As String, ByRef lvl As String)
-        Dim dal As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dal As MySqlConnector.MySqlDataAdapter
         Dim dsl As New DataSet
 
         Try
@@ -2695,7 +2699,7 @@ Err:
 
             sql = "SELECT obsvalue FROM observationfinal WHERE recordedFrom = '" & Stn & "' AND describedBy = '" & Ecod & "' AND obsdatetime ='" & dtt & "';"
 
-            dal = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dal = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dal.SelectCommand.CommandTimeout = 0
             dsl.Clear()
             dal.Fill(dsl, "obs")
@@ -2920,10 +2924,10 @@ Err:
         Dim constring As String
 
         constring = frmLogin.txtusrpwd.Text
-        conn = New MySql.Data.MySqlClient.MySqlConnection
-        conn.ConnectionString = constring
+        conn = New MySqlConnector.MySqlConnection
+        conn.ConnectionString = constring ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
         conn.Open()
-        cmd = New MySql.Data.MySqlClient.MySqlCommand
+        cmd = New MySqlConnector.MySqlCommand
 
         Try
             cmd.Connection = conn
@@ -2942,11 +2946,11 @@ Err:
         Dim constring As String
 
         constring = frmLogin.txtusrpwd.Text
-        conn = New MySql.Data.MySqlClient.MySqlConnection
-        conn.ConnectionString = constring
+        conn = New MySqlConnector.MySqlConnection
+        conn.ConnectionString = constring ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
         conn.Open()
         Try
-            cmd = New MySql.Data.MySqlClient.MySqlCommand
+            cmd = New MySqlConnector.MySqlCommand
             cmd.Connection = conn
             cmd.CommandText = "REFRESH_data"
             cmd.CommandType = CommandType.StoredProcedure
@@ -2962,8 +2966,8 @@ Err:
         Dim constring As String
 
         constring = frmLogin.txtusrpwd.Text
-        conn = New MySql.Data.MySqlClient.MySqlConnection
-        conn.ConnectionString = constring
+        conn = New MySqlConnector.MySqlConnection
+        conn.ConnectionString = constring ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
         conn.Open()
 
 
@@ -2971,7 +2975,7 @@ Err:
             'MsgBox(lstvStations.Items.Count & " " & lstvElements.Items.Count)
             For i = 0 To lstvStations.Items.Count - 1
                 For j = 0 To lstvElements.Items.Count - 1
-                    cmd = New MySql.Data.MySqlClient.MySqlCommand
+                    cmd = New MySqlConnector.MySqlCommand
                     cmd.Connection = conn
                     cmd.CommandText = "gather_stats"
                     cmd.CommandType = CommandType.StoredProcedure
@@ -2997,7 +3001,7 @@ Err:
         If lstvStations.Items.Count > 0 And lstvElements.Items.Count > 0 Then
             For i = 0 To lstvStations.Items.Count - 1
                 For j = 0 To lstvElements.Items.Count - 1
-                    cmd = New MySql.Data.MySqlClient.MySqlCommand
+                    cmd = New MySqlConnector.MySqlCommand
                     cmd.Connection = conn
                     cmd.CommandText = "missing_data"
                     cmd.CommandType = CommandType.StoredProcedure
@@ -3029,7 +3033,7 @@ Err:
             sql = "SELECT stationname Station,Latitude,Longitude,Elevation, elementname Element,YEAR(obs_date) 'Year',  MONTH(obs_date) 'Month',Day(obs_date) 'Day','xx.x' Missing " &
                   "FROM(missing_data, station, obselement) WHERE station.stationId = missing_data.STN_ID AND obselement.elementId=missing_data.ELEM"
             Try
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
 
                 ds.Clear()
                 da.Fill(ds, "missing")
@@ -3055,14 +3059,14 @@ Err:
 
     Function RegkeyValue(keynm As String) As String
         ' Get the image archiving folder
-        Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dar As MySqlConnector.MySqlDataAdapter
         Dim dsr As New DataSet
         Dim regmax As Integer
 
         Try
             'sql = "SELECT * FROM regkeys"
             sql = "SELECT keyValue FROM regkeys WHERE keyName = '" & keynm & "';"
-            dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dar = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dar.Fill(dsr, "regkeys")
 
             If dsr.Tables("regkeys").Rows.Count = 1 Then
@@ -3125,7 +3129,7 @@ Err:
             lstvStations.Columns.Add("Station Name", 400, HorizontalAlignment.Left)
 
             sql = "SELECT recordedFrom, stationName FROM observationfinal INNER JOIN station ON stationId = recordedFrom GROUP BY recordedFrom;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "stations")
@@ -3159,7 +3163,7 @@ Err:
             lstvElements.Columns.Add("Element Details", 400, HorizontalAlignment.Left)
 
             sql = "SELECT describedBy, elementName,description  FROM observationfinal INNER JOIN obselement ON elementId = describedBy GROUP BY describedBy;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
 
             da.SelectCommand.CommandTimeout = 0
@@ -3215,7 +3219,7 @@ Err:
                 ' Get station locations 
                 sql = "SELECT stationId,longitude,latitude,elevation FROM station"
 
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 dstn.Clear()
                 da.Fill(dstn, "station")
@@ -3270,7 +3274,7 @@ Err:
                           "WHERE (describedBy = '" & lstvElements.Items(k).SubItems(0).Text & "') and (obsDatetime between '" & st & " ' and '" & ed & "') ORDER BY obsDatetime) t GROUP BY YY, MM,DEKAD;"
 
                 'MsgBox(sql)
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "observationfinal")
@@ -3338,7 +3342,7 @@ Err:
                 ' Get station locations 
                 sql = "SELECT stationId,longitude,latitude,elevation FROM station"
 
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 dstn.Clear()
                 da.Fill(dstn, "station")
@@ -3393,7 +3397,7 @@ Err:
                           "WHERE (describedBy = '" & lstvElements.Items(k).SubItems(0).Text & "') and (obsDatetime between '" & st & " ' and '" & ed & "') ORDER BY obsDatetime) t GROUP BY YY, MM,DD;"
 
                 'MsgBox(sql)
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
 
@@ -3445,7 +3449,7 @@ Err:
         Try
             sql = "SELECT stationId, stationName FROM station WHERE stationId= '" & id & "';"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "station")
 
@@ -3486,7 +3490,7 @@ Err:
     Private Sub optqualifier_CheckedChanged(sender As Object, e As EventArgs) Handles optqualifier.CheckedChanged
         If optqualifier.Checked Then
             sql = "select qualifier from Station where not isnull(qualifier) group by qualifier;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "qualifier")
 
@@ -3517,7 +3521,7 @@ Err:
 
     Sub Populate_StationsListView(sql As String)
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         ds.Clear()
         da.Fill(ds, "group")
@@ -3547,7 +3551,7 @@ Err:
 
         If optAuthority.Checked Then
             sql = "select authority from Station where not isnull(authority) group by authority;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "authority")
 
@@ -3568,7 +3572,7 @@ Err:
     Private Sub optRegion_CheckedChanged(sender As Object, e As EventArgs) Handles optRegion.CheckedChanged
         If optRegion.Checked Then
             sql = "select adminRegion from Station where not isnull(adminRegion) group by adminRegion;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "adminRegion")
 
@@ -3594,7 +3598,7 @@ Err:
     Private Sub optBasin_CheckedChanged(sender As Object, e As EventArgs) Handles optBasin.CheckedChanged
         If optBasin.Checked Then
             sql = "select drainageBasin from Station where not isnull(drainageBasin) group by drainageBasin;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "drainageBasin")
 
@@ -3620,7 +3624,7 @@ Err:
     Private Sub optRegion2_CheckedChanged(sender As Object, e As EventArgs) Handles optRegion2.CheckedChanged
         If optRegion2.Checked Then
             sql = "select adminRegion2 from Station where not isnull(adminRegion2) group by adminRegion2;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "adminRegion2")
 
@@ -3646,7 +3650,7 @@ Err:
     Private Sub optRegion3_CheckedChanged(sender As Object, e As EventArgs) Handles optRegion3.CheckedChanged
         If optRegion3.Checked Then
             sql = "select adminRegion3 from Station where not isnull(adminRegion3) group by adminRegion3;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "adminRegion3")
 
@@ -3723,7 +3727,7 @@ Err:
             sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected = '1' and elementId = '" & id & "';"
 
             'sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected ='1' and description=""" & prod & """"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "obselement")
 
@@ -3765,16 +3769,16 @@ Err:
     End Sub
 
     Sub Inventory_Table(sql As String)
-        Dim con As New MySql.Data.MySqlClient.MySqlConnection
+        Dim con As New MySqlConnector.MySqlConnection
         Dim constr As String
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
         'MsgBox("Create Inventory Table")
         Try
             constr = frmLogin.txtusrpwd.Text
             con.ConnectionString = constr
             con.Open()
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
+            qry = New MySqlConnector.MySqlCommand(sql, con)
             qry.CommandTimeout = 0
 
             'Execute query
@@ -3791,11 +3795,11 @@ Err:
 
     End Sub
 
-    Sub Intialize_Inventory_Table(cons As MySql.Data.MySqlClient.MySqlConnection)
+    Sub Intialize_Inventory_Table(cons As MySqlConnector.MySqlConnection)
 
         Dim sql0, stid, stnNm, elm, lat, lon, elev, fi, dat As String
         Dim yy, mm As Long
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         Try
 
@@ -3803,7 +3807,7 @@ Err:
 
             sql0 = "ALTER TABLE `inventory_output` CHANGE COLUMN `Station_Name` `Station_Name` VARCHAR(255) NULL DEFAULT NULL AFTER `StationID`, CHANGE COLUMN `Lat` `Lat` VARCHAR(50) NULL AFTER `Code`, CHANGE COLUMN `Lon` `Lon` VARCHAR(50) NULL AFTER `Lat`, ADD PRIMARY KEY (`StationID`, `Code`, `YYYY`, `MM`);"
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql0, cons)
+            qry = New MySqlConnector.MySqlCommand(sql0, cons)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
@@ -3840,7 +3844,7 @@ Err:
             'sql0 = "LOAD DATA local INFILE 'C:/ProgramData/Climsoft4/data/inventory-table.csv' IGNORE INTO TABLE inventory_output FIELDS TERMINATED BY ',' (StationID, Station_Name, Code, Lat, Lon, Elev, YYYY, MM)"
             sql0 = "LOAD DATA local INFILE '" & fi & "' IGNORE INTO TABLE inventory_output FIELDS TERMINATED BY ',' (StationID, Station_Name, Code, Lat, Lon, Elev, YYYY, MM)"
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql0, cons)
+            qry = New MySqlConnector.MySqlCommand(sql0, cons)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
@@ -3853,11 +3857,11 @@ Err:
 
     End Sub
 
-    Sub Get_LatLon(conns As MySql.Data.MySqlClient.MySqlConnection, id As String, ByRef lat As String, ByRef lon As String, ByRef elev As String)
+    Sub Get_LatLon(conns As MySqlConnector.MySqlConnection, id As String, ByRef lat As String, ByRef lon As String, ByRef elev As String)
 
         sql = "SELECT stationId, latitude, longitude, elevation FROM station WHERE stationId = '" & id & "';"
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conns)
             ds.Clear()
             da.Fill(ds, "station")
 
@@ -3877,7 +3881,7 @@ Err:
         End Try
     End Sub
     Sub TmpTable(stns As String, elms As String, sdt As String, edt As String, summry As String, Optional Levels As String = "")
-        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim cmd As MySqlConnector.MySqlCommand
         sql = "drop table if exists tmpproducts; " &
               "create table tmpproducts Select  recordedFrom, describedBy, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & summry & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF " &
               "From observationfinal " &
@@ -3896,9 +3900,9 @@ Err:
 
 
         'MsgBox(sql)
-        conn.ConnectionString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = frmLogin.txtusrpwd.Text ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
         conn.Open()
-        cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        cmd = New MySqlConnector.MySqlCommand(sql, conn)
         cmd.CommandTimeout = 0
 
         'Execute query
@@ -3906,7 +3910,7 @@ Err:
         conn.Close()
     End Sub
     Sub TypTable(summry As String, Optional levels As String = "")
-        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim cmd As MySqlConnector.MySqlCommand
         sql = "drop table if exists typroducts; " &
               "create table typroducts select recordedFrom, describedBy, YY, " & summry & "(Value) As value, SUM(DF) DDF from tmpproducts " &
               "group by recordedFrom, describedBy, YY order by recordedFrom, describedBy, YY;"
@@ -3916,9 +3920,9 @@ Err:
               "create table typroducts select recordedFrom, describedBy, obsLevel,YY, " & summry & "(Value) As value, SUM(DF) DDF from tmpproducts " &
               "group by recordedFrom, describedBy, YY, obsLevel order by recordedFrom, describedBy, YY;"
         End If
-        conn.ConnectionString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = frmLogin.txtusrpwd.Text ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
         conn.Open()
-        cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        cmd = New MySqlConnector.MySqlCommand(sql, conn)
         cmd.CommandTimeout = 0
 
         'Execute query
@@ -3928,7 +3932,7 @@ Err:
 
     Sub Inventory_Statistics()
         Dim fl, sql As String
-        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim cmd As MySqlConnector.MySqlCommand
 
         Try
             fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\inventory-statistics.csv"
@@ -3950,7 +3954,7 @@ Err:
                 LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE invent_statics FIELDS TERMINATED BY ',' (StationID, Station_Name, Code, Lat, Lon, Elev, YYYY, MM, Available, Missing);"
 
             conn.Open()
-            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            cmd = New MySqlConnector.MySqlCommand(sql, conn)
             cmd.CommandTimeout = 0
             cmd.ExecuteNonQuery()
 
@@ -3968,7 +3972,7 @@ Err:
             'sql = "select StationID, Station_Name, code, YYYY, sum(Available) as Tdays from invent_statics group by YYYY;"
             sql = "SELECT stationID, Station_Name, YYYY,SUM(IF(Code = '2', value, 0)) AS 'TMAX',SUM(IF(Code = '3', value, 0)) AS 'TMIN', SUM(IF(Code ='5', value, 0)) AS 'PRECIP' FROM (SELECT stationID, Station_Name, Code, YYYY, Available as value FROM invent_statics ORDER BY StationID, YYYY) t GROUP BY StationID, YYYY;"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "inventory")
@@ -4023,7 +4027,7 @@ Err:
         Try
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sqc, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sqc, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "chart")
@@ -4089,16 +4093,16 @@ Err:
     End Sub
     Sub SeasonalProducts(sql As String, typ As String, months As String)
 
-        Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dap As MySqlConnector.MySqlDataAdapter
         Dim dsp As New DataSet
-        Dim conp As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conp As New MySqlConnector.MySqlConnection
         Dim fl, mms(), dat(), vals As String
         Dim yr, mr, yy, mm, rec, kount As Integer
 
         Try
             conp.ConnectionString = MyConnectionString
             conp.Open()
-            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
+            dap = New MySqlConnector.MySqlDataAdapter(sql, conp)
             dap.SelectCommand.CommandTimeout = 0
             dsp.Clear()
             dap.Fill(dsp, "observationfinal")
@@ -4299,7 +4303,7 @@ Err:
     Private Sub optRegion4_CheckedChanged(sender As Object, e As EventArgs) Handles optRegion4.CheckedChanged
         If optRegion4.Checked Then
             sql = "select adminRegion4 from Station where not isnull(adminRegion4) group by adminRegion4;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "adminRegion4")
 

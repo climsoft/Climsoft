@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class formMetadata
-    Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim dbconn As New MySqlConnector.MySqlConnection
     Dim dbConnectionString As String
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
     Dim rec As Integer
@@ -62,7 +62,7 @@ Public Class formMetadata
         Dim sql As String
         Try
             sql = "SELECT * FROM " & tbl
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
             da.Fill(ds, tbl)
             Kount = ds.Tables(tbl).Rows.Count
@@ -395,7 +395,7 @@ Public Class formMetadata
         Try
             'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
             'must be declared for the Update method to work.
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
             Dim dsNewRow As DataRow
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
@@ -639,7 +639,7 @@ Public Class formMetadata
 
             'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
             'must be declared for the Update method to work.
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
             Dim recUpdate As New dataEntryGlobalRoutines
 
             'MsgBox(ds.Tables("station").Rows.Count)
@@ -693,7 +693,7 @@ Public Class formMetadata
 
 
     Function DeleteRecord(tbl As String, recs As Integer) As Boolean
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
         DeleteRecord = True
@@ -765,7 +765,7 @@ Public Class formMetadata
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
@@ -820,7 +820,7 @@ Public Class formMetadata
     Private Sub cmdUpdateElement_Click(sender As Object, e As EventArgs) Handles cmdUpdateElement.Click
         On Error GoTo Err
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
         If cboElementId.Text = "" Then
@@ -892,7 +892,7 @@ Err:
         sql = "SELECT * FROM  " & tbl
 
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             dstn.Clear()
             da.Fill(dstn, tbl)
 
@@ -912,7 +912,7 @@ Err:
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
@@ -960,7 +960,7 @@ Err:
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
@@ -997,7 +997,7 @@ Err:
         Dim dstn As New DataSet
         Dim sql As String
         sql = "SELECT * FROM  " & tbl
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         dstn.Clear()
 
         da.Fill(dstn, tbl)
@@ -1173,7 +1173,7 @@ Err:
             dbconn.ConnectionString = dbConnectionString
             dbconn.Open()
             sql = "SELECT stationId, stationName FROM station ORDER BY stationId"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
             cboSearchStation.Items.Clear()
             da.Fill(ds, "station")
@@ -1184,7 +1184,7 @@ Err:
                 cboStationId.Items.Add(ds.Tables("station").Rows(i).Item("stationId"))
             Next
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             dbconn.Close()
             MessageBox.Show(ex.Message)
         End Try
@@ -1202,7 +1202,7 @@ Err:
             dbconn.Open()
             sql = "SELECT elementName FROM obselement where elementName <> '' ORDER BY elementName"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
             cboSearchElement.Items.Clear()
             da.Fill(ds, "obselement")
@@ -1212,7 +1212,7 @@ Err:
             Next
 
             sql = "SELECT elementId FROM obselement ORDER BY elementId"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
             cboElementId.Items.Clear()
             da.Fill(ds, "obselement")
@@ -1226,7 +1226,7 @@ Err:
             dbconn.Close()
 
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             dbconn.Close()
             MessageBox.Show(ex.Message)
         End Try
@@ -1245,7 +1245,7 @@ Err:
             dbConnectionString = frmLogin.txtusrpwd.Text
             dbconn.ConnectionString = dbConnectionString
             dbconn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
             da.Fill(ds, "station")
             maxRows = ds.Tables("station").Rows.Count
@@ -1270,7 +1270,7 @@ Err:
                 Next
             End If
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             dbconn.Close()
             MessageBox.Show(ex.Message)
         End Try
@@ -1287,7 +1287,7 @@ Err:
             dbconn.Open()
 
             sql = "SELECT * FROM obselement"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
             dbconn.Close()
             da.Fill(ds, "obselement")
@@ -1409,7 +1409,7 @@ Err:
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
@@ -1460,7 +1460,7 @@ Err:
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
@@ -1497,7 +1497,7 @@ Err:
     End Sub
 
     Private Sub cmdAddQualier_Click(sender As Object, e As EventArgs) Handles cmdAddQualier.Click
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
@@ -1529,7 +1529,7 @@ Err:
     End Sub
 
     Private Sub cmdAddScheduleClass_Click(sender As Object, e As EventArgs) Handles cmdAddScheduleClass.Click
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
@@ -1562,7 +1562,7 @@ Err:
             ' Update Feature Class
             ' Set the feature Class definition
             SetDataSet("physicalfeatureclass")
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
             Dim dsNewRow As DataRow
             Dim recCommit As New dataEntryGlobalRoutines
             dsNewRow = ds.Tables("physicalfeatureclass").NewRow
@@ -1577,7 +1577,7 @@ Err:
             ' Update Physical Feature
             ' Set the feature Class definition
             SetDataSet("physicalfeature")
-            Dim cp As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cp As New MySqlConnector.MySqlCommandBuilder(da)
             Dim dsNewRowp As DataRow
             Dim recCommitp As New dataEntryGlobalRoutines
 
@@ -1608,7 +1608,7 @@ Err:
     Private Sub cmdUpdateInstrument_Click(sender As Object, e As EventArgs) Handles cmdUpdateInstrument.Click
 
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
         Try
             'If txtId.Text = "" Then
@@ -1878,7 +1878,7 @@ Err:
     Private Sub cmdUpdateArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdUpdateArchiveDef.Click
         On Error GoTo Err
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
         ds.Tables("paperarchivedefinition").Rows(rec).Item("formId") = txtFormId.Text
@@ -1897,7 +1897,7 @@ Err:
 
     Private Sub cmdUpdateHistory_Click(sender As Object, e As EventArgs) Handles cmdUpdateHistory.Click
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
         Try
@@ -1980,7 +1980,7 @@ Err:
 
     Private Sub cmdUpdateScheduleClass_Click(sender As Object, e As EventArgs) Handles cmdUpdateScheduleClass.Click
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
         Try
@@ -2001,7 +2001,7 @@ Err:
 
     Private Sub cmdUpdateFeature_Click(sender As Object, e As EventArgs) Handles cmdUpdateFeature.Click
 
-        'Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        'Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         'Dim recUpdate As New dataEntryGlobalRoutines
         Dim img As String
 
@@ -2203,13 +2203,13 @@ Err:
 
 
         Try
-            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+            Dim objCmd As MySqlConnector.MySqlCommand
 
             ' Create the Command for executing query and set its properties
 
             dbconn.Open()
 
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sq, dbconn)
+            objCmd = New MySqlConnector.MySqlCommand(sq, dbconn)
 
             'Execute query
             objCmd.ExecuteNonQuery()

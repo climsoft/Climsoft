@@ -441,8 +441,8 @@ Public Class ucrHourlyWind
             strTableName = GetTableName()
 
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.GetOpenedConnection)
-                Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
+            Using cmdSelect As New MySqlConnector.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.GetOpenedConnection)
+                Using da As New MySqlConnector.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
             End Using
@@ -496,7 +496,7 @@ Public Class ucrHourlyWind
 
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                        Using cmd As New MySqlConnector.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -505,7 +505,7 @@ Public Class ucrHourlyWind
                             cmd.Parameters.AddWithValue("@dataForm", strTableName)
 
                             bUpdateRecord = False
-                            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                            Using reader As MySqlConnector.MySqlDataReader = cmd.ExecuteReader()
                                 bUpdateRecord = reader.HasRows
                             End Using
                         End Using
@@ -524,7 +524,7 @@ Public Class ucrHourlyWind
                                 "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@qcStatus,@acquisitiontype,@capturedBy,@dataForm)"
                         End If
                         Try
-                            Using cmdSave As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                            Using cmdSave As New MySqlConnector.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                                 cmdSave.Parameters.AddWithValue("@stationId", strStationId)
                                 cmdSave.Parameters.AddWithValue("@elemCode", lElementId)
                                 cmdSave.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)

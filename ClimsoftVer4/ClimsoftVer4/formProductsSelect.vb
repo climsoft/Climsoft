@@ -19,11 +19,11 @@
 ''' todo. delete
 ''' </summary>
 Public Class frmProductsSelect
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
     Dim maxRows As Integer
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim MyConnectionString As String
     Dim kounts As Integer
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -35,11 +35,11 @@ Public Class frmProductsSelect
 
             'sql = "SELECT * FROM tblproducts"
             sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "tblproducts")
             ' conn.Close()
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MessageBox.Show(ex.Message)
         End Try
 
@@ -67,7 +67,7 @@ Public Class frmProductsSelect
 
         sql = "SELECT prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "tblProducts")
 

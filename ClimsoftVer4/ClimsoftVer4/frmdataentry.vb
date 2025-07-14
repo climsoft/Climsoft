@@ -114,15 +114,16 @@ Public Class frmDataEntry
                         formUnselect(frm)
                 End Select
             End If
+
         Catch ex As Exception
             MsgBox(ex.HResult & ": " & ex.Message)
         End Try
     End Sub
 
     Sub formUnselect(frm As String)
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conn As New MySqlConnector.MySqlConnection
         Dim sql As String
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         Try
             conn.ConnectionString = frmLogin.txtusrpwd.Text
@@ -130,7 +131,7 @@ Public Class frmDataEntry
 
             sql = "update data_forms set selected = 0  where form_name = '" & frm & "';"
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
             conn.Close()
@@ -138,4 +139,6 @@ Public Class frmDataEntry
             MsgBox(ex.Message)
         End Try
     End Sub
+
+
 End Class

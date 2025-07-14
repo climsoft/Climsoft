@@ -17,13 +17,14 @@ Imports System.IO
 Imports System.Security.AccessControl
 Imports System.Security.Principal
 Imports ClimsoftVer4.Translations
-
+Imports Microsoft.SqlServer
 
 Public Class frmLogin
     Public HTMLHelp As New clsHelp
     Public connectionDetails As New List(Of String)
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
 
+    'Dim conn As New MySqlConnector.
     ' Get Application Data folder to all users, e.g. C:\ProgramData
     ' Storing config.inf here ensures that it will still be available when Climsoft is updated
     Dim commonPath As String = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
@@ -103,28 +104,40 @@ Public Class frmLogin
                 parts = connection.Split("|")
                 If parts(0) = dbChoice Then
                     connectionString = parts(1)
+                    Exit For
                 End If
             Next
         End If
 
-        ' Check that the connection string, with username and password is accepted by the
-        ' connection String builder (otherwise warn and stop)
+        ' Check that the connection string, with username and password is accepted by the connection String builder (otherwise warn and stop)
         Try
+            'conn1.ConnectionString =
+            connectionString = connectionString
             builder.ConnectionString = connectionString
             builder("uid") = username
             builder("pwd") = password
 
             ' The connection string has historically been stored in this control
             ' There are other locations in the software that may access this
-            txtusrpwd.Text = builder.ConnectionString & ";Convert Zero Datetime=True"
+
+            '' The following commented connections string have been modified to allow DB connection using higher MariaDB versions
+            'txtusrpwd.Text = builder.ConnectionString & ";Convert Zero Datetime=True"
+            'txtusrpwd.Text = builder.ConnectionString & ";ConvertZeroDateTime = True"
+
+            txtusrpwd.Text = builder.ConnectionString
 
         Catch ex As Exception
-            MsgBox("Login failed: " & ex.Message)
+            MsgBox(ex.Message & " @ Login_Click1")
+            'MsgBox("Login failed @ Login_Click: " & ex.Message)
             Exit Sub
         End Try
 
         conn.ConnectionString = txtusrpwd.Text
+
         Try
+            'conn.ConnectionString = "Server=10.10.3.132;Port=3306;Database=mariadb_climsoft_db_v4;userID=root;Password=admin;protocol=TCP;Convert Zero Datetime=True"
+            'MsgBox(conn.ConnectionString)
+
             conn.Open()
         Catch ex As Exception
             If ex.Message.IndexOf("Access denied for user") >= 0 Then
@@ -136,7 +149,8 @@ Public Class frmLogin
                 MsgBox("Unable to connect to database, please test database connection using " &
                        """Manage database connections""")
             Else
-                MsgBox("Login failed: " & ex.Message)
+                MsgBox(ex.Message & " @ Login_Click2")
+                'MsgBox("Login failed: " & ex.Message)
             End If
 
             Exit Sub
@@ -147,7 +161,8 @@ Public Class frmLogin
         ' Check if the login is listed with roles in the current database except the root user
         climsoftuserRoles(usr)
         If Not usr And txtUsername.Text <> "root" Then
-            MsgBox("Access denied. User not found in the current database")
+            MsgBox("Access denied. User not found in the current database  @ Login_Click3")
+            'MsgBox("Access denied. User not found in the current database")
             conn.Close()
             Exit Sub
         End If
@@ -157,7 +172,10 @@ Public Class frmLogin
         conn.Close()
         clsDataConnection.OpenConnection(txtusrpwd.Text) 'todo. the connection string should come from somewhere else
 
-        Path_Security()
+        ' The following code has been commented since the access permissions are set during installation
+
+        'Path_Security()
+
         frmSplashScreen.Show()
         Me.Hide()
     End Sub
@@ -167,11 +185,18 @@ Public Class frmLogin
     End Sub
 
     Sub climsoftuserRoles(ByRef lognusr As Boolean)
+        'Dim daClimsoftUserRoles As MySqlConnector.MySqlDataAdapter
+
         Try
             'Set SQL for populating user roles
             rolesSQL = "SELECT * from climsoftusers"
-            daClimsoftUserRoles = New MySql.Data.MySqlClient.MySqlDataAdapter(rolesSQL, conn)
+            daClimsoftUserRoles = New MySqlConnector.MySqlDataAdapter(rolesSQL, conn)
+            'aClimsoftUserRoles = New MySqlConnector.MySqlDataAdapter(rolesSQL, conn)
+            'daClimsoftUserRoles = New MySqlConnector.MySqlDataAdapter(rolesSQL, conn)
+            dsClimsoftUserRoles.Clear()
             daClimsoftUserRoles.Fill(dsClimsoftUserRoles, "userRoles")
+
+
 
             With dsClimsoftUserRoles.Tables("userRoles")
                 For i = 0 To .Rows.Count - 1
@@ -182,14 +207,15 @@ Public Class frmLogin
             End With
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " @ climsoftuserRoles")
+
         End Try
     End Sub
 
     Sub languageTableInit()
         'Set SQL string for populating "regData" dataset
         languageTableSQL = "SELECT * from language_translation"     '
-        daLanguageTable = New MySql.Data.MySqlClient.MySqlDataAdapter(languageTableSQL, conn)
+        daLanguageTable = New MySqlConnector.MySqlDataAdapter(languageTableSQL, conn)
         daLanguageTable.Fill(dsLanguageTable, "languageTranslation")
     End Sub
 
@@ -197,11 +223,11 @@ Public Class frmLogin
         Try
             'Set SQL string for populating "regData" dataset
             regSQL = "SELECT keyName,keyValue FROM regkeys"     '
-            daReg = New MySql.Data.MySqlClient.MySqlDataAdapter(regSQL, conn)
+            daReg = New MySqlConnector.MySqlDataAdapter(regSQL, conn)
             daReg.Fill(dsReg, "regData")
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " @ regDataInit")
         End Try
     End Sub
 
@@ -291,28 +317,31 @@ Public Class frmLogin
 
         dtpath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4"
         ' Create the path if it is not there
+
         If IO.Directory.Exists(dtpath) = False Then
+
             IO.Directory.CreateDirectory(dtpath)
         End If
 
         ' Grant full access on `filePath` for all users (allows any user to write to file)
         ' This is currently necessary because some Climsoft installers are not Windows Administrators
         Try
-            Dim dInfo As IO.DirectoryInfo = New IO.DirectoryInfo(dtpath)
-            Dim dSecurity As DirectorySecurity = dInfo.GetAccessControl()
+            'Dim dInfo As IO.DirectoryInfo = New IO.DirectoryInfo(dtpath)
+            Dim dinfo As New IO.DirectoryInfo(dtpath)
+            Dim dSecurity As DirectorySecurity = dinfo.GetAccessControl()
 
             dSecurity.AddAccessRule(New FileSystemAccessRule(
-                New SecurityIdentifier(WellKnownSidType.WorldSid, Nothing),
-                FileSystemRights.FullControl,
-                InheritanceFlags.ObjectInherit Or InheritanceFlags.ContainerInherit,
-                PropagationFlags.NoPropagateInherit, AccessControlType.Allow
-            ))
+                    New SecurityIdentifier(WellKnownSidType.WorldSid, Nothing),
+                    FileSystemRights.FullControl,
+                    InheritanceFlags.ObjectInherit Or InheritanceFlags.ContainerInherit,
+                    PropagationFlags.NoPropagateInherit, AccessControlType.Allow
+                ))
 
-            dInfo.SetAccessControl(dSecurity)
+
+            dinfo.SetAccessControl(dSecurity)
 
         Catch ex As Exception
-
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " @ Path_Securit")
         End Try
     End Sub
 
@@ -322,4 +351,6 @@ Public Class frmLogin
         lblLanguage.Text = My.Settings.languageName
         ClsTranslations.TranslateForm(Me)
     End Sub
+
+
 End Class

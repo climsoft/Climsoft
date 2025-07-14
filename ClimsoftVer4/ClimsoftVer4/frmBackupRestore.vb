@@ -1,8 +1,8 @@
 ﻿Public Class frmBackupRestore
     Dim bkprst, sql As String
-    Dim conn1 As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn1 As New MySqlConnector.MySqlConnection
     Dim MyConnectionString As String
-    Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    Dim cmd As New MySqlConnector.MySqlCommand
     Private Sub cmdCSV_Click(sender As Object, e As EventArgs) Handles cmdCSV.Click
         On Error GoTo Err
         Dim dbTable As String
@@ -48,7 +48,7 @@ Err:
         'Execute query for migrating data to V4 db
         conn1.ConnectionString = frmLogin.txtusrpwd.Text
         conn1.Open()
-        cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+        cmd = New MySqlConnector.MySqlCommand(sql, conn1)
         cmd.ExecuteNonQuery()
 
         conn1.Close()

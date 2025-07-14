@@ -98,19 +98,19 @@ Public Class frmImportCSV
 
         maxRows = ds.Tables("clicomDaily").Rows.Count
         ' MsgBox("Number of rows: " & maxRows)
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conn As New MySqlConnector.MySqlConnection
         Dim connStr As String
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim objCmd As MySqlConnector.MySqlCommand
 
         connStr = frmLogin.txtusrpwd.Text
 
         conn.ConnectionString = connStr
         conn.Open()
         Dim ds1 As New DataSet
-        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da1 As MySqlConnector.MySqlDataAdapter
         Dim elemMaxRows As Integer, k As Integer, valScale As Single
         sql = "SELECT elementId,elementScale FROM obselement"
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
 
         da1.Fill(ds1, "elemScale")
         elemMaxRows = ds1.Tables("elemScale").Rows.Count
@@ -168,11 +168,11 @@ Public Class frmImportCSV
 
                 If IsDate(obsDate) And Val(obsVal) >= 0 Then
                     ' Create the Command for executing query and set its properties
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                    objCmd = New MySqlConnector.MySqlCommand(sql, conn)
                     Try
                         'Execute query
                         objCmd.ExecuteNonQuery()
-                        ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                        ' Catch ex As MySqlConnector.MySqlException
                         'Ignore expected error i.e. error of Duplicates in MySqlException
                     Catch ex As Exception
                         'Dispaly error message if it is different from the one trapped in 'Catch' execption above

@@ -84,9 +84,9 @@ Public Class frmImportAWS
 
             maxDataRows = ds.Tables("awsData").Rows.Count
             'MsgBox("Number of rows: " & maxDataRows)
-            Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+            Dim conn As New MySqlConnector.MySqlConnection
             Dim connStr As String
-            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+            Dim objCmd As MySqlConnector.MySqlCommand
 
             connStr = frmLogin.txtusrpwd.Text
 
@@ -94,29 +94,29 @@ Public Class frmImportAWS
             conn.Open()
 
             Dim ds1 As New DataSet
-            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da1 As MySqlConnector.MySqlDataAdapter
 
             Dim ds2 As New DataSet
-            Dim da2 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da2 As MySqlConnector.MySqlDataAdapter
 
             Dim ds3 As New DataSet
-            Dim da3 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da3 As MySqlConnector.MySqlDataAdapter
 
             Dim stnMaxRows As Integer, awsElemMaxRows As Integer, awsDataMaxCols, k As Integer, _
                 stnAwsId As String, awsElemAbbrev As String
 
             sql = "SELECT elementId,elementScale FROM obselement"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da1.Fill(ds1, "elemScale")
 
             sql2 = "SELECT * FROM aws_stations"
-            da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql2, conn)
+            da2 = New MySqlConnector.MySqlDataAdapter(sql2, conn)
             da2.Fill(ds2, "awsStations")
 
             stnMaxRows = ds2.Tables("awsStations").Rows.Count
 
             sql3 = "SELECT * FROM aws_elements"
-            da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
+            da3 = New MySqlConnector.MySqlDataAdapter(sql3, conn)
             da3.Fill(ds3, "awsElements")
 
             awsElemMaxRows = ds3.Tables("awsElements").Rows.Count
@@ -232,11 +232,11 @@ Public Class frmImportAWS
                                 qcStatus & "," & acquisitionType & ")"
 
                             ' Create the Command for executing query and set its properties
-                            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                            objCmd = New MySqlConnector.MySqlCommand(sql, conn)
                             Try
                                 'Execute query
                                 objCmd.ExecuteNonQuery()
-                                ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                                ' Catch ex As MySqlConnector.MySqlException
                                 'Ignore expected error i.e. error of Duplicates in MySqlException
                             Catch ex As Exception
                                 'Dispaly error message if it is different from the one trapped in 'Catch' execption above

@@ -91,11 +91,12 @@ Partial Class frmMainMenu
         '
         Me.menuStripMain.AllowItemReorder = True
         Me.menuStripMain.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.menuStripMain.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.menuStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInput, Me.mnuAccessories, Me.mnuProducts, Me.mnuQC, Me.mnuAdministration, Me.ChangeOwnPasswordToolStripMenuItem, Me.mnuTools, Me.mnuHelp})
         Me.menuStripMain.Location = New System.Drawing.Point(0, 0)
         Me.menuStripMain.Name = "menuStripMain"
         Me.menuStripMain.ShowItemToolTips = True
-        Me.menuStripMain.Size = New System.Drawing.Size(931, 27)
+        Me.menuStripMain.Size = New System.Drawing.Size(942, 27)
         Me.menuStripMain.TabIndex = 7
         Me.menuStripMain.Text = "Main Menu"
         '
@@ -401,10 +402,10 @@ Partial Class frmMainMenu
         Me.Panel1.Controls.Add(Me.btnMainPaperArchive)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.btnMainDataEntry)
-        Me.Panel1.Location = New System.Drawing.Point(0, 27)
+        Me.Panel1.Location = New System.Drawing.Point(0, 23)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0, 3, 3, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(931, 558)
+        Me.Panel1.Size = New System.Drawing.Size(942, 584)
         Me.Panel1.TabIndex = 10
         '
         'Label5
@@ -678,7 +679,7 @@ Partial Class frmMainMenu
         'frmMainMenu
         '
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(931, 585)
+        Me.ClientSize = New System.Drawing.Size(942, 605)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.menuStripMain)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

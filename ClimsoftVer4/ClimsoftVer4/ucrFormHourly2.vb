@@ -345,8 +345,8 @@
             strTableName = GetTableName()
 
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.GetOpenedConnection)
-                Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
+            Using cmdSelect As New MySqlConnector.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.GetOpenedConnection)
+                Using da As New MySqlConnector.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
             End Using
@@ -384,7 +384,7 @@
                         bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                        Using cmd As New MySqlConnector.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -392,7 +392,7 @@
                             cmd.Parameters.AddWithValue("@acquisitiontype", 1)
                             cmd.Parameters.AddWithValue("@dataForm", strTableName)
 
-                            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                            Using reader As MySqlConnector.MySqlDataReader = cmd.ExecuteReader()
                                 bUpdateRecord = reader.HasRows
                             End Using
                         End Using
@@ -419,7 +419,7 @@
                         End If
 
                         Try
-                            Using cmdSave As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                            Using cmdSave As New MySqlConnector.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                                 'cmd.Parameters.Add("@stationId", SqlDbType.VarChar, 255).Value = strStationId
                                 cmdSave.Parameters.AddWithValue("@stationId", strStationId)
                                 cmdSave.Parameters.AddWithValue("@elemCode", lElementId)
@@ -472,8 +472,8 @@
 
     Function Seq_Element(ByRef eCode As String) As Boolean
 
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim da_seq As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim conn As New MySqlConnector.MySqlConnection
+        Dim da_seq As MySqlConnector.MySqlDataAdapter
         Dim strConnString, sql_seq, elm As String
         Dim ds_seq As New DataSet
         Dim kount As Integer
@@ -486,7 +486,7 @@
 
             sql_seq = "select elementId from seq_daily_element order by seq;"
 
-            da_seq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql_seq, conn)
+            da_seq = New MySqlConnector.MySqlDataAdapter(sql_seq, conn)
             ds_seq.Clear()
             da_seq.SelectCommand.CommandTimeout = 0
             da_seq.Fill(ds_seq, "Sequence")
@@ -548,15 +548,15 @@
             Return False
         End Try
     End Function
-    Function skipGroundMin(conn As MySql.Data.MySqlClient.MySqlConnection) As Boolean
-        Dim daq As MySql.Data.MySqlClient.MySqlDataAdapter
+    Function skipGroundMin(conn As MySqlConnector.MySqlConnection) As Boolean
+        Dim daq As MySqlConnector.MySqlDataAdapter
         Dim dsq As New DataSet
         Dim sql As String
         Dim st_month, ed_month, rec_month As Integer
 
         sql = "select keyName,keyValue from regkeys where keyName = 'key03' or keyName = 'key04';"
         Try
-            daq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            daq = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dsq.Clear()
             daq.SelectCommand.CommandTimeout = 0
             daq.Fill(dsq, "months")

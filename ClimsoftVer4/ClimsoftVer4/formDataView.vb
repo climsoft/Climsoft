@@ -15,13 +15,16 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+Imports System.Data.SqlTypes
+Imports System.Linq.Expressions
+
 Public Class formDataView
     Dim connStr As String
     Dim Sql, Sql2, userName, id, Nm, cd, yr, mn, dy, hr As String
-    Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim objCmd As MySqlConnector.MySqlCommand
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim ds, dsn, dsi, dsy, dsm As New DataSet
-    Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As New MySqlConnector.MySqlDataAdapter
 
     Private Sub formDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
@@ -109,7 +112,7 @@ Public Class formDataView
 
     Private Sub populateDataGrid(strSQL As String)
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSQL, conn)
+            da = New MySqlConnector.MySqlDataAdapter(strSQL, conn)
             da.Fill(ds, "dataView")
             Me.DataGridView.DataSource = ds.Tables(0)
         Catch ex As Exception
@@ -118,14 +121,18 @@ Public Class formDataView
     End Sub
 
     Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
+        Import_File()
+        Exit Sub
+
         Dim tblhdr, x, importFile As String
+
         Try
             connStr = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = connStr
+            conn.ConnectionString = connStr & ";AllowLoadLocalInfile=true"
             conn.Open()
 
             Sql = "SELECT * FROM " & dsSourceTableName & ";"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(Sql, conn)
             ds.Clear()
             da.Fill(ds, "frmtbl")
 
@@ -135,6 +142,7 @@ Public Class formDataView
                     tblhdr = tblhdr & "," & .Columns.Item(i).Caption
                 Next
             End With
+
             'MsgBox(tblhdr)
             dlgImportFile.Filter = "Form Import file|*.*"
             dlgImportFile.Title = ClsTranslations.GetTranslation("Open Import File")
@@ -173,7 +181,7 @@ Public Class formDataView
                    /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
 
             'Execute SQL command
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
             objCmd.ExecuteNonQuery()
 
             Me.Refresh()
@@ -321,7 +329,7 @@ Public Class formDataView
                 conn.Open()
 
                 'Execute SQL command
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
                 objCmd.ExecuteNonQuery()
 
                 MsgBox(ClsTranslations.GetTranslation("Selected record has been deleted!"), MsgBoxStyle.Information)
@@ -462,7 +470,7 @@ Public Class formDataView
 
                 'Execute SQL command
                 Sql = Strings.Replace(Sql, "'\N'", "\N")
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
                 objCmd.ExecuteNonQuery()
                 conn.Close()           '
                 MsgBox(ClsTranslations.GetTranslation("Selected value has been updated!"), MsgBoxStyle.Information)
@@ -483,7 +491,7 @@ Public Class formDataView
     Private Sub cmdExport_Click(sender As Object, e As EventArgs) Handles cmdExport.Click
         Dim hdr, dat, exportfile, x, CellValue As String
         Dim ds1 As New DataSet
-        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da1 As MySqlConnector.MySqlDataAdapter
 
         Try
             connStr = frmLogin.txtusrpwd.Text
@@ -523,7 +531,7 @@ Public Class formDataView
 
             Sql = "Select * from " & dsSourceTableName & ";"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(Sql, conn)
 
             ds1.Clear()
             da1.Fill(ds1, dsSourceTableName)
@@ -534,7 +542,8 @@ Public Class formDataView
                 dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
                 For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
                     If IsDBNull(ds1.Tables(dsSourceTableName).Rows(i).Item(j)) Then
-                        CellValue = "\N" '""
+                        CellValue = Chr(0) '"\N" '""
+
                         'dat = dat & "," & "\N"
                     Else
                         CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
@@ -571,7 +580,7 @@ Public Class formDataView
             'Sql = "select * from " & dsSourceTableName & " into outfile '" & exportfile & "' fields terminated by ',';"
 
             ''Execute SQL command
-            'objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
             'objCmd.ExecuteNonQuery()
 
             conn.Close()
@@ -680,7 +689,7 @@ Public Class formDataView
     End Sub
     'Function Get_tblIDX(recNo As Long) As Boolean
     '    Dim dsx As New DataSet
-    '    Dim dax As MySql.Data.MySqlClient.MySqlDataAdapter
+    '    Dim dax As MySqlConnector.MySqlDataAdapter
 
     '    Try
     '        Sql = "select * from " & dsSourceTableName & ";"
@@ -689,7 +698,7 @@ Public Class formDataView
     '        'conn.ConnectionString = connStr
     '        conn.Open()
 
-    '        dax = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+    '        dax = New MySqlConnector.MySqlDataAdapter(Sql, conn)
     '        conn.Close()
 
     '        dsx.Clear()
@@ -785,7 +794,7 @@ Public Class formDataView
             conn.ConnectionString = connStr
             conn.Open()
 
-            Dim daa = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            Dim daa = New MySqlConnector.MySqlDataAdapter(Sql, conn)
             dss.Clear()
             daa.Fill(dss, dsSourceTableName)
 
@@ -811,7 +820,7 @@ Public Class formDataView
             conn.ConnectionString = connStr
             conn.Open()
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(Sql, conn)
             dsi.Clear()
             da.Fill(dsi, "station")
             conn.Close()
@@ -837,7 +846,7 @@ Public Class formDataView
             conn.ConnectionString = connStr
             conn.Open()
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(Sql, conn)
             dsn.Clear()
             da.Fill(dsn, "station")
             conn.Close()
@@ -857,4 +866,43 @@ Public Class formDataView
     'Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView.CellValueChanged
     '    MsgBox(id & " " & yr & " " & mn & " " & Me.DataGridView.CurrentCell.Value)
     'End Sub
+
+    Sub Import_File()
+        Dim importFile As String
+
+        Try
+
+            dlgImportFile.Filter = "Form Import file|*.*"
+            dlgImportFile.Title = ClsTranslations.GetTranslation("Open Import File")
+            dlgImportFile.FileName = dsSourceTableName
+            dlgImportFile.ShowDialog()
+
+            If InStr(dlgImportFile.FileName, dsSourceTableName) = 0 Then
+                MsgBox(ClsTranslations.GetTranslation("The selected import file name does not match the opened form: ") & dsSourceTableName & ClsTranslations.GetTranslation(". Please confirm!"))
+                Exit Sub
+            End If
+
+            'Convert Import file path seperators to SQL style
+            importFile = Strings.Left(dlgImportFile.FileName, 1)
+            For i = 2 To Len(dlgImportFile.FileName) - 1
+                If Strings.Mid(dlgImportFile.FileName, i, 1) = "\" Then
+                    importFile = importFile & "/"
+                Else
+                    importFile = importFile & Strings.Mid(dlgImportFile.FileName, i, 1)
+                End If
+            Next
+            importFile = importFile & Strings.Right(dlgImportFile.FileName, 1)
+
+            ' Execute import file function
+            If Not CommonModules.Load_Files(importFile, dsSourceTableName, 1, ",",) Then
+                MsgBox("Can't Import " & importFile)
+                Exit Sub
+            End If
+            MsgBox("File '" & dlgImportFile.FileName & ClsTranslations.GetTranslation("' Successfully Imported"))
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
 End Class

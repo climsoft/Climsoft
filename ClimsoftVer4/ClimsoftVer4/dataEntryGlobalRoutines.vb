@@ -239,15 +239,18 @@ Public Class dataEntryGlobalRoutines
                 ctl.BackColor = Color.White
                 ' My.Computer.Keyboard.SendKeys("{TAB}")
                 tabNext = True
+                Return True
             Else
                 checkFutureDate = False
                 ctl.BackColor = Color.Red
                 ctl.Focus()
                 tabNext = False
                 MsgBox("Evaluated observation date [ " & DateSerial(yyyy, mm, dd) & "]. Dates greater than today not accepted!", MsgBoxStyle.Critical)
+                Return False
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
+            Return False
         End Try
     End Function
     Public Function checkExists(ByVal itemFound As Boolean, ctl As Control) As Boolean
@@ -325,8 +328,8 @@ Public Class dataEntryGlobalRoutines
     Public Sub viewTableRecords(strSQL As String, Optional translateContents As Boolean = False)
 
         Dim dsv As New DataSet
-        Dim dav As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dav As MySqlConnector.MySqlDataAdapter
+        Dim dbconn As New MySqlConnector.MySqlConnection
         Dim dbConnectionString As String
         Try
             'Dim tblName As String
@@ -336,7 +339,7 @@ Public Class dataEntryGlobalRoutines
             dbconn.Open()
             ' strSQL = "SELECT * FROM  " & tbl
             'strSQL = strSQL & tblName
-            dav = New MySql.Data.MySqlClient.MySqlDataAdapter(strSQL, dbconn)
+            dav = New MySqlConnector.MySqlDataAdapter(strSQL, dbconn)
             ' Set to unlimited timeout period
             dav.SelectCommand.CommandTimeout = 0
 
@@ -368,17 +371,17 @@ Public Class dataEntryGlobalRoutines
 
         Valid_Stn = False
 
-        Dim conns As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conns As New MySqlConnector.MySqlConnection
         conns.ConnectionString = frmLogin.txtusrpwd.Text
         conns.Open()
         Try
             Dim dss As New DataSet
             Dim sqls As String
-            Dim das As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim das As MySqlConnector.MySqlDataAdapter
 
             sqls = "SELECT stationId,stationName FROM station ORDER BY stationName;"
-            'das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
-            das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
+            'das = New MySqlConnector.MySqlDataAdapter(sqls, conns)
+            das = New MySqlConnector.MySqlDataAdapter(sqls, conns)
             ' Set to unlimited timeout period
             das.SelectCommand.CommandTimeout = 0
 
@@ -401,16 +404,16 @@ Public Class dataEntryGlobalRoutines
 
         Valid_Elm = False
 
-        Dim conns As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conns As New MySqlConnector.MySqlConnection
         conns.ConnectionString = frmLogin.txtusrpwd.Text
         conns.Open()
         Try
             Dim dss As New DataSet
             Dim sqls As String
-            Dim das As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim das As MySqlConnector.MySqlDataAdapter
 
             sqls = "SELECT elementID,elementName FROM obselement where Selected = '1' ORDER BY elementName;"
-            das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
+            das = New MySqlConnector.MySqlDataAdapter(sqls, conns)
             ' Set to unlimited timeout period
             das.SelectCommand.CommandTimeout = 0
 
@@ -429,15 +432,15 @@ Public Class dataEntryGlobalRoutines
         End Try
     End Function
 
-    'Public Sub E_Value(con As MySql.Data.MySqlClient.MySqlConnection, st1 As String, cod As Integer, yy As Integer)
+    'Public Sub E_Value(con As MySqlConnector.MySqlConnection, st1 As String, cod As Integer, yy As Integer)
     '    MsgBox(st1)
 
     'End Sub
 
     Public Function Entered_Value(stn As String, cod As Integer, yy As Integer, mm As Integer, dd As Integer, hh As Integer, ByRef obs As String) As Boolean
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conn As New MySqlConnector.MySqlConnection
         Dim constr As String
-        Dim d As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim d As MySqlConnector.MySqlDataAdapter
         Dim s As New DataSet
         Dim dttime, sql As String
 
@@ -452,7 +455,7 @@ Public Class dataEntryGlobalRoutines
         sql = "select obsValue from observationinitial where recordedFrom ='" & stn & "' and describedBy ='" & cod & "' and obsDatetime ='" & dttime & "';"
         'MsgBox(sql)
         Try
-            d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            d = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             d.SelectCommand.CommandTimeout = 0
             d.Fill(s, "obsv_rec")
@@ -466,7 +469,7 @@ Public Class dataEntryGlobalRoutines
                 'If cod = "112" Then
                 '    s.Clear()
                 '    sql = "select obsValue from observationinitial where recordedFrom ='" & stn & "' and describedBy ='111' and obsDatetime ='" & dttime & "';"
-                '    d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, con)
+                '    d = New MySqlConnector.MySqlDataAdapter(sql, con)
                 '    ' Set to unlimited timeout period
                 '    d.SelectCommand.CommandTimeout = 0
                 '    s.Clear()
@@ -482,9 +485,9 @@ Public Class dataEntryGlobalRoutines
     End Function
 
     Function Db_Update_Conflicts(stn As String, cod As Integer, yy As Integer, mm As Integer, dd As Integer, hh As Integer, obs As String) As Boolean
-        Dim con As New MySql.Data.MySqlClient.MySqlConnection
+        Dim con As New MySqlConnector.MySqlConnection
         Dim constr As String
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         constr = frmLogin.txtusrpwd.Text
         con.ConnectionString = constr
@@ -501,7 +504,7 @@ Public Class dataEntryGlobalRoutines
         End If
         sql = "update observationinitial set obsValue= '" & obs & "', flag ='" & flg & "', mark ='1' where recordedFrom ='" & stn & "' and describedBy ='" & cod & "' and obsDatetime ='" & dttime & "';"
 
-        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
+        qry = New MySqlConnector.MySqlCommand(sql, con)
         qry.CommandTimeout = 0
 
         Try
@@ -516,7 +519,7 @@ Public Class dataEntryGlobalRoutines
         con.Close()
     End Function
 
-    Function Entry_Verification(con As MySql.Data.MySqlClient.MySqlConnection, frm As Object, stnid As String, elmcode As String, yy As String, mm As String, dd As String, hh As String) As Boolean
+    Function Entry_Verification(con As MySqlConnector.MySqlConnection, frm As Object, stnid As String, elmcode As String, yy As String, mm As String, dd As String, hh As String) As Boolean
         Dim obsv1, cpVal, c1 As String
         Dim conflict As Boolean
         'MsgBox("Entry_Verification " & frm & " " & elmcode)
@@ -572,8 +575,8 @@ Public Class dataEntryGlobalRoutines
 
     Function Key_Entry_Mode(frm As String) As String
         'Get the key entry mode
-        Dim cons As New MySql.Data.MySqlClient.MySqlConnection
-        Dim d As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim cons As New MySqlConnector.MySqlConnection
+        Dim d As MySqlConnector.MySqlDataAdapter
         Dim s As New DataSet
         Dim sql As String
 
@@ -585,7 +588,7 @@ Public Class dataEntryGlobalRoutines
             sql = "select entry_mode from data_forms where description ='" & frm & "';"
 
             cons.Open()
-            d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, cons)
+            d = New MySqlConnector.MySqlDataAdapter(sql, cons)
             d.SelectCommand.CommandTimeout = 0
             s.Clear()
             d.Fill(s, "forms")
@@ -600,8 +603,8 @@ Public Class dataEntryGlobalRoutines
         End Try
     End Function
     Function GetCurrentStation(frm As String, ByRef stn As String) As Boolean
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim conn As New MySqlConnector.MySqlConnection
+        Dim daLastDataRecord As MySqlConnector.MySqlDataAdapter
         Dim strConnString, SQL_last_record As String
         Dim dsLastDataRecord As New DataSet
         Dim recs As Long
@@ -614,7 +617,7 @@ Public Class dataEntryGlobalRoutines
             'SQL_last_record = "select form_daily2.stationId,stationName, entryDatetime from " & frm & " form_daily2 INNER JOIN station ON form_daily2.stationId = station.stationId where signature ='" & frmLogin.txtUsername.Text & "' order by entryDatetime;"
             SQL_last_record = "select " & frm & ".stationId, stationName, entryDatetime from " & frm & " INNER JOIN station ON " & frm & ".stationId = station.stationId where signature ='" & frmLogin.txtUsername.Text & "' order by entryDatetime;"
             dsLastDataRecord.Clear()
-            daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+            daLastDataRecord = New MySqlConnector.MySqlDataAdapter(SQL_last_record, conn)
             ' Set to unlimited timeout period
             daLastDataRecord.SelectCommand.CommandTimeout = 0
             daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
@@ -639,8 +642,8 @@ Public Class dataEntryGlobalRoutines
     End Function
 
     Function Enable_Sequencer(frmtxt As String) As Boolean
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim da_seq As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim conn As New MySqlConnector.MySqlConnection
+        Dim da_seq As MySqlConnector.MySqlDataAdapter
         Dim strConnString, sql_seq, sts_seq As String
         Dim ds_seq As New DataSet
         Dim recs As Long
@@ -652,7 +655,7 @@ Public Class dataEntryGlobalRoutines
 
             sql_seq = "select elem_code_location from data_forms where description = '" & frmtxt & "'"
             ds_seq.Clear()
-            da_seq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql_seq, conn)
+            da_seq = New MySqlConnector.MySqlDataAdapter(sql_seq, conn)
             ' Set to unlimited timeout period
             da_seq.SelectCommand.CommandTimeout = 0
             da_seq.Fill(ds_seq, "SeqStatus")
@@ -682,11 +685,11 @@ Public Class dataEntryGlobalRoutines
     End Function
 
     Sub Update_Sequencer(frmtxt As String, sts As Boolean)
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim da_seq As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim conn As New MySqlConnector.MySqlConnection
+        Dim da_seq As MySqlConnector.MySqlDataAdapter
         Dim strConnString, sql_seq, sts_seq As String
         Dim ds_seq As New DataSet
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
         Dim recs As Long
 
 
@@ -696,7 +699,7 @@ Public Class dataEntryGlobalRoutines
         Try
             sql_seq = "select elem_code_location from data_forms where description = '" & frmtxt & "'"
             ds_seq.Clear()
-            da_seq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql_seq, conn)
+            da_seq = New MySqlConnector.MySqlDataAdapter(sql_seq, conn)
             ' Set to unlimited timeout period
             da_seq.SelectCommand.CommandTimeout = 0
             da_seq.Fill(ds_seq, "SeqStatus")
@@ -739,7 +742,7 @@ Public Class dataEntryGlobalRoutines
             If Len(sts_seq) > 0 Then
                 sql_seq = "update data_forms set elem_code_location = '" & sts_seq & "' where description ='" & frmtxt & "';"
                 conn.Open()
-                qry = New MySql.Data.MySqlClient.MySqlCommand(sql_seq, conn)
+                qry = New MySqlConnector.MySqlCommand(sql_seq, conn)
                 qry.CommandTimeout = 0
                 'Execute query
                 qry.ExecuteNonQuery()
@@ -760,8 +763,8 @@ Public Class dataEntryGlobalRoutines
     End Sub
     Function RegkeyValue(keynm As String) As String
         ' Get the image archiving folder
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim conn As New MySqlConnector.MySqlConnection
+        Dim dar As MySqlConnector.MySqlDataAdapter
         Dim dsr As New DataSet
         Dim regmax As Integer
         Dim sql, dbConnectionString As String
@@ -773,7 +776,7 @@ Public Class dataEntryGlobalRoutines
             conn.ConnectionString = dbConnectionString
             conn.Open()
             sql = "SELECT * FROM regkeys"
-            dar = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            dar = New MySqlConnector.MySqlDataAdapter(Sql, conn)
             dar.Fill(dsr, "regkeys")
 
             regmax = dsr.Tables("regkeys").Rows.Count
@@ -795,10 +798,10 @@ Public Class dataEntryGlobalRoutines
 
 
     Function DataPush(tbl As String) As Boolean
-        Dim con0 As New MySql.Data.MySqlClient.MySqlConnection
-        Dim a As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim con0 As New MySqlConnector.MySqlConnection
+        Dim a As MySqlConnector.MySqlDataAdapter
         Dim s As New DataSet
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
         Dim outDataDir, outDataFile, connstr, flds, sql, dat, xt As String
 
         ' Backup the form data into text file
@@ -816,13 +819,13 @@ Public Class dataEntryGlobalRoutines
             End If
             FileOpen(16, outDataFile, OpenMode.Output)
 
-            connstr = frmLogin.txtusrpwd.Text
+            connstr = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true" ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             con0.ConnectionString = connstr
             con0.Open()
 
             ''MsgBox(connstr)
             sql = "select * from " & tbl & ";"
-            a = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, con0)
+            a = New MySqlConnector.MySqlDataAdapter(sql, con0)
             s.Clear()
             a.Fill(s, "frmtbl")
             con0.Close()
@@ -859,9 +862,9 @@ Public Class dataEntryGlobalRoutines
         End Try
 
         ' Push data to the remote server
-        Dim conn0 As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conn0 As New MySqlConnector.MySqlConnection
         Dim builder As New Common.DbConnectionStringBuilder()
-        'Dim a As MySql.Data.MySqlClient.MySqlDataAdapter
+        'Dim a As MySqlConnector.MySqlDataAdapter
         'Dim s As New DataSet
 
         Try
@@ -873,13 +876,13 @@ Public Class dataEntryGlobalRoutines
             builder("uid") = frmLogin.txtUsername.Text
             builder("pwd") = frmLogin.txtPassword.Text
 
-            connstr = builder.ConnectionString & ";Convert Zero Datetime=True"
+            connstr = builder.ConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true" ';SslMode=VerifyCA"
             'MsgBox(connstr)
             conn0.ConnectionString = connstr
             conn0.Open()
 
             sql = "SELECT * FROM " & tbl & ";"
-            a = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn0)
+            a = New MySqlConnector.MySqlDataAdapter(sql, conn0)
             s.Clear()
             a.Fill(s, "frmtbl")
 
@@ -890,13 +893,16 @@ Public Class dataEntryGlobalRoutines
                 Next
             End With
             outDataFile = Strings.Replace(outDataFile, "\", "/")
-            sql = "LOAD DATA LOCAL INFILE '" & outDataFile & "' REPLACE INTO TABLE " & tbl & " FIELDS TERMINATED BY ',' (" & flds & ");"
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn0)
-            qry.CommandTimeout = 0
+            Load_Files(outDataFile, tbl, 0, ",")
 
-            'Execute query
-            qry.ExecuteNonQuery()
+            'sql = "LOAD DATA LOCAL INFILE '" & outDataFile & "' REPLACE INTO TABLE " & tbl & " FIELDS TERMINATED BY ',' (" & flds & ");"
+
+            'qry = New MySqlConnector.MySqlCommand(sql, conn0)
+            'qry.CommandTimeout = 0
+
+            ''Execute query
+            'qry.ExecuteNonQuery()
             conn0.Close()
 
         Catch ex As Exception
@@ -984,9 +990,9 @@ Public Class dataEntryGlobalRoutines
     End Sub
 
     Function totalCTLS(ByRef kount As Integer, tbl As String) As Boolean
-        Dim connc As New MySql.Data.MySqlClient.MySqlConnection
+        Dim connc As New MySqlConnector.MySqlConnection
         Dim myConnectionString, sql As String
-        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da As MySqlConnector.MySqlDataAdapter
         Dim ds As New DataSet
 
         myConnectionString = frmLogin.txtusrpwd.Text
@@ -997,7 +1003,7 @@ Public Class dataEntryGlobalRoutines
 
         Try
             connc.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, connc)
+            da = New MySqlConnector.MySqlDataAdapter(sql, connc)
             ds.Clear()
             da.Fill(ds, "flds")
             connc.Close()
@@ -1032,9 +1038,9 @@ Public Class dataEntryGlobalRoutines
 
     End Sub
     Function GetQCLimits(stn As String, ecode As String, ByRef Ulimit As String, ByRef Llimit As String) As Boolean
-        Dim connc As New MySql.Data.MySqlClient.MySqlConnection
+        Dim connc As New MySqlConnector.MySqlConnection
         Dim myConnectionString, sql As String
-        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da As MySqlConnector.MySqlDataAdapter
         Dim ds As New DataSet
 
         Try
@@ -1047,7 +1053,7 @@ Public Class dataEntryGlobalRoutines
             ' Check local limits
             sql = "SELECT upperlimit, lowerlimit FROM stationelement WHERE recordedFrom = '" & stn & "' AND describedBy = '" & Val(ecode) & "';"
             'MsgBox(sql)
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, connc)
+            da = New MySqlConnector.MySqlDataAdapter(sql, connc)
             ds.Clear()
             da.Fill(ds, "flds")
 
@@ -1061,7 +1067,7 @@ Public Class dataEntryGlobalRoutines
             ' Check global limits
             sql = "SELECT upperlimit, lowerlimit FROM obselement WHERE elementid = '" & Val(ecode) & "';"
             'MsgBox(sql)
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, connc)
+            da = New MySqlConnector.MySqlDataAdapter(sql, connc)
             ds.Clear()
             da.Fill(ds, "flds")
 
@@ -1081,17 +1087,21 @@ Public Class dataEntryGlobalRoutines
     End Function
     Public Function Valid_Table(tbl As String) As Boolean
 
-        Dim conns As New MySql.Data.MySqlClient.MySqlConnection
-        conns.ConnectionString = frmLogin.txtusrpwd.Text
-        conns.Open()
+        Dim conns As New MySqlConnector.MySqlConnection
         Try
+
+            conns.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True"
+
+            conns.Open()
+
             Dim dst As New DataSet
             Dim sqlt As String
-            Dim dast As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim dast As MySqlConnector.MySqlDataAdapter
 
             ' Test existence of the requeted key entry table
             sqlt = "SELECT * FROM " & tbl & ";"
-            dast = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlt, conns)
+            dast = New MySqlConnector.MySqlDataAdapter(sqlt, conns)
+            dst.Clear()
             dast.Fill(dst, "EntryTable")
 
             conns.Close()
@@ -1101,8 +1111,39 @@ Public Class dataEntryGlobalRoutines
             If ex.HResult = -2147467259 Then
                 MsgBox("Can't locate table " & tbl)
             End If
-            MsgBox("Failed to open " & tbl)
+            MsgBox(ex.Message & ": Failed to open " & tbl)
             Return False
         End Try
+    End Function
+
+    Function Load_Files(flname As String, tblname As String, skplines As Integer, fldsep As String, Optional fldquotechar As String = "") As Boolean
+        Dim lconn As New MySqlConnector.MySqlConnection
+        ' Dim cmd As MySqlConnector.MySqlCommand
+        Dim fl As MySqlConnector.MySqlBulkLoader
+        ' Dim rws As Long
+        lconn.ConnectionString = frmLogin.txtusrpwd.Text & ";AllowLoadLocalInfile=true"
+
+        Try
+            lconn.Open()
+            fl = New MySqlConnector.MySqlBulkLoader(lconn)
+
+            fl.FileName = flname
+            fl.TableName = tblname
+            fl.EscapeCharacter = "UTFB"
+            fl.NumberOfLinesToSkip = skplines
+            fl.FieldTerminator = fldsep
+            fl.FieldQuotationCharacter = fldquotechar
+            'fl.FieldQuotationOptional ='True',
+            fl.Local = True
+
+            fl.Load()
+            lconn.Close()
+            Return True
+        Catch ex As Exception
+            lconn.Close()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+
     End Function
 End Class

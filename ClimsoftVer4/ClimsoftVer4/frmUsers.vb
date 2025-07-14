@@ -1,10 +1,10 @@
 ﻿Public Class frmUsers
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim connStr As String, Sql As String
-    Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+    Dim objCmd As MySqlConnector.MySqlCommand
 
     Dim ds As New DataSet
-    Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As New MySqlConnector.MySqlDataAdapter
     ' Dim sql As String
     
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
@@ -13,7 +13,7 @@
     End Sub
     Private Sub populateDataGrid()
         Sql = "select * from climsoftusers"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(Sql, conn)
         da.Fill(ds, "climsoftusers")
         Me.DataGridView1.DataSource = ds.Tables(0)
     End Sub
@@ -22,7 +22,7 @@
         conn.Open()
         populateDataGrid()
         ' ''Sql = "select * from climsoftusers"
-        ' ''da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+        ' ''da = New MySqlConnector.MySqlDataAdapter(Sql, conn)
         ' ''da.Fill(ds, "climsoftusers")
         ' ''Me.DataGridView1.DataSource = ds.Tables(0)
         'connStr = frmLogin.txtusrpwd.Text
@@ -45,42 +45,42 @@
                 'Try
                 'add new user to [climsoftusers] table
                 Sql = "INSERT INTO climsoftusers(userName,userRole) VALUES ('" & txtUserName.Text & "','" & cboUserType.Text & "'" & ")"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
                 objCmd.ExecuteNonQuery()
 
                 'Create new user in [mysql.user] table
                 Sql = "CREATE USER '" & txtUserName.Text & "'@'localhost' IDENTIFIED BY '" & txtUserPwd.Text & "';"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
                 'execute command
                 objCmd.ExecuteNonQuery()
                 'Create new user in [mysql.user] table
                 Sql = "CREATE USER '" & txtUserName.Text & "'@'%' IDENTIFIED BY '" & txtUserPwd.Text & "';"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
                 'execute Command
                 objCmd.ExecuteNonQuery()
 
                 'Grant role to new user
                 Sql = "GRANT " & cboUserType.Text & " TO '" & txtUserName.Text & "';"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
                 'execute command
                 objCmd.ExecuteNonQuery()
 
                 'Set default role to new user
                 Sql = "SET DEFAULT ROLE " & cboUserType.Text & " FOR '" & txtUserName.Text & "'@'localhost';"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
                 'execute command
                 objCmd.ExecuteNonQuery()
 
                 'Flush privileges
                 Sql = "FLUSH PRIVILEGES;"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
                 'execute command
                 objCmd.ExecuteNonQuery()
 
                 ds.Tables.Clear()
                 populateDataGrid()
                 ' ''Sql = "select * from climsoftusers"
-                ' ''da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+                ' ''da = New MySqlConnector.MySqlDataAdapter(Sql, conn)
                 ' ''da.Fill(ds, "climsoftusers")
                 ' ''Me.DataGridView1.DataSource = ds.Tables(0)
 

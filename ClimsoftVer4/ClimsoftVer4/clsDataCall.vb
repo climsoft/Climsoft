@@ -13,10 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Public Class DataCall
 
+
     'Data Adapater to retrieve data from the database
-    Public da As New MySql.Data.MySqlClient.MySqlDataAdapter
+    Public da As New MySqlConnector.MySqlDataAdapter
 
     Private strTable As String
     ' The fields in the table which the values will be from
@@ -34,7 +36,7 @@ Public Class DataCall
     Public Function Clone() As DataCall
         Dim clsNewDataCall As New DataCall
 
-        clsNewDataCall.SetDataAdapter(DirectCast(DirectCast(da, ICloneable).Clone(), MySql.Data.MySqlClient.MySqlDataAdapter))
+        clsNewDataCall.SetDataAdapter(DirectCast(DirectCast(da, ICloneable).Clone(), MySqlConnector.MySqlDataAdapter))
         clsNewDataCall.SetTableName(strTable)
         clsNewDataCall.SetFields(ClsCloneFunctions.GetClonedDict(dctFields))
         clsNewDataCall.SetKeyFields(ClsCloneFunctions.GetClonedList(lstKeyFieldNames))
@@ -43,7 +45,7 @@ Public Class DataCall
         Return clsNewDataCall
     End Function
 
-    Public Sub SetDataAdapter(daNew As MySql.Data.MySqlClient.MySqlDataAdapter)
+    Public Sub SetDataAdapter(daNew As MySqlConnector.MySqlDataAdapter)
         da = daNew
     End Sub
 
@@ -147,20 +149,20 @@ Public Class DataCall
         Dim clsCurrentFilter As TableFilter
         Dim strSqlFieldNames As String
         Dim strSqlFieldParameters As String
-        Dim cmdSelect As MySql.Data.MySqlClient.MySqlCommand
+        Dim cmdSelect As MySqlConnector.MySqlCommand
         Dim strSelectCommand As String
         Dim strKeysWhereCommand As String
-        Dim cmdInsert As MySql.Data.MySqlClient.MySqlCommand
+        Dim cmdInsert As MySqlConnector.MySqlCommand
         Dim strInsertCommand As String
-        Dim cmdUpdate As MySql.Data.MySqlClient.MySqlCommand
+        Dim cmdUpdate As MySqlConnector.MySqlCommand
         Dim strUpdateCommand As String
         Dim strUpdateSetCommand As String
-        Dim cmdDelete As MySql.Data.MySqlClient.MySqlCommand
+        Dim cmdDelete As MySqlConnector.MySqlCommand
         Dim strDeleteCommand As String
         Dim lstTempFieldNames As New List(Of String)
         Dim lstTempFieldParameters As New List(Of String)
         Dim dtbSchema As DataTable
-        Dim type As MySql.Data.MySqlClient.MySqlDbType
+        Dim type As MySqlConnector.MySqlDbType
         Dim iSize As Integer
         Dim parameterPlaceHolder As String
 
@@ -175,10 +177,10 @@ Public Class DataCall
                 End If
             End If
 
-            cmdSelect = New MySql.Data.MySqlClient.MySqlCommand()
-            cmdInsert = New MySql.Data.MySqlClient.MySqlCommand()
-            cmdUpdate = New MySql.Data.MySqlClient.MySqlCommand()
-            cmdDelete = New MySql.Data.MySqlClient.MySqlCommand()
+            cmdSelect = New MySqlConnector.MySqlCommand()
+            cmdInsert = New MySqlConnector.MySqlCommand()
+            cmdUpdate = New MySqlConnector.MySqlCommand()
+            cmdDelete = New MySqlConnector.MySqlCommand()
 
             dtbSchema = GetTableSchema(strTable)
 
@@ -199,7 +201,8 @@ Public Class DataCall
                 lstTempFieldParameters.Add(parameterPlaceHolder)
 
                 'TODO change the size parameter for dates
-                cmdInsert.Parameters.Add(parameterPlaceHolder, type, iSize, strName)
+                cmdInsert.Parameters.Add(parameterPlaceHolder, type)
+                'cmdInsert.Parameters.Add(parameterPlaceHolder, type, iSize, strName)
             Next
 
             strSqlFieldNames = String.Join(",", lstTempFieldNames.ToArray)
@@ -236,17 +239,17 @@ Public Class DataCall
                     strKeysWhereCommand = strKeysWhereCommand & " AND " & strTempKeyField & " = " & parameterPlaceHolder
                 End If
 
-                Dim paramUpdate As MySql.Data.MySqlClient.MySqlParameter
-                Dim paramDelete As MySql.Data.MySqlClient.MySqlParameter
+                Dim paramUpdate As MySqlConnector.MySqlParameter
+                Dim paramDelete As MySqlConnector.MySqlParameter
 
                 type = GetFieldMySqlDbType(strTempKeyField, dtbSchema)
                 iSize = GetFieldMySqlDbLength(strTempKeyField, dtbSchema)
 
                 'TODO change the size parameter for dates
-                paramUpdate = New MySql.Data.MySqlClient.MySqlParameter(parameterPlaceHolder, type, iSize, strTempKeyField)
+                paramUpdate = New MySqlConnector.MySqlParameter(parameterPlaceHolder, type, iSize, strTempKeyField)
                 paramUpdate.SourceVersion = DataRowVersion.Original
                 cmdUpdate.Parameters.Add(paramUpdate)
-                paramDelete = New MySql.Data.MySqlClient.MySqlParameter(parameterPlaceHolder, type, iSize, strTempKeyField)
+                paramDelete = New MySqlConnector.MySqlParameter(parameterPlaceHolder, type, iSize, strTempKeyField)
                 paramDelete.SourceVersion = DataRowVersion.Original
                 cmdDelete.Parameters.Add(paramDelete)
             Next
@@ -261,12 +264,12 @@ Public Class DataCall
                     strUpdateSetCommand = strUpdateSetCommand & " , " & strTempField & " = " & parameterPlaceHolder
                 End If
 
-
                 type = GetFieldMySqlDbType(strTempField, dtbSchema)
                 iSize = GetFieldMySqlDbLength(strTempField, dtbSchema)
 
                 'TODO change the size parameter for dates
-                cmdUpdate.Parameters.Add(parameterPlaceHolder, type, iSize, strTempField)
+                'cmdUpdate.Parameters.Add(parameterPlaceHolder, type, iSize, strTempField)
+                cmdUpdate.Parameters.Add(parameterPlaceHolder, type)
             Next
 
             'UPDATE statement
@@ -446,11 +449,11 @@ Public Class DataCall
         End If
 
         Try
-            Using cmd As New MySql.Data.MySqlClient.MySqlCommand("SELECT COUNT(*) AS colnum FROM " & strTable, clsDataConnection.GetOpenedConnection)
+            Using cmd As New MySqlConnector.MySqlCommand("SELECT COUNT(*) AS colnum FROM " & strTable, clsDataConnection.GetOpenedConnection)
                 If clsCurrentFilter IsNot Nothing Then
                     clsCurrentFilter.AddToSqlcommand(cmd)
                 End If
-                Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                Using reader As MySqlConnector.MySqlDataReader = cmd.ExecuteReader()
                     If reader.HasRows Then
                         While reader.Read
                             iCount = reader.Item("colnum")
@@ -471,8 +474,8 @@ Public Class DataCall
         Return GetDataTableFromQuery("SELECT COLUMN_NAME, COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" & strSchemaTable & "' AND TABLE_SCHEMA = '" & clsDataConnection.GetDatabaseName & "'")
     End Function
 
-    Private Function GetFieldMySqlDbType(strField As String, dtbSchema As DataTable) As MySql.Data.MySqlClient.MySqlDbType
-        Dim type As MySql.Data.MySqlClient.MySqlDbType
+    Private Function GetFieldMySqlDbType(strField As String, dtbSchema As DataTable) As MySqlConnector.MySqlDbType
+        Dim type As MySqlConnector.MySqlDbType
         Dim strType As String
         Dim iBracketStart As Integer
 
@@ -483,31 +486,31 @@ Public Class DataCall
         End If
         Select Case strType
             Case "varchar"
-                type = MySql.Data.MySqlClient.MySqlDbType.VarChar
+                type = MySqlConnector.MySqlDbType.VarChar
             Case "int"
-                type = MySql.Data.MySqlClient.MySqlDbType.Int32
+                type = MySqlConnector.MySqlDbType.Int32
             Case "bigint"
-                type = MySql.Data.MySqlClient.MySqlDbType.Int64
+                type = MySqlConnector.MySqlDbType.Int64
             Case "double"
-                type = MySql.Data.MySqlClient.MySqlDbType.Double
+                type = MySqlConnector.MySqlDbType.Double
             Case "date"
-                type = MySql.Data.MySqlClient.MySqlDbType.Date
+                type = MySqlConnector.MySqlDbType.Date
             Case "datetime"
-                type = MySql.Data.MySqlClient.MySqlDbType.DateTime
+                type = MySqlConnector.MySqlDbType.DateTime
             Case "timestamp"
-                type = MySql.Data.MySqlClient.MySqlDbType.Timestamp
+                type = MySqlConnector.MySqlDbType.Timestamp
             Case "smallint"
-                type = MySql.Data.MySqlClient.MySqlDbType.Int24
+                type = MySqlConnector.MySqlDbType.Int24
             Case "tinyint"
-                type = MySql.Data.MySqlClient.MySqlDbType.Int16
+                type = MySqlConnector.MySqlDbType.Int16
             Case "float"
-                type = MySql.Data.MySqlClient.MySqlDbType.Float
+                type = MySqlConnector.MySqlDbType.Float
             Case "decimal"
-                type = MySql.Data.MySqlClient.MySqlDbType.Decimal
+                type = MySqlConnector.MySqlDbType.Decimal
             Case "char"
-                type = MySql.Data.MySqlClient.MySqlDbType.VarChar 'TODO char is not supported
+                type = MySqlConnector.MySqlDbType.VarChar 'TODO char is not supported
             Case "text"
-                type = MySql.Data.MySqlClient.MySqlDbType.Text
+                type = MySqlConnector.MySqlDbType.Text
 
                 'TODO. Add all the other types
         End Select
@@ -534,7 +537,7 @@ Public Class DataCall
     ''' <returns></returns>
     Public Function GetDataTableFromQuery(strSql As String) As DataTable
         Dim dtb As New DataTable
-        Using daTemp As New MySql.Data.MySqlClient.MySqlDataAdapter(strSql, clsDataConnection.GetOpenedConnection)
+        Using daTemp As New MySqlConnector.MySqlDataAdapter(strSql, clsDataConnection.GetOpenedConnection)
             daTemp.Fill(dtb)
         End Using
         Return dtb

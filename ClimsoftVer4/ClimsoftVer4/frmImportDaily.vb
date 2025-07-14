@@ -1,13 +1,14 @@
 ﻿Public Class frmImportDaily
-    Dim dbcon As New MySql.Data.MySqlClient.MySqlConnection
+    Dim dbcon As New MySqlConnector.MySqlConnection
     Dim recCommit As New dataEntryGlobalRoutines
-    Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da1 As MySqlConnector.MySqlDataAdapter
     Dim dbConnectionString, dat, flg As String
     Dim ds1 As New DataSet
     Dim dsNewRow As DataRow
     Dim sql, currentRow(), delimit, cprd As String
     Dim lin, rec, col, kount, prd As Integer
     Dim ImportFile As Boolean
+    Dim loadFile As New dataEntryGlobalRoutines
 
     Public Enum ImportType
         Hourly
@@ -291,7 +292,7 @@
 
             sql = "select elementId, abbreviation from obselement where Selected = 1;" ' where elementId > 880 ;"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "obselement")
 
@@ -335,7 +336,7 @@
 
             sql = "select elementId, abbreviation from obselement where elementtype = 'Upper Air';"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "obselement")
 
@@ -376,7 +377,7 @@
 
             sql = "select elementId, abbreviation from obselement where selected = 1;" 'elementId < 881;"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "obselement")
 
@@ -417,7 +418,7 @@
 
             'sql = "select elementId, abbreviation from obselement where elementId > 880 ;"
 
-            'da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            'da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             'ds1.Clear()
             'da1.Fill(ds1, "obselement")
 
@@ -460,7 +461,7 @@
 
     Private Sub cmdLoadData_Click(sender As Object, e As EventArgs) Handles cmdLoadData.Click
         Dim DataCat, fl1, fl2, cr, sql0 As String
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim objCmd As MySqlConnector.MySqlCommand
 
         ImportFile = True
         pnlErrors.Visible = False
@@ -480,7 +481,7 @@
             FileOpen(101, fl1, OpenMode.Output)
 
             dbConnectionString = frmLogin.txtusrpwd.Text
-            dbcon.ConnectionString = dbConnectionString
+            dbcon.ConnectionString = dbConnectionString ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             dbcon.Open()
 
             ' Contruct the SQL path structure for the output file
@@ -568,29 +569,30 @@
             ' Create sql query to upload data from SQL file
 
             If rbtnFinal.Checked Then ' load data into observationfinal table
-                sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType);"
+                loadFile.Load_Files(fl2, "observationfinal", 0, ",")
+                'sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType);"
             Else ' load data into observationinitial table
-                sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType);"
+                loadFile.Load_Files(fl2, "observationinitial", 0, ",")
+                'sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType);"
             End If
 
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql0, dbcon)
+            'objCmd = New MySqlConnector.MySqlCommand(sql0, dbcon)
 
-            'Execute query
-            objCmd.CommandTimeout = 0
-            objCmd.ExecuteNonQuery()
+            ''Execute query
+            'objCmd.CommandTimeout = 0
+            'objCmd.ExecuteNonQuery()
 
-            If ImportFile Then
-                lblRecords.Text = "Data import process successfully completed"
-            Else
-                lblRecords.Text = "Data Import Failed!"
-            End If
+            'If ImportFile Then
+            '    lblRecords.Text = "Data import process successfully completed"
+            'Else
+            '    lblRecords.Text = "Data Import Failed!"
+            'End If
 
-            dbcon.Close()
-            Me.Cursor = Cursors.Default
+            'dbcon.Close()
+            'Me.Cursor = Cursors.Default
 
             ' Output stations and elements errors into a file
             'pnlErrors.Visible = False
-
 
             If lstStations.Items.Count > 0 Then
                 pnlErrors.Visible = True
@@ -605,7 +607,8 @@
                 lstElements.Visible = True
                 cmdSaveErrors.Visible = True
             End If
-
+            lblRecords.Text = "Data import process successfully completed"
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
             lblRecords.Text = "Data Import Failed!, Check if the Staion Id exists in metadata"
@@ -1800,7 +1803,7 @@
 
             sql = "select elementId, abbreviation from obselement where selected = 1;" 'elementId < 881 ;"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "obselement")
 
@@ -2070,7 +2073,7 @@
             dbcon.Open()
 
             sql = "SELECT * FROM observationinitial"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "observationinitial")
             dsNewRow = ds1.Tables("observationinitial").NewRow
@@ -2105,18 +2108,21 @@
                 datetime = DateAndTime.Year(datetime) & "-" & DateAndTime.Month(datetime) & "-" & DateAndTime.Day(datetime) & " " & DateAndTime.Hour(datetime) & ":" & DateAndTime.Minute(datetime) & ":" & DateAndTime.Second(datetime)
             End If
 
-            If Val(cprd) < 1 Then cprd = "\N" ' No cummulative values
+            'If Val(cprd) < 1 Then cprd = "\N" ' No cummulative values
+            If Val(cprd) < 1 Then cprd = "" ' No cummulative values
 
             If rbtnFinal.Checked Then ' Set for upload to observationfinal table
                 qcStatus = 1
                 qcLog = 1
             Else ' Set for upload to observationinitial table
                 qcStatus = 0
-                qcLog = "\N"
+                'qcLog = "\N"
+                qcLog = ""
                 'dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & acqTyp
             End If
 
-            dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & qcStatus & "," & qcLog & "," & acqTyp
+            'dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & qcStatus & "," & qcLog & "," & acqTyp
+            dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & qcStatus & "," & qcLog & "," & acqTyp & ",,,,,,,,"
 
             Print(101, dat)
             PrintLine(101)
@@ -2197,7 +2203,7 @@
             'sql = "select elementId, elementScale from obselement where elementId like '" & Int(code) & "';"
             sql = "select elementId, elementScale from obselement where elementId = '" & code & "';"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "obselement")
 
@@ -2276,7 +2282,7 @@
             'Check If Station exist
             sql = "select stationId from station where stationId like '" & stn_id & "';"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "station")
 
@@ -2297,7 +2303,7 @@
             ' Check if Element exist
             sql = "select elementId from obselement where elementId = '" & elm_code & "';"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "element")
 
@@ -2343,7 +2349,7 @@
             'sql = "SELECT * FROM " & "obselement"
             sql = "select elementId, elementScale from obselement where elementId like " & Val(code) & ";"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "obselement")
 
@@ -2389,7 +2395,7 @@
 
             sql = "select elementScale,lowerLimit,upperLimit from obselement where elementId like " & Val(code) & ";"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "obselement")
 
@@ -2642,7 +2648,7 @@
 
         Dim ds1, ds2 As New DataSet
         Dim sql1 As String
-        Dim da1, da11 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da1, da11 As MySqlConnector.MySqlDataAdapter
         Try
             dbConnectionString = frmLogin.txtusrpwd.Text
             dbcon.ConnectionString = dbConnectionString
@@ -2650,7 +2656,7 @@
 
             ' Populate Stations
             sql1 = "SELECT stationId,stationName FROM station"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, dbcon)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql1, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "station")
 
@@ -2667,7 +2673,7 @@
 
             ' Populate elements
             sql1 = "SELECT elementId,elementName FROM obselement"
-            da11 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, dbcon)
+            da11 = New MySqlConnector.MySqlDataAdapter(sql1, dbcon)
             ds2.Clear()
             da11.Fill(ds2, "element")
 

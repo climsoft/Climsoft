@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class formDatabaseConnect
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
 
 
@@ -30,7 +30,7 @@ Public Class formDatabaseConnect
             ' MsgBox("Connection Successful !", MsgBoxStyle.Information)
             Me.Hide()
             frmLaunchPad.Show()
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MessageBox.Show(ex.Message)
         End Try
     End Sub

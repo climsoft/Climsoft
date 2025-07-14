@@ -77,7 +77,7 @@
     End Sub
 
     Private Sub frmPlotter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim conn As MySql.Data.MySqlClient.MySqlConnection
+        Dim conn As New MySqlConnector.MySqlConnection
         Dim conString As String
         Dim SQLDataString, SQLElementString As String
 
@@ -88,14 +88,14 @@
 
         SQLDataString = "SELECT stationname,elementname,missing FROM missing_stats,obselement,station WHERE missing_stats.STN_ID=station.stationId AND obselement.elementId=missing_stats.ELEM"
 
-        conn = New MySql.Data.MySqlClient.MySqlConnection
+        conn = New MySqlConnector.MySqlConnection
         conn.ConnectionString = conString
         conn.Open()
 
         Try
             'conn.Open()
-            Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
-            Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim cmd As New MySqlConnector.MySqlCommand
+            Dim da As New MySqlConnector.MySqlDataAdapter
             Dim ds As New System.Data.DataSet
             Dim i As Integer
 
@@ -156,7 +156,7 @@
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim conn As MySql.Data.MySqlClient.MySqlConnection
+        Dim conn As New MySqlConnector.MySqlConnection
         Dim conString As String
         Dim SQLDataString, SQLGAPSDATA, SQLGAPS, Opdate, Cldate As String
 
@@ -167,13 +167,13 @@
         SQLDataString = "SELECT stn_id as Station, Elem as Element,opening_date AS StartDate,closing_date as EndDate From Missing_stats Where missing>0"
         SQLGAPSDATA = "SELECT * FROM gaps"
         SQLGAPS = "SELECT StationName, Description, Year(missing_date) Yr, Month(missing_date) Mm, Day(missing_date) Dd From gaps, station, obselement Where missing_stnid = stationid AND missing_elem = elementid"
-        conn = New MySql.Data.MySqlClient.MySqlConnection
+        conn = New MySqlConnector.MySqlConnection
         conn.ConnectionString = conString
 
         Try
             conn.Open()
-            Dim cmd, new_cmd As New MySql.Data.MySqlClient.MySqlCommand
-            Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim cmd, new_cmd As New MySqlConnector.MySqlCommand
+            Dim da As New MySqlConnector.MySqlDataAdapter
             Dim ds As New System.Data.DataSet
             Dim i As Integer
 
@@ -184,7 +184,7 @@
             cmd.ExecuteNonQuery()
 
             'Read Missing Data
-            cmd = New MySql.Data.MySqlClient.MySqlCommand
+            cmd = New MySqlConnector.MySqlCommand
             cmd.CommandText = SQLDataString
             cmd.CommandType = CommandType.Text
             cmd.Connection = conn
@@ -194,7 +194,7 @@
 
             'Insert Missing Data
             For i = 0 To ds.Tables("Gaps").Rows.Count - 1
-                new_cmd = New MySql.Data.MySqlClient.MySqlCommand
+                new_cmd = New MySqlConnector.MySqlCommand
                 new_cmd.Connection = conn
                 new_cmd.CommandText = "find_gaps"
                 new_cmd.CommandType = CommandType.StoredProcedure
@@ -214,7 +214,7 @@
             'Open Excel File for Missing Data
             Dim fl As String
             'Read Missing Data
-            cmd = New MySql.Data.MySqlClient.MySqlCommand
+            cmd = New MySqlConnector.MySqlCommand
             cmd.CommandText = SQLGAPS
             cmd.CommandType = CommandType.Text
             cmd.Connection = conn

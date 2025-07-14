@@ -15,14 +15,14 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 Public Class frmGeneralSettings
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
     Dim usrName As String
     Dim usrPwd As String
     Dim dbServer As String
     Dim dbName As String
     Dim inc As Integer
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
     Dim maxRows As Integer
@@ -60,11 +60,11 @@ Public Class frmGeneralSettings
 
         '' Add a record for key entry mode if not exists
         'Try
-        '    Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        '    Dim qry As MySqlConnector.MySqlCommand
         '    sql = "INSERT INTO `regkeys` (`keyName`, `keyValue`, `keyDescription`) VALUES ('key14', 'Single', 'Data entry mode. Single or Double entry');"
 
         '    conn.Open()
-        '    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        '    qry = New MySqlConnector.MySqlCommand(sql, conn)
         '    qry.CommandTimeout = 0
         '    qry.ExecuteNonQuery()
 
@@ -88,7 +88,7 @@ Public Class frmGeneralSettings
             'MsgBox("Connection Successful !", MsgBoxStyle.Information)
 
             sql = "SELECT * FROM regkeys"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "regkeys")
@@ -100,7 +100,7 @@ Public Class frmGeneralSettings
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
 
             'FormLaunchPad.Show()
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MessageBox.Show(ex.Message)
             conn.Close()
         End Try
@@ -228,7 +228,7 @@ Public Class frmGeneralSettings
             'must be declared for the Update method to work.
             Dim m As Integer
             'Dim ctl As Control
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
             Dim dsNewRow As DataRow
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
@@ -270,7 +270,7 @@ Public Class frmGeneralSettings
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
@@ -289,7 +289,7 @@ Public Class frmGeneralSettings
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
         If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
@@ -355,7 +355,7 @@ Public Class frmGeneralSettings
     End Sub
 
     Sub UpdateRegistry()
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8mb4 */;
@@ -394,7 +394,7 @@ INSERT INTO `regkeys` (`keyName`, `keyValue`, `keyDescription`) VALUES
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
 
-        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        qry = New MySqlConnector.MySqlCommand(sql, conn)
         qry.CommandTimeout = 0
 
         Try
@@ -403,7 +403,7 @@ INSERT INTO `regkeys` (`keyName`, `keyValue`, `keyDescription`) VALUES
 
             ' Refresh the dataset with the updated data
             sql = "SELECT * FROM regkeys"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "regkeys")

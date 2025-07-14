@@ -1,11 +1,11 @@
 ﻿Public Class frmDataMigration
 
-    Dim da, da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da, da1 As MySqlConnector.MySqlDataAdapter
     Dim ds, ds1 As New DataSet
     Dim sql, bkpfile, fchar As String
-    Dim conn, conn1 As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn, conn1 As New MySqlConnector.MySqlConnection
     Dim MyConnectionString As String
-    Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    Dim cmd As New MySqlConnector.MySqlCommand
     Dim ReplaceIgnore As String
     Private Sub cmdStart_Click(sender As Object, e As EventArgs) Handles cmdStart.Click
         Dim sql_stn, sql_elm, sql_obsv, dbstr3, dbstr4, sql_scale As String
@@ -19,7 +19,7 @@
             ' Export CLIMSOFT 3 Mysql db to text (CSV) backup
             lstMsgs.Items.Clear()
 
-            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = frmLogin.txtusrpwd.Text ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             conn.Open()
 
             Dim DataPath As String
@@ -66,19 +66,19 @@
                 End If
 
                 ' Create observations backup file
-                cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_obsv, conn)
+                cmd = New MySqlConnector.MySqlCommand(sql_obsv, conn)
                 cmd.CommandTimeout = 0
                 cmd.ExecuteNonQuery()
 
                 ' Create stations backup file
                 sql_stn = "use " & dbstr3 & ";select id,station_name,qualifier,country,authority from station into outfile '" & stn_tmpbkpfile & "' fields terminated by ',';"
-                cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_stn, conn)
+                cmd = New MySqlConnector.MySqlCommand(sql_stn, conn)
                 cmd.CommandTimeout = 0
                 cmd.ExecuteNonQuery()
 
                 ' Create elements observations backup file
                 sql_elm = "use " & dbstr3 & ";select code,abbreviation,element_name,description,element_scale,upper_limit,lower_limit,units,element_type,total,selected from obs_element into outfile '" & elm_tmpbkpfile & "' fields terminated by ',';"
-                cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_elm, conn)
+                cmd = New MySqlConnector.MySqlCommand(sql_elm, conn)
                 cmd.CommandTimeout = 0
                 cmd.ExecuteNonQuery()
 
@@ -86,14 +86,14 @@
 
                 ' Update station metadata of migrated database
                 sql_stn = "use " & dbstr4 & ";LOAD DATA LOCAL INFILE '" & stn_tmpbkpfile & "' IGNORE INTO TABLE station FIELDS TERMINATED BY ',' (stationId,stationName,qualifier,country,authority);"
-                cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_stn, conn)
+                cmd = New MySqlConnector.MySqlCommand(sql_stn, conn)
                 cmd.CommandTimeout = 0
                 cmd.ExecuteNonQuery()
                 lstMsgs.Items.Add(ClsTranslations.GetTranslation("Station metadata updated"))
 
                 ' Update elements metadata
                 sql_elm = "use " & dbstr4 & ";LOAD DATA LOCAL INFILE '" & elm_tmpbkpfile & "' IGNORE INTO TABLE obselement FIELDS TERMINATED BY ',' (elementId,abbreviation,elementName,description,elementScale,upperLimit,lowerLimit,units,elementtype,qcTotalRequired,selected);"
-                cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_elm, conn)
+                cmd = New MySqlConnector.MySqlCommand(sql_elm, conn)
                 cmd.CommandTimeout = 0
                 cmd.ExecuteNonQuery()
                 lstMsgs.Items.Add(ClsTranslations.GetTranslation("Element metadata updated"))
@@ -111,7 +111,7 @@
                 ' Update station metadata
                 sql_stn = "LOAD DATA LOCAL INFILE '" & bkpfile & "' IGNORE INTO TABLE station FIELDS TERMINATED BY ',' (stationId);"
 
-                cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_stn, conn)
+                cmd = New MySqlConnector.MySqlCommand(sql_stn, conn)
                 cmd.CommandTimeout = 0
                 cmd.ExecuteNonQuery()
 
@@ -119,7 +119,7 @@
                 ''sql_elm = "LOAD DATA LOCAL INFILE '" & bkpfile & "' IGNORE INTO TABLE obselement FIELDS TERMINATED BY ',' (@col1,@col2,@col3,@col4,@col5,@col6,@col7,@col8,@col9,@col10,@col11,@col12,@col13) set elementId=@col2;"
                 'sql_elm = "LOAD DATA LOCAL INFILE '" & bkpfile & "' IGNORE INTO TABLE obselement FIELDS TERMINATED BY ',' (@col1,elementId,@col3,@col4,@col5,@col6,@col7,@col8,@col9,@col10,@col11);"
 
-                '    cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_elm, conn)
+                '    cmd = New MySqlConnector.MySqlCommand(sql_elm, conn)
                 '    cmd.CommandTimeout = 0
                 '    cmd.ExecuteNonQueryAsync()
 
@@ -130,7 +130,7 @@
             End If
 
             'Execute query for migrating data to V4 db
-            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_obsv, conn)
+            cmd = New MySqlConnector.MySqlCommand(sql_obsv, conn)
             cmd.CommandTimeout = 0
             cmd.ExecuteNonQuery()
             lstMsgs.Items.Add(ClsTranslations.GetTranslation("Observations updated"))
@@ -138,7 +138,7 @@
             sql_scale = "UPDATE IGNORE observationinitial INNER JOIN obselement ON describedBy = elementId SET obsValue = obsValue/elementScale, mark =71 where obsValue <> '' and elementScale > 0 and (mark is null or mark <> 71);"
 
             'Execute query for observation vlaues scaling
-            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_scale, conn)
+            cmd = New MySqlConnector.MySqlCommand(sql_scale, conn)
             cmd.CommandTimeout = 0
             cmd.ExecuteNonQuery()
             lstMsgs.Items.Add(ClsTranslations.GetTranslation("Observations scaling removed"))
@@ -286,7 +286,7 @@
         conn1.Open()
 
         'Sql = "SELECT * FROM station"
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter("SELECT * FROM station", conn1)
+        da1 = New MySqlConnector.MySqlDataAdapter("SELECT * FROM station", conn1)
         da1.Fill(ds1, "station")
 
         conn1.Close()
@@ -340,7 +340,7 @@ Err:
 
         conn1.ConnectionString = frmLogin.txtusrpwd.Text
         conn1.Open()
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter("SELECT * FROM station", conn1)
+        da1 = New MySqlConnector.MySqlDataAdapter("SELECT * FROM station", conn1)
         da1.Fill(ds1, "station")
         conn1.Close()
 
@@ -361,7 +361,7 @@ Err:
 
         conn1.ConnectionString = frmLogin.txtusrpwd.Text
         conn1.Open()
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter("SELECT * FROM obselement", conn1)
+        da1 = New MySqlConnector.MySqlDataAdapter("SELECT * FROM obselement", conn1)
         da1.Fill(ds1, "obselement")
         conn1.Close()
 

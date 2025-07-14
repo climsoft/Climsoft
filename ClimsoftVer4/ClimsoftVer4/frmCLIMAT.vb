@@ -1,8 +1,8 @@
 ﻿Public Class frmCLIMAT
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
-    Dim qry As MySql.Data.MySqlClient.MySqlCommand
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim qry As MySqlConnector.MySqlCommand
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql, frm As String
     Dim PRESST, PRESSL, GPM, TMPMN, TMPMAX, TMPMIN, VAPPSR, PRECIP, SUNSHN, SNWDEP, WNDSPD, VISBY, DYTHND, DYHAIL, serNum As Integer
@@ -29,7 +29,7 @@
             sql = "select stationName from station where wmoid  <> '' and wmoid is not null;"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "station")
@@ -54,7 +54,7 @@
         Try
 
             sql = "select * from climat_parameters order by Nos;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "parameters")
 
@@ -123,7 +123,7 @@
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
         Dim ItmExist As Boolean
         sql = "select stationId, stationName from station where stationName  = '" & cmbstation.Text & "';"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "station")
 
@@ -217,7 +217,7 @@
 
         Try
             conn.Open()
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
 
             'Execute query
@@ -242,7 +242,7 @@
         'MsgBox(sql)
         Try
             conn.Open()
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
 
             'Execute query
@@ -264,7 +264,7 @@
                    where (" & lst & ") and describedBy = '" & PRECIP & "' and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & " group by stn,yy,mm order by stn,mm) as TT Order by stn, mm,Total;"
             'MsgBox(sql)
             conn.Open()
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
 
             'Execute query
@@ -286,7 +286,7 @@
 
 
             'conn.Open()
-            'qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            'qry = New MySqlConnector.MySqlCommand(sql, conn)
             'qry.CommandTimeout = 0
 
             ''Execute query
@@ -416,7 +416,7 @@
 
         Try
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "stnId")
@@ -466,7 +466,7 @@ WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='" & TMPMN & "' OR descri
 GROUP BY StationId, MM;"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "values")
@@ -640,7 +640,7 @@ GROUP BY StationId, MM;"
     Function Section1_Group6(stn As String) As String ' Precipitation data
         Dim MonVal, Total, Quintile, dys As String
         Dim Q As Integer
-        Dim da6 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da6 As MySqlConnector.MySqlDataAdapter
         Dim ds6 As New DataSet
 
         Try
@@ -649,7 +649,7 @@ GROUP BY StationId, MM;"
                where(recordedFrom = '" & stn & "') and describedBy = '" & PRECIP & "' and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & " group by yy;"
 
             conn.Open()
-            da6 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da6 = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da6.SelectCommand.CommandTimeout = 0
             ds6.Clear()
             da6.Fill(ds6, "Precip")
@@ -672,7 +672,7 @@ GROUP BY StationId, MM;"
             sql = "select * from PrecipQuintiles where stn = '" & stn & "' and mm = " & txtMonth.Text & ";"
 
             conn.Open()
-            da6 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da6 = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da6.SelectCommand.CommandTimeout = 0
             ds6.Clear()
             da6.Fill(ds6, "Quintile")
@@ -701,7 +701,7 @@ GROUP BY StationId, MM;"
                where (recordedFrom = '" & stn & "') and describedBy = '" & PRECIP & "' and obsvalue >= 1 and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & " group by yy,mm;"
 
             conn.Open()
-            da6 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da6 = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da6.SelectCommand.CommandTimeout = 0
             ds6.Clear()
             da6.Fill(ds6, "Dys")
@@ -794,7 +794,7 @@ GROUP BY StationId, MM;"
         End Try
     End Function
     Function SNHRPercent(Vhrs As String, ByRef perc As String) As Boolean
-        Dim da7 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da7 As MySqlConnector.MySqlDataAdapter
         Dim ds7 As New DataSet
         Dim mm As Integer
         Dim Nhrs As String
@@ -803,7 +803,7 @@ GROUP BY StationId, MM;"
             sql = "select * from normals_Totals where code = " & SUNSHN & ";"
 
             conn.Open()
-            da7 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da7 = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da7.SelectCommand.CommandTimeout = 0
             ds7.Clear()
             da7.Fill(ds7, "SUNHRS")
@@ -832,7 +832,7 @@ GROUP BY StationId, MM;"
 
     End Function
     Function DaysAvailable(stn As String, code As Integer) As Integer
-        Dim daDys As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim daDys As MySqlConnector.MySqlDataAdapter
         Dim dsDys As New DataSet
 
         sql = "Select stn,describedBy,yy,mm, COUNT(IF(describedBy = '" & code & "', value, NULL)) AS 'Dys'
@@ -843,7 +843,7 @@ GROUP BY StationId, MM;"
                    Group by yy, mm;"
         Try
             conn.Open()
-            daDys = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            daDys = New MySqlConnector.MySqlDataAdapter(sql, conn)
             daDys.SelectCommand.CommandTimeout = 0
             dsDys.Clear()
             daDys.Fill(dsDys, "AvlDys")
@@ -901,7 +901,7 @@ GROUP BY StationId, MM;"
             sql = "SELECT * FROM aws_mss where foldertype = 'ASC';"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
@@ -944,7 +944,7 @@ GROUP BY StationId, MM;"
     End Sub
 
     Function DaysMissHlyObs(stn As String, ByRef Press As String, ByRef Vpress As String) As Boolean
-        Dim da0 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da0 As MySqlConnector.MySqlDataAdapter
         Dim ds0 As New DataSet
 
         sql = "Select stn, yy,mm,
@@ -958,7 +958,7 @@ GROUP BY StationId, MM;"
 
         Try
             conn.Open()
-            da0 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da0 = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da0.SelectCommand.CommandTimeout = 0
             ds0.Clear()
             da0.Fill(ds0, "HlyMiss")
@@ -1020,7 +1020,7 @@ GROUP BY StationId, MM;"
 
         Try
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "AvgNormals")
@@ -1042,7 +1042,7 @@ GROUP BY StationId, MM;"
             ' Get Normals for those values that are summed up namely Precipitation and Sunshine hours
             sql = "select * from normals_Totals where stn = '" & stn & "';"
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "SumNormals")
@@ -1063,7 +1063,7 @@ GROUP BY StationId, MM;"
                     where (recordedFrom = '" & stn & "') and describedBy = '" & PRECIP & "' and obsvalue >= 1 and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & " and month(obsDatetime)= " & txtMonth.Text & " group by stn,yy,mm) as TT
                     group by stn,mm;"
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "nDysPrecip")
@@ -1087,7 +1087,7 @@ GROUP BY StationId, MM;"
                     group by stn;"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "NormalsYears")
@@ -1117,7 +1117,7 @@ GROUP BY StationId, MM;"
                     group by stn, code,mm;"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "TmnSTD")
@@ -1400,7 +1400,7 @@ GROUP BY StationId, MM;"
                    And obsvalue " & eqtn & ";"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "Tdays")
@@ -1426,7 +1426,7 @@ GROUP BY StationId, MM;"
             sql = "select obsvalue as value, day(obsDatetime) as dd from observationfinal where recordedFrom ='" & stn & "' and describedBy = " & code & " and year(obsDatetime) = " & Val(txtYear.Text) & " and month(obsDatetime)= " & Val(txtMonth.Text) & " order by value " & sortOrder & ";"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "XTvalues")
@@ -1469,7 +1469,7 @@ GROUP BY StationId, MM;"
             sql = "select units from obselement where elementId = '" & WNDSPD & "';"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "Source")
@@ -1502,7 +1502,7 @@ GROUP BY StationId, MM;"
                    where recordedFrom = '" & stn & "' and (describedBy= '" & DYTHND & "' or describedBy = '" & DYHAIL & "') and obsvalue = 1 and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & ";"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "ThunderHail")
@@ -1536,7 +1536,7 @@ GROUP BY StationId, MM;"
             sql = "select qualifier from station where qualifier ='AWS' and stationId='" & stn & " ';"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "StationTyp")
@@ -1547,7 +1547,7 @@ GROUP BY StationId, MM;"
             sql = "select AVG(IF(keyName ='key02', keyvalue, NULL)) AS 'Tmax', AVG(IF(keyName ='key01', keyvalue, NULL)) AS 'Tmin' from regkeys where keyName ='key01' or keyName = 'key02';"
 
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "dysTxn")
@@ -1591,8 +1591,8 @@ GROUP BY StationId, MM;"
         sql = "select * from climat_parameters order by Nos;"
 
         Dim climatds As New DataSet
-        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim da As MySqlConnector.MySqlDataAdapter
+        Dim dbconn As New MySqlConnector.MySqlConnection
         Dim dbConnectionString As String
 
         Try
@@ -1600,7 +1600,7 @@ GROUP BY StationId, MM;"
             conn.ConnectionString = dbConnectionString
             conn.Open()
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
             climatds.Clear()
@@ -1738,7 +1738,7 @@ GROUP BY StationId, MM;"
         Try
             sql = "select Element_Abbreviation,Element_Code from climat_parameters where Element_Name = 'Message Header';"
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()

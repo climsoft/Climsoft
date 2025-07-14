@@ -351,7 +351,7 @@ Public Class TableFilter
         Return strExpression
     End Function
 
-    Public Sub SetParameters(cmd As MySql.Data.MySqlClient.MySqlCommand)
+    Public Sub SetParameters(cmd As MySqlConnector.MySqlCommand)
 
 
         Dim strExpression As String
@@ -392,7 +392,7 @@ Public Class TableFilter
         'Return strExpression
     End Sub
 
-    Public Sub AddToSqlcommand(cmd As MySql.Data.MySqlClient.MySqlCommand)
+    Public Sub AddToSqlcommand(cmd As MySqlConnector.MySqlCommand)
         cmd.CommandText = cmd.CommandText & " WHERE " & GetSqlParameterisedExpression()
         SetParameters(cmd)
     End Sub

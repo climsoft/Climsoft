@@ -1,12 +1,12 @@
 ﻿Public Class formAgro1
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
     Dim usrName As String
     Dim usrPwd As String
     Dim dbServer As String
     Dim dbName As String
     Dim inc As Integer
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
     Dim maxRows As Integer
@@ -14,17 +14,17 @@
     Dim elemCode As String
     Dim dsValueLimits As New DataSet
     Dim sqlValueLimits As String
-    Dim daValueLimits As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daValueLimits As MySqlConnector.MySqlDataAdapter
     Dim stationCode As String
     Dim dsStationElevation As New DataSet
     Dim sqlStationElevation As String
-    Dim daStationElevation As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daStationElevation As MySqlConnector.MySqlDataAdapter
     Dim dsStationId As New DataSet
     Dim sqlStationId As String
-    Dim daStationId As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daStationId As MySqlConnector.MySqlDataAdapter
     Dim valUpperLimit As String, valLowerLimit As String, stnElevation As String
     Dim obsValue As String
-    Dim daSequencer As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daSequencer As MySqlConnector.MySqlDataAdapter
     Dim dsSequencer As New DataSet
     Dim FldName As New dataEntryGlobalRoutines
 
@@ -108,7 +108,7 @@
 
                     'sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
                     ''
-                    'daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                    'daValueLimits = New MySqlConnector.MySqlDataAdapter(sqlValueLimits, conn)
                     ''Clear all rows in dataset before filling dataset with new row record for element code associated with active control
                     'dsValueLimits.Clear()
                     ''Add row for element code associated with active control
@@ -222,15 +222,15 @@
 
 
             sql = "SELECT * FROM form_agro1"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
 
             da.Fill(ds, "form_agro1")
             conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
 
             'FormLaunchPad.Show()
-        Catch ex As MySql.Data.MySqlClient.MySqlException
-            MessageBox.Show(ex.Message)
+        Catch ex As Exception 'MySqlConnector.MySqlException
+            MessageBox.Show(ex.HResult & ": " & ex.Message)
             Me.Close()
             Exit Sub
         End Try
@@ -244,9 +244,9 @@
             Dim ctl As Control
             Dim ds1 As New DataSet
             Dim sql1 As String
-            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da1 As MySqlConnector.MySqlDataAdapter
             sql1 = "SELECT stationId,stationName FROM station"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql1, conn)
 
             da1.Fill(ds1, "station")
             If ds1.Tables("station").Rows.Count > 0 Then
@@ -357,8 +357,8 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        Dim dataFormRecCount, seqRecCount As Integer
-        Dim strStation, strYear, strMonth, strDay, Sql As String
+        Dim dataFormRecCount As Integer
+        Dim strStation, strYear, strMonth, strDay As String
 
         strStation = cboStation.SelectedValue
         Try
@@ -417,55 +417,34 @@
             End If
 
             Dim dsLastDataRecord As New DataSet
-            Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim daLastDataRecord As MySqlConnector.MySqlDataAdapter
             Dim SQL_last_record, lastRecYear, lastRecMonth, lastRecDay, stn As String
+            Dim lastRec, nextRec As Date
 
             SQL_last_record = "SELECT stationId,yyyy,mm,dd,signature,entryDatetime from form_agro1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_agro1);"
             dsLastDataRecord.Clear()
-            daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+            daLastDataRecord = New MySqlConnector.MySqlDataAdapter(SQL_last_record, conn)
             daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
 
-            'Initialize header fields required for sequencer
-            stn = cboStation.SelectedValue
-            cboStation.SelectedValue = stn
-            lastRecDay = cboDay.Text
-            lastRecMonth = cboMonth.Text
-            lastRecYear = txtYear.Text
-
             If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
+
+                ''Initialize header fields required for sequencer
                 stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
                 cboStation.SelectedValue = stn
                 lastRecDay = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("dd")
                 lastRecMonth = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("mm")
                 lastRecYear = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("yyyy")
+
+                ' Sequence the records for next entry by selecting the next day
+
+                lastRec = DateSerial(lastRecYear, lastRecMonth, lastRecDay)
+                nextRec = DateAdd("d", 1, lastRec)
+
+                txtYear.Text = DateAndTime.Year(nextRec)
+                cboMonth.Text = DateAndTime.Month(nextRec)
+                cboDay.Text = DateAndTime.Day(nextRec)
+
             End If
-
-            Sql = "SELECT * FROM " & txtSequencer.Text
-            daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
-
-            'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
-            'of records in the recordest table whenever the AddNew button is clicked
-            dsSequencer.Clear()
-            daSequencer.Fill(dsSequencer, "sequencer")
-
-            seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
-
-            For k = 0 To seqRecCount - 1
-                If dsSequencer.Tables("sequencer").Rows(k).Item("dd") = lastRecDay And dsSequencer.Tables("sequencer").Rows(k).Item("mm") = lastRecMonth Then
-                    If (k + 1) <= seqRecCount - 1 Then
-                        cboMonth.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("mm")
-                        cboDay.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("dd")
-                        txtYear.Text = Val(lastRecYear)
-
-                    Else
-                        cboMonth.Text = dsSequencer.Tables("sequencer").Rows(0).Item("mm")
-                        cboDay.Text = dsSequencer.Tables("sequencer").Rows(0).Item("dd")
-                        txtYear.Text = Val(lastRecYear) + 1
-                    End If
-                End If
-            Next k
-
-            ' Sequencer code Ends there
 
             'Clear textboxes for observation values
             'Observation values range from column 6 i.e. column index 5 to column 29 i.e. column index 28
@@ -489,12 +468,13 @@
 
             'Set record index to last record
             inc = maxRows
+            navigateRecords()
 
             'Display record position in record navigation Text Box
             recNumberTextBox.Text = "Record " & maxRows + 1 & " of " & maxRows + 1
             txtVal_Elem101Field004.Focus()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at AddNew_Click")
         End Try
     End Sub
 
@@ -510,52 +490,58 @@
         'which is a parameter of the "Row" attribute or property of the dataset.
 
         '--------------------------
-        Dim stn As String
-        'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
-        stn = ds.Tables("form_agro1").Rows(inc).Item("stationId")
-        cboStation.SelectedValue = stn
-        '--------------------------
-        'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
-        'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
 
-        txtYear.Text = ds.Tables("form_agro1").Rows(inc).Item("yyyy")
-        cboMonth.Text = ds.Tables("form_agro1").Rows(inc).Item("mm")
-        cboDay.Text = ds.Tables("form_agro1").Rows(inc).Item("dd")
+        Try
+            Dim stn As String
+            'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
+            stn = ds.Tables("form_agro1").Rows(inc).Item("stationId")
+            cboStation.SelectedValue = stn
+            '--------------------------
+            'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
+            'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
 
-        Dim m As Integer
-        Dim ctl As Control
+            txtYear.Text = ds.Tables("form_agro1").Rows(inc).Item("yyyy")
+            cboMonth.Text = ds.Tables("form_agro1").Rows(inc).Item("mm")
+            cboDay.Text = ds.Tables("form_agro1").Rows(inc).Item("dd")
 
-        'Display observation values in coressponding textboxes
-        'Observation values start in column 6 i.e. column index 5, and end in column 54 i.e. column Index 53
-        For m = 5 To 53
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_agro1").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("form_agro1").Rows(inc).Item(m)
-                    Else
-                        ctl.Text = ""
+            Dim m As Integer
+            Dim ctl As Control
+
+            'Display observation values in coressponding textboxes
+            'Observation values start in column 6 i.e. column index 5, and end in column 54 i.e. column Index 53
+            For m = 4 To 37 'For m = 5 To 53
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        If Not IsDBNull(ds.Tables("form_agro1").Rows(inc).Item(m)) Then
+                            ctl.Text = ds.Tables("form_agro1").Rows(inc).Item(m)
+                        Else
+                            ctl.Text = ""
+                        End If
+
                     End If
+                Next ctl
+            Next m
 
-                End If
-            Next ctl
-        Next m
+            'Display observation flags in coressponding textboxes
+            'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
+            For m = 38 To 71 'For m = 54 To 102
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        If Not IsDBNull(ds.Tables("form_agro1").Rows(inc).Item(m)) Then
+                            ctl.Text = ds.Tables("form_agro1").Rows(inc).Item(m)
+                        Else
+                            ctl.Text = ""
+                        End If
 
-        'Display observation flags in coressponding textboxes
-        'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
-        For m = 54 To 102
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_agro1").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("form_agro1").Rows(inc).Item(m)
-                    Else
-                        ctl.Text = ""
                     End If
+                Next ctl
+            Next m
 
-                End If
-            Next ctl
-        Next m
-
-        displayRecordNumber()
+            displayRecordNumber()
+        Catch ex As Exception
+            If ex.HResult = -2146233080 Then Exit Sub
+            MsgBox(ex.Message & " navigateRecords")
+        End Try
     End Sub
 
     Private Sub btnMovePrevious_Click(sender As Object, e As EventArgs) Handles btnMovePrevious.Click
@@ -688,7 +674,7 @@
 
                         sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
 
-                        daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                        daValueLimits = New MySqlConnector.MySqlDataAdapter(sqlValueLimits, conn)
                         'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
                         dsValueLimits.Clear()
                         'Add row for element code associated with active control
@@ -736,7 +722,7 @@
                 'must be declared for the Update method to work.
                 Dim m As Integer
                 'Dim ctl As Control
-                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
                 Dim dsNewRow As DataRow
                 'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
                 Dim recCommit As New dataEntryGlobalRoutines
@@ -758,7 +744,7 @@
 
                 'Commit observation values to database
                 'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
-                For m = 4 To 38
+                For m = 4 To 37
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                             ds.Tables("form_agro1").Rows(inc).Item(m) = ctl.Text
@@ -768,7 +754,7 @@
 
                 'Commit observation flags to database
                 'Observation Flags range from column 39 i.e. column index 38 to column 72 i.e. column index 71
-                For m = 39 To 71
+                For m = 38 To 71
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                             ds.Tables("form_agro1").Rows(inc).Item(m) = ctl.Text
@@ -818,7 +804,7 @@
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
@@ -830,7 +816,7 @@
 
         'Update observation values in database
         'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-        For m = 5 To 53
+        For m = 4 To 37
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                     ds.Tables("form_agro1").Rows(inc).Item(m) = ctl.Text
@@ -839,8 +825,8 @@
         Next m
 
         'Update observation flags in database
-        'Observation values range from column 55 i.e. column index 54 to column 103 i.e. column index 102
-        For m = 54 To 102
+        'Observation values range from column 39 i.e. column index 38 to column 72 i.e. column index 71
+        For m = 38 To 71
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                     ds.Tables("form_agro1").Rows(inc).Item(m) = ctl.Text
@@ -858,7 +844,7 @@
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
         If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
@@ -941,9 +927,7 @@
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub Label28_Click(sender As Object, e As EventArgs) Handles Label28.Click
 
-    End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_agro1")
@@ -971,7 +955,7 @@
             conn.ConnectionString = myConnectionString
             conn.Open()
             '
-            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+            Dim objCmd As MySqlConnector.MySqlCommand
             maxRows = ds.Tables("form_agro1").Rows.Count
             qcStatus = 0
             acquisitionType = 1
@@ -1018,12 +1002,12 @@
                             & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
                         ' Create the Command for executing query and set its properties
-                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                        objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                         Try
                             'Execute query
                             objCmd.ExecuteNonQuery()
-                            'Catch ex As MySql.Data.MySqlClient.MySqlException
+                            'Catch ex As MySqlConnector.MySqlException
                             '    'Ignore expected error i.e. error of Duplicates in MySqlException
                         Catch ex As Exception
                             'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -1044,98 +1028,200 @@
         frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
     End Sub
 
-    'Function DataPushs(tbl As String) As Boolean
-    '    Dim outDataDir, outDataFile, connstr, flds As String
-    '    Dim conn0 As New MySql.Data.MySqlClient.MySqlConnection
-    '    Dim a As MySql.Data.MySqlClient.MySqlDataAdapter
-    '    Dim s As New DataSet
-    '    Dim qry As MySql.Data.MySqlClient.MySqlCommand
-    '    Dim builder As New Common.DbConnectionStringBuilder()
-
-    '    ' Backup the form data into text file
-    '    Try
-    '        outDataDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
-
-    '        ' Create the directory if not existing
-    '        If Not IO.Directory.Exists(outDataDir) Then
-    '            IO.Directory.CreateDirectory(outDataDir)
-    '        End If
-    '        outDataFile = outDataDir & "\" & tbl & ".csv"
-
-    '        If IO.File.Exists(outDataFile) Then
-    '            IO.File.Delete(outDataFile)
-    '        End If
-    '        outDataFile = Strings.Replace(outDataFile, "\", "/")
-
-    '        sql = "select * from " & tbl & " into outfile '" & outDataFile & "' fields terminated by ',';"
-
-    '        conn.ConnectionString = frmLogin.txtusrpwd.Text
-
-    '        conn.Open()
-    '        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-    '        qry.CommandTimeout = 0
-
-    '        'Execute query
-    '        qry.ExecuteNonQuery()
-    '        conn.Close()
-
-    '    Catch ex As Exception
-    '        conn.Close()
-    '        MsgBox(ex.Message)
-    '        Return False
-    '    End Try
-
-    '    ' Push data to the server
-    '    Try
-
-    '        builder.ConnectionString = "" 'frmLogin.txtusrpwd.Text
-    '        builder("server") = "localhost"
-    '        builder("database") = "mariadb_climsoft_db_v4"
-    '        builder("port") = "3308"
-    '        builder("uid") = frmLogin.txtUsername.Text
-    '        builder("pwd") = frmLogin.txtPassword.Text
-
-    '        connstr = builder.ConnectionString & ";Convert Zero Datetime=True"
-    '        conn0.ConnectionString = connstr
-    '        conn0.Open()
-
-    '        sql = "SELECT * FROM " & tbl & ";"
-    '        a = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn0)
-    '        s.Clear()
-    '        a.Fill(s, "frmtbl")
-
-    '        With s.Tables("frmtbl")
-    '            flds = .Columns.Item(0).Caption
-    '            For i = 1 To .Columns.Count - 1
-    '                flds = flds & "," & .Columns.Item(i).Caption
-    '            Next
-    '        End With
-
-    '        sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-    '                   /*!40101 SET NAMES utf8mb4 */;
-    '                   /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-    '                   /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-    '                   /*!40000 ALTER TABLE `" & tbl & "` DISABLE KEYS */;
-    '                   LOAD DATA LOCAL INFILE '" & outDataFile & "' REPLACE INTO TABLE " & tbl & " FIELDS TERMINATED BY ',' (" & flds & ");
-    '                   /*!40000 ALTER TABLE `" & tbl & "` ENABLE KEYS */;
-    '                   /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-    '                   /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-    '                   /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
-
-    '        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn0)
-    '        qry.CommandTimeout = 0
-
-    '        'Execute query
-    '        qry.ExecuteNonQuery()
-    '        conn0.Close()
 
 
-    '    Catch ex As Exception
-    '        conn0.Close()
-    '        MsgBox(ex.Message)
-    '        Return False
-    '    End Try
-    '    Return True
-    'End Function
+    Private Sub cboDay_TextChanged(sender As Object, e As EventArgs) Handles cboDay.TextChanged
+        formPopulate()
+    End Sub
 
+    Private Sub txtYear_TextChanged(sender As Object, e As EventArgs) Handles txtYear.TextChanged
+        formPopulate()
+    End Sub
+
+
+    Sub formPopulate()
+        Dim Ctrl As Control
+        Dim dattime, dtt As String
+
+        Try
+
+            dattime = DateSerial(txtYear.Text, cboMonth.Text, cboDay.Text)
+            dtt = txtYear.Text & "-" & cboMonth.Text & "-" & cboDay.Text
+
+            If DateDiff("d", Now(), dattime) >= 0 Or Not IsDate(dtt) Then
+
+                DisableTboxes()
+                lblInvaliDate.Text = "Invalid Date Entry! Check Values"
+                lblInvaliDate.ForeColor = Color.Red
+                txtYear.Focus()
+                Exit Sub
+            Else
+
+                ' enable text boxes
+                lblInvaliDate.Text = ""
+                EnablableTboxes()
+            End If
+
+            'Dim conn1 As New MySqlConnector.MySqlConnection
+            Dim da1 As MySqlConnector.MySqlDataAdapter
+            Dim ds1 As New DataSet
+
+
+            'conn1.ConnectionString = myConnectionString
+            conn.Open()
+            sql = "select * from form_agro1 where stationId ='" & cboStation.SelectedValue & "' and yyyy = " & txtYear.Text & " and mm = " & cboMonth.Text & " and dd = " & cboDay.Text & ";"
+
+            ds1.Clear()
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
+            da1.Fill(ds1, "form_daily1")
+            conn.Close()
+
+
+            With ds1.Tables("form_daily1")
+
+                If .Rows.Count > 0 Then
+                    btnAddNew.Enabled = True
+                    btnCommit.Enabled = False
+                    btnUpdate.Enabled = True
+                    btnDelete.Enabled = True
+                    btnClear.Enabled = False
+                    btnMoveFirst.Enabled = True
+                    btnMoveNext.Enabled = True
+                    btnMovePrevious.Enabled = True
+                    btnMoveLast.Enabled = True
+
+                    GetRecordNo(cboStation.SelectedValue, txtYear.Text, cboMonth.Text, cboDay.Text)
+                    displayRecordNumber()
+
+                    'Populate Values
+                    For i = 4 To 37
+                        For Each Ctrl In Me.Controls
+                            If Strings.Left(Ctrl.Name, 6) = "txtVal" And Val(Strings.Right(Ctrl.Name, 3)) = i Then
+                                If Not IsDBNull(.Rows(0).Item(i)) Then
+                                    Ctrl.Text = .Rows(0).Item(i)
+                                Else
+                                    Ctrl.Text = ""
+                                End If
+
+                            End If
+                        Next
+                    Next
+                    ' Populate Flags
+                    For m = 38 To 71
+                        For Each ctl In Me.Controls
+                            If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                                If Not IsDBNull(.Rows(0).Item(m)) Then
+                                    ctl.Text = .Rows(0).Item(m)
+                                Else
+                                    ctl.Text = ""
+                                End If
+                            End If
+                        Next ctl
+                    Next m
+                Else
+
+                    btnAddNew.Enabled = True
+                    btnCommit.Enabled = True
+                    btnUpdate.Enabled = False
+                    btnDelete.Enabled = False
+                    btnClear.Enabled = True
+                    btnMoveFirst.Enabled = False
+                    btnMoveNext.Enabled = False
+                    btnMovePrevious.Enabled = False
+                    btnMoveLast.Enabled = False
+                    recNumberTextBox.Text = "New Record"
+                    ' Clear Values
+                    For i = 4 To 37
+                        For Each Ctrl In Me.Controls
+                            If Strings.Left(Ctrl.Name, 6) = "txtVal" And Val(Strings.Right(Ctrl.Name, 3)) = i Then
+                                Ctrl.Text = ""
+                            End If
+                        Next
+                    Next
+
+                    ' Clear Flags
+                    For m = 38 To 71
+                        For Each ctl In Me.Controls
+                            If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                                ctl.Text = ""
+                            End If
+                        Next ctl
+                    Next m
+
+                End If
+                'displayRecordNumber()
+            End With
+
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+            conn.Close()
+        End Try
+    End Sub
+
+    Private Sub cboDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDay.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cboMonth_TextChanged(sender As Object, e As EventArgs) Handles cboMonth.TextChanged
+        formPopulate()
+    End Sub
+
+    Sub GetRecordNo(stn As String, yyyy As Long, mm As Integer, dd As Integer)
+        'Dim conn2 As New MySqlConnector.MySqlConnection
+        Dim da2 As MySqlConnector.MySqlDataAdapter
+        Dim ds2 As New DataSet
+
+        Try
+            'conn2.ConnectionString = myConnectionString
+            conn.Open()
+
+            sql = "SELECT * FROM form_agro1"
+            da2 = New MySqlConnector.MySqlDataAdapter(sql, conn)
+            ds2.Clear()
+            da2.Fill(ds2, "records")
+            conn.Close()
+
+            With ds2.Tables("records")
+                For i = 0 To .Rows.Count - 1
+                    If .Rows(i).Item("stationId") = stn And .Rows(i).Item("yyyy") = yyyy And .Rows(i).Item("mm") = mm And .Rows(i).Item("dd") = dd Then
+                        inc = i
+                        Exit For
+                    End If
+                Next
+            End With
+
+        Catch ex As Exception
+            conn.Close()
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Sub DisableTboxes()
+        Dim Ctl As Control
+
+        For Each Ctl In Me.Controls
+            If Strings.Left(Ctl.Name, 6) = "txtVal" Or Strings.Left(Ctl.Name, 7) = "txtFlag" Then
+                Ctl.Text = ""
+                Ctl.Enabled = False
+            End If
+        Next
+
+        btnAddNew.Enabled = False
+        btnCommit.Enabled = False
+        btnUpdate.Enabled = False
+        btnDelete.Enabled = False
+        btnClear.Enabled = False
+
+        recNumberTextBox.Text = ""
+
+    End Sub
+
+    Sub EnablableTboxes()
+        Dim Ctl As Control
+        For Each Ctl In Me.Controls
+            If Strings.Left(Ctl.Name, 6) = "txtVal" Or Strings.Left(Ctl.Name, 7) = "txtFlag" Then
+                Ctl.Enabled = True
+            End If
+        Next
+    End Sub
 End Class

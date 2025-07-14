@@ -1,12 +1,12 @@
 ﻿Public Class frmElementSequencerDaily
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim ds As New DataSet
-    Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As New MySqlConnector.MySqlDataAdapter
     Dim sql As String
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Me.dataGridView1.Rows.Remove(dataGridView1.SelectedRows(0))
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Try
             da.Update(ds, "seqDailyElement")
             MsgBox("Record Deleted!", MsgBoxStyle.Information)
@@ -20,7 +20,7 @@
         conn.ConnectionString = frmLogin.txtusrpwd.Text
         conn.Open()
         sql = "select * from seq_daily_element"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "seqDailyElement")
         Me.dataGridView1.DataSource = ds.Tables(0)
 
@@ -33,7 +33,7 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Try
             da.Update(ds, "seqDailyElement")
             MsgBox("Sequencer table updated successfully!", MsgBoxStyle.Information)

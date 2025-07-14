@@ -1,9 +1,9 @@
 ﻿Public Class frmSynopTDCF
-    Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim dbconn As New MySqlConnector.MySqlConnection
     Dim dbConnectionString As String
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
-    Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-    Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+    Dim da As MySqlConnector.MySqlDataAdapter
+    Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
+    Dim objCmd As MySqlConnector.MySqlCommand
     Dim recUpdate As New dataEntryGlobalRoutines
     Dim TDCF As New tdcfRoutines
     Dim ds As New DataSet
@@ -25,7 +25,7 @@
             dbconn.Open()
 
             sql = "SELECT * FROM bufr_indicators"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -71,7 +71,7 @@
 
             ' Populate with MSS details
             sql = "SELECT * FROM aws_mss"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -127,7 +127,7 @@
             'MsgBox(sql)
 
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
+            objCmd = New MySqlConnector.MySqlCommand(sql, dbconn)
 
             'Execute query
             objCmd.ExecuteNonQuery()
@@ -172,7 +172,7 @@
             'MsgBox(sql)
 
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
+            objCmd = New MySqlConnector.MySqlCommand(sql, dbconn)
 
             'Execute query
             objCmd.ExecuteNonQuery()
@@ -192,7 +192,7 @@
             dbconn.Open()
 
             sql = "SELECT * FROM aws_mss"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -209,7 +209,7 @@
                 'MsgBox(sql)
 
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
+                objCmd = New MySqlConnector.MySqlCommand(sql, dbconn)
 
                 'Execute query
                 objCmd.ExecuteNonQuery()
@@ -226,7 +226,7 @@
                 'MsgBox(sql)
 
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
+                objCmd = New MySqlConnector.MySqlCommand(sql, dbconn)
 
                 'Execute query
                 objCmd.ExecuteNonQuery()
@@ -260,7 +260,7 @@
             dbConnectionString = frmLogin.txtusrpwd.Text
             dbconn.ConnectionString = dbConnectionString
             dbconn.Open()
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
+            objCmd = New MySqlConnector.MySqlCommand(sql, dbconn)
 
             'Execute query
             objCmd.ExecuteNonQuery()
@@ -270,7 +270,7 @@
             'Set data set
             sql = "Select * from bufr_crex_data"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -377,7 +377,7 @@
         Me.Cursor = Cursors.Default
 
     End Sub
-    Sub Output_Data_Code(conn1 As MySql.Data.MySqlClient.MySqlConnection, sbst As Integer)
+    Sub Output_Data_Code(conn1 As MySqlConnector.MySqlConnection, sbst As Integer)
 
         ' Output expanded decsriptors into a CSV file
 
@@ -392,7 +392,7 @@
         counts = 1
         sql = "select * from bufr_crex_data where selected =1 order by nos;"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
         ' Set to unlimited timeout period
         da.SelectCommand.CommandTimeout = 0
 
@@ -422,7 +422,7 @@
 
     End Sub
 
-    Sub Bufr_Crex_Initialize(conn1 As MySql.Data.MySqlClient.MySqlConnection)
+    Sub Bufr_Crex_Initialize(conn1 As MySqlConnector.MySqlConnection)
 
         Dim sql As String
 
@@ -439,7 +439,7 @@
 
             sql = "Select * from bufr_crex_data"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -451,7 +451,7 @@
             ' Clear previously encoded data
             sql = "update bufr_crex_data set bufr_data = '',crex_data = '' where bufr_data <> '' or crex_data <> '';"
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+            objCmd = New MySqlConnector.MySqlCommand(sql, conn1)
 
             'Execute query
             objCmd.ExecuteNonQuery()
@@ -477,7 +477,7 @@
                     Next j
 
                     sql = "update bufr_crex_data set Crex_Data = '" & crex_miss & "', Bufr_Data = '" & bufr_miss & "' where nos = '" & i + 1 & "';"
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+                    objCmd = New MySqlConnector.MySqlCommand(sql, conn1)
                     'Execute query
                     objCmd.ExecuteNonQuery()
                 Next
@@ -487,11 +487,11 @@
             MsgBox(ex.Message & " Bufr_Crex_Initialize")
         End Try
     End Sub
-    Sub Set_Replications(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
+    Sub Set_Replications(conn1 As MySqlConnector.MySqlConnection, stn As String)
 
         sql = "Select * from bufr_crex_data"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
         ' Set to unlimited timeout period
         da.SelectCommand.CommandTimeout = 0
 
@@ -509,7 +509,7 @@
 
         'sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
         'MsgBox(sql)
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
         ' Set to unlimited timeout period
         da.SelectCommand.CommandTimeout = 0
 
@@ -545,13 +545,13 @@
 
         End With
     End Sub
-    Sub Update_Station_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
+    Sub Update_Station_Details(conn1 As MySqlConnector.MySqlConnection, stn As String)
         Dim station_name, wmo_block, wmo_No, lat, lon, elev, qualifier, typ As String
 
         sql = "select stationName, wmoid, latitude, longitude, elevation from station where stationId = '" & stn & "';"
 
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -605,11 +605,11 @@
             MsgBox(ex.Message & " Update_Station_Details")
         End Try
     End Sub
-    Function Get_StationQualifier(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String) As String
+    Function Get_StationQualifier(conn1 As MySqlConnector.MySqlConnection, stn As String) As String
         'sql = "select qualifier,belongsTo from stationqualifier where belongsTo = '" & stn & "';"
         sql = "SELECT qualifier from station WHERE stationId ='" & stn & "';"
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -630,11 +630,11 @@
             Return "MISSING"
         End Try
     End Function
-    Sub Update_Instruments_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
+    Sub Update_Instruments_Details(conn1 As MySqlConnector.MySqlConnection, stn As String)
         sql = "select describedby as code,instrumentcode,height from stationelement where recordedfrom = '" & stn & "';"
 
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -669,7 +669,7 @@
             MsgBox(ex.Message)
         End Try
     End Sub
-    Sub Update_Time_Periods(conn1 As MySql.Data.MySqlClient.MySqlConnection)
+    Sub Update_Time_Periods(conn1 As MySqlConnector.MySqlConnection)
         Dim Tprd As String
 
         If CLng(cboHour.Text) Mod 6 = 0 Then
@@ -694,13 +694,13 @@
         Update_Observation(conn1, "-24", "rad2_TP") ' Time Period for radiation replication 2
 
     End Sub
-    Sub Update_Observation_data(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String, yr As String, mm As String, dd As String, hh As String)
+    Sub Update_Observation_data(conn1 As MySqlConnector.MySqlConnection, stn As String, yr As String, mm As String, dd As String, hh As String)
         Dim fld, dat, ChrR, N, CL, CM, CH As String
         Dim code, rep1, rep2 As Integer
         sql = "select * from " & srcTable.Text & " where stationid = '" & stn & " ' and yyyy= '" & yr & " ' and mm = '" & mm & " ' and dd= '" & dd & " '  and hh = '" & hh & "';"
         'MsgBox(sql)
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -841,13 +841,13 @@
         Return Precip_Characteristic
     End Function
 
-    Sub Update_Observation(conn1 As MySql.Data.MySqlClient.MySqlConnection, data As String, element As String)
+    Sub Update_Observation(conn1 As MySqlConnector.MySqlConnection, data As String, element As String)
 
         sql = "update bufr_crex_data set observation = '" & data & "' where Climsoft_Element='" & element & "';"
 
         Try
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+            objCmd = New MySqlConnector.MySqlCommand(sql, conn1)
             'Execute query
             objCmd.ExecuteNonQuery()
 
@@ -857,13 +857,13 @@
     End Sub
 
 
-    Sub Select_Descriptor(conn1 As MySql.Data.MySqlClient.MySqlConnection, elm As String, rep_type As String)
+    Sub Select_Descriptor(conn1 As MySqlConnector.MySqlConnection, elm As String, rep_type As String)
         Dim ds1 As New DataSet
         Dim kount1, num As Integer
 
         Try
             sql = "Select * from bufr_crex_data"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -875,7 +875,7 @@
             For i = 0 To kount1 - 1
                 ' Set the relication descriptor as TRUE
                 sql = "update bufr_crex_data Set Selected = '1' where Climsoft_Element = '" & rep_type & "';"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+                objCmd = New MySqlConnector.MySqlCommand(sql, conn1)
                 objCmd.ExecuteNonQuery()
 
                 ' Set the cloud details observed as TRUE
@@ -884,7 +884,7 @@
                         num = Val(ds1.Tables("bufr_crex_data").Rows(i).Item("nos")) - 1
                         For j = num To num + 4
                             sql = "update bufr_crex_data set Selected = '1' where nos = '" & j & "';"
-                            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+                            objCmd = New MySqlConnector.MySqlCommand(sql, conn1)
                             objCmd.ExecuteNonQuery()
                         Next
                         Exit For
@@ -897,7 +897,7 @@
 
     End Sub
 
-    Sub Initialize_Cloud_Replications(conn1 As MySql.Data.MySqlClient.MySqlConnection, dsa As DataSet, rep_factor As Integer, StartElement As String, rep_type As String)
+    Sub Initialize_Cloud_Replications(conn1 As MySqlConnector.MySqlConnection, dsa As DataSet, rep_factor As Integer, StartElement As String, rep_type As String)
 
 
         ' Initialize cloud layers by setting them to FALSE so that they are not selected if observations not made
@@ -906,7 +906,7 @@
         '    If dsa.Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = rep_type Then
         '        For j = i + 3 To i + 3 + (rep_factor * 4) '17
         '            sql = "update bufr_crex_data set selected = '0' where nos = '" & j & "';"
-        '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+        '            objCmd = New MySqlConnector.MySqlCommand(sql, conn1)
         '            'Execute query
         '            objCmd.ExecuteNonQuery()
         '        Next
@@ -927,7 +927,7 @@
                         Else
                             sql = "update bufr_crex_data set selected = '0' where Nos = '" & j & "';"
                         End If
-                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+                        objCmd = New MySqlConnector.MySqlCommand(sql, conn1)
                         objCmd.ExecuteNonQuery()
                     Next
                     Exit For
@@ -968,13 +968,13 @@
         '    End Select
         'End If
     End Sub
-    Sub Encode_Bufr(conn1 As MySql.Data.MySqlClient.MySqlConnection)
+    Sub Encode_Bufr(conn1 As MySqlConnector.MySqlConnection)
         Dim ds1 As New DataSet
         Dim bufr_str, climsoft_element_scale As String
         Try
             'sql = "Select * from bufr_crex_data"
             sql = "SELECT * FROM bufr_crex_data where selected = 1 ORDER BY Nos;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -1002,7 +1002,7 @@
                     sql = "update bufr_crex_data set Bufr_Data = '" & bufr_str & "' where Climsoft_Element = '" & .Item("climsoft_element") & "';"
 
                     ' Create the Command for executing query to update with Bufr data
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+                    objCmd = New MySqlConnector.MySqlCommand(sql, conn1)
                     'Execute query
                     objCmd.ExecuteNonQuery()
                 End With
@@ -1015,14 +1015,14 @@
 
     End Sub
 
-    Function ScaleFactor(conn1 As MySql.Data.MySqlClient.MySqlConnection, code As String) As String
+    Function ScaleFactor(conn1 As MySqlConnector.MySqlConnection, code As String) As String
 
         ScaleFactor = 1
         If Not IsNumeric(code) Then Return ScaleFactor
         Try
             sql = "Select elementId, elementScale from obselement where elementId = '" & Val(code) & "';"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -1043,7 +1043,7 @@
         Me.Close()
     End Sub
 
-    Function Bufr_Data(conn1 As MySql.Data.MySqlClient.MySqlConnection, Bufr_Unit As String, Bufr_Scale As Integer, Bufr_RefValue As Long, Bufr_DataWidth As Integer, dat As String, climfactor As String) As String
+    Function Bufr_Data(conn1 As MySqlConnector.MySqlConnection, Bufr_Unit As String, Bufr_Scale As Integer, Bufr_RefValue As Long, Bufr_DataWidth As Integer, dat As String, climfactor As String) As String
 
         'frm_synop_crex.lmsg = Bufr_Unit 'Bufr_Scale & " " & Bufr_DataWidth & " " & dat & " " & climfactor
 
@@ -1135,14 +1135,14 @@
 
     End Function
 
-    Function Bufr_Section4(conn1 As MySql.Data.MySqlClient.MySqlConnection, ByRef subset_section4 As String) As Boolean
+    Function Bufr_Section4(conn1 As MySqlConnector.MySqlConnection, ByRef subset_section4 As String) As Boolean
 
         'Dim bufr_subset As String
         Try
 
             sql = "select * from bufr_crex_data where selected =1 order by nos;"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -1170,7 +1170,7 @@
         End Try
     End Function
 
-    Function CCITT_Binary(conn1 As MySql.Data.MySqlClient.MySqlConnection, dat As String, DataWidth As Integer) As String
+    Function CCITT_Binary(conn1 As MySqlConnector.MySqlConnection, dat As String, DataWidth As Integer) As String
 
         Dim binstr As String
         Dim dat1 As String
@@ -1179,7 +1179,7 @@
         Dim recs As Integer
         Try
             sql = "Select * from ccitt;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
@@ -1223,7 +1223,7 @@
     End Function
 
 
-    Function BUFR_Code(conn1 As MySql.Data.MySqlClient.MySqlConnection, binary_data As String, subsets As Integer, Optional WSId As Boolean = False) As Boolean
+    Function BUFR_Code(conn1 As MySqlConnector.MySqlConnection, binary_data As String, subsets As Integer, Optional WSId As Boolean = False) As Boolean
 
         'MsgBox(subsets)
         BUFR_Code = False
@@ -1469,7 +1469,7 @@
             'counts = 1
             'sql = "select * from bufr_crex_data where selected =1 order by nos;"
 
-            'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            'da = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             'ds.Clear()
             'da.Fill(ds, "bufr_coded")
 
@@ -1642,7 +1642,7 @@
     'Private Sub cboTemplate_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
     '    If Len(cboTemplate.Text) > 0 Then
     '        sql = "SELECT * FROM bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
-    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+    '        da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
 
     '        ds.Clear()
     '        da.Fill(ds, "bufr_indicators")
@@ -1671,7 +1671,7 @@
     Private Sub cboTemplate_TextChanged1(sender As Object, e As EventArgs) Handles cboTemplate.TextChanged
 
         sql = "SELECT * FROM bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         ' Set to unlimited timeout period
         da.SelectCommand.CommandTimeout = 0
 

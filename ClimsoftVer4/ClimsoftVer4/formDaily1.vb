@@ -16,13 +16,13 @@
 
 Public Class formDaily1
 
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
-    Dim da, daSequencer, daValueLimits As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da, daSequencer, daValueLimits As MySqlConnector.MySqlDataAdapter
     Dim ds, dsSequencer, dsValueLimits As New DataSet
     Dim sql, obsValue, elemCode, sqlValueLimits, valUpperLimit, valLowerLimit As String
     Dim FldName As New dataEntryGlobalRoutines
-    Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+    Dim objCmd As MySqlConnector.MySqlCommand
     Dim inc, maxrows, valueFldsTotal As Integer
     Dim objKeyPress As New dataEntryGlobalRoutines
 
@@ -60,7 +60,7 @@ Public Class formDaily1
             conn.Open()
 
             sql = "SELECT * FROM form_daily1"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "form_daily1")
 
             maxrows = ds.Tables("form_daily1").Rows.Count
@@ -71,10 +71,10 @@ Public Class formDaily1
             Dim ctl As Control
             Dim ds1 As New DataSet
             Dim sql1 As String
-            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da1 As MySqlConnector.MySqlDataAdapter
 
             sql1 = "SELECT stationId,stationName FROM station"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql1, conn)
 
             da1.Fill(ds1, "station")
             If ds1.Tables("station").Rows.Count > 0 Then
@@ -169,10 +169,10 @@ Public Class formDaily1
 
             Dim dsrg As New DataSet
             Dim sqlg As String
-            Dim darg As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim darg As MySqlConnector.MySqlDataAdapter
 
             sqlg = "Select keyvalue from regkeys where keyname = 'key01';"
-            darg = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlg, conn)
+            darg = New MySqlConnector.MySqlDataAdapter(sqlg, conn)
             dsrg.Clear()
             darg.Fill(dsrg, "Keys")
 
@@ -207,7 +207,7 @@ Public Class formDaily1
 
         Try
             sql = "SELECT * FROM form_daily1"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "form_daily1")
 
@@ -323,7 +323,7 @@ Public Class formDaily1
         ElementName = ""
 
         sql = "SELECT * FROM obselement"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "element")
 
@@ -348,14 +348,14 @@ Public Class formDaily1
 
         sql = "SELECT * FROM form_daily1;"
         'where stationId ='" & cboStation.SelectedValue & "' and yyyy = " & txtYear.Text & " and mm = " & cboMonth.Text & " and dd = " & cboDay.Text & ";"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "form_daily1")
 
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
@@ -402,7 +402,7 @@ Public Class formDaily1
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
         Try
@@ -562,12 +562,12 @@ Public Class formDaily1
                             & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
                         ' Create the Command for executing query and set its properties
-                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                        objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                         Try
                             'Execute query
                             objCmd.ExecuteNonQuery()
-                            'Catch ex As MySql.Data.MySqlClient.MySqlException
+                            'Catch ex As MySqlConnector.MySqlException
                             '    'Ignore expected error i.e. error of Duplicates in MySqlException
                         Catch ex As Exception
                             'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -683,7 +683,7 @@ Public Class formDaily1
                     'sqlValueLimits = "Select elementId, upperLimit, lowerLimit FROM obselement WHERE elementId=" & elemCode
                     ''MsgBox(cboStation.SelectedValue & " " & elemCode)
 
-                    'daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                    'daValueLimits = New MySqlConnector.MySqlDataAdapter(sqlValueLimits, conn)
                     ''Clear all rows in dataset before filling dataset with new row record for element code associated with active control
                     'dsValueLimits.Clear()
                     ''Add row for element code associated with active control
@@ -882,14 +882,14 @@ Public Class formDaily1
             End If
 
             Dim dsLastDataRecord As New DataSet
-            Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim daLastDataRecord As MySqlConnector.MySqlDataAdapter
             Dim SQL_last_record, lastRecYear, lastRecMonth, lastRecDay, stn As String
             Dim lastRec, nextRec As Date
 
             SQL_last_record = "Select stationId, yyyy, mm, dd, Signature, entryDatetime from form_daily1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_daily1);"
 
             dsLastDataRecord.Clear()
-            daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+            daLastDataRecord = New MySqlConnector.MySqlDataAdapter(SQL_last_record, conn)
             daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
 
             'Initialize header fields required for sequencer
@@ -1103,7 +1103,7 @@ Public Class formDaily1
 
                         sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
 
-                        daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                        daValueLimits = New MySqlConnector.MySqlDataAdapter(sqlValueLimits, conn)
                         'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
                         dsValueLimits.Clear()
                         'Add row for element code associated with active control
@@ -1151,7 +1151,7 @@ Public Class formDaily1
                 'must be declared for the Update method to work.
                 Dim m As Integer
 
-                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
                 Dim dsNewRow As DataRow
                 'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
                 Dim recCommit As New dataEntryGlobalRoutines
@@ -1330,8 +1330,8 @@ Public Class formDaily1
                 EnablableTboxes()
             End If
 
-            Dim conn1 As New MySql.Data.MySqlClient.MySqlConnection
-            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim conn1 As New MySqlConnector.MySqlConnection
+            Dim da1 As MySqlConnector.MySqlDataAdapter
             Dim ds1 As New DataSet
 
 
@@ -1340,7 +1340,7 @@ Public Class formDaily1
             sql = "select * from form_daily1 where stationId ='" & cboStation.SelectedValue & "' and yyyy = " & cboYear.Text & " and mm = " & cboMonth.Text & " and dd = " & cboDay.Text & " and hh = " & cboHour.Text & ";"
 
             ds1.Clear()
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, conn1)
             da1.Fill(ds1, "form_daily1")
             conn1.Close()
 
@@ -1462,8 +1462,8 @@ Public Class formDaily1
     'End Sub
 
     Sub GetRecordNo(stn As String, yyyy As Long, mm As Integer, dd As Integer, hh As Integer)
-        Dim conn2 As New MySql.Data.MySqlClient.MySqlConnection
-        Dim da2 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim conn2 As New MySqlConnector.MySqlConnection
+        Dim da2 As MySqlConnector.MySqlDataAdapter
         Dim ds2 As New DataSet
 
         Try
@@ -1471,7 +1471,7 @@ Public Class formDaily1
             conn2.Open()
 
             sql = "SELECT * FROM form_daily1"
-            da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn2)
+            da2 = New MySqlConnector.MySqlDataAdapter(sql, conn2)
             ds2.Clear()
             da2.Fill(ds2, "records")
             conn2.Close()
@@ -1669,7 +1669,7 @@ Public Class formDaily1
 
     '    Try
     '        conn.Open()
-    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+    '        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
     '        ds.Clear()
     '        da3.Fill(ds, "flds")
     '        conn.Close()

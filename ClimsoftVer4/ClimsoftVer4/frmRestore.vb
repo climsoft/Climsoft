@@ -2,12 +2,12 @@
     Dim strBackupFolder As String, strBackupFolderUnixStyle As String
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         'Import data by station
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conn As New MySqlConnector.MySqlConnection
         Dim connStr As String
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim objCmd As MySqlConnector.MySqlCommand
         Dim sql As String, sql2 As String, stnId As String, i As Integer
 
-        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da As MySqlConnector.MySqlDataAdapter
         Dim ds As New DataSet
         Dim maxRows As Integer
         Dim RestorePath As String, stnBackupFile As String
@@ -18,7 +18,7 @@
         conn.Open()
 
         sql = "SELECT stationId FROM station"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
 
         da.Fill(ds, "station")
         maxRows = ds.Tables("station").Rows.Count
@@ -35,14 +35,14 @@
 
                 sql2 = "LOAD DATA INFILE '" & strBackupFolderUnixStyle & "/" & stnBackupFile & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedfrom,describedby,obsdatetime,obslevel,obsvalue,flag,qcstatus,acquisitiontype);"
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql2, conn)
+                objCmd = New MySqlConnector.MySqlCommand(sql2, conn)
                 Try
                     lblDataIngestionProgress.Text = ClsTranslations.GetTranslation("Importing backup data for station") & " [" & stnId & "]"
                     lblDataIngestionProgress.Refresh()
                     'Execute query
                     objCmd.ExecuteNonQuery()
                     conn.Close()
-                    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                    'Catch ex As MySqlConnector.MySqlException
                     'Ignore expected error i.e. error of Duplicates in MySqlException
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above

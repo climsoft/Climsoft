@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class form_daily2
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class form_daily2
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim YyyyLabel As System.Windows.Forms.Label
         Me.Label37 = New System.Windows.Forms.Label()
@@ -209,565 +209,637 @@ Partial Class form_daily2
         'YyyyLabel
         '
         YyyyLabel.AutoSize = True
-        YyyyLabel.Location = New System.Drawing.Point(82, 79)
+        YyyyLabel.Location = New System.Drawing.Point(123, 122)
+        YyyyLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         YyyyLabel.Name = "YyyyLabel"
-        YyyyLabel.Size = New System.Drawing.Size(29, 13)
+        YyyyLabel.Size = New System.Drawing.Size(43, 20)
         YyyyLabel.TabIndex = 472
         YyyyLabel.Text = "Year"
         '
         'Label37
         '
         Me.Label37.AutoSize = True
-        Me.Label37.Location = New System.Drawing.Point(635, 452)
+        Me.Label37.Location = New System.Drawing.Point(952, 695)
+        Me.Label37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(31, 13)
+        Me.Label37.Size = New System.Drawing.Size(44, 20)
         Me.Label37.TabIndex = 576
         Me.Label37.Text = "Total"
         '
         'txtTotal
         '
-        Me.txtTotal.Location = New System.Drawing.Point(635, 471)
+        Me.txtTotal.Location = New System.Drawing.Point(952, 725)
+        Me.txtTotal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtTotal.Name = "txtTotal"
-        Me.txtTotal.Size = New System.Drawing.Size(47, 20)
+        Me.txtTotal.Size = New System.Drawing.Size(68, 26)
         Me.txtTotal.TabIndex = 36
         '
         'Label35
         '
         Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(358, 192)
+        Me.Label35.Location = New System.Drawing.Point(537, 295)
+        Me.Label35.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(27, 13)
+        Me.Label35.Size = New System.Drawing.Size(40, 20)
         Me.Label35.TabIndex = 570
         Me.Label35.Text = "Flag"
         '
         'Label34
         '
         Me.Label34.AutoSize = True
-        Me.Label34.Location = New System.Drawing.Point(163, 192)
+        Me.Label34.Location = New System.Drawing.Point(244, 295)
+        Me.Label34.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(27, 13)
+        Me.Label34.Size = New System.Drawing.Size(40, 20)
         Me.Label34.TabIndex = 569
         Me.Label34.Text = "Flag"
         '
         'Label33
         '
         Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(303, 192)
+        Me.Label33.Location = New System.Drawing.Point(454, 295)
+        Me.Label33.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(34, 13)
+        Me.Label33.Size = New System.Drawing.Size(50, 20)
         Me.Label33.TabIndex = 568
         Me.Label33.Text = "Value"
         '
         'Label32
         '
         Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(265, 192)
+        Me.Label32.Location = New System.Drawing.Point(398, 295)
+        Me.Label32.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(26, 13)
+        Me.Label32.Size = New System.Drawing.Size(37, 20)
         Me.Label32.TabIndex = 567
         Me.Label32.Text = "Day"
         '
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(262, 452)
+        Me.Label29.Location = New System.Drawing.Point(393, 695)
+        Me.Label29.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(19, 13)
+        Me.Label29.Size = New System.Drawing.Size(27, 20)
         Me.Label29.TabIndex = 564
         Me.Label29.Text = "20"
         '
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(262, 422)
+        Me.Label28.Location = New System.Drawing.Point(393, 649)
+        Me.Label28.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(19, 13)
+        Me.Label28.Size = New System.Drawing.Size(27, 20)
         Me.Label28.TabIndex = 563
         Me.Label28.Text = "19"
         '
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(262, 396)
+        Me.Label27.Location = New System.Drawing.Point(393, 609)
+        Me.Label27.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(19, 13)
+        Me.Label27.Size = New System.Drawing.Size(27, 20)
         Me.Label27.TabIndex = 562
         Me.Label27.Text = "18"
         '
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(262, 370)
+        Me.Label26.Location = New System.Drawing.Point(393, 569)
+        Me.Label26.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(19, 13)
+        Me.Label26.Size = New System.Drawing.Size(27, 20)
         Me.Label26.TabIndex = 561
         Me.Label26.Text = "17"
         '
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(262, 344)
+        Me.Label25.Location = New System.Drawing.Point(393, 529)
+        Me.Label25.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(19, 13)
+        Me.Label25.Size = New System.Drawing.Size(27, 20)
         Me.Label25.TabIndex = 560
         Me.Label25.Text = "16"
         '
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(262, 318)
+        Me.Label24.Location = New System.Drawing.Point(393, 489)
+        Me.Label24.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(19, 13)
+        Me.Label24.Size = New System.Drawing.Size(27, 20)
         Me.Label24.TabIndex = 559
         Me.Label24.Text = "15"
         '
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(262, 292)
+        Me.Label23.Location = New System.Drawing.Point(393, 449)
+        Me.Label23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(19, 13)
+        Me.Label23.Size = New System.Drawing.Size(27, 20)
         Me.Label23.TabIndex = 558
         Me.Label23.Text = "14"
         '
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(262, 266)
+        Me.Label22.Location = New System.Drawing.Point(393, 409)
+        Me.Label22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(19, 13)
+        Me.Label22.Size = New System.Drawing.Size(27, 20)
         Me.Label22.TabIndex = 557
         Me.Label22.Text = "13"
         '
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(262, 240)
+        Me.Label21.Location = New System.Drawing.Point(393, 369)
+        Me.Label21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(19, 13)
+        Me.Label21.Size = New System.Drawing.Size(27, 20)
         Me.Label21.TabIndex = 556
         Me.Label21.Text = "12"
         '
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(262, 214)
+        Me.Label20.Location = New System.Drawing.Point(393, 329)
+        Me.Label20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(19, 13)
+        Me.Label20.Size = New System.Drawing.Size(27, 20)
         Me.Label20.TabIndex = 555
         Me.Label20.Text = "11"
         '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(71, 448)
+        Me.Label18.Location = New System.Drawing.Point(106, 689)
+        Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(19, 13)
+        Me.Label18.Size = New System.Drawing.Size(27, 20)
         Me.Label18.TabIndex = 553
         Me.Label18.Text = "10"
         '
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(71, 422)
+        Me.Label17.Location = New System.Drawing.Point(106, 649)
+        Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(19, 13)
+        Me.Label17.Size = New System.Drawing.Size(27, 20)
         Me.Label17.TabIndex = 552
         Me.Label17.Text = "09"
         '
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(71, 396)
+        Me.Label16.Location = New System.Drawing.Point(106, 609)
+        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(19, 13)
+        Me.Label16.Size = New System.Drawing.Size(27, 20)
         Me.Label16.TabIndex = 551
         Me.Label16.Text = "08"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(71, 370)
+        Me.Label15.Location = New System.Drawing.Point(106, 569)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(19, 13)
+        Me.Label15.Size = New System.Drawing.Size(27, 20)
         Me.Label15.TabIndex = 550
         Me.Label15.Text = "07"
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(71, 344)
+        Me.Label14.Location = New System.Drawing.Point(106, 529)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(19, 13)
+        Me.Label14.Size = New System.Drawing.Size(27, 20)
         Me.Label14.TabIndex = 549
         Me.Label14.Text = "06"
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(71, 318)
+        Me.Label13.Location = New System.Drawing.Point(106, 489)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(19, 13)
+        Me.Label13.Size = New System.Drawing.Size(27, 20)
         Me.Label13.TabIndex = 548
         Me.Label13.Text = "05"
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(71, 292)
+        Me.Label12.Location = New System.Drawing.Point(106, 449)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(19, 13)
+        Me.Label12.Size = New System.Drawing.Size(27, 20)
         Me.Label12.TabIndex = 547
         Me.Label12.Text = "04"
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(71, 266)
+        Me.Label11.Location = New System.Drawing.Point(106, 409)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(19, 13)
+        Me.Label11.Size = New System.Drawing.Size(27, 20)
         Me.Label11.TabIndex = 546
         Me.Label11.Text = "03"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(71, 240)
+        Me.Label10.Location = New System.Drawing.Point(106, 369)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(19, 13)
+        Me.Label10.Size = New System.Drawing.Size(27, 20)
         Me.Label10.TabIndex = 545
         Me.Label10.Text = "02"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(71, 214)
+        Me.Label9.Location = New System.Drawing.Point(106, 329)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(19, 13)
+        Me.Label9.Size = New System.Drawing.Size(27, 20)
         Me.Label9.TabIndex = 544
         Me.Label9.Text = "01"
         '
         'txtFlag20Field055
         '
-        Me.txtFlag20Field055.Location = New System.Drawing.Point(359, 445)
+        Me.txtFlag20Field055.Location = New System.Drawing.Point(538, 685)
+        Me.txtFlag20Field055.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag20Field055.Name = "txtFlag20Field055"
-        Me.txtFlag20Field055.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag20Field055.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag20Field055.TabIndex = 540
         '
         'txtFlag19Field054
         '
-        Me.txtFlag19Field054.Location = New System.Drawing.Point(359, 419)
+        Me.txtFlag19Field054.Location = New System.Drawing.Point(538, 645)
+        Me.txtFlag19Field054.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag19Field054.Name = "txtFlag19Field054"
-        Me.txtFlag19Field054.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag19Field054.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag19Field054.TabIndex = 539
         '
         'txtFlag18Field053
         '
-        Me.txtFlag18Field053.Location = New System.Drawing.Point(359, 393)
+        Me.txtFlag18Field053.Location = New System.Drawing.Point(538, 605)
+        Me.txtFlag18Field053.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag18Field053.Name = "txtFlag18Field053"
-        Me.txtFlag18Field053.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag18Field053.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag18Field053.TabIndex = 538
         '
         'txtFlag17Field052
         '
-        Me.txtFlag17Field052.Location = New System.Drawing.Point(359, 367)
+        Me.txtFlag17Field052.Location = New System.Drawing.Point(538, 565)
+        Me.txtFlag17Field052.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag17Field052.Name = "txtFlag17Field052"
-        Me.txtFlag17Field052.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag17Field052.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag17Field052.TabIndex = 537
         '
         'txtFlag16Field051
         '
-        Me.txtFlag16Field051.Location = New System.Drawing.Point(359, 341)
+        Me.txtFlag16Field051.Location = New System.Drawing.Point(538, 525)
+        Me.txtFlag16Field051.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag16Field051.Name = "txtFlag16Field051"
-        Me.txtFlag16Field051.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag16Field051.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag16Field051.TabIndex = 536
         '
         'txtFlag15Field050
         '
-        Me.txtFlag15Field050.Location = New System.Drawing.Point(359, 315)
+        Me.txtFlag15Field050.Location = New System.Drawing.Point(538, 485)
+        Me.txtFlag15Field050.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag15Field050.Name = "txtFlag15Field050"
-        Me.txtFlag15Field050.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag15Field050.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag15Field050.TabIndex = 535
         '
         'txtFlag14Field049
         '
-        Me.txtFlag14Field049.Location = New System.Drawing.Point(359, 289)
+        Me.txtFlag14Field049.Location = New System.Drawing.Point(538, 445)
+        Me.txtFlag14Field049.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag14Field049.Name = "txtFlag14Field049"
-        Me.txtFlag14Field049.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag14Field049.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag14Field049.TabIndex = 534
         '
         'txtFlag13Field048
         '
-        Me.txtFlag13Field048.Location = New System.Drawing.Point(359, 263)
+        Me.txtFlag13Field048.Location = New System.Drawing.Point(538, 405)
+        Me.txtFlag13Field048.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag13Field048.Name = "txtFlag13Field048"
-        Me.txtFlag13Field048.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag13Field048.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag13Field048.TabIndex = 533
         '
         'txtFlag12Field047
         '
-        Me.txtFlag12Field047.Location = New System.Drawing.Point(359, 237)
+        Me.txtFlag12Field047.Location = New System.Drawing.Point(538, 365)
+        Me.txtFlag12Field047.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag12Field047.Name = "txtFlag12Field047"
-        Me.txtFlag12Field047.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag12Field047.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag12Field047.TabIndex = 532
         '
         'txtFlag11Field046
         '
-        Me.txtFlag11Field046.Location = New System.Drawing.Point(359, 211)
+        Me.txtFlag11Field046.Location = New System.Drawing.Point(538, 325)
+        Me.txtFlag11Field046.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag11Field046.Name = "txtFlag11Field046"
-        Me.txtFlag11Field046.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag11Field046.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag11Field046.TabIndex = 531
         '
         'txtFlag10Field045
         '
-        Me.txtFlag10Field045.Location = New System.Drawing.Point(163, 445)
+        Me.txtFlag10Field045.Location = New System.Drawing.Point(244, 685)
+        Me.txtFlag10Field045.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag10Field045.Name = "txtFlag10Field045"
-        Me.txtFlag10Field045.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag10Field045.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag10Field045.TabIndex = 528
         '
         'txtFlag09Field044
         '
-        Me.txtFlag09Field044.Location = New System.Drawing.Point(163, 419)
+        Me.txtFlag09Field044.Location = New System.Drawing.Point(244, 645)
+        Me.txtFlag09Field044.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag09Field044.Name = "txtFlag09Field044"
-        Me.txtFlag09Field044.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag09Field044.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag09Field044.TabIndex = 527
         '
         'txtFlag08Field043
         '
-        Me.txtFlag08Field043.Location = New System.Drawing.Point(163, 393)
+        Me.txtFlag08Field043.Location = New System.Drawing.Point(244, 605)
+        Me.txtFlag08Field043.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag08Field043.Name = "txtFlag08Field043"
-        Me.txtFlag08Field043.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag08Field043.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag08Field043.TabIndex = 526
         '
         'txtFlag07Field042
         '
-        Me.txtFlag07Field042.Location = New System.Drawing.Point(163, 367)
+        Me.txtFlag07Field042.Location = New System.Drawing.Point(244, 565)
+        Me.txtFlag07Field042.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag07Field042.Name = "txtFlag07Field042"
-        Me.txtFlag07Field042.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag07Field042.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag07Field042.TabIndex = 525
         '
         'txtFlag06Field041
         '
-        Me.txtFlag06Field041.Location = New System.Drawing.Point(163, 341)
+        Me.txtFlag06Field041.Location = New System.Drawing.Point(244, 525)
+        Me.txtFlag06Field041.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag06Field041.Name = "txtFlag06Field041"
-        Me.txtFlag06Field041.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag06Field041.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag06Field041.TabIndex = 524
         '
         'txtFlag05Field040
         '
-        Me.txtFlag05Field040.Location = New System.Drawing.Point(163, 315)
+        Me.txtFlag05Field040.Location = New System.Drawing.Point(244, 485)
+        Me.txtFlag05Field040.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag05Field040.Name = "txtFlag05Field040"
-        Me.txtFlag05Field040.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag05Field040.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag05Field040.TabIndex = 523
         '
         'txtFlag07Field039
         '
-        Me.txtFlag07Field039.Location = New System.Drawing.Point(163, 289)
+        Me.txtFlag07Field039.Location = New System.Drawing.Point(244, 445)
+        Me.txtFlag07Field039.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag07Field039.Name = "txtFlag07Field039"
-        Me.txtFlag07Field039.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag07Field039.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag07Field039.TabIndex = 522
         '
         'txtFlag03Field038
         '
-        Me.txtFlag03Field038.Location = New System.Drawing.Point(163, 263)
+        Me.txtFlag03Field038.Location = New System.Drawing.Point(244, 405)
+        Me.txtFlag03Field038.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag03Field038.Name = "txtFlag03Field038"
-        Me.txtFlag03Field038.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag03Field038.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag03Field038.TabIndex = 521
         '
         'txtFlag02Field037
         '
-        Me.txtFlag02Field037.Location = New System.Drawing.Point(163, 237)
+        Me.txtFlag02Field037.Location = New System.Drawing.Point(244, 365)
+        Me.txtFlag02Field037.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag02Field037.Name = "txtFlag02Field037"
-        Me.txtFlag02Field037.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag02Field037.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag02Field037.TabIndex = 520
         '
         'txtFlag01Field036
         '
-        Me.txtFlag01Field036.Location = New System.Drawing.Point(163, 211)
+        Me.txtFlag01Field036.Location = New System.Drawing.Point(244, 325)
+        Me.txtFlag01Field036.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag01Field036.Name = "txtFlag01Field036"
-        Me.txtFlag01Field036.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag01Field036.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag01Field036.TabIndex = 519
         '
         'txtVal_20Field024
         '
-        Me.txtVal_20Field024.Location = New System.Drawing.Point(303, 445)
+        Me.txtVal_20Field024.Location = New System.Drawing.Point(454, 685)
+        Me.txtVal_20Field024.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_20Field024.Name = "txtVal_20Field024"
-        Me.txtVal_20Field024.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_20Field024.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_20Field024.TabIndex = 24
         '
         'txtVal_19Field023
         '
-        Me.txtVal_19Field023.Location = New System.Drawing.Point(303, 419)
+        Me.txtVal_19Field023.Location = New System.Drawing.Point(454, 645)
+        Me.txtVal_19Field023.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_19Field023.Name = "txtVal_19Field023"
-        Me.txtVal_19Field023.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_19Field023.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_19Field023.TabIndex = 23
         '
         'txtVal_18Field022
         '
-        Me.txtVal_18Field022.Location = New System.Drawing.Point(303, 393)
+        Me.txtVal_18Field022.Location = New System.Drawing.Point(454, 605)
+        Me.txtVal_18Field022.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_18Field022.Name = "txtVal_18Field022"
-        Me.txtVal_18Field022.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_18Field022.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_18Field022.TabIndex = 22
         '
         'txtVal_17Field021
         '
-        Me.txtVal_17Field021.Location = New System.Drawing.Point(303, 367)
+        Me.txtVal_17Field021.Location = New System.Drawing.Point(454, 565)
+        Me.txtVal_17Field021.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_17Field021.Name = "txtVal_17Field021"
-        Me.txtVal_17Field021.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_17Field021.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_17Field021.TabIndex = 21
         '
         'txtVal_16Field020
         '
-        Me.txtVal_16Field020.Location = New System.Drawing.Point(302, 341)
+        Me.txtVal_16Field020.Location = New System.Drawing.Point(453, 525)
+        Me.txtVal_16Field020.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_16Field020.Name = "txtVal_16Field020"
-        Me.txtVal_16Field020.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_16Field020.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_16Field020.TabIndex = 20
         '
         'txtVal_15Field019
         '
-        Me.txtVal_15Field019.Location = New System.Drawing.Point(302, 315)
+        Me.txtVal_15Field019.Location = New System.Drawing.Point(453, 485)
+        Me.txtVal_15Field019.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_15Field019.Name = "txtVal_15Field019"
-        Me.txtVal_15Field019.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_15Field019.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_15Field019.TabIndex = 19
         '
         'txtVal_14Field018
         '
-        Me.txtVal_14Field018.Location = New System.Drawing.Point(303, 289)
+        Me.txtVal_14Field018.Location = New System.Drawing.Point(454, 445)
+        Me.txtVal_14Field018.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_14Field018.Name = "txtVal_14Field018"
-        Me.txtVal_14Field018.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_14Field018.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_14Field018.TabIndex = 18
         '
         'txtVal_13Field017
         '
-        Me.txtVal_13Field017.Location = New System.Drawing.Point(303, 263)
+        Me.txtVal_13Field017.Location = New System.Drawing.Point(454, 405)
+        Me.txtVal_13Field017.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_13Field017.Name = "txtVal_13Field017"
-        Me.txtVal_13Field017.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_13Field017.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_13Field017.TabIndex = 17
         '
         'txtVal_12Field016
         '
-        Me.txtVal_12Field016.Location = New System.Drawing.Point(302, 237)
+        Me.txtVal_12Field016.Location = New System.Drawing.Point(453, 365)
+        Me.txtVal_12Field016.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_12Field016.Name = "txtVal_12Field016"
-        Me.txtVal_12Field016.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_12Field016.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_12Field016.TabIndex = 16
         '
         'txtVal_11Field015
         '
-        Me.txtVal_11Field015.Location = New System.Drawing.Point(303, 211)
+        Me.txtVal_11Field015.Location = New System.Drawing.Point(454, 325)
+        Me.txtVal_11Field015.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_11Field015.Name = "txtVal_11Field015"
-        Me.txtVal_11Field015.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_11Field015.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_11Field015.TabIndex = 15
         '
         'txtVal_10Field014
         '
-        Me.txtVal_10Field014.Location = New System.Drawing.Point(107, 445)
+        Me.txtVal_10Field014.Location = New System.Drawing.Point(160, 685)
+        Me.txtVal_10Field014.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_10Field014.Name = "txtVal_10Field014"
-        Me.txtVal_10Field014.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_10Field014.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_10Field014.TabIndex = 14
         '
         'txtVal_09Field013
         '
-        Me.txtVal_09Field013.Location = New System.Drawing.Point(107, 419)
+        Me.txtVal_09Field013.Location = New System.Drawing.Point(160, 645)
+        Me.txtVal_09Field013.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_09Field013.Name = "txtVal_09Field013"
-        Me.txtVal_09Field013.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_09Field013.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_09Field013.TabIndex = 13
         '
         'txtVal_08Field012
         '
-        Me.txtVal_08Field012.Location = New System.Drawing.Point(107, 393)
+        Me.txtVal_08Field012.Location = New System.Drawing.Point(160, 605)
+        Me.txtVal_08Field012.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_08Field012.Name = "txtVal_08Field012"
-        Me.txtVal_08Field012.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_08Field012.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_08Field012.TabIndex = 12
         '
         'txtVal_07Field011
         '
-        Me.txtVal_07Field011.Location = New System.Drawing.Point(107, 367)
+        Me.txtVal_07Field011.Location = New System.Drawing.Point(160, 565)
+        Me.txtVal_07Field011.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_07Field011.Name = "txtVal_07Field011"
-        Me.txtVal_07Field011.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_07Field011.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_07Field011.TabIndex = 11
         '
         'txtVal_06Field010
         '
-        Me.txtVal_06Field010.Location = New System.Drawing.Point(107, 341)
+        Me.txtVal_06Field010.Location = New System.Drawing.Point(160, 525)
+        Me.txtVal_06Field010.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_06Field010.Name = "txtVal_06Field010"
-        Me.txtVal_06Field010.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_06Field010.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_06Field010.TabIndex = 10
         '
         'txtVal_05Field009
         '
-        Me.txtVal_05Field009.Location = New System.Drawing.Point(107, 315)
+        Me.txtVal_05Field009.Location = New System.Drawing.Point(160, 485)
+        Me.txtVal_05Field009.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_05Field009.Name = "txtVal_05Field009"
-        Me.txtVal_05Field009.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_05Field009.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_05Field009.TabIndex = 9
         '
         'txtVal_04Field008
         '
-        Me.txtVal_04Field008.Location = New System.Drawing.Point(107, 289)
+        Me.txtVal_04Field008.Location = New System.Drawing.Point(160, 445)
+        Me.txtVal_04Field008.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_04Field008.Name = "txtVal_04Field008"
-        Me.txtVal_04Field008.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_04Field008.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_04Field008.TabIndex = 8
         '
         'txtVal_03Field007
         '
-        Me.txtVal_03Field007.Location = New System.Drawing.Point(107, 263)
+        Me.txtVal_03Field007.Location = New System.Drawing.Point(160, 405)
+        Me.txtVal_03Field007.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_03Field007.Name = "txtVal_03Field007"
-        Me.txtVal_03Field007.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_03Field007.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_03Field007.TabIndex = 7
         '
         'txtVal_02Field006
         '
-        Me.txtVal_02Field006.Location = New System.Drawing.Point(107, 237)
+        Me.txtVal_02Field006.Location = New System.Drawing.Point(160, 365)
+        Me.txtVal_02Field006.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_02Field006.Name = "txtVal_02Field006"
-        Me.txtVal_02Field006.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_02Field006.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_02Field006.TabIndex = 6
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(107, 192)
+        Me.Label7.Location = New System.Drawing.Point(160, 295)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(34, 13)
+        Me.Label7.Size = New System.Drawing.Size(50, 20)
         Me.Label7.TabIndex = 495
         Me.Label7.Text = "Value"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(67, 192)
+        Me.Label6.Location = New System.Drawing.Point(100, 295)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(26, 13)
+        Me.Label6.Size = New System.Drawing.Size(37, 20)
         Me.Label6.TabIndex = 494
         Me.Label6.Text = "Day"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(389, 29)
+        Me.Label3.Location = New System.Drawing.Point(584, 45)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(45, 13)
+        Me.Label3.Size = New System.Drawing.Size(68, 20)
         Me.Label3.TabIndex = 493
         Me.Label3.Text = "Element"
         '
         'cboElement
         '
         Me.cboElement.FormattingEnabled = True
-        Me.cboElement.Location = New System.Drawing.Point(436, 26)
+        Me.cboElement.Location = New System.Drawing.Point(654, 40)
+        Me.cboElement.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cboElement.Name = "cboElement"
-        Me.cboElement.Size = New System.Drawing.Size(249, 21)
+        Me.cboElement.Size = New System.Drawing.Size(372, 28)
         Me.cboElement.TabIndex = 1
         '
         'txtVal_01Field005
         '
-        Me.txtVal_01Field005.Location = New System.Drawing.Point(107, 211)
+        Me.txtVal_01Field005.Location = New System.Drawing.Point(160, 325)
+        Me.txtVal_01Field005.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_01Field005.Name = "txtVal_01Field005"
-        Me.txtVal_01Field005.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_01Field005.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_01Field005.TabIndex = 5
         '
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(622, 575)
+        Me.btnUpload.Location = New System.Drawing.Point(933, 885)
+        Me.btnUpload.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpload.Name = "btnUpload"
-        Me.btnUpload.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpload.Size = New System.Drawing.Size(112, 35)
         Me.btnUpload.TabIndex = 490
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
@@ -775,52 +847,58 @@ Partial Class form_daily2
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(225, 580)
+        Me.Label5.Location = New System.Drawing.Point(338, 892)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(59, 13)
+        Me.Label5.Size = New System.Drawing.Size(87, 20)
         Me.Label5.TabIndex = 489
         Me.Label5.Text = "Sequencer"
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(290, 576)
+        Me.txtSequencer.Location = New System.Drawing.Point(435, 886)
+        Me.txtSequencer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtSequencer.Name = "txtSequencer"
-        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
+        Me.txtSequencer.Size = New System.Drawing.Size(298, 26)
         Me.txtSequencer.TabIndex = 488
         Me.txtSequencer.Text = "seq_daily_element"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(78, 29)
+        Me.Label4.Location = New System.Drawing.Point(117, 45)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(40, 13)
+        Me.Label4.Size = New System.Drawing.Size(60, 20)
         Me.Label4.TabIndex = 487
         Me.Label4.Text = "Station"
         '
         'cboStation
         '
         Me.cboStation.FormattingEnabled = True
-        Me.cboStation.Location = New System.Drawing.Point(121, 26)
+        Me.cboStation.Location = New System.Drawing.Point(182, 40)
+        Me.cboStation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cboStation.Name = "cboStation"
-        Me.cboStation.Size = New System.Drawing.Size(259, 21)
+        Me.cboStation.Size = New System.Drawing.Size(386, 28)
         Me.cboStation.TabIndex = 0
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(309, 79)
+        Me.Label2.Location = New System.Drawing.Point(464, 122)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(30, 13)
+        Me.Label2.Size = New System.Drawing.Size(44, 20)
         Me.Label2.TabIndex = 486
         Me.Label2.Text = "Hour"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(186, 79)
+        Me.Label1.Location = New System.Drawing.Point(279, 122)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(37, 13)
+        Me.Label1.Size = New System.Drawing.Size(54, 20)
         Me.Label1.TabIndex = 485
         Me.Label1.Text = "Month"
         '
@@ -828,25 +906,28 @@ Partial Class form_daily2
         '
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.cboMonth.Location = New System.Drawing.Point(225, 75)
+        Me.cboMonth.Location = New System.Drawing.Point(338, 115)
+        Me.cboMonth.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cboMonth.Name = "cboMonth"
-        Me.cboMonth.Size = New System.Drawing.Size(68, 21)
+        Me.cboMonth.Size = New System.Drawing.Size(100, 28)
         Me.cboMonth.TabIndex = 3
         '
         'cboHour
         '
         Me.cboHour.FormattingEnabled = True
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboHour.Location = New System.Drawing.Point(341, 75)
+        Me.cboHour.Location = New System.Drawing.Point(512, 115)
+        Me.cboHour.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cboHour.Name = "cboHour"
-        Me.cboHour.Size = New System.Drawing.Size(51, 21)
+        Me.cboHour.Size = New System.Drawing.Size(74, 28)
         Me.cboHour.TabIndex = 4
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(622, 534)
+        Me.btnHelp.Location = New System.Drawing.Point(933, 822)
+        Me.btnHelp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(112, 35)
         Me.btnHelp.TabIndex = 479
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -854,9 +935,10 @@ Partial Class form_daily2
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(361, 534)
+        Me.btnClear.Location = New System.Drawing.Point(542, 822)
+        Me.btnClear.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.Size = New System.Drawing.Size(112, 35)
         Me.btnClear.TabIndex = 477
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
@@ -864,36 +946,40 @@ Partial Class form_daily2
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(100, 534)
+        Me.btnCommit.Location = New System.Drawing.Point(150, 822)
+        Me.btnCommit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(75, 23)
+        Me.btnCommit.Size = New System.Drawing.Size(112, 35)
         Me.btnCommit.TabIndex = 37
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(274, 534)
+        Me.btnDelete.Location = New System.Drawing.Point(411, 822)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(112, 35)
         Me.btnDelete.TabIndex = 476
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(13, 534)
+        Me.btnAddNew.Location = New System.Drawing.Point(20, 822)
+        Me.btnAddNew.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(112, 35)
         Me.btnAddNew.TabIndex = 38
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(187, 534)
+        Me.btnUpdate.Location = New System.Drawing.Point(291, 822)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(112, 35)
         Me.btnUpdate.TabIndex = 475
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -901,9 +987,10 @@ Partial Class form_daily2
         'btnMovePrevious
         '
         Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(256, 505)
+        Me.btnMovePrevious.Location = New System.Drawing.Point(384, 777)
+        Me.btnMovePrevious.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnMovePrevious.Name = "btnMovePrevious"
-        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
+        Me.btnMovePrevious.Size = New System.Drawing.Size(69, 35)
         Me.btnMovePrevious.TabIndex = 484
         Me.btnMovePrevious.Text = "<<"
         Me.btnMovePrevious.UseVisualStyleBackColor = True
@@ -911,9 +998,10 @@ Partial Class form_daily2
         'btnMoveFirst
         '
         Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(209, 505)
+        Me.btnMoveFirst.Location = New System.Drawing.Point(314, 777)
+        Me.btnMoveFirst.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnMoveFirst.Name = "btnMoveFirst"
-        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveFirst.Size = New System.Drawing.Size(62, 35)
         Me.btnMoveFirst.TabIndex = 483
         Me.btnMoveFirst.Text = "|<<"
         Me.btnMoveFirst.UseVisualStyleBackColor = True
@@ -921,541 +1009,613 @@ Partial Class form_daily2
         'btnMoveLast
         '
         Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(499, 505)
+        Me.btnMoveLast.Location = New System.Drawing.Point(748, 777)
+        Me.btnMoveLast.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveLast.Size = New System.Drawing.Size(62, 35)
         Me.btnMoveLast.TabIndex = 482
         Me.btnMoveLast.Text = ">>|"
         Me.btnMoveLast.UseVisualStyleBackColor = True
         '
         'recNumberTextBox
         '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(308, 507)
+        Me.recNumberTextBox.Location = New System.Drawing.Point(462, 780)
+        Me.recNumberTextBox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.recNumberTextBox.Name = "recNumberTextBox"
-        Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
+        Me.recNumberTextBox.Size = New System.Drawing.Size(210, 26)
         Me.recNumberTextBox.TabIndex = 481
         '
         'btnMoveNext
         '
         Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(455, 505)
+        Me.btnMoveNext.Location = New System.Drawing.Point(682, 777)
+        Me.btnMoveNext.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnMoveNext.Name = "btnMoveNext"
-        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
+        Me.btnMoveNext.Size = New System.Drawing.Size(57, 35)
         Me.btnMoveNext.TabIndex = 480
         Me.btnMoveNext.Text = ">>"
         Me.btnMoveNext.UseVisualStyleBackColor = True
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(535, 534)
+        Me.btnClose.Location = New System.Drawing.Point(802, 822)
+        Me.btnClose.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.Size = New System.Drawing.Size(112, 35)
         Me.btnClose.TabIndex = 478
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(121, 75)
+        Me.txtYear.Location = New System.Drawing.Point(182, 115)
+        Me.txtYear.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtYear.Name = "txtYear"
-        Me.txtYear.Size = New System.Drawing.Size(55, 20)
+        Me.txtYear.Size = New System.Drawing.Size(80, 26)
         Me.txtYear.TabIndex = 2
         '
         'txtPeriod10Field076
         '
-        Me.txtPeriod10Field076.Location = New System.Drawing.Point(194, 445)
+        Me.txtPeriod10Field076.Location = New System.Drawing.Point(291, 685)
+        Me.txtPeriod10Field076.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod10Field076.Name = "txtPeriod10Field076"
-        Me.txtPeriod10Field076.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod10Field076.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod10Field076.TabIndex = 586
         '
         'txtPeriod09Field075
         '
-        Me.txtPeriod09Field075.Location = New System.Drawing.Point(194, 419)
+        Me.txtPeriod09Field075.Location = New System.Drawing.Point(291, 645)
+        Me.txtPeriod09Field075.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod09Field075.Name = "txtPeriod09Field075"
-        Me.txtPeriod09Field075.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod09Field075.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod09Field075.TabIndex = 585
         '
         'txtPeriod08Field074
         '
-        Me.txtPeriod08Field074.Location = New System.Drawing.Point(194, 393)
+        Me.txtPeriod08Field074.Location = New System.Drawing.Point(291, 605)
+        Me.txtPeriod08Field074.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod08Field074.Name = "txtPeriod08Field074"
-        Me.txtPeriod08Field074.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod08Field074.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod08Field074.TabIndex = 584
         '
         'txtPeriod07Field073
         '
-        Me.txtPeriod07Field073.Location = New System.Drawing.Point(194, 367)
+        Me.txtPeriod07Field073.Location = New System.Drawing.Point(291, 565)
+        Me.txtPeriod07Field073.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod07Field073.Name = "txtPeriod07Field073"
-        Me.txtPeriod07Field073.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod07Field073.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod07Field073.TabIndex = 583
         '
         'txtPeriod06Field072
         '
-        Me.txtPeriod06Field072.Location = New System.Drawing.Point(194, 341)
+        Me.txtPeriod06Field072.Location = New System.Drawing.Point(291, 525)
+        Me.txtPeriod06Field072.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod06Field072.Name = "txtPeriod06Field072"
-        Me.txtPeriod06Field072.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod06Field072.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod06Field072.TabIndex = 582
         '
         'txtPeriod05Field071
         '
-        Me.txtPeriod05Field071.Location = New System.Drawing.Point(194, 315)
+        Me.txtPeriod05Field071.Location = New System.Drawing.Point(291, 485)
+        Me.txtPeriod05Field071.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod05Field071.Name = "txtPeriod05Field071"
-        Me.txtPeriod05Field071.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod05Field071.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod05Field071.TabIndex = 581
         '
         'txtPeriod04Field070
         '
-        Me.txtPeriod04Field070.Location = New System.Drawing.Point(194, 289)
+        Me.txtPeriod04Field070.Location = New System.Drawing.Point(291, 445)
+        Me.txtPeriod04Field070.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod04Field070.Name = "txtPeriod04Field070"
-        Me.txtPeriod04Field070.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod04Field070.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod04Field070.TabIndex = 580
         '
         'txtPeriod03Field069
         '
-        Me.txtPeriod03Field069.Location = New System.Drawing.Point(194, 263)
+        Me.txtPeriod03Field069.Location = New System.Drawing.Point(291, 405)
+        Me.txtPeriod03Field069.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod03Field069.Name = "txtPeriod03Field069"
-        Me.txtPeriod03Field069.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod03Field069.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod03Field069.TabIndex = 579
         '
         'txtPeriod02Field068
         '
-        Me.txtPeriod02Field068.Location = New System.Drawing.Point(194, 237)
+        Me.txtPeriod02Field068.Location = New System.Drawing.Point(291, 365)
+        Me.txtPeriod02Field068.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod02Field068.Name = "txtPeriod02Field068"
-        Me.txtPeriod02Field068.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod02Field068.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod02Field068.TabIndex = 578
         '
         'txtPeriod01Field067
         '
-        Me.txtPeriod01Field067.Location = New System.Drawing.Point(194, 211)
+        Me.txtPeriod01Field067.Location = New System.Drawing.Point(291, 325)
+        Me.txtPeriod01Field067.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod01Field067.Name = "txtPeriod01Field067"
-        Me.txtPeriod01Field067.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod01Field067.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod01Field067.TabIndex = 577
         '
         'txtPeriod20Field086
         '
-        Me.txtPeriod20Field086.Location = New System.Drawing.Point(392, 445)
+        Me.txtPeriod20Field086.Location = New System.Drawing.Point(588, 685)
+        Me.txtPeriod20Field086.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod20Field086.Name = "txtPeriod20Field086"
-        Me.txtPeriod20Field086.Size = New System.Drawing.Size(27, 20)
+        Me.txtPeriod20Field086.Size = New System.Drawing.Size(38, 26)
         Me.txtPeriod20Field086.TabIndex = 598
         '
         'txtPeriod19Field085
         '
-        Me.txtPeriod19Field085.Location = New System.Drawing.Point(392, 419)
+        Me.txtPeriod19Field085.Location = New System.Drawing.Point(588, 645)
+        Me.txtPeriod19Field085.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod19Field085.Name = "txtPeriod19Field085"
-        Me.txtPeriod19Field085.Size = New System.Drawing.Size(27, 20)
+        Me.txtPeriod19Field085.Size = New System.Drawing.Size(38, 26)
         Me.txtPeriod19Field085.TabIndex = 597
         '
         'txtPeriod18Field084
         '
-        Me.txtPeriod18Field084.Location = New System.Drawing.Point(392, 393)
+        Me.txtPeriod18Field084.Location = New System.Drawing.Point(588, 605)
+        Me.txtPeriod18Field084.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod18Field084.Name = "txtPeriod18Field084"
-        Me.txtPeriod18Field084.Size = New System.Drawing.Size(27, 20)
+        Me.txtPeriod18Field084.Size = New System.Drawing.Size(38, 26)
         Me.txtPeriod18Field084.TabIndex = 596
         '
         'txtPeriod17Field083
         '
-        Me.txtPeriod17Field083.Location = New System.Drawing.Point(392, 367)
+        Me.txtPeriod17Field083.Location = New System.Drawing.Point(588, 565)
+        Me.txtPeriod17Field083.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod17Field083.Name = "txtPeriod17Field083"
-        Me.txtPeriod17Field083.Size = New System.Drawing.Size(27, 20)
+        Me.txtPeriod17Field083.Size = New System.Drawing.Size(38, 26)
         Me.txtPeriod17Field083.TabIndex = 595
         '
         'txtPeriod16Field082
         '
-        Me.txtPeriod16Field082.Location = New System.Drawing.Point(392, 341)
+        Me.txtPeriod16Field082.Location = New System.Drawing.Point(588, 525)
+        Me.txtPeriod16Field082.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod16Field082.Name = "txtPeriod16Field082"
-        Me.txtPeriod16Field082.Size = New System.Drawing.Size(27, 20)
+        Me.txtPeriod16Field082.Size = New System.Drawing.Size(38, 26)
         Me.txtPeriod16Field082.TabIndex = 594
         '
         'txtPeriod15Field081
         '
-        Me.txtPeriod15Field081.Location = New System.Drawing.Point(392, 315)
+        Me.txtPeriod15Field081.Location = New System.Drawing.Point(588, 485)
+        Me.txtPeriod15Field081.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod15Field081.Name = "txtPeriod15Field081"
-        Me.txtPeriod15Field081.Size = New System.Drawing.Size(27, 20)
+        Me.txtPeriod15Field081.Size = New System.Drawing.Size(38, 26)
         Me.txtPeriod15Field081.TabIndex = 593
         '
         'txtPeriod14Field080
         '
-        Me.txtPeriod14Field080.Location = New System.Drawing.Point(392, 289)
+        Me.txtPeriod14Field080.Location = New System.Drawing.Point(588, 445)
+        Me.txtPeriod14Field080.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod14Field080.Name = "txtPeriod14Field080"
-        Me.txtPeriod14Field080.Size = New System.Drawing.Size(27, 20)
+        Me.txtPeriod14Field080.Size = New System.Drawing.Size(38, 26)
         Me.txtPeriod14Field080.TabIndex = 592
         '
         'txtPeriod13Field079
         '
-        Me.txtPeriod13Field079.Location = New System.Drawing.Point(392, 263)
+        Me.txtPeriod13Field079.Location = New System.Drawing.Point(588, 405)
+        Me.txtPeriod13Field079.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod13Field079.Name = "txtPeriod13Field079"
-        Me.txtPeriod13Field079.Size = New System.Drawing.Size(27, 20)
+        Me.txtPeriod13Field079.Size = New System.Drawing.Size(38, 26)
         Me.txtPeriod13Field079.TabIndex = 591
         '
         'txtPeriod12Field078
         '
-        Me.txtPeriod12Field078.Location = New System.Drawing.Point(392, 237)
+        Me.txtPeriod12Field078.Location = New System.Drawing.Point(588, 365)
+        Me.txtPeriod12Field078.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod12Field078.Name = "txtPeriod12Field078"
-        Me.txtPeriod12Field078.Size = New System.Drawing.Size(27, 20)
+        Me.txtPeriod12Field078.Size = New System.Drawing.Size(38, 26)
         Me.txtPeriod12Field078.TabIndex = 590
         '
         'txtPeriod11Field077
         '
-        Me.txtPeriod11Field077.Location = New System.Drawing.Point(392, 211)
+        Me.txtPeriod11Field077.Location = New System.Drawing.Point(588, 325)
+        Me.txtPeriod11Field077.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod11Field077.Name = "txtPeriod11Field077"
-        Me.txtPeriod11Field077.Size = New System.Drawing.Size(27, 20)
+        Me.txtPeriod11Field077.Size = New System.Drawing.Size(38, 26)
         Me.txtPeriod11Field077.TabIndex = 589
         '
         'txtPeriod30Field096
         '
-        Me.txtPeriod30Field096.Location = New System.Drawing.Point(592, 445)
+        Me.txtPeriod30Field096.Location = New System.Drawing.Point(888, 685)
+        Me.txtPeriod30Field096.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod30Field096.Name = "txtPeriod30Field096"
-        Me.txtPeriod30Field096.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod30Field096.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod30Field096.TabIndex = 649
         '
         'txtPeriod29Field095
         '
-        Me.txtPeriod29Field095.Location = New System.Drawing.Point(592, 419)
+        Me.txtPeriod29Field095.Location = New System.Drawing.Point(888, 645)
+        Me.txtPeriod29Field095.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod29Field095.Name = "txtPeriod29Field095"
-        Me.txtPeriod29Field095.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod29Field095.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod29Field095.TabIndex = 648
         '
         'txtPeriod28Field094
         '
-        Me.txtPeriod28Field094.Location = New System.Drawing.Point(592, 393)
+        Me.txtPeriod28Field094.Location = New System.Drawing.Point(888, 605)
+        Me.txtPeriod28Field094.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod28Field094.Name = "txtPeriod28Field094"
-        Me.txtPeriod28Field094.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod28Field094.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod28Field094.TabIndex = 647
         '
         'txtPeriod27Field093
         '
-        Me.txtPeriod27Field093.Location = New System.Drawing.Point(592, 367)
+        Me.txtPeriod27Field093.Location = New System.Drawing.Point(888, 565)
+        Me.txtPeriod27Field093.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod27Field093.Name = "txtPeriod27Field093"
-        Me.txtPeriod27Field093.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod27Field093.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod27Field093.TabIndex = 646
         '
         'txtPeriod26Field092
         '
-        Me.txtPeriod26Field092.Location = New System.Drawing.Point(592, 341)
+        Me.txtPeriod26Field092.Location = New System.Drawing.Point(888, 525)
+        Me.txtPeriod26Field092.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod26Field092.Name = "txtPeriod26Field092"
-        Me.txtPeriod26Field092.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod26Field092.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod26Field092.TabIndex = 645
         '
         'txtPeriod25Field091
         '
-        Me.txtPeriod25Field091.Location = New System.Drawing.Point(592, 315)
+        Me.txtPeriod25Field091.Location = New System.Drawing.Point(888, 485)
+        Me.txtPeriod25Field091.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod25Field091.Name = "txtPeriod25Field091"
-        Me.txtPeriod25Field091.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod25Field091.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod25Field091.TabIndex = 644
         '
         'txtPeriod24Field090
         '
-        Me.txtPeriod24Field090.Location = New System.Drawing.Point(592, 289)
+        Me.txtPeriod24Field090.Location = New System.Drawing.Point(888, 445)
+        Me.txtPeriod24Field090.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod24Field090.Name = "txtPeriod24Field090"
-        Me.txtPeriod24Field090.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod24Field090.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod24Field090.TabIndex = 643
         '
         'txtPeriod23Field089
         '
-        Me.txtPeriod23Field089.Location = New System.Drawing.Point(592, 263)
+        Me.txtPeriod23Field089.Location = New System.Drawing.Point(888, 405)
+        Me.txtPeriod23Field089.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod23Field089.Name = "txtPeriod23Field089"
-        Me.txtPeriod23Field089.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod23Field089.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod23Field089.TabIndex = 642
         '
         'txtPeriod22Field088
         '
-        Me.txtPeriod22Field088.Location = New System.Drawing.Point(592, 237)
+        Me.txtPeriod22Field088.Location = New System.Drawing.Point(888, 365)
+        Me.txtPeriod22Field088.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod22Field088.Name = "txtPeriod22Field088"
-        Me.txtPeriod22Field088.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod22Field088.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod22Field088.TabIndex = 641
         '
         'txtPeriod21Field087
         '
-        Me.txtPeriod21Field087.Location = New System.Drawing.Point(592, 211)
+        Me.txtPeriod21Field087.Location = New System.Drawing.Point(888, 325)
+        Me.txtPeriod21Field087.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod21Field087.Name = "txtPeriod21Field087"
-        Me.txtPeriod21Field087.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod21Field087.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod21Field087.TabIndex = 640
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(559, 192)
+        Me.Label8.Location = New System.Drawing.Point(838, 295)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(27, 13)
+        Me.Label8.Size = New System.Drawing.Size(40, 20)
         Me.Label8.TabIndex = 639
         Me.Label8.Text = "Flag"
         '
         'Label38
         '
         Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(503, 192)
+        Me.Label38.Location = New System.Drawing.Point(754, 295)
+        Me.Label38.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(34, 13)
+        Me.Label38.Size = New System.Drawing.Size(50, 20)
         Me.Label38.TabIndex = 638
         Me.Label38.Text = "Value"
         '
         'Label39
         '
         Me.Label39.AutoSize = True
-        Me.Label39.Location = New System.Drawing.Point(465, 192)
+        Me.Label39.Location = New System.Drawing.Point(698, 295)
+        Me.Label39.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(26, 13)
+        Me.Label39.Size = New System.Drawing.Size(37, 20)
         Me.Label39.TabIndex = 637
         Me.Label39.Text = "Day"
         '
         'Label42
         '
         Me.Label42.AutoSize = True
-        Me.Label42.Location = New System.Drawing.Point(462, 452)
+        Me.Label42.Location = New System.Drawing.Point(693, 695)
+        Me.Label42.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(19, 13)
+        Me.Label42.Size = New System.Drawing.Size(27, 20)
         Me.Label42.TabIndex = 634
         Me.Label42.Text = "30"
         '
         'Label43
         '
         Me.Label43.AutoSize = True
-        Me.Label43.Location = New System.Drawing.Point(462, 422)
+        Me.Label43.Location = New System.Drawing.Point(693, 649)
+        Me.Label43.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(19, 13)
+        Me.Label43.Size = New System.Drawing.Size(27, 20)
         Me.Label43.TabIndex = 633
         Me.Label43.Text = "29"
         '
         'Label44
         '
         Me.Label44.AutoSize = True
-        Me.Label44.Location = New System.Drawing.Point(462, 396)
+        Me.Label44.Location = New System.Drawing.Point(693, 609)
+        Me.Label44.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(19, 13)
+        Me.Label44.Size = New System.Drawing.Size(27, 20)
         Me.Label44.TabIndex = 632
         Me.Label44.Text = "28"
         '
         'Label45
         '
         Me.Label45.AutoSize = True
-        Me.Label45.Location = New System.Drawing.Point(462, 370)
+        Me.Label45.Location = New System.Drawing.Point(693, 569)
+        Me.Label45.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(19, 13)
+        Me.Label45.Size = New System.Drawing.Size(27, 20)
         Me.Label45.TabIndex = 631
         Me.Label45.Text = "27"
         '
         'Label46
         '
         Me.Label46.AutoSize = True
-        Me.Label46.Location = New System.Drawing.Point(462, 344)
+        Me.Label46.Location = New System.Drawing.Point(693, 529)
+        Me.Label46.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(19, 13)
+        Me.Label46.Size = New System.Drawing.Size(27, 20)
         Me.Label46.TabIndex = 630
         Me.Label46.Text = "26"
         '
         'Label47
         '
         Me.Label47.AutoSize = True
-        Me.Label47.Location = New System.Drawing.Point(462, 318)
+        Me.Label47.Location = New System.Drawing.Point(693, 489)
+        Me.Label47.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(19, 13)
+        Me.Label47.Size = New System.Drawing.Size(27, 20)
         Me.Label47.TabIndex = 629
         Me.Label47.Text = "25"
         '
         'Label48
         '
         Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(462, 292)
+        Me.Label48.Location = New System.Drawing.Point(693, 449)
+        Me.Label48.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(19, 13)
+        Me.Label48.Size = New System.Drawing.Size(27, 20)
         Me.Label48.TabIndex = 628
         Me.Label48.Text = "24"
         '
         'Label49
         '
         Me.Label49.AutoSize = True
-        Me.Label49.Location = New System.Drawing.Point(462, 266)
+        Me.Label49.Location = New System.Drawing.Point(693, 409)
+        Me.Label49.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(19, 13)
+        Me.Label49.Size = New System.Drawing.Size(27, 20)
         Me.Label49.TabIndex = 627
         Me.Label49.Text = "23"
         '
         'Label50
         '
         Me.Label50.AutoSize = True
-        Me.Label50.Location = New System.Drawing.Point(462, 240)
+        Me.Label50.Location = New System.Drawing.Point(693, 369)
+        Me.Label50.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(19, 13)
+        Me.Label50.Size = New System.Drawing.Size(27, 20)
         Me.Label50.TabIndex = 626
         Me.Label50.Text = "22"
         '
         'Label51
         '
         Me.Label51.AutoSize = True
-        Me.Label51.Location = New System.Drawing.Point(462, 214)
+        Me.Label51.Location = New System.Drawing.Point(693, 329)
+        Me.Label51.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(19, 13)
+        Me.Label51.Size = New System.Drawing.Size(27, 20)
         Me.Label51.TabIndex = 625
         Me.Label51.Text = "21"
         '
         'txtFlag30Field065
         '
-        Me.txtFlag30Field065.Location = New System.Drawing.Point(559, 445)
+        Me.txtFlag30Field065.Location = New System.Drawing.Point(838, 685)
+        Me.txtFlag30Field065.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag30Field065.Name = "txtFlag30Field065"
-        Me.txtFlag30Field065.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag30Field065.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag30Field065.TabIndex = 622
         '
         'txtFlag29Field064
         '
-        Me.txtFlag29Field064.Location = New System.Drawing.Point(559, 419)
+        Me.txtFlag29Field064.Location = New System.Drawing.Point(838, 645)
+        Me.txtFlag29Field064.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag29Field064.Name = "txtFlag29Field064"
-        Me.txtFlag29Field064.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag29Field064.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag29Field064.TabIndex = 621
         '
         'txtFlag28Field063
         '
-        Me.txtFlag28Field063.Location = New System.Drawing.Point(559, 393)
+        Me.txtFlag28Field063.Location = New System.Drawing.Point(838, 605)
+        Me.txtFlag28Field063.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag28Field063.Name = "txtFlag28Field063"
-        Me.txtFlag28Field063.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag28Field063.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag28Field063.TabIndex = 620
         '
         'txtFlag27Field062
         '
-        Me.txtFlag27Field062.Location = New System.Drawing.Point(559, 367)
+        Me.txtFlag27Field062.Location = New System.Drawing.Point(838, 565)
+        Me.txtFlag27Field062.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag27Field062.Name = "txtFlag27Field062"
-        Me.txtFlag27Field062.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag27Field062.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag27Field062.TabIndex = 619
         '
         'txtFlag26Field061
         '
-        Me.txtFlag26Field061.Location = New System.Drawing.Point(559, 341)
+        Me.txtFlag26Field061.Location = New System.Drawing.Point(838, 525)
+        Me.txtFlag26Field061.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag26Field061.Name = "txtFlag26Field061"
-        Me.txtFlag26Field061.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag26Field061.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag26Field061.TabIndex = 618
         '
         'txtFlag25Field060
         '
-        Me.txtFlag25Field060.Location = New System.Drawing.Point(559, 315)
+        Me.txtFlag25Field060.Location = New System.Drawing.Point(838, 485)
+        Me.txtFlag25Field060.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag25Field060.Name = "txtFlag25Field060"
-        Me.txtFlag25Field060.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag25Field060.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag25Field060.TabIndex = 617
         '
         'txtFlag24Field059
         '
-        Me.txtFlag24Field059.Location = New System.Drawing.Point(559, 289)
+        Me.txtFlag24Field059.Location = New System.Drawing.Point(838, 445)
+        Me.txtFlag24Field059.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag24Field059.Name = "txtFlag24Field059"
-        Me.txtFlag24Field059.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag24Field059.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag24Field059.TabIndex = 616
         '
         'txtFlag23Field058
         '
-        Me.txtFlag23Field058.Location = New System.Drawing.Point(559, 263)
+        Me.txtFlag23Field058.Location = New System.Drawing.Point(838, 405)
+        Me.txtFlag23Field058.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag23Field058.Name = "txtFlag23Field058"
-        Me.txtFlag23Field058.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag23Field058.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag23Field058.TabIndex = 615
         '
         'txtFlag22Field057
         '
-        Me.txtFlag22Field057.Location = New System.Drawing.Point(559, 237)
+        Me.txtFlag22Field057.Location = New System.Drawing.Point(838, 365)
+        Me.txtFlag22Field057.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag22Field057.Name = "txtFlag22Field057"
-        Me.txtFlag22Field057.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag22Field057.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag22Field057.TabIndex = 614
         '
         'txtFlag21Field056
         '
-        Me.txtFlag21Field056.Location = New System.Drawing.Point(559, 211)
+        Me.txtFlag21Field056.Location = New System.Drawing.Point(838, 325)
+        Me.txtFlag21Field056.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag21Field056.Name = "txtFlag21Field056"
-        Me.txtFlag21Field056.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag21Field056.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag21Field056.TabIndex = 613
         '
         'txtVal_30Field034
         '
-        Me.txtVal_30Field034.Location = New System.Drawing.Point(503, 445)
+        Me.txtVal_30Field034.Location = New System.Drawing.Point(754, 685)
+        Me.txtVal_30Field034.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_30Field034.Name = "txtVal_30Field034"
-        Me.txtVal_30Field034.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_30Field034.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_30Field034.TabIndex = 34
         '
         'txtVal_29Field033
         '
-        Me.txtVal_29Field033.Location = New System.Drawing.Point(503, 419)
+        Me.txtVal_29Field033.Location = New System.Drawing.Point(754, 645)
+        Me.txtVal_29Field033.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_29Field033.Name = "txtVal_29Field033"
-        Me.txtVal_29Field033.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_29Field033.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_29Field033.TabIndex = 33
         '
         'txtVal_28Field032
         '
-        Me.txtVal_28Field032.Location = New System.Drawing.Point(503, 393)
+        Me.txtVal_28Field032.Location = New System.Drawing.Point(754, 605)
+        Me.txtVal_28Field032.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_28Field032.Name = "txtVal_28Field032"
-        Me.txtVal_28Field032.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_28Field032.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_28Field032.TabIndex = 32
         '
         'txtVal_27Field031
         '
-        Me.txtVal_27Field031.Location = New System.Drawing.Point(503, 367)
+        Me.txtVal_27Field031.Location = New System.Drawing.Point(754, 565)
+        Me.txtVal_27Field031.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_27Field031.Name = "txtVal_27Field031"
-        Me.txtVal_27Field031.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_27Field031.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_27Field031.TabIndex = 31
         '
         'txtVal_26Field030
         '
-        Me.txtVal_26Field030.Location = New System.Drawing.Point(502, 341)
+        Me.txtVal_26Field030.Location = New System.Drawing.Point(753, 525)
+        Me.txtVal_26Field030.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_26Field030.Name = "txtVal_26Field030"
-        Me.txtVal_26Field030.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_26Field030.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_26Field030.TabIndex = 30
         '
         'txtVal_25Field029
         '
-        Me.txtVal_25Field029.Location = New System.Drawing.Point(502, 315)
+        Me.txtVal_25Field029.Location = New System.Drawing.Point(753, 485)
+        Me.txtVal_25Field029.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_25Field029.Name = "txtVal_25Field029"
-        Me.txtVal_25Field029.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_25Field029.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_25Field029.TabIndex = 29
         '
         'txtVal_24Field028
         '
-        Me.txtVal_24Field028.Location = New System.Drawing.Point(503, 289)
+        Me.txtVal_24Field028.Location = New System.Drawing.Point(754, 445)
+        Me.txtVal_24Field028.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_24Field028.Name = "txtVal_24Field028"
-        Me.txtVal_24Field028.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_24Field028.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_24Field028.TabIndex = 28
         '
         'txtVal_23Field027
         '
-        Me.txtVal_23Field027.Location = New System.Drawing.Point(503, 263)
+        Me.txtVal_23Field027.Location = New System.Drawing.Point(754, 405)
+        Me.txtVal_23Field027.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_23Field027.Name = "txtVal_23Field027"
-        Me.txtVal_23Field027.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_23Field027.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_23Field027.TabIndex = 27
         '
         'txtVal_22Field026
         '
-        Me.txtVal_22Field026.Location = New System.Drawing.Point(502, 237)
+        Me.txtVal_22Field026.Location = New System.Drawing.Point(753, 365)
+        Me.txtVal_22Field026.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_22Field026.Name = "txtVal_22Field026"
-        Me.txtVal_22Field026.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_22Field026.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_22Field026.TabIndex = 26
         '
         'txtVal_21Field025
         '
-        Me.txtVal_21Field025.Location = New System.Drawing.Point(503, 211)
+        Me.txtVal_21Field025.Location = New System.Drawing.Point(754, 325)
+        Me.txtVal_21Field025.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_21Field025.Name = "txtVal_21Field025"
-        Me.txtVal_21Field025.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_21Field025.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_21Field025.TabIndex = 25
         '
         'txtPeriod31Field097
         '
-        Me.txtPeriod31Field097.Location = New System.Drawing.Point(592, 471)
+        Me.txtPeriod31Field097.Location = New System.Drawing.Point(888, 725)
+        Me.txtPeriod31Field097.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPeriod31Field097.Name = "txtPeriod31Field097"
-        Me.txtPeriod31Field097.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod31Field097.Size = New System.Drawing.Size(48, 26)
         Me.txtPeriod31Field097.TabIndex = 653
         '
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(462, 478)
+        Me.Label19.Location = New System.Drawing.Point(693, 735)
+        Me.Label19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(19, 13)
+        Me.Label19.Size = New System.Drawing.Size(27, 20)
         Me.Label19.TabIndex = 652
         Me.Label19.Text = "31"
         '
         'txtFlag31Field066
         '
-        Me.txtFlag31Field066.Location = New System.Drawing.Point(559, 471)
+        Me.txtFlag31Field066.Location = New System.Drawing.Point(838, 725)
+        Me.txtFlag31Field066.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFlag31Field066.Name = "txtFlag31Field066"
-        Me.txtFlag31Field066.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag31Field066.Size = New System.Drawing.Size(38, 26)
         Me.txtFlag31Field066.TabIndex = 651
         '
         'txtVal_31Field035
         '
-        Me.txtVal_31Field035.Location = New System.Drawing.Point(503, 471)
+        Me.txtVal_31Field035.Location = New System.Drawing.Point(754, 725)
+        Me.txtVal_31Field035.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVal_31Field035.Name = "txtVal_31Field035"
-        Me.txtVal_31Field035.Size = New System.Drawing.Size(51, 20)
+        Me.txtVal_31Field035.Size = New System.Drawing.Size(74, 26)
         Me.txtVal_31Field035.TabIndex = 35
         '
         'groupUnits
@@ -1468,9 +1628,11 @@ Partial Class form_daily2
         Me.groupUnits.Controls.Add(Me.cboCloudheightUnits)
         Me.groupUnits.Controls.Add(Me.cboPrecipUnits)
         Me.groupUnits.Controls.Add(Me.cboTemperatureUnits)
-        Me.groupUnits.Location = New System.Drawing.Point(72, 125)
+        Me.groupUnits.Location = New System.Drawing.Point(108, 192)
+        Me.groupUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.groupUnits.Name = "groupUnits"
-        Me.groupUnits.Size = New System.Drawing.Size(631, 49)
+        Me.groupUnits.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.groupUnits.Size = New System.Drawing.Size(946, 75)
         Me.groupUnits.TabIndex = 654
         Me.groupUnits.TabStop = False
         Me.groupUnits.Text = "Units"
@@ -1478,36 +1640,40 @@ Partial Class form_daily2
         'Label53
         '
         Me.Label53.AutoSize = True
-        Me.Label53.Location = New System.Drawing.Point(499, 23)
+        Me.Label53.Location = New System.Drawing.Point(748, 35)
+        Me.Label53.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(43, 13)
+        Me.Label53.Size = New System.Drawing.Size(64, 20)
         Me.Label53.TabIndex = 7
         Me.Label53.Text = "Visibility"
         '
         'Label52
         '
         Me.Label52.AutoSize = True
-        Me.Label52.Location = New System.Drawing.Point(317, 23)
+        Me.Label52.Location = New System.Drawing.Point(476, 35)
+        Me.Label52.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(66, 13)
+        Me.Label52.Size = New System.Drawing.Size(98, 20)
         Me.Label52.TabIndex = 6
         Me.Label52.Text = "Cloud height"
         '
         'Label41
         '
         Me.Label41.AutoSize = True
-        Me.Label41.Location = New System.Drawing.Point(193, 22)
+        Me.Label41.Location = New System.Drawing.Point(290, 34)
+        Me.Label41.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(37, 13)
+        Me.Label41.Size = New System.Drawing.Size(53, 20)
         Me.Label41.TabIndex = 5
         Me.Label41.Text = "Precip"
         '
         'Label40
         '
         Me.Label40.AutoSize = True
-        Me.Label40.Location = New System.Drawing.Point(6, 23)
+        Me.Label40.Location = New System.Drawing.Point(9, 35)
+        Me.Label40.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(67, 13)
+        Me.Label40.Size = New System.Drawing.Size(100, 20)
         Me.Label40.TabIndex = 4
         Me.Label40.Text = "Temperature"
         '
@@ -1515,9 +1681,10 @@ Partial Class form_daily2
         '
         Me.cboVisibilityUnits.FormattingEnabled = True
         Me.cboVisibilityUnits.Items.AddRange(New Object() {"metres", "yards"})
-        Me.cboVisibilityUnits.Location = New System.Drawing.Point(564, 20)
+        Me.cboVisibilityUnits.Location = New System.Drawing.Point(846, 31)
+        Me.cboVisibilityUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cboVisibilityUnits.Name = "cboVisibilityUnits"
-        Me.cboVisibilityUnits.Size = New System.Drawing.Size(53, 21)
+        Me.cboVisibilityUnits.Size = New System.Drawing.Size(78, 28)
         Me.cboVisibilityUnits.TabIndex = 3
         Me.cboVisibilityUnits.Text = "metres"
         '
@@ -1525,9 +1692,10 @@ Partial Class form_daily2
         '
         Me.cboCloudheightUnits.FormattingEnabled = True
         Me.cboCloudheightUnits.Items.AddRange(New Object() {"feet", "metres"})
-        Me.cboCloudheightUnits.Location = New System.Drawing.Point(386, 20)
+        Me.cboCloudheightUnits.Location = New System.Drawing.Point(579, 31)
+        Me.cboCloudheightUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cboCloudheightUnits.Name = "cboCloudheightUnits"
-        Me.cboCloudheightUnits.Size = New System.Drawing.Size(53, 21)
+        Me.cboCloudheightUnits.Size = New System.Drawing.Size(78, 28)
         Me.cboCloudheightUnits.TabIndex = 2
         Me.cboCloudheightUnits.Text = "feet"
         '
@@ -1535,9 +1703,10 @@ Partial Class form_daily2
         '
         Me.cboPrecipUnits.FormattingEnabled = True
         Me.cboPrecipUnits.Items.AddRange(New Object() {"mm", "inches"})
-        Me.cboPrecipUnits.Location = New System.Drawing.Point(234, 19)
+        Me.cboPrecipUnits.Location = New System.Drawing.Point(351, 29)
+        Me.cboPrecipUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cboPrecipUnits.Name = "cboPrecipUnits"
-        Me.cboPrecipUnits.Size = New System.Drawing.Size(53, 21)
+        Me.cboPrecipUnits.Size = New System.Drawing.Size(78, 28)
         Me.cboPrecipUnits.TabIndex = 1
         Me.cboPrecipUnits.Text = "mm"
         '
@@ -1545,9 +1714,10 @@ Partial Class form_daily2
         '
         Me.cboTemperatureUnits.FormattingEnabled = True
         Me.cboTemperatureUnits.Items.AddRange(New Object() {"Deg C", "Deg F"})
-        Me.cboTemperatureUnits.Location = New System.Drawing.Point(94, 20)
+        Me.cboTemperatureUnits.Location = New System.Drawing.Point(141, 31)
+        Me.cboTemperatureUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cboTemperatureUnits.Name = "cboTemperatureUnits"
-        Me.cboTemperatureUnits.Size = New System.Drawing.Size(53, 21)
+        Me.cboTemperatureUnits.Size = New System.Drawing.Size(78, 28)
         Me.cboTemperatureUnits.TabIndex = 0
         Me.cboTemperatureUnits.Text = "Deg C"
         '
@@ -1556,9 +1726,11 @@ Partial Class form_daily2
         Me.grpDefaultValues.Controls.Add(Me.Label30)
         Me.grpDefaultValues.Controls.Add(Me.txtSameValue)
         Me.grpDefaultValues.Controls.Add(Me.btnAssignSameValue)
-        Me.grpDefaultValues.Location = New System.Drawing.Point(392, 65)
+        Me.grpDefaultValues.Location = New System.Drawing.Point(588, 100)
+        Me.grpDefaultValues.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.grpDefaultValues.Name = "grpDefaultValues"
-        Me.grpDefaultValues.Size = New System.Drawing.Size(311, 40)
+        Me.grpDefaultValues.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.grpDefaultValues.Size = New System.Drawing.Size(466, 62)
         Me.grpDefaultValues.TabIndex = 655
         Me.grpDefaultValues.TabStop = False
         '
@@ -1566,25 +1738,28 @@ Partial Class form_daily2
         '
         Me.Label30.AutoSize = True
         Me.Label30.ForeColor = System.Drawing.Color.Blue
-        Me.Label30.Location = New System.Drawing.Point(197, 21)
+        Me.Label30.Location = New System.Drawing.Point(296, 32)
+        Me.Label30.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(40, 13)
+        Me.Label30.Size = New System.Drawing.Size(59, 20)
         Me.Label30.TabIndex = 2
         Me.Label30.Text = "Value="
         '
         'txtSameValue
         '
-        Me.txtSameValue.Location = New System.Drawing.Point(243, 18)
+        Me.txtSameValue.Location = New System.Drawing.Point(364, 28)
+        Me.txtSameValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtSameValue.Name = "txtSameValue"
-        Me.txtSameValue.Size = New System.Drawing.Size(47, 20)
+        Me.txtSameValue.Size = New System.Drawing.Size(68, 26)
         Me.txtSameValue.TabIndex = 1
         '
         'btnAssignSameValue
         '
         Me.btnAssignSameValue.ForeColor = System.Drawing.Color.Blue
-        Me.btnAssignSameValue.Location = New System.Drawing.Point(6, 16)
+        Me.btnAssignSameValue.Location = New System.Drawing.Point(9, 25)
+        Me.btnAssignSameValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAssignSameValue.Name = "btnAssignSameValue"
-        Me.btnAssignSameValue.Size = New System.Drawing.Size(169, 23)
+        Me.btnAssignSameValue.Size = New System.Drawing.Size(254, 35)
         Me.btnAssignSameValue.TabIndex = 0
         Me.btnAssignSameValue.Text = "Assign same value to all obs"
         Me.btnAssignSameValue.UseVisualStyleBackColor = True
@@ -1592,18 +1767,20 @@ Partial Class form_daily2
         'Label31
         '
         Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(194, 192)
+        Me.Label31.Location = New System.Drawing.Point(291, 295)
+        Me.Label31.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(37, 13)
+        Me.Label31.Size = New System.Drawing.Size(54, 20)
         Me.Label31.TabIndex = 656
         Me.Label31.Text = "Period"
         '
         'Label36
         '
         Me.Label36.AutoSize = True
-        Me.Label36.Location = New System.Drawing.Point(592, 192)
+        Me.Label36.Location = New System.Drawing.Point(888, 295)
+        Me.Label36.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(37, 13)
+        Me.Label36.Size = New System.Drawing.Size(54, 20)
         Me.Label36.TabIndex = 657
         Me.Label36.Text = "Period"
         '
@@ -1613,49 +1790,51 @@ Partial Class form_daily2
         Me.chkEnableSequencer.Checked = True
         Me.chkEnableSequencer.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkEnableSequencer.ForeColor = System.Drawing.Color.Red
-        Me.chkEnableSequencer.Location = New System.Drawing.Point(562, 3)
+        Me.chkEnableSequencer.Location = New System.Drawing.Point(843, 5)
+        Me.chkEnableSequencer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.chkEnableSequencer.Name = "chkEnableSequencer"
-        Me.chkEnableSequencer.Size = New System.Drawing.Size(155, 17)
+        Me.chkEnableSequencer.Size = New System.Drawing.Size(230, 24)
         Me.chkEnableSequencer.TabIndex = 659
         Me.chkEnableSequencer.Text = "Enable Element Sequencer"
         Me.chkEnableSequencer.UseVisualStyleBackColor = True
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(448, 534)
+        Me.btnView.Location = New System.Drawing.Point(672, 822)
+        Me.btnView.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.Size = New System.Drawing.Size(112, 35)
         Me.btnView.TabIndex = 660
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
-
         'Label54
         '
         Me.Label54.AutoSize = True
-        Me.Label54.Location = New System.Drawing.Point(387, 192)
+        Me.Label54.Location = New System.Drawing.Point(580, 295)
+        Me.Label54.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(37, 13)
+        Me.Label54.Size = New System.Drawing.Size(54, 20)
         Me.Label54.TabIndex = 661
         Me.Label54.Text = "Period"
-
         '
         'chkRepeatEntry
         '
         Me.chkRepeatEntry.AutoSize = True
         Me.chkRepeatEntry.Enabled = False
-        Me.chkRepeatEntry.Location = New System.Drawing.Point(16, 578)
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(24, 889)
+        Me.chkRepeatEntry.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
-        Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(203, 24)
         Me.chkRepeatEntry.TabIndex = 662
         Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
         Me.chkRepeatEntry.UseVisualStyleBackColor = True
         '
         'form_daily2
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(724, 613)
+        Me.ClientSize = New System.Drawing.Size(1086, 943)
         Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.Label54)
         Me.Controls.Add(Me.btnView)
@@ -1825,6 +2004,7 @@ Partial Class form_daily2
         Me.Controls.Add(YyyyLabel)
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "form_daily2"
         Me.Text = "Daily data for the whole month"
         Me.groupUnits.ResumeLayout(False)

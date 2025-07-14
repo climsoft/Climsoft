@@ -1,10 +1,10 @@
 ﻿Public Class frmObsView
 
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
-    Dim qry As New MySql.Data.MySqlClient.MySqlCommand
+    Dim qry As New MySqlConnector.MySqlCommand
     Dim maxRows, maxColumns, qcStatus, acquisitionStatus As Integer
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim MyConnectionString, Selectflds, rw, stn, elm, dt, qc, aq As String
     Dim ItmExist As Boolean
     Dim stnlist, elmlist, levlist, dttPeriod, sdate, edate, sql, tblName, flag, advcSelect, frm As String
@@ -34,13 +34,13 @@
             'sql = "SELECT recordedFrom, stationName from observationfinal INNER JOIN station ON recordedFrom = stationId group by recordedFrom  ORDER BY stationName;"
 
             'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(Sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "station")
             'conn.Close()
 
-            'Catch ex As MySql.Data.MySqlClient.MySqlException
+            'Catch ex As MySqlConnector.MySqlException
             '    MessageBox.Show(ex.Message)
             'End Try
 
@@ -55,7 +55,7 @@
             Sql = "SELECT * FROM obselement where selected = '1' ORDER BY description"
 
             'sql = "select describedBy, description from observationfinal INNER JOIN obselement on describedBy = elementId group by describedBy  order by description;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(Sql, conn)
             da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "obselement")
 
@@ -70,7 +70,7 @@
 
             ClsTranslations.TranslateForm(Me)
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MessageBox.Show(ex.Message)
         End Try
     End Sub
@@ -78,7 +78,7 @@
         sql = "select table_name from data_forms where selected =1;"
 
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "forms")
@@ -99,7 +99,7 @@
         sql = "select characterSymbol,description as Typ from flags order by numSymbol;"
 
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "flags")
@@ -120,7 +120,7 @@
 
         sql = "SELECT stationId, stationName FROM station WHERE stationName='" & cmbstation.Text & "';"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "station")
 
@@ -161,7 +161,7 @@
 
             sql = "SELECT elementId, abbreviation, description FROM obselement WHERE description='" & cmbElement.Text & "';"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "obselement")
 
@@ -225,7 +225,7 @@
             sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected = '1' and elementId = '" & id & "';"
 
             'sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected ='1' and description=""" & prod & """"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "obselement")
 
@@ -313,7 +313,7 @@
 
                 'MsgBox(sql)
                 'cmbElement.Text = sql
-                qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                qry = New MySqlConnector.MySqlCommand(sql, conn)
                 qry.CommandTimeout = 0
                 'Execute query
                 qry.ExecuteNonQuery()
@@ -344,7 +344,7 @@
 
                 'MsgBox(sql)
 
-                qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                qry = New MySqlConnector.MySqlCommand(sql, conn)
                 qry.CommandTimeout = 0
                 'Execute query
                 qry.ExecuteNonQuery()
@@ -617,7 +617,7 @@
             lstvStations.Columns.Add("Station Name", 400, HorizontalAlignment.Left)
 
             sql = "SELECT recordedFrom, stationName FROM " & tblName & " INNER JOIN station ON stationId = recordedFrom GROUP BY recordedFrom;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "stations")
@@ -666,7 +666,7 @@
 
 
             sql = "SELECT describedBy, elementName,description  FROM " & tblName & " INNER JOIN obselement ON elementId = describedBy GROUP BY describedBy;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
 
             da.SelectCommand.CommandTimeout = 0
@@ -705,7 +705,7 @@
         Try
             sql = "SELECT stationId, stationName FROM station WHERE stationId= '" & id & "';"
             'MsgBox(sql)
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "station")
 
@@ -898,7 +898,7 @@
 
             'sql = "Select * From " & tblName & " Where " & stnlist & " And " & elmlist & " And " & dttPeriod & advcSelect & ";"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "records")
@@ -926,10 +926,10 @@
         End Try
     End Function
     Function BackupRecords(tbl As String, sql As String) As Boolean
-        Dim con0 As New MySql.Data.MySqlClient.MySqlConnection
-        Dim a As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim con0 As New MySqlConnector.MySqlConnection
+        Dim a As MySqlConnector.MySqlDataAdapter
         Dim s As New DataSet
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
         Dim outDataDir, outDataFile, connstr, dat, xt As String
         Dim objcommon As New dataEntryGlobalRoutines
 
@@ -948,14 +948,14 @@
             End If
             FileOpen(17, outDataFile, OpenMode.Output)
 
-            connstr = frmLogin.txtusrpwd.Text
+            connstr = frmLogin.txtusrpwd.Text & ' ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             con0.ConnectionString = connstr
             con0.Open()
 
             'sql = "SELECT * From " & tbl & " WHERE " & stnlist & " And " & elmlist & " And " & dttPeriod & advcSelect & ";"
             'MsgBox(sql)
 
-            a = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, con0)
+            a = New MySqlConnector.MySqlDataAdapter(sql, con0)
             a.SelectCommand.CommandTimeout = 0
             s.Clear()
             a.Fill(s, "backup")
@@ -999,7 +999,7 @@
         End Try
 
         ' Connect to remote server and backup the selected data
-        Dim conn0 As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conn0 As New MySqlConnector.MySqlConnection
         Dim builder As New Common.DbConnectionStringBuilder()
 
         Try
@@ -1011,7 +1011,7 @@
             builder("uid") = frmLogin.txtUsername.Text
             builder("pwd") = frmLogin.txtPassword.Text
 
-            connstr = builder.ConnectionString & ";Convert Zero Datetime=True"
+            connstr = builder.ConnectionString ' & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true;SslMode=VerifyCA"
             'MsgBox(connstr)
             conn0.ConnectionString = connstr
             conn0.Open()
@@ -1034,7 +1034,7 @@
                    /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
             End If
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn0)
+            qry = New MySqlConnector.MySqlCommand(sql, conn0)
             qry.CommandTimeout = 0
 
             'Execute query
@@ -1149,7 +1149,7 @@
 
         Try
             sql = "SELECT country FROM station WHERE country IS NOT NULL AND LENGTH(country) > 0 GROUP BY country order BY country ;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "stations")
@@ -1173,7 +1173,7 @@
 
             sql = "SELECT " & itm & " FROM station WHERE country ='" & lstCountry.SelectedItem & "' AND " & itm & " IS NOT NULL AND LENGTH( " & itm & ") > 0 GROUP BY  " & itm & " ORDER BY  " & itm & ";"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "stations")
@@ -1207,7 +1207,7 @@
         Dim Str(2) As String
         Dim itm = New ListViewItem
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "metadata")

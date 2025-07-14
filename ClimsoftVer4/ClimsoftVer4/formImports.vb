@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class formImports
-    Dim dbcon As New MySql.Data.MySqlClient.MySqlConnection
+    Dim dbcon As New MySqlConnector.MySqlConnection
     Dim dbConectionString As String
-    Dim d As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim d As MySqlConnector.MySqlDataAdapter
     Dim s As New DataSet
     Dim sql1 As String
     Dim ImportFile As String
@@ -29,11 +29,11 @@ Public Class formImports
     Private Sub cmdStart_Click(sender As Object, e As EventArgs) Handles cmdStart.Click
         On Error GoTo Err
         dbConectionString = frmLogin.txtusrpwd.Text
-        dbcon.ConnectionString = dbConectionString
+        dbcon.ConnectionString = dbConectionString ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
         dbcon.Open()
 
         sql1 = "SELECT * FROM station"
-        d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, dbcon)
+        d = New MySqlConnector.MySqlDataAdapter(sql1, dbcon)
         d.Fill(s, "station")
 
         dbcon.Close()
@@ -49,7 +49,7 @@ Public Class formImports
             'Dim currentField As String
             'Dim row As String()
 
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(d)
             Dim dsNewRow As DataRow
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
@@ -133,7 +133,7 @@ Err:
         'dbcon.Open()
 
         'sql1 = "SELECT * FROM station"
-        'd = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, dbcon)
+        'd = New MySqlConnector.MySqlDataAdapter(sql1, dbcon)
         'd.Fill(s, "station")
 
 
@@ -202,7 +202,7 @@ Err:
             dbcon.Open()
 
             sql1 = "SELECT * FROM station"
-            d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, dbcon)
+            d = New MySqlConnector.MySqlDataAdapter(sql1, dbcon)
             d.Fill(s, "station")
 
             dbcon.Close()
@@ -215,7 +215,7 @@ Err:
                 Dim num As Integer = 1
 
 
-                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
+                Dim cb As New MySqlConnector.MySqlCommandBuilder(d)
                 Dim dsNewRow As DataRow
                 'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
                 Dim recCommit As New dataEntryGlobalRoutines
@@ -276,7 +276,7 @@ Err:
             Dim rows As String()
             Dim mxr As Integer = DataGridView1.Rows.Count
 
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(d)
             Dim dsNewRow As DataRow
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
@@ -403,33 +403,37 @@ Err:
                 Dim rows As String()
                 Dim mxr As Integer = DataGridView1.Rows.Count
 
-                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
+                Dim cb As New MySqlConnector.MySqlCommandBuilder(d)
                 Dim dsNewRow As DataRow
 
                 'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
                 Dim recCommit As New dataEntryGlobalRoutines
 
                 Me.Cursor = Windows.Forms.Cursors.WaitCursor
-                Dim stnsFile, fldlist, vals, sql As String
+                'Dim stnsFile As String
+                Dim fld, fldlist, vals, sql As String
 
                 Try
-                    stnsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\stn_metadata.csv"
+                    'stnsFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\stn_metadata.csv"
 
-                    FileOpen(222, stnsFile, OpenMode.Output)
+                    'FileOpen(222, stnsFile, OpenMode.Output)
 
                     fails = 0
                     listErrors.Items.Clear()
                     fldlist = DataGridView1.Rows(0).Cells(2).Value
+                    fld = "`" & DataGridView1.Rows(0).Cells(2).Value & "`"
                     For i = 1 To DataGridView1.Rows.Count - 1
                         If Len(DataGridView1.Rows(i).Cells(2).Value) <> 0 Then
                             fldlist = fldlist & "," & DataGridView1.Rows(i).Cells(2).Value
+                            fld = fld & ",`" & DataGridView1.Rows(i).Cells(2).Value & "`"
                         End If
                     Next
-
+                    'PrintLine(222, "REPLACE INTO `station` (" & fld & ") VALUES")
+                    sql = "REPLACE INTO `station` (" & fld & ") VALUES"
                     If Strings.InStr(fldlist, "stationId") = 0 Then
                         Me.Cursor = Windows.Forms.Cursors.Default
                         MsgBox("StationId Required")
-                        FileClose(222)
+                        'FileClose(222)
                         Exit Sub
                     End If
 
@@ -456,56 +460,72 @@ Err:
                                     End If
 
                                     If nums = 1 Then
-                                        vals = dsNewRow(0)
+                                        vals = "'" & dsNewRow(0) & "'"
                                         If Len(vals) = 0 Then vals = "\N"
                                     Else
                                         If Len(currentField) = 0 Then
-                                            vals = vals & "," & "\N"
+                                            vals = vals & ",\N" & ""
                                         Else
-                                            vals = vals & "," & currentField
+                                            vals = vals & ",'" & currentField & "'"
                                         End If
                                     End If
                                 End If
                                 nums = nums + 1
                             Next
-                            Print(222, vals & Chr(10))
+                            'Print(222, vals)
+                            If MyReader.EndOfData = True Then
+                                'PrintLine(222, "(" & vals & ");")
+                                sql = sql & "(" & vals & ");"
+                            Else
+                                sql = sql & "(" & vals & "),"
+                                'PrintLine(222, "(" & vals & "),")
+                            End If
+
                         End If
                     Loop
+                    'MsgBox(sql)
                     Me.Cursor = Windows.Forms.Cursors.Default
-                    FileClose(222)
+                    'FileClose(222)
+
+                    'If Not Load_Files(stnsFile, "station", 0, ",") Then
+                    '    FileClose(222)
+                    '    MsgBox("Can import file: " & stnsFile)
+                    '    Exit Sub
+                    'End If
 
                     ' Update the station metadata with data from a text file
-                    Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+                    Dim objCmd As MySqlConnector.MySqlCommand
                     dbConectionString = frmLogin.txtusrpwd.Text
-                    dbcon.ConnectionString = dbConectionString
+                    dbcon.ConnectionString = dbConectionString '& ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
                     dbcon.Open()
 
-                    ' Convert the the path delimiter for the metadata file to SQL structure
-                    stnsFile = Strings.Replace(stnsFile, "\", "/")
+                    ' ' Convert the the path delimiter for the metadata file to SQL structure
+                    ' stnsFile = Strings.Replace(stnsFile, "\", "/")
 
-                    sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-                   /*!40101 SET NAMES utf8mb4 */;
-                   /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-                   /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-                   /*!40000 ALTER TABLE `station` DISABLE KEYS */;
-                   LOAD DATA LOCAL INFILE '" & stnsFile & "' REPLACE INTO TABLE station FIELDS TERMINATED BY ',' (" & fldlist & ");
-                   /*!40000 ALTER TABLE `station` ENABLE KEYS */;
-                   /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-                   /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-                   /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
-                    'MsgBox(sql)
+                    ' sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+                    '/*!40101 SET NAMES utf8mb4 */;
+                    '/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+                    '/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+                    '/*!40000 ALTER TABLE `station` DISABLE KEYS */;
+                    'LOAD DATA LOCAL INFILE '" & stnsFile & "' REPLACE INTO TABLE station FIELDS TERMINATED BY ',' (" & fldlist & ");
+                    '/*!40000 ALTER TABLE `station` ENABLE KEYS */;
+                    '/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+                    '/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+                    '/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
+                    ' 'MsgBox(sql)
+
                     'Execute SQL command
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbcon)
+                    objCmd = New MySqlConnector.MySqlCommand(sql, dbcon)
                     objCmd.ExecuteNonQuery()
-
                     dbcon.Close()
-                    FileClose(222)
+                    'FileClose(222)
+
                     Me.Cursor = Windows.Forms.Cursors.Default
                     lblSummary.Text = "Records Successfully Updated"
 
                 Catch ex As Exception
                     dbcon.Close()
-                    FileClose(222)
+                    'FileClose(222)
                     Me.Cursor = Windows.Forms.Cursors.Default
 
                     If lin > 0 Then
