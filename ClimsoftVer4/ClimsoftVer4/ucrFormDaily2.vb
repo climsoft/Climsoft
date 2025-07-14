@@ -1,4 +1,4 @@
-﻿
+﻿Imports MySqlConnector
 Public Class ucrFormDaily2
 
     'These store field names for value, flag and period
@@ -33,8 +33,6 @@ Public Class ucrFormDaily2
             ucrVisibilityUnits.SetDefaultValue("metres")
             ucrVisibilityUnits.bValidate = False
 
-
-
             ucrHour.SetDefaultValue(GetDefaultHourValue())
 
 
@@ -65,7 +63,6 @@ Public Class ucrFormDaily2
 
             AddField("signature")
             AddField("entryDatetime")
-
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
             AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
             AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
@@ -76,7 +73,6 @@ Public Class ucrFormDaily2
             ucrDaily2Navigation.SetTableEntryAndKeyControls(Me)
 
             bFirstLoad = False
-
 
             'add extra filters for none admin users
             If Not (userGroup = "ClimsoftAdmin" OrElse userGroup = "ClimsoftOperatorSupervisor") Then
@@ -94,6 +90,7 @@ Public Class ucrFormDaily2
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Dim usrStn As New dataEntryGlobalRoutines
+
         'Dim txtElementCode, stn As String
 
         'txtElementCode = ucrElementSelector.cboValues.SelectedValue
@@ -407,8 +404,8 @@ Public Class ucrFormDaily2
             strTableName = GetTableName()
 
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.GetOpenedConnection)
-                Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
+            Using cmdSelect As New MySqlConnector.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.GetOpenedConnection)
+                Using da As New MySqlConnector.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
             End Using
@@ -446,7 +443,7 @@ Public Class ucrFormDaily2
                         bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                        Using cmd As New MySqlConnector.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -454,7 +451,7 @@ Public Class ucrFormDaily2
                             cmd.Parameters.AddWithValue("@acquisitiontype", 1)
                             cmd.Parameters.AddWithValue("@dataForm", strTableName)
 
-                            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                            Using reader As MySqlConnector.MySqlDataReader = cmd.ExecuteReader()
                                 bUpdateRecord = reader.HasRows
                             End Using
                         End Using
@@ -497,7 +494,7 @@ Public Class ucrFormDaily2
                         End If
 
                         Try
-                            Using cmdSave As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                            Using cmdSave As New MySqlConnector.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                                 'cmd.Parameters.Add("@stationId", SqlDbType.VarChar, 255).Value = strStationId
                                 cmdSave.Parameters.AddWithValue("@stationId", strStationId)
                                 cmdSave.Parameters.AddWithValue("@elemCode", lElementId)
@@ -554,8 +551,8 @@ Public Class ucrFormDaily2
 
     Function Seq_Element(ByRef eCode As String) As Boolean
 
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim da_seq As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim conn As New MySqlConnector.MySqlConnection
+        Dim da_seq As MySqlConnector.MySqlDataAdapter
         Dim strConnString, sql_seq, elm As String
         Dim ds_seq As New DataSet
         Dim kount As Integer
@@ -568,7 +565,7 @@ Public Class ucrFormDaily2
 
             sql_seq = "select elementId from seq_daily_element order by seq;"
 
-            da_seq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql_seq, conn)
+            da_seq = New MySqlConnector.MySqlDataAdapter(sql_seq, conn)
             ds_seq.Clear()
             da_seq.SelectCommand.CommandTimeout = 0
             da_seq.Fill(ds_seq, "Sequence")
@@ -630,15 +627,15 @@ Public Class ucrFormDaily2
             Return False
         End Try
     End Function
-    Function skipGroundMin(conn As MySql.Data.MySqlClient.MySqlConnection) As Boolean
-        Dim daq As MySql.Data.MySqlClient.MySqlDataAdapter
+    Function skipGroundMin(conn As MySqlConnector.MySqlConnection) As Boolean
+        Dim daq As MySqlConnector.MySqlDataAdapter
         Dim dsq As New DataSet
         Dim sql As String
         Dim st_month, ed_month, rec_month As Integer
 
         sql = "select keyName,keyValue from regkeys where keyName = 'key03' or keyName = 'key04';"
         Try
-            daq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            daq = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dsq.Clear()
             daq.SelectCommand.CommandTimeout = 0
             daq.Fill(dsq, "months")
@@ -679,19 +676,122 @@ Public Class ucrFormDaily2
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
 
-    End Sub
 
-    Private Sub ucrMonth_Load(sender As Object, e As EventArgs) Handles ucrMonth.Load
+    'Private Sub btnssave_Click(sender As Object, e As EventArgs) Handles btnssave.Click
 
-    End Sub
+    '    save_data()
 
-    Private Sub lblMonth_Click(sender As Object, e As EventArgs) Handles lblMonth.Click
+    'End Sub
 
-    End Sub
+    Sub save_data()
 
-    Private Sub Label16_Click(sender As Object, e As EventArgs) Handles Label16.Click
+        Dim strSQL As String, stnId As String, elemId As String, obsYear As String, obsMonth As String, obsHour As String
+        Dim strSignature, strTimeStamp As String
+        Dim temperatureUnits As String, precipUnits As String, visUnits As String, cloudHeightUnits As String
+        Dim obsVal(31) As String, obsFlag(31), obsPeriod(31) As String
+        Dim entryYear As String, entryMonth As String, entryDay As String, entryHour As String, entryMinute As String, entrySecond As String
 
+        Dim conn As New MySqlConnector.MySqlConnection
+        Dim cmd As MySqlConnector.MySqlCommand
+        Dim myConnectionString As String
+
+        myConnectionString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = myConnectionString
+
+        'Generate Sql string for inserting data form_daily2 table
+
+        stnId = ucrStationSelector.GetValue
+        elemId = ucrElementSelector.GetValue
+        obsYear = ucrYearSelector.GetValue
+        obsMonth = ucrMonth.GetValue
+        obsHour = ucrMonth.GetValue
+
+        ' Initialize values
+
+        For i = 0 To 30
+            obsVal(i) = ""
+            obsFlag(i) = "M"
+            obsPeriod(i) = ""
+        Next
+        temperatureUnits = ""
+        precipUnits = ""
+        cloudHeightUnits = ""
+        visUnits = ""
+        strSignature = frmLogin.txtUsername.Text
+
+        entryYear = Year(Now())
+        entryMonth = Month(Now())
+        If Val(entryMonth) < 10 Then entryMonth = "0" & entryMonth
+        entryDay = DateAndTime.Day(Now())
+        If Val(entryDay) < 10 Then entryDay = "0" & entryDay
+        entryHour = Hour(Now())
+        If Val(entryHour) < 10 Then entryHour = "0" & entryHour
+        entryMinute = Minute(Now())
+        If Val(entryMinute) < 10 Then entryMinute = "0" & entryMinute
+        entrySecond = Second(Now())
+        If Val(entrySecond) < 10 Then entrySecond = "0" & entrySecond
+
+        strTimeStamp = entryYear & "-" & entryMonth & "-" & entryDay & " " & entryHour & ":" & entryMinute & ":" & entrySecond
+
+        ' Set values
+        Dim obj As Object
+        Dim x As Integer
+
+
+        For Each obj In Me.Controls
+            If Strings.Left(obj.name, 18) = "ucrValueFlagPeriod" Then
+                x = Int(Strings.Mid(obj.name, 19, Len(obj.name) - 18))
+                obsVal(x - 1) = obj.GetElementValue
+                obsFlag(x - 1) = obj.GetElementFlagValue
+                obsPeriod(x - 1) = obj.GetElementPeriodValue
+            End If
+        Next
+
+        strSQL = "INSERT INTO form_daily2 (stationId,elementId,yyyy,mm,hh,day01,day02,day03,day04,day05,day06,day07,day08," &
+           "day09,day10,day11,day12,day13,day14,day15,day16,day17,day18,day19,day20,day21,day22,day23," &
+           "day24,day25,day26,day27,day28,day29,day30,day31,flag01,flag02,flag03,flag04,flag05,flag06,flag07,flag08," &
+           "flag09,flag10,flag11,flag12,flag13,flag14,flag15,flag16,flag17,flag18,flag19,flag20,flag21,flag22,flag23," &
+           "flag24,flag25,flag26,flag27,flag28,flag29,flag30,flag31,period01,period02,period03,period04,period05,period06," &
+           "period07,period08,period09,period10,period11,period12,period13,period14,period15,period16,period17,period18," &
+           "period19,period20,period21,period22,period23,period24,period25,period26,period27,period28,period29,period30," &
+           "period31,temperatureUnits,precipUnits,cloudHeightUnits,visUnits,signature,entryDatetime) " &
+           "VALUES ('" & stnId & "','" & elemId & "','" & obsYear & "','" & obsMonth & "','" & obsHour & "','" & obsVal(0) &
+           "','" & obsVal(1) & "','" & obsVal(2) & "','" & obsVal(3) & "','" & obsVal(4) & "','" & obsVal(5) & "','" & obsVal(6) &
+           "','" & obsVal(7) & "','" & obsVal(8) & "','" & obsVal(9) & "','" & obsVal(10) & "','" & obsVal(11) &
+           "','" & obsVal(12) & "','" & obsVal(13) & "','" & obsVal(14) & "','" & obsVal(15) & "','" & obsVal(16) &
+           "','" & obsVal(17) & "','" & obsVal(18) & "','" & obsVal(19) & "','" & obsVal(20) & "','" & obsVal(21) &
+           "','" & obsVal(22) & "','" & obsVal(23) & "','" & obsVal(24) & "','" & obsVal(25) & "','" & obsVal(26) &
+           "','" & obsVal(27) & "','" & obsVal(28) & "','" & obsVal(29) & "','" & obsVal(30) &
+           "','" & obsFlag(0) & "','" & obsFlag(1) & "','" & obsFlag(2) &
+           "','" & obsFlag(3) & "','" & obsFlag(4) & "','" & obsFlag(5) & "','" & obsFlag(6) & "','" & obsFlag(7) &
+           "','" & obsFlag(8) & "','" & obsFlag(9) & "','" & obsFlag(10) & "','" & obsFlag(11) & "','" & obsFlag(12) &
+           "','" & obsFlag(13) & "','" & obsFlag(14) & "','" & obsFlag(15) & "','" & obsFlag(16) & "','" & obsFlag(17) &
+           "','" & obsFlag(18) & "','" & obsFlag(19) & "','" & obsFlag(20) & "','" & obsFlag(21) & "','" & obsFlag(22) &
+           "','" & obsFlag(23) & "','" & obsFlag(24) & "','" & obsFlag(25) & "','" & obsFlag(26) & "','" & obsFlag(27) &
+           "','" & obsFlag(28) & "','" & obsFlag(29) & "','" & obsFlag(30) &
+           "','" & obsPeriod(0) & "','" & obsPeriod(1) & "','" & obsPeriod(2) &
+           "','" & obsPeriod(3) & "','" & obsPeriod(4) & "','" & obsPeriod(5) & "','" & obsPeriod(6) & "','" & obsPeriod(7) &
+           "','" & obsPeriod(8) & "','" & obsPeriod(9) & "','" & obsPeriod(10) & "','" & obsPeriod(11) & "','" & obsPeriod(12) &
+           "','" & obsPeriod(13) & "','" & obsPeriod(14) & "','" & obsPeriod(15) & "','" & obsPeriod(16) & "','" & obsPeriod(17) &
+           "','" & obsPeriod(18) & "','" & obsPeriod(19) & "','" & obsPeriod(20) & "','" & obsPeriod(21) & "','" & obsPeriod(22) &
+           "','" & obsPeriod(23) & "','" & obsPeriod(24) & "','" & obsPeriod(25) & "','" & obsPeriod(26) & "','" & obsPeriod(27) &
+           "','" & obsPeriod(28) & "','" & obsPeriod(29) & "','" & obsPeriod(30) & "','" & temperatureUnits & "','" & precipUnits &
+           "','" & cloudHeightUnits & "','" & visUnits & "','" & strSignature & "','" & strTimeStamp & "')"
+
+
+        conn.Open()
+        cmd = New MySqlConnector.MySqlCommand(strSQL, conn)
+
+        Try
+            'Execute query
+            cmd.ExecuteNonQuery()
+            MsgBox("Record successfully saved")
+            conn.Close()
+        Catch ex As Exception
+            'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+            MsgBox(ex.Message)
+            conn.Close()
+        End Try
     End Sub
 End Class

@@ -1412,6 +1412,7 @@ Partial Class ucrFormDaily2
         Me.Controls.Add(Me.ucrValueFlagPeriod3)
         Me.Controls.Add(Me.ucrValueFlagPeriod2)
         Me.Controls.Add(Me.ucrValueFlagPeriod1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrFormDaily2"
         Me.Size = New System.Drawing.Size(778, 595)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()

@@ -348,10 +348,13 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub UpdateScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateScriptToolStripMenuItem1.Click
+        'Load_local_Files()
+        'Exit Sub
         Me.Cursor = Cursors.WaitCursor
         Dim sqlFile, sqlText, sqlStatements(), errfl As String
-        Dim sqlconn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim sqlconn As New MySqlConnector.MySqlConnection
+        Dim qry As MySqlConnector.MySqlCommand
+        Dim fll As MySqlConnector.MySqlBulkLoader
 
         Try
             frmImportDaily.dlgOpenImportFile.Filter = "Script File|*.sql"
@@ -363,23 +366,28 @@ Public Class frmMainMenu
             sqlFile = frmImportDaily.dlgOpenImportFile.FileName
             sqlText = IO.File.ReadAllText(sqlFile)
             sqlStatements = Strings.Split(sqlText, ";")
+            'sqlconn.ConnectionString = frmLogin.txtusrpwd.Text & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
+            'sqlconn.ConnectionString = frmLogin.txtusrpwd.Text & ";AllowLoadLocalInfile=true"
             sqlconn.ConnectionString = frmLogin.txtusrpwd.Text
+            'MsgBox(sqlconn.ConnectionString)
             sqlconn.Open()
             Me.Cursor = Cursors.WaitCursor
         Catch ex As Exception
-            MsgBox("Operation Cancelled")
+            MsgBox(ex.Message & " - Operation Cancelled")
             sqlconn.Close()
             FileClose(111)
             Me.Cursor = Cursors.Default
             Exit Sub
         End Try
+        'MsgBox(sqlconn.ConnectionString)
+
 
         Try
             Me.Cursor = Cursors.WaitCursor
-            For i = 0 To sqlStatements.Count - 1
-                'If sqlStatements(i) = "" Then Continue For ' For blank Statement
 
-                qry = New MySql.Data.MySqlClient.MySqlCommand(sqlStatements(i) & ";", sqlconn)
+            For i = 0 To sqlStatements.Count - 1
+                'MsgBox(sqlStatements(i))
+                qry = New MySqlConnector.MySqlCommand(sqlStatements(i) & ";", sqlconn)
                 qry.CommandTimeout = 0
 
                 Try
@@ -387,9 +395,12 @@ Public Class frmMainMenu
                     qry.ExecuteNonQuery()
 
                 Catch x As Exception
+                    If x.HResult <> -2147467259 Then MsgBox(x.Message)
+
                     PrintLine(111, i & "," & sqlStatements(i) & "," & x.Message)
                 End Try
             Next
+            sqlconn.Close()
             MsgBox("Finished updating the database")
             sqlconn.Close()
             FileClose(111)
@@ -409,5 +420,35 @@ Public Class frmMainMenu
 
     Private Sub verTlStripMenuItem_Click(sender As Object, e As EventArgs) Handles verTlStripMenuItem.Click
         MsgBox("Climsft " & frmSplashScreen.lblVersion.Text,, "Version Details")
+    End Sub
+
+
+    Sub Load_local_Files()
+        Dim lconn As New MySqlConnector.MySqlConnection
+        ' Dim cmd As MySqlConnector.MySqlCommand
+        Dim fl As MySqlConnector.MySqlBulkLoader
+        ' Dim rws As Long
+        lconn.ConnectionString = frmLogin.txtusrpwd.Text & ";AllowLoadLocalInfile=true"
+
+        Try
+            lconn.Open()
+            fl = New MySqlConnector.MySqlBulkLoader(lconn)
+            fl.FileName = "C:/Climsoft Project/NMHS/Djibouti/AWS/vaisala_combined/dj_vaisala112.csv"
+            fl.TableName = "dj_vaisala112"
+            fl.EscapeCharacter = "UTFB"
+            fl.NumberOfLinesToSkip = 0
+            fl.FieldTerminator = ","
+
+            'fl.FieldQuotationCharacter = '"'
+            'fl.FieldQuotationOptional ='True',
+            fl.Local = True
+
+            fl.Load()
+            lconn.Close()
+        Catch ex As Exception
+            lconn.Close()
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
 End Class

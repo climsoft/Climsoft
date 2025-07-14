@@ -41,11 +41,12 @@ Partial Class frmDataEntry
         Me.lstViewForms.GridLines = True
         Me.lstViewForms.HideSelection = False
         Me.lstViewForms.HoverSelection = True
-        Me.lstViewForms.Location = New System.Drawing.Point(4, 27)
+        Me.lstViewForms.Location = New System.Drawing.Point(6, 42)
+        Me.lstViewForms.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.lstViewForms.Name = "lstViewForms"
         Me.lstViewForms.RightToLeftLayout = True
         Me.lstViewForms.Scrollable = False
-        Me.lstViewForms.Size = New System.Drawing.Size(659, 235)
+        Me.lstViewForms.Size = New System.Drawing.Size(986, 359)
         Me.lstViewForms.TabIndex = 0
         Me.lstViewForms.UseCompatibleStateImageBehavior = False
         Me.lstViewForms.View = System.Windows.Forms.View.Details
@@ -67,9 +68,10 @@ Partial Class frmDataEntry
         'btnCancel
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.Location = New System.Drawing.Point(521, 265)
+        Me.btnCancel.Location = New System.Drawing.Point(782, 408)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(69, 27)
+        Me.btnCancel.Size = New System.Drawing.Size(104, 42)
         Me.btnCancel.TabIndex = 6
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -77,9 +79,10 @@ Partial Class frmDataEntry
         'btnHelp
         '
         Me.btnHelp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnHelp.Location = New System.Drawing.Point(596, 265)
+        Me.btnHelp.Location = New System.Drawing.Point(894, 408)
+        Me.btnHelp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(69, 27)
+        Me.btnHelp.Size = New System.Drawing.Size(104, 42)
         Me.btnHelp.TabIndex = 5
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -87,9 +90,10 @@ Partial Class frmDataEntry
         'btnOk
         '
         Me.btnOk.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnOk.Location = New System.Drawing.Point(446, 265)
+        Me.btnOk.Location = New System.Drawing.Point(669, 408)
+        Me.btnOk.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnOk.Name = "btnOk"
-        Me.btnOk.Size = New System.Drawing.Size(69, 27)
+        Me.btnOk.Size = New System.Drawing.Size(104, 42)
         Me.btnOk.TabIndex = 4
         Me.btnOk.Text = "Open"
         Me.btnOk.UseVisualStyleBackColor = True
@@ -97,17 +101,18 @@ Partial Class frmDataEntry
         'lblSelection
         '
         Me.lblSelection.AutoSize = True
-        Me.lblSelection.Location = New System.Drawing.Point(4, 8)
+        Me.lblSelection.Location = New System.Drawing.Point(6, 12)
+        Me.lblSelection.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSelection.Name = "lblSelection"
-        Me.lblSelection.Size = New System.Drawing.Size(146, 13)
+        Me.lblSelection.Size = New System.Drawing.Size(218, 20)
         Me.lblSelection.TabIndex = 7
         Me.lblSelection.Text = "Select the entry form to open:"
         '
         'frmDataEntry
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(667, 295)
+        Me.ClientSize = New System.Drawing.Size(1000, 454)
         Me.Controls.Add(Me.lblSelection)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnHelp)
@@ -118,6 +123,7 @@ Partial Class frmDataEntry
         Me.HelpProvider1.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
         Me.HelpProvider1.SetHelpString(Me, "topic2")
         Me.KeyPreview = True
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "frmDataEntry"
         Me.HelpProvider1.SetShowHelp(Me, True)
         Me.Text = "Data Key Entry Forms"

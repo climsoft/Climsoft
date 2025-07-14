@@ -1,7 +1,7 @@
 ﻿Public Class frmClimatSettings
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-    Dim qry As MySql.Data.MySqlClient.MySqlCommand
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim conn As New MySqlConnector.MySqlConnection
+    Dim qry As MySqlConnector.MySqlCommand
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
     Dim dbConnectionString As String
@@ -16,7 +16,7 @@
 
             sql = "select * from climat_parameters order by Nos;"
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
             dsp.Clear()
@@ -82,12 +82,12 @@
             conn.Open()
 
             sql = "select * from climat_parameters order by Nos;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "parameters")
             conn.Close()
 
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
             With DataGridViewParameters
                 For i = 0 To .Rows.Count - 1
                     For j = 3 To .Columns.Count - 1
@@ -151,7 +151,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         Try
 
             conn.Open()
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
 
             'Execute query
@@ -189,12 +189,12 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             'conn.Open()
 
             sql = "select * from climat_parameters order by Nos;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "parameters")
             conn.Close()
 
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
             With DataGridViewParameters
                 For i = 0 To .Rows.Count - 1
                     For j = 2 To .Columns.Count - 1
@@ -226,7 +226,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         '    conn.ConnectionString = dbConnectionString
         '    conn.Open()
 
-        '    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        '    da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         '    ds.Clear()
         '    da.Fill(ds, "users")
 
@@ -234,7 +234,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         '        For i = 0 To .Rows.Count - 1
         '            If .Rows(i).Item("userRole") = "ClimsoftProducts" Or .Rows(i).Item("userRole") = "ClimsoftQC" Then
         '                sql = "GRANT SELECT ON climat_parameters TO '" & .Rows(i).Item("userName") & "';"
-        '                qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        '                qry = New MySqlConnector.MySqlCommand(sql, conn)
         '                'execute command
         '                qry.ExecuteNonQuery()
         '            End If
@@ -257,7 +257,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             'conn.ConnectionString = dbConnectionString
             conn.Open()
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "users")
 
@@ -266,7 +266,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 For i = 0 To .Rows.Count - 1
                     If .Rows(i).Item("userRole") = "ClimsoftProducts" Or .Rows(i).Item("userRole") = "ClimsoftQC" Then
                         sql = "GRANT SELECT ON climat_parameters TO '" & .Rows(i).Item("userName") & "';"
-                        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qry = New MySqlConnector.MySqlCommand(sql, conn)
                         'execute command
                         qry.ExecuteNonQuery()
                     End If
@@ -275,7 +275,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 For i = 0 To .Rows.Count - 1
                     If .Rows(i).Item("userRole") = "ClimsoftProducts" Or .Rows(i).Item("userRole") = "ClimsoftQC" Then
                         sql = "GRANT SELECT,CREATE,DROP,INSERT ON normals_averages TO '" & .Rows(i).Item("userName") & "';"
-                        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qry = New MySqlConnector.MySqlCommand(sql, conn)
                         'execute command
                         qry.ExecuteNonQuery()
                     End If
@@ -285,7 +285,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 For i = 0 To .Rows.Count - 1
                     If .Rows(i).Item("userRole") = "ClimsoftProducts" Or .Rows(i).Item("userRole") = "ClimsoftQC" Then
                         sql = "GRANT SELECT,CREATE,DROP,INSERT ON normals_totals TO '" & .Rows(i).Item("userName") & "';"
-                        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qry = New MySqlConnector.MySqlCommand(sql, conn)
                         'execute command
                         qry.ExecuteNonQuery()
                     End If
@@ -295,7 +295,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 For i = 0 To .Rows.Count - 1
                     If .Rows(i).Item("userRole") = "ClimsoftProducts" Or .Rows(i).Item("userRole") = "ClimsoftQC" Then
                         sql = "GRANT SELECT,CREATE,DROP,INSERT ON normalyears TO '" & .Rows(i).Item("userName") & "';"
-                        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qry = New MySqlConnector.MySqlCommand(sql, conn)
                         'execute command
                         qry.ExecuteNonQuery()
                     End If
@@ -305,7 +305,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 For i = 0 To .Rows.Count - 1
                     If .Rows(i).Item("userRole") = "ClimsoftProducts" Or .Rows(i).Item("userRole") = "ClimsoftQC" Then
                         sql = "GRANT SELECT,CREATE,DROP,INSERT ON PrecipQuintiles TO '" & .Rows(i).Item("userName") & "';"
-                        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qry = New MySqlConnector.MySqlCommand(sql, conn)
                         'execute command
                         qry.ExecuteNonQuery()
                     End If
@@ -315,7 +315,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 For i = 0 To .Rows.Count - 1
                     If .Rows(i).Item("userRole") = "ClimsoftProducts" Or .Rows(i).Item("userRole") = "ClimsoftQC" Then
                         sql = "GRANT SELECT ON aws_mss TO '" & .Rows(i).Item("userName") & "';"
-                        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qry = New MySqlConnector.MySqlCommand(sql, conn)
                         'execute command
                         qry.ExecuteNonQuery()
                     End If
@@ -339,7 +339,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             ' Populate with MSS details
             sql = "SELECT * FROM aws_mss where foldertype = 'ASC'"
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
@@ -359,7 +359,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             ' Populate with Header
             sql = "select Element_Abbreviation, Element_Code from climat_parameters where Element_Name = 'Message Header';"
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
@@ -384,7 +384,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             If TabParameters.SelectedTab.Name = "FTP" Then
                 sql = "SELECT * FROM aws_mss where foldertype = 'ASC'"
                 'conn.Open()
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 ' Set to unlimited timeout period
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
@@ -403,7 +403,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         conn.Open()
 
         Try
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             'Execute query
             qry.ExecuteNonQuery()
@@ -419,16 +419,16 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         Try
             sql = "update climat_parameters set Element_Abbreviation = '" & txtMsgHeader.Text & "', Element_Code = '" & txtGTSdiff.Text & "' where Element_Name = 'Message Header';"
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
             ' Update server details
             sql = "select * from aws_mss;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "mss")
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
             With ds.Tables("mss")
                 .Rows(0).Item("ftpId") = txtServer.Text
                 .Rows(0).Item("ftpMode") = cboFTP.Text
@@ -451,12 +451,12 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             Try
                 sql = "select * from climat_parameters order by Nos;"
                 conn.Open()
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 ds.Clear()
                 da.Fill(ds, "parameters")
                 conn.Close()
 
-                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
                 With DataGridViewParameters
                     For i = 0 To .Rows.Count - 1
                         For j = 2 To .Columns.Count - 1
@@ -474,16 +474,16 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             Try
                 sql = "update climat_parameters set Element_Abbreviation = '" & txtMsgHeader.Text & "', Element_Code = '" & txtGTSdiff.Text & "' where Element_Name = 'Message Header';"
                 conn.Open()
-                qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                qry = New MySqlConnector.MySqlCommand(sql, conn)
                 qry.CommandTimeout = 0
                 qry.ExecuteNonQuery()
 
                 ' Update server details
                 sql = "select * from aws_mss where foldertype = 'ASC';"
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 ds.Clear()
                 da.Fill(ds, "mss")
-                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
                 With ds.Tables("mss")
                     .Rows(0).Item("ftpId") = txtServer.Text
                     .Rows(0).Item("ftpMode") = cboFTP.Text
@@ -561,18 +561,18 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         Try
             sql = "update climat_parameters set Element_Abbreviation = '" & txtMsgHeader.Text & "', Element_Code = '" & txtGTSdiff.Text & "' where Element_Name = 'Message Header';"
             conn.Open()
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
             ' Update server details
             sql = "select * from aws_mss where foldertype = 'ASC';"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "mss")
             conn.Close()
 
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
 
             With ds.Tables("mss")
                 dsNewRow = .NewRow

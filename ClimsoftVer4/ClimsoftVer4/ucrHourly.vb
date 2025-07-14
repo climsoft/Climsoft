@@ -373,10 +373,10 @@
             strTableName = GetTableName()
 
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand(
+            Using cmdSelect As New MySqlConnector.MySqlCommand(
                 "Select * FROM " & strTableName & " ORDER BY entryDatetime",
                 clsDataConnection.GetOpenedConnection)
-                Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
+                Using da As New MySqlConnector.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
             End Using
@@ -421,14 +421,14 @@
 
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                        Using cmd As New MySqlConnector.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
                             cmd.Parameters.AddWithValue("@qcStatus", 0)
                             cmd.Parameters.AddWithValue("@acquisitiontype", 1)
                             cmd.Parameters.AddWithValue("@dataForm", strTableName)
-                            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                            Using reader As MySqlConnector.MySqlDataReader = cmd.ExecuteReader()
                                 bUpdateRecord = reader.HasRows
                             End Using
                         End Using
@@ -447,7 +447,7 @@
                         End If
 
                         Try
-                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                            Using cmd As New MySqlConnector.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                                 cmd.Parameters.AddWithValue("@stationId", strStationId)
                                 cmd.Parameters.AddWithValue("@elemCode", lElementId)
                                 cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)

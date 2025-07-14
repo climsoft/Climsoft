@@ -39,87 +39,7 @@ Public Class frmDatabaseConnections
         Dim database As String
         Dim port As String
         Dim server As String
-
-        For Each row As DataGridViewRow In dataGridViewConnections.Rows
-            builder = New Common.DbConnectionStringBuilder()
-            connection = row.Cells(0).Value
-            server = row.Cells(1).Value
-            database = row.Cells(2).Value
-            port = row.Cells(3).Value
-
-            ' Skip empty rows (and continue to process other rows)
-            If String.IsNullOrEmpty(connection) And String.IsNullOrEmpty(server) And
-                    String.IsNullOrEmpty(database) And String.IsNullOrEmpty(port) Then
-                Continue For
-            End If
-
-            ' Connection name: must not be empty (abort save)
-            If String.IsNullOrEmpty(connection) Then
-                MsgBox("Unable to save connections. Please ensure that each connection has a connection name")
-                Exit Sub
-            End If
-
-            ' Connection name: Match one or more letters, numbers or underscores (otherwise abort save)
-            If Not System.Text.RegularExpressions.Regex.IsMatch(connection, "^[a-zA-Z0-9_]+$") Then
-                MsgBox("Unable to save connection information due to connection """ & connection & """" &
-                       Environment.NewLine & Environment.NewLine &
-                       "The connection name must only contain letters, numbers and underscores")
-                Exit Sub
-            End If
-
-            ' Server address: Match one or more letters, numbers or hyphen or
-            '                 match numbers and period allowing IP addresses (otherwise abort save)
-            If String.IsNullOrEmpty(server) OrElse
-                Not System.Text.RegularExpressions.Regex.IsMatch(server, "^[a-zA-Z0-9-]+$") And
-                Not System.Text.RegularExpressions.Regex.IsMatch(server, "^[0-9.]+$") Then
-
-                MsgBox("Unable to save connection information due to connection """ & connection & """" &
-                       Environment.NewLine & Environment.NewLine &
-                       "The server address must only contain letters, numbers and hyphens (or numbers " &
-                       "and periods for IP addresses, e.g. 127.0.0.1)")
-                Exit Sub
-            End If
-
-            ' Database name: Match one or more letters, numbers or underscores (otherwise abort save)
-            If String.IsNullOrEmpty(database) OrElse
-                Not System.Text.RegularExpressions.Regex.IsMatch(database, "^[a-zA-Z0-9_]+$") Then
-
-                MsgBox("Unable to save connection information due to connection """ & connection & """" &
-                       Environment.NewLine & Environment.NewLine &
-                       "The database name must only contain letters, numbers and underscores")
-                Exit Sub
-            End If
-
-            ' Port number: Match one or more numbers (otherwise abort save)
-            If String.IsNullOrEmpty(port) OrElse
-                Not System.Text.RegularExpressions.Regex.IsMatch(port, "^[0-9]+$") Then
-
-                MsgBox("Unable to save connection information due to connection """ & connection & """" &
-                       Environment.NewLine & Environment.NewLine &
-                       "The port number must be a whole number (e.g. 3306 or 3308)")
-                Exit Sub
-            End If
-        Next
-
-        ' All rows have now been validated. 
-
-        ' If `filePath` already exists then Create() will clear the current contents
-        IO.Directory.CreateDirectory(frmLogin.directoryPath)
-        IO.File.Create(frmLogin.filePath).Dispose()
-        ' Grant full access on `filePath` for all users (allows any user to write to file)
-        ' This is currently necessary because some Climsoft installers are not Windows Administrators
-        Dim dInfo As IO.DirectoryInfo = New IO.DirectoryInfo(frmLogin.filePath)
-        Dim dSecurity As DirectorySecurity = dInfo.GetAccessControl()
-        dSecurity.AddAccessRule(New FileSystemAccessRule(
-            New SecurityIdentifier(WellKnownSidType.WorldSid, Nothing),
-            FileSystemRights.FullControl,
-            InheritanceFlags.ObjectInherit Or InheritanceFlags.ContainerInherit,
-            PropagationFlags.NoPropagateInherit, AccessControlType.Allow
-        ))
-        dInfo.SetAccessControl(dSecurity)
-
-        ' Loop over validated rows and add details from each row to `filePath`
-        Using writer As IO.StreamWriter = New IO.StreamWriter(frmLogin.filePath)
+        Try
             For Each row As DataGridViewRow In dataGridViewConnections.Rows
                 builder = New Common.DbConnectionStringBuilder()
                 connection = row.Cells(0).Value
@@ -127,32 +47,118 @@ Public Class frmDatabaseConnections
                 database = row.Cells(2).Value
                 port = row.Cells(3).Value
 
-                ' Skip empty rows (and continue to save other rows to registry)
+                ' Skip empty rows (and continue to process other rows)
                 If String.IsNullOrEmpty(connection) And String.IsNullOrEmpty(server) And
                     String.IsNullOrEmpty(database) And String.IsNullOrEmpty(port) Then
                     Continue For
                 End If
 
-                connectionString = "server=" & server & ";database=" & database & ";port=" & port
+                ' Connection name: must not be empty (abort save)
+                If String.IsNullOrEmpty(connection) Then
+                    MsgBox("Unable to save connections. Please ensure that each connection has a connection name")
+                    Exit Sub
+                End If
 
-                ' Check that the connection string is accepted by the connection string builder
-                ' (otherwise warn and continue)
-                Try
-                    builder.ConnectionString = connectionString
-                Catch ex As Exception
-                    MsgBox("Unable to save connection information for connection """ & connection & """" &
-                        Environment.NewLine & Environment.NewLine & ex.Message)
-                    Continue For
-                End Try
+                ' Connection name: Match one or more letters, numbers or underscores (otherwise abort save)
+                If Not System.Text.RegularExpressions.Regex.IsMatch(connection, "^[a-zA-Z0-9_]+$") Then
+                    MsgBox("Unable to save connection information due to connection """ & connection & """" &
+                       Environment.NewLine & Environment.NewLine &
+                       "The connection name must only contain letters, numbers and underscores")
+                    Exit Sub
+                End If
 
-                ' Only save if the built connection string is not null/empty
-                If Not String.IsNullOrEmpty(builder.ConnectionString) Then
-                    writer.WriteLine(connection & "|" & builder.ConnectionString)
+                ' Server address: Match one or more letters, numbers or hyphen or
+                '                 match numbers and period allowing IP addresses (otherwise abort save)
+                If String.IsNullOrEmpty(server) OrElse
+                Not System.Text.RegularExpressions.Regex.IsMatch(server, "^[a-zA-Z0-9-]+$") And
+                Not System.Text.RegularExpressions.Regex.IsMatch(server, "^[0-9.]+$") Then
+
+                    MsgBox("Unable to save connection information due to connection """ & connection & """" &
+                       Environment.NewLine & Environment.NewLine &
+                       "The server address must only contain letters, numbers and hyphens (or numbers " &
+                       "and periods for IP addresses, e.g. 127.0.0.1)")
+                    Exit Sub
+                End If
+
+                ' Database name: Match one or more letters, numbers or underscores (otherwise abort save)
+                If String.IsNullOrEmpty(database) OrElse
+                Not System.Text.RegularExpressions.Regex.IsMatch(database, "^[a-zA-Z0-9_]+$") Then
+
+                    MsgBox("Unable to save connection information due to connection """ & connection & """" &
+                       Environment.NewLine & Environment.NewLine &
+                       "The database name must only contain letters, numbers and underscores")
+                    Exit Sub
+                End If
+
+                ' Port number: Match one or more numbers (otherwise abort save)
+                If String.IsNullOrEmpty(port) OrElse
+                Not System.Text.RegularExpressions.Regex.IsMatch(port, "^[0-9]+$") Then
+
+                    MsgBox("Unable to save connection information due to connection """ & connection & """" &
+                       Environment.NewLine & Environment.NewLine &
+                       "The port number must be a whole number (e.g. 3306 or 3308)")
+                    Exit Sub
                 End If
             Next
-        End Using
 
-        frmLogin.refreshDatabases()
+            ' All rows have now been validated. 
+
+            ' If `filePath` already exists then Create() will clear the current contents
+            IO.Directory.CreateDirectory(frmLogin.directoryPath)
+            IO.File.Create(frmLogin.filePath).Dispose()
+
+            ' The following code has been commented since the access permissions are set during installation
+
+            '' Grant full access on `filePath` for all users (allows any user to write to file)
+            '' This is currently necessary because some Climsoft installers are not Windows Administrators
+            'Dim dInfo As IO.DirectoryInfo = New IO.DirectoryInfo(frmLogin.filePath)
+            'Dim dSecurity As DirectorySecurity = dInfo.GetAccessControl()
+            'dSecurity.AddAccessRule(New FileSystemAccessRule(
+            '    New SecurityIdentifier(WellKnownSidType.WorldSid, Nothing),
+            '    FileSystemRights.FullControl,
+            '    InheritanceFlags.ObjectInherit Or InheritanceFlags.ContainerInherit,
+            '    PropagationFlags.NoPropagateInherit, AccessControlType.Allow
+            '))
+            'dInfo.SetAccessControl(dSecurity)
+
+            ' Loop over validated rows and add details from each row to `filePath`
+            Using writer As IO.StreamWriter = New IO.StreamWriter(frmLogin.filePath)
+                For Each row As DataGridViewRow In dataGridViewConnections.Rows
+                    builder = New Common.DbConnectionStringBuilder()
+                    connection = row.Cells(0).Value
+                    server = row.Cells(1).Value
+                    database = row.Cells(2).Value
+                    port = row.Cells(3).Value
+
+                    ' Skip empty rows (and continue to save other rows to registry)
+                    If String.IsNullOrEmpty(connection) And String.IsNullOrEmpty(server) And
+                    String.IsNullOrEmpty(database) And String.IsNullOrEmpty(port) Then
+                        Continue For
+                    End If
+
+                    connectionString = "server=" & server & ";database=" & database & ";port=" & port
+
+                    ' Check that the connection string is accepted by the connection string builder
+                    ' (otherwise warn and continue)
+                    Try
+                        builder.ConnectionString = connectionString
+                    Catch ex As Exception
+                        MsgBox("Unable to save connection information for connection """ & connection & """" &
+                        Environment.NewLine & Environment.NewLine & ex.Message)
+                        Continue For
+                    End Try
+
+                    ' Only save if the built connection string is not null/empty
+                    If Not String.IsNullOrEmpty(builder.ConnectionString) Then
+                        writer.WriteLine(connection & "|" & builder.ConnectionString)
+                    End If
+                Next
+            End Using
+            frmLogin.refreshDatabases()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
         Close()
     End Sub
 

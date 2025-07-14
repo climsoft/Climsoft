@@ -503,7 +503,7 @@
 
     'code commented out temprarily
     Sub Compare_Entry(obsv As String)
-        'Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        'Dim conn As New MySqlConnector.MySqlConnection
         'Dim constr As String
         Dim frm, stn, elm, yy, mm, dd, hh, obsv1 As String
         'Dim Conflict As Boolean

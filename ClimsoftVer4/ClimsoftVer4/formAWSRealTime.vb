@@ -19,9 +19,9 @@ Imports System.Net
 
 Public Class formAWSRealTime
 
-    Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim dbconn As New MySqlConnector.MySqlConnection
     Dim dbConnectionString As String
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql, flg As String
     Dim rec As Integer
@@ -47,7 +47,7 @@ Public Class formAWSRealTime
     Dim msg_header, msg_file As String
     Dim datt, flprefix, stn1 As String
 
-    Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    Dim cmd As New MySqlConnector.MySqlCommand
 
 
     Private Sub cmdProcess_Click(sender As Object, e As EventArgs) Handles cmdProcess.Click
@@ -69,18 +69,26 @@ Public Class formAWSRealTime
         pnlProcessing.Visible = True
         ' database Connect
         dbConnectionString = frmLogin.txtusrpwd.Text
-        dbconn.ConnectionString = dbConnectionString
-        dbconn.Open()
+        dbconn.ConnectionString = dbConnectionString & ";AllowLoadLocalInfile=true"
+        'dbconn.ConnectionString = dbConnectionString & ";MySqlBulkLoader.Local = true;Local=true"
 
-        'Indicators_Populate(dbconn)
+        Try
+            dbconn.Open()
 
-        ShowPanel(pnlProcessing, "Process Settings")
-        Me.Text = "AWS Real Time"
-        load_PressingParameters("txtlFill")
-        load_Indicators()
-        Timer1.Start()
-        'Timer2.Start()
-        ClsTranslations.TranslateForm(Me)
+            'Indicators_Populate(dbconn)
+
+            ShowPanel(pnlProcessing, "Process Settings")
+            Me.Text = "AWS Real Time"
+            load_PressingParameters("txtlFill")
+            load_Indicators()
+            Timer1.Start()
+            'Timer2.Start()
+            ClsTranslations.TranslateForm(Me)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+
     End Sub
 
     Private Sub cmdServers_Click(sender As Object, e As EventArgs) Handles cmdServers.Click
@@ -173,7 +181,7 @@ Public Class formAWSRealTime
         On Error GoTo Err
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
@@ -217,7 +225,7 @@ Err:
         Dim sql As String
 
         sql = "SELECT * FROM " & tabl
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         ' Remove timeout requirement
         da.SelectCommand.CommandTimeout = 0
 
@@ -236,7 +244,7 @@ Err:
         On Error GoTo Err
         Dim s As New DataSet
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         ' Remove timeout requirement
         da.SelectCommand.CommandTimeout = 0
 
@@ -250,72 +258,82 @@ Err:
         'MsgBox(Err.Description)
     End Function
     Sub PopulateForm(pnl As String, navbar As TextBox, num As Integer)
-        On Error Resume Next
-        Dim navs As String
+        'On Error Resume Next
+        'Dim navs As String
         'If Kount = 0 Then Exit Sub
-        Select Case pnl
-            Case "bss"
-                txtBaseStationAddress.Text = ds.Tables("aws_basestation").Rows(num).Item("ftpId")
-                txtBaseStationFolder.Text = ds.Tables("aws_basestation").Rows(num).Item("inputFolder")
-                txtBasestationFTPMode.Text = ds.Tables("aws_basestation").Rows(num).Item("ftpMode")
-                txtBaseStationUser.Text = ds.Tables("aws_basestation").Rows(num).Item("userName")
-                txtbaseStationPW.Text = ds.Tables("aws_basestation").Rows(num).Item("password")
+        Try
+            Select Case pnl
+                Case "bss"
+                    txtBaseStationAddress.Text = ds.Tables("aws_basestation").Rows(num).Item("ftpId")
+                    txtBaseStationFolder.Text = ds.Tables("aws_basestation").Rows(num).Item("inputFolder")
+                    txtBasestationFTPMode.Text = ds.Tables("aws_basestation").Rows(num).Item("ftpMode")
+                    txtBaseStationUser.Text = ds.Tables("aws_basestation").Rows(num).Item("userName")
+                    txtbaseStationPW.Text = ds.Tables("aws_basestation").Rows(num).Item("password")
 
-            Case "mss"
-                txtMSSAddress.Text = ds.Tables("aws_mss").Rows(num).Item("ftpId")
-                txtMSSFolder.Text = ds.Tables("aws_mss").Rows(num).Item("inputFolder")
-                txtmssFTPMode.Text = ds.Tables("aws_mss").Rows(num).Item("ftpMode")
-                txtmssUser.Text = ds.Tables("aws_mss").Rows(num).Item("userName")
-                txtMSSPW.Text = ds.Tables("aws_mss").Rows(num).Item("password")
-                lstFolders.SelectedItem = ds.Tables("aws_mss").Rows(num).Item("foldertype")
+                Case "mss"
+                    txtMSSAddress.Text = ds.Tables("aws_mss").Rows(num).Item("ftpId")
+                    txtMSSFolder.Text = ds.Tables("aws_mss").Rows(num).Item("inputFolder")
+                    txtmssFTPMode.Text = ds.Tables("aws_mss").Rows(num).Item("ftpMode")
+                    txtmssUser.Text = ds.Tables("aws_mss").Rows(num).Item("userName")
+                    txtMSSPW.Text = ds.Tables("aws_mss").Rows(num).Item("password")
+                    lstFolders.SelectedItem = ds.Tables("aws_mss").Rows(num).Item("foldertype")
 
-            Case "sites"
-                txtSiteID.Text = ds.Tables("aws_sites").Rows(num).Item("SiteID")
-                txtSiteName.Text = ds.Tables("aws_sites").Rows(num).Item("SiteName")
-                txtInFile.Text = ds.Tables("aws_sites").Rows(num).Item("InputFile")
-                txtDataStructure.Text = ds.Tables("aws_sites").Rows(num).Item("DataStructure")
-                txtFlag.Text = ds.Tables("aws_sites").Rows(num).Item("MissingDataFlag")
-                txtIP.Text = ds.Tables("aws_sites").Rows(num).Item("awsServerIp")
-                chkPrefix.Checked = ds.Tables("aws_sites").Rows(num).Item("chkPrefix")
-                chkOperational.Checked = ds.Tables("aws_sites").Rows(num).Item("OperationalStatus")
-                chkGTSEncode.Checked = ds.Tables("aws_sites").Rows(num).Item("GTSEncode")
+                Case "sites"
+                    txtSiteID.Text = ds.Tables("aws_sites").Rows(num).Item("SiteID")
+                    txtSiteName.Text = ds.Tables("aws_sites").Rows(num).Item("SiteName")
+                    txtInFile.Text = ds.Tables("aws_sites").Rows(num).Item("InputFile")
+                    txtDataStructure.Text = ds.Tables("aws_sites").Rows(num).Item("DataStructure")
+                    txtIP.Text = ds.Tables("aws_sites").Rows(num).Item("awsServerIp")
+                    chkPrefix.Checked = ds.Tables("aws_sites").Rows(num).Item("chkPrefix")
+                    chkOperational.Checked = ds.Tables("aws_sites").Rows(num).Item("OperationalStatus")
+                    chkGTSEncode.Checked = ds.Tables("aws_sites").Rows(num).Item("GTSEncode")
 
-                chkHrsAdjust.Checked = ds.Tables("aws_sites").Rows(num).Item("AdjustHr")
+                    chkHrsAdjust.Checked = ds.Tables("aws_sites").Rows(num).Item("AdjustHr")
 
-                If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("GTSHeader")) Then
-                    txtGTSHeader.Text = ds.Tables("aws_sites").Rows(num).Item("GTSHeader")
-                Else
-                    txtGTSHeader.Text = ""
-                End If
+                    If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("GTSHeader")) Then
+                        txtGTSHeader.Text = ds.Tables("aws_sites").Rows(num).Item("GTSHeader")
+                    Else
+                        txtGTSHeader.Text = ""
+                    End If
 
-                If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("FilePrefix")) Then
-                    txtfilePrefix.Text = ds.Tables("aws_sites").Rows(num).Item("FilePrefix")
-                Else
-                    txtfilePrefix.Text = ""
-                End If
+                    If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("FilePrefix")) Then
+                        txtfilePrefix.Text = ds.Tables("aws_sites").Rows(num).Item("FilePrefix")
+                    Else
+                        txtfilePrefix.Text = ""
+                    End If
 
-                If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("UTCDiff")) Then
-                    txtUTCdiff.Text = ds.Tables("aws_sites").Rows(num).Item("UTCDiff")
-                Else
-                    txtUTCdiff.Text = ""
-                End If
+                    If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("UTCDiff")) Then
+                        txtUTCdiff.Text = ds.Tables("aws_sites").Rows(num).Item("UTCDiff")
+                    Else
+                        txtUTCdiff.Text = ""
+                    End If
 
-                If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("AdjustHH")) Then
-                    txtHrs.Text = ds.Tables("aws_sites").Rows(num).Item("AdjustHH")
-                Else
-                    txtHrs.Text = ""
-                End If
+                    If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("AdjustHH")) Then
+                        txtHrs.Text = ds.Tables("aws_sites").Rows(num).Item("AdjustHH")
+                    Else
+                        txtHrs.Text = ""
+                    End If
 
-            Case "pnlDataStructures"
+                    If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("MissingDataFlag")) Then
+                        txtFlag.Text = ds.Tables("aws_sites").Rows(num).Item("MissingDataFlag")
+                    Else
+                        txtFlag.Text = ""
+                    End If
+
+                Case "pnlDataStructures"
 
 
-        End Select
+            End Select
 
-        navbar.Text = ""
-        If num < 0 Then num = 0
+            navbar.Text = ""
+            If num < 0 Then num = 0
 
-        If Kount > 0 Then navbar.Text = num + 1 & "of" & Kount
-
+            If Kount > 0 Then navbar.Text = num + 1 & "of" & Kount
+        Catch ex As Exception
+            If ex.HResult <> -2146233080 Then
+                MsgBox(ex.HResult & ": " & ex.Message)
+            End If
+        End Try
     End Sub
 
     Function RecordUpdate(tbl As String, pnl As String, num As Integer, cmdtype As String) As Boolean
@@ -325,7 +343,7 @@ Err:
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
         Select Case pnl
@@ -414,7 +432,7 @@ Err:
 
     Function DeleteRecord(tbl As String, recs As Integer) As Boolean
         'MsgBox(1)
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
         DeleteRecord = True
@@ -501,7 +519,7 @@ Err:
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
@@ -628,7 +646,7 @@ Err:
         On Error GoTo Err
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
@@ -708,17 +726,17 @@ Err:
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
         Dim sqlr As String
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         'Try
 
         sqlr = "UPDATE aws_sites set SiteName = '" & txtSiteName.Text & "', InputFile= '" & txtInFile.Text & "',FilePrefix ='" & txtfilePrefix.Text & "',chkPrefix = " & chkPrefix.CheckState & ",DataStructure = '" & txtDataStructure.Text & "',UTCDiff = '" & txtUTCdiff.Text & "',AdjustHH = '" & txtHrs.Text & "',AdjustHr = '" & chkHrsAdjust.CheckState &
                    "',MissingDataFlag = '" & txtFlag.Text & "',awsServerIP ='" & txtIP.Text & "',OperationalStatus = " & chkOperational.CheckState & ",GTSEncode = " & chkGTSEncode.CheckState & ",GTSHeader = '" & txtGTSHeader.Text & "' WHERE SiteID = '" & txtSiteID.Text & "';"
 
-        qry = New MySql.Data.MySqlClient.MySqlCommand(sqlr, dbconn)
+        qry = New MySqlConnector.MySqlCommand(sqlr, dbconn)
 
         Try
                 qry.ExecuteNonQuery()
@@ -765,12 +783,12 @@ Err:
     End Sub
 
     Sub FillList(ByRef lst As ComboBox, tbl As String, lstfld As String)
-        Dim dlst As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dlst As MySqlConnector.MySqlDataAdapter
         Dim dstn As New DataSet
         Dim sql As String
         sql = "Select * FROM  " & tbl
 
-        dlst = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        dlst = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         dstn.Clear()
 
         dstn = GetDataSet(tbl, sql)
@@ -814,13 +832,13 @@ Err:
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim str As New DataSet
         'Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
         Dim sql0 As String
-        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+        Dim comm As New MySqlConnector.MySqlCommand
 
         ' Create the structure details record in aws_structures table
         If Len(txtStrName.Text) = 0 Or Len(txtDelimiter.Text) = 0 Or Len(txtHeaders.Text) = 0 Then
@@ -920,7 +938,7 @@ Err:
             ' Delate the structure table
             Dim recCommit As New dataEntryGlobalRoutines
             Dim sql0 As String
-            Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+            Dim comm As New MySqlConnector.MySqlCommand
             comm.Connection = dbconn
 
             sql0 = "DROP TABLE `" & tblNm & "`;"
@@ -936,11 +954,11 @@ Err:
     Sub DataGridFill(tbl As String)
         On Error GoTo Err
 
-        Dim dg As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dg As MySqlConnector.MySqlDataAdapter
         Dim dstn As New DataSet
         Dim sql As String
         sql = "SELECT * FROM  " & tbl
-        dg = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        dg = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         ' Remove timeout requirement
         dg.SelectCommand.CommandTimeout = 0
 
@@ -962,9 +980,9 @@ Err:
 
     Sub load_PressingParameters(LoadType As String)
         'On Error GoTo Err
-        Dim dbpconn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dpa As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim dbpconn As New MySqlConnector.MySqlConnection
+        Dim dpa As MySqlConnector.MySqlDataAdapter
+        Dim qry As MySqlConnector.MySqlCommand
         Dim dps As New DataSet
         Dim sqlp As String
 
@@ -973,11 +991,11 @@ Err:
         Try
             ' Late adjustment on table aws_process_parameters. Added to allow for saving and retrieval of Ecode period data
             sqlp = "ALTER TABLE `aws_process_parameters` ADD COLUMN IF NOT EXISTS `EncodePeriod` INT(11) NOT NULL DEFAULT '2' AFTER `UTCDiff`;"
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sqlp, dbconn)
+            qry = New MySqlConnector.MySqlCommand(sqlp, dbconn)
             qry.ExecuteNonQuery()
 
             sqlp = "SELECT * FROM aws_process_parameters"
-            dpa = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlp, dbconn)
+            dpa = New MySqlConnector.MySqlDataAdapter(sqlp, dbconn)
             ' Remove timeout requirement
             dpa.SelectCommand.CommandTimeout = 0
 
@@ -990,12 +1008,12 @@ Err:
 
                 sqlp = "INSERT INTO `aws_process_parameters` (`RetrievePeriod`, `RetrieveTimeout`, `UTCDiff`) VALUES ('2', '999', '0');"
 
-                qry = New MySql.Data.MySqlClient.MySqlCommand(sqlp, dbconn)
+                qry = New MySqlConnector.MySqlCommand(sqlp, dbconn)
                 'Execute query
                 qry.ExecuteNonQuery()
 
                 sqlp = "SELECT * FROM aws_process_parameters"
-                dpa = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlp, dbconn)
+                dpa = New MySqlConnector.MySqlDataAdapter(sqlp, dbconn)
                 ' Remove timeout requirement
                 dpa.SelectCommand.CommandTimeout = 0
 
@@ -1016,7 +1034,7 @@ Err:
 
                 Case "dpupdate"
 
-                    Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(dpa)
+                    Dim cb As New MySqlConnector.MySqlCommandBuilder(dpa)
 
                     dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveInterval") = txtInterval.Text
                     dps.Tables("aws_process_parameters").Rows(0).Item("HourOffset") = txtOffset.Text
@@ -1042,8 +1060,8 @@ Err:
     End Sub
     Sub load_Indicators(Optional Tmpt As String = "")
 
-        Dim iconn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dai As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim iconn As New MySqlConnector.MySqlConnection
+        Dim dai As MySqlConnector.MySqlDataAdapter
         Dim dsi As New DataSet
         Try
 
@@ -1053,7 +1071,7 @@ Err:
 
             ' Populate Template Combo box
             sql = "SELECT * FROM bufr_indicators;"
-            dai = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, iconn)
+            dai = New MySqlConnector.MySqlDataAdapter(sql, iconn)
             ' Remove timeout requirement
             dai.SelectCommand.CommandTimeout = 0
             dsi.Clear()
@@ -1073,7 +1091,7 @@ Err:
                 Else
                     sql = "SELECT * FROM bufr_indicators where Tmplate = '" & Tmpt & "';"
                 End If
-                dai = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+                dai = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
                 ' Remove timeout requirement
                 dai.SelectCommand.CommandTimeout = 0
 
@@ -1103,7 +1121,7 @@ Err:
 
             ' Populate with Code and Flags
             sql = "SELECT FXY as Element, Description as Name, Bufr_Unit as Unit, Bufr_Value as Value FROM code_flag;"
-            dai = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, iconn)
+            dai = New MySqlConnector.MySqlDataAdapter(sql, iconn)
             ' Remove timeout requirement
             dai.SelectCommand.CommandTimeout = 0
 
@@ -1518,7 +1536,7 @@ Err:
         sql = "SELECT Nos, Bufr_Template, CREX_Template, Sequence_Descriptor1, Sequence_Descriptor0, Bufr_Element, Crex_Element, Climsoft_Element, Element_Name, Crex_Unit, Crex_Scale, Crex_DataWidth, Bufr_Unit, Bufr_Scale, Bufr_RefValue, Bufr_DataWidth_Bits, Observation, Crex_Data, Bufr_Data " &
               "FROM " & tt_aws & " WHERE (((Sequence_Descriptor1) Is Not Null)) ORDER BY Nos;"
         'Log_Errors(sql)
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         ' Remove timeout requirement
         da.SelectCommand.CommandTimeout = 0
 
@@ -2152,7 +2170,7 @@ Err:
         Dim awsr As DataSet
         Dim obsdata As String
         'Dim recUpdate As New dataEntryGlobalRoutines
-        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        Dim cmd As New MySqlConnector.MySqlCommand
 
         cmd.Connection = dbconn
 
@@ -2160,7 +2178,7 @@ Err:
 
         txtStatus.Text = "Updating AWS Record"
 
-        'Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        'Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
 
         'sql1 = "SELECT * FROM " & aws_struc
 
@@ -2199,7 +2217,7 @@ Err:
 
         'MsgBox(datastring & " " & rec & " " & aws_struc & " " & flg)
         SetDataSet(aws_struc)
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
 
         'ds.Tables(aws_struc).Rows(rec).Item("obsv") = datastring
 
@@ -2300,7 +2318,7 @@ Err:
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
 
-        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        Dim cmd As New MySqlConnector.MySqlCommand
         Dim dsdb As New DataSet
         Dim sql, sql3 As String
         Dim obs, flgs, units As String
@@ -2401,9 +2419,9 @@ Err:
 
     End Function
     Sub update_tbltemplate(aws_obsv As DataRow, Date_Time As String, Bufr_E() As String, Abbrev_E() As String)
-        'Dim qry As MySql.Data.MySqlClient.MySqlCommand
-        'Dim dbconw As New MySql.Data.MySqlClient.MySqlConnection
-        'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        'Dim qry As MySqlConnector.MySqlCommand
+        'Dim dbconw As New MySqlConnector.MySqlConnection
+        'Dim cmd As New MySqlConnector.MySqlCommand
 
         Dim trs As New DataSet
         Dim sql, yy, mm, dd, hh, Tprd, min, ss, Seq_Desc, tt_aws, InitValue As String
@@ -2433,7 +2451,7 @@ Err:
             'trs = GetDataSet(tt_aws, sql)
             'trs = GetDataSet("bufr_crex_data", sql)
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ' Remove timeout requirement
             da.SelectCommand.CommandTimeout = 0
 
@@ -2474,7 +2492,7 @@ Err:
                     ' If Len(.Fields("Sequence_Descriptor1")) <> 0 Then Seq_Desc = Seq_Desc & .Fields("Sequence_Descriptor1")
                     'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
 
-                    Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                    Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
                     Dim recUpdate As New dataEntryGlobalRoutines
 
                     ' Initialize Bufr data with missing value i.e. all 1s
@@ -2719,9 +2737,9 @@ Err:
         End Try
     End Sub
     'Sub update_tbltemplate(aws_struct As String, Date_Time As String)
-    '    Dim qry As MySql.Data.MySqlClient.MySqlCommand
-    '    Dim dbconw As New MySql.Data.MySqlClient.MySqlConnection
-    '    Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    '    Dim qry As MySqlConnector.MySqlCommand
+    '    Dim dbconw As New MySqlConnector.MySqlConnection
+    '    Dim cmd As New MySqlConnector.MySqlCommand
 
     '    Dim trs As New DataSet
     '    Dim sql, yy, mm, dd, hh, min, ss, Seq_Desc, tt_aws, InitValue As String
@@ -2741,7 +2759,7 @@ Err:
     '        dbconw.ConnectionString = frmLogin.txtusrpwd.Text
 
     '        dbconw.Open()
-    '        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconw)
+    '        qry = New MySqlConnector.MySqlCommand(sql, dbconw)
 
     '        'Execute query
     '        qry.ExecuteNonQuery()
@@ -2754,7 +2772,7 @@ Err:
     '        'trs = GetDataSet(tt_aws, sql)
     '        'trs = GetDataSet("bufr_crex_data", sql)
 
-    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconw)
+    '        da = New MySqlConnector.MySqlDataAdapter(sql, dbconw)
     '        ' Remove timeout requirement
     '        da.SelectCommand.CommandTimeout = 0
 
@@ -2790,7 +2808,7 @@ Err:
     '                ' If Len(.Fields("Sequence_Descriptor1")) <> 0 Then Seq_Desc = Seq_Desc & .Fields("Sequence_Descriptor1")
     '                'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
 
-    '                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+    '                Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
     '                Dim recUpdate As New dataEntryGlobalRoutines
 
     '                ' Initialize Bufr data with missing value i.e. all 1s
@@ -2940,7 +2958,7 @@ Err:
     '    End Try
     'End Sub
 
-    'Sub Update_Time_Periods1(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, hr As String)
+    'Sub Update_Time_Periods1(conw As MySqlConnector.MySqlConnection, qry As MySqlConnector.MySqlCommand, hr As String)
     '    Dim Tprd As String
     '    Try
     '        If CLng(hr) Mod 6 = 0 Then
@@ -2970,7 +2988,7 @@ Err:
     '    End Try
     'End Sub
 
-    'Sub Update_Time_Periods(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, hr As String)
+    'Sub Update_Time_Periods(conw As MySqlConnector.MySqlConnection, qry As MySqlConnector.MySqlCommand, hr As String)
     '    Dim Tprd As String
     '    Try
     '        If CLng(hr) Mod 6 = 0 Then
@@ -3000,8 +3018,8 @@ Err:
     '    End Try
     'End Sub
     Sub Update_data(sql As String)
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
-        Dim conndb As New MySql.Data.MySqlClient.MySqlConnection
+        Dim qry As MySqlConnector.MySqlCommand
+        Dim conndb As New MySqlConnector.MySqlConnection
 
         Try
             'cmd.Connection = dbconn
@@ -3011,8 +3029,8 @@ Err:
 
             conndb.ConnectionString = frmLogin.txtusrpwd.Text
             conndb.Open()
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conndb)
-            'qry = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
+            qry = New MySqlConnector.MySqlCommand(sql, conndb)
+            'qry = New MySqlConnector.MySqlCommand(sql, dbconn)
 
             'Execute query
             qry.ExecuteNonQuery()
@@ -3023,13 +3041,13 @@ Err:
         End Try
     End Sub
 
-    'Sub Update_data(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, data As String, element As String)
+    'Sub Update_data(conw As MySqlConnector.MySqlConnection, qry As MySqlConnector.MySqlCommand, data As String, element As String)
 
     '    sql = "update bufr_crex_data set observation = '" & data & "' where Climsoft_Element='" & element & "';"
     '    ' Create the Command for executing query and set its properties
     '    'MsgBox(sql)
     '    Try
-    '        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+    '        qry = New MySqlConnector.MySqlCommand(sql, conw)
     '        'Execute query
     '        qry.ExecuteNonQuery()
     '        'MsgBox(typ)
@@ -3037,7 +3055,7 @@ Err:
     '        MsgBox(ex.Message & " at update_data")
     '    End Try
     'End Sub
-    Sub Update_observations(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, aws_struct As String)
+    Sub Update_observations(conw As MySqlConnector.MySqlConnection, qry As MySqlConnector.MySqlCommand, aws_struct As String)
         ' Update Template with AWS observation values
         sql = "UPDATE " & aws_struct & " INNER JOIN bufr_crex_data ON " & aws_struct & ".Bufr_Element = bufr_crex_data.Bufr_Element SET bufr_crex_data.Observation = " & aws_struct & ".obsv where " & aws_struct & ".Bufr_Element = bufr_crex_data.Bufr_Element;"
         'sql = "update aws_inam1 INNER JOIN bufr_crex_data ON aws_inam1.Bufr_Element = bufr_crex_data.Bufr_Element SET bufr_crex_data.Observation = aws_inam1.obsv where aws_inam1.Bufr_Element = bufr_crex_data.Bufr_Element;"
@@ -3054,8 +3072,8 @@ Err:
 
     Sub Update_specificPeriod_Observations(Date_Time As String, nat_id As String)
 
-        'Dim comm As New MySql.Data.MySqlClient.MySqlCommand
-        Dim dap As New MySql.Data.MySqlClient.MySqlDataAdapter
+        'Dim comm As New MySqlConnector.MySqlCommand
+        Dim dap As New MySqlConnector.MySqlDataAdapter
         Dim drp As New DataSet
 
         Dim DTfrom, DTto As Date
@@ -3079,7 +3097,7 @@ Err:
 
             sql = "Select sum(obsValue) As Total from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='892' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
             'Log_Errors(sql)
-            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            dap = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ' Remove timeout requirement
             dap.SelectCommand.CommandTimeout = 0
             drp.Clear()
@@ -3098,7 +3116,7 @@ Err:
 
             ' Update Template with Time period as per Regional (1st replication) and Local (2nd replication) decisions
             sql = "select Nos-1 from bufr_crex_data WHERE Bufr_Element = '013011';"
-            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            dap = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             drp.Clear()
             dap.Fill(drp, "TPRec")
             TPRec1 = drp.Tables("TPRec").Rows(0).Item(0)
@@ -3129,7 +3147,7 @@ Err:
             Select Case Int(Hour(Date_Time))
                 Case 18 ' Update Tmax
                     sql = "Select Max(obsValue) As Tmax from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='881' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
-                    dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+                    dap = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
                     drp.Clear()
                     dap.Fill(drp, "Tmax")
                     obsv = 0
@@ -3142,7 +3160,7 @@ Err:
                 Case 6 ' Update Tmin
                     sql = "Select Min(obsValue) As Tmin from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='881' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
                     'Log_Errors(sql)
-                    dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+                    dap = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
                     drp.Clear()
                     dap.Fill(drp, "Tmin")
                     obsv = 0
@@ -3161,11 +3179,11 @@ Err:
     End Sub
 
     Sub TPrecip_4SpecifiedPeriod(sql As String, recNo As Integer)
-        Dim Pda As New MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim Pda As New MySqlConnector.MySqlDataAdapter
         Dim Prs As New DataSet
         Dim obs As String
 
-        Pda = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        Pda = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         Prs.Clear()
         Pda.Fill(Prs, "TPP")
         obs = 0
@@ -3175,10 +3193,10 @@ Err:
         Update_data(sql)
     End Sub
 
-    'Sub Update_specificPeriod_Observations(conw As MySql.Data.MySqlClient.MySqlConnection, Date_Time As String, nat_id As String)
+    'Sub Update_specificPeriod_Observations(conw As MySqlConnector.MySqlConnection, Date_Time As String, nat_id As String)
 
-    '    Dim comm As New MySql.Data.MySqlClient.MySqlCommand
-    '    Dim dap As New MySql.Data.MySqlClient.MySqlDataAdapter
+    '    Dim comm As New MySqlConnector.MySqlCommand
+    '    Dim dap As New MySqlConnector.MySqlDataAdapter
     '    Dim drp As New DataSet
 
     '    Dim DTfrom, DTto As Date
@@ -3198,7 +3216,7 @@ Err:
     '        stPD = DateAndTime.Year(DTfrom) & "-" & Format(DateAndTime.Month(DTfrom), "00") & "-" & Format(DateAndTime.Day(DTfrom), "00") & " " & Format(DateAndTime.Hour(DTfrom), "00") & ":" & Format(DateAndTime.Minute(DTfrom), "00") & ":00"
 
     '        sql = "Select sum(obsValue) As Total from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='892' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
-    '        dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+    '        dap = New MySqlConnector.MySqlDataAdapter(sql, conw)
     '        ' Remove timeout requirement
     '        dap.SelectCommand.CommandTimeout = 0
     '        drp.Clear()
@@ -3207,14 +3225,14 @@ Err:
     '        obsv = 0
     '        If Not IsDBNull(drp.Tables("Tprecip").Rows(0).Item(0)) Then obsv = drp.Tables("Tprecip").Rows(0).Item(0)
     '        sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = 013023;"
-    '        comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+    '        comm = New MySqlConnector.MySqlCommand(sql, conw)
     '        'Execute query
     '        comm.ExecuteNonQuery()
 
     '        ' Update Template with Regional agreed period
     '        ' Cancel by setting value for first replication to ''
     '        sql = "update bufr_crex_data set observation = '' where Bufr_Element = 013011 and Climsoft_Element <> '174';"
-    '        comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+    '        comm = New MySqlConnector.MySqlCommand(sql, conw)
     '        'Execute query
     '        comm.ExecuteNonQuery()
 
@@ -3225,24 +3243,24 @@ Err:
     '        Select Case Int(Hour(Date_Time))
     '            Case 18 ' Update Tmax
     '                sql = "Select Max(obsValue) As Tmax from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='881' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
-    '                dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+    '                dap = New MySqlConnector.MySqlDataAdapter(sql, conw)
     '                drp.Clear()
     '                dap.Fill(drp, "Tmax")
     '                obsv = 0
     '                If Not IsDBNull(drp.Tables("Tmax").Rows(0).Item(0)) Then obsv = drp.Tables("Tmax").Rows(0).Item(0)
     '                sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = '012111';"
-    '                comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+    '                comm = New MySqlConnector.MySqlCommand(sql, conw)
     '                comm.ExecuteNonQuery()
     '                'Log_Errors(sql)
     '            Case 6 ' Update Tmin
     '                sql = "Select Min(obsValue) As Tmin from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='881' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
-    '                dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+    '                dap = New MySqlConnector.MySqlDataAdapter(sql, conw)
     '                drp.Clear()
     '                dap.Fill(drp, "Tmin")
     '                obsv = 0
     '                If Not IsDBNull(drp.Tables("Tmin").Rows(0).Item(0)) Then obsv = drp.Tables("Tmin").Rows(0).Item(0)
     '                sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = '012112';"
-    '                comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+    '                comm = New MySqlConnector.MySqlCommand(sql, conw)
     '                comm.ExecuteNonQuery()
 
     '                'Log_Errors(sql)
@@ -3266,8 +3284,8 @@ Err:
 
     Sub Initialize_Template(ttb As String)
         'Dim sql1 As String
-        'Dim con1 As New MySql.Data.MySqlClient.MySqlConnection
-        'Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        'Dim con1 As New MySqlConnector.MySqlConnection
+        'Dim qry As MySqlConnector.MySqlCommand
 
         Try
             'con1.ConnectionString = frmLogin.txtusrpwd.Text
@@ -3281,7 +3299,7 @@ Err:
             cmd.CommandText = sql
             cmd.ExecuteNonQuery()
 
-            'qry = New MySql.Data.MySqlClient.MySqlCommand(sql1, con1)
+            'qry = New MySqlConnector.MySqlCommand(sql1, con1)
             ''Execute query
             'qry.ExecuteNonQuery()
             'con1.Close()
@@ -3384,7 +3402,7 @@ Err:
             Log_Errors(x.Message)
         End Try
     End Sub
-    'Sub Initialize_Cloud_Replications(dbconw As MySql.Data.MySqlClient.MySqlConnection, trs As DataSet, qry As MySql.Data.MySqlClient.MySqlCommand, RepType As String, descrp As Integer)
+    'Sub Initialize_Cloud_Replications(dbconw As MySqlConnector.MySqlConnection, trs As DataSet, qry As MySqlConnector.MySqlCommand, RepType As String, descrp As Integer)
     '    Dim RecNo As Integer
 
     '    With trs
@@ -3398,7 +3416,7 @@ Err:
     '                    Else
     '                        sql = "update bufr_crex_data set selected = '0' where Nos = '" & j & "';"
     '                    End If
-    '                    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconw)
+    '                    qry = New MySqlConnector.MySqlCommand(sql, dbconw)
     '                    qry.ExecuteNonQuery()
     '                Next
     '                Exit For
@@ -3435,7 +3453,7 @@ Err:
         Dim bitstream As String
 
         Dim flgrs As New DataSet
-        'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        'Dim cmd As New MySqlConnector.MySqlCommand
 
         Try
             flgrs = GetDataSet("flagtable", "SELECT * FROM flagtable")
@@ -3512,7 +3530,7 @@ Err:
         Dim bitstream As String
 
         Dim flgrs As New DataSet
-        'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        'Dim cmd As New MySqlConnector.MySqlCommand
 
         flgrs = GetDataSet("flagtable", "SELECT * FROM flagtable")
         Initialize_CodeFlag = ""
@@ -3584,15 +3602,15 @@ Err:
         Dim SoilTemp As Boolean
         Dim sql As String
         Dim rs1 As New DataSet
-        Dim daws As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        Dim daws As MySqlConnector.MySqlDataAdapter
+        Dim cmd As New MySqlConnector.MySqlCommand
 
         Try
             cmd.Connection = dbconn
 
             sql = "SELECT * FROM " & tt_aws & " ORDER BY Nos;"
 
-            daws = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            daws = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ' Set to unlimited timeout period
             daws.SelectCommand.CommandTimeout = 0
 
@@ -3695,14 +3713,14 @@ Err:
     '        Dim SoilTemp As Boolean
     '        Dim sql As String
     '        Dim rs1 As New DataSet
-    '        Dim daws As MySql.Data.MySqlClient.MySqlDataAdapter
-    '        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    '        Dim daws As MySqlConnector.MySqlDataAdapter
+    '        Dim cmd As New MySqlConnector.MySqlCommand
 
     '        cmd.Connection = dbconn
 
     '        sql = "SELECT * FROM " & aws_struct & " ORDER BY Cols;"
 
-    '        daws = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+    '        daws = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
     '        ' Set to unlimited timeout period
     '        daws.SelectCommand.CommandTimeout = 0
 
@@ -3964,7 +3982,7 @@ Err:
 
         sql = "SELECT * FROM " & tt_aws & " ORDER BY Nos"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         trs.Clear()
         da.Fill(trs, tt_aws)
 
@@ -3994,7 +4012,7 @@ Err:
             Log_Errors(Err.Message)
         End Try
     End Sub
-    'Sub TDCF_Encode(dbconw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, trs As DataSet, tt_aws As String)
+    'Sub TDCF_Encode(dbconw As MySqlConnector.MySqlConnection, qry As MySqlConnector.MySqlCommand, trs As DataSet, tt_aws As String)
 
     '    Dim bufrdata As String
     '    Dim sql As String
@@ -4002,7 +4020,7 @@ Err:
 
     '    sql = "SELECT * FROM " & tt_aws & " ORDER BY Nos"
 
-    '    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconw)
+    '    da = New MySqlConnector.MySqlDataAdapter(sql, dbconw)
     '    trs.Clear()
     '    da.Fill(trs, tt_aws)
     '    qry.Connection = dbconn
@@ -4803,7 +4821,7 @@ Err:
             tbl = cmbExistingStructures.Text
 
             SetDataSet(tbl)
-            Dim cw As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cw As New MySqlConnector.MySqlCommandBuilder(da)
             If Len(dat) > 0 Then
                 ds.Tables(tbl).Rows(rw).Item(col) = dat
             Else
@@ -4857,7 +4875,7 @@ Err:
                 recno = DataGridViewStructures.CurrentRow.Index
                 'MsgBox(recno)
                 SetDataSet(tbl)
-                Dim cw As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                Dim cw As New MySqlConnector.MySqlCommandBuilder(da)
 
                 ds.Tables(tbl).Rows(recno).Delete()
                 da.Update(ds, tbl)
@@ -4886,7 +4904,7 @@ Err:
             'tbl = cmbExistingStructures.Text
             tbl = "aws_sites"
             SetDataSet(tbl)
-            Dim cw As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cw As New MySqlConnector.MySqlCommandBuilder(da)
             If Len(dat) > 0 Then
                 ds.Tables(tbl).Rows(rw).Item(col) = dat
             Else
@@ -4921,7 +4939,7 @@ Err:
                 tbl = "aws_sites"
                 recno = DataGridViewSites.CurrentRow.Index
                 SetDataSet(tbl)
-                Dim cw As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                Dim cw As New MySqlConnector.MySqlCommandBuilder(da)
 
                 ds.Tables(tbl).Rows(recno).Delete()
                 da.Update(ds, tbl)
@@ -5213,8 +5231,8 @@ Err:
     Function Get_DateStamp(AWSsite As String, datrow As DataRow) As String
         Dim dt, Date_s, Time_s, yyyy, mm, dd, nn, hh, ss As String
 
-        'Dim dbstr As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dastr As MySql.Data.MySqlClient.MySqlDataAdapter
+        'Dim dbstr As New MySqlConnector.MySqlConnection
+        Dim dastr As MySqlConnector.MySqlDataAdapter
         Dim dsstr As New DataSet
         Dim sqlstr As String
 
@@ -5225,8 +5243,8 @@ Err:
             sqlstr = "SELECT * FROM " & AWSsite
             'dsstr = GetDataSet(AWSsite, sqlstr)
 
-            'dastr = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlstr, dbstr)
-            dastr = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlstr, dbconn)
+            'dastr = New MySqlConnector.MySqlDataAdapter(sqlstr, dbstr)
+            dastr = New MySqlConnector.MySqlDataAdapter(sqlstr, dbconn)
             ' Remove timeout requirement
             dastr.SelectCommand.CommandTimeout = 0
 
@@ -5311,7 +5329,7 @@ Err:
     End Sub
 
     Private Sub cmdSaves_Click(sender As Object, e As EventArgs) Handles cmdSaves.Click
-        Dim sconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim sconn As New MySqlConnector.MySqlConnection
         Dim optsection As Integer
 
         Try
@@ -5329,7 +5347,7 @@ Err:
             sql = "INSERT IGNORE INTO bufr_indicators (Tmplate,Msg_Header,BUFR_Edition,Originating_Centre,Originating_SubCentre,Update_Sequence,Optional_Section,Data_Category,Intenational_Data_SubCategory,Local_Data_SubCategory,Master_table,Local_Table) VALUES('" & txtTemplate.Text & "','" & txtMsgHeader.Text & "','" & txtBufrEdition.Text & "','" & txtOriginatingCentre.Text & "','" & txtOriginatingSubcentre.Text & "','" & txtUpdateSequence.Text & "','" & optsection & "','" & txtDataCategory.Text & "','" & txtInternationalSubcategory.Text & "','" & txtLocalSubcategory.Text & "','" & txtMastertableVersion.Text & "','" & txtLocaltableVersion.Text & "');"
 
             ' Create the Command for executing query and set its properties
-            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, sconn)
+            cmd = New MySqlConnector.MySqlCommand(sql, sconn)
 
             'Execute query
             cmd.ExecuteNonQuery()
@@ -5342,7 +5360,7 @@ Err:
     End Sub
 
     Private Sub cmdDefault_Click(sender As Object, e As EventArgs) Handles cmdDefault.Click
-        Dim sconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim sconn As New MySqlConnector.MySqlConnection
 
         Try
 
@@ -5351,12 +5369,12 @@ Err:
 
             ' Select default Template
             sql = "Update bufr_indicators set defaultTemplate = 1 where Tmplate= '" & txtTemplate.Text & "';"
-            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, sconn)
+            cmd = New MySqlConnector.MySqlCommand(sql, sconn)
             cmd.ExecuteNonQuery()
 
             ' Deselect default Template from any other
             sql = "Update bufr_indicators set defaultTemplate = 0 where Tmplate != '" & txtTemplate.Text & "';"
-            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, sconn)
+            cmd = New MySqlConnector.MySqlCommand(sql, sconn)
             cmd.ExecuteNonQuery()
 
             sconn.Close()
@@ -5368,7 +5386,7 @@ Err:
     End Sub
 
     Private Sub cmdUpadate_Click(sender As Object, e As EventArgs) Handles cmdUpadate.Click
-        Dim sconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim sconn As New MySqlConnector.MySqlConnection
         Dim optsection As Integer
 
         Try
@@ -5387,7 +5405,7 @@ Err:
                 "' where tmplate= '" & txtTemplate.Text & "';"
 
             ' Create the Command for executing query and set its properties
-            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, sconn)
+            cmd = New MySqlConnector.MySqlCommand(sql, sconn)
 
             'Execute query
             cmd.ExecuteNonQuery()
@@ -5410,8 +5428,8 @@ Err:
 
     Sub Get_Datetime(AWSsite As String, ByRef dtCol As Integer, ByRef dtFmt As String)
 
-        Dim dbstr As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dastr As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dbstr As New MySqlConnector.MySqlConnection
+        Dim dastr As MySqlConnector.MySqlDataAdapter
         Dim dsstr As New DataSet
         Dim sqlstr As String
 
@@ -5421,7 +5439,7 @@ Err:
 
             sqlstr = "SELECT * FROM " & AWSsite
 
-            dastr = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlstr, dbstr)
+            dastr = New MySqlConnector.MySqlDataAdapter(sqlstr, dbstr)
             ' Remove timeout requirement
             dastr.SelectCommand.CommandTimeout = 0
 
@@ -5609,7 +5627,7 @@ Err:
         Dim rs, rstr As New DataSet
         Dim dTable As DataTable
         Dim datestring, infile, delmtr, delimiter_ascii, txtqlfr, aws_data, AWSsite, fls, aws_input_file, aws_input_file_flds As String
-        'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        'Dim cmd As New MySqlConnector.MySqlCommand
 
         'cmd.Connection = dbconn
         'Try
@@ -5916,13 +5934,13 @@ Err:
         Try
 
             dtt = Get_DateStamp(AWSsite, drws)
-
+            'Log_Errors(dtt)
             ' Check for valid date
             If Not IsDate(dtt) Then Return False
 
             'Adjust the observation hour if data in AWS file has has different time setting from that in database e.g. UTC and Local time
             dttdb = DateAdd("h", AdjustHH, dtt)
-
+            'Log_Errors(dttdb)
             ' Check whether the current record can be updated into the database
             If DateDiff("h", dttdb, txtDateTime.Text) > Val(txtPeriod.Text - 1) And Val(txtPeriod.Text) <> 999 Then Return False
 
@@ -5940,6 +5958,9 @@ Err:
                 '' Convert wind speed to SI units
                 'If Strings.LCase(unitt(j)) = "knots" Then drws(j) = Val(drws(j)) / 2
 
+                ' Skip if value is a missing data flag
+                If drws(j) = flg Then Continue For
+
                 If QC_Limits(stn, elm(j), dttdb, drws(j), Llimit(j), Ulimit(j)) Then
                     Continue For
                 End If
@@ -5948,7 +5969,8 @@ Err:
                 'If Strings.LCase(unitt(j)) = "hpa" Then drws(j) = Val(drws(j)) * 100
 
                 If IsNumeric(elm(j)) Then
-                    x = stn & "," & elm(j) & "," & dttdb & ",surface" & "," & drws(j) & ",\N" & ",1" & ",4"
+
+                    x = stn & "," & elm(j) & "," & dttdb & ",surface" & "," & drws(j) & "," & "" & ",1" & ",1" & ",1" & ",4" & ",,,,,,,,"
                     PrintLine(12, x)
                 End If
             Next j
@@ -5956,14 +5978,16 @@ Err:
             FileClose(12)
             aws_sql_input_file = Strings.Replace(aws_sql_input_file, "\", "/")
 
-            sql = "LOAD DATA local INFILE '" & aws_sql_input_file & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType);"
-            'Log_Errors(sql)
-            'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
-            cmd.Connection = dbconn
+            Load_Files(aws_sql_input_file, "observationfinal", 0, ",")
 
-            cmd.CommandTimeout = 0
-            cmd.CommandText = sql
-            cmd.ExecuteNonQuery()
+            'sql = "LOAD DATA local INFILE '" & aws_sql_input_file & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType);"
+            ''Log_Errors(sql)
+            ''Dim cmd As New MySqlConnector.MySqlCommand
+            'cmd.Connection = dbconn
+
+            'cmd.CommandTimeout = 0
+            'cmd.CommandText = sql
+            'cmd.ExecuteNonQuery()
 
 
             ' Update TDCF Template and Encode to BUFR for GTS Transmission
@@ -5997,7 +6021,7 @@ Err:
             Return True
         Catch ex As Exception
             FileClose(12)
-            Log_Errors(ex.Message)
+            Log_Errors(ex.Message & " at Update_db")
             Return False
         End Try
     End Function
@@ -6071,8 +6095,8 @@ Err:
 
 
     Function WSI_Data(ByRef WSI_section4 As String) As Boolean
-        Dim wconn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim daw As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim wconn As New MySqlConnector.MySqlConnection
+        Dim daw As MySqlConnector.MySqlDataAdapter
         Dim dsw As New DataSet
         Dim WSI, seriesID, issuerID, issuerNo, localID As String
         Dim WSIsplit As Array
@@ -6086,7 +6110,7 @@ Err:
             wconn.Open()
             sql = "Select wsi FROM station WHERE stationId = '" & nat_id & "';"
 
-            daw = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, wconn)
+            daw = New MySqlConnector.MySqlDataAdapter(sql, wconn)
             daw.SelectCommand.CommandTimeout = 0
             wconn.Close()
 
@@ -6157,13 +6181,13 @@ Err:
     '    'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
     '    'must be declared for the Update method to work.
 
-    '    Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+    '    Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
     '    Dim str As New DataSet
     '    'Dim dsNewRow As DataRow
     '    'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
     '    Dim recCommit As New dataEntryGlobalRoutines
     '    Dim sql0 As String
-    '    Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+    '    Dim comm As New MySqlConnector.MySqlCommand
 
     '    ' Create the structure details record in aws_structures table
     '    If Len(txtStrName.Text) = 0 Or Len(txtDelimiter.Text) = 0 Or Len(txtHeaders.Text) = 0 Then
@@ -6190,12 +6214,12 @@ Err:
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim str As New DataSet
 
         Dim recCommit As New dataEntryGlobalRoutines
         Dim sql0, tblName As String
-        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+        Dim comm As New MySqlConnector.MySqlCommand
 
         ' Create the structure details record in aws_structures table
         If Len(txtStrName.Text) = 0 Or Len(txtDelimiter.Text) = 0 Or Len(txtHeaders.Text) = 0 Then

@@ -41,9 +41,9 @@ Public Class frmGTSNOAA
         'Copy Data file to CLICOM folder and rename the files to [clicom_daily.csv] and [schema.ini] and overwrite existing file
         My.Computer.FileSystem.CopyFile(txtDataFile.Text, strDataFile, True)
 
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim conn As New MySqlConnector.MySqlConnection
         Dim connStr As String, sql As String
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim objCmd As MySqlConnector.MySqlCommand
 
         connStr = frmLogin.txtusrpwd.Text
 
@@ -123,11 +123,11 @@ Public Class frmGTSNOAA
                                 ' MsgBox(sql)
 
                                 ' Create the Command for executing query and set its properties
-                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                                objCmd = New MySqlConnector.MySqlCommand(sql, conn)
                                 Try
                                     'Execute query
                                     objCmd.ExecuteNonQuery()
-                                    ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    ' Catch ex As MySqlConnector.MySqlException
                                     'Ignore expected error i.e. error of Duplicates in MySqlException
                                 Catch ex As Exception
                                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -149,11 +149,11 @@ Public Class frmGTSNOAA
                                 qcStatus & "," & acquisitionType & ")"
 
                                 ' Create the Command for executing query and set its properties
-                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                                objCmd = New MySqlConnector.MySqlCommand(sql, conn)
                                 Try
                                     'Execute query
                                     objCmd.ExecuteNonQuery()
-                                    ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    ' Catch ex As MySqlConnector.MySqlException
                                     'Ignore expected error i.e. error of Duplicates in MySqlException
                                 Catch ex As Exception
                                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -176,11 +176,11 @@ Public Class frmGTSNOAA
                                 qcStatus & "," & acquisitionType & ")"
 
                                 ' Create the Command for executing query and set its properties
-                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                                objCmd = New MySqlConnector.MySqlCommand(sql, conn)
                                 Try
                                     'Execute query
                                     objCmd.ExecuteNonQuery()
-                                    ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    ' Catch ex As MySqlConnector.MySqlException
                                     'Ignore expected error i.e. error of Duplicates in MySqlException
                                 Catch ex As Exception
                                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -202,11 +202,11 @@ Public Class frmGTSNOAA
                                 qcStatus & "," & acquisitionType & ")"
 
                                 ' Create the Command for executing query and set its properties
-                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                                objCmd = New MySqlConnector.MySqlCommand(sql, conn)
                                 Try
                                     'Execute query
                                     objCmd.ExecuteNonQuery()
-                                    ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    ' Catch ex As MySqlConnector.MySqlException
                                     'Ignore expected error i.e. error of Duplicates in MySqlException
                                 Catch ex As Exception
                                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above

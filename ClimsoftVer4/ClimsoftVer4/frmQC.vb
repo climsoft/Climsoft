@@ -17,11 +17,11 @@
 'Imports ClimsoftVer4.GlobalVariables
 
 Public Class frmQC
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
     Dim beginYear As Integer, endYear As Integer, beginMonth As Integer, endMonth As Integer, sql As String, strSQL As String
-    Dim ds As New DataSet, da As MySql.Data.MySqlClient.MySqlDataAdapter, beginYearMonth As String, endYearMonth As String
-    Dim ds1 As New DataSet, da1 As MySql.Data.MySqlClient.MySqlDataAdapter, sql1 As String
+    Dim ds As New DataSet, da As MySqlConnector.MySqlDataAdapter, beginYearMonth As String, endYearMonth As String
+    Dim ds1 As New DataSet, da1 As MySqlConnector.MySqlDataAdapter, sql1 As String
     Dim qcReportsFolderWindows As String, qcReportsFolderUnix As String
     Dim msgTxtQCReportsOutLowerLimits As String
     Dim msgTxtQCReportsOutUpperLimits As String
@@ -48,8 +48,8 @@ Public Class frmQC
     End Sub
 
     Private Sub frmQC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim conns As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dss As New DataSet, daa As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim conns As New MySqlConnector.MySqlConnection
+        Dim dss As New DataSet, daa As MySqlConnector.MySqlDataAdapter
         Dim sql As String
 
 
@@ -79,7 +79,7 @@ Public Class frmQC
             conns.Open()
 
             Sql = "SELECT * FROM station ORDER BY stationId"
-            daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            daa = New MySqlConnector.MySqlDataAdapter(sql, conns)
             dss.Clear()
 
             daa.Fill(dss, "station")
@@ -104,7 +104,7 @@ Public Class frmQC
             Next
 
             sql = "SELECT * FROM obselement ORDER BY elementId"
-            daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            daa = New MySqlConnector.MySqlDataAdapter(sql, conns)
             dss.Clear()
             daa.Fill(dss, "element")
             lstViewElements.Items.Clear()
@@ -121,7 +121,7 @@ Public Class frmQC
                 lstViewElements.Items.Add(itms)
             Next
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MsgBox(ex.Message)
             conns.Close()
         End Try
@@ -284,12 +284,12 @@ Public Class frmQC
     '        '' The following code was commented because its role was not clear and it was cause timeout error when the observationinitial table became big
 
     '        'sql = "SELECT * FROM observationInitial where year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth
-    '        'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+    '        'da = New MySqlConnector.MySqlDataAdapter(sql, conn)
     '        'da.Fill(ds, "obsInitial")
 
     '        'Get required data for QC interelement comparison
     '        sql1 = "SELECT * from qc_interelement_relationship_definition"
-    '        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+    '        da1 = New MySqlConnector.MySqlDataAdapter(sql1, conn)
 
     '        ' Set timeout period to unlimited
     '        da1.SelectCommand.CommandTimeout = 0
@@ -298,12 +298,12 @@ Public Class frmQC
     '        n = ds1.Tables("interElement").Rows.Count
     '        conn.Close()
 
-    '    Catch ex As MySql.Data.MySqlClient.MySqlException
+    '    Catch ex As MySqlConnector.MySqlException
     '        MessageBox.Show(ex.Message)
     '        conn.Close()
     '    End Try
 
-    '    Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+    '    Dim objCmd As MySqlConnector.MySqlCommand
 
     '    myConnectionString = frmLogin.txtusrpwd.Text
 
@@ -343,7 +343,7 @@ Public Class frmQC
     '        'strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`limitType` varchar(10) DEFAULT NULL,`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`,`limitType`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
     '        strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
-    '        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '        objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
     '        objCmd.CommandTimeout = 0
     '    Catch ex As Exception
@@ -366,7 +366,7 @@ Public Class frmQC
 
     '    'MsgBox(strSQL)
     '    ' Create the Command for executing query and set its properties
-    '    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '    objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
     '    Try
 
@@ -374,7 +374,7 @@ Public Class frmQC
     '        objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
     '        objCmd.ExecuteNonQuery()
     '        'MsgBox("QC status updated!", MsgBoxStyle.Information)
-    '    Catch ex As MySql.Data.MySqlClient.MySqlException
+    '    Catch ex As MySqlConnector.MySqlException
     '        'Ignore expected error i.e. error of Duplicates in MySqlException
 
     '    Catch ex As Exception
@@ -399,7 +399,7 @@ Public Class frmQC
     '        ' Empty the QC values table
     '        Try
     '            strSQL = "TRUNCATE qcabslimits;"
-    '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
     '            objCmd.CommandTimeout = 0
     '            objCmd.ExecuteNonQuery()
     '        Catch ex As Exception
@@ -423,7 +423,7 @@ Public Class frmQC
 
     '        ''"union all select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','upperlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
 
-    '        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '        objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
     '        Try
     '            'Execute query
@@ -454,7 +454,7 @@ Public Class frmQC
     '        ' Empty the QC values table
     '        Try
     '            strSQL = "TRUNCATE qcabslimits;"
-    '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
     '            objCmd.CommandTimeout = 0
     '            objCmd.ExecuteNonQuery()
     '        Catch ex As Exception
@@ -479,7 +479,7 @@ Public Class frmQC
     '        '"union all select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','lowerlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
 
     '        ' Create the Command for executing query and set its properties
-    '        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '        objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
     '        Try
     '            'Execute query
@@ -494,7 +494,7 @@ Public Class frmQC
     '            'MsgBox(msgTxtQCReportsOutLowerLimits & QcReportFile, MsgBoxStyle.Information)
 
 
-    '            'Catch ex As MySql.Data.MySqlClient.MySqlException
+    '            'Catch ex As MySqlConnector.MySqlException
     '            '    'Ignore expected error i.e. error of Duplicates in MySqlException
     '        Catch ex As Exception
     '            'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -507,7 +507,7 @@ Public Class frmQC
 
     '        'MsgBox(strSQL)
     '        ' Create the Command for executing query and set its properties
-    '        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '        objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
 
     '        'Loop through the combination of elements in the [qc_interelement_relationship_definition] table
@@ -521,7 +521,7 @@ Public Class frmQC
     '            strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnlist & " and (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
     '            If chkAllStations.Checked Then strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
 
-    '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
     '            Try
     '                objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
@@ -547,7 +547,7 @@ Public Class frmQC
 
     '            ' Create the Command for executing query and set its properties
     '            objCmd.CommandTimeout = 0
-    '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
     '            Try
     '                'Execute query
@@ -555,7 +555,7 @@ Public Class frmQC
 
     '                objCmd.ExecuteNonQuery()
     '                'MsgBox("Table qc_interelement_1 cleared!")
-    '                'Catch ex As MySql.Data.MySqlClient.MySqlException
+    '                'Catch ex As MySqlConnector.MySqlException
     '                '    'Ignore expected error i.e. error of Duplicates in MySqlException
     '            Catch ex As Exception
     '                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -584,7 +584,7 @@ Public Class frmQC
     '                " and month(obsdatetime) between " & beginMonth & " and " & endMonth
     '            End If
     '            ' Create the Command for executing query and set its properties
-    '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
     '            Try
     '                'Execute query
@@ -592,7 +592,7 @@ Public Class frmQC
     '                objCmd.CommandTimeout = 0
     '                objCmd.ExecuteNonQuery()
     '                'MsgBox("Table qc_interelement_1 created!")
-    '                'Catch ex As MySql.Data.MySqlClient.MySqlException
+    '                'Catch ex As MySqlConnector.MySqlException
     '                '    'Ignore expected error i.e. error of Duplicates in MySqlException
     '            Catch ex As Exception
     '                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -607,14 +607,14 @@ Public Class frmQC
 
     '            ' Create the Command for executing query and set its properties
     '            objCmd.CommandTimeout = 0
-    '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
     '            Try
     '                'Execute query
     '                objCmd.CommandTimeout = 0
     '                objCmd.ExecuteNonQuery()
     '                'MsgBox("Table qc_interelement_2 cleared!")
-    '                'Catch ex As MySql.Data.MySqlClient.MySqlException
+    '                'Catch ex As MySqlConnector.MySqlException
     '                '    'Ignore expected error i.e. error of Duplicates in MySqlException
     '            Catch ex As Exception
     '                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -636,14 +636,14 @@ Public Class frmQC
     '            End If
     '            ' Create the Command for executing query and set its properties
     '            objCmd.CommandTimeout = 0
-    '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
     '            Try
     '                'Execute query
     '                objCmd.CommandTimeout = 0
     '                objCmd.ExecuteNonQuery()
     '                'MsgBox("Table qc_interelement_2 created!")
-    '                'Catch ex As MySql.Data.MySqlClient.MySqlException
+    '                'Catch ex As MySqlConnector.MySqlException
     '                '    'Ignore expected error i.e. error of Duplicates in MySqlException
     '            Catch ex As Exception
     '                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -665,14 +665,14 @@ Public Class frmQC
     '                    "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and obsDatetime_1=obsDatetime_2 and cast(obsValue_1 as SIGNED) < cast(obsValue_2 as SIGNED);"
 
     '                ' '' Create the Command for executing query and set its properties
-    '                ''objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '                ''objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
     '                ''Try
     '                ''    'Execute query
     '                ''    objCmd.ExecuteNonQuery()
     '                ''    MsgBox("QC inter-element report(1) send to: d:/data/qc_values_interelement_set1_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
 
     '                ''    'MsgBox("Table qc_interelement_2 cleared!")
-    '                ''    'Catch ex As MySql.Data.MySqlClient.MySqlException
+    '                ''    'Catch ex As MySqlConnector.MySqlException
     '                ''    '    'Ignore expected error i.e. error of Duplicates in MySqlException
     '                ''Catch ex As Exception
     '                ''    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -696,7 +696,7 @@ Public Class frmQC
     '            End If
 
     '            '' Create the Command for executing query and set its properties
-    '            'objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+    '            'objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
 
     '            Try
@@ -709,7 +709,7 @@ Public Class frmQC
 
     '                'MsgBox("QC inter-element report( send To: d:/data/qc_values_interelement_set2_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
 
-    '                'Catch ex As MySql.Data.MySqlClient.MySqlException
+    '                'Catch ex As MySqlConnector.MySqlException
     '                '    'Ignore expected error i.e. error of Duplicates in MySqlException
     '            Catch ex As Exception
     '                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -812,7 +812,7 @@ Public Class frmQC
         Try
             'Get required data for QC interelement comparison
             sql1 = "SELECT * from qc_interelement_relationship_definition"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql1, conn)
 
             ' Set timeout period to unlimited
             da.SelectCommand.CommandTimeout = 0
@@ -821,12 +821,12 @@ Public Class frmQC
             n = ds.Tables("interElement").Rows.Count
             'conn.Close()
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MessageBox.Show(ex.Message)
             'conn.Close()
         End Try
 
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim objCmd As MySqlConnector.MySqlCommand
 
         'myConnectionString = frmLogin.txtusrpwd.Text
 
@@ -861,7 +861,7 @@ Public Class frmQC
             ' create the QC output table if not existing
             strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
             objCmd.CommandTimeout = 0
         Catch ex As Exception
@@ -889,14 +889,14 @@ Public Class frmQC
         End If
 
         ' Create the Command for executing query and set its properties
-        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+        objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
         Try
             'Execute query
             objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
             objCmd.ExecuteNonQuery()
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             'Ignore expected error i.e. error of Duplicates in MySqlException
 
         Catch ex As Exception
@@ -922,7 +922,7 @@ Public Class frmQC
                 ' Empty the QC values table
 
                 strSQL = "TRUNCATE qcabslimits;"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
                 objCmd.CommandTimeout = 0
                 objCmd.ExecuteNonQuery()
             Catch ex As Exception
@@ -942,7 +942,7 @@ Public Class frmQC
                      "between " & beginYear & " And " & endYear & " And month(obsdatetime) between " & beginMonth & " And " & endMonth & " And  " &
                      "upperlimit <> '' and cast(obsValue as SIGNED) > cast(upperlimit as SIGNED);"
 
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
                 'Execute query
                 objCmd.CommandTimeout = 0
                 objCmd.ExecuteNonQuery()
@@ -960,7 +960,7 @@ Public Class frmQC
                          "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " &
                          "upperlimit <> '' and cast(obsValue as SIGNED) > cast(upperlimit as SIGNED);"
 
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
                 'Execute query
                 objCmd.CommandTimeout = 0
                 objCmd.ExecuteNonQuery()
@@ -986,7 +986,7 @@ Public Class frmQC
                 ' Empty the QC values table
 
                 strSQL = "TRUNCATE qcabslimits;"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
                 objCmd.CommandTimeout = 0
                 objCmd.ExecuteNonQuery()
             Catch ex As Exception
@@ -1003,7 +1003,7 @@ Public Class frmQC
                      "between " & beginYear & " And " & endYear & " And month(obsdatetime) between " & beginMonth & " And " & endMonth & " And  " &
                      "lowerLimit <> '' and cast(obsValue as SIGNED) < cast(lowerlimit as SIGNED);"
 
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
                 'Execute query
                 objCmd.CommandTimeout = 0
                 objCmd.ExecuteNonQuery()
@@ -1023,7 +1023,7 @@ Public Class frmQC
                       "lowerLimit <> '' and cast(obsValue as SIGNED) < cast(lowerlimit as SIGNED);"
 
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                 'Execute query
                 objCmd.CommandTimeout = 0
@@ -1049,7 +1049,7 @@ Public Class frmQC
 
             'Loop through the combination of elements in the [qc_interelement_relationship_definition] table
             sql1 = "SELECT * from qc_interelement_relationship_definition"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql1, conn)
             da1.SelectCommand.CommandTimeout = 0
             ds1.Clear()
             da1.Fill(ds1, "interElement")
@@ -1071,7 +1071,7 @@ Public Class frmQC
                 txtProgress.Text = "Updating QC Status to 1......"
                 txtProgress.Refresh()
 
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                 Try
                     objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
@@ -1098,7 +1098,7 @@ Public Class frmQC
 
                     ' Create the Command for executing query and set its properties
                     objCmd.CommandTimeout = 0
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                    objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
 
                     'Execute query
@@ -1136,7 +1136,7 @@ Public Class frmQC
                     " and month(obsdatetime) between " & beginMonth & " and " & endMonth
                 End If
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                 Try
                     'Execute query
@@ -1171,7 +1171,7 @@ Public Class frmQC
                 txtProgress.Refresh()
 
                 objCmd.CommandTimeout = 0
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                 Try
                     'Execute query
@@ -1223,7 +1223,7 @@ Public Class frmQC
 
             ' Empty Qc Limits table
             sql = "DELETE from qcabslimits"
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            objCmd = New MySqlConnector.MySqlCommand(sql, conn)
             objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
             objCmd.ExecuteNonQuery()
 
@@ -1235,7 +1235,7 @@ Public Class frmQC
             strSQL = "UPDATE observationinitial Set qcTypeLog = CONCAT(qcTypeLog, '3') WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
                       UPDATE observationinitial Set qcTypeLog = '3' WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " AND qcTypeLog is NULL;"
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
             Try
                 'Execute query
@@ -1267,7 +1267,7 @@ Public Class frmQC
                 strSQL = "UPDATE observationinitial Set qcTypeLog = CONCAT(qcTypeLog, '4') WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
                          UPDATE observationinitial Set qcTypeLog = '4' WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " AND qcTypeLog is NULL;"
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                 Try
                     'Execute query
@@ -1291,7 +1291,7 @@ Public Class frmQC
                 strSQL = "UPDATE observationinitial Set qcTypeLog = CONCAT(qcTypeLog, '5') WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";
                          UPDATE observationinitial Set qcTypeLog = '5' WHERE " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " AND qcTypeLog is NULL;"
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                 Try
                     'Execute query
@@ -1309,7 +1309,7 @@ Public Class frmQC
             ' Empty Qc Limits table
             Try
                 sql = "DELETE from qcabslimits"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                objCmd = New MySqlConnector.MySqlCommand(sql, conn)
                 objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
                 objCmd.ExecuteNonQuery()
 
@@ -1370,7 +1370,7 @@ Public Class frmQC
 
             sql = "SELECT * FROM qcabslimits;"
             ds.Clear()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "qcabslimits")
             x = ds.Tables("qcabslimits").Rows.Count
@@ -1432,7 +1432,7 @@ Public Class frmQC
         txtProgress.Text = "Preparing QC output for " & elm1 & " and " & elm2 & " ......"
         txtProgress.Refresh()
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql1, conn)
         da.SelectCommand.CommandTimeout = 0
         ds.Clear()
         da.Fill(ds, "qcInterElements")
@@ -1554,7 +1554,7 @@ Public Class frmQC
             'txtProgress.Text = sql
             'MsgBox(sql)
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da1.SelectCommand.CommandTimeout = 0
             ds1.Clear()
             da1.Fill(ds1, "dailyobs")
@@ -1611,7 +1611,7 @@ Public Class frmQC
         End Try
     End Sub
     Sub qcConsecutiveObs(sql As String, period As String, qcType As Integer)
-        Dim ds2 As New DataSet, da2 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim ds2 As New DataSet, da2 As MySqlConnector.MySqlDataAdapter
         Dim prevobs, prevDate, errRec As String
         Dim maxrows As Long
         Dim obsDiff, stsDiff, mean, stdev As Double
@@ -1621,7 +1621,7 @@ Public Class frmQC
             'conn.Open()
             'txtProgress.Visible = True
             'txtProgress.Text = sql
-            da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da2 = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da2.SelectCommand.CommandTimeout = 0
             ds2.Clear()
             da2.Fill(ds2, "dailyobs")
@@ -1693,7 +1693,7 @@ Public Class frmQC
     End Sub
     Sub Monthly_MEAN_STDEV(stn As String, elm As String, yy As Integer, mm As Integer, ByRef MEAN As String, ByRef STD As String)
         Dim dsv As New DataSet
-        Dim dav As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dav As MySqlConnector.MySqlDataAdapter
 
         sql = "SELECT AVG(obsvalue) As MEAN, STD(obsValue) As STDEV From observationinitial " &
                "Where RecordedFrom = '" & stn & "' AND describedBy = '" & elm & "' and Year(obsDatetime) = " & yy & " and Month(obsDatetime) = " & mm & " GROUP by Year(obsDatetime), Month(obsDatetime);"
@@ -1701,7 +1701,7 @@ Public Class frmQC
 
         Try
 
-            dav = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dav = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dav.SelectCommand.CommandTimeout = 0
             dsv.Clear()
             dav.Fill(dsv, "MEANSTDEV")
@@ -1714,7 +1714,7 @@ Public Class frmQC
     End Sub
     Sub dailyObs(stn As String, elm As String, dt As String, ByRef prevObs As String)
         Dim dsf As New DataSet
-        Dim daf As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim daf As MySqlConnector.MySqlDataAdapter
 
         sql = "SELECT recordedFrom AS STN, describedBy AS COD, obsDatetime AS DT,Year(obsDatetime) YY, Month(obsDatetime) AS MM, Day(obsDatetime) AS DD, obsvalue AS Val FROM observationinitial " &
                "WHERE recordedFrom = '" & stn & "' AND describedBy = '" & elm & "' AND obsDatetime = '" & dt & "';"
@@ -1722,7 +1722,7 @@ Public Class frmQC
 
         Try
 
-            daf = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            daf = New MySqlConnector.MySqlDataAdapter(sql, conn)
             daf.SelectCommand.CommandTimeout = 0
             dsf.Clear()
             daf.Fill(dsf, "dailyobs")
@@ -1740,11 +1740,11 @@ Public Class frmQC
 
     Sub UpdateqcLog(sqclog As String, qcLogType As String)
 
-        Dim dslog As New DataSet, dalog As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dslog As New DataSet, dalog As MySqlConnector.MySqlDataAdapter
         Dim qcLog As String
 
         Try
-            dalog = New MySql.Data.MySqlClient.MySqlDataAdapter(sqclog, conn)
+            dalog = New MySqlConnector.MySqlDataAdapter(sqclog, conn)
             ' Set timeout period to unlimited
             dalog.SelectCommand.CommandTimeout = 0
             dslog.Clear()
@@ -1767,7 +1767,7 @@ Public Class frmQC
     End Sub
     Sub qcLogUpdate(id As String, code As Integer, dtTime As String, qcType As String)
 
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         dtTime = DateAndTime.Year(dtTime) & "-" & DateAndTime.Month(dtTime) & "-" & DateAndTime.Day(dtTime) & " " & DateAndTime.Hour(dtTime) & ":" & DateAndTime.Minute(dtTime) & ":" & DateAndTime.Second(dtTime)
 
@@ -1777,7 +1777,7 @@ Public Class frmQC
 
             sql = "UPDATE observationinitial SET qcTypeLog = '" & qcType & "' WHERE recordedFrom = '" & id & "' and describedBy = '" & code & "' AND obsDatetime = '" & dtTime & "';"
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             'Execute query
             qry.ExecuteNonQuery()
@@ -1789,7 +1789,7 @@ Public Class frmQC
         Try
             sql1 = "Update observationinitial SET qcTypeLog = '" & qcType & "' WHERE  recordedFrom = '" & id & "' and describedBy = '" & code & "' AND obsDatetime = '" & dtTime & "' AND qcTypeLog IS NULL;"
             'txtProgress.Text = sql1
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql1, conn)
+            qry = New MySqlConnector.MySqlCommand(sql1, conn)
             qry.CommandTimeout = 0
             'Execute query
             qry.ExecuteNonQuery()
@@ -1802,13 +1802,13 @@ Public Class frmQC
 
     Sub statitical_change(id As String, code As Integer, dttime As String, obs As String, obsDiff As String)
 
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         Try
             dttime = DateAndTime.Year(dttime) & "-" & DateAndTime.Month(dttime) & "-" & DateAndTime.Day(dttime) & " " & DateAndTime.Hour(dttime) & ":" & DateAndTime.Minute(dttime) & ":" & DateAndTime.Second(dttime)
 
             sql = "INSERT IGNORE INTO `qcabslimits` (`StationId`, `ElementId`, `Datetime`, `obsValue`, `limitValue`) VALUES ('" & id & "', '" & code & "', '" & dttime & "', '" & obs & "', '" & obsDiff & "');"
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.ExecuteNonQuery()
 
         Catch ex As Exception
@@ -1818,7 +1818,7 @@ Public Class frmQC
 
     Sub Statistic_limits(id As String, cod As Integer, yy As Integer, mm As Integer, dd As Integer, ByRef avg As Double, ByRef stdev As Double, period As String)
         Dim dst As New DataSet
-        Dim dat As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dat As MySqlConnector.MySqlDataAdapter
 
         Try
             Select Case period
@@ -1833,7 +1833,7 @@ Public Class frmQC
             End Select
 
             'txtProgress.Text = sql
-            dat = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dat = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dat.SelectCommand.CommandTimeout = 0
             dst.Clear()
             dat.Fill(dst, "limits")

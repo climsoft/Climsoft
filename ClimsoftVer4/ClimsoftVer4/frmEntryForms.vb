@@ -1,11 +1,11 @@
 ﻿Public Class frmEntryForms
 
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim MyConnectionString As String
-    Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    Dim cmd As New MySqlConnector.MySqlCommand
 
     Private Sub frmEntryForms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim col(1) As String
@@ -26,7 +26,7 @@
 
             sql = "SELECT selected,table_name, description, entry_mode FROM data_forms where Selected ='1';"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "data_forms")
 
@@ -38,7 +38,7 @@
 
             ClsTranslations.TranslateForm(Me)
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MessageBox.Show(ex.Message)
         End Try
     End Sub
@@ -100,7 +100,7 @@
     End Function
 
     Function Empty_Table(tbl) As Boolean
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         Empty_Table = True
 
@@ -124,7 +124,7 @@
 
             End If
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
@@ -136,7 +136,7 @@
     End Function
 
     Function Record_Uploaded(sqli As String, sqlf As String) As Boolean
-        Dim da2 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da2 As MySqlConnector.MySqlDataAdapter
         Dim ds2 As New DataSet
         Dim tbl_initial, tbl_final As Boolean
         Record_Uploaded = False
@@ -145,7 +145,7 @@
 
         Try
             ' Check if records uploaded into the table observationinitial
-            da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sqli, conn)
+            da2 = New MySqlConnector.MySqlDataAdapter(sqli, conn)
             ds2.Clear()
             da2.Fill(ds2, "initial_uploaded")
 
@@ -154,7 +154,7 @@
             End If
 
             ' Check if records uploaded into the table observationfinal
-            da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlf, conn)
+            da2 = New MySqlConnector.MySqlDataAdapter(sqlf, conn)
             ds2.Clear()
             da2.Fill(ds2, "final_uploaded")
 
@@ -174,7 +174,7 @@
     End Function
 
     Sub Delete_Uploaded(tbl As String, typ As String)
-        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da1 As MySqlConnector.MySqlDataAdapter
         Dim ds1 As New DataSet
         Dim sql1, sql2, stn, elm, yr, mn As String
 
@@ -183,7 +183,7 @@
 
                 If typ = "All" Then sql = "select stationId, ElementId,yyyy, mm from " & tbl
                 If typ = "Selected" Then sql = "select stationId, ElementId,yyyy, mm from " & tbl & " where (yyyy between '" & txtBYear.Text & "' and '" & txtEYear.Text & "') and (mm between '" & txtBmonth.Text & "' and '" & TxtEMonth.Text & "');"
-                da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 ds1.Clear()
                 da1.Fill(ds1, tbl)
                 With ds1.Tables(tbl)
@@ -205,7 +205,7 @@
             ElseIf tbl = "form_hourlywind" Or tbl = "form_agro1" Or tbl = "form_synoptic_2_ra1" Then
                 If typ = "All" Then sql = "select stationId,yyyy, mm from " & tbl
                 If typ = "Selected" Then sql = "select stationId, yyyy, mm from " & tbl & " where (yyyy between '" & txtBYear.Text & "' and '" & txtEYear.Text & "') and (mm between '" & txtBmonth.Text & "' and '" & TxtEMonth.Text & "');"
-                da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 ds1.Clear()
                 da1.Fill(ds1, tbl)
                 With ds1.Tables(tbl)
@@ -226,7 +226,7 @@
             ElseIf tbl = "form_monthly" Then
                 If typ = "All" Then sql = "select stationId, ElementId,yyyy from " & tbl
                 If typ = "Selected" Then sql = "select stationId, ElementId,yyyy from " & tbl & " where (yyyy between '" & txtBYear.Text & "' and '" & txtEYear.Text & "');"
-                da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 ds1.Clear()
                 da1.Fill(ds1, tbl)
                 With ds1.Tables(tbl)
@@ -249,12 +249,12 @@
     End Sub
 
     Function Delete_Record(sql As String) As Boolean
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         Delete_Record = True
 
         Try
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 

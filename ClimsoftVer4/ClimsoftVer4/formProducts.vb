@@ -17,11 +17,17 @@
 Public Class frmProducts
     'Public xy As String
     Private dataTable As DataTable
-
+    Dim conp As New MySqlConnector.MySqlConnection
+    Dim MyConnectionString As String
+    Dim cmd As New MySqlConnector.MySqlCommand
+    Dim da As MySqlConnector.MySqlDataAdapter
+    Dim ds As New DataSet
+    Dim sql As String
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'todo. this function is meant to update the products table everytime it's run
-        ProductsTable_Update()
 
+        ProductsTable_Update()
+        Exit Sub
         'set up the products data table
         Dim clsDataCall As New DataCall
         clsDataCall.SetTableName("tblProducts")
@@ -57,7 +63,9 @@ Public Class frmProducts
 
     Private Sub cmbProductsCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboProductsCategory.SelectedIndexChanged
         'clear list view rows
-        lstViewProducts.Items.Clear()
+        populate_list(cboProductsCategory.Text)
+
+        Exit Sub
 
         'get products of the selected category
         Dim dataRows() As DataRow = dataTable.Select("prCategory = '" & cboProductsCategory.SelectedValue & "'")
@@ -144,12 +152,16 @@ Public Class frmProducts
     'todo. should this always be called?? and is this the right place to call it
     'this should be done as part of the scripts update
     Private Sub ProductsTable_Update()
+        'Dim dbconn As New MySqlConnector.MySqlConnection
+
         Dim currDB As String = ""
         Dim sql0 As String
-        Dim qry0 As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry0 As MySqlConnector.MySqlCommand
         Dim MyConnectionString As String
 
         MyConnectionString = frmLogin.txtusrpwd.Text
+        conp.ConnectionString = MyConnectionString
+        conp.Open()
         frmUserManagement.CurrentDB(MyConnectionString, currDB)
         sql0 = "USE `" & currDB & "`;
                 CREATE TABLE IF NOT EXISTS `tblproducts` (
@@ -207,14 +219,166 @@ Public Class frmProducts
                ('42', 'AWS Precip Daily 06-06Z', 'AWS Daily Precipitation Total 06-06UTC', 'Special Products');"
         Try
             Me.Cursor = Cursors.WaitCursor
-            qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)
+
+            'qry0 = New MySqlConnector.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)
+            qry0 = New MySqlConnector.MySqlCommand(sql0, conp)
             qry0.CommandTimeout = 0
             qry0.ExecuteNonQuery()
+            conp.Close()
+
+            products_Categories()
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
-            MsgBox(ex.Message)
-            Me.Cursor = Cursors.Default
+        conp.Close()
+        MsgBox(ex.Message & "@ ProductsTable_Update")
+        Me.Cursor = Cursors.Default
         End Try
     End Sub
 
+    'Private Sub lstvProducts_Click(sender As Object, e As EventArgs) Handles lstViewProducts.Click
+    Sub products_Categories()
+
+        sql = "SELECT prCategory FROM tblproducts GROUP BY prCategory;"
+        conp.ConnectionString = frmLogin.txtusrpwd.Text
+        Try
+            conp.Open()
+            da = New MySqlConnector.MySqlDataAdapter(sql, conp)
+            ds.Clear()
+            da.Fill(ds, "products")
+
+            conp.Close()
+
+        With ds.Tables("products")
+                'MsgBox(.Rows.Count)
+                lstViewProducts.Clear()
+
+                For i = 0 To .Rows.Count - 1
+                    cboProductsCategory.Items.Add(.Rows(i).Item(0))
+                Next
+
+        End With
+
+            'Initialize Products List Views
+            lstViewProducts.Columns.Clear()
+
+            lstViewProducts.Columns.Add("Product Name", 100, HorizontalAlignment.Left)
+            lstViewProducts.Columns.Add("Product Details", 200, HorizontalAlignment.Left)
+
+            '    If lstViewProducts.SelectedItems.Count = 0 Then
+            '        Exit Sub
+            '    End If
+
+            '    Dim selectedProductName As String = lstViewProducts.SelectedItems.Item(0).Text
+            '    Dim str(3), Ecode As String
+            '    Dim itm = New ListViewItem
+
+            '    Select Case selectedProductName
+            '        Case "Stations Records"
+            '            frmInventoryChart.Show()
+            '        Case "CLIMAT"
+            '            frmCLIMAT.Show()
+
+            '            'Case Else
+            '            'MsgBox(selectedProductName)
+            '            'todo. refactor formProductsSelectCriteria to not use product type label
+            '            'the label should show translated text
+
+            '        Case "Daily Wind Speed"
+            '            Ecode = InputBox(ClsTranslations.GetTranslation("Element Code?"), ClsTranslations.GetTranslation("Daily Wind Totalizer Element Code"))
+
+            '            If Ecode = "" Or Not IsNumeric(Ecode) Then Exit Sub
+            '            'If InputBox("Element Code?", "Daily Wind Totalizer Element Code") = "" Then Exit Sub
+            '            'str(0) = CInt(InputBox("Element Code?", "Daily Wind Totalizer Element Code")) 'CInt(Ecode)
+
+            '            str(0) = Ecode
+            '            str(1) = "WINDTOT"
+            '            str(2) = ClsTranslations.GetTranslation("Wind Totalizer")
+            '            itm = New ListViewItem(str)
+            '            formProductsSelectCriteria.lstvElements.Items.Clear()
+            '            formProductsSelectCriteria.lstvElements.Items.Add(itm)
+            '            formProductsSelectCriteria.lblProductType.Text = selectedProductName
+            '            formProductsSelectCriteria.Show()
+
+            '        Case "Hourly Wind Speed"
+            '            Ecode = InputBox(ClsTranslations.GetTranslation("Element Code?"), ClsTranslations.GetTranslation("Hourly Wind Totalizer Element Code"))
+
+            '            If Ecode = "" Or Not IsNumeric(Ecode) Then Exit Sub
+
+            '            str(0) = Ecode
+            '            str(1) = "WINDTOT"
+            '            str(2) = ClsTranslations.GetTranslation("Wind Totalizer")
+            '            itm = New ListViewItem(str)
+            '            formProductsSelectCriteria.lstvElements.Items.Clear()
+            '            formProductsSelectCriteria.lstvElements.Items.Add(itm)
+            '            formProductsSelectCriteria.lblProductType.Text = selectedProductName
+            '            formProductsSelectCriteria.Show()
+            '        Case Else
+            '            formProductsSelectCriteria.lblProductType.Text = selectedProductName
+            '            formProductsSelectCriteria.Show()
+            '    End Select
+        Catch ex As Exception
+            conp.Close()
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Sub products_groups(grp As String)
+        sql = "SELECT productName FROM tblproducts WHERE prCategory = '" & grp & "';"
+
+        Try
+
+            conp.ConnectionString = frmLogin.txtusrpwd.Text
+            conp.Open()
+            da = New MySqlConnector.MySqlDataAdapter(sql, conp)
+            ds.Clear()
+            da.Fill(ds, "products")
+
+            conp.Close()
+
+            With ds.Tables("products")
+                'MsgBox(.Rows.Count)
+                For i = 0 To .Rows.Count - 1
+                    cboProductsCategory.Items.Add(.Rows(i).Item(0))
+                Next
+
+            End With
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+
+    End Sub
+    Sub populate_list(lst As String)
+        sql = "SELECT productName, prDetails FROM tblproducts WHERE prCategory = '" & lst & "';"
+
+        Try
+
+            conp.ConnectionString = frmLogin.txtusrpwd.Text
+            conp.Open()
+            da = New MySqlConnector.MySqlDataAdapter(sql, conp)
+            ds.Clear()
+            da.Fill(ds, "list")
+
+            conp.Close()
+            Dim prd(2) As String
+            Dim itms = New ListViewItem
+
+            With ds.Tables("list")
+                lstViewProducts.Items.Clear()
+                'MsgBox(.Rows.Count)
+                For i = 0 To .Rows.Count - 1
+                    prd(0) = .Rows(i).Item(0)
+                    prd(1) = .Rows(i).Item(1)
+                    itms = New ListViewItem(prd)
+                    lstViewProducts.Items.Add(itms)
+                Next
+
+            End With
+
+        Catch ex As Exception
+            conp.Close()
+            MsgBox(ex.Message)
+        End Try
+    End Sub
 End Class

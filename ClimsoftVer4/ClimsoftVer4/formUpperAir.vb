@@ -16,17 +16,17 @@
 
 Public Class formUpperAir
 
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
     Dim elemCode As String
     Dim dsValueLimits As New DataSet
     Dim sqlValueLimits As String
-    Dim daValueLimits As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daValueLimits As MySqlConnector.MySqlDataAdapter
     Dim valUpperLimit As String, valLowerLimit As String, stnElevation As String
     Dim obsValue As String
     Dim FldName As New dataEntryGlobalRoutines
     Dim inc As Integer
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
     Dim maxRows As Integer
@@ -55,11 +55,11 @@ Public Class formUpperAir
             conn.Open()
 
             sql = "SELECT * From form_upperair1"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "form_upperair1")
             conn.Close()
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
 
             If ex.HResult = -2147467259 Then
                 ' Table does not exit
@@ -93,9 +93,9 @@ Public Class formUpperAir
             Dim ctl As Control
             Dim ds1 As New DataSet
             Dim sql1 As String
-            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da1 As MySqlConnector.MySqlDataAdapter
             sql1 = "SELECT stationId,stationName FROM station"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql1, conn)
 
             da1.Fill(ds1, "station")
             If ds1.Tables("station").Rows.Count > 0 Then
@@ -240,7 +240,7 @@ Public Class formUpperAir
                     elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
                     sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
                     '
-                    daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                    daValueLimits = New MySqlConnector.MySqlDataAdapter(sqlValueLimits, conn)
                     'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
                     dsValueLimits.Clear()
                     'Add row for element code associated with active control
@@ -341,7 +341,7 @@ Public Class formUpperAir
 
     Function Create_form_upperair1_table(db As String) As Boolean
         Dim sql As String
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         Me.Cursor = Cursors.WaitCursor
 
@@ -387,7 +387,7 @@ Public Class formUpperAir
         Try
             ' Create the table form_upperair1'
 
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
         Catch ex As Exception
@@ -408,7 +408,7 @@ Public Class formUpperAir
 	               DROP INDEX `obsInitialIdentification`,
 	               ADD UNIQUE INDEX `obsInitialIdentification` (`recordedFrom`, `describedBy`, `obsDatetime`, `qcStatus`, `acquisitionType`, `obsLevel`);"
         Try
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
@@ -424,7 +424,7 @@ Public Class formUpperAir
 	               DROP INDEX `obsFinalIdentification`,
 	               ADD UNIQUE INDEX `obsFinalIdentification` (`recordedFrom`, `describedBy`, `obsDatetime`, `qcStatus`, `acquisitionType`, `obsLevel`);"
         Try
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
@@ -440,7 +440,7 @@ Public Class formUpperAir
         '        DROP INDEX `obsInitialIdentification`,
         '        ADD UNIQUE INDEX `obsInitialIdentification` (`recordedFrom`, `describedBy`, `obsDatetime`, `qcStatus`, `acquisitionType`, `obsLevel`);"
         'Try
-        '    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        '    qry = New MySqlConnector.MySqlCommand(sql, conn)
         '    qry.CommandTimeout = 0
         '    qry.ExecuteNonQuery()
 
@@ -456,7 +456,7 @@ Public Class formUpperAir
         '        DROP INDEX `obsFinalIdentification`,
         '        ADD UNIQUE INDEX `obsFinalIdentification` (`recordedFrom`, `describedBy`, `obsDatetime`, `qcStatus`, `acquisitionType`, `obsLevel`);"
         'Try
-        '    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        '    qry = New MySqlConnector.MySqlCommand(sql, conn)
         '    qry.CommandTimeout = 0
         '    qry.ExecuteNonQuery()
 
@@ -472,7 +472,7 @@ Public Class formUpperAir
         Try
             sql = "select * from form_upperair1"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "frmupperair1")
 
             stVal = 0
@@ -496,7 +496,7 @@ Public Class formUpperAir
             If stVal > 0 And edVal > 0 Then
                 sql = "UPDATE `data_forms` SET `val_start_position`= " & stVal & ", `val_end_position`= " & edVal & ", `elem_code_location` = 'Horizontal' WHERE `form_name`='form_upperair1';"
 
-                qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                qry = New MySqlConnector.MySqlCommand(sql, conn)
                 qry.CommandTimeout = 0
                 qry.ExecuteNonQuery()
             End If
@@ -514,11 +514,11 @@ Public Class formUpperAir
     Sub Grant_Permissions(dbnme As String)
 
         Dim sql, usr, usrl As String
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         Try
             sql = "use " & dbnme & "; Select userName, userRole from climsoftusers;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "ClimsoftUsers")
 
@@ -531,12 +531,12 @@ Public Class formUpperAir
                         If usrl = "ClimsoftAdmin" Or usrl = "ClimsoftOperator" Or usrl = "ClimsoftRainfall" Or usrl = "ClimsoftOperatorSupervisor" Or usrl = "ClimsoftQC" Then
 
                             sql = "GRANT DELETE,Select,INSERT,UPDATE, CREATE On " & dbnme & ".form_upperair1 To '" & usr & "';"
-                            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                            qry = New MySqlConnector.MySqlCommand(sql, conn)
                             'execute command
                             qry.ExecuteNonQuery()
 
                             sql = "GRANT DELETE,Select,INSERT,UPDATE On mariadb_climsoft_test_db_v4.form_upperair1 To  '" & usr & "';"
-                            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                            qry = New MySqlConnector.MySqlCommand(sql, conn)
                             'execute command
                             qry.ExecuteNonQuery()
                         End If
@@ -720,13 +720,13 @@ Public Class formUpperAir
 
             ' Sequencer code Ends there
             Dim dsLastDataRecord As New DataSet
-            Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim daLastDataRecord As MySqlConnector.MySqlDataAdapter
             Dim SQL_last_record, lastRecYear, lastRecMonth, lastRecDay, stn, lastLevel As String
             Dim nextRecDate As Date
 
             SQL_last_record = "SELECT stationId,yyyy,mm,dd,levelName,signature,entryDatetime from form_upperair1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_upperair1);"
             dsLastDataRecord.Clear()
-            daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+            daLastDataRecord = New MySqlConnector.MySqlDataAdapter(SQL_last_record, conn)
             daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
 
             'Initialize header fields required for sequencer
@@ -813,7 +813,7 @@ Public Class formUpperAir
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
@@ -853,7 +853,7 @@ Public Class formUpperAir
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
         If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
@@ -918,6 +918,16 @@ Public Class formUpperAir
         frmFormUpload.Show()
         frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName1.Text
 
+    End Sub
+
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+        Me.Cursor = Cursors.WaitCursor
+        If FldName.DataPush("form_upperair1") Then
+            MsgBox("Data Pushed to remote server successfully")
+        Else
+            MsgBox("Data Push Failed!")
+        End If
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
@@ -1020,7 +1030,7 @@ Public Class formUpperAir
 
                         sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
 
-                        daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                        daValueLimits = New MySqlConnector.MySqlDataAdapter(sqlValueLimits, conn)
                         'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
                         dsValueLimits.Clear()
                         'Add row for element code associated with active control
@@ -1068,7 +1078,7 @@ Public Class formUpperAir
                 'must be declared for the Update method to work.
                 Dim m As Integer
                 'Dim ctl As Control
-                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
                 Dim dsNewRow As DataRow
                 'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
                 Dim recCommit As New dataEntryGlobalRoutines

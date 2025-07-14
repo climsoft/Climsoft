@@ -42,8 +42,8 @@ Public Class frmUpdateDBfromQCReport
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
 
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim objCmd As MySqlConnector.MySqlCommand
+        Dim conn As New MySqlConnector.MySqlConnection
 
         strFileName1 = System.IO.Path.GetFileName(txtQCReportOriginal.Text)
         strFileName2 = System.IO.Path.GetFileName(txtQCReportUpdated.Text)
@@ -76,7 +76,7 @@ Public Class frmUpdateDBfromQCReport
             conn1.Close()
         Catch ex As Exception
             'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at btnOK")
             Me.Cursor = Cursors.Default
             lblProcessStatus.Text = "Stopped"
         End Try
@@ -179,12 +179,12 @@ Public Class frmUpdateDBfromQCReport
                                & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
                                 ' Create the Command for executing query and set its properties
-                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                                 Try
                                     'Execute query
                                     objCmd.ExecuteNonQuery()
-                                    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    'Catch ex As MySqlConnector.MySqlException
                                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
                                     Me.Cursor = Cursors.Default
                                     lblProcessStatus.Text = "Stopped"
@@ -264,13 +264,13 @@ Public Class frmUpdateDBfromQCReport
                                & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
                                 ' Create the Command for executing query and set its properties
-                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                                 Try
                                     'Execute query
                                     objCmd.CommandTimeout = 0
                                     objCmd.ExecuteNonQuery()
-                                    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    'Catch ex As MySqlConnector.MySqlException
                                     'Ignore expected error i.e. error of Duplicates in MySqlException
 
                                 Catch ex As Exception
@@ -298,7 +298,12 @@ Public Class frmUpdateDBfromQCReport
             'Loop through all records in dataset [QCReportOriginal]
             Try
                 For i = 0 To m
-                    If Not IsDBNull(ds.Tables("QCReportOriginal").Rows(i).Item("StationId")) Then stnId1 = ds.Tables("QCReportOriginal").Rows(i).Item("StationId")
+                    If Not IsDBNull(ds.Tables("QCReportOriginal").Rows(i).Item("StationId")) Then
+                        stnId1 = ds.Tables("QCReportOriginal").Rows(i).Item("StationId")
+                    Else
+                        Continue For
+                    End If
+
                     elemId1 = ds.Tables("QCReportOriginal").Rows(i).Item("elementId")
                     yyyy1 = ds.Tables("QCReportOriginal").Rows(i).Item("yyyy")
                     mm1 = ds.Tables("QCReportOriginal").Rows(i).Item("mm")
@@ -358,12 +363,12 @@ Public Class frmUpdateDBfromQCReport
                                & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
                                 ' Create the Command for executing query and set its properties
-                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
                                 objCmd.CommandTimeout = 0
                                 Try
                                     'Execute query
                                     objCmd.ExecuteNonQuery()
-                                    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    'Catch ex As MySqlConnector.MySqlException
                                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
                                 Catch ex As Exception
                                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -379,7 +384,7 @@ Public Class frmUpdateDBfromQCReport
                 'MsgBox(msgTxtLimitsChecksChangesUpdated, MsgBoxStyle.Information)
                 lblProcessStatus.Text = "Changed records for limits checks have been updated successfully!"
             Catch ex As Exception
-                MsgBox(ex.Message)
+                MsgBox(ex.Message & " at btnOK1")
                 Me.Cursor = Cursors.Default
                 lblProcessStatus.Text = "Stopped"
                 conn.Close()

@@ -1,8 +1,8 @@
 ﻿Public Class frmCharts
     Public stns, elmlist, elmcolmn, sdt, edt, SumAvg, SummaryType, graphType As String
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
-    Dim con As New MySql.Data.MySqlClient.MySqlConnection
+    Dim con As New MySqlConnector.MySqlConnection
     Dim sql, MyConnectionString As String
 
     Private Sub chtitle_TextChanged(sender As Object, e As EventArgs) Handles txtchtitle.TextChanged
@@ -122,7 +122,7 @@
             End If
 
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, con)
+            da = New MySqlConnector.MySqlDataAdapter(Sql, con)
             ds.Clear()
             da.Fill(ds, "charts")
             recmx = ds.Tables("charts").Rows.Count

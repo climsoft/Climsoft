@@ -1,8 +1,8 @@
 ﻿Public Class frmSynopticTimeSelection
 
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim ds As New DataSet
-    Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As New MySqlConnector.MySqlDataAdapter
     Dim sql As String
 
     Private Sub frmHourlyTimeSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -10,7 +10,7 @@
             conn.ConnectionString = frmLogin.txtusrpwd.Text
             conn.Open()
             sql = "select hh from seq_hour"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "hours")
             Me.DataGridView1.DataSource = ds.Tables(0)
             conn.Close()
@@ -26,8 +26,8 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
+        Dim objCmd As MySqlConnector.MySqlCommand
         Try
 
 
@@ -36,13 +36,13 @@
             With DataGridView1
 
                 sql = "TRUNCATE `seq_hour`;"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                objCmd = New MySqlConnector.MySqlCommand(sql, conn)
                 objCmd.ExecuteNonQuery()
 
                 For i = 0 To .Rows.Count - 1
                     'MsgBox(.Rows(i).Cells(0).Value)
                     sql = "INSERT INTO seq_hour (`hh`) VALUES (" & .Rows(i).Cells(0).Value & ");"
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                    objCmd = New MySqlConnector.MySqlCommand(sql, conn)
                     objCmd.ExecuteNonQuery()
                 Next
             End With

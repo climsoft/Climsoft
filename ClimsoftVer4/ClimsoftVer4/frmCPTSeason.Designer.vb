@@ -106,9 +106,9 @@ Partial Class frmCPTSeason
         Me.lblEndMonth.AutoSize = True
         Me.lblEndMonth.Location = New System.Drawing.Point(313, 49)
         Me.lblEndMonth.Name = "lblEndMonth"
-        Me.lblEndMonth.Size = New System.Drawing.Size(62, 13)
+        Me.lblEndMonth.Size = New System.Drawing.Size(59, 13)
         Me.lblEndMonth.TabIndex = 4
-        Me.lblEndMonth.Text = "Start Month"
+        Me.lblEndMonth.Text = "End Month"
         '
         'frmCPTSeason
         '

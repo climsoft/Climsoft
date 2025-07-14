@@ -1,14 +1,14 @@
 ﻿Public Class frmModifyObservations
     Dim sql, db, dbstr, rw, stn, elm, dt, qc, aq As String
     Dim recs As New DataSet
-    Dim das As MySql.Data.MySqlClient.MySqlDataAdapter
-    Dim dbc As New MySql.Data.MySqlClient.MySqlConnection
+    Dim das As MySqlConnector.MySqlDataAdapter
+    Dim dbc As New MySqlConnector.MySqlConnection
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "modifyobservations.htm")
     End Sub
 
-    Dim qry As New MySql.Data.MySqlClient.MySqlCommand
+    Dim qry As New MySqlConnector.MySqlCommand
 
     Private Sub cmdView_Click(sender As Object, e As EventArgs) Handles cmdView.Click
         rw = -1
@@ -25,7 +25,7 @@
             '' Select records
             'sql = "select recordedFrom as Station, describedBy as Element, year(obsdatetime) as Year, month(obsdatetime) as Month, day(obsdatetime) as Day, right(obsdatetime,8) as Time, obsvalue as Value, obslevel as Level, flag as Flag, period as Period, qcstatus as QcStatus, acquisitiontype as AcquisitionType from " & db & " WHERE " & _
             '    "recordedFrom = '" & txtStation.Text & "' and describedBy='" & txtElement.Text & "' and (year(obsdatetime) between " & txtStartYear.Text & " and " & txtEndYear.Text & ") and (month(obsdatetime) between " & txtStartMonth.Text & " and " & txtEndMonth.Text & ") and (day(obsdatetime) between 1 and 31);"
-            'das = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbc)
+            'das = New MySqlConnector.MySqlDataAdapter(sql, dbc)
             '' Set to unlimited timeout period
             'das.SelectCommand.CommandTimeout = 0
 
@@ -63,7 +63,7 @@
             sql = "select recordedFrom as Station, describedBy as Element, year(obsdatetime) as Year, month(obsdatetime) as Month, day(obsdatetime) as Day, right(obsdatetime,8) as Time, obsvalue as Value, obslevel as Level, flag as Flag, period as Period, qcstatus as QcStatus, acquisitiontype as AcquisitionType from " & db & " WHERE " & _
                   "recordedFrom = '" & txtStation.Text & "' and describedBy='" & txtElement.Text & "' and (year(obsdatetime) between '" & txtStartYear.Text & "' and '" & txtEndYear.Text & "') and (month(obsdatetime) between '" & txtStartMonth.Text & "' and '" & txtEndMonth.Text & "') and (day(obsdatetime) between '" & txtStartDay.Text & "' and '" & txtEndDay.Text & "') and (hour(obsdatetime) between '" & txtStartHour.Text & "' and '" & txtEndHour.Text & "');"
             'MsgBox(sql)
-            das = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbc)
+            das = New MySqlConnector.MySqlDataAdapter(sql, dbc)
             ' Set to unlimited timeout period
             das.SelectCommand.CommandTimeout = 0
             recs.Clear()

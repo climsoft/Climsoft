@@ -1,9 +1,9 @@
 ﻿Public Class frmCreateEntryForm
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
-    Dim qry As MySql.Data.MySqlClient.MySqlCommand
+    Dim qry As MySqlConnector.MySqlCommand
 
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
     Dim frm, tbl As String
@@ -23,7 +23,7 @@
 
             ' load forms
             sql = "SELECT form_name, description FROM data_forms where form_name = 'form_daily1' or form_name = 'form_synoptic2_TDCF';"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "data_forms")
 
@@ -35,7 +35,7 @@
 
             'Load elements
             sql = "SELECT elementId, description FROM obselement;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "elements")
 
@@ -70,7 +70,7 @@
     Sub add_Element(idType As String, dat As String)
         Dim maxRows As Integer
         Dim ItmExist As Boolean
-        Dim dae As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dae As MySqlConnector.MySqlDataAdapter
         Dim dse As New DataSet
         Dim j As Integer
         Try
@@ -87,7 +87,7 @@
                     sql = "SELECT elementId, description FROM obselement WHERE elementId ='" & dat & "';"
             End Select
 
-            dae = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dae = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dse.Clear()
             dae.Fill(dse, "obselement")
 
@@ -185,7 +185,7 @@
         If Not Update_DataForms() Then Exit Sub
 
         Try
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
@@ -208,14 +208,14 @@
         'Clear_lstElements()
 
         sql = "SELECT form_name, description FROM data_forms where description = '" & lstBoxForms.SelectedItem & "';"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "forms")
 
         Try
             frm = ds.Tables("forms").Rows(0).Item(0)
             sql = "SELECT * FROM " & frm & ";"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "frm")
         Catch x As Exception
@@ -252,7 +252,7 @@
         ed = stat + lstViewElements.Items.Count - 1
         sql = "update data_forms set val_start_position = " & stat & ", val_end_position =  " & ed & " where form_name = '" & tbl & "';"
         Try
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
@@ -266,7 +266,7 @@
     Function TableName(ByRef tbl As String) As Boolean
 
         sql = "SELECT table_name FROM data_forms where description = '" & lstBoxForms.SelectedItem & "';"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "tblNm")
 

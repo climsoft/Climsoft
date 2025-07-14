@@ -67,9 +67,11 @@ Partial Class frmDBUtilities
         '
         'MenuStrip1
         '
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToolStripMenuItem, Me.ExternalDataToolStripMenuItem, Me.GenerateValuesToolStripMenuItem, Me.BackupToolStripMenuItem, Me.RestoreToolStripMenuItem, Me.OptionsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(4, 1, 0, 1)
         Me.MenuStrip1.Size = New System.Drawing.Size(852, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
@@ -78,20 +80,20 @@ Partial Class frmDBUtilities
         '
         Me.ImportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ObsInitialToFinalToolStripMenuItem})
         Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
-        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
+        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(57, 22)
         Me.ImportToolStripMenuItem.Text = "Upload"
         '
         'ObsInitialToFinalToolStripMenuItem
         '
         Me.ObsInitialToFinalToolStripMenuItem.Name = "ObsInitialToFinalToolStripMenuItem"
-        Me.ObsInitialToFinalToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
+        Me.ObsInitialToFinalToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ObsInitialToFinalToolStripMenuItem.Text = "Obs Initial to Final"
         '
         'ExternalDataToolStripMenuItem
         '
         Me.ExternalDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CLICOMDailyToolStripMenuItem, Me.AWSToolStripMenuItem, Me.NOAAGTSToolStripMenuItem, Me.DailyToolStripMenuItem, Me.CLIMSOFTV3ToolStripMenuItem})
         Me.ExternalDataToolStripMenuItem.Name = "ExternalDataToolStripMenuItem"
-        Me.ExternalDataToolStripMenuItem.Size = New System.Drawing.Size(88, 20)
+        Me.ExternalDataToolStripMenuItem.Size = New System.Drawing.Size(87, 22)
         Me.ExternalDataToolStripMenuItem.Text = "External Data"
         '
         'CLICOMDailyToolStripMenuItem
@@ -178,26 +180,26 @@ Partial Class frmDBUtilities
         'GenerateValuesToolStripMenuItem
         '
         Me.GenerateValuesToolStripMenuItem.Name = "GenerateValuesToolStripMenuItem"
-        Me.GenerateValuesToolStripMenuItem.Size = New System.Drawing.Size(102, 20)
+        Me.GenerateValuesToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
         Me.GenerateValuesToolStripMenuItem.Text = "Generate Values"
         Me.GenerateValuesToolStripMenuItem.Visible = False
         '
         'BackupToolStripMenuItem
         '
         Me.BackupToolStripMenuItem.Name = "BackupToolStripMenuItem"
-        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(58, 20)
+        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(58, 22)
         Me.BackupToolStripMenuItem.Text = "Backup"
         '
         'RestoreToolStripMenuItem
         '
         Me.RestoreToolStripMenuItem.Name = "RestoreToolStripMenuItem"
-        Me.RestoreToolStripMenuItem.Size = New System.Drawing.Size(58, 20)
+        Me.RestoreToolStripMenuItem.Size = New System.Drawing.Size(58, 22)
         Me.RestoreToolStripMenuItem.Text = "Restore"
         '
         'OptionsToolStripMenuItem
         '
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 22)
         Me.OptionsToolStripMenuItem.Text = "Options"
         Me.OptionsToolStripMenuItem.Visible = False
         '
@@ -224,7 +226,7 @@ Partial Class frmDBUtilities
         Me.Dbtpanel2.Controls.Add(Me.ProgressBarDb)
         Me.Dbtpanel2.Location = New System.Drawing.Point(444, 52)
         Me.Dbtpanel2.Name = "Dbtpanel2"
-        Me.Dbtpanel2.Padding = New System.Windows.Forms.Padding(2)
+        Me.Dbtpanel2.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Dbtpanel2.Size = New System.Drawing.Size(396, 338)
         Me.Dbtpanel2.TabIndex = 5
         '
@@ -242,9 +244,11 @@ Partial Class frmDBUtilities
         '
         'ToolStrip1
         '
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.cmbDb, Me.ToolStripButton1})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
         Me.ToolStrip1.Size = New System.Drawing.Size(852, 25)
         Me.ToolStrip1.TabIndex = 6
         Me.ToolStrip1.Text = "ToolStrip1"
@@ -252,7 +256,7 @@ Partial Class frmDBUtilities
         'ToolStripLabel1
         '
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(55, 22)
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(55, 28)
         Me.ToolStripLabel1.Text = "Database"
         Me.ToolStripLabel1.Visible = False
         '
@@ -260,7 +264,7 @@ Partial Class frmDBUtilities
         '
         Me.cmbDb.Items.AddRange(New Object() {"Initial", "Final"})
         Me.cmbDb.Name = "cmbDb"
-        Me.cmbDb.Size = New System.Drawing.Size(121, 25)
+        Me.cmbDb.Size = New System.Drawing.Size(121, 31)
         Me.cmbDb.Visible = False
         '
         'ToolStripButton1
@@ -269,7 +273,7 @@ Partial Class frmDBUtilities
         Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(28, 28)
         Me.ToolStripButton1.Text = "ToolStripButton1"
         Me.ToolStripButton1.Visible = False
         '
@@ -279,7 +283,7 @@ Partial Class frmDBUtilities
         Me.Dbtpanel1.Controls.Add(Me.grpbxUpload)
         Me.Dbtpanel1.Location = New System.Drawing.Point(12, 52)
         Me.Dbtpanel1.Name = "Dbtpanel1"
-        Me.Dbtpanel1.Padding = New System.Windows.Forms.Padding(2)
+        Me.Dbtpanel1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Dbtpanel1.Size = New System.Drawing.Size(426, 338)
         Me.Dbtpanel1.TabIndex = 7
         '

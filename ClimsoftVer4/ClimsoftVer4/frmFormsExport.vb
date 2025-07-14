@@ -1,9 +1,9 @@
 ﻿Public Class frmFormsExport
 
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim maxRows, maxColumns As Integer
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim MyConnectionString, sql As String
     Dim stnlist, elmlist, levlist, elmcolmn, sdate, edate, abbrev, WrunCode As String
     Dim ItmExist As Boolean
@@ -15,7 +15,7 @@
 
         sql = "SELECT stationId, stationName FROM station WHERE stationName='" & prod & "';"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "station")
 
@@ -66,7 +66,7 @@
 
             sql = "SELECT elementId, abbreviation, elementName FROM obselement WHERE elementName ='" & prod & "';"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "obselement")
 
@@ -121,7 +121,7 @@
             lstvStations.Columns.Add("Station Name", 400, HorizontalAlignment.Left)
 
             sql = "SELECT " & dsSourceTableName & ".stationId, stationName FROM " & dsSourceTableName & " INNER JOIN station ON station.stationId = " & dsSourceTableName & ".stationId WHERE stationName IS NOT NULL GROUP BY stationName ORDER BY stationName;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "stations")
@@ -158,7 +158,7 @@
 
             sql = "SELECT  " & dsSourceTableName & ".elementId, elementName,description  FROM  " & dsSourceTableName & " INNER JOIN obselement ON obselement.elementId =  " & dsSourceTableName & ".elementId WHERE elementName IS NOT NULL GROUP BY elementName ORDER By " & dsSourceTableName & ".elementId;"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
 
             da.SelectCommand.CommandTimeout = 0
@@ -239,7 +239,7 @@
         sql = "Select stationName FROM " & dsSourceTableName & " INNER JOIN station On " & dsSourceTableName & ".stationId = station.stationId GROUP BY stationName ORDER BY stationName;"
 
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "station")
             'conn.Close()
@@ -257,7 +257,7 @@
         'Populate Element list
         sql = "Select elementName FROM " & dsSourceTableName & " INNER JOIN obselement On obselement.elementId =  " & dsSourceTableName & ".elementId GROUP BY elementName order BY elementName;"
         Try
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "obselement")
@@ -483,7 +483,7 @@
         Try
             sql = "Select stationId, stationName FROM station WHERE stationId= '" & id & "';"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "station")
 
@@ -522,8 +522,8 @@
     End Sub
 
     Function Frmdetails(tbl As String, ByRef stat As Integer, ByRef ed As Integer, ByRef struc As String) As Boolean
-        'Dim conf As New MySql.Data.MySqlClient.MySqlConnection
-        'Dim daf As MySql.Data.MySqlClient.MySqlDataAdapter
+        'Dim conf As New MySqlConnector.MySqlConnection
+        'Dim daf As MySqlConnector.MySqlDataAdapter
         'Dim dsf As New DataSet
 
         Try
@@ -532,7 +532,7 @@
             conn.Open()
 
             sql = "SELECT TABLE_NAME AS Tname,val_start_position AS startPos,val_end_position AS endPos, elem_code_location AS Estruct FROM data_forms WHERE TABLE_NAME = '" & tbl & "';"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "forms")
 
@@ -552,15 +552,15 @@
     End Function
 
     Function scaled(Ecode As Integer, ByRef sclfactor As String) As Boolean
-        'Dim conf As New MySql.Data.MySqlClient.MySqlConnection
-        Dim daf As MySql.Data.MySqlClient.MySqlDataAdapter
+        'Dim conf As New MySqlConnector.MySqlConnection
+        Dim daf As MySqlConnector.MySqlDataAdapter
         Dim dsf As New DataSet
 
         Try
             conn.Open()
             sql = "SELECT elementScale FROM obselement WHERE elementId = " & Ecode & ";"
             'MsgBox(sql)
-            daf = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            daf = New MySqlConnector.MySqlDataAdapter(sql, conn)
             dsf.Clear()
             daf.Fill(dsf, "elements")
             conn.Close()
@@ -597,7 +597,7 @@
 
             sql = "SELECT * FROM " & dsSourceTableName & " WHERE(stationId = " & stnlist & ") And (elementId = " & elmlist & ");"
             'MsgBox(sql)
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "frmRecs")
             conn.Close()
@@ -707,7 +707,7 @@
 
             sql = "Select * FROM " & dsSourceTableName & " WHERE (stationId = " & stnlist & ");"
             'MsgBox(sql)
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "frmRecs")
             conn.Close()
@@ -804,7 +804,7 @@
 
             sql = "Select * FROM " & dsSourceTableName & " WHERE (stationId = " & stnlist & ");"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "frmRecs")
             conn.Close()
@@ -898,7 +898,7 @@
 
             sql = "SELECT * FROM " & dsSourceTableName & " WHERE(stationId = " & stnlist & ") And (elementId = " & elmlist & ");"
             MsgBox(sql)
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "frmRecs")
             conn.Close()
@@ -970,7 +970,7 @@
 
             sql = "Select elementId, abbreviation, description FROM obselement WHERE selected = '1' and elementId = '" & id & "';"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "obselement")
 

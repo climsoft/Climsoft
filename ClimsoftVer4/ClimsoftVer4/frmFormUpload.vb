@@ -1,8 +1,8 @@
 ﻿Imports System.ComponentModel
 
 Public Class frmFormUpload
-    Dim sql As String, conns As New MySql.Data.MySqlClient.MySqlConnection
-    Dim daa As New MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim sql As String, conns As New MySqlConnector.MySqlConnection
+    Dim daa As New MySqlConnector.MySqlDataAdapter
     Dim dss As New DataSet
     Dim frm_tbl As String
     Dim rgKey As New dataEntryGlobalRoutines
@@ -33,12 +33,12 @@ Public Class frmFormUpload
 
 
         Try
-            conns.ConnectionString = frmLogin.txtusrpwd.Text
+            conns.ConnectionString = frmLogin.txtusrpwd.Text ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             conns.Open()
 
             sql = "select " & lblFormName1.Text & ".stationId, stationName from " & lblFormName1.Text & " inner join station on " & lblFormName1.Text & ".stationId=station.stationId group by " & lblFormName1.Text & ".stationId;"
             'MsgBox(sql)
-            daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            daa = New MySqlConnector.MySqlDataAdapter(sql, conns)
             ' Set to unlimited timeout period
             daa.SelectCommand.CommandTimeout = 0
             daa.Fill(dss, "station")
@@ -182,10 +182,10 @@ Public Class frmFormUpload
             ' Convert path separater to SQL format
             fl = Strings.Replace(fl, "\", "/")
 
-            conns.ConnectionString = frmLogin.txtusrpwd.Text
+            conns.ConnectionString = frmLogin.txtusrpwd.Text ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             conns.Open()
 
-            daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            daa = New MySqlConnector.MySqlDataAdapter(sql, conns)
             ' Set to unlimited timeout period
             daa.SelectCommand.CommandTimeout = 0
             dss.Clear()
@@ -199,7 +199,7 @@ Public Class frmFormUpload
                 Exit Sub
             End If
 
-            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+            Dim objCmd As MySqlConnector.MySqlCommand
 
             qcStatus = 0
             acquisitionType = 1
@@ -301,6 +301,37 @@ Public Class frmFormUpload
                             mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
                             dd = dss.Tables(frm_tbl).Rows(n).Item("dd")
                             hh = rgKey.RegkeyValue("key01")
+
+                            ' Align the air temperaturs and RH hourly observations to the appriate element codes and observation hours e.g. RH@12H from elemCode 515 to 105 and hh to 12:00 respectively                   
+                            Select Case elemCode
+                                Case 515
+                                    elemCode = 105
+                                    hh = 12
+                                Case 511
+                                    elemCode = 101
+                                    hh = 12
+                                Case 512
+                                    elemCode = 102
+                                    hh = 12
+                                Case 503
+                                    elemCode = 103
+                                    hh = 12
+                            End Select
+
+                            ' Soil Tempeartures @ 05H for all depths alignment
+                            If elemCode = 72 Or elemCode = 73 Or elemCode = 74 Or elemCode = 554 Or elemCode = 75 Or elemCode = 76 Then hh = 5
+
+                            ' Soil Tempeartures @ 09H for 5cm,10cm and 20cm alignment
+                            If elemCode = 561 Or elemCode = 562 Or elemCode = 563 Then
+                                elemCode = 72
+                                hh = 9
+                            End If
+
+                            ' Soil Tempeartures @ 13H for 5cm,10cm and 20cm alignment
+                            If elemCode = 564 Or elemCode = 565 Or elemCode = 565 Then
+                                elemCode = 72
+                                hh = 13
+                            End If
 
                         Case "form_upperair1"
                             elemCode = Strings.Right(dss.Tables(frm_tbl).Columns(m).ColumnName, 3)
@@ -427,7 +458,7 @@ Public Class frmFormUpload
 
             strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm);"
 
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
+            objCmd = New MySqlConnector.MySqlCommand(strSQL, conns)
 
             'Execute query
             objCmd.CommandTimeout = 0
@@ -474,7 +505,7 @@ Public Class frmFormUpload
 
             sql = "select val_start_position as St, val_end_position as Ed, elem_code_location as Loc from data_forms where table_name = '" & tbl & "';"
             'MsgBox(sql)
-            daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            daa = New MySqlConnector.MySqlDataAdapter(sql, conns)
             ' Set to unlimited timeout period
             daa.SelectCommand.CommandTimeout = 0
             dsf.Clear()

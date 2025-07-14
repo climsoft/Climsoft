@@ -16,14 +16,14 @@
 
 Public Class form_monthly
 
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
     Dim usrName As String
     Dim usrPwd As String
     Dim dbServer As String
     Dim dbName As String
     Dim inc As Integer
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
     Dim maxRows As Integer
@@ -31,18 +31,18 @@ Public Class form_monthly
     Dim elemCode As String
     Dim dsValueLimits As New DataSet
     Dim sqlValueLimits As String
-    Dim daValueLimits As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daValueLimits As MySqlConnector.MySqlDataAdapter
     Dim stationCode As String
     Dim dsStationElevation As New DataSet
     Dim sqlStationElevation As String
-    Dim daStationElevation As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daStationElevation As MySqlConnector.MySqlDataAdapter
     Dim dsStationId As New DataSet
     Dim sqlStationId As String
-    Dim daStationId As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daStationId As MySqlConnector.MySqlDataAdapter
     Dim valUpperLimit As String, valLowerLimit As String, stnElevation As String, totalRequired As Integer
     Dim obsValue As String
     Dim selectAllHours As Boolean
-    Dim daSequencer As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daSequencer As MySqlConnector.MySqlDataAdapter
     Dim dsSequencer As New DataSet
 
     Private Sub navigateRecords()
@@ -54,7 +54,7 @@ Public Class form_monthly
         'Refill dataset before getting maxRows
         ds.Clear()
         sql = "SELECT * FROM form_monthly"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "form_monthly")
 
         maxRows = ds.Tables("form_monthly").Rows.Count
@@ -157,7 +157,7 @@ Public Class form_monthly
                 elemCode = cboElement.SelectedValue
                 sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit,qcTotalRequired FROM obselement WHERE elementId=" & elemCode
                 '
-                daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                daValueLimits = New MySqlConnector.MySqlDataAdapter(sqlValueLimits, conn)
                 'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
                 dsValueLimits.Clear()
                 'Add row for element code associated with active control
@@ -253,13 +253,13 @@ Public Class form_monthly
             'MsgBox("Connection Successful !", MsgBoxStyle.Information)
 
             sql = "SELECT * FROM form_monthly"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "form_monthly")
             conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
 
             'FormLaunchPad.Show()
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MessageBox.Show(ex.Message)
         End Try
 
@@ -274,16 +274,16 @@ Public Class form_monthly
             Dim ds2 As New DataSet
             Dim ds3 As New DataSet
             Dim sql1 As String, sql2 As String, sql3 As String
-            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
-            Dim da2 As MySql.Data.MySqlClient.MySqlDataAdapter
-            Dim da3 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da1 As MySqlConnector.MySqlDataAdapter
+            Dim da2 As MySqlConnector.MySqlDataAdapter
+            Dim da3 As MySqlConnector.MySqlDataAdapter
 
 
             sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql1, conn)
 
             sql3 = "SELECT elementID,elementName FROM obselement WHERE elementId BETWEEN 200 AND 299 ORDER BY elementName;"
-            da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
+            da3 = New MySqlConnector.MySqlDataAdapter(sql3, conn)
 
             da1.Fill(ds1, "station")
             If ds1.Tables("station").Rows.Count > 0 Then
@@ -310,7 +310,7 @@ Public Class form_monthly
 
             'Populate dataForms
             sql2 = "SELECT val_start_position,val_end_position FROM data_forms WHERE table_name='form_monthly'"
-            da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql2, conn)
+            da2 = New MySqlConnector.MySqlDataAdapter(sql2, conn)
             da2.Fill(ds2, "dataForms")
 
             i = ds2.Tables("dataForms").Rows(0).Item("val_start_position")
@@ -521,7 +521,7 @@ Public Class form_monthly
             elemCode = cboElement.SelectedValue
             sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit,qcTotalRequired FROM obselement WHERE elementId=" & elemCode
             '
-            daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+            daValueLimits = New MySqlConnector.MySqlDataAdapter(sqlValueLimits, conn)
             'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
             dsValueLimits.Clear()
             'Add row for element code associated with active control
@@ -581,7 +581,7 @@ Public Class form_monthly
             'must be declared for the Update method to work.
             Dim m As Integer
             'Dim ctl As Control
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
             Dim dsNewRow As DataRow
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
@@ -693,7 +693,7 @@ Public Class form_monthly
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
@@ -732,7 +732,7 @@ Public Class form_monthly
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
         If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
@@ -823,7 +823,7 @@ Public Class form_monthly
         conn.ConnectionString = myConnectionString
         conn.Open()
         '
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim objCmd As MySqlConnector.MySqlCommand
         maxRows = ds.Tables("form_monthly").Rows.Count
         qcStatus = 0
         acquisitionType = 1
@@ -866,12 +866,12 @@ Public Class form_monthly
                     ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
 
                     ' Create the Command for executing query and set its properties
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                    objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                     Try
                         'Execute query
                         objCmd.ExecuteNonQuery()
-                        'Catch ex As MySql.Data.MySqlClient.MySqlException
+                        'Catch ex As MySqlConnector.MySqlException
                         '    'Ignore expected error i.e. error of Duplicates in MySqlException
                     Catch ex As Exception
                         'Dispaly error message if it is different from the one trapped in 'Catch' execption above

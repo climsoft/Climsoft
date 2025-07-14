@@ -50,10 +50,12 @@ Partial Class frmProducts
         '
         'MenuStrip1
         '
+        Me.MenuStrip1.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(515, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(772, 35)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -61,86 +63,91 @@ Partial Class frmProducts
         '
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenListToolStripMenuItem, Me.ToolStripMenuItem2, Me.OpenListToolStripMenuItem1, Me.ToolStripMenuItem1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(54, 29)
         Me.FileToolStripMenuItem.Text = "File"
         '
         'OpenListToolStripMenuItem
         '
         Me.OpenListToolStripMenuItem.Name = "OpenListToolStripMenuItem"
-        Me.OpenListToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.OpenListToolStripMenuItem.Size = New System.Drawing.Size(271, 34)
         Me.OpenListToolStripMenuItem.Text = "Save Specifications"
         Me.OpenListToolStripMenuItem.Visible = False
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(179, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(271, 34)
         Me.ToolStripMenuItem2.Text = "Open Specifications"
         Me.ToolStripMenuItem2.Visible = False
         '
         'OpenListToolStripMenuItem1
         '
         Me.OpenListToolStripMenuItem1.Name = "OpenListToolStripMenuItem1"
-        Me.OpenListToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
+        Me.OpenListToolStripMenuItem1.Size = New System.Drawing.Size(271, 34)
         Me.OpenListToolStripMenuItem1.Text = "Add New Product"
         Me.OpenListToolStripMenuItem1.Visible = False
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(268, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(271, 34)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'EditToolStripMenuItem
         '
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(58, 29)
         Me.EditToolStripMenuItem.Text = "Edit"
         Me.EditToolStripMenuItem.Visible = False
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(65, 29)
         Me.HelpToolStripMenuItem.Text = "Help"
         '
         'lblProducts
         '
         Me.lblProducts.AutoSize = True
         Me.lblProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProducts.Location = New System.Drawing.Point(77, 52)
+        Me.lblProducts.Location = New System.Drawing.Point(116, 80)
+        Me.lblProducts.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblProducts.Name = "lblProducts"
-        Me.lblProducts.Size = New System.Drawing.Size(69, 16)
+        Me.lblProducts.Size = New System.Drawing.Size(97, 25)
         Me.lblProducts.TabIndex = 14
         Me.lblProducts.Text = "Products"
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 35)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(515, 25)
+        Me.ToolStrip1.Padding = New System.Windows.Forms.Padding(0, 0, 3, 0)
+        Me.ToolStrip1.Size = New System.Drawing.Size(772, 25)
         Me.ToolStrip1.TabIndex = 13
         Me.ToolStrip1.Text = "ToolStrip1"
         '
         'ToolStrip2
         '
         Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.ToolStrip2.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.ToolStripButton1})
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 429)
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 664)
         Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(515, 25)
+        Me.ToolStrip2.Padding = New System.Windows.Forms.Padding(0, 0, 3, 0)
+        Me.ToolStrip2.Size = New System.Drawing.Size(772, 34)
         Me.ToolStrip2.TabIndex = 16
         Me.ToolStrip2.Text = "ToolStrip2"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 34)
         '
         'ToolStripButton1
         '
@@ -150,7 +157,7 @@ Partial Class frmProducts
         Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(40, 22)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(61, 29)
         Me.ToolStripButton1.Text = "Close"
         '
         'Panel1
@@ -159,27 +166,30 @@ Partial Class frmProducts
         Me.Panel1.Controls.Add(Me.lblProductsCategory)
         Me.Panel1.Controls.Add(Me.lstViewProducts)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel1.Location = New System.Drawing.Point(0, 49)
+        Me.Panel1.Location = New System.Drawing.Point(0, 60)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(503, 380)
+        Me.Panel1.Size = New System.Drawing.Size(754, 604)
         Me.Panel1.TabIndex = 17
         '
         'cboProductsCategory
         '
         Me.cboProductsCategory.FormattingEnabled = True
-        Me.cboProductsCategory.ItemHeight = 13
-        Me.cboProductsCategory.Location = New System.Drawing.Point(264, 14)
+        Me.cboProductsCategory.ItemHeight = 20
+        Me.cboProductsCategory.Location = New System.Drawing.Point(396, 22)
+        Me.cboProductsCategory.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cboProductsCategory.Name = "cboProductsCategory"
-        Me.cboProductsCategory.Size = New System.Drawing.Size(217, 21)
+        Me.cboProductsCategory.Size = New System.Drawing.Size(324, 28)
         Me.cboProductsCategory.TabIndex = 18
         '
         'lblProductsCategory
         '
         Me.lblProductsCategory.AutoSize = True
         Me.lblProductsCategory.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProductsCategory.Location = New System.Drawing.Point(18, 19)
+        Me.lblProductsCategory.Location = New System.Drawing.Point(27, 29)
+        Me.lblProductsCategory.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblProductsCategory.Name = "lblProductsCategory"
-        Me.lblProductsCategory.Size = New System.Drawing.Size(151, 16)
+        Me.lblProductsCategory.Size = New System.Drawing.Size(219, 25)
         Me.lblProductsCategory.TabIndex = 17
         Me.lblProductsCategory.Text = "Select Product category"
         '
@@ -193,11 +203,12 @@ Partial Class frmProducts
         Me.lstViewProducts.HideSelection = False
         Me.lstViewProducts.HoverSelection = True
         Me.lstViewProducts.LabelEdit = True
-        Me.lstViewProducts.Location = New System.Drawing.Point(21, 41)
+        Me.lstViewProducts.Location = New System.Drawing.Point(32, 63)
+        Me.lstViewProducts.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.lstViewProducts.MultiSelect = False
         Me.lstViewProducts.Name = "lstViewProducts"
         Me.lstViewProducts.RightToLeftLayout = True
-        Me.lstViewProducts.Size = New System.Drawing.Size(461, 320)
+        Me.lstViewProducts.Size = New System.Drawing.Size(690, 490)
         Me.lstViewProducts.TabIndex = 16
         Me.lstViewProducts.UseCompatibleStateImageBehavior = False
         Me.lstViewProducts.View = System.Windows.Forms.View.Details
@@ -214,14 +225,15 @@ Partial Class frmProducts
         '
         'frmProducts
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(515, 454)
+        Me.ClientSize = New System.Drawing.Size(772, 698)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.lblProducts)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "frmProducts"
         Me.Text = "Products List"
         Me.MenuStrip1.ResumeLayout(False)

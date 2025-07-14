@@ -1,7 +1,7 @@
 ﻿Public Class clsDataConnection
-    Private Shared ReadOnly conn As New MySql.Data.MySqlClient.MySqlConnection
+    Private Shared ReadOnly conn As New MySqlConnector.MySqlConnection
 
-    Public Shared Function GetOpenedConnection() As MySql.Data.MySqlClient.MySqlConnection
+    Public Shared Function GetOpenedConnection() As MySqlConnector.MySqlConnection
         If conn.State <> ConnectionState.Open Then
             conn.Open()
         End If
@@ -14,6 +14,7 @@
 
     Public Shared Sub OpenConnection(ConnectionString As String)
         Try
+
             conn.ConnectionString = ConnectionString
             conn.Open()
 

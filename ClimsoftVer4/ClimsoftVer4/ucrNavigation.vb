@@ -781,8 +781,8 @@ Public Class ucrNavigation
             'FROM `surf_times` S, (SELECT @pos := 0) p WHERE `Map` = "surf_mesa"  ORDER BY `Time` ) `surf_times` WHERE `SteamID` = "76561198065863390" ORDER BY pos LIMIT 1;
 
             i = 0
-            Using Command As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
-                Using reader As MySql.Data.MySqlClient.MySqlDataReader = Command.ExecuteReader()
+            Using Command As New MySqlConnector.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                Using reader As MySqlConnector.MySqlDataReader = Command.ExecuteReader()
                     If reader.HasRows Then
                         While reader.Read()
                             bIsRowFetched = True

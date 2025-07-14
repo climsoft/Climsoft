@@ -1,8 +1,8 @@
 ﻿Public Class frmTDCFindicators
-    Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim dbconn As New MySqlConnector.MySqlConnection
     Dim dbConnectionString, sql As String
-    Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim objCmd As MySqlConnector.MySqlCommand
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
 
     Dim kount As Integer
@@ -28,7 +28,7 @@
 
             sql = "INSERT INTO bufr_indicators (Tmplate,Msg_Header,BUFR_Edition,Originating_Centre,Originating_SubCentre,Update_Sequence,Optional_Section,Data_Category,Intenational_Data_SubCategory,Local_Data_SubCategory,Master_table,Local_Table) VALUES('" & cboTemplate.Text & "','" & txtMsgHeader.Text & "','" & txtBUFREditionNumber.Text & "','" & txtOriginatingGeneratingCentre.Text & "','" & txtOriginatingGeneratingSubCentre.Text & "','" & txtUpdateSequenceNumber.Text & "','" & optsection & "','" & txtDataCategory.Text & "','" & txtInternationalDataSubCategory.Text & "','" & txtLocalDataSubCategory.Text & "','" & txtMastersTableVersionNumber.Text & "','" & txtLocalTableVersionNumber.Text & "');"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ' Remove timeout requirement
             da.SelectCommand.CommandTimeout = 0
 
@@ -39,7 +39,7 @@
             'MsgBox(sql)
 
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
+            objCmd = New MySqlConnector.MySqlCommand(sql, dbconn)
 
             'Execute query
             objCmd.ExecuteNonQuery()
@@ -73,7 +73,7 @@
             'MsgBox(sql)
 
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
+            objCmd = New MySqlConnector.MySqlCommand(sql, dbconn)
 
             'Execute query
             objCmd.ExecuteNonQuery()
@@ -104,7 +104,7 @@
         Try
             sql = "select * from bufr_indicators;"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ' Remove timeout requirement
             da.SelectCommand.CommandTimeout = 0
 
@@ -138,7 +138,7 @@
                 dbconn.Open()
 
                 sql = "select * from bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
                 ' Remove timeout requirement
                 da.SelectCommand.CommandTimeout = 0
 

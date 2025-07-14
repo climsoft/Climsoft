@@ -1,7 +1,7 @@
 ﻿Public Class frmChangePassword
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim connStr As String, Sql As String
-    Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+    Dim objCmd As MySqlConnector.MySqlCommand
     Dim msgNotYetImplemented As String
     Dim msgWrongPasswordConfirmation As String
     Dim msgPasswordTooShort As String
@@ -25,7 +25,7 @@
                 Try
                     'Set new password
                     Sql = "SET PASSWORD FOR '" & txtUsername.Text & "'@'localhost' = PASSWORD('" & txtNewPassword.Text & "');"
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                    objCmd = New MySqlConnector.MySqlCommand(Sql, conn)
                     objCmd.ExecuteNonQuery()
                     MsgBox("New password set for '" & txtUsername.Text & "'@'localhost'", MsgBoxStyle.Information)
                 Catch ex As Exception

@@ -1,12 +1,12 @@
 ﻿Public Class formSynopticCaribbean
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
     Dim usrName As String
     Dim usrPwd As String
     Dim dbServer As String
     Dim dbName As String
     Dim inc As Integer
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
     Dim maxRows As Integer
@@ -14,17 +14,17 @@
     Dim elemCode As String
     Dim dsValueLimits As New DataSet
     Dim sqlValueLimits As String
-    Dim daValueLimits As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daValueLimits As MySqlConnector.MySqlDataAdapter
     Dim stationCode As String
     Dim dsStationElevation As New DataSet
     Dim sqlStationElevation As String
-    Dim daStationElevation As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daStationElevation As MySqlConnector.MySqlDataAdapter
     Dim dsStationId As New DataSet
     Dim sqlStationId As String
-    Dim daStationId As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daStationId As MySqlConnector.MySqlDataAdapter
     Dim valUpperLimit As String, valLowerLimit As String, stnElevation As String
     Dim obsValue As String
-    Dim daSequencer As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim daSequencer As MySqlConnector.MySqlDataAdapter
     Dim dsSequencer As New DataSet
     Dim FldName As New dataEntryGlobalRoutines
 
@@ -138,7 +138,7 @@
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
@@ -238,14 +238,14 @@
             'End If
 
             'Dim dsLastDataRecord As New DataSet
-            'Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+            'Dim daLastDataRecord As MySqlConnector.MySqlDataAdapter
             'Dim SQL_last_record, lastRecYear, lastRecMonth, lastRecHour, lastRecElement, stn As String
 
             ''SQL_last_record = "SELECT stationId,elementId,yyyy,mm,hh,signature,entryDatetime from form_synoptic2_caribbean WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
             'SQL_last_record = "SELECT stationId,yyyy,mm,hh,signature,entryDatetime from form_synoptic2_caribbean WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
 
             'dsLastDataRecord.Clear()
-            'daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+            'daLastDataRecord = New MySqlConnector.MySqlDataAdapter(SQL_last_record, conn)
             'daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
 
             ''Initialize header fields required for sequencer
@@ -264,7 +264,7 @@
             '    'lastRecElement = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("elementId")
             'End If
 
-            'daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            'daSequencer = New MySqlConnector.MySqlDataAdapter(Sql, conn)
             ''Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
             ''of records in the recordest table whenever the AddNew button is clicked
             'dsSequencer.Clear()
@@ -487,7 +487,7 @@
 
                     sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
 
-                    daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                    daValueLimits = New MySqlConnector.MySqlDataAdapter(sqlValueLimits, conn)
                     'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
                     dsValueLimits.Clear()
                     'Add row for element code associated with active control
@@ -535,7 +535,7 @@
             'must be declared for the Update method to work.
             Dim m As Integer
             'Dim ctl As Control
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
             Dim dsNewRow As DataRow
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
@@ -613,7 +613,7 @@
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
         If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
@@ -689,7 +689,7 @@
                 elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
                 sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
                 '
-                daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                daValueLimits = New MySqlConnector.MySqlDataAdapter(sqlValueLimits, conn)
                 'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
                 dsValueLimits.Clear()
                 'Add row for element code associated with active control
@@ -809,11 +809,11 @@
             conn.Open()
 
             sql = "SELECT * FROM form_synoptic2_caribbean"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "form_synoptic2_caribbean")
             conn.Close()
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             If ex.HResult = -2147467259 Then
                 ' Table does not exit
                 MsgBox("Table will be created. Re-open the form")
@@ -846,9 +846,9 @@
             Dim ctl As Control
             Dim ds1 As New DataSet
             Dim sql1 As String
-            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da1 As MySqlConnector.MySqlDataAdapter
             sql1 = "SELECT stationId,stationName FROM station"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql1, conn)
 
             da1.Fill(ds1, "station")
             If ds1.Tables("station").Rows.Count > 0 Then
@@ -863,7 +863,7 @@
             End If
 
             ''sql1 = "SELECT stationId,stationName FROM station"
-            ''da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            ''da1 = New MySqlConnector.MySqlDataAdapter(sql1, conn)
 
             '---------------------------------
             'Initialize header information for data-entry form
@@ -1005,7 +1005,7 @@
                 'gpm = txtVal_Elem101Field010.Text
 
                 sqlStationElevation = "SELECT stationid,elevation from station WHERE stationid = '" & stationCode & "';"
-                daStationElevation = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlStationElevation, conn)
+                daStationElevation = New MySqlConnector.MySqlDataAdapter(sqlStationElevation, conn)
                 'Clear all rows in dataset before filling dataset with new row record for active station
                 dsStationElevation.Clear()
                 'Add row for element code associated with active control
@@ -1067,7 +1067,7 @@
     '    ''gpm = txtVal_Elem301Field010.Text
 
     '    ''sqlStationElevation = "SELECT stationid,elevation from station WHERE stationid=" & stationCode
-    '    ''daStationElevation = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlStationElevation, conn)
+    '    ''daStationElevation = New MySqlConnector.MySqlDataAdapter(sqlStationElevation, conn)
     '    ' ''Clear all rows in dataset before filling dataset with new row record for active station
     '    ''dsStationElevation.Clear()
     '    ' ''Add row for element code associated with active control
@@ -1110,7 +1110,7 @@
             conn.ConnectionString = myConnectionString
             conn.Open()
             '
-            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+            Dim objCmd As MySqlConnector.MySqlCommand
             maxRows = ds.Tables("form_synoptic2_caribbean").Rows.Count
             qcStatus = 0
             acquisitionType = 1
@@ -1159,7 +1159,7 @@
                             & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
                         ' Create the Command for executing query and set its properties
-                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                        objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                         Try
                             'Execute query
@@ -1201,19 +1201,19 @@
 
         sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType " &
             "FROM observationInitial WHERE year(obsDateTime)=2000 AND month(obsDatetime)=1 AND day(obsDatetime)=1"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "obsInitial")
         ''conn.Close() '
-        ' Dim dsObsInitial As New MySql.Data.MySqlClient.MySqlDataAdapter
+        ' Dim dsObsInitial As New MySqlConnector.MySqlDataAdapter
 
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim objCmd As MySqlConnector.MySqlCommand
         maxRows = ds.Tables("obsInitial").Rows.Count
 
         Dim ds1 As New DataSet
-        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da1 As MySqlConnector.MySqlDataAdapter
         Dim elemMaxRows As Integer, k As Integer, valScale As Single
         sql = "SELECT elementId,elementScale FROM obselement"
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
 
         da1.Fill(ds1, "elemScale")
         elemMaxRows = ds1.Tables("elemScale").Rows.Count
@@ -1256,12 +1256,12 @@
                 qcStatus & "," & acquisitionType & ")"
 
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
             Try
                 'Execute query
                 objCmd.ExecuteNonQuery()
-                'Catch ex As MySql.Data.MySqlClient.MySqlException
+                'Catch ex As MySqlConnector.MySqlException
                 '    'Ignore expected error i.e. error of Duplicates in MySqlException
             Catch ex As Exception
                 'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -1317,7 +1317,7 @@
             sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic2_caribbean where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
 
             'MsgBox(sql)
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "form_synoptic2_caribbean")
             kount = ds.Tables("form_synoptic2_caribbean").Rows.Count
@@ -1411,7 +1411,7 @@
 
     Function Create_Caribbean_Synoptic_table(db As String) As Boolean
         Dim sql As String
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         Create_Caribbean_Synoptic_table = False
 
@@ -1501,7 +1501,7 @@
         Try
             ' Create the table form_synoptic2_caribbean'
             'MsgBox(sql)
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
             Create_Caribbean_Synoptic_table = True
@@ -1519,11 +1519,11 @@
     Sub Grant_Permissions()
 
         Dim sql, usr, usrl As String
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
 
         Try
             sql = "use mariadb_climsoft_db_v4; SELECT userName, userRole from climsoftusers;"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "ClimsoftUsers")
 
@@ -1536,12 +1536,12 @@
                         If usrl = "ClimsoftAdmin" Or usrl = "ClimsoftOperator" Or usrl = "ClimsoftRainfall" Or usrl = "ClimsoftOperatorSupervisor" Or usrl = "ClimsoftQC" Then
 
                             sql = "GRANT DELETE,Select,INSERT,UPDATE, CREATE On mariadb_climsoft_db_v4.form_synoptic2_caribbean To '" & usr & "';"
-                            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                            qry = New MySqlConnector.MySqlCommand(sql, conn)
                             'execute command
                             qry.ExecuteNonQuery()
 
                             sql = "GRANT DELETE,Select,INSERT,UPDATE On mariadb_climsoft_test_db_v4.form_synoptic2_caribbean To  '" & usr & "';"
-                            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                            qry = New MySqlConnector.MySqlCommand(sql, conn)
                             'execute command
                             qry.ExecuteNonQuery()
                         End If

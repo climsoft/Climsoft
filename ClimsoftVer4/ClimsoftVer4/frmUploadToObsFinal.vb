@@ -1,7 +1,7 @@
 ﻿Public Class frmUploadToObsFinal
     Dim msgTxtNotYetImplemented As String
-    Dim MyConnectionString As String, sql As String, conn As New MySql.Data.MySqlClient.MySqlConnection
-    Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim MyConnectionString As String, sql As String, conn As New MySqlConnector.MySqlConnection
+    Dim da As New MySqlConnector.MySqlDataAdapter
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -42,22 +42,22 @@
             "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear &
             " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=1"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ' Set to unlimited timeout period
         da.SelectCommand.CommandTimeout = 0
 
         da.Fill(ds, "obsInitial")
         ''conn.Close() '
-        ' Dim dsObsInitial As New MySql.Data.MySqlClient.MySqlDataAdapter
+        ' Dim dsObsInitial As New MySqlConnector.MySqlDataAdapter
 
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim objCmd As MySqlConnector.MySqlCommand
         maxRows = ds.Tables("obsInitial").Rows.Count
 
         Dim ds1 As New DataSet
-        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim da1 As MySqlConnector.MySqlDataAdapter
         Dim elemMaxRows As Integer, k As Integer, valScale As Single
         Sql = "SELECT elementId,elementScale FROM obselement"
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ' Set to unlimited timeout period
         da1.SelectCommand.CommandTimeout = 0
 
@@ -108,12 +108,12 @@
                     qcStatus & "," & acquisitionType & "," & mark1 & ")"
 
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
 
                 'Execute query
                 objCmd.ExecuteNonQuery()
-                'Catch ex As MySql.Data.MySqlClient.MySqlException
+                'Catch ex As MySqlConnector.MySqlException
                 '    'Ignore expected error i.e. error of Duplicates in MySqlException
             Catch ex As Exception
 
@@ -138,19 +138,19 @@
             "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear &
             " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=2"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ' Set to unlimited timeout period
         da.SelectCommand.CommandTimeout = 0
         da.Fill(ds, "obsInitial")
 
         ''conn.Close() '
-        ' Dim dsObsInitial As New MySql.Data.MySqlClient.MySqlDataAdapter
+        ' Dim dsObsInitial As New MySqlConnector.MySqlDataAdapter
 
 
         maxRows = ds.Tables("obsInitial").Rows.Count
 
         sql = "SELECT elementId,elementScale FROM obselement"
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
         ' Set to unlimited timeout period
         da1.SelectCommand.CommandTimeout = 0
 
@@ -201,12 +201,12 @@
                 qcStatus & "," & acquisitionType & ")"
 
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
             Try
                 'Execute query
                 objCmd.ExecuteNonQuery()
-                'Catch ex As MySql.Data.MySqlClient.MySqlException
+                'Catch ex As MySqlConnector.MySqlException
                 '    'Ignore expected error i.e. error of Duplicates in MySqlException
             Catch ex As Exception
                 'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -230,8 +230,8 @@
 
 
     Private Sub frmUploadToObsFinal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim conns As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dss As New DataSet, daa As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim conns As New MySqlConnector.MySqlConnection
+        Dim dss As New DataSet, daa As MySqlConnector.MySqlDataAdapter
         Dim sql As String
 
 
@@ -255,7 +255,7 @@
             conns.Open()
 
             sql = "SELECT * FROM station ORDER BY stationId"
-            daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            daa = New MySqlConnector.MySqlDataAdapter(sql, conns)
             ' Set to unlimited timeout period
             daa.SelectCommand.CommandTimeout = 0
             daa.Fill(dss, "station")
@@ -277,7 +277,7 @@
             Next
 
             sql = "SELECT * FROM obselement ORDER BY elementId"
-            daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            daa = New MySqlConnector.MySqlDataAdapter(sql, conns)
             ' Set to unlimited timeout period
             daa.SelectCommand.CommandTimeout = 0
 
@@ -295,7 +295,7 @@
                 lstViewElements.Items.Add(itms)
             Next
 
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MsgBox(ex.Message)
             conns.Close()
         End Try
@@ -475,7 +475,7 @@
 
 
             MyConnectionString = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = MyConnectionString
+            conn.ConnectionString = MyConnectionString ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             conn.Open()
 
             'First upload records with QC status =1
@@ -486,22 +486,22 @@
                 " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=1;"
 
             Trecs = 0
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "obsInitial")
 
-            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+            Dim objCmd As MySqlConnector.MySqlCommand
             maxRows = ds.Tables("obsInitial").Rows.Count
 
             Trecs = Trecs + maxRows ' Total Records
 
             Dim ds1 As New DataSet
-            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da1 As MySqlConnector.MySqlDataAdapter
             Dim elemMaxRows As Integer, k As Integer, valScale As Single
             sql = "SELECT elementId,elementScale FROM obselement"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da1.SelectCommand.CommandTimeout = 0
             ds1.Clear()
@@ -556,16 +556,16 @@
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("period")) Then
                     period = ds.Tables("obsInitial").Rows(n).Item("period")
                 Else
-                    period = "\N"
+                    period = "" ' "\N"
                 End If
 
                 'Types of bservation values
                 If IsDBNull(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of NULL for obs values
-                    obsVal = "\N"
+                    obsVal = "" ' "\N"
                     obsFlag = "M"
                 ElseIf Len(ds.Tables("obsInitial").Rows(n).Item("obsValue")) = 0 Or Not IsNumeric(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of Blanks for obs values
-                    obsVal = "\N"
-                    obsFlag = "M"
+                    obsVal = "" ' "\N"
+                    obsFlag = "" ' "M"
                 Else
                     obsVal = ds.Tables("obsInitial").Rows(n).Item("obsValue")
                     obsVal = obsVal * valScale
@@ -582,15 +582,15 @@
                 obsFlag = Strings.Replace(obsFlag, "\", "")
 
                 ' Other data fields not commonly used. First initialize to NULL
-                qcTypeLog = "\N"
-                acquisitionType = "\N"
-                dataform = "\N"
-                captBy = "\N"
-                tmpUnits = "\N"
-                precipUnits = "\N"
-                cldUnits = "\N"
-                visunits = "\N"
-                datasrcTzone = "\N"
+                qcTypeLog = "" '"\N"
+                acquisitionType = "" ' "\N"
+                dataform = "" ' "\N"
+                captBy = "" ' "\N"
+                tmpUnits = "" ' "\N"
+                precipUnits = "" ' "\N"
+                cldUnits = "" '\N"
+                visunits = "" '\N"
+                datasrcTzone = "" ' "\N"
 
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("qcTypeLog")) Then qcTypeLog = ds.Tables("obsInitial").Rows(n).Item("qcTypeLog")
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("acquisitionType")) Then acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
@@ -626,7 +626,7 @@
                     'MsgBox(strSQL)
                     ' Upload with replacing existing records 
                     ' Create the Command for executing query and set its properties
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                    objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
                     objCmd.CommandTimeout = 0
 
                     'Execute query
@@ -643,15 +643,18 @@
                 txtDataTransferProgress.Refresh()
 
                 ' Create sql query
-                'strSQL = "LOAD DATA local INFILE '" & fl1 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark)"
-                strSQL = "LOAD DATA local INFILE '" & fl1 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark, " &
-                          "qcTypeLog,acquisitionType,dataForm,capturedBy,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits,dataSourceTimeZone);"
 
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                Load_Files(fl1, "observationfinal", 0, ",")
 
-                'Execute query
-                objCmd.CommandTimeout = 0
-                objCmd.ExecuteNonQuery()
+                ''strSQL = "LOAD DATA local INFILE '" & fl1 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark)"
+                'strSQL = "LOAD DATA local INFILE '" & fl1 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark, " &
+                '          "qcTypeLog,acquisitionType,dataForm,capturedBy,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits,dataSourceTimeZone);"
+
+                'objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
+
+                ''Execute query
+                'objCmd.CommandTimeout = 0
+                'objCmd.ExecuteNonQuery()
 
                 txtDataTransferProgress.Text = ""
                 txtDataTransferProgress.Refresh()
@@ -673,7 +676,7 @@
                 "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " And " & endYear &
                 " And month(obsDatetime) between " & beginMonth & " And " & endMonth & " And qcStatus=2"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "obsInitial")
@@ -682,7 +685,7 @@
             Trecs = Trecs + maxRows
 
             sql = "SELECT elementId,elementScale FROM obselement"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da1.SelectCommand.CommandTimeout = 0
 
@@ -751,7 +754,7 @@
                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & qcStatus & ");"
 
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
                 objCmd.CommandTimeout = 0
 
                 'Execute query

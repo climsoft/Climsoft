@@ -5,9 +5,9 @@
 
     Private Sub frmInventoryChart_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        Dim c As New MySql.Data.MySqlClient.MySqlConnection
+        Dim c As New MySqlConnector.MySqlConnection
         Dim MyCStr As String
-        Dim a As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim a As MySqlConnector.MySqlDataAdapter
         Dim s As New DataSet
 
         Dim sql As String
@@ -20,7 +20,7 @@
 
             sql = "Select TT as YY, count(TT) as STATIONS from (select year(obsdatetime) as TT, recordedFrom as ST from observationfinal group by TT, ST) as T group by TT;"
 
-            a = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, c)
+            a = New MySqlConnector.MySqlDataAdapter(sql, c)
             a.SelectCommand.CommandTimeout = 0
             s.Clear()
             a.Fill(s, "inventory")

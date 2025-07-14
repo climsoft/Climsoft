@@ -15,11 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class frmQCdatesSelection
 
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim myConnectionString As String
     Dim beginYear As Integer, endYear As Integer, beginMonth As Integer, endMonth As Integer, sql As String, strSQL As String
-    Dim ds As New DataSet, da As MySql.Data.MySqlClient.MySqlDataAdapter, beginYearMonth As String, endYearMonth As String
-    Dim ds1 As New DataSet, da1 As MySql.Data.MySqlClient.MySqlDataAdapter, sql1 As String
+    Dim ds As New DataSet, da As MySqlConnector.MySqlDataAdapter, beginYearMonth As String, endYearMonth As String
+    Dim ds1 As New DataSet, da1 As MySqlConnector.MySqlDataAdapter, sql1 As String
     Dim qcReportsFolderWindows As String, qcReportsFolderUnix As String
     Dim msgTxtQCReportsOutLowerLimits As String
     Dim msgTxtQCReportsOutUpperLimits As String
@@ -36,25 +36,25 @@ Public Class frmQCdatesSelection
             'MsgBox("Connection Successful !", MsgBoxStyle.Information)
 
             sql = "SELECT * FROM observationInitial where year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "obsInitial")
             'conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
 
             'Get required data for QC interelement comparison
             sql1 = "SELECT * from qc_interelement_relationship_definition"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            da1 = New MySqlConnector.MySqlDataAdapter(sql1, conn)
             da1.Fill(ds1, "interElement")
 
             n = ds1.Tables("interElement").Rows.Count
             
             'FormLaunchPad.Show()
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MessageBox.Show(ex.Message)
         End Try
 
 
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim objCmd As MySqlConnector.MySqlCommand
 
 
         ''myConnectionString = frmLogin.txtusrpwd.Text
@@ -79,13 +79,13 @@ Public Class frmQCdatesSelection
         'Update QC status for selected date range from 0 to 1
         strSQL = "update observationinitial set qcstatus=1 where year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth
         ' Create the Command for executing query and set its properties
-        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+        objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
         Try
             'Execute query
             objCmd.ExecuteNonQuery()
             ' MsgBox("QC status updated!", MsgBoxStyle.Information)
-            'Catch ex As MySql.Data.MySqlClient.MySqlException
+            'Catch ex As MySqlConnector.MySqlException
             '    'Ignore expected error i.e. error of Duplicates in MySqlException
         Catch ex As Exception
             'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -103,12 +103,12 @@ Public Class frmQCdatesSelection
                "into outfile '" & qcReportsFolderUnix & "/qc_report_upperlimit_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
 
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
             Try
                 'Execute query
                 objCmd.ExecuteNonQuery()
-                'Catch ex As MySql.Data.MySqlClient.MySqlException
+                'Catch ex As MySqlConnector.MySqlException
                 '    'Ignore expected error i.e. error of Duplicates in MySqlException
             Catch ex As Exception
                 'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -125,7 +125,7 @@ Public Class frmQCdatesSelection
                "into outfile '" & qcReportsFolderUnix & "/qc_report_lowerlimit_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
 
             ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+            objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
             Try
                 'Execute query
@@ -138,7 +138,7 @@ Public Class frmQCdatesSelection
                 MsgBox(msgTxtQCReportsOutLowerLimits & qcReportsFolderUnix & "/qc_values_lowerlimit_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
                 MsgBox(msgTxtQCReportsOutUpperLimits & qcReportsFolderUnix & "/qc_values_upperlimit_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
 
-                'Catch ex As MySql.Data.MySqlClient.MySqlException
+                'Catch ex As MySqlConnector.MySqlException
                 '    'Ignore expected error i.e. error of Duplicates in MySqlException
             Catch ex As Exception
                 'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -157,13 +157,13 @@ Public Class frmQCdatesSelection
                 strSQL = "DELETE from qc_interelement_1"
 
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                 Try
                     'Execute query
                     objCmd.ExecuteNonQuery()
                     ' MsgBox("Table qc_interelement_1 cleared!")
-                    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                    'Catch ex As MySqlConnector.MySqlException
                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -177,13 +177,13 @@ Public Class frmQCdatesSelection
                     " and month(obsdatetime) between " & beginMonth & " and " & endMonth
 
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                 Try
                     'Execute query
                     objCmd.ExecuteNonQuery()
                     'MsgBox("Table qc_interelement_2 cleared!")
-                    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                    'Catch ex As MySqlConnector.MySqlException
                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -194,13 +194,13 @@ Public Class frmQCdatesSelection
                 strSQL = "DELETE from qc_interelement_2"
 
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                 Try
                     'Execute query
                     objCmd.ExecuteNonQuery()
                     ' MsgBox("Table qc_interelement_1 cleared!")
-                    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                    'Catch ex As MySqlConnector.MySqlException
                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -214,13 +214,13 @@ Public Class frmQCdatesSelection
                     " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ""
 
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
                 Try
                     'Execute query
                     objCmd.ExecuteNonQuery()
                     'MsgBox("Table qc_interelement_2 cleared!")
-                    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                    'Catch ex As MySqlConnector.MySqlException
                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -236,14 +236,14 @@ Public Class frmQCdatesSelection
                         "'" & qcReportsFolderUnix & "/qc_interelement_" & elem1 & "_" & elem2 & "_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
 
                     ' '' Create the Command for executing query and set its properties
-                    ''objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                    ''objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
                     ''Try
                     ''    'Execute query
                     ''    objCmd.ExecuteNonQuery()
                     ''    MsgBox("QC inter-element report(1) send to: d:/data/qc_values_interelement_set1_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
 
                     ''    'MsgBox("Table qc_interelement_2 cleared!")
-                    ''    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                    ''    'Catch ex As MySqlConnector.MySqlException
                     ''    '    'Ignore expected error i.e. error of Duplicates in MySqlException
                     ''Catch ex As Exception
                     ''    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -261,7 +261,7 @@ Public Class frmQCdatesSelection
 
                 End If
                 ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd = New MySqlConnector.MySqlCommand(strSQL, conn)
 
 
                 Try
@@ -270,7 +270,7 @@ Public Class frmQCdatesSelection
                     'MsgBox("QC inter-element report( send to: d:/data/qc_values_interelement_set2_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
 
                     'MsgBox("Table qc_interelement_2 cleared!")
-                    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                    'Catch ex As MySqlConnector.MySqlException
                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -304,7 +304,7 @@ Public Class frmQCdatesSelection
             conn.Open()
 
             sql = "SELECT * FROM station ORDER BY stationId"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "station")
 
             Dim stn(2) As String
@@ -315,7 +315,7 @@ Public Class frmQCdatesSelection
                 itms = New ListViewItem(stn)
                 LstViewStations.Items.Add(itms)
             Next
-        Catch ex As MySql.Data.MySqlClient.MySqlException
+        Catch ex As MySqlConnector.MySqlException
             MessageBox.Show(ex.Message)
             conn.Close()
         End Try

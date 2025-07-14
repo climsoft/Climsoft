@@ -63,8 +63,8 @@
     End Function
 
     Function CCITT_Binary(dat As String, DataWidth As Integer) As String
-        Dim cconn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dacc As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim cconn As New MySqlConnector.MySqlConnection
+        Dim dacc As MySqlConnector.MySqlDataAdapter
         Dim dscc As New DataSet
 
         Dim binstr, dat1, chr1, chr2, sql As String
@@ -75,7 +75,7 @@
             cconn.Open()
             sql = "Select * FROM ccitt ;"
 
-            dacc = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, cconn)
+            dacc = New MySqlConnector.MySqlDataAdapter(sql, cconn)
             dacc.SelectCommand.CommandTimeout = 0
             cconn.Close()
 
@@ -120,8 +120,8 @@
         End Try
     End Function
     Public Function WSI_data(stnid As String, ByRef WSI_section4 As String) As Boolean
-        Dim wconn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim daw As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim wconn As New MySqlConnector.MySqlConnection
+        Dim daw As MySqlConnector.MySqlDataAdapter
         Dim dsw As New DataSet
         Dim WSI, sql As String
         Dim seriesID, issuerID, issuerNo, localID As String
@@ -135,7 +135,7 @@
             wconn.Open()
             sql = "Select wsi,gtsWSI FROM station WHERE stationId = '" & stnid & "';"
 
-            daw = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, wconn)
+            daw = New MySqlConnector.MySqlDataAdapter(sql, wconn)
             daw.SelectCommand.CommandTimeout = 0
             wconn.Close()
 
@@ -200,8 +200,8 @@
 
     End Function
     Function FTP_Put(fl As String) As Boolean
-        Dim fconn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim fda As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim fconn As New MySqlConnector.MySqlConnection
+        Dim fda As MySqlConnector.MySqlDataAdapter
         Dim rf As New DataSet
         Dim ftp_host, Lflder, Rflder, Drv, ftpmode, usr, pwd, ftpscript, ftpbatch, binFile, sql As String
 
@@ -211,11 +211,11 @@
             fconn.Open()
 
             sql = "SELECT * FROM aws_mss where foldertype = 'binary';"
-            fda = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, fconn)
+            fda = New MySqlConnector.MySqlDataAdapter(sql, fconn)
             fda.SelectCommand.CommandTimeout = 0
             fconn.Close()
 
-            fda = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, fconn)
+            fda = New MySqlConnector.MySqlDataAdapter(sql, fconn)
             fda.SelectCommand.CommandTimeout = 0
             fconn.Close()
 

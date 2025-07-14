@@ -1,7 +1,7 @@
 ﻿Public Class frmElementSequencerHourly
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim conn As New MySqlConnector.MySqlConnection
     Dim ds As New DataSet
-    Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As New MySqlConnector.MySqlDataAdapter
     Dim sql As String
 
 
@@ -10,7 +10,7 @@
             conn.ConnectionString = frmLogin.txtusrpwd.Text
             conn.Open()
             sql = "select * from seq_element"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "seqElement")
             Me.dataGridView1.DataSource = ds.Tables(0)
             ClsTranslations.TranslateForm(Me)
@@ -24,7 +24,7 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Try
             da.Update(ds, "seqElement")
             ' MsgBox("Base sequencer table updated!", MsgBoxStyle.Information)
@@ -33,18 +33,18 @@
         End Try
         '-----------------
         'Update sequencer tables
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim objCmd As MySqlConnector.MySqlCommand
 
         'Clear sequencer table for non-leap year
         sql = "delete from seq_month_day_element"
                
                     ' Create the Command for executing query and set its properties
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                    objCmd = New MySqlConnector.MySqlCommand(sql, conn)
                     Try
                         'Execute query
             objCmd.ExecuteNonQuery()
             'MsgBox("Old sequencer records for non-leap year deleted!", MsgBoxStyle.Information)
-                        ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                        ' Catch ex As MySqlConnector.MySqlException
                         'Ignore expected error i.e. error of Duplicates in MySqlException
                     Catch ex As Exception
                         'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -55,13 +55,13 @@
         sql = "insert ignore into seq_month_day_element (mm,dd,elementId) SELECT mm, dd, element_code FROM seq_element, seq_day, seq_month,seq_year WHERE not isnull(date(convert(STR_TO_DATE(concat('',dd,',',mm,',',yyyy,''),'%d,%m,%Y'),char))) GROUP BY mm, dd, seq;"
 
         ' Create the Command for executing query and set its properties
-        objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        objCmd = New MySqlConnector.MySqlCommand(sql, conn)
         Try
             'Execute query
             objCmd.ExecuteNonQuery()
 
             ' MsgBox("Sequencer records for non-leap year updated!", MsgBoxStyle.Information)
-            ' Catch ex As MySql.Data.MySqlClient.MySqlException
+            ' Catch ex As MySqlConnector.MySqlException
             'Ignore expected error i.e. error of Duplicates in MySqlException
         Catch ex As Exception
             'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -71,12 +71,12 @@
         'Clear sequencer records for leap year
         sql = "delete from seq_month_day_element_leap_yr"
         ' Create the Command for executing query and set its properties
-        objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        objCmd = New MySqlConnector.MySqlCommand(sql, conn)
         Try
             'Execute query
             objCmd.ExecuteNonQuery()
             'MsgBox("Old sequencer records for leap year deleted!", MsgBoxStyle.Information)
-            ' Catch ex As MySql.Data.MySqlClient.MySqlException
+            ' Catch ex As MySqlConnector.MySqlException
             'Ignore expected error i.e. error of Duplicates in MySqlException
         Catch ex As Exception
             'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -86,12 +86,12 @@
         'Append new sequencer records for leap year
         sql = "insert ignore into seq_month_day_element_leap_yr (mm,dd,elementId) SELECT mm, dd, element_code FROM seq_element, seq_day, seq_month,seq_leap_year WHERE not isnull(date(convert(STR_TO_DATE(concat('',dd,',',mm,',',yyyy,''),'%d,%m,%Y'),char))) GROUP BY mm, dd, seq;"
         ' Create the Command for executing query and set its properties
-        objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        objCmd = New MySqlConnector.MySqlCommand(sql, conn)
         Try
             'Execute query
             objCmd.ExecuteNonQuery()
             'MsgBox("Sequencer records for leap year updated!", MsgBoxStyle.Information)
-            ' Catch ex As MySql.Data.MySqlClient.MySqlException
+            ' Catch ex As MySqlConnector.MySqlException
             'Ignore expected error i.e. error of Duplicates in MySqlException
         Catch ex As Exception
             'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -106,7 +106,7 @@
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
             Me.dataGridView1.Rows.Remove(dataGridView1.SelectedRows(0))
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
 
             da.Update(ds, "seqElement")
             MsgBox("Record Deleted!", MsgBoxStyle.Information)

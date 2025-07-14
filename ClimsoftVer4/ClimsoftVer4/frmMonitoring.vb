@@ -1,11 +1,11 @@
 ﻿
 Public Class frmMonitoring
     Public ds As New DataSet
-    Public da As MySql.Data.MySqlClient.MySqlDataAdapter
-    Public conn As New MySql.Data.MySqlClient.MySqlConnection
+    Public da As MySqlConnector.MySqlDataAdapter
+    Public conn As New MySqlConnector.MySqlConnection
     Public constr, sql As String
     Public kount As Long
-    Public qwry As MySql.Data.MySqlClient.MySqlCommand
+    Public qwry As MySqlConnector.MySqlCommand
 
     Private Sub optUsers_CheckedChanged(sender As Object, e As EventArgs) Handles optUsers.CheckedChanged
         If optUsers.Checked Then
@@ -24,7 +24,7 @@ Public Class frmMonitoring
             ' Get Users
             sql = "Select * from climsoftusers;"
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "Users")
@@ -38,7 +38,7 @@ Public Class frmMonitoring
             ' Get Key Entry forms
             sql = "Select * from data_forms where selected =1;"
             'conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "KeyEntryForms")
@@ -57,19 +57,19 @@ Public Class frmMonitoring
                   "`perform` int(11) DEFAULT NULL, " &
                   "PRIMARY KEY (`username`));"
 
-            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qwry = New MySqlConnector.MySqlCommand(sql, conn)
             qwry.CommandTimeout = 0
             qwry.ExecuteNonQuery()
 
             ' Populate the table with users
             sql = "INSERT IGNORE INTO userrecords ( userName ) SELECT climsoftusers.userName FROM climsoftusers;"
-            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qwry = New MySqlConnector.MySqlCommand(sql, conn)
             qwry.CommandTimeout = 0
             qwry.ExecuteNonQuery()
 
             ' Add root user
             sql = "INSERT IGNORE INTO `userrecords` (`username`) VALUES ('root');"
-            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qwry = New MySqlConnector.MySqlCommand(sql, conn)
             qwry.CommandTimeout = 0
             qwry.ExecuteNonQuery()
             conn.Close()
@@ -159,7 +159,7 @@ Public Class frmMonitoring
                 End If
 
                 conn.Open()
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "Records")
@@ -217,7 +217,7 @@ Public Class frmMonitoring
                         sql = "SELECT signature, entryDatetime FROM " & cboForms.Items(k) & " WHERE entryDatetime Between '" & dtf & "' and '" & dtt & "';"
                     End If
 
-                    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                    da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                     da.SelectCommand.CommandTimeout = 0
                     ds.Clear()
                     da.Fill(ds, "UserRecords")
@@ -236,7 +236,7 @@ Public Class frmMonitoring
                 'MsgBox(kt)
                 ' Update user record
                 sql = "UPDATE userrecords set recsdone = " & kount & " where username ='" & cboUser.Items(i) & "';"
-                qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                qwry = New MySqlConnector.MySqlCommand(sql, conn)
                 qwry.CommandTimeout = 0
                 qwry.ExecuteNonQuery()
             Next i
@@ -263,7 +263,7 @@ Public Class frmMonitoring
             'sql = "Select * from userrecords"
             sql = "SELECT username as Login, recsdone as Records,recsexpt as Target, round(recsdone/recsexpt * 100, 1) as performance FROM userrecords WHERE recsexpt IS NOT NULL;"
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "Performs")
@@ -349,14 +349,14 @@ Public Class frmMonitoring
     End Sub
 
     Private Sub cmdretrieve1_Click(sender As Object, e As EventArgs) Handles cmdretrieve1.Click
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim qry As MySqlConnector.MySqlCommand
         Me.Cursor = Cursors.WaitCursor
 
         Try
             conn.Open()
             ' Add a record for key entry mode if not exists
             sql = "ALTER TABLE `data_forms` ADD COLUMN `entry_mode` TINYINT(2) NOT NULL DEFAULT '0' AFTER `sequencer`;"
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
 
@@ -369,7 +369,7 @@ Public Class frmMonitoring
         ' Add a record for users entry status if not exists
         Try
             sql = "ALTER TABLE `climsoftusers` ADD COLUMN `entry_status` TINYINT(2) NOT NULL DEFAULT '0' AFTER `userRole`;"
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry = New MySqlConnector.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
         Catch ex As Exception
@@ -385,7 +385,7 @@ Public Class frmMonitoring
             If optTargets.Checked Then
                 sql = "SELECT username as User,recsexpt as Target_Records FROM userrecords;"
 
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "settings")
@@ -394,7 +394,7 @@ Public Class frmMonitoring
             ElseIf optEntryMode.Checked Then
                 sql = "SELECT form_name,description, entry_mode FROM data_forms where selected ='1';"
 
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "forms")
@@ -403,7 +403,7 @@ Public Class frmMonitoring
             ElseIf optUsersStatus.Checked Then
                 sql = "SELECT username as User,entry_status as Entry_Status FROM climsoftusers;"
 
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "EntryStatus")
@@ -442,7 +442,7 @@ Public Class frmMonitoring
                         End If
 
                         ' Update user record
-                        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qwry = New MySqlConnector.MySqlCommand(sql, conn)
                         qwry.CommandTimeout = 0
                         qwry.ExecuteNonQuery()
                     Next
@@ -451,7 +451,7 @@ Public Class frmMonitoring
                         entrymode = Val(.Rows(i).Cells(2).Value)
                         ' Update user record
                         sql = "UPDATE data_forms set entry_mode = '" & entrymode & "' where form_name ='" & .Rows(i).Cells(0).Value & "';"
-                        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qwry = New MySqlConnector.MySqlCommand(sql, conn)
                         qwry.CommandTimeout = 0
                         qwry.ExecuteNonQuery()
                     Next
@@ -475,7 +475,7 @@ Public Class frmMonitoring
 
                         'Grant or Revoke Select and Update privileges in observationfinal table for the user
                         Try
-                            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                            qwry = New MySqlConnector.MySqlCommand(sql, conn)
                             qwry.CommandTimeout = 0
                             qwry.ExecuteNonQuery()
 
@@ -485,7 +485,7 @@ Public Class frmMonitoring
 
                         ' Update user entry status
                         sql = "UPDATE climsoftusers set entry_status = '" & entrystatus & "' where userName ='" & usr & "';"
-                        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qwry = New MySqlConnector.MySqlCommand(sql, conn)
                         qwry.CommandTimeout = 0
                         qwry.ExecuteNonQuery()
                     Next
@@ -537,7 +537,7 @@ Public Class frmMonitoring
 
             ' Extract data
             conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "verified")
@@ -803,7 +803,7 @@ Public Class frmMonitoring
 
                 conn.Open()
                 sql = "select stationId, elementId from form_daily2 group by stationId, elementId;"
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds1.Clear()
                 da.Fill(ds1, "GrpRecords")
@@ -817,7 +817,7 @@ Public Class frmMonitoring
                             For k = 1 To 12
                                 sql = "select stationId, elementid, yyyy,mm from (select stationId, elementId, yyyy, mm from form_daily2 where (yyyy between " & Val(txtYear1.Text) & " and  " & Val(txtYear2.Text) & " ) and (mm between 1 and 12)) t
                                        where stationId = '" & stn & "' and elementId = '" & elm & "' and yyyy = " & j & " and mm = " & k & ";"
-                                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                                 da.SelectCommand.CommandTimeout = 0
                                 ds.Clear()
                                 da.Fill(ds, "MissRecords")
@@ -849,7 +849,7 @@ Public Class frmMonitoring
 
                 conn.Open()
                 sql = "select stationId, elementId from form_hourly group by stationId, elementId;"
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds1.Clear()
                 da.Fill(ds1, "GrpRecords")
@@ -865,7 +865,7 @@ Public Class frmMonitoring
                                     If Not IsDate(l & "/" & k & "/" & j) Then Continue For
                                     sql = "select stationId, elementid, yyyy,mm, dd from (select stationId, elementId, yyyy, mm, dd from form_hourly where (yyyy between " & Val(txtYear1.Text) & " and  " & Val(txtYear2.Text) & " ) and (mm between 1 and 12)) t
                                                where stationId = '" & stn & "' and elementId = '" & elm & "' and yyyy = " & j & " and mm = " & k & " and dd = " & l & ";"
-                                    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                                    da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                                     da.SelectCommand.CommandTimeout = 0
                                     ds.Clear()
                                     da.Fill(ds, "MissRecords")
@@ -898,7 +898,7 @@ Public Class frmMonitoring
 
                 conn.Open()
                 sql = "select stationId from " & cboForms.Text & " group by stationId;"
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds1.Clear()
                 da.Fill(ds1, "GrpRecords")
@@ -913,7 +913,7 @@ Public Class frmMonitoring
                                     If Not IsDate(l & "/" & k & "/" & j) Then Continue For
                                     sql = "select stationId, yyyy,mm, dd from (select stationId, yyyy, mm, dd from " & cboForms.Text & " where (yyyy between " & Val(txtYear1.Text) & " and  " & Val(txtYear2.Text) & " ) and (mm between 1 and 12)) t
                                                where stationId = '" & stn & "' and yyyy = " & j & " and mm = " & k & " and dd = " & l & ";"
-                                    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                                    da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                                     da.SelectCommand.CommandTimeout = 0
                                     ds.Clear()
                                     da.Fill(ds, "MissRecords")
@@ -946,7 +946,7 @@ Public Class frmMonitoring
 
                 conn.Open()
                 sql = "select stationId from " & cboForms.Text & " group by stationId;"
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds1.Clear()
                 da.Fill(ds1, "GrpRecords")
@@ -962,7 +962,7 @@ Public Class frmMonitoring
                                     For m = 0 To 21 Step 3
                                         sql = "select stationId, yyyy,mm, dd, hh from (select stationId, yyyy, mm, dd, hh from " & cboForms.Text & " where (yyyy between " & Val(txtYear1.Text) & " and  " & Val(txtYear2.Text) & " ) and (mm between 1 and 12)) t
                                                where stationId = '" & stn & "' and yyyy = " & j & " and mm = " & k & " and dd = " & l & " and hh = " & m & ";"
-                                        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                                        da = New MySqlConnector.MySqlDataAdapter(sql, conn)
                                         da.SelectCommand.CommandTimeout = 0
                                         ds.Clear()
                                         da.Fill(ds, "MissRecords")

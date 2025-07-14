@@ -1,7 +1,7 @@
 ﻿Public Class formPaperArchive
-    Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
+    Dim dbconn As New MySqlConnector.MySqlConnection
     Dim dbConnectionString As String
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim da As MySqlConnector.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql, ImagesPath As String
     Dim rec As Integer
@@ -184,21 +184,21 @@
                 End If
             Next
         Catch ex As Exception
-            lstMessages.Items.Add(ex.Message)
+            lstMessages.Items.Add(ex.Message & " @ UpdateArchive")
             UpdateArchive = False
         End Try
     End Function
 
 
-    Function ArchiveRecord(stn As String, frm As String, frmdatetime As Date, img As String) As Boolean
+    Function ArchiveRecord(stn As String, frm As String, frmdatetime As String, img As String) As Boolean
+
         'On Error GoTo Err
         'On Error Resume Next
+        Dim cmd As MySqlConnector.MySqlCommand
+        'Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
+        'Dim dsNewRow As DataRow
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-        Dim dsNewRow As DataRow
-
-        'sql = "SELECT * FROM paperarchive"
-        'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        'da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         'da.Fill(ds, "paperarchive")
 
         'MsgBox(ds.Tables("paperarchive").Rows.Count)
@@ -209,21 +209,30 @@
         ArchiveRecord = True
         Dim recCommit As New dataEntryGlobalRoutines
         Try
-            dsNewRow = ds.Tables("paperarchive").NewRow
+            img = Strings.Replace(img, "\", "\\")
+            sql = "INSERT IGNORE INTO `paperarchive` (`belongsTo`, `formDatetime`, `image`, `classifiedInto`) VALUES ('" & stn & "', '" & frmdatetime & "', '" & img & "', '" & frm & "');"
+            cmd = New MySqlConnector.MySqlCommand(sql, dbconn)
+            cmd.CommandTimeout = 0
+            ''Execute query
+            cmd.ExecuteNonQuery()
 
-            dsNewRow.Item("belongsTo") = stn
-            dsNewRow.Item("formDatetime") = frmdatetime
-            dsNewRow.Item("image") = img
-            dsNewRow.Item("classifiedInto") = frm
 
-            'Add a new record to the data source table
-            ds.Tables("paperarchive").Rows.Add(dsNewRow)
-            da.Update(ds, "paperarchive")
+            'dsNewRow = ds.Tables("paperarchive").NewRow
+
+            'dsNewRow.Item("belongsTo") = stn
+            'dsNewRow.Item("formDatetime") = frmdatetime
+            'dsNewRow.Item("image") = img
+            'dsNewRow.Item("classifiedInto") = frm
+
+            ''Add a new record to the data source table
+            'ds.Tables("paperarchive").Rows.Add(dsNewRow)
+            'da.Update(ds, "paperarchive")
+
             'MsgBox("Record Archived")
             'Exit Function
         Catch ex As Exception
             'MsgBox(Err.Number & " : " & Err.Description)
-            lstMessages.Items.Add(ex.Message)
+            lstMessages.Items.Add(ex.Message & " @ ArchiveRecord")
             ArchiveRecord = False
         End Try
 
@@ -261,18 +270,18 @@
         FillList(txtFormId, "paperarchivedefinition", "formId")
 
         sql = "SELECT * FROM paperarchive"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         da.Fill(ds, "paperarchive")
 
         ' Get the image archiving folder details
-        Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dar As MySqlConnector.MySqlDataAdapter
         Dim dsr As New DataSet
         Dim regmax As Integer
         Dim ImagesPath As String
 
         sql = "SELECT * FROM regkeys where KeyName='key12';"
 
-        dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        dar = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         dar.Fill(dsr, "regkeys")
         regmax = dsr.Tables("regkeys").Rows.Count
 
@@ -353,7 +362,7 @@
         Dim dir, ext, ImagesPath As String
         Dim fld, xt As Integer
         Dim stn, frm, y, m, d, h As String
-        Dim frmdatetime As Date
+        Dim frmdatetime As String 'Date
 
         Me.Cursor = Cursors.WaitCursor
         Try
@@ -394,8 +403,11 @@
             frmdatetime = y & "-" & m & "-" & d & " " & h & ":00:00"
 
             If IsDate(frmdatetime) Then
+                'MsgBox(frmdatetime)
                 'IO.File.Copy(txtImageFile.Text, "c:\images\" & FileNm, True)
+
                 IO.File.Copy(txtImageFile.Text, ImagesPath & "\" & FileNm, True)
+
                 If ArchiveRecord(stn, frm, frmdatetime, ImagesPath & "\" & FileNm) Then
                     lblArchiveMsg.Text = FileNm & " " & ClsTranslations.GetTranslation("Archived")
                     'Clear Form
@@ -430,7 +442,7 @@
         Dim dstn As New DataSet
         Dim sql As String
         sql = "SELECT * FROM  " & tbl
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
         dstn.Clear()
         da.Fill(dstn, tbl)
 
@@ -486,7 +498,7 @@
                 pictureBoxForm.Refresh()
 
                 sql = "SELECT * FROM  paperarchive"
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+                da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
                 ds.Clear()
                 da.Fill(ds, "paperarchive")
 
@@ -638,9 +650,9 @@ Err:
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim sql0 As String
-        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+        Dim comm As New MySqlConnector.MySqlCommand
         Dim stn, dt, img, frm As String
 
         Try
@@ -649,10 +661,10 @@ Err:
                 Exit Sub
             End If
             sql = "SELECT * FROM paperarchive"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
             da.Fill(ds, "paperarchive")
-
+            dbconn.Close()
             If ds.Tables("paperarchive").Rows.Count = 0 Then ' Zero records. Nothing to delete
                 MsgBox(ClsTranslations.GetTranslation("Nothing to delete"))
                 Exit Sub
@@ -671,10 +683,9 @@ Err:
 
                 ' Change the path character to mysql format
                 img = Strings.Replace(img, "\", "\\")
-
+                dbconn.Open()
                 comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
                 sql0 = "DELETE FROM `paperarchive` WHERE  `belongsTo`='" & stn & "' AND `formDatetime`='" & dt & "' AND `image`='" & img & "' AND `classifiedInto`='" & frm & "' LIMIT 1;"
-                MsgBox(sql0)
                 comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
                 comm.ExecuteNonQuery()   ' Execute the query
 
@@ -690,8 +701,11 @@ Err:
                 ' Set Image location to nothin
                 pictureBoxForm.ImageLocation = Nothing
                 pictureBoxForm.Refresh()
+                IO.File.Delete(img)
+                dbconn.Close()
             End If
         Catch ex As Exception
+            dbconn.Close()
             MsgBox(ex.HResult & " " & ex.Message)
         End Try
 
@@ -724,16 +738,16 @@ Err:
 
     Function DeleteRecord(tbl As String, recs As Integer) As Boolean
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim cb As New MySqlConnector.MySqlCommandBuilder(da)
         Dim recCommit As New dataEntryGlobalRoutines
         Dim sql0 As String
-        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+        Dim comm As New MySqlConnector.MySqlCommand
         Dim stn, dt, img, frm As String
 
         DeleteRecord = True
         Try
             sql = "SELECT * FROM " & tbl
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             da.Fill(ds, tbl)
 
             stn = ds.Tables("PaperArchive").Rows(rec).Item(0)
@@ -782,7 +796,7 @@ Err:
             dbconn.Open()
             lstArchival.Clear()
             sql = "SELECT * FROM paperarchive ORDER BY belongsTo"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da = New MySqlConnector.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
             da.Fill(ds, "paperarchive")
 
@@ -871,10 +885,12 @@ Err:
 
             ' Get the current full path for the image
             SelectedImage = lblArhiveFolder.Text & "\" & IO.Path.GetFileName(SelectedImage)
+
             If Strings.UCase(Strings.Right(SelectedImage, 3)) = "PDF" Then
                 ShowImage(SelectedImage)
             Else
                 pictureBoxForm.ImageLocation = SelectedImage
+                pictureBoxForm.Load()
                 pictureBoxForm.Refresh()
             End If
             'PicForm.ImageLocation = lstArchival.FocusedItem.SubItems(3).Text
@@ -893,7 +909,7 @@ Err:
             If MessageBox.Show(ClsTranslations.GetTranslation("Do you really want to Delete this Record?"),
                                ClsTranslations.GetTranslation("Delete"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.Yes Then
                 Dim dt, img, sql0 As String
-                Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+                Dim comm As New MySqlConnector.MySqlCommand
 
                 img = pictureBoxForm.ImageLocation
 

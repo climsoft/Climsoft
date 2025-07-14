@@ -95,6 +95,7 @@ Partial Class formUpperAir
         Me.recNumberTextBox = New System.Windows.Forms.TextBox()
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnPush = New System.Windows.Forms.Button()
         Me.grpHeaders.SuspendLayout()
         Me.grpData.SuspendLayout()
         Me.pnlConmmand.SuspendLayout()
@@ -608,6 +609,7 @@ Partial Class formUpperAir
         '
         'pnlConmmand
         '
+        Me.pnlConmmand.Controls.Add(Me.btnPush)
         Me.pnlConmmand.Controls.Add(Me.chkRepeatEntry)
         Me.pnlConmmand.Controls.Add(Me.btnView)
         Me.pnlConmmand.Controls.Add(Me.btnUpload)
@@ -628,7 +630,7 @@ Partial Class formUpperAir
         Me.pnlConmmand.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlConmmand.Location = New System.Drawing.Point(0, 517)
         Me.pnlConmmand.Name = "pnlConmmand"
-        Me.pnlConmmand.Size = New System.Drawing.Size(663, 114)
+        Me.pnlConmmand.Size = New System.Drawing.Size(690, 114)
         Me.pnlConmmand.TabIndex = 681
         '
         'chkRepeatEntry
@@ -644,7 +646,7 @@ Partial Class formUpperAir
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(413, 41)
+        Me.btnView.Location = New System.Drawing.Point(383, 41)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 21
@@ -682,7 +684,7 @@ Partial Class formUpperAir
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(575, 41)
+        Me.btnHelp.Location = New System.Drawing.Point(608, 41)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 25
@@ -692,7 +694,7 @@ Partial Class formUpperAir
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(332, 41)
+        Me.btnClear.Location = New System.Drawing.Point(308, 41)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 23
@@ -702,7 +704,7 @@ Partial Class formUpperAir
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(89, 41)
+        Me.btnCommit.Location = New System.Drawing.Point(83, 41)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
         Me.btnCommit.TabIndex = 18
@@ -711,7 +713,7 @@ Partial Class formUpperAir
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(251, 41)
+        Me.btnDelete.Location = New System.Drawing.Point(233, 41)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 22
@@ -729,7 +731,7 @@ Partial Class formUpperAir
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(170, 41)
+        Me.btnUpdate.Location = New System.Drawing.Point(158, 41)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 20
@@ -785,18 +787,27 @@ Partial Class formUpperAir
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(494, 41)
+        Me.btnClose.Location = New System.Drawing.Point(533, 41)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 24
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(458, 41)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(75, 23)
+        Me.btnPush.TabIndex = 1189
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
+        '
         'formUpperAir
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(663, 631)
+        Me.ClientSize = New System.Drawing.Size(690, 631)
         Me.Controls.Add(Me.pnlConmmand)
         Me.Controls.Add(Me.grpData)
         Me.Controls.Add(Me.grpHeaders)
@@ -886,4 +897,5 @@ Partial Class formUpperAir
     Friend WithEvents txtFlag313Field026 As TextBox
     Friend WithEvents txtVal_Elem313Field013 As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents btnPush As Button
 End Class
