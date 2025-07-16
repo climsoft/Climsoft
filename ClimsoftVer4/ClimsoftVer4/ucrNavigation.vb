@@ -787,10 +787,11 @@ Public Class ucrNavigation
                         While reader.Read()
                             bIsRowFetched = True
                             For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
-                                If kvp.Value <> reader.GetString(kvp.Key) Then
+                                If kvp.Value <> reader(kvp.Key).ToString() Then
                                     bIsRowFetched = False
                                     Exit For
                                 End If
+
                             Next
 
                             If bIsRowFetched Then
@@ -803,8 +804,6 @@ Public Class ucrNavigation
 
                 End Using
             End Using
-
-
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
         End Try
