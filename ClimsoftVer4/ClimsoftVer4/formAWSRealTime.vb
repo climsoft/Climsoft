@@ -69,7 +69,7 @@ Public Class formAWSRealTime
         pnlProcessing.Visible = True
         ' database Connect
         dbConnectionString = frmLogin.txtusrpwd.Text
-        dbconn.ConnectionString = dbConnectionString
+        dbconn.ConnectionString = dbConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         dbconn.Open()
 
         'Indicators_Populate(dbconn)
@@ -184,6 +184,7 @@ Public Class formAWSRealTime
         dsNewRow.Item("ftpMode") = txtBasestationFTPMode.Text
         dsNewRow.Item("userName") = txtBaseStationUser.Text
         dsNewRow.Item("password") = txtbaseStationPW.Text
+        dsNewRow.Item("port") = txtPort.Text
 
         ' Confirm Password
         If txtbaseStationPW.Text <> txtbaseStationPWConfirm.Text Then
@@ -260,6 +261,7 @@ Err:
                 txtBasestationFTPMode.Text = ds.Tables("aws_basestation").Rows(num).Item("ftpMode")
                 txtBaseStationUser.Text = ds.Tables("aws_basestation").Rows(num).Item("userName")
                 txtbaseStationPW.Text = ds.Tables("aws_basestation").Rows(num).Item("password")
+                txtPort.Text = ds.Tables("aws_basestation").Rows(num).Item("port")
 
             Case "mss"
                 txtMSSAddress.Text = ds.Tables("aws_mss").Rows(num).Item("ftpId")
@@ -335,6 +337,7 @@ Err:
                 ds.Tables(tbl).Rows(num).Item("ftpMode") = txtBasestationFTPMode.Text
                 ds.Tables(tbl).Rows(num).Item("userName") = txtBaseStationUser.Text
                 ds.Tables(tbl).Rows(num).Item("password") = txtbaseStationPW.Text
+                ds.Tables(tbl).Rows(num).Item("port") = txtPort.Text
 
             Case "mss"
                 ds.Tables(tbl).Rows(num).Item("ftpId") = txtMSSAddress.Text
@@ -457,6 +460,7 @@ Err:
                 'txtBasestationFTPMode.Text = ""
                 txtBaseStationUser.Clear()
                 txtBasestationFTPMode.Text = "FTP"
+                txtPort.Text = "21"
                 txtbaseStationPW.Clear()
                 txtbaseStationPWConfirm.Clear()
                 txtbaseStationPWConfirm.Visible = True
@@ -1048,7 +1052,7 @@ Err:
         Try
 
             'dbConnectionString = frmLogin.txtusrpwd.Text
-            iconn.ConnectionString = dbConnectionString
+            iconn.ConnectionString = dbConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             iconn.Open()
 
             ' Populate Template Combo box
@@ -1642,19 +1646,16 @@ Err:
 
         FTP_Call = True
 
-        Dim ftpscript As String
-        Dim ftpbatch As String
-        Dim Drive1 As String
-        Dim local_folder As String
-        Dim out_folder As String
+        Dim ftpscript, ftpbatch As String
+        Dim Drive1, local_folder, out_folder As String
 
-        Dim usr As String
-        Dim pwd As String
+        Dim usr, pwd As String
         Dim flder, fldr As String
         Dim ftpmode, quot As String
+        Dim portNumber As Integer
 
         Try
-            If Not Get_ftp_details(ftpmethod, ftp_host, flder, ftpmode, usr, pwd) Then
+            If Not Get_ftp_details(ftpmethod, ftp_host, flder, ftpmode, usr, pwd, portNumber) Then
                 Log_Errors("Host server " & ftp_host & " Not found")
                 Return False
             End If
@@ -1685,7 +1686,7 @@ Err:
                         'Print(1, "asc" & Chr(13) & Chr(10))
 
                         ' Improved FTP method that uses WinSCP commands and works even in Filezilla servers
-                        Print(1, "open FTP://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
+                        Print(1, "open FTP://" & usr & ":" & pwd & "@" & ftp_host & ":" & portNumber & Chr(13) & Chr(10))
                         Print(1, "cd " & flder & Chr(13) & Chr(10))
                         'Print(1, "asc" & Chr(13) & Chr(10))
 
@@ -1880,7 +1881,7 @@ Err:
             Next
         End If
     End Sub
-    Function Get_ftp_details(ftpmethod As String, aws_ftp As String, ByRef flder As String, ByRef ftpmode As String, ByRef usr As String, ByRef pwd As String) As Boolean
+    Function Get_ftp_details(ftpmethod As String, aws_ftp As String, ByRef flder As String, ByRef ftpmode As String, ByRef usr As String, ByRef pwd As String, ByRef portNo As Integer) As Boolean
 
         Dim sql As String
         Dim rf As New DataSet
@@ -1903,6 +1904,7 @@ Err:
                                 ftpmode = .Rows(i).Item("ftpMode")
                                 usr = .Rows(i).Item("userName")
                                 pwd = .Rows(i).Item("password")
+                                portNo = .Rows(i).Item("port")
                                 Exit For
                             End If
                         End With
@@ -3009,7 +3011,7 @@ Err:
             'cmd.CommandText = sql
             'cmd.ExecuteNonQuery()
 
-            conndb.ConnectionString = frmLogin.txtusrpwd.Text
+            conndb.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conndb.Open()
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conndb)
             'qry = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
@@ -4172,17 +4174,14 @@ Err:
         On Error GoTo Err
         Dim local_folder, backup_folder As String
 
-        Dim usr As String
-        Dim pwd As String
-        Dim flder As String
-        Dim ftpmode As String
-        Dim ftpmethod As String
-        Dim Drive1 As String
-        Dim ftpscript As String
-        Dim ftpbatch As String
+        Dim usr, pwd As String
+        Dim Drive1, flder As String
+        Dim ftpmode, ftpmethod As String
+        Dim ftpscript, ftpbatch As String
+        Dim portNumber As Integer
 
         ' Get the FTP details from the base station server
-        Get_ftp_details("get", ftp_host, flder, ftpmode, usr, pwd)
+        Get_ftp_details("get", ftp_host, flder, ftpmode, usr, pwd, portNumber)
         'MsgBox(usr & " " & pwd)
         FileClose(1) ' Close the file if ever it exist
 
@@ -5117,6 +5116,8 @@ Err:
         txtBasestationFTPMode.Text = ""
         txtBaseStationUser.Text = ""
         txtbaseStationPW.Text = ""
+        txtPort.Text = ""
+
     End Sub
 
 
@@ -5316,7 +5317,7 @@ Err:
 
         Try
             'dbConnectionString = frmLogin.txtusrpwd.Text
-            sconn.ConnectionString = dbConnectionString
+            sconn.ConnectionString = dbConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             sconn.Open()
 
             ' set value for the optional section
@@ -5346,7 +5347,7 @@ Err:
 
         Try
 
-            sconn.ConnectionString = dbConnectionString
+            sconn.ConnectionString = dbConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             sconn.Open()
 
             ' Select default Template
@@ -5373,7 +5374,7 @@ Err:
 
         Try
 
-            sconn.ConnectionString = dbConnectionString
+            sconn.ConnectionString = dbConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             sconn.Open()
 
             ' set value for the optional section
@@ -5416,7 +5417,7 @@ Err:
         Dim sqlstr As String
 
         Try
-            dbstr.ConnectionString = frmLogin.txtusrpwd.Text
+            dbstr.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             dbstr.Open()
 
             sqlstr = "SELECT * FROM " & AWSsite
@@ -5494,6 +5495,8 @@ Err:
         '    ''txtSiteID.Text = ID
         'End If
     End Sub
+
+
 
     Function Format_Datetime(dt As String, fmt As String) As String
         Dim ty, tm, td, tH, tmi As String
@@ -5916,13 +5919,13 @@ Err:
         Try
 
             dtt = Get_DateStamp(AWSsite, drws)
-
+            'Log_Errors(dtt)
             ' Check for valid date
             If Not IsDate(dtt) Then Return False
 
             'Adjust the observation hour if data in AWS file has has different time setting from that in database e.g. UTC and Local time
             dttdb = DateAdd("h", AdjustHH, dtt)
-
+            'Log_Errors(dttdb)
             ' Check whether the current record can be updated into the database
             If DateDiff("h", dttdb, txtDateTime.Text) > Val(txtPeriod.Text - 1) And Val(txtPeriod.Text) <> 999 Then Return False
 
@@ -5940,6 +5943,9 @@ Err:
                 '' Convert wind speed to SI units
                 'If Strings.LCase(unitt(j)) = "knots" Then drws(j) = Val(drws(j)) / 2
 
+                ' Skip if value is a missing data flag
+                If drws(j) = flg Then Continue For
+
                 If QC_Limits(stn, elm(j), dttdb, drws(j), Llimit(j), Ulimit(j)) Then
                     Continue For
                 End If
@@ -5948,7 +5954,9 @@ Err:
                 'If Strings.LCase(unitt(j)) = "hpa" Then drws(j) = Val(drws(j)) * 100
 
                 If IsNumeric(elm(j)) Then
-                    x = stn & "," & elm(j) & "," & dttdb & ",surface" & "," & drws(j) & ",\N" & ",1" & ",4"
+
+                    'x = stn & "," & elm(j) & "," & dttdb & ",surface" & "," & drws(j) & "," & "" & ",1" & ",1" & ",1" & ",4" & ",,,,,,,,"
+                    x = stn & "," & elm(j) & "," & dttdb & ",surface" & "," & drws(j) & "," & "" & ",1" & ",4"
                     PrintLine(12, x)
                 End If
             Next j
@@ -5956,9 +5964,12 @@ Err:
             FileClose(12)
             aws_sql_input_file = Strings.Replace(aws_sql_input_file, "\", "/")
 
-            sql = "LOAD DATA local INFILE '" & aws_sql_input_file & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType);"
+            'Load_Files(aws_sql_input_file, "observationfinal", 0, ",")
+
+            sql = "LOAD DATA LOCAL INFILE '" & aws_sql_input_file & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType);"
+
             'Log_Errors(sql)
-            'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+            Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
             cmd.Connection = dbconn
 
             cmd.CommandTimeout = 0
@@ -5997,7 +6008,7 @@ Err:
             Return True
         Catch ex As Exception
             FileClose(12)
-            Log_Errors(ex.Message)
+            Log_Errors(ex.Message & " at Update_db")
             Return False
         End Try
     End Function
@@ -6082,7 +6093,7 @@ Err:
 
 
         Try
-            wconn.ConnectionString = frmLogin.txtusrpwd.Text
+            wconn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             wconn.Open()
             sql = "Select wsi FROM station WHERE stationId = '" & nat_id & "';"
 

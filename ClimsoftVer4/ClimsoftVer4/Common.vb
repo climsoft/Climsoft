@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Win32
+Imports MySql.Data.MySqlClient
 Module CommonModules
 
     Function ViewFile(flname As String) As Boolean
@@ -36,6 +37,37 @@ errhandler:
         MsgBox(Err.Number & " " & Err.Description)
         GetWRplotPath = False
         'End Try
+
+    End Function
+
+    Function Load_Files(flname As String, tblname As String, skplines As Integer, fldsep As String, Optional fldquotechar As String = "") As Boolean
+        Dim lconn As New MySql.Data.MySqlClient.MySqlConnection
+        ' Dim cmd As MySqlConnector.MySqlCommand
+        Dim fl As MySql.Data.MySqlClient.MySqlBulkLoader
+        ' Dim rws As Long
+        lconn.ConnectionString = frmLogin.txtusrpwd.Text & ";AllowLoadLocalInfile=true"
+
+        Try
+            lconn.Open()
+            fl = New MySql.Data.MySqlClient.MySqlBulkLoader(lconn)
+
+            fl.FileName = flname
+            fl.TableName = tblname
+            fl.EscapeCharacter = "UTFB"
+            fl.NumberOfLinesToSkip = skplines
+            fl.FieldTerminator = fldsep
+            fl.FieldQuotationCharacter = fldquotechar
+            'fl.FieldQuotationOptional ='True',
+            fl.Local = True
+
+            fl.Load()
+            lconn.Close()
+            Return True
+        Catch ex As Exception
+            lconn.Close()
+            MsgBox(ex.Message)
+            Return False
+        End Try
 
     End Function
 

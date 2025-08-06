@@ -1,4 +1,6 @@
-﻿Public Class frmImportDaily
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmImportDaily
     Dim dbcon As New MySql.Data.MySqlClient.MySqlConnection
     Dim recCommit As New dataEntryGlobalRoutines
     Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
@@ -8,6 +10,7 @@
     Dim sql, currentRow(), delimit, cprd As String
     Dim lin, rec, col, kount, prd As Integer
     Dim ImportFile As Boolean
+    Dim loadFile As New dataEntryGlobalRoutines
 
     Public Enum ImportType
         Hourly
@@ -263,7 +266,7 @@
             pnlErrors.Visible = False
         Catch ex As Exception
             Me.Cursor = Cursors.Default
-            MsgBox(Ex.message)
+            MsgBox(ex.Message)
         End Try
     End Sub
 
@@ -470,17 +473,14 @@
             Me.Cursor = Cursors.WaitCursor
             lblRecords.Text = ""
             lblTRecords.Text = Val(lblTRecords.Text) - Val(txtStartRow.Text) + 1 ' Compute total data records from the input file
-            'If Not IO.Directory.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data") Then
             If Not IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data") Then
-                'IO.Directory.CreateDirectory(Application.StartupPath & "\data")
                 IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data")
             End If
-            'fl1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_sql.csv"
             fl1 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\data_sql.csv"
             FileOpen(101, fl1, OpenMode.Output)
 
             dbConnectionString = frmLogin.txtusrpwd.Text
-            dbcon.ConnectionString = dbConnectionString
+            dbcon.ConnectionString = dbConnectionString & ";AllowLoadLocalInfile=true"
             dbcon.Open()
 
             ' Contruct the SQL path structure for the output file
@@ -565,6 +565,15 @@
 
             FileClose(101)
 
+            '' Create sql query to upload data from SQL file
+
+            'If rbtnFinal.Checked Then ' load data into observationfinal table
+            '    loadFile.Load_Files(fl2, "observationfinal", 0, ",")
+            'Else ' load data into observationinitial table
+            '    loadFile.Load_Files(fl2, "observationinitial", 0, ",")
+            'End If
+
+
             ' Create sql query to upload data from SQL file
 
             If rbtnFinal.Checked Then ' load data into observationfinal table
@@ -588,8 +597,6 @@
             dbcon.Close()
             Me.Cursor = Cursors.Default
 
-            ' Output stations and elements errors into a file
-            'pnlErrors.Visible = False
 
 
             If lstStations.Items.Count > 0 Then
@@ -605,7 +612,8 @@
                 lstElements.Visible = True
                 cmdSaveErrors.Visible = True
             End If
-
+            lblRecords.Text = "Data import process successfully completed"
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
             lblRecords.Text = "Data Import Failed!, Check if the Staion Id exists in metadata"
@@ -646,10 +654,10 @@
         'Try
 
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(delimit)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(delimit)
 
-                Do While MyReader.EndOfData = False
+            Do While MyReader.EndOfData = False
                 Try
                     'While Not MyReader.EndOfData
                     currentRow = MyReader.ReadFields()
@@ -704,6 +712,7 @@
                                                         col = col + 1
                                                         Continue For 'Blanks to be skipped
                                                     End If
+
                                                     If IsDate(dttime) Then
                                                         If Station_Element(st, cod) Then
                                                             'Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl)
@@ -756,25 +765,25 @@
                     Continue Do
                 End Try
             Loop
-            End Using
+        End Using
 
         'Catch ex As Exception
         '    If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
         'End Try
 
     End Sub
-   
+
     Sub Load_Daily1()
 
         'Try
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(delimit)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(delimit)
 
-                Dim st, cod, y, m, d, h, dttime, hd, dat, flg, lvl As String
-                Dim acquisitiontype As Integer
+            Dim st, cod, y, m, d, h, dttime, hd, dat, flg, lvl As String
+            Dim acquisitiontype As Integer
 
-                Do While MyReader.EndOfData = False
+            Do While MyReader.EndOfData = False
                 Try
                     currentRow = MyReader.ReadFields()
                     If MyReader.LineNumber > Val(txtStartRow.Text) Then
@@ -832,7 +841,11 @@
 
                                     ' Check for missing flag data values 
                                     If dat = txtMissingFlag.Text Then
-                                        If dat = "" Then Continue For 'Blanks to be skipped
+                                        If dat = "" Then
+                                            col = col + 1
+                                            Continue For 'Blanks to be skipped
+                                        End If
+
                                         If IsDate(dttime) Then
                                             If Station_Element(st, cod) Then
                                                 Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl)
@@ -875,7 +888,7 @@
                     Continue Do
                 End Try
             Loop
-            End Using
+        End Using
         'Catch ex As Exception
         '    MsgBox(ex.HResult & " " & ex.Message)
         'End Try
@@ -890,12 +903,12 @@
         Dim acquisitiontype As Integer
 
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(delimit)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(delimit)
 
-                'MsgBox("Daily")
+            'MsgBox("Daily")
 
-                Do While MyReader.EndOfData = False
+            Do While MyReader.EndOfData = False
                 Try
                     currentRow = MyReader.ReadFields()
 
@@ -943,7 +956,11 @@
 
                                                 ' Check for missing flag data values 
                                                 If dat = txtMissingFlag.Text Then
-                                                    If dat = "" Then Continue For 'Blanks to be skipped
+                                                    If dat = "" Then 'Blanks to be skipped
+                                                        col = col + 1
+                                                        Continue For
+                                                    End If
+
                                                     If IsDate(dttime) Then
                                                         If Station_Element(st, cod) Then
                                                             If chkUTC.Checked Then
@@ -1013,7 +1030,7 @@
                     Continue Do
                 End Try
             Loop ' Next Data row
-            End Using ' MyReader
+        End Using ' MyReader
 
         'Catch ex As Exception
         '    MsgBox(ex.HResult & " " & ex.Message)
@@ -1188,10 +1205,10 @@
         Dim acquisitiontype As Integer
         'Try
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(delimit)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(delimit)
 
-                Do While MyReader.EndOfData = False
+            Do While MyReader.EndOfData = False
                 Try
                     currentRow = MyReader.ReadFields()
                     If MyReader.LineNumber > Val(txtStartRow.Text) Then
@@ -1244,7 +1261,11 @@
 
                                     ' Check for missing flag data values 
                                     If dat = txtMissingFlag.Text Then
-                                        If dat = "" Then Continue For 'Blanks to be skipped
+                                        If dat = "" Then 'Blanks to be skipped
+                                            col = col + 1
+                                            Continue For
+                                        End If
+
                                         If IsDate(dttim) Then
                                             If Station_Element(st, cod) Then
                                                 If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
@@ -1277,7 +1298,7 @@
                     Continue Do
                 End Try
             Loop
-            End Using
+        End Using
         'Catch ex As Exception
         '    MsgBox(ex.HResult & " " & ex.Message)
         'End Try
@@ -1289,10 +1310,10 @@
 
         'Try
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(delimit)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(delimit)
 
-                Do While MyReader.EndOfData = False
+            Do While MyReader.EndOfData = False
                 Try
                     currentRow = MyReader.ReadFields()
                     If MyReader.LineNumber > Val(txtStartRow.Text) Then
@@ -1334,7 +1355,7 @@
                                             dttcom = dttcom + 1
                                         ElseIf .Columns(col).Name = "hh" Then ' Hour column found
                                             h = dat
-                                        ElseIf .Columns(col).Name = "level" Then ' Hour column found
+                                        ElseIf .Columns(col).Name = "level" Then ' Level column found
                                             lvl = dat
                                         ElseIf .Columns(col).Name = "NA" Then ' Not Required
                                             'Column labeled NA will be skipped
@@ -1358,7 +1379,11 @@
                                             ' Check for missing flag data values 
                                             If dat = txtMissingFlag.Text Then
                                                 'MsgBox(dt_tm & " " & dat)
-                                                If dat = "" Then Continue For 'Blanks to be skipped
+                                                If dat = "" Then 'Blanks to be skipped
+                                                    col = col + 1
+                                                    Continue For
+                                                End If
+
                                                 If IsDate(dt_tm) Then
 
                                                     'MsgBox(st & " " & cod)
@@ -1382,6 +1407,10 @@
                                             If IsNumeric(dat) Then
                                                 prd = 0
                                                 If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                                prd = prd + 1 ' Update observation period counter
+                                            ElseIf Len(dat) = 1 Then ' Single non numeric charcater used
+                                                dat = ""
+                                                flg = "M"
                                             Else
                                                 Get_Value_Flag(cod, dat, flg)
                                             End If
@@ -1431,7 +1460,7 @@
                     Continue Do
                 End Try
             Loop
-            End Using
+        End Using
 
         'Catch ex As Exception
         '    MsgBox(ex.Message)
@@ -1481,10 +1510,10 @@
         'Try
 
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(delimit)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(delimit)
 
-                Do While MyReader.EndOfData = False
+            Do While MyReader.EndOfData = False
                 Try
                     currentRow = MyReader.ReadFields()
 
@@ -1560,7 +1589,7 @@
                     Continue Do
                 End Try
             Loop
-            End Using
+        End Using
         'Catch ex As Exception
         '    If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
         'End Try
@@ -1576,10 +1605,10 @@
         'Try
 
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(delimit)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(delimit)
 
-                Do While MyReader.EndOfData = False
+            Do While MyReader.EndOfData = False
                 Try
                     'While Not MyReader.EndOfData
                     currentRow = MyReader.ReadFields()
@@ -1619,7 +1648,11 @@
 
                                                 ' Check for missing flag data values 
                                                 If dat = txtMissingFlag.Text Then
-                                                    If dat = "" Then Continue For 'Blanks to be skipped
+                                                    If dat = "" Then 'Blanks to be skipped
+                                                        col = col + 1
+                                                        Continue For
+                                                    End If
+
                                                     If Station_Element(st, cod) Then
                                                         If IsDate(dttime) Then
                                                             If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype) Then Exit For
@@ -1669,7 +1702,7 @@
                 End Try
             Loop
 
-            End Using
+        End Using
 
         'Catch ex As Exception
         'If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
@@ -1683,10 +1716,10 @@
 
         'Try
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(delimit)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(delimit)
 
-                Do While MyReader.EndOfData = False
+            Do While MyReader.EndOfData = False
                 Try
                     currentRow = MyReader.ReadFields()
 
@@ -1733,12 +1766,13 @@
 
                                             ' Check for missing flag data values 
                                             If dat = txtMissingFlag.Text Then
+                                                col = col + 1
                                                 If dat = "" Then Continue For 'Blanks to be skipped
+
                                                 If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, "", "M", acquisitiontype, lvl)
                                                 lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                                 lblRecords.Refresh()
-                                                col = col + 1
-                                                'End If
+
                                                 Continue For
                                             End If
 
@@ -1774,7 +1808,7 @@
                     Continue Do
                 End Try
             Loop
-            End Using
+        End Using
 
         'Catch ex As Exception
         '    MsgBox(ex.HResult & " " & ex.Message)
@@ -1826,10 +1860,10 @@
 
         'Try
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(delimit)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(delimit)
 
-                Do While MyReader.EndOfData = False
+            Do While MyReader.EndOfData = False
                 Try
                     currentRow = MyReader.ReadFields()
                     If MyReader.LineNumber > Val(txtStartRow.Text) Then
@@ -1915,7 +1949,7 @@
                     Continue Do
                 End Try
             Loop
-            End Using
+        End Using
         'Catch ex As Exception
         '    MsgBox(ex.HResult & " " & ex.Message)
         'End Try
@@ -1959,11 +1993,9 @@
         'MsgBox("Flag")
         Dim datstr, flgchr As String
         Try
-
             If Len(dat) = 0 Then
                 dat = ""
                 flg = "M"
-                prd = prd + 1 ' Update observation period counter
             Else
                 datstr = Strings.Left(dat, Len(dat) - 1)
                 flgchr = Strings.Right(dat, 1)
@@ -2105,18 +2137,21 @@
                 datetime = DateAndTime.Year(datetime) & "-" & DateAndTime.Month(datetime) & "-" & DateAndTime.Day(datetime) & " " & DateAndTime.Hour(datetime) & ":" & DateAndTime.Minute(datetime) & ":" & DateAndTime.Second(datetime)
             End If
 
-            If Val(cprd) < 1 Then cprd = "\N" ' No cummulative values
+            'If Val(cprd) < 1 Then cprd = "\N" ' No cummulative values
+            If Val(cprd) < 1 Then cprd = "" ' No cummulative values
 
             If rbtnFinal.Checked Then ' Set for upload to observationfinal table
                 qcStatus = 1
                 qcLog = 1
             Else ' Set for upload to observationinitial table
                 qcStatus = 0
-                qcLog = "\N"
+                'qcLog = "\N"
+                qcLog = ""
                 'dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & acqTyp
             End If
 
             dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & qcStatus & "," & qcLog & "," & acqTyp
+            'dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & qcStatus & "," & qcLog & "," & acqTyp & ",,,,,,,,"
 
             Print(101, dat)
             PrintLine(101)

@@ -279,7 +279,7 @@ Partial Class formPaperArchive
         '
         Me.lblArchiveMsg.AutoSize = True
         Me.lblArchiveMsg.ForeColor = System.Drawing.Color.Red
-        Me.lblArchiveMsg.Location = New System.Drawing.Point(108, 396)
+        Me.lblArchiveMsg.Location = New System.Drawing.Point(21, 396)
         Me.lblArchiveMsg.Name = "lblArchiveMsg"
         Me.lblArchiveMsg.Size = New System.Drawing.Size(0, 13)
         Me.lblArchiveMsg.TabIndex = 1
@@ -855,7 +855,7 @@ Partial Class formPaperArchive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1203, 582)
+        Me.ClientSize = New System.Drawing.Size(1203, 586)
         Me.Controls.Add(Me.lblImageRotate)
         Me.Controls.Add(Me.lblZoomout)
         Me.Controls.Add(Me.pictureBoxForm)

@@ -24,7 +24,7 @@ Public Class formDatabaseConnect
         myConnectionString = txtDbParameters.Text & "uid=" & userName.Text & ";pwd=" & passWord.Text & ";"
 
         Try
-            conn.ConnectionString = myConnectionString
+            conn.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
 
             ' MsgBox("Connection Successful !", MsgBoxStyle.Information)

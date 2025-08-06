@@ -3,6 +3,7 @@
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         'Import data by station
         Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim builder As New Common.DbConnectionStringBuilder()
         Dim connStr As String
         Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
         Dim sql As String, sql2 As String, stnId As String, i As Integer
@@ -12,7 +13,8 @@
         Dim maxRows As Integer
         Dim RestorePath As String, stnBackupFile As String
 
-        connStr = frmLogin.txtusrpwd.Text
+        connStr = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=true;AllowLoadLocalInfile=true"
+        'connStr = builder.ConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true" ';SslMode=VerifyCA"
 
         conn.ConnectionString = connStr
         conn.Open()
@@ -33,7 +35,7 @@
             If System.IO.File.Exists(RestorePath) Then
                 conn.Open()
 
-                sql2 = "LOAD DATA INFILE '" & strBackupFolderUnixStyle & "/" & stnBackupFile & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedfrom,describedby,obsdatetime,obslevel,obsvalue,flag,qcstatus,acquisitiontype);"
+                sql2 = "LOAD DATA LOCAL INFILE '" & strBackupFolderUnixStyle & "/" & stnBackupFile & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedfrom,describedby,obsdatetime,obslevel,obsvalue,flag,qcstatus,qcTypeLog,acquisitiontype,dataForm,capturedBy);"
                 ' Create the Command for executing query and set its properties
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql2, conn)
                 Try

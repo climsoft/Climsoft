@@ -67,10 +67,13 @@ Partial Class frmDBUtilities
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToolStripMenuItem, Me.ExternalDataToolStripMenuItem, Me.GenerateValuesToolStripMenuItem, Me.BackupToolStripMenuItem, Me.RestoreToolStripMenuItem, Me.OptionsToolStripMenuItem})
+        Me.MenuStrip1.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToolStripMenuItem, Me.ExternalDataToolStripMenuItem, Me.RestoreToolStripMenuItem, Me.GenerateValuesToolStripMenuItem, Me.BackupToolStripMenuItem, Me.OptionsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(852, 24)
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(6, 2, 0, 2)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1278, 33)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -78,126 +81,126 @@ Partial Class frmDBUtilities
         '
         Me.ImportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ObsInitialToFinalToolStripMenuItem})
         Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
-        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
+        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(86, 29)
         Me.ImportToolStripMenuItem.Text = "Upload"
         '
         'ObsInitialToFinalToolStripMenuItem
         '
         Me.ObsInitialToFinalToolStripMenuItem.Name = "ObsInitialToFinalToolStripMenuItem"
-        Me.ObsInitialToFinalToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
+        Me.ObsInitialToFinalToolStripMenuItem.Size = New System.Drawing.Size(257, 34)
         Me.ObsInitialToFinalToolStripMenuItem.Text = "Obs Initial to Final"
         '
         'ExternalDataToolStripMenuItem
         '
         Me.ExternalDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CLICOMDailyToolStripMenuItem, Me.AWSToolStripMenuItem, Me.NOAAGTSToolStripMenuItem, Me.DailyToolStripMenuItem, Me.CLIMSOFTV3ToolStripMenuItem})
         Me.ExternalDataToolStripMenuItem.Name = "ExternalDataToolStripMenuItem"
-        Me.ExternalDataToolStripMenuItem.Size = New System.Drawing.Size(88, 20)
+        Me.ExternalDataToolStripMenuItem.Size = New System.Drawing.Size(131, 29)
         Me.ExternalDataToolStripMenuItem.Text = "External Data"
         '
         'CLICOMDailyToolStripMenuItem
         '
         Me.CLICOMDailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyToolStripMenuItem1, Me.SynopToolStripMenuItem, Me.HourlyToolStripMenuItem})
         Me.CLICOMDailyToolStripMenuItem.Name = "CLICOMDailyToolStripMenuItem"
-        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(233, 34)
         Me.CLICOMDailyToolStripMenuItem.Text = "CLICOM"
         '
         'DailyToolStripMenuItem1
         '
         Me.DailyToolStripMenuItem1.Name = "DailyToolStripMenuItem1"
-        Me.DailyToolStripMenuItem1.Size = New System.Drawing.Size(120, 22)
+        Me.DailyToolStripMenuItem1.Size = New System.Drawing.Size(182, 34)
         Me.DailyToolStripMenuItem1.Text = "Daily"
         '
         'SynopToolStripMenuItem
         '
         Me.SynopToolStripMenuItem.Name = "SynopToolStripMenuItem"
-        Me.SynopToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
+        Me.SynopToolStripMenuItem.Size = New System.Drawing.Size(182, 34)
         Me.SynopToolStripMenuItem.Text = "Synoptic"
         '
         'HourlyToolStripMenuItem
         '
         Me.HourlyToolStripMenuItem.Name = "HourlyToolStripMenuItem"
-        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
+        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(182, 34)
         Me.HourlyToolStripMenuItem.Text = "Hourly"
         '
         'AWSToolStripMenuItem
         '
         Me.AWSToolStripMenuItem.Name = "AWSToolStripMenuItem"
-        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(233, 34)
         Me.AWSToolStripMenuItem.Text = "AWS "
         '
         'NOAAGTSToolStripMenuItem
         '
         Me.NOAAGTSToolStripMenuItem.Name = "NOAAGTSToolStripMenuItem"
-        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(233, 34)
         Me.NOAAGTSToolStripMenuItem.Text = "NOAA GTS"
         '
         'DailyToolStripMenuItem
         '
         Me.DailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripHourly, Me.ToolStripDaily, Me.ToolStripSynoptic, Me.MultipleElementColumnsToolStripMenuItem, Me.MonthlyToolStripMenuItem2})
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(233, 34)
         Me.DailyToolStripMenuItem.Text = "Text Files"
         '
         'ToolStripHourly
         '
         Me.ToolStripHourly.Name = "ToolStripHourly"
-        Me.ToolStripHourly.Size = New System.Drawing.Size(215, 22)
+        Me.ToolStripHourly.Size = New System.Drawing.Size(321, 34)
         Me.ToolStripHourly.Text = "Hourly"
         '
         'ToolStripDaily
         '
         Me.ToolStripDaily.Name = "ToolStripDaily"
-        Me.ToolStripDaily.Size = New System.Drawing.Size(215, 22)
+        Me.ToolStripDaily.Size = New System.Drawing.Size(321, 34)
         Me.ToolStripDaily.Text = "Daily"
         '
         'ToolStripSynoptic
         '
         Me.ToolStripSynoptic.Name = "ToolStripSynoptic"
-        Me.ToolStripSynoptic.Size = New System.Drawing.Size(215, 22)
+        Me.ToolStripSynoptic.Size = New System.Drawing.Size(321, 34)
         Me.ToolStripSynoptic.Text = "Dekadal"
         Me.ToolStripSynoptic.Visible = False
         '
         'MultipleElementColumnsToolStripMenuItem
         '
         Me.MultipleElementColumnsToolStripMenuItem.Name = "MultipleElementColumnsToolStripMenuItem"
-        Me.MultipleElementColumnsToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.MultipleElementColumnsToolStripMenuItem.Size = New System.Drawing.Size(321, 34)
         Me.MultipleElementColumnsToolStripMenuItem.Text = "Multiple Element Columns"
         '
         'MonthlyToolStripMenuItem2
         '
         Me.MonthlyToolStripMenuItem2.Name = "MonthlyToolStripMenuItem2"
-        Me.MonthlyToolStripMenuItem2.Size = New System.Drawing.Size(215, 22)
+        Me.MonthlyToolStripMenuItem2.Size = New System.Drawing.Size(321, 34)
         Me.MonthlyToolStripMenuItem2.Text = "Monthly"
         '
         'CLIMSOFTV3ToolStripMenuItem
         '
         Me.CLIMSOFTV3ToolStripMenuItem.Name = "CLIMSOFTV3ToolStripMenuItem"
-        Me.CLIMSOFTV3ToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.CLIMSOFTV3ToolStripMenuItem.Size = New System.Drawing.Size(233, 34)
         Me.CLIMSOFTV3ToolStripMenuItem.Text = "Data Migration"
         '
         'GenerateValuesToolStripMenuItem
         '
         Me.GenerateValuesToolStripMenuItem.Name = "GenerateValuesToolStripMenuItem"
-        Me.GenerateValuesToolStripMenuItem.Size = New System.Drawing.Size(102, 20)
+        Me.GenerateValuesToolStripMenuItem.Size = New System.Drawing.Size(153, 29)
         Me.GenerateValuesToolStripMenuItem.Text = "Generate Values"
         Me.GenerateValuesToolStripMenuItem.Visible = False
         '
         'BackupToolStripMenuItem
         '
         Me.BackupToolStripMenuItem.Name = "BackupToolStripMenuItem"
-        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(58, 20)
+        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(85, 29)
         Me.BackupToolStripMenuItem.Text = "Backup"
         '
         'RestoreToolStripMenuItem
         '
         Me.RestoreToolStripMenuItem.Name = "RestoreToolStripMenuItem"
-        Me.RestoreToolStripMenuItem.Size = New System.Drawing.Size(58, 20)
+        Me.RestoreToolStripMenuItem.Size = New System.Drawing.Size(87, 29)
         Me.RestoreToolStripMenuItem.Text = "Restore"
         '
         'OptionsToolStripMenuItem
         '
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(92, 29)
         Me.OptionsToolStripMenuItem.Text = "Options"
         Me.OptionsToolStripMenuItem.Visible = False
         '
@@ -205,16 +208,18 @@ Partial Class frmDBUtilities
         '
         Me.Panel1.Controls.Add(Me.btnClose)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 396)
+        Me.Panel1.Location = New System.Drawing.Point(0, 609)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(852, 27)
+        Me.Panel1.Size = New System.Drawing.Size(1278, 42)
         Me.Panel1.TabIndex = 3
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(305, 0)
+        Me.btnClose.Location = New System.Drawing.Point(458, 0)
+        Me.btnClose.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(67, 27)
+        Me.btnClose.Size = New System.Drawing.Size(100, 42)
         Me.btnClose.TabIndex = 1
         Me.btnClose.Text = "Close"
         '
@@ -222,18 +227,20 @@ Partial Class frmDBUtilities
         '
         Me.Dbtpanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Dbtpanel2.Controls.Add(Me.ProgressBarDb)
-        Me.Dbtpanel2.Location = New System.Drawing.Point(444, 52)
+        Me.Dbtpanel2.Location = New System.Drawing.Point(666, 80)
+        Me.Dbtpanel2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Dbtpanel2.Name = "Dbtpanel2"
-        Me.Dbtpanel2.Padding = New System.Windows.Forms.Padding(2)
-        Me.Dbtpanel2.Size = New System.Drawing.Size(396, 338)
+        Me.Dbtpanel2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.Dbtpanel2.Size = New System.Drawing.Size(592, 518)
         Me.Dbtpanel2.TabIndex = 5
         '
         'ProgressBarDb
         '
         Me.ProgressBarDb.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ProgressBarDb.Location = New System.Drawing.Point(2, 311)
+        Me.ProgressBarDb.Location = New System.Drawing.Point(3, 479)
+        Me.ProgressBarDb.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ProgressBarDb.Name = "ProgressBarDb"
-        Me.ProgressBarDb.Size = New System.Drawing.Size(388, 21)
+        Me.ProgressBarDb.Size = New System.Drawing.Size(582, 32)
         Me.ProgressBarDb.TabIndex = 0
         '
         'OpenFileDialog1
@@ -242,17 +249,19 @@ Partial Class frmDBUtilities
         '
         'ToolStrip1
         '
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.cmbDb, Me.ToolStripButton1})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 33)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(852, 25)
+        Me.ToolStrip1.Padding = New System.Windows.Forms.Padding(0, 0, 3, 0)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1278, 25)
         Me.ToolStrip1.TabIndex = 6
         Me.ToolStrip1.Text = "ToolStrip1"
         '
         'ToolStripLabel1
         '
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(55, 22)
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(86, 28)
         Me.ToolStripLabel1.Text = "Database"
         Me.ToolStripLabel1.Visible = False
         '
@@ -260,7 +269,7 @@ Partial Class frmDBUtilities
         '
         Me.cmbDb.Items.AddRange(New Object() {"Initial", "Final"})
         Me.cmbDb.Name = "cmbDb"
-        Me.cmbDb.Size = New System.Drawing.Size(121, 25)
+        Me.cmbDb.Size = New System.Drawing.Size(180, 33)
         Me.cmbDb.Visible = False
         '
         'ToolStripButton1
@@ -269,7 +278,7 @@ Partial Class frmDBUtilities
         Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(34, 28)
         Me.ToolStripButton1.Text = "ToolStripButton1"
         Me.ToolStripButton1.Visible = False
         '
@@ -277,28 +286,32 @@ Partial Class frmDBUtilities
         '
         Me.Dbtpanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Dbtpanel1.Controls.Add(Me.grpbxUpload)
-        Me.Dbtpanel1.Location = New System.Drawing.Point(12, 52)
+        Me.Dbtpanel1.Location = New System.Drawing.Point(18, 80)
+        Me.Dbtpanel1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Dbtpanel1.Name = "Dbtpanel1"
-        Me.Dbtpanel1.Padding = New System.Windows.Forms.Padding(2)
-        Me.Dbtpanel1.Size = New System.Drawing.Size(426, 338)
+        Me.Dbtpanel1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.Dbtpanel1.Size = New System.Drawing.Size(637, 518)
         Me.Dbtpanel1.TabIndex = 7
         '
         'grpbxUpload
         '
         Me.grpbxUpload.Controls.Add(Me.cmdUpload)
         Me.grpbxUpload.Controls.Add(Me.ListView1)
-        Me.grpbxUpload.Location = New System.Drawing.Point(2, 302)
+        Me.grpbxUpload.Location = New System.Drawing.Point(3, 465)
+        Me.grpbxUpload.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.grpbxUpload.Name = "grpbxUpload"
-        Me.grpbxUpload.Size = New System.Drawing.Size(421, 33)
+        Me.grpbxUpload.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.grpbxUpload.Size = New System.Drawing.Size(632, 51)
         Me.grpbxUpload.TabIndex = 7
         Me.grpbxUpload.TabStop = False
         Me.grpbxUpload.Visible = False
         '
         'cmdUpload
         '
-        Me.cmdUpload.Location = New System.Drawing.Point(152, 6)
+        Me.cmdUpload.Location = New System.Drawing.Point(228, 9)
+        Me.cmdUpload.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdUpload.Name = "cmdUpload"
-        Me.cmdUpload.Size = New System.Drawing.Size(148, 21)
+        Me.cmdUpload.Size = New System.Drawing.Size(222, 32)
         Me.cmdUpload.TabIndex = 7
         Me.cmdUpload.Text = "Start Upload"
         Me.cmdUpload.UseVisualStyleBackColor = True
@@ -312,10 +325,11 @@ Partial Class frmDBUtilities
         Me.ListView1.GridLines = True
         Me.ListView1.HideSelection = False
         Me.ListView1.LabelEdit = True
-        Me.ListView1.Location = New System.Drawing.Point(0, -313)
+        Me.ListView1.Location = New System.Drawing.Point(0, -482)
+        Me.ListView1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ListView1.Size = New System.Drawing.Size(412, 305)
+        Me.ListView1.Size = New System.Drawing.Size(616, 467)
         Me.ListView1.TabIndex = 5
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -323,9 +337,9 @@ Partial Class frmDBUtilities
         '
         'frmDBUtilities
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(852, 423)
+        Me.ClientSize = New System.Drawing.Size(1278, 651)
         Me.Controls.Add(Me.Dbtpanel1)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.Dbtpanel2)
@@ -334,6 +348,7 @@ Partial Class frmDBUtilities
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmDBUtilities"

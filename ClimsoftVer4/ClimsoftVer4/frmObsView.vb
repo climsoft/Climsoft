@@ -948,7 +948,7 @@
             End If
             FileOpen(17, outDataFile, OpenMode.Output)
 
-            connstr = frmLogin.txtusrpwd.Text
+            connstr = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             con0.ConnectionString = connstr
             con0.Open()
 
@@ -1011,7 +1011,9 @@
             builder("uid") = frmLogin.txtUsername.Text
             builder("pwd") = frmLogin.txtPassword.Text
 
-            connstr = builder.ConnectionString & ";Convert Zero Datetime=True"
+            connstr = builder.ConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true" ';SslMode=VerifyCA"
+
+            'connstr = builder.ConnectionString & ";Convert Zero Datetime=True"
             'MsgBox(connstr)
             conn0.ConnectionString = connstr
             conn0.Open()

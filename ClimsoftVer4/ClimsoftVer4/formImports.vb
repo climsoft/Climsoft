@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports MySql.Data.MySqlClient
+
 Public Class formImports
     Dim dbcon As New MySql.Data.MySqlClient.MySqlConnection
     Dim dbConectionString As String
@@ -266,8 +268,7 @@ Err:
     End Sub
 
     Private Sub cmdProcess_Click(sender As Object, e As EventArgs) Handles cmdProcess.Click
-        'On Error GoTo Err
-        'Try
+
         Dim fails As Long
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
             MyReader.TextFieldType = FileIO.FieldType.Delimited
@@ -316,16 +317,7 @@ Err:
             Me.Cursor = Windows.Forms.Cursors.Default
             lblSummary.Text = "Summary: " & lin - fails - 1 & " out of " & lin - 1 & " Records Successfully Imported"
         End Using
-        Exit Sub
-        'Err:
-        '        MsgBox(Err.Description & " " & Err.Number)
-        '        If Err.Number = 5 Then Resume Next
 
-
-        'Catch ex As Exception
-        '    MsgBox(ex.Message)
-        '    If ex.HResult = -2147467259 Then Resume Next
-        '    MsgBox(ex.HResult)
         Me.Cursor = Windows.Forms.Cursors.Default
         '    'If Err.Number = 5 Then Resume Next
         '    'MsgBox(Err.Number & " " & Err.Description)
@@ -393,6 +385,8 @@ Err:
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
+
         Dim fails As Long
         Try
             Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
@@ -477,7 +471,7 @@ Err:
                     ' Update the station metadata with data from a text file
                     Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
                     dbConectionString = frmLogin.txtusrpwd.Text
-                    dbcon.ConnectionString = dbConectionString
+                    dbcon.ConnectionString = dbConectionString & ";AllowLoadLocalInfile=true"
                     dbcon.Open()
 
                     ' Convert the the path delimiter for the metadata file to SQL structure
@@ -526,6 +520,139 @@ Err:
             End If
 
         End Try
+
+
+
+
+
+        'Dim fails As Long
+        'Try
+        '    Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
+
+        '        MyReader.TextFieldType = FileIO.FieldType.Delimited
+        '        MyReader.SetDelimiters(",")
+        '        Dim nums As Integer
+        '        Dim rows As String()
+        '        Dim mxr As Integer = DataGridView1.Rows.Count
+
+        '        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
+        '        Dim dsNewRow As DataRow
+
+        '        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        '        Dim recCommit As New dataEntryGlobalRoutines
+
+        '        Me.Cursor = Windows.Forms.Cursors.WaitCursor
+        '        'Dim stnsFile As String
+        '        Dim fld, fldlist, vals, sql As String
+
+        '        Try
+
+        '            fails = 0
+        '            listErrors.Items.Clear()
+        '            fldlist = DataGridView1.Rows(0).Cells(2).Value
+        '            fld = "`" & DataGridView1.Rows(0).Cells(2).Value & "`"
+        '            For i = 1 To DataGridView1.Rows.Count - 1
+        '                If Len(DataGridView1.Rows(i).Cells(2).Value) <> 0 Then
+        '                    fldlist = fldlist & "," & DataGridView1.Rows(i).Cells(2).Value
+        '                    fld = fld & ",`" & DataGridView1.Rows(i).Cells(2).Value & "`"
+        '                End If
+        '            Next
+        '            'PrintLine(222, "REPLACE INTO `station` (" & fld & ") VALUES")
+        '            sql = "REPLACE INTO `station` (" & fld & ") VALUES"
+        '            If Strings.InStr(fldlist, "stationId") = 0 Then
+        '                Me.Cursor = Windows.Forms.Cursors.Default
+        '                MsgBox("StationId Required")
+        '                'FileClose(222)
+        '                Exit Sub
+        '            End If
+
+
+        '            Do While MyReader.EndOfData = False
+
+        '                lin = MyReader.LineNumber()
+
+        '                currentRow = MyReader.ReadFields()
+
+        '                If lin > 1 Then
+        '                    nums = 1
+        '                    dsNewRow = s.Tables("station").NewRow
+        '                    vals = ""
+        '                    For Each currentField In currentRow
+
+        '                        rows = New String() {nums, currentField}
+
+        '                        If Len(DataGridView1.Rows(nums - 1).Cells(2).Value) <> 0 Then
+        '                            If Len(currentField) = 0 Then
+        '                                dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = vbNull
+        '                            Else
+        '                                dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = currentField
+        '                            End If
+
+        '                            If nums = 1 Then
+        '                                vals = "'" & dsNewRow(0) & "'"
+        '                                If Len(vals) = 0 Then vals = "\N"
+        '                            Else
+        '                                If Len(currentField) = 0 Then
+        '                                    vals = vals & ",\N" & ""
+        '                                Else
+        '                                    vals = vals & ",'" & currentField & "'"
+        '                                End If
+        '                            End If
+        '                        End If
+        '                        nums = nums + 1
+        '                    Next
+        '                    'Print(222, vals)
+        '                    If MyReader.EndOfData = True Then
+        '                        'PrintLine(222, "(" & vals & ");")
+        '                        sql = sql & "(" & vals & ");"
+        '                    Else
+        '                        sql = sql & "(" & vals & "),"
+        '                        'PrintLine(222, "(" & vals & "),")
+        '                    End If
+
+        '                End If
+        '            Loop
+        '            'MsgBox(sql)
+        '            Me.Cursor = Windows.Forms.Cursors.Default
+
+        '            ' Update the station metadata with data from a text file
+        '            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        '            dbConectionString = frmLogin.txtusrpwd.Text
+        '            dbcon.ConnectionString = dbConectionString & ";AllowLoadLocalInfile=true"
+        '            dbcon.Open()
+
+        '            'Execute SQL command
+        '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbcon)
+        '            objCmd.ExecuteNonQuery()
+        '            dbcon.Close()
+        '            'FileClose(222)
+
+        '            Me.Cursor = Windows.Forms.Cursors.Default
+        '            lblSummary.Text = "Records Successfully Updated"
+
+        '        Catch ex As Exception
+        '            dbcon.Close()
+        '            'FileClose(222)
+        '            Me.Cursor = Windows.Forms.Cursors.Default
+        '            MsgBox(sql)
+        '            If lin > 0 Then
+        '                listErrors.Items.Add(lin - 1 & " " & ex.Message)
+        '                listErrors.Refresh()
+        '            Else
+        '                MsgBox(ex.Message)
+        '            End If
+
+        '            'fails = fails + 1
+        '        End Try
+        '    End Using
+        'Catch x As Exception
+        '    If x.HResult = -2147467261 Or x.HResult = -2147024894 Then
+        '        MsgBox("No valid metadata file found")
+        '    Else
+        '        MsgBox(x.Message)
+        '    End If
+
+        'End Try
 
     End Sub
 

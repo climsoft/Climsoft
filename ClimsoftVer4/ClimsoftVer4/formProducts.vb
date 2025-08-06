@@ -14,14 +14,25 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports MySql.Data.MySqlClient
+
 Public Class frmProducts
     'Public xy As String
+    'Public xy As String
+
+    Dim conp As New MySql.Data.MySqlClient.MySqlConnection
+    Dim MyConnectionString As String
+    Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    Dim ds As New DataSet
+    Dim sql As String
     Private dataTable As DataTable
 
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'todo. this function is meant to update the products table everytime it's run
         ProductsTable_Update()
 
+        Exit Sub
         'set up the products data table
         Dim clsDataCall As New DataCall
         clsDataCall.SetTableName("tblProducts")
@@ -57,22 +68,28 @@ Public Class frmProducts
 
     Private Sub cmbProductsCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboProductsCategory.SelectedIndexChanged
         'clear list view rows
-        lstViewProducts.Items.Clear()
 
-        'get products of the selected category
-        Dim dataRows() As DataRow = dataTable.Select("prCategory = '" & cboProductsCategory.SelectedValue & "'")
+        populate_list(cboProductsCategory.Text)
 
-        If dataRows Is Nothing Then
-            Exit Sub
-        End If
+        Exit Sub
 
-        'add them to the list view
-        For Each row As DataRow In dataRows
-            'add product and prodcut details. List view has 2 columns
-            lstViewProducts.Items.Add(New ListViewItem({row.Field(Of String)("productName"),
-                                                 ClsTranslations.GetTranslation(row.Field(Of String)("prDetails"))})
-                                                 )
-        Next
+
+        'lstViewProducts.Items.Clear()
+
+        ''get products of the selected category
+        'Dim dataRows() As DataRow = dataTable.Select("prCategory = '" & cboProductsCategory.SelectedValue & "'")
+
+        'If dataRows Is Nothing Then
+        '    Exit Sub
+        'End If
+
+        ''add them to the list view
+        'For Each row As DataRow In dataRows
+        '    'add product and prodcut details. List view has 2 columns
+        '    lstViewProducts.Items.Add(New ListViewItem({row.Field(Of String)("productName"),
+        '                                         ClsTranslations.GetTranslation(row.Field(Of String)("prDetails"))})
+        '                                         )
+        'Next
 
     End Sub
 
@@ -144,12 +161,17 @@ Public Class frmProducts
     'todo. should this always be called?? and is this the right place to call it
     'this should be done as part of the scripts update
     Private Sub ProductsTable_Update()
+
+        'Dim dbconn As New MySqlConnector.MySqlConnection
+
         Dim currDB As String = ""
         Dim sql0 As String
         Dim qry0 As MySql.Data.MySqlClient.MySqlCommand
         Dim MyConnectionString As String
 
         MyConnectionString = frmLogin.txtusrpwd.Text
+        conp.ConnectionString = MyConnectionString
+        conp.Open()
         frmUserManagement.CurrentDB(MyConnectionString, currDB)
         sql0 = "USE `" & currDB & "`;
                 CREATE TABLE IF NOT EXISTS `tblproducts` (
@@ -207,14 +229,212 @@ Public Class frmProducts
                ('42', 'AWS Precip Daily 06-06Z', 'AWS Daily Precipitation Total 06-06UTC', 'Special Products');"
         Try
             Me.Cursor = Cursors.WaitCursor
-            qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)
+
+            'qry0 = New MySqlConnector.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)
+            qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, conp)
             qry0.CommandTimeout = 0
             qry0.ExecuteNonQuery()
+            conp.Close()
+
+            products_Categories()
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
-            MsgBox(ex.Message)
+            conp.Close()
+            MsgBox(ex.Message & "@ ProductsTable_Update")
             Me.Cursor = Cursors.Default
+        End Try
+
+        'Dim currDB As String = ""
+        'Dim sql0 As String
+        'Dim qry0 As MySql.Data.MySqlClient.MySqlCommand
+        'Dim MyConnectionString As String
+
+        'MyConnectionString = frmLogin.txtusrpwd.Text
+        'frmUserManagement.CurrentDB(MyConnectionString, currDB)
+        'sql0 = "USE `" & currDB & "`;
+        '        CREATE TABLE IF NOT EXISTS `tblproducts` (
+        '          `productId` varchar(10) NOT NULL,
+        '          `productName` varchar(50) DEFAULT NULL,
+        '          `prDetails` varchar(50) DEFAULT NULL,
+        '          `prCategory` varchar(50) DEFAULT NULL,
+        '          PRIMARY KEY (`productId`),
+        '          KEY `productId` (`productId`)
+        '        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+        '       DELETE FROM `tblproducts`;
+        '       INSERT INTO `tblproducts` (`productId`, `productName`, `prDetails`, `prCategory`) VALUES
+        '       ('0', 'Minutes', 'Minutes observations', 'Data'),  
+        '       ('01', 'Inventory', 'Details of Data Records', 'Inventory'),  
+        '       ('02', 'Hourly', 'Summaries of Hourly Observations', 'Data'),  
+        '       ('03', 'Daily', 'Summaries of Daily Observation', 'Data'),  
+        '       ('04', 'Pentad', '5 Days Summaries', 'Data'),  
+        '       ('05', 'Dekadal', '10 Days Summaries', 'Data'),  
+        '       ('06', 'Monthly', 'Monthly Summaries', 'Data'),  
+        '       ('07', 'Annual', 'Annual Summaries', 'Data'),  
+        '       ('08', 'Means', 'Long Term Means', 'Data'),  
+        '       ('09', 'Extremes', 'Long Term', 'Data'),  
+        '       ('10', 'WindRose', 'Wind Rose Picture', 'Graphics'),  
+        '       ('11', 'TimeSeries', 'Time Series Chart', 'Graphics'),  
+        '       ('12', 'Histograms', 'Histogram Chart', 'Graphics'),  
+        '       ('13', 'Instat', 'Daily Data for Instat', 'Output for other Applications'),  
+        '       ('14', 'Rclimdex', 'Daily Data for Rclimdex', 'Output for other Applications'),  
+        '       ('15', 'CPT', 'Data for CPT', 'Output for other Applications'),  
+        '       ('16', 'GeoCLIM Monthly', 'Monthly Data for GeoCLIM', 'Output for other Applications'),  
+        '       ('17', 'GeoCLIM Dekadal', 'Dekadal Data for Geoclim', 'Output for other Applications'),  
+        '       ('18', 'GeoCLIM Daily', 'Daily Data for Geoclim', 'Output for other Applications'),   
+        '       ('19', 'CLIMAT', 'CLIMAT Messages', 'Messages'),  
+        '       ('20', 'Missing Data', 'Inventory of Missing Data', 'Inventory'),  
+        '       ('21', 'CDT Dekadal', 'Dekadal Data for CDT', 'Output for other Applications'),  
+        '       ('22', 'CDT Daily', 'Daily Data for CDT', 'Output for other Applications'),  
+        '       ('23', 'Dekadal Counts', 'Dekadal Rain Days', 'Rain Days'),  
+        '       ('24', 'Monthly Counts', 'Monthly Rain Days', 'Rain Days'),  
+        '       ('25', 'Annual Counts', 'Annual Rain Days', 'Rain Days'),
+        '       ('26', 'Daily Extremes', 'Daily Lowest and Highest values', 'Data'),
+        '       ('27', 'Monthly Extremes', 'Monthly Lowest and Highest daily values', 'Data'),
+        '       ('28', 'Annual Extremes', 'Annual Lowest and Highest daily values', 'Data'),
+        '       ('29', 'Stations Records', 'Time Series Chart for Observing Stations', 'Inventory'),
+        '       ('30', 'Yearly Elements Observed', 'Yearly Time Series Chart per Station', 'Inventory'),
+        '       ('31', 'Monthly Elements Observed', 'Monthly Time Series Chart per Station', 'Inventory'),
+        '       ('32', 'Daily Levels', 'Daily Observations', 'Upper Air'),
+        '       ('33', 'Monthly Levels', 'Monthly Summaries', 'Upper Air'),
+        '       ('34', 'Annual Levels', 'Annual Summaries', 'Upper Air'),
+        '       ('35', 'Seasonal Monthly', 'Monthly Seasonal Summaries', 'Data'),
+        '       ('36', 'Daily Wind Speed', 'Wind Speed from Daily Wind Run Total', 'Data'),
+        '       ('37', 'Hourly Wind Speed', 'Wind Speed from Hourly Wind Run Total', 'Data'),
+        '       ('38', 'Climate Station', 'Data for Climate Station Tool', 'Output for other Applications'),
+        '       ('39', 'Daily Mean Water Level', 'Hydrological Daily Mean Water Level', 'Special Products'),
+        '       ('40', 'Monthly Mean Water Level', 'Hydrological Monthly Mean Water Level', 'Special Products'),
+        '       ('41', 'Annual Mean Water Level', 'Hydrological Annual Mean Water Level', 'Special Products'),
+        '       ('42', 'AWS Precip Daily 06-06Z', 'AWS Daily Precipitation Total 06-06UTC', 'Special Products');"
+        'Try
+        '    Me.Cursor = Cursors.WaitCursor
+        '    qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, clsDataConnection.GetOpenedConnection)
+        '    qry0.CommandTimeout = 0
+        '    qry0.ExecuteNonQuery()
+        '    Me.Cursor = Cursors.Default
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        '    Me.Cursor = Cursors.Default
+        'End Try
+    End Sub
+
+
+    Sub products_Categories()
+
+        Sql = "SELECT prCategory FROM tblproducts GROUP BY prCategory;"
+        conp.ConnectionString = frmLogin.txtusrpwd.Text
+        Try
+            conp.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conp)
+            ds.Clear()
+            da.Fill(ds, "products")
+
+            conp.Close()
+
+            With ds.Tables("products")
+                'MsgBox(.Rows.Count)
+                lstViewProducts.Clear()
+
+                For i = 0 To .Rows.Count - 1
+                    cboProductsCategory.Items.Add(.Rows(i).Item(0))
+                Next
+
+            End With
+
+            'Initialize Products List Views
+            lstViewProducts.Columns.Clear()
+
+            lstViewProducts.Columns.Add("Product Name", 100, HorizontalAlignment.Left)
+            lstViewProducts.Columns.Add("Product Details", 200, HorizontalAlignment.Left)
+
+            '    If lstViewProducts.SelectedItems.Count = 0 Then
+            '        Exit Sub
+            '    End If
+
+            '    Dim selectedProductName As String = lstViewProducts.SelectedItems.Item(0).Text
+            '    Dim str(3), Ecode As String
+            '    Dim itm = New ListViewItem
+
+            '    Select Case selectedProductName
+            '        Case "Stations Records"
+            '            frmInventoryChart.Show()
+            '        Case "CLIMAT"
+            '            frmCLIMAT.Show()
+
+            '            'Case Else
+            '            'MsgBox(selectedProductName)
+            '            'todo. refactor formProductsSelectCriteria to not use product type label
+            '            'the label should show translated text
+
+            '        Case "Daily Wind Speed"
+            '            Ecode = InputBox(ClsTranslations.GetTranslation("Element Code?"), ClsTranslations.GetTranslation("Daily Wind Totalizer Element Code"))
+
+            '            If Ecode = "" Or Not IsNumeric(Ecode) Then Exit Sub
+            '            'If InputBox("Element Code?", "Daily Wind Totalizer Element Code") = "" Then Exit Sub
+            '            'str(0) = CInt(InputBox("Element Code?", "Daily Wind Totalizer Element Code")) 'CInt(Ecode)
+
+            '            str(0) = Ecode
+            '            str(1) = "WINDTOT"
+            '            str(2) = ClsTranslations.GetTranslation("Wind Totalizer")
+            '            itm = New ListViewItem(str)
+            '            formProductsSelectCriteria.lstvElements.Items.Clear()
+            '            formProductsSelectCriteria.lstvElements.Items.Add(itm)
+            '            formProductsSelectCriteria.lblProductType.Text = selectedProductName
+            '            formProductsSelectCriteria.Show()
+
+            '        Case "Hourly Wind Speed"
+            '            Ecode = InputBox(ClsTranslations.GetTranslation("Element Code?"), ClsTranslations.GetTranslation("Hourly Wind Totalizer Element Code"))
+
+            '            If Ecode = "" Or Not IsNumeric(Ecode) Then Exit Sub
+
+            '            str(0) = Ecode
+            '            str(1) = "WINDTOT"
+            '            str(2) = ClsTranslations.GetTranslation("Wind Totalizer")
+            '            itm = New ListViewItem(str)
+            '            formProductsSelectCriteria.lstvElements.Items.Clear()
+            '            formProductsSelectCriteria.lstvElements.Items.Add(itm)
+            '            formProductsSelectCriteria.lblProductType.Text = selectedProductName
+            '            formProductsSelectCriteria.Show()
+            '        Case Else
+            '            formProductsSelectCriteria.lblProductType.Text = selectedProductName
+            '            formProductsSelectCriteria.Show()
+            '    End Select
+        Catch ex As Exception
+            conp.Close()
+            MsgBox(ex.Message)
         End Try
     End Sub
 
+    Sub populate_list(lst As String)
+        sql = "SELECT productName, prDetails FROM tblproducts WHERE prCategory = '" & lst & "';"
+
+        Try
+
+            conp.ConnectionString = frmLogin.txtusrpwd.Text
+            conp.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
+            ds.Clear()
+            da.Fill(ds, "list")
+
+            conp.Close()
+            Dim prd(2) As String
+            Dim itms = New ListViewItem
+
+            With ds.Tables("list")
+                lstViewProducts.Items.Clear()
+                'MsgBox(.Rows.Count)
+                For i = 0 To .Rows.Count - 1
+                    prd(0) = .Rows(i).Item(0)
+                    prd(1) = .Rows(i).Item(1)
+                    itms = New ListViewItem(prd)
+                    lstViewProducts.Items.Add(itms)
+                Next
+
+            End With
+
+        Catch ex As Exception
+            conp.Close()
+            MsgBox(ex.Message)
+        End Try
+    End Sub
 End Class
