@@ -56,7 +56,7 @@ Public Class formDaily1
         myConnectionString = frmLogin.txtusrpwd.Text
 
         Try
-            conn.ConnectionString = myConnectionString
+            conn.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
 
             sql = "SELECT * FROM form_daily1"
@@ -202,7 +202,7 @@ Public Class formDaily1
         Dim lblvalue, lblVheader, lblFheader As Label
 
         myConnectionString = frmLogin.txtusrpwd.Text
-        conn.ConnectionString = myConnectionString
+        conn.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         conn.Open()
 
         Try
@@ -343,7 +343,7 @@ Public Class formDaily1
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
 
-        conn.ConnectionString = myConnectionString
+        conn.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         conn.Open()
 
         sql = "SELECT * FROM form_daily1;"
@@ -512,7 +512,7 @@ Public Class formDaily1
         Try
             myConnectionString = frmLogin.txtusrpwd.Text
 
-            conn.ConnectionString = myConnectionString
+            conn.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
             '
             maxRows = ds.Tables("form_daily1").Rows.Count
@@ -1335,7 +1335,7 @@ Public Class formDaily1
             Dim ds1 As New DataSet
 
 
-            conn1.ConnectionString = myConnectionString
+            conn1.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn1.Open()
             sql = "select * from form_daily1 where stationId ='" & cboStation.SelectedValue & "' and yyyy = " & cboYear.Text & " and mm = " & cboMonth.Text & " and dd = " & cboDay.Text & " and hh = " & cboHour.Text & ";"
 
@@ -1467,7 +1467,7 @@ Public Class formDaily1
         Dim ds2 As New DataSet
 
         Try
-            conn2.ConnectionString = myConnectionString
+            conn2.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn2.Open()
 
             sql = "SELECT * FROM form_daily1"

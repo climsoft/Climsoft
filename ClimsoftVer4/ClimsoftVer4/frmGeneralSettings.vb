@@ -274,16 +274,22 @@ Public Class frmGeneralSettings
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
-        'Update header fields for form in database
-        ds.Tables("regkeys").Rows(inc).Item("keyName") = txtKeyName.Text
-        ds.Tables("regkeys").Rows(inc).Item("keyValue") = txtKeyValue.Text
-        ds.Tables("regkeys").Rows(inc).Item("keyDescription") = txtKeyDescription.Text
 
-        'The data adapter is used to update the record in the data source table
-        da.Update(ds, "regkeys")
+        Try
+            'Update header fields for form in database
+            ds.Tables("regkeys").Rows(inc).Item("keyName") = txtKeyName.Text
+            ds.Tables("regkeys").Rows(inc).Item("keyValue") = txtKeyValue.Text
+            ds.Tables("regkeys").Rows(inc).Item("keyDescription") = txtKeyDescription.Text
 
-        'Show message for successful updating or record.
-        recUpdate.messageBoxRecordedUpdated()
+            'The data adapter is used to update the record in the data source table
+            da.Update(ds, "regkeys")
+
+            'Show message for successful updating or record.
+            recUpdate.messageBoxRecordedUpdated()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click

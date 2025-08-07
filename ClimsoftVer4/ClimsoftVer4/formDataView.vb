@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+Imports MySql.Data.MySqlClient
+
 Public Class formDataView
     Dim connStr As String
     Dim Sql, Sql2, userName, id, Nm, cd, yr, mn, dy, hr As String
@@ -118,10 +120,49 @@ Public Class formDataView
     End Sub
 
     Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
+
+        'Dim importFile As String
+
+        'Try
+
+        '    dlgImportFile.Filter = "Form Import file|*.*"
+        '    dlgImportFile.Title = ClsTranslations.GetTranslation("Open Import File")
+        '    dlgImportFile.FileName = dsSourceTableName
+        '    dlgImportFile.ShowDialog()
+
+        '    If InStr(dlgImportFile.FileName, dsSourceTableName) = 0 Then
+        '        MsgBox(ClsTranslations.GetTranslation("The selected import file name does not match the opened form: ") & dsSourceTableName & ClsTranslations.GetTranslation(". Please confirm!"))
+        '        Exit Sub
+        '    End If
+
+        '    'Convert Import file path seperators to SQL style
+        '    importFile = Strings.Left(dlgImportFile.FileName, 1)
+        '    For i = 2 To Len(dlgImportFile.FileName) - 1
+        '        If Strings.Mid(dlgImportFile.FileName, i, 1) = "\" Then
+        '            importFile = importFile & "/"
+        '        Else
+        '            importFile = importFile & Strings.Mid(dlgImportFile.FileName, i, 1)
+        '        End If
+        '    Next
+        '    importFile = importFile & Strings.Right(dlgImportFile.FileName, 1)
+
+        '    ' Execute import file function
+        '    If Not CommonModules.Load_Files(importFile, dsSourceTableName, 1, ",") Then
+        '        MsgBox("Can't Import " & importFile)
+        '        Exit Sub
+        '    End If
+        '    MsgBox("File '" & dlgImportFile.FileName & ClsTranslations.GetTranslation("' Successfully Imported"))
+
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        'End Try
+
+
+
         Dim tblhdr, x, importFile As String
         Try
             connStr = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = connStr
+            conn.ConnectionString = connStr & ";AllowLoadLocalInfile=true "
             conn.Open()
 
             Sql = "SELECT * FROM " & dsSourceTableName & ";"
@@ -316,7 +357,7 @@ Public Class formDataView
 
             If Strings.Len(Sql) > 0 Then
                 connStr = frmLogin.txtusrpwd.Text
-                conn.ConnectionString = connStr
+                conn.ConnectionString = connStr & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
                 'Open connection to database
                 conn.Open()
 
@@ -457,7 +498,7 @@ Public Class formDataView
 
             If Strings.Len(Sql) > 0 Then
                 connStr = frmLogin.txtusrpwd.Text
-                conn.ConnectionString = connStr
+                conn.ConnectionString = connStr & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
                 conn.Open()
 
                 'Execute SQL command
@@ -487,7 +528,7 @@ Public Class formDataView
 
         Try
             connStr = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = connStr
+            conn.ConnectionString = connStr & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
 
 
@@ -512,12 +553,12 @@ Public Class formDataView
 
             FileOpen(111, x, OpenMode.Output)
 
-            hdr = DataGridView.Columns(0).Name
+            'hdr = DataGridView.Columns(0).Name
 
-            For i = 1 To DataGridView.ColumnCount - 1
-                hdr = hdr & "," & DataGridView.Columns(i).Name
-            Next
-            PrintLine(111, hdr)
+            'For i = 1 To DataGridView.ColumnCount - 1
+            '    hdr = hdr & "," & DataGridView.Columns(i).Name
+            'Next
+            'PrintLine(111, hdr)
 
             'FileClose(111)
 
@@ -534,7 +575,8 @@ Public Class formDataView
                 dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
                 For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
                     If IsDBNull(ds1.Tables(dsSourceTableName).Rows(i).Item(j)) Then
-                        CellValue = "\N" '""
+                        CellValue = Chr(0) '"\N" '""
+
                         'dat = dat & "," & "\N"
                     Else
                         CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
@@ -782,7 +824,7 @@ Public Class formDataView
             End Select
 
             connStr = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = connStr
+            conn.ConnectionString = connStr & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
 
             Dim daa = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)

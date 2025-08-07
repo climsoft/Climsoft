@@ -905,11 +905,11 @@
                         'execute command
                         objCmd.ExecuteNonQuery()
 
-                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".qc_interelement_1 TO '" & txtUserName.Text & "';"
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE,DROP ON " & dbnme & ".qc_interelement_1 TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
-                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".qc_interelement_2 TO '" & txtUserName.Text & "';"
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE,DROP ON " & dbnme & ".qc_interelement_2 TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
@@ -1750,7 +1750,7 @@
         conn.Open()
 
 
-        Sql = "select userName, UserRole from ClimsoftUsers;"
+        Sql = "select userName, UserRole from climsoftusers;"
 
         ' Update User Role
         Try
@@ -2662,11 +2662,11 @@
             'execute command
             objCmd.ExecuteNonQuery()
 
-            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".qc_interelement_1 TO '" & usrName & "';"
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE,DROP ON " & dbnme & ".qc_interelement_1 TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
-            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".qc_interelement_2 TO '" & usrName & "';"
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE,DROP ON " & dbnme & ".qc_interelement_2 TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
@@ -2808,11 +2808,11 @@
             'execute command
             objCmd.ExecuteNonQuery()
 
-            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.qc_interelement_1 TO '" & usrName & "';"
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE,DROP ON mariadb_climsoft_test_db_v4.qc_interelement_1 TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
-            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.qc_interelement_2 TO '" & usrName & "';"
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE,DROP ON mariadb_climsoft_test_db_v4.qc_interelement_2 TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()

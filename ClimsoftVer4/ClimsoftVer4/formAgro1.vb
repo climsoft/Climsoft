@@ -217,7 +217,7 @@
 
         myConnectionString = frmLogin.txtusrpwd.Text
         Try
-            conn.ConnectionString = myConnectionString
+            conn.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
 
 
@@ -968,7 +968,7 @@
         Try
             myConnectionString = frmLogin.txtusrpwd.Text
 
-            conn.ConnectionString = myConnectionString
+            conn.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
             '
             Dim objCmd As MySql.Data.MySqlClient.MySqlCommand

@@ -174,7 +174,7 @@ Public Class frmUpdateDBfromQCReport
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(i).Item("capturedBy_2")) Then capturedBy = ds1.Tables("QCReportUpdated").Rows(i).Item("capturedBy_2")
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(i).Item("capturedBy_2")) Then dataForm = ds1.Tables("QCReportUpdated").Rows(i).Item("dataForm_2")
                                 'Generate new SQL string for appending modified record to observationInitial table
-                                strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
+                                strSQL = "INSERT IGNORE INTO observationinitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                                & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
@@ -259,7 +259,7 @@ Public Class frmUpdateDBfromQCReport
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(i).Item("capturedBy_2")) Then capturedBy = ds1.Tables("QCReportUpdated").Rows(i).Item("capturedBy_2")
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(i).Item("dataForm_2")) Then dataForm = ds1.Tables("QCReportUpdated").Rows(i).Item("dataForm_2")
                                 'Generate new SQL string for appending modified record to observationInitial table
-                                strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
+                                strSQL = "INSERT IGNORE INTO observationinitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                                & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
@@ -353,7 +353,7 @@ Public Class frmUpdateDBfromQCReport
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(j).Item("dataForm")) Then dataForm = ds1.Tables("QCReportUpdated").Rows(j).Item("dataForm")
 
                                 'Generate new SQL string for appending modified record to observationInitial table
-                                strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
+                                strSQL = "INSERT IGNORE INTO observationinitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                                & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 

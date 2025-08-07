@@ -58,7 +58,7 @@ Public Class frmMainMenu
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
                     mnuProducts.Enabled = False
-                    btnMainDataTransfer.Enabled = False
+                    'btnMainDataTransfer.Enabled = False
                     btnMainSettingsAWS.Enabled = False
                     btnMainUserManagement.Enabled = False
                     btnMainProducts.Enabled = False
@@ -363,7 +363,7 @@ Public Class frmMainMenu
             sqlFile = frmImportDaily.dlgOpenImportFile.FileName
             sqlText = IO.File.ReadAllText(sqlFile)
             sqlStatements = Strings.Split(sqlText, ";")
-            sqlconn.ConnectionString = frmLogin.txtusrpwd.Text
+            sqlconn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             sqlconn.Open()
             Me.Cursor = Cursors.WaitCursor
         Catch ex As Exception

@@ -301,7 +301,7 @@ Public Class form_daily2
 
         myConnectionString = frmLogin.txtusrpwd.Text
         Try
-            conn.ConnectionString = myConnectionString
+            conn.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
 
             'MsgBox("Connection Successful !", MsgBoxStyle.Information)
@@ -939,7 +939,7 @@ Public Class form_daily2
 
             myConnectionString = frmLogin.txtusrpwd.Text
 
-            conn.ConnectionString = myConnectionString
+            conn.ConnectionString = myConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
 
             Dim strSQL As String, stnId As String, elemId As String, obsYear As String, obsMonth As String, obsHour As String, _

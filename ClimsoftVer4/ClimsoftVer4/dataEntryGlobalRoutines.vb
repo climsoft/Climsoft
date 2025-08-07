@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports MySql.Data.MySqlClient
+
 Public Class dataEntryGlobalRoutines
 
     Public Sub messageBoxNoPreviousRecord()
@@ -67,7 +69,7 @@ Public Class dataEntryGlobalRoutines
         'Dim Tp As Object
         Dim Tp_Fahrenheit As Object
         Dim Tp_Celcius As Object
-       
+
         Td_Fahrenheit = 9 / 5 * dryBulb + 32
         '2.71828183= natural number (e)
         Ed = 6.1078 * 2.71828183 ^ ((9.5939 * [Td_Fahrenheit] - 307.004) / (0.556 * [Td_Fahrenheit] + 219.522))
@@ -76,7 +78,7 @@ Public Class dataEntryGlobalRoutines
         Ea = [Ew] - 0.35 * ([Td_Fahrenheit] - [Tw_Fahrenheit])
         Tp_Fahrenheit = -1 * (Math.Log([Ea] / 6.1078) * 219.522 + 307.004) / (Math.Log([Ea] / 6.1078) * 0.556 - 9.59539)
         Tp_Celcius = 5 / 9 * ([Tp_Fahrenheit] - 32)
-        
+
         '* Td in this case is Temperature drybulb,Tw wetbulb and Tp is dewpoint temperature
         'E is saturation vapour pressure(s.v.p.), hence Ed is s.v.p. over drybulb and Ew s.v.p. over wetbulb, Ea actual s.v.p.
 
@@ -109,7 +111,7 @@ Public Class dataEntryGlobalRoutines
     End Function
     Public Function calculateMSLppp(ppp As String, dryBulb As String, elevation As String) As String
         Dim MSLppp As VariantType
-       
+
         MSLppp = (ppp * (1 - 0.0065 * elevation / (dryBulb + 0.0065 * elevation + 273.15)) ^ -5.257) * 10
         '0.0065 is dry adiabatic lapse rate
         calculateMSLppp = MSLppp
@@ -125,7 +127,7 @@ Public Class dataEntryGlobalRoutines
             ctl.BackColor = Color.Red
             ctl.Focus()
             tabNext = False
-            MsgBox("Number expected!", MsgBoxStyle.Critical)        
+            MsgBox("Number expected!", MsgBoxStyle.Critical)
         End If
     End Function
     Public Function checkLowerLimit(ctl As Control, ByVal obsVal As String, ByVal valLowerLimit As String) As Boolean
@@ -198,7 +200,7 @@ Public Class dataEntryGlobalRoutines
             MsgBox("Invalid month!", MsgBoxStyle.Critical)
         End If
     End Function
-   
+
     Public Function checkValidYear(ByVal strVal As String, ctl As Control) As Boolean
         If Val(strVal) >= 1000 And Val(strVal) <= 9999 Then
             checkValidYear = True
@@ -773,7 +775,7 @@ Public Class dataEntryGlobalRoutines
             conn.ConnectionString = dbConnectionString
             conn.Open()
             sql = "SELECT * FROM regkeys"
-            dar = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             dar.Fill(dsr, "regkeys")
 
             regmax = dsr.Tables("regkeys").Rows.Count
@@ -816,7 +818,7 @@ Public Class dataEntryGlobalRoutines
             End If
             FileOpen(16, outDataFile, OpenMode.Output)
 
-            connstr = frmLogin.txtusrpwd.Text
+            connstr = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true" ' & ";AllowLoadLocalInfile=true;SslMode=VerifyCA"
             con0.ConnectionString = connstr
             con0.Open()
 
@@ -861,7 +863,7 @@ Public Class dataEntryGlobalRoutines
         ' Push data to the remote server
         Dim conn0 As New MySql.Data.MySqlClient.MySqlConnection
         Dim builder As New Common.DbConnectionStringBuilder()
-        'Dim a As MySql.Data.MySqlClient.MySqlDataAdapter
+        'Dim a As MySqlConnector.MySqlDataAdapter
         'Dim s As New DataSet
 
         Try
@@ -873,7 +875,7 @@ Public Class dataEntryGlobalRoutines
             builder("uid") = frmLogin.txtUsername.Text
             builder("pwd") = frmLogin.txtPassword.Text
 
-            connstr = builder.ConnectionString & ";Convert Zero Datetime=True"
+            connstr = builder.ConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true" ';SslMode=VerifyCA"
             'MsgBox(connstr)
             conn0.ConnectionString = connstr
             conn0.Open()
@@ -890,6 +892,10 @@ Public Class dataEntryGlobalRoutines
                 Next
             End With
             outDataFile = Strings.Replace(outDataFile, "\", "/")
+
+            'MsgBox(outDataFile)
+            'Load_Files(outDataFile, tbl, 0, ",")
+
             sql = "LOAD DATA LOCAL INFILE '" & outDataFile & "' REPLACE INTO TABLE " & tbl & " FIELDS TERMINATED BY ',' (" & flds & ");"
 
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn0)
@@ -1104,5 +1110,36 @@ Public Class dataEntryGlobalRoutines
             MsgBox("Failed to open " & tbl)
             Return False
         End Try
+    End Function
+
+    Function Load_Files(flname As String, tblname As String, skplines As Integer, fldsep As String, Optional fldquotechar As String = "") As Boolean
+        Dim lconn As New MySql.Data.MySqlClient.MySqlConnection
+        ' Dim cmd As MySqlConnector.MySqlCommand
+        Dim fl As MySql.Data.MySqlClient.MySqlBulkLoader
+        ' Dim rws As Long
+        lconn.ConnectionString = frmLogin.txtusrpwd.Text & ";AllowLoadLocalInfile=true"
+
+        Try
+            lconn.Open()
+            fl = New MySql.Data.MySqlClient.MySqlBulkLoader(lconn)
+
+            fl.FileName = flname
+            fl.TableName = tblname
+            fl.EscapeCharacter = "UTFB"
+            fl.NumberOfLinesToSkip = skplines
+            fl.FieldTerminator = fldsep
+            fl.FieldQuotationCharacter = fldquotechar
+            'fl.FieldQuotationOptional ='True',
+            fl.Local = True
+
+            fl.Load()
+            lconn.Close()
+            Return True
+        Catch ex As Exception
+            lconn.Close()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+
     End Function
 End Class

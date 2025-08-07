@@ -46,7 +46,7 @@ Err:
         On Error GoTo Err
 
         'Execute query for migrating data to V4 db
-        conn1.ConnectionString = frmLogin.txtusrpwd.Text
+        conn1.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         conn1.Open()
         cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
         cmd.ExecuteNonQuery()

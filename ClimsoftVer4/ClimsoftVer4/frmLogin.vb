@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.Data.Common
 Imports System.IO
 Imports System.Security.AccessControl
 Imports System.Security.Principal
@@ -111,6 +112,7 @@ Public Class frmLogin
         ' connection String builder (otherwise warn and stop)
         Try
             builder.ConnectionString = connectionString
+
             builder("uid") = username
             builder("pwd") = password
 
@@ -122,7 +124,7 @@ Public Class frmLogin
             MsgBox("Login failed: " & ex.Message)
             Exit Sub
         End Try
-
+        'connectionString = builder.ConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         conn.ConnectionString = txtusrpwd.Text
         Try
             conn.Open()

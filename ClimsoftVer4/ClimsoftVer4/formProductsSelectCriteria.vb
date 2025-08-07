@@ -43,7 +43,7 @@ Public Class formProductsSelectCriteria
 
         MyConnectionString = frmLogin.txtusrpwd.Text
         Try
-            conn.ConnectionString = MyConnectionString
+            conn.ConnectionString = MyConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
 
             sql = "SELECT * FROM station ORDER BY stationName"
@@ -104,7 +104,7 @@ Public Class formProductsSelectCriteria
 
         Try
             MyConnectionString = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = MyConnectionString
+            conn.ConnectionString = MyConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
             sql = "SELECT keyvalue FROM regkeys WHERE keyName = 'key19';"
 
@@ -1151,7 +1151,7 @@ Err:
         Dim fl As String
 
         Try
-            conp.ConnectionString = MyConnectionString
+            conp.ConnectionString = MyConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conp.Open()
             dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
             dap.SelectCommand.CommandTimeout = 0
@@ -1270,7 +1270,7 @@ Err:
 
         Dim dat, rec As String
         Try
-            conp.ConnectionString = MyConnectionString
+            conp.ConnectionString = MyConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conp.Open()
             dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
             dap.SelectCommand.CommandTimeout = 0
@@ -1371,7 +1371,7 @@ Err:
 
 
         Try
-            conn1.ConnectionString = connString
+            conn1.ConnectionString = connString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn1.Open()
 
             'sql = "SELECT * FROM [" & "means.csv" & "]"
@@ -2106,7 +2106,7 @@ Err:
         'Dim qry As MySql.Data.MySqlClient.MySqlCommand
 
         Try
-            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conn.Open()
 
 
@@ -2541,7 +2541,7 @@ Err:
         'Dim nxtDylvl, AVGlvl, AMlvl, PMlvl, wghtMean As Double
 
         Try
-            conp.ConnectionString = MyConnectionString
+            conp.ConnectionString = MyConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conp.Open()
             dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
             dap.SelectCommand.CommandTimeout = 0
@@ -2921,7 +2921,7 @@ Err:
 
         constring = frmLogin.txtusrpwd.Text
         conn = New MySql.Data.MySqlClient.MySqlConnection
-        conn.ConnectionString = constring
+        conn.ConnectionString = constring & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         conn.Open()
         cmd = New MySql.Data.MySqlClient.MySqlCommand
 
@@ -2943,7 +2943,7 @@ Err:
 
         constring = frmLogin.txtusrpwd.Text
         conn = New MySql.Data.MySqlClient.MySqlConnection
-        conn.ConnectionString = constring
+        conn.ConnectionString = constring & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         conn.Open()
         Try
             cmd = New MySql.Data.MySqlClient.MySqlCommand
@@ -2963,7 +2963,7 @@ Err:
 
         constring = frmLogin.txtusrpwd.Text
         conn = New MySql.Data.MySqlClient.MySqlConnection
-        conn.ConnectionString = constring
+        conn.ConnectionString = constring & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         conn.Open()
 
 
@@ -3771,7 +3771,7 @@ Err:
         'MsgBox("Create Inventory Table")
         Try
             constr = frmLogin.txtusrpwd.Text
-            con.ConnectionString = constr
+            con.ConnectionString = constr & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             con.Open()
 
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
@@ -3896,7 +3896,7 @@ Err:
 
 
         'MsgBox(sql)
-        conn.ConnectionString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         conn.Open()
         cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
         cmd.CommandTimeout = 0
@@ -3916,7 +3916,7 @@ Err:
               "create table typroducts select recordedFrom, describedBy, obsLevel,YY, " & summry & "(Value) As value, SUM(DF) DDF from tmpproducts " &
               "group by recordedFrom, describedBy, YY, obsLevel order by recordedFrom, describedBy, YY;"
         End If
-        conn.ConnectionString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         conn.Open()
         cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
         cmd.CommandTimeout = 0
@@ -4096,7 +4096,7 @@ Err:
         Dim yr, mr, yy, mm, rec, kount As Integer
 
         Try
-            conp.ConnectionString = MyConnectionString
+            conp.ConnectionString = MyConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conp.Open()
             dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
             dap.SelectCommand.CommandTimeout = 0

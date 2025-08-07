@@ -122,7 +122,7 @@ Partial Class frmObsView
         Me.TabSelect.Controls.Add(Me.pnlStationsElements)
         Me.TabSelect.Location = New System.Drawing.Point(4, 22)
         Me.TabSelect.Name = "TabSelect"
-        Me.TabSelect.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabSelect.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabSelect.Size = New System.Drawing.Size(1207, 545)
         Me.TabSelect.TabIndex = 0
         Me.TabSelect.Text = "Selection Details"
@@ -341,7 +341,7 @@ Partial Class frmObsView
         Me.lblProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProducts.Location = New System.Drawing.Point(158, -1)
         Me.lblProducts.Name = "lblProducts"
-        Me.lblProducts.Size = New System.Drawing.Size(17, 16)
+        Me.lblProducts.Size = New System.Drawing.Size(16, 16)
         Me.lblProducts.TabIndex = 8
         Me.lblProducts.Text = "   "
         '
@@ -792,7 +792,7 @@ Partial Class frmObsView
         Me.tabView.Controls.Add(Me.grpButtons)
         Me.tabView.Location = New System.Drawing.Point(4, 22)
         Me.tabView.Name = "tabView"
-        Me.tabView.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabView.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.tabView.Size = New System.Drawing.Size(1207, 545)
         Me.tabView.TabIndex = 1
         Me.tabView.Text = "View Records"
@@ -806,6 +806,7 @@ Partial Class frmObsView
         Me.dataGridViewRecord.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dataGridViewRecord.Location = New System.Drawing.Point(3, 3)
         Me.dataGridViewRecord.Name = "dataGridViewRecord"
+        Me.dataGridViewRecord.RowHeadersWidth = 62
         Me.dataGridViewRecord.Size = New System.Drawing.Size(1107, 451)
         Me.dataGridViewRecord.TabIndex = 1
         '
@@ -890,7 +891,7 @@ Partial Class frmObsView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1218, 607)
+        Me.ClientSize = New System.Drawing.Size(1218, 614)
         Me.Controls.Add(Me.btnBackup)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)

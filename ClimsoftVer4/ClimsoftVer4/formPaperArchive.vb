@@ -222,7 +222,7 @@
             'MsgBox("Record Archived")
             'Exit Function
         Catch ex As Exception
-            'MsgBox(Err.Number & " : " & Err.Description)
+            MsgBox(Err.Number & " : " & Err.Description & " @ ArchiveRecord")
             lstMessages.Items.Add(ex.Message)
             ArchiveRecord = False
         End Try
@@ -252,7 +252,7 @@
     Private Sub formPaperArchive_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         dbConnectionString = frmLogin.txtusrpwd.Text
-        dbconn.ConnectionString = dbConnectionString
+        dbconn.ConnectionString = dbConnectionString & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
         dbconn.Open()
 
         FillList(txtStationArchive, "station", "stationId")
@@ -349,6 +349,11 @@
     End Sub
 
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub cmdArchiveUnstructure_Click(sender As Object, e As EventArgs) Handles cmdArchiveUnstructure.Click
         Dim dir, ext, ImagesPath As String
         Dim fld, xt As Integer
@@ -361,28 +366,19 @@
             ' Define Images Archiving path
 
             ImagesPath = lblArhiveFolder.Text
-            'ImagesPath = ImagesPath & "\images"
-            'MsgBox(ImagesPath)
-            '    GetFullPath(Application.StartupPath) & "\data"
 
+            'Create the images folder if it does not exist
             If Not IO.Directory.Exists(ImagesPath) Then
                 IO.Directory.CreateDirectory(ImagesPath)
             End If
 
-
-            'Craete the images folder if it does not exist
-
-            'If Not IO.Directory.Exists("c:\images") Then
-            '    IO.Directory.CreateDirectory("c:\images")
-            'End If
-
             dir = IO.Directory.GetParent(txtImageFile.Text).FullName
             fld = Len(dir)
-            xt = InStr(txtImageFile.Text, ".")
-            ext = Mid(txtImageFile.Text, xt + 1, Len(txtImageFile.Text) - 1)
+
+            ext = IO.Path.GetExtension(txtImageFile.Text)
 
             FileNm = txtStationArchive.Text & "-" & txtFormId.Text & "-" & Format(Val(txtYear.Text), "00") & Format(Val(txtMonth.Text), "00") _
-                & Format(Val(txtDay.Text), "00") & Format(Val(txtHour.Text), "00") & "." & ext
+                & Format(Val(txtDay.Text), "00") & Format(Val(txtHour.Text), "00") & ext
 
             stn = txtStationArchive.Text
             frm = txtFormId.Text
@@ -395,6 +391,7 @@
 
             If IsDate(frmdatetime) Then
                 'IO.File.Copy(txtImageFile.Text, "c:\images\" & FileNm, True)
+
                 IO.File.Copy(txtImageFile.Text, ImagesPath & "\" & FileNm, True)
                 If ArchiveRecord(stn, frm, frmdatetime, ImagesPath & "\" & FileNm) Then
                     lblArchiveMsg.Text = FileNm & " " & ClsTranslations.GetTranslation("Archived")
@@ -419,7 +416,6 @@
             End If
 
         Catch ex As Exception
-            'MsgBox(ex.Message)
             'lstMessages.Items.Add(ex.Message)
             lblArchiveMsg.Text = ex.Message
             Me.Cursor = Cursors.Default
@@ -778,7 +774,7 @@ Err:
         dbconn.Close()
 
         Try
-            dbconn.ConnectionString = frmLogin.txtusrpwd.Text
+            dbconn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             dbconn.Open()
             lstArchival.Clear()
             sql = "SELECT * FROM paperarchive ORDER BY belongsTo"
@@ -928,10 +924,42 @@ Err:
         End If
     End Sub
 
+    'Private Sub txtMonth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtMonth.SelectedIndexChanged
+    '    txtDay.Text = Date.DaysInMonth(txtYear.Text, txtMonth.Text)
+    'End Sub
 
     Private Sub lblImageRotate_Click(sender As Object, e As EventArgs) Handles lblImageRotate.Click
         pictureBoxForm.Image.RotateFlip(RotateFlipType.Rotate90FlipNone)
         pictureBoxForm.Refresh()
     End Sub
 
+    Private Sub txtMM_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtMM.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtMonth_TextChanged(sender As Object, e As EventArgs) Handles txtMonth.TextChanged
+        Try
+            If IsNumeric(txtYear.Text) Then
+                txtDay.Text = Date.DaysInMonth(txtYear.Text, txtMonth.Text)
+                'Else
+                '    MsgBox("Invalid Year")
+            End If
+        Catch ex As Exception
+            MsgBox("Invalid Entries. Check values!")
+            'MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub txtMM_TextChanged(sender As Object, e As EventArgs) Handles txtMM.TextChanged
+        Try
+            If IsNumeric(txtYY.Text) Then
+                txtDD.Text = Date.DaysInMonth(txtYY.Text, txtMM.Text)
+                'Else
+                '    MsgBox("Invalid Year")
+            End If
+        Catch ex As Exception
+            MsgBox("Invalid Entries. Check values!")
+            'MsgBox(ex.Message)
+        End Try
+    End Sub
 End Class

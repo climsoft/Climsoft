@@ -410,7 +410,7 @@ Public Class frmFormUpload
                         Continue For
                     End If
 
-                    frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
+                    frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & ",," & acquisitionType & "," & dataForm & "," & capturedBy
                     PrintLine(122, frmrec & ",")
                     'PrintLine(122)
 
@@ -425,13 +425,15 @@ Public Class frmFormUpload
 
             ' Create sql query
 
-            strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm);"
+            Load_Files(fl, "observationinitial", 0, ",")
 
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
+            'strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm);"
 
-            'Execute query
-            objCmd.CommandTimeout = 0
-            objCmd.ExecuteNonQuery()
+            'objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
+
+            ''Execute query
+            'objCmd.CommandTimeout = 0
+            'objCmd.ExecuteNonQuery()
 
             'If maxRows = 0 Then
             '    txtDataTransferProgress1.Text = " No data found "
