@@ -71,7 +71,7 @@ Public Class ucrBaseDataLink
 
     Public Sub SetField(strNewField As String)
         CreateDataDefinition()
-        clsDataDefinition.SetField(strNewField)
+        clsDataDefinition.SetFields({strNewField})
         SetSortByItems()
     End Sub
 
@@ -109,9 +109,9 @@ Public Class ucrBaseDataLink
         SetFields(lstNewFields)
     End Sub
 
-    Public Function GetDataField() As String
-        Return clsDataDefinition.GetField
-    End Function
+    'Public Function GetDataField() As String
+    '    Return clsDataDefinition.GetField
+    'End Function
 
     Public Overridable Sub SetFilter(clsNewFilter As TableFilter)
         CreateDataDefinition()

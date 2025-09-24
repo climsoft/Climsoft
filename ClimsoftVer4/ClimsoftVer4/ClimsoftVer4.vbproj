@@ -242,6 +242,10 @@
     <Compile Include="frmFormUpload.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmImportQCData.Designer.vb">
+      <DependentUpon>frmImportQCData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportQCData.vb">
     <Compile Include="frmHourly2Sequencer.Designer.vb">
       <DependentUpon>frmHourly2Sequencer.vb</DependentUpon>
     </Compile>
@@ -982,6 +986,8 @@
     <EmbeddedResource Include="frmFormUpload.resx">
       <DependentUpon>frmFormUpload.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmImportQCData.resx">
+      <DependentUpon>frmImportQCData.vb</DependentUpon>
     <EmbeddedResource Include="frmHourly2Sequencer.resx">
       <DependentUpon>frmHourly2Sequencer.vb</DependentUpon>
     </EmbeddedResource>
