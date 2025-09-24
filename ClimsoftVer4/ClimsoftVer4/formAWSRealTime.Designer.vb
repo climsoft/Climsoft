@@ -172,6 +172,8 @@ Partial Class formAWSRealTime
         Me.lblFTPFolder = New System.Windows.Forms.Label()
         Me.lblBaseStationFTP = New System.Windows.Forms.Label()
         Me.pnlMSS = New System.Windows.Forms.Panel()
+        Me.lblMport = New System.Windows.Forms.Label()
+        Me.txtMport = New System.Windows.Forms.TextBox()
         Me.lstFolders = New System.Windows.Forms.ListBox()
         Me.cmdMssAddNew = New System.Windows.Forms.Button()
         Me.cmdMssRefresh = New System.Windows.Forms.Button()
@@ -273,7 +275,7 @@ Partial Class formAWSRealTime
         Me.pnlControl.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlControl.Location = New System.Drawing.Point(0, 0)
         Me.pnlControl.Name = "pnlControl"
-        Me.pnlControl.Size = New System.Drawing.Size(191, 633)
+        Me.pnlControl.Size = New System.Drawing.Size(191, 606)
         Me.pnlControl.TabIndex = 0
         '
         'cmdHelp
@@ -365,7 +367,7 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.grpElements)
         Me.pnlProcessing.Location = New System.Drawing.Point(194, 29)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(757, 63)
+        Me.pnlProcessing.Size = New System.Drawing.Size(757, 199)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
         '
@@ -1493,9 +1495,9 @@ Partial Class formAWSRealTime
         Me.pnlServers.Controls.Add(Me.pnlMSS)
         Me.pnlServers.Controls.Add(Me.cmdMSS)
         Me.pnlServers.Controls.Add(Me.cmdBaseStation)
-        Me.pnlServers.Location = New System.Drawing.Point(191, 256)
+        Me.pnlServers.Location = New System.Drawing.Point(191, 224)
         Me.pnlServers.Name = "pnlServers"
-        Me.pnlServers.Size = New System.Drawing.Size(760, 140)
+        Me.pnlServers.Size = New System.Drawing.Size(760, 136)
         Me.pnlServers.TabIndex = 2
         Me.pnlServers.Visible = False
         '
@@ -1780,6 +1782,8 @@ Partial Class formAWSRealTime
         '
         Me.pnlMSS.BackColor = System.Drawing.Color.BlanchedAlmond
         Me.pnlMSS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlMSS.Controls.Add(Me.lblMport)
+        Me.pnlMSS.Controls.Add(Me.txtMport)
         Me.pnlMSS.Controls.Add(Me.lstFolders)
         Me.pnlMSS.Controls.Add(Me.cmdMssAddNew)
         Me.pnlMSS.Controls.Add(Me.cmdMssRefresh)
@@ -1806,6 +1810,24 @@ Partial Class formAWSRealTime
         Me.pnlMSS.Name = "pnlMSS"
         Me.pnlMSS.Size = New System.Drawing.Size(713, 287)
         Me.pnlMSS.TabIndex = 3
+        '
+        'lblMport
+        '
+        Me.lblMport.AutoSize = True
+        Me.lblMport.Location = New System.Drawing.Point(440, 97)
+        Me.lblMport.Name = "lblMport"
+        Me.lblMport.Size = New System.Drawing.Size(26, 13)
+        Me.lblMport.TabIndex = 80
+        Me.lblMport.Text = "Port"
+        '
+        'txtMport
+        '
+        Me.txtMport.Location = New System.Drawing.Point(470, 93)
+        Me.txtMport.Name = "txtMport"
+        Me.txtMport.Size = New System.Drawing.Size(49, 20)
+        Me.txtMport.TabIndex = 79
+        Me.txtMport.Text = "21"
+        Me.txtMport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lstFolders
         '
@@ -1847,7 +1869,7 @@ Partial Class formAWSRealTime
         '
         Me.txtmssFTPMode.FormattingEnabled = True
         Me.txtmssFTPMode.Items.AddRange(New Object() {"FTP", "SFTP"})
-        Me.txtmssFTPMode.Location = New System.Drawing.Point(306, 94)
+        Me.txtmssFTPMode.Location = New System.Drawing.Point(306, 93)
         Me.txtmssFTPMode.Name = "txtmssFTPMode"
         Me.txtmssFTPMode.Size = New System.Drawing.Size(116, 21)
         Me.txtmssFTPMode.TabIndex = 74
@@ -2379,7 +2401,7 @@ Partial Class formAWSRealTime
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(973, 633)
+        Me.ClientSize = New System.Drawing.Size(964, 606)
         Me.Controls.Add(Me.pnlProcessing)
         Me.Controls.Add(Me.pnlDataStructures)
         Me.Controls.Add(Me.pnlServers)
@@ -2641,4 +2663,6 @@ Partial Class formAWSRealTime
     Friend WithEvents lblUTCdiff As Label
     Friend WithEvents lblPort As Label
     Friend WithEvents txtPort As TextBox
+    Friend WithEvents lblMport As Label
+    Friend WithEvents txtMport As TextBox
 End Class

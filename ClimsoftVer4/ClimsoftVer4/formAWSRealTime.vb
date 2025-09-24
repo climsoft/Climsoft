@@ -16,6 +16,9 @@
 
 Imports System.IO
 Imports System.Net
+Imports System.Security.Cryptography
+Imports Google.Protobuf.WellKnownTypes
+Imports Org.BouncyCastle.Math
 
 Public Class formAWSRealTime
 
@@ -1766,7 +1769,7 @@ Err:
             Else
                 'If ftpmode = "FTP" Then Print(3, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
                 'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-                If ftpmode = "PSFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+                If ftpmode = "SFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
             End If
 
             Print(3, "echo on" & Chr(13) & Chr(10))
@@ -2361,7 +2364,7 @@ Err:
         'MsgBox(" Update_main_db")
         Log_Errors(Err.Number & ":" & Err.Description & "  at Update_main_db")
     End Sub
-    Function QC_Limits(stn As String, elms As String, dts As String, obs As String, L_limit As String, U_limit As String) As Boolean
+    Function QC_Limits(stn As String, obsv_name As String, dts As String, obs As String, L_limit As String, U_limit As String) As Boolean
         If Len(L_limit) = 0 Or Len(U_limit) = 0 Then Return False
         QC_Limits = False
 
@@ -2385,7 +2388,7 @@ Err:
                 If Val(obs) < Val(L_limit) Then limittype = "Lower Limit"
                 If Val(obs) > Val(U_limit) Then limittype = "Upper Limit"
 
-                errdata = stn & "," & elms & "," & dts & "," & obs & "," & limittype
+                errdata = stn & "," & obsv_name & "," & dts & "," & obs & "," & limittype
 
                 PrintLine(21, errdata)
                 FileClose(21)
@@ -3344,8 +3347,8 @@ Err:
                         Next
                         'If Edecrpt = "020001" Then Log_Errors(sql)
                         Update_data(sql)
-                            Exit For
-                        End If
+                        Exit For
+                    End If
                 Next
             End With
         Catch x As Exception
@@ -3487,11 +3490,11 @@ Err:
 
         ' Initialize with code figures and flags of site values
         Dim C_sql As String
-            Dim F_sql As String
+        Dim F_sql As String
 
-            ' Construct SQL statements for Mysql Query
-            C_sql = "UPDATE Code_Flag INNER JOIN TM_307091 ON Code_Flag.FXY = TM_307091.Bufr_Element SET TM_307091.Observation = Code_Flag.Bufr_Value WHERE (((TM_307091.Bufr_Unit)=" & "'code table'" & "));"
-            F_sql = "UPDATE Code_Flag INNER JOIN TM_307091 ON Code_Flag.FXY = TM_307091.Bufr_Element SET TM_307091.Bufr_Data = Code_Flag.Bufr_Value WHERE (((TM_307091.Bufr_Unit)=" & "'Flag table'" & ") AND ((Code_Flag.Bufr_Value) Is Not Null Or (Code_Flag.Bufr_Value)<>""""));"
+        ' Construct SQL statements for Mysql Query
+        C_sql = "UPDATE Code_Flag INNER JOIN TM_307091 ON Code_Flag.FXY = TM_307091.Bufr_Element SET TM_307091.Observation = Code_Flag.Bufr_Value WHERE (((TM_307091.Bufr_Unit)=" & "'code table'" & "));"
+        F_sql = "UPDATE Code_Flag INNER JOIN TM_307091 ON Code_Flag.FXY = TM_307091.Bufr_Element SET TM_307091.Bufr_Data = Code_Flag.Bufr_Value WHERE (((TM_307091.Bufr_Unit)=" & "'Flag table'" & ") AND ((Code_Flag.Bufr_Value) Is Not Null Or (Code_Flag.Bufr_Value)<>""""));"
         Try
             ' Execute query
             cmd.CommandText = F_sql
@@ -3845,7 +3848,7 @@ Err:
                         sql = sql & "UPDATE " & tt_aws & " SET selected = '1', Observation = '" & MxGustS(1) & "' WHERE Nos = '" & RecNo + 4 & "';"
 
                         Exit For
-                        End If
+                    End If
                 Next
 
             End With
@@ -4092,7 +4095,7 @@ Err:
         ' Add leading zeroes to short data strings
         CCITT_Binary = ""
         binstr = ""
-        If Len(dat) <DataWidth / 8 Then
+        If Len(dat) < DataWidth / 8 Then
             For kount = 1 To DataWidth - Len(dat) * 8
                 binstr = binstr & "0"
             Next kount
@@ -4642,7 +4645,7 @@ Err:
 
         'MsgBox(byt)
 
-        Dim fileStream As FileStream = _
+        Dim fileStream As FileStream =
             New FileStream(fileName, FileMode.Create)
         Try
             Dim kounts As Long
@@ -5680,20 +5683,20 @@ Err:
                     rstr = GetDataSet(AWSsite, sql)
                     kount = rstr.Tables(AWSsite).Rows.Count - 1
 
-                    Dim Elms(0 To kount), Bufr(0 To kount), Units(0 To kount), L_limit(0 To kount), U_limit(0 To kount), E_Abbrev(0 To kount) As String
+                    Dim obsv_name(0 To kount), Bufr(0 To kount), Units(0 To kount), L_limit(0 To kount), U_limit(0 To kount), E_Abbrev(0 To kount) As String
 
                     With rstr.Tables(AWSsite)
 
                         For k = 0 To .Rows.Count - 1
 
-                            Elms(k) = String.Empty
+                            obsv_name(k) = String.Empty
                             Bufr(k) = String.Empty
                             Units(k) = String.Empty
                             L_limit(k) = String.Empty
                             U_limit(k) = String.Empty
                             E_Abbrev(k) = String.Empty
 
-                            If Not IsDBNull(.Rows(k).Item("Climsoft_Element")) And Len(.Rows(k).Item("Climsoft_Element").ToString) <> 0 Then Elms(k) = .Rows(k).Item("Climsoft_Element")
+                            If Not IsDBNull(.Rows(k).Item("Climsoft_Element")) And Len(.Rows(k).Item("Climsoft_Element").ToString) <> 0 Then obsv_name(k) = .Rows(k).Item("Climsoft_Element")
                             If Not IsDBNull(.Rows(k).Item("Bufr_Element")) And Len(.Rows(k).Item("Bufr_Element").ToString) <> 0 Then Bufr(k) = .Rows(k).Item("Bufr_Element")
                             If Not IsDBNull(.Rows(k).Item("Unit")) And Len(.Rows(k).Item("Unit").ToString) <> 0 Then Units(k) = .Rows(k).Item("Unit")
                             If Not IsDBNull(.Rows(k).Item("Lower_limit")) And Len(.Rows(k).Item("Lower_limit").ToString) <> 0 Then L_limit(k) = .Rows(k).Item("Lower_limit")
@@ -5766,7 +5769,7 @@ Err:
                             recs = recs + 1
                             Process_Status("Processing input record " & recs & " of " & result.Count) ' & "  From " & infile)
                             txtStatus.Refresh()
-                            If Not update_db(row, colmn, nat_id, flg, AWSsite, Elms, Units, L_limit, U_limit, Bufr, E_Abbrev) Then Continue For
+                            If Not update_db(row, colmn, nat_id, flg, AWSsite, obsv_name, Units, L_limit, U_limit, Bufr, E_Abbrev) Then Continue For
 
                         Next
 
@@ -5976,7 +5979,6 @@ Err:
             cmd.CommandText = sql
             cmd.ExecuteNonQuery()
 
-
             ' Update TDCF Template and Encode to BUFR for GTS Transmission
             ' Test if any BUFR Element is set
             Kount = 0
@@ -5999,8 +6001,12 @@ Err:
                     Rmd = DateAndTime.Hour(dtt) Mod ET 'Check when the encoding interval is reached @ Rmd is Zero 
 
                     If Rmd = 0 Then
+
                         update_tbltemplate(drws, dtt, EBufr, AbbrevE)
                         EncodeBUFR = True
+
+                        'Create CSV file for WIS2BOX
+                        'CSV4WIS2BOX(stn, dtt)
                     End If
                 End If
             End If
@@ -6077,9 +6083,6 @@ Err:
     '        Return False
     '    End Try
     'End Function
-
-
-
 
     Function WSI_Data(ByRef WSI_section4 As String) As Boolean
         Dim wconn As New MySql.Data.MySqlClient.MySqlConnection
@@ -6252,6 +6255,303 @@ Err:
         Catch x As Exception
             If x.HResult <> -2147467262 Then MsgBox(x.HResult)
         End Try
+    End Sub
+
+    Function CSV4WIS2BOX(stn As String, timestamp As String) As Boolean
+        Dim csvwisb2box_file, wigos_id, recs, hdrs, wisrecs(47), wishdrs(47), dttime As String
+
+        'csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & stn & "-" & DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & "-" & DateAndTime.Hour(timestamp) & ".csv"
+        dttime = DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & " " & DateAndTime.Hour(timestamp) & ":" & DateAndTime.Minute(timestamp) & ":" & DateAndTime.Second(timestamp)
+        'Log_Errors(csvwisb2box_file)
+        Try
+            'FileOpen(14, csvwisb2box_file, OpenMode.Output)
+
+            sql = "SELECT left(wmoid,2) AS WMO_Block,right(wmoid,3) AS WMO_Number,wsi as WIGOS_ID, stationName as Station_Name, year(obsDatetime) as Datetime_Year,month(obsDatetime) As Datetime_Month,day(obsDatetime) as Datetime_Day,hour(obsDatetime)+1 as Datetime_Hour, '0' AS Datetime_Minute,latitude as Latitude, longitude as Longitude, elevation as Elevation, 
+               AVG(IF(describedBy = '884', value, NULL)) AS 'Pressure_Barometric', 
+               AVG(IF(describedBy = '891', value, NULL)) AS 'Pressure_QNH', 
+               AVG(IF(describedBy = '881', value, NULL)) AS 'Temperature_Drybulb', 
+               AVG(IF(describedBy = '885', value, NULL)) AS 'Temperature_Dewpoint', 
+               AVG(IF(describedBy = '893', value, NULL)) AS 'Relative_Humidity', 
+               SUM(IF(describedBy = '892', value, NULL)) AS 'Rain_1Htotal',
+               SUM(IF(describedBy = '888', value, NULL)) AS 'Sunshine_1Htotal',
+               AVG(IF(describedBy = '895', value, NULL)) AS 'Wind_Direction',
+               AVG(IF(describedBy = '897', value, NULL)) AS 'Wind_Speed',
+               AVG(IF(describedBy = '887', value, NULL)) AS 'WindGust_Direction',
+               AVG(IF(describedBy = '886', value, NULL)) AS 'WindGust_Speed',
+               SUM(IF(describedBy = '928', value, NULL)) AS 'Evaporation_Total',
+               SUM(IF(describedBy = '994', value, NULL)) AS 'Radiation_Total'
+               FROM (SELECT wmoid,wsi,recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value 
+               FROM  station INNER JOIN observationfinal ON stationId = recordedFrom WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='884' OR  describedBy = '891' OR  describedBy = '881' OR  describedBy = '885' OR  describedBy = '895' 
+               OR  describedBy = '893' OR  describedBy = '892' OR  describedBy = '888' OR  describedBy = '895' OR  describedBy = '897' OR  describedBy = '887' OR  describedBy = '886' OR  describedBy = '928' OR  describedBy = '994') 
+               and (obsdatetime BETWEEN DATE_ADD('" & dttime & "', INTERVAL -1 HOUR ) AND '" & dttime & "') ORDER BY recordedFrom, obsDatetime) t 
+               GROUP BY StationName, year(obsDatetime), month(obsDatetime), day(obsDatetime);"
+
+            If Not WIS2BOX_Observations(stn, wigos_id, dttime, sql, wishdrs, wisrecs) Then
+                Log_Errors("Unable to construct WIS2BOX record")
+            End If
+
+            hdrs = wishdrs(0)
+            recs = wisrecs(0)
+            For i = 1 To 46
+                hdrs = hdrs & "," & wishdrs(i)
+                recs = recs & "," & wisrecs(i)
+            Next
+
+            ' Create a file for WIS2BOX CSV data output
+            csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\WIGOS-" & wigos_id & "-" & DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & "-" & DateAndTime.Hour(timestamp) & ".csv"
+
+            FileOpen(14, csvwisb2box_file, OpenMode.Output)
+
+            PrintLine(14, hdrs)
+            PrintLine(14, recs)
+
+            CSVWIS2BOX_Send(csvwisb2box_file)
+            lstOutputFiles.Items.Add(IO.Path.GetFileName(csvwisb2box_file))
+
+            FileClose(14)
+            Return True
+
+        Catch ex As Exception
+            Log_Errors(ex.Message & " @ CSV4WIS2BOX")
+            FileClose(14)
+            Return False
+        End Try
+    End Function
+    Function WIS2BOX_Observations(stn As String, ByRef wigosID As String, dttm As String, sql As String, ByRef obsv_name() As String, ByRef obsv_Value() As String) As Boolean
+        Dim wisconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dswis As New DataSet
+        Dim dawis As MySql.Data.MySqlClient.MySqlDataAdapter
+
+        Try
+            wisconn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
+            wisconn.Open()
+
+            dawis = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, wisconn)
+            dawis.SelectCommand.CommandTimeout = 0
+            dswis.Clear()
+            dawis.Fill(dswis, "wis2box")
+
+            'Log_Errors(dswis.Tables("wis2box").Rows.Count)
+
+            obsv_name(0) = "WMO_Block"
+            obsv_name(1) = "WMO_Number"
+            obsv_name(2) = "WIGOS_ID"
+            obsv_name(3) = "Station_Name"
+            obsv_name(4) = "Station_Type"
+            obsv_name(5) = "Datetime_Year"
+            obsv_name(6) = "Datetime_Month"
+            obsv_name(7) = "Datetime_Day"
+            obsv_name(8) = "Datetime_Hour"
+            obsv_name(9) = "Datetime_Minute"
+            obsv_name(10) = "Latitude"
+            obsv_name(11) = "Longitude"
+            obsv_name(12) = "Elevation"
+            obsv_name(13) = "Pressure_Elevation"
+            obsv_name(14) = "Pressure_Barometric"
+            obsv_name(15) = "Pressure_QNH"
+            obsv_name(16) = "Pressure_3Hchange"
+            obsv_name(17) = "Pressure_24Hchange"
+            obsv_name(18) = "Temperature_Height"
+            obsv_name(19) = "Temperature_Drybulb"
+            obsv_name(20) = "Temperature_Dewpoint"
+            obsv_name(21) = "Relative_Humidity"
+            obsv_name(22) = "Rain_Height"
+            obsv_name(23) = "Rain_Period"
+            obsv_name(24) = "Rain_24Htotal"
+            obsv_name(25) = "Rain_Period"
+            obsv_name(26) = "Rain_1Htotal"
+            obsv_name(27) = "Sunshine_24Htotal"
+            obsv_name(28) = "Sunshine_Period"
+            obsv_name(29) = "Sunshine_1Htotal"
+            obsv_name(30) = "Tmax_Period"
+            obsv_name(31) = "Temperature_Tmax"
+            obsv_name(32) = "Tmin_Period"
+            obsv_name(33) = "Temperature_Tmin"
+            obsv_name(34) = "Wind_Height"
+            obsv_name(35) = "Wind_Type"
+            obsv_name(36) = "Wind_Sig"
+            obsv_name(37) = "Wind_Period"
+            obsv_name(38) = "Wind_Direction"
+            obsv_name(39) = "Wind_Speed"
+            obsv_name(40) = "WindGust_Direction"
+            obsv_name(41) = "WindGust_Speed"
+            obsv_name(42) = "Evaporation_Period"
+            obsv_name(43) = "Evaporation_Type"
+            obsv_name(44) = "Evaporation_Total"
+            obsv_name(45) = "Radiation_Period"
+            obsv_name(46) = "Radiation_Total"
+
+            ' Populate the observations list
+            With dswis.Tables("wis2box")
+                For i = 0 To .Columns.Count - 1
+                    For j = 0 To 46
+                        If obsv_name(j) = .Columns(i).ColumnName Then
+                            If Not IsDBNull(.Rows(0).Item(i)) Then
+                                obsv_Value(j) = .Rows(0).Item(i)
+                            Else
+                                obsv_Value(j) = ""
+                            End If
+                            Exit For
+                        End If
+                    Next
+                Next
+            End With
+
+            ' Get WIGOS ID for the station
+            wigosID = obsv_Value(2)
+
+            ' Compute Special observations
+            obsv_Value(4) = 0       ' Station of automatic type 
+            If obsv_Value(12) <> "" Then obsv_Value(13) = Val(obsv_Value(12)) + 1   ' Barometer Elevation
+            obsv_Value(18) = 1      ' Height of Thermometer above local ground
+            obsv_Value(22) = 0.25   ' Height of Raingauge above local ground
+            obsv_Value(23) = -24    ' Time period for daily rainfall
+            obsv_Value(25) = -1     ' Time period for hourly rainfall
+            obsv_Value(28) = -1     ' Time period for hourly sunshine
+            obsv_Value(30) = -24    ' Time period for maximum temperature
+            obsv_Value(32) = -24    ' Time period for minimum temperature
+            obsv_Value(34) = 10     ' Height of Wind instrument above local ground
+            obsv_Value(35) = 0      ' Type of Wind instrument
+            obsv_Value(36) = 2      ' Wind time significance
+            obsv_Value(37) = -10    ' Wind time period
+            obsv_Value(42) = -1     ' Evaporation time period"
+            obsv_Value(43) = 1      ' Evaporation instrument type
+            obsv_Value(45) = -1     ' Radiation period"
+
+            ' Compute 24 Hour observations
+            sql = "SELECT left(wmoid,2) AS WMO_Block,right(wmoid,3) AS WMO_Number,wsi as WIGOS_ID, stationName as Station_Name, year(obsDatetime) as Datetime_Year,month(obsDatetime) As Datetime_Month,day(obsDatetime) as Datetime_Day,hour(obsDatetime) as Datetime_Hour, '0' AS Datetime_Minute,latitude as Latitude, longitude as Longitude, elevation as Elevation, 
+               MAX(IF(describedBy = '881', value, NULL)) AS 'Temperature_Maximum', 
+               MIN(IF(describedBy = '881', value, NULL)) AS 'Temperature_Minimum',                
+               SUM(IF(describedBy = '892', value, NULL)) AS 'Rain_24Htotal',
+               SUM(IF(describedBy = '888', value, NULL)) AS 'Sunshine_24Htotal'
+               FROM (SELECT wmoid,wsi,recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value 
+               FROM  station INNER JOIN observationfinal ON stationId = recordedFrom WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='881' OR  describedBy = '891' OR  describedBy = '892' OR  describedBy = '888') 
+               and (obsdatetime BETWEEN DATE_ADD('" & dttm & "', INTERVAL -24 HOUR ) AND '" & dttm & "') ORDER BY recordedFrom, obsDatetime) t;"
+
+            dawis = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, wisconn)
+            dawis.SelectCommand.CommandTimeout = 0
+            dswis.Clear()
+            dawis.Fill(dswis, "obsv")
+
+            With dswis.Tables("obsv")
+                If .Rows.Count > 0 Then
+                    If Not IsDBNull(.Rows(0).Item("Temperature_Maximum")) Then obsv_Value(31) = .Rows(0).Item("Temperature_Maximum")
+                    If Not IsDBNull(.Rows(0).Item("Temperature_Minimum")) Then obsv_Value(33) = .Rows(0).Item("Temperature_Minimum")
+                    If Not IsDBNull(.Rows(0).Item("Rain_24Htotal")) Then obsv_Value(24) = .Rows(0).Item("Rain_24Htotal")
+                    If Not IsDBNull(.Rows(0).Item("Sunshine_24Htotal")) Then obsv_Value(27) = .Rows(0).Item("Sunshine_24Htotal")
+                End If
+            End With
+
+            ' Convert temperature observation values to Kelvin
+            If obsv_Value(19) <> "" Then obsv_Value(19) = Val(obsv_Value(19)) + 273.15 ' Dry bulb temperature
+            If obsv_Value(20) <> "" Then obsv_Value(20) = Val(obsv_Value(20)) + 273.15 ' Wet bulb temperature
+            If obsv_Value(31) <> "" Then obsv_Value(31) = Val(obsv_Value(31)) + 273.15 ' Maximum temperature
+            If obsv_Value(33) <> "" Then obsv_Value(33) = Val(obsv_Value(33)) + 273.15 ' Minimum temperature
+
+            ' Compute Presure Tendancy
+
+            ' 3HR Pressure change
+            sql = "select obsvalue FROM  station INNER JOIN observationfinal ON stationId = recordedFrom
+                    WHERE RecordedFrom = '" & stn & "' AND describedBy ='884' and (obsdatetime = DATE_ADD('" & dttm & "', INTERVAL -3 HOUR ) OR obsdatetime ='" & dttm & "') ORDER BY obsdatetime;"
+            'Log_Errors(sql)
+            dawis = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, wisconn)
+            dawis.SelectCommand.CommandTimeout = 0
+            dswis.Clear()
+            dawis.Fill(dswis, "3hrPtendancy")
+
+            With dswis.Tables("3hrPtendancy")
+                If .Rows.Count = 2 Then
+                    If Not IsDBNull(.Rows(0).Item(0)) And Not IsDBNull(.Rows(1).Item(0)) Then
+                        obsv_Value(16) = Val(.Rows(1).Item(0)) - Val(.Rows(0).Item(0))
+                    End If
+
+                End If
+
+            End With
+
+            ' 3HR Pressure change
+            sql = "select obsvalue FROM  station INNER JOIN observationfinal ON stationId = recordedFrom
+                    WHERE RecordedFrom = '" & stn & "' AND describedBy ='884' and (obsdatetime = DATE_ADD('" & dttm & "', INTERVAL -24 HOUR ) OR obsdatetime ='" & dttm & "') ORDER BY obsdatetime;"
+
+            dawis = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, wisconn)
+            dawis.SelectCommand.CommandTimeout = 0
+            dswis.Clear()
+            dawis.Fill(dswis, "24hrPtendancy")
+
+            With dswis.Tables("24hrPtendancy")
+                If .Rows.Count = 2 Then
+                    If Not IsDBNull(.Rows(0).Item(0)) And Not IsDBNull(.Rows(1).Item(0)) Then
+                        obsv_Value(17) = Val(.Rows(1).Item(0)) - Val(.Rows(0).Item(0))
+                    End If
+
+                End If
+            End With
+
+            wisconn.Close()
+            Return True
+        Catch ex As Exception
+            wisconn.Close()
+            Log_Errors(ex.Message & " @ WIS2BOX_Elements")
+            Return False
+        End Try
+    End Function
+    Sub CSVWIS2BOX_Send(csvwisfile As String)
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dswis As New DataSet
+        Dim dawis As MySql.Data.MySqlClient.MySqlDataAdapter
+
+        'If lstMessages.Items.Count = 0 Then
+        '    MsgBox(ClsTranslations.GetTranslation("No CLIMAT message encoded"))
+        '    Exit Sub
+        'End If
+
+        Dim kount As Integer
+        Me.Cursor = Cursors.WaitCursor
+        ' Get server details
+        Try
+
+            sql = "SELECT * FROM aws_mss where foldertype = 'ASC';"
+
+            conn.ConnectionString = frmLogin.txtusrpwd.Text & ";AllowLoadLocalInfile=true"
+            conn.Open()
+
+            dawis = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dawis.SelectCommand.CommandTimeout = 0
+            dswis.Clear()
+            dawis.Fill(dswis, "wis2csv")
+
+            With dswis.Tables("wis2csv")
+                kount = .Rows.Count
+                'MsgBox(Kount)
+                If kount = 0 Then
+                    Log_Errors("No server located")
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                Else
+                    Dim msg_file, url, login, pwd, foldr, ftpmode As String
+                    msg_file = csvwisfile
+                    url = .Rows(0).Item("ftpId")
+                    login = .Rows(0).Item("userName")
+                    pwd = .Rows(0).Item("password")
+                    foldr = .Rows(0).Item("inputFolder")
+                    ftpmode = .Rows(0).Item("ftpMode")
+
+                    If Not frmCLIMAT.FTP_Execute(msg_file, url, login, pwd, foldr, ftpmode, "put") Then
+                        Log_Errors("FTP Failure")
+                    End If
+
+                End If
+            End With
+        Catch ex As Exception
+            conn.Close()
+            If ex.HResult = -2147467259 Then
+                Log_Errors("Permission to Send not set!")
+                'MsgBox(ClsTranslations.GetTranslation("Permission to Send not set! Administrator should start CLIMAT opeartion, open Setting then Click on 'Grant User Permissions'."))
+            Else
+                MsgBox(ex.Message)
+            End If
+        End Try
+        Me.Cursor = Cursors.Default
     End Sub
 End Class
 

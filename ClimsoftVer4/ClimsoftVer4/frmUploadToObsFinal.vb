@@ -389,7 +389,7 @@ Public Class frmUploadToObsFinal
         '' Open Form for displaying data transfer progress
         'Dim m As Integer, n As Integer, elem1 As Integer, elem2, Trecs As Integer
         'Dim elmcode, stnlist, elmlist, stnelm_selected, fl1, rec As String
-        'Dim stnselected, elmselected As Boolean
+        'Dim stnselected, obsv_nameelected As Boolean
 
         ''Upload data to observationInitial table
         'Dim strSQL, stnId, elemCode, obsVal, obsFlag, period, mark1, qcStatus, obsLevel, obsDate, mm, dd, hh, mnt, ss As String
@@ -413,7 +413,7 @@ Public Class frmUploadToObsFinal
         '    stnlist = ""
         '    elmlist = ""
         '    stnselected = False
-        '    elmselected = False
+        '    obsv_nameelected = False
 
         '    'Set Cursor to busy mode
         '    Me.Cursor = Cursors.WaitCursor
@@ -441,7 +441,7 @@ Public Class frmUploadToObsFinal
         '        For i = 0 To lstViewElements.Items.Count - 1
         '            If lstViewElements.Items(i).Checked = True Then
         '                elmcode = lstViewElements.Items(i).SubItems(0).Text
-        '                elmselected = True
+        '                obsv_nameelected = True
         '                If Len(elmlist) = 0 Then
         '                    elmlist = "describedBy = " & " '" & elmcode & "'" 'stnid
         '                Else
@@ -450,7 +450,7 @@ Public Class frmUploadToObsFinal
         '            End If
         '        Next
         '    Else ' When All stations are selected
-        '        elmselected = True
+        '        obsv_nameelected = True
         '    End If
 
         '    ' Contruct the Stations and Elements selction criteria string
@@ -458,7 +458,7 @@ Public Class frmUploadToObsFinal
         '    If Len(elmlist) > 0 Then elmlist = "(" & elmlist & ")"
 
         '    ' Set the stations and elements selection conditions
-        '    If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
+        '    If stnselected = False Or obsv_nameelected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
         '        Me.Cursor = Cursors.Default
         '        conn.Close()
         '        FileClose(102)
@@ -788,7 +788,7 @@ Public Class frmUploadToObsFinal
         '        'Open form for displaying data transfer progress
         Dim m As Integer, n As Integer, elem1 As Integer, elem2, Trecs As Integer
         Dim elmcode, stnlist, elmlist, stnelm_selected, fl1, rec As String
-        Dim stnselected, elmselected As Boolean
+        Dim stnselected, obsv_nameelected As Boolean
 
         'Upload data to observationInitial table
         Dim strSQL, stnId, elemCode, obsVal, obsFlag, period, mark1, qcStatus, obsLevel, obsDate, mm, dd, hh, mnt, ss As String
@@ -812,7 +812,7 @@ Public Class frmUploadToObsFinal
             stnlist = ""
             elmlist = ""
             stnselected = False
-            elmselected = False
+            obsv_nameelected = False
 
             'Set Cursor to busy mode
             Me.Cursor = Cursors.WaitCursor
@@ -840,7 +840,7 @@ Public Class frmUploadToObsFinal
                 For i = 0 To lstViewElements.Items.Count - 1
                     If lstViewElements.Items(i).Checked = True Then
                         elmcode = lstViewElements.Items(i).SubItems(0).Text
-                        elmselected = True
+                        obsv_nameelected = True
                         If Len(elmlist) = 0 Then
                             elmlist = "describedBy = " & " '" & elmcode & "'" 'stnid
                         Else
@@ -849,7 +849,7 @@ Public Class frmUploadToObsFinal
                     End If
                 Next
             Else ' When All stations are selected
-                elmselected = True
+                obsv_nameelected = True
             End If
 
             ' Contruct the Stations and Elements selction criteria string
@@ -857,7 +857,7 @@ Public Class frmUploadToObsFinal
             If Len(elmlist) > 0 Then elmlist = "(" & elmlist & ")"
 
             ' Set the stations and elements selection conditions
-            If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
+            If stnselected = False Or obsv_nameelected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
                 Me.Cursor = Cursors.Default
                 conn.Close()
                 FileClose(102)
@@ -958,19 +958,19 @@ Public Class frmUploadToObsFinal
 
                 obsLevel = ds.Tables("obsInitial").Rows(n).Item("obslevel")
 
-                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("period")) Then
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("period")) And IsNumeric(ds.Tables("obsInitial").Rows(n).Item("period")) Then
                     period = ds.Tables("obsInitial").Rows(n).Item("period")
                 Else
-                    period = "" ' "\N"
+                    period = 1 ' "\N"
                 End If
 
                 'Types of bservation values
                 If IsDBNull(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of NULL for obs values
-                    obsVal = "" ' "\N"
+                    obsVal = "\N"
                     obsFlag = "M"
                 ElseIf Len(ds.Tables("obsInitial").Rows(n).Item("obsValue")) = 0 Or Not IsNumeric(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of Blanks for obs values
-                    obsVal = "" ' "\N"
-                    obsFlag = "" ' "M"
+                    obsVal = "\N"
+                    obsFlag = "M" ' "M"
                 Else
                     obsVal = ds.Tables("obsInitial").Rows(n).Item("obsValue")
                     obsVal = obsVal * valScale
@@ -1028,9 +1028,11 @@ Public Class frmUploadToObsFinal
                     '"dataForm,capturedBy,mark,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits,dataSourceTimeZone)
                     strSQL = "REPLACE INTO observationfinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,qcTypeLog,acquisitionType," &
                         "dataForm,capturedBy,mark,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits,dataSourceTimeZone) " &
-                        "VALUES('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & period & "," & qcStatus & "," & qcTypeLog & "," & acquisitionType & "," &
-                        dataform & ",'" & captBy & "','" & mark1 & "'," & tmpUnits & "," & precipUnits & "," & cldUnits & "," & visunits & "," & datasrcTzone & ");"
-                    'MsgBox(strSQL)
+                        "VALUES('" & stnId & "','" & elemCode & "','" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & period & "," & qcStatus & ",'" & qcTypeLog & "'," & acquisitionType & ",'" &
+                        dataform & "','" & captBy & "'," & mark1 & ",'" & tmpUnits & "','" & precipUnits & "','" & cldUnits & "','" & visunits & "','" & datasrcTzone & "');"
+
+                    'txtDataTransferProgress.Text = (strSQL)
+
                     ' Upload with replacing existing records 
                     ' Create the Command for executing query and set its properties
                     objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
