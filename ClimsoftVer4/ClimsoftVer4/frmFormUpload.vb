@@ -182,7 +182,7 @@ Public Class frmFormUpload
             ' Convert path separater to SQL format
             fl = Strings.Replace(fl, "\", "/")
 
-            conns.ConnectionString = frmLogin.txtusrpwd.Text
+            conns.ConnectionString = frmLogin.txtusrpwd.Text & ";AllowLoadLocalInfile=true"
             conns.Open()
 
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
@@ -364,11 +364,11 @@ Public Class frmFormUpload
 
                             datetimeGTS(obsDatetime)
 
-                            strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
-                                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "');"
+                            strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy) " &
+                                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & dataForm & "','" & capturedBy & "');"
 
                             ' First save data into a text file to be uploaded later
-                            frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
+                            frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & dataForm & "," & capturedBy
                             PrintLine(122, frmrec & ",")
                             'PrintLine(122)
 
@@ -388,7 +388,7 @@ Public Class frmFormUpload
                             ''Generate SQL string for inserting data into observationinitial table
 
                             ' First save data into a text file to be uploaded later
-                            frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
+                            frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & dataForm & "," & capturedBy
                             PrintLine(122, frmrec & ",")
                             'PrintLine(122)
 
@@ -410,7 +410,7 @@ Public Class frmFormUpload
                         Continue For
                     End If
 
-                    frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & ",," & acquisitionType & "," & dataForm & "," & capturedBy
+                    frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & dataForm & "," & capturedBy
                     PrintLine(122, frmrec & ",")
                     'PrintLine(122)
 
@@ -425,23 +425,23 @@ Public Class frmFormUpload
 
             ' Create sql query
 
-            Load_Files(fl, "observationinitial", 0, ",")
+            'Load_Files(fl, "observationinitial", 0, ",")
 
-            'strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm);"
+            strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy);"
 
-            'objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
 
-            ''Execute query
-            'objCmd.CommandTimeout = 0
-            'objCmd.ExecuteNonQuery()
+            'Execute query
+            objCmd.CommandTimeout = 0
+            objCmd.ExecuteNonQuery()
 
-            'If maxRows = 0 Then
-            '    txtDataTransferProgress1.Text = " No data found "
-            'Else
-            lblDataTransferProgress.ForeColor = Color.Red
+            If maxRows = 0 Then
+                txtDataTransferProgress1.Text = " No data found "
+            Else
+                lblDataTransferProgress.ForeColor = Color.Red
                 lblDataTransferProgress.Text = "Total " & maxRows & " Records Transfered" 'Data transfer complete !"
                 txtDataTransferProgress1.Text = ""
-            'End If
+            End If
             conns.Close()
         Catch ex As Exception
             FileClose(122)

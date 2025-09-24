@@ -501,7 +501,7 @@ Public Class frmImportDaily
                 Case ImportType.Monthly
                     DataCat = "Monthly"
                 Case ImportType.MultipleElements
-                    DataCat = "ColElms"
+                    DataCat = "Colobsv_name"
                 Case ImportType.ClicomDaily
                     DataCat = "CLICOMDLY"
                 Case ImportType.ClicomHourly
@@ -545,7 +545,7 @@ Public Class frmImportDaily
                     Load_Aws()
                 Case "AWS_special"
                     Load_Aws_special()
-                Case "ColElms"
+                Case "Colobsv_name"
                     If chkUpperAir.Checked Then
                         load_UpperAir()
                     Else
@@ -616,7 +616,7 @@ Public Class frmImportDaily
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
-            lblRecords.Text = "Data Import Failed!, Check if the Staion Id exists in metadata"
+            lblRecords.Text = "Data Import Failed! " ' Check if the Staion Id exists in metadata"
             dbcon.Close()
             FileClose(101)
             Me.Cursor = Cursors.Default
@@ -1127,18 +1127,19 @@ Public Class frmImportDaily
                                                 dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
 
                                                 ' Check for missing flag data values 
-                                                If dat = txtMissingFlag.Text Then
+                                                If dat = txtMissingFlag.Text Or dat = "" Then
                                                     col = col + 1
-                                                    If dat = "" Then Continue For 'Blanks to be skipped
 
-                                                    If IsDate(dttim) Then
-                                                        If Station_Element(st, cod) Then
+                                                    'If dat = "" Then Continue For 'Blanks to be skipped
 
-                                                            If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
-                                                            lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
-                                                            lblRecords.Refresh()
-                                                        End If
-                                                    End If
+                                                    'If IsDate(dttim) Then
+                                                    '    If Station_Element(st, cod) Then
+
+                                                    '        If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
+                                                    '        lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                    '        lblRecords.Refresh()
+                                                    '    End If
+                                                    'End If
                                                     Continue For
                                                 End If
 

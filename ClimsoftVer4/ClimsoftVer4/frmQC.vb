@@ -203,7 +203,7 @@ Public Class frmQC
 
     '    Dim m As Integer, n As Integer, elem1 As Integer, elem2 As Integer
     '    Dim stnid, elmcode, stnlist, elmlist, stnelm_selected, QcReportFile As String
-    '    Dim stnselected, elmselected As Boolean
+    '    Dim stnselected, obsv_nameelected As Boolean
 
     '    Me.Cursor = Cursors.WaitCursor
 
@@ -213,7 +213,7 @@ Public Class frmQC
     '    stnlist = ""
     '    elmlist = ""
     '    stnselected = False
-    '    elmselected = False
+    '    obsv_nameelected = False
 
 
     '    ' List the selected stations
@@ -239,7 +239,7 @@ Public Class frmQC
     '        For i = 0 To lstViewElements.Items.Count - 1
     '            If lstViewElements.Items(i).Checked = True Then
     '                elmcode = lstViewElements.Items(i).SubItems(0).Text
-    '                elmselected = True
+    '                obsv_nameelected = True
     '                If Len(elmlist) = 0 Then
     '                    elmlist = "describedBy = " & " '" & elmcode & "'" 'stnid
     '                Else
@@ -249,17 +249,17 @@ Public Class frmQC
     '            End If
     '        Next
     '    Else ' When All Elements are selected
-    '        elmselected = True
+    '        obsv_nameelected = True
     '    End If
 
-    '    If optInterElement.Checked = True Then elmselected = True
+    '    If optInterElement.Checked = True Then obsv_nameelected = True
 
     '    ' Contruct the Stations and Elements selction criteria string
     '    If Len(stnlist) > 0 Then stnlist = "(" & stnlist & ")"
     '    If Len(elmlist) > 0 Then elmlist = "(" & elmlist & ")"
 
     '    ' Set the stations and elements selection conditions
-    '    If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
+    '    If stnselected = False Or obsv_nameelected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
     '        MsgBox(ClsTranslations.GetTranslation(" Selections not properly done. Check values!"), MsgBoxStyle.Exclamation, ClsTranslations.GetTranslation("Selection Error"))
     '        Me.Cursor = Cursors.Default
     '        Exit Sub
@@ -733,7 +733,7 @@ Public Class frmQC
 
         Dim m, n, elem1, elem2 As Integer
         Dim stnid, elmcode, stnlist, elmlist, stnelm_selected, stnelm_local, QcReportFile, strSQLog, qcLog As String
-        Dim stnselected, elmselected As Boolean
+        Dim stnselected, obsv_nameelected As Boolean
 
         Me.Cursor = Cursors.WaitCursor
 
@@ -743,7 +743,7 @@ Public Class frmQC
         stnlist = ""
         elmlist = ""
         stnselected = False
-        elmselected = False
+        obsv_nameelected = False
 
 
         ' List the selected stations
@@ -769,7 +769,7 @@ Public Class frmQC
             For i = 0 To lstViewElements.Items.Count - 1
                 If lstViewElements.Items(i).Checked = True Then
                     elmcode = lstViewElements.Items(i).SubItems(0).Text
-                    elmselected = True
+                    obsv_nameelected = True
                     If Len(elmlist) = 0 Then
                         elmlist = "describedBy = " & " '" & elmcode & "'" 'stnid
                     Else
@@ -779,17 +779,17 @@ Public Class frmQC
                 End If
             Next
         Else ' When All Elements are selected
-            elmselected = True
+            obsv_nameelected = True
         End If
 
-        If optInterElement.Checked = True Then elmselected = True
+        If optInterElement.Checked = True Then obsv_nameelected = True
 
         ' Construct the Stations and Elements selction criteria string
         If Len(stnlist) > 0 Then stnlist = "(" & stnlist & ")"
         If Len(elmlist) > 0 Then elmlist = "(" & elmlist & ")"
 
         ' Set the stations and elements selection conditions
-        If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
+        If stnselected = False Or obsv_nameelected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
             MsgBox(ClsTranslations.GetTranslation(" Selections not properly done. Check values!"), MsgBoxStyle.Exclamation, ClsTranslations.GetTranslation("Selection Error"))
             Me.Cursor = Cursors.Default
             Exit Sub
