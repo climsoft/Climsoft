@@ -931,6 +931,7 @@
         Dim s As New DataSet
         Dim qry As MySql.Data.MySqlClient.MySqlCommand
         Dim outDataDir, outDataFile, connstr, dat, xt As String
+
         Dim objcommon As New dataEntryGlobalRoutines
 
         Try
@@ -980,8 +981,16 @@
                         Else
                             xt = .Rows(i).Item(j)
                         End If
-                        If .Columns(j).ColumnName = "obsDatetime" And IsDate(xt) Then xt = DateAndTime.Year(xt) & "-" & DateAndTime.Month(xt) & "-" & DateAndTime.Day(xt) & " " & DateAndTime.TimeValue(xt)
-                        dat = dat & "," & xt
+                        If .Columns(j).ColumnName = "obsDatetime" And IsDate(xt) Then
+                            xt = DateAndTime.Year(xt) & "-" & DateAndTime.Month(xt) & "-" & DateAndTime.Day(xt) & " " & DateAndTime.Hour(xt) & ":" & DateAndTime.Minute(xt) & ":" & DateAndTime.Second(xt)
+                        ElseIf .Columns(j).ColumnName = "entry_date_time" Then
+                            If IsDBNull(xt) Then
+                                xt = Now().Year & "-" & Now().Month & "-" & Now().Day & " " & Now().Hour & ":" & Now().Minute & ":" & Now().Second
+                            Else
+                                xt = DateAndTime.Year(xt) & "-" & DateAndTime.Month(xt) & "-" & DateAndTime.Day(xt) & " " & DateAndTime.Hour(xt) & ":" & DateAndTime.Minute(xt) & ":" & DateAndTime.Second(xt)
+                            End If
+                        End If
+                            dat = dat & "," & xt
                     Next
                     PrintLine(17, dat)
                 Next

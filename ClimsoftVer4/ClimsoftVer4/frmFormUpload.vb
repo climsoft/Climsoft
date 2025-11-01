@@ -182,7 +182,7 @@ Public Class frmFormUpload
             ' Convert path separater to SQL format
             fl = Strings.Replace(fl, "\", "/")
 
-            conns.ConnectionString = frmLogin.txtusrpwd.Text
+            conns.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conns.Open()
 
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
@@ -411,6 +411,7 @@ Public Class frmFormUpload
                     End If
 
                     frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & ",," & acquisitionType & "," & dataForm & "," & capturedBy
+                    'frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & dataForm & "," & capturedBy
                     PrintLine(122, frmrec & ",")
                     'PrintLine(122)
 
@@ -427,7 +428,7 @@ Public Class frmFormUpload
 
             Load_Files(fl, "observationinitial", 0, ",")
 
-            'strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm);"
+            'strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy);"
 
             'objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
 
@@ -435,13 +436,13 @@ Public Class frmFormUpload
             'objCmd.CommandTimeout = 0
             'objCmd.ExecuteNonQuery()
 
-            'If maxRows = 0 Then
-            '    txtDataTransferProgress1.Text = " No data found "
-            'Else
-            lblDataTransferProgress.ForeColor = Color.Red
+            If maxRows = 0 Then
+                txtDataTransferProgress1.Text = " No data found "
+            Else
+                lblDataTransferProgress.ForeColor = Color.Red
                 lblDataTransferProgress.Text = "Total " & maxRows & " Records Transfered" 'Data transfer complete !"
                 txtDataTransferProgress1.Text = ""
-            'End If
+            End If
             conns.Close()
         Catch ex As Exception
             FileClose(122)

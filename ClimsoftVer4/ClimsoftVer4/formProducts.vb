@@ -334,6 +334,7 @@ Public Class frmProducts
             With ds.Tables("products")
                 'MsgBox(.Rows.Count)
                 lstViewProducts.Clear()
+                cboProductsCategory.Items.Clear()
 
                 For i = 0 To .Rows.Count - 1
                     cboProductsCategory.Items.Add(.Rows(i).Item(0))

@@ -915,15 +915,16 @@ GROUP BY StationId, MM;"
                 Me.Cursor = Cursors.Default
                 Exit Sub
             Else
-                Dim msg_file, url, login, pwd, foldr, ftpmode As String
+                Dim msg_file, url, login, pwd, foldr, ftpmode, ftpPort As String
                 msg_file = txtCLIMAT.Text
                 url = ds.Tables("server").Rows(0).Item("ftpId")
                 login = ds.Tables("server").Rows(0).Item("userName")
                 pwd = ds.Tables("server").Rows(0).Item("password")
                 foldr = ds.Tables("server").Rows(0).Item("inputFolder")
                 ftpmode = ds.Tables("server").Rows(0).Item("ftpMode")
+                ftpPort = ds.Tables("server").Rows(0).Item("port")
 
-                If Not FTP_Execute(msg_file, url, login, pwd, foldr, ftpmode, "put") Then
+                If Not FTP_Execute(msg_file, url, login, pwd, foldr, ftpmode, "put", ftpPort) Then
                     MsgBox(ClsTranslations.GetTranslation("FTP Failure"))
                 Else
                     MsgBox(ClsTranslations.GetTranslation("Message File Sent"))
@@ -1634,7 +1635,7 @@ GROUP BY StationId, MM;"
 
     End Sub
 
-    Function FTP_Execute(ftpfile As String, ftp_host As String, usr As String, pwd As String, flder As String, ftpmode As String, ftpmethod As String) As Boolean
+    Function FTP_Execute(ftpfile As String, ftp_host As String, usr As String, pwd As String, flder As String, ftpmode As String, ftpmethod As String, portNumber As String) As Boolean
 
         FTP_Execute = True
 
@@ -1648,71 +1649,32 @@ GROUP BY StationId, MM;"
             local_folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
             Drive1 = System.IO.Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData))
 
+            'Create a script file
             Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
-            ftpscript = local_folder & "\ftp_climat.txt"
+            ftpscript = local_folder & "\ftp_" & ftpmethod & ".txt"
             FileOpen(1, ftpscript, OpenMode.Output)
 
-            Select Case ftpmethod
-                Case "get"
+            txtinputfile = System.IO.Path.GetFileName(ftpfile)
 
-                    'txtinputfile = local_folder & "\" & System.IO.Path.GetFileName(ftpfile)
+            ' Print FTP comands in the script file
+            Print(1, "open " & ftpmode & "://" & usr & ":" & pwd & "@" & ftp_host & ":" & portNumber & Chr(13) & Chr(10))
+            Print(1, "cd " & flder & Chr(13) & Chr(10))
+            Print(1, "asc" & Chr(13) & Chr(10))
+            Print(1, ftpmethod & " " & txtinputfile & Chr(13) & Chr(10))
+            Print(1, "close" & Chr(13) & Chr(10))
+            Print(1, "exit" & Chr(13) & Chr(10))
 
-                    ''MsgBox(ftpmode & " " & txtinputfile)
-
-                    'If ftpmode = "psftp" Then Print(1, "cd " & flder & Chr(13) & Chr(10)) 'Print #1, "cd " & in_folder
-
-                    'If ftpmode = "FTP" Then
-                    '    Print(1, "open " & ftp_host & Chr(13) & Chr(10))
-                    '    Print(1, usr & Chr(13) & Chr(10))
-                    '    Print(1, pwd & Chr(13) & Chr(10))
-                    '    Print(1, "cd " & flder & Chr(13) & Chr(10))
-                    '    Print(1, "bin" & Chr(13) & Chr(10))
-                    'End If
-                    'Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
-                    'Print(1, "bye" & Chr(13) & Chr(10))
-                Case "put"
-                    txtinputfile = System.IO.Path.GetFileName(ftpfile)
-                    If ftpmode = "psftp" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
-                    If ftpmode = "FTP" Then
-
-                        Print(1, "open ftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
-                        'Print(1, "cd " & flder & Chr(13) & Chr(10))
-                        'Print(1, "asc" & Chr(13) & Chr(10))
-                        'Print(111, "put" & " " & txtinputfile & Chr(13) & Chr(10))
-                        ''Print(1, "mv" & " " & fl & " " & binFile & Chr(13) & Chr(10))
-
-
-                        'Print(1, "open " & ftp_host & Chr(13) & Chr(10))
-                        'Print(1, usr & Chr(13) & Chr(10))
-                        'Print(1, pwd & Chr(13) & Chr(10))
-                        Print(1, "cd " & flder & Chr(13) & Chr(10))
-                        Print(1, "asc" & Chr(13) & Chr(10))
-                    End If
-                    Print(1, ftpmethod & " " & txtinputfile & Chr(13) & Chr(10))
-                    Print(1, "bye" & Chr(13) & Chr(10))
-
-
-            End Select
             FileClose(1)
-            ftpbatch = local_folder & "\ftp_climat.bat"
+
+            ' Create a Windows batch file
+            ftpbatch = local_folder & "\ftp_" & ftpmethod & ".bat"
 
             FileOpen(1, ftpbatch, OpenMode.Output)
 
             Print(1, "echo off" & Chr(13) & Chr(10))
             Print(1, Drive1 & Chr(13) & Chr(10))
             Print(1, "CD " & local_folder & Chr(13) & Chr(10))
-
-            If ftpmethod = "get" Then
-                'If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_bufr.txt" & Chr(13) & Chr(10))
-                ''If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-                'If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_bufr.txt" & Chr(13) & Chr(10))
-            Else
-                If ftpmode = "FTP" Then
-                    'Print(1, ftpmode & " -v -s:ftp_climat.txt" & Chr(13) & Chr(10))
-                    Print(1, Chr(34) & System.IO.Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /ini=nul /script=" & System.IO.Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
-                End If
-                If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_bufr.txt" & Chr(13) & Chr(10))
-            End If
+            Print(1, Chr(34) & System.IO.Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /script=" & System.IO.Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
 
             Print(1, "echo on" & Chr(13) & Chr(10))
             Print(1, "close" & Chr(13) & Chr(10))
