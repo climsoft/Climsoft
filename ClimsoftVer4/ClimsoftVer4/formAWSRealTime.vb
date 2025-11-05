@@ -20,6 +20,7 @@ Imports System.Security.Cryptography
 Imports System.Security.Cryptography.Pkcs
 Imports Google.Protobuf.WellKnownTypes
 Imports Org.BouncyCastle.Asn1
+
 Imports Org.BouncyCastle.Math
 
 Public Class formAWSRealTime
@@ -1828,7 +1829,10 @@ Err:
                 'If ftpmode = "PSFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
             Else
 
-                'If ftpmode = "SFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+                'If ftpmode = "FTP" Then Print(3, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+                'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+                If ftpmode = "SFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+
             End If
 
             Print(3, "echo on" & Chr(13) & Chr(10))
@@ -4199,7 +4203,17 @@ Err:
                     dat = dat & " "
                 Next
 
-                'Log_Errors(Len(dat))
+        ' Add leading zeroes to short data strings
+        CCITT_Binary = ""
+        binstr = ""
+        If Len(dat) < DataWidth / 8 Then
+            For kount = 1 To DataWidth - Len(dat) * 8
+                binstr = binstr & "0"
+            Next kount
+        Else
+            dat = Strings.Left(dat, DataWidth / 8)
+        End If
+
 
                 'For kount = 1 To DataWidth - Len(dat) * 8
                 '    binstr = binstr & "0"
@@ -6127,6 +6141,7 @@ Err:
                     Rmd = DateAndTime.Hour(utc) Mod ET 'Check when the encoding interval is reached @ Rmd is Zero 
 
                     If Rmd = 0 Then
+
                         'Log_Errors(dtt)
                         'update_tbltemplate(drws, dtt, EBufr, AbbrevE)
                         'EncodeBUFR = True
@@ -6140,6 +6155,7 @@ Err:
                             'Create CSV file for WIS2BOX
                             If CSV_E > 0 Then CSV4WIS2BOX(stn, dttdb, utc)
                         End If
+
 
                     End If
                 End If
@@ -6401,7 +6417,8 @@ Err:
         Try
             'FileOpen(14, csvwisb2box_file, OpenMode.Output)
 
-            sql = "SELECT wsi as WIGOS_ID,left(wmoid,2) AS WMO_Block,right(wmoid,3) AS WMO_Number, stationName as Station_Name, year(obsDatetime) as Datetime_Year,month(obsDatetime) As Datetime_Month,day(obsDatetime) as Datetime_Day,hour(obsDatetime)+1 as Datetime_Hour, '0' AS Datetime_Minute,latitude as Latitude, longitude as Longitude, elevation as Elevation, 
+           sql = "SELECT wsi as WIGOS_ID,left(wmoid,2) AS WMO_Block,right(wmoid,3) AS WMO_Number, stationName as Station_Name, year(obsDatetime) as Datetime_Year,month(obsDatetime) As Datetime_Month,day(obsDatetime) as Datetime_Day,hour(obsDatetime)+1 as Datetime_Hour, '0' AS Datetime_Minute,latitude as Latitude, longitude as Longitude, elevation as Elevation, 
+
                AVG(IF(describedBy = '884', value, NULL)) AS 'Pressure_Barometric', 
                AVG(IF(describedBy = '891', value, NULL)) AS 'Pressure_QNH', 
                AVG(IF(describedBy = '881', value, NULL)) AS 'Temperature_Drybulb', 
@@ -6415,7 +6432,9 @@ Err:
                AVG(IF(describedBy = '886', value, NULL)) AS 'WindGust_Speed',
                SUM(IF(describedBy = '928', value, NULL)) AS 'Evaporation_Total',
                SUM(IF(describedBy = '994', value, NULL)) AS 'Radiation_Total'
+
                FROM (SELECT wsi,wmoid,recordedFrom,StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value 
+
                FROM  station INNER JOIN observationfinal ON stationId = recordedFrom WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='884' OR  describedBy = '891' OR  describedBy = '881' OR  describedBy = '885' OR  describedBy = '895' 
                OR  describedBy = '893' OR  describedBy = '892' OR  describedBy = '888' OR  describedBy = '895' OR  describedBy = '897' OR  describedBy = '887' OR  describedBy = '886' OR  describedBy = '928' OR  describedBy = '994') 
                and (obsdatetime BETWEEN DATE_ADD('" & dttime & "', INTERVAL -1 HOUR ) AND '" & dttime & "') ORDER BY recordedFrom, obsDatetime) t 
@@ -6428,14 +6447,17 @@ Err:
 
             hdrs = "wsi_series,wsi_issuer,wsi_issue_number,wsi_local"
             recs = wsi_series & "," & wsi_issuer & "," & wsi_issue_number & "," & wsi_local
+
             For i = 1 To 46
                 hdrs = hdrs & "," & wishdrs(i)
                 recs = recs & "," & wisrecs(i)
             Next
 
             ' Create a file for WIS2BOX CSV data output
+
             'csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\WIGOS-" & WIGOS_id & "-" & DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & "-" & DateAndTime.Hour(timestamp) & ".csv"
             csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\WIGOS-" & WIGOS_id & "-" & DateAndTime.Year(UTC) & "-" & DateAndTime.Month(UTC) & "-" & DateAndTime.Day(UTC) & "-" & DateAndTime.Hour(UTC) & ".csv"
+
 
 
             FileOpen(14, csvwisb2box_file, OpenMode.Output)
@@ -6468,6 +6490,7 @@ Err:
             dawis.SelectCommand.CommandTimeout = 0
             dswis.Clear()
             dawis.Fill(dswis, "wis2box")
+
             'Log_Errors(sql)
             If dswis.Tables("wis2box").Rows.Count = 0 Then
                 Log_Errors("No Records found")
@@ -6478,6 +6501,7 @@ Err:
             obsv_name(0) = "WIGOS_ID"
             obsv_name(1) = "WMO_Block"
             obsv_name(2) = "WMO_Number"
+
             obsv_name(3) = "Station_Name"
             obsv_name(4) = "Station_Type"
             obsv_name(5) = "Datetime_Year"
@@ -6527,6 +6551,7 @@ Err:
             With dswis.Tables("wis2box")
                 For i = 0 To .Columns.Count - 1
                     For j = 0 To 49
+
                         If obsv_name(j) = .Columns(i).ColumnName Then
                             If Not IsDBNull(.Rows(0).Item(i)) Then
                                 obsv_Value(j) = .Rows(0).Item(i)

@@ -277,7 +277,8 @@ Partial Class formAWSRealTime
         Me.pnlControl.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlControl.Location = New System.Drawing.Point(0, 0)
         Me.pnlControl.Name = "pnlControl"
-        Me.pnlControl.Size = New System.Drawing.Size(191, 569)
+        Me.pnlControl.Size = New System.Drawing.Size(191, 606)
+
         Me.pnlControl.TabIndex = 0
         '
         'cmdHelp
@@ -369,7 +370,9 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.grpElements)
         Me.pnlProcessing.Location = New System.Drawing.Point(194, 29)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(757, 47)
+
+        Me.pnlProcessing.Size = New System.Drawing.Size(757, 199)
+
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
         '
@@ -1528,6 +1531,7 @@ Partial Class formAWSRealTime
         Me.pnlServers.Location = New System.Drawing.Point(191, 374)
         Me.pnlServers.Name = "pnlServers"
         Me.pnlServers.Size = New System.Drawing.Size(760, 150)
+
         Me.pnlServers.TabIndex = 2
         Me.pnlServers.Visible = False
         '
@@ -2431,7 +2435,9 @@ Partial Class formAWSRealTime
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(960, 569)
+
+        Me.ClientSize = New System.Drawing.Size(964, 606)
+
         Me.Controls.Add(Me.pnlProcessing)
         Me.Controls.Add(Me.pnlDataStructures)
         Me.Controls.Add(Me.pnlServers)
@@ -2695,6 +2701,8 @@ Partial Class formAWSRealTime
     Friend WithEvents txtPort As TextBox
     Friend WithEvents lblMport As Label
     Friend WithEvents txtMport As TextBox
+
     Friend WithEvents optCSV As RadioButton
     Friend WithEvents optBufr As RadioButton
+
 End Class
