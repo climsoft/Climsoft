@@ -17,7 +17,10 @@
 Imports System.IO
 Imports System.Net
 Imports System.Security.Cryptography
+Imports System.Security.Cryptography.Pkcs
 Imports Google.Protobuf.WellKnownTypes
+Imports Org.BouncyCastle.Asn1
+
 Imports Org.BouncyCastle.Math
 
 Public Class formAWSRealTime
@@ -83,7 +86,7 @@ Public Class formAWSRealTime
         load_Indicators()
         Timer1.Start()
         'Timer2.Start()
-        ClsTranslations.TranslateForm(Me)
+        'ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub cmdServers_Click(sender As Object, e As EventArgs) Handles cmdServers.Click
@@ -108,12 +111,12 @@ Public Class formAWSRealTime
         pnl.Visible = True
         pnl.Dock = DockStyle.Left
 
-        'todo. after the form has been refactored. This block should be removed from here
-        Me.Text = ClsTranslations.GetTranslation(topic)
-        lblRetrieveHrs.Text = ClsTranslations.GetTranslation(lblRetrieveHrs.Text)
-        lblEncodeHrs.Text = ClsTranslations.GetTranslation(lblEncodeHrs.Text)
-        lblNextProcess.Text = ClsTranslations.GetTranslation(lblNextProcess.Text)
-        ClsTranslations.TranslateForm(Me)
+        ''todo. after the form has been refactored. This block should be removed from here
+        'Me.Text = ClsTranslations.GetTranslation(topic)
+        'lblRetrieveHrs.Text = ClsTranslations.GetTranslation(lblRetrieveHrs.Text)
+        'lblEncodeHrs.Text = ClsTranslations.GetTranslation(lblEncodeHrs.Text)
+        'lblNextProcess.Text = ClsTranslations.GetTranslation(lblNextProcess.Text)
+        'ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub cmdSites_Click(sender As Object, e As EventArgs) Handles cmdSites.Click
@@ -273,6 +276,7 @@ Err:
                 txtmssUser.Text = ds.Tables("aws_mss").Rows(num).Item("userName")
                 txtMSSPW.Text = ds.Tables("aws_mss").Rows(num).Item("password")
                 lstFolders.SelectedItem = ds.Tables("aws_mss").Rows(num).Item("foldertype")
+                txtMport.Text = ds.Tables("aws_mss").Rows(num).Item("port")
 
             Case "sites"
                 txtSiteID.Text = ds.Tables("aws_sites").Rows(num).Item("SiteID")
@@ -286,6 +290,8 @@ Err:
                 chkGTSEncode.Checked = ds.Tables("aws_sites").Rows(num).Item("GTSEncode")
 
                 chkHrsAdjust.Checked = ds.Tables("aws_sites").Rows(num).Item("AdjustHr")
+                optBufr.Checked = ds.Tables("aws_sites").Rows(num).Item("BUFR")
+                optCSV.Checked = ds.Tables("aws_sites").Rows(num).Item("CSV")
 
                 If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("GTSHeader")) Then
                     txtGTSHeader.Text = ds.Tables("aws_sites").Rows(num).Item("GTSHeader")
@@ -349,6 +355,7 @@ Err:
                 ds.Tables(tbl).Rows(num).Item("userName") = txtmssUser.Text
                 ds.Tables(tbl).Rows(num).Item("password") = txtMSSPW.Text
                 ds.Tables(tbl).Rows(num).Item("foldertype") = lstFolders.SelectedItem
+                ds.Tables(tbl).Rows(num).Item("port") = txtMport.Text
 
             Case "pnlDataStructures"
                 'MsgBox(tbl & " " & strRec)
@@ -455,49 +462,57 @@ Err:
         lblConfirmInputPW.Visible = False
     End Sub
     Sub FormReset(pannel As String)
+        Try
+            Select Case pannel
+                Case "bss"
+                    txtBaseStationAddress.Clear()
+                    txtBaseStationFolder.Clear()
+                    'txtBasestationFTPMode.Text = ""
+                    txtBaseStationUser.Clear()
+                    txtBasestationFTPMode.Text = "FTP"
+                    txtPort.Text = "21"
+                    txtbaseStationPW.Clear()
+                    txtbaseStationPWConfirm.Clear()
+                    txtbaseStationPWConfirm.Visible = True
+                    lblConfirmInputPW.Visible = True
+                    txtbssNavigator.Clear()
 
-        Select Case pannel
-            Case "bss"
-                txtBaseStationAddress.Clear()
-                txtBaseStationFolder.Clear()
-                'txtBasestationFTPMode.Text = ""
-                txtBaseStationUser.Clear()
-                txtBasestationFTPMode.Text = "FTP"
-                txtPort.Text = "21"
-                txtbaseStationPW.Clear()
-                txtbaseStationPWConfirm.Clear()
-                txtbaseStationPWConfirm.Visible = True
-                lblConfirmInputPW.Visible = True
-                txtbssNavigator.Clear()
+                Case "mss"
+                    txtMSSAddress.Clear()
+                    txtMSSFolder.Clear()
+                    txtmssUser.Clear()
+                    txtmssFTPMode.Text = "FTP"
+                    txtMport.Text = "21"
+                    txtMSSPW.Clear()
+                    txtMSSConfirm.Clear()
+                    txtMSSConfirm.Visible = True
+                    lblmssConfirmPassword.Visible = True
+                    txtmssNavigator.Clear()
 
-            Case "mss"
-                txtMSSAddress.Clear()
-                txtMSSFolder.Clear()
-                txtmssUser.Clear()
-                txtmssFTPMode.Text = "FTP"
-                txtMSSPW.Clear()
-                txtMSSConfirm.Clear()
-                txtMSSConfirm.Visible = True
-                lblmssConfirmPassword.Visible = True
-                txtmssNavigator.Clear()
+                Case "sites"
+                    txtSiteID.Text = ""
+                    txtSiteName.Text = ""
+                    txtInFile.Clear()
+                    txtDataStructure.Text = ""
+                    txtFlag.Clear()
+                    chkOperational.Checked = True
+                    txtIP.Text = ""
+                    txtGTSHeader.Text = ""
+                    txtfilePrefix.Text = ""
+                    chkPrefix.Checked = False
 
-            Case "sites"
-                txtSiteID.Text = ""
-                txtSiteName.Text = ""
-                txtInFile.Clear()
-                txtDataStructure.Text = ""
-                txtFlag.Clear()
-                chkOperational.Checked = True
-                txtIP.Text = ""
-                txtGTSHeader.Text = ""
-                txtfilePrefix.Text = ""
-                chkPrefix.Checked = False
+                    chkHrsAdjust.Checked = False
+                    txtHrs.Text = ""
+                    chkGTSEncode.Checked = False
+                    txtUTCdiff.Text = ""
 
-                chkHrsAdjust.Checked = False
-                txtHrs.Text = ""
-                chkGTSEncode.Checked = False
-                txtUTCdiff.Text = ""
-        End Select
+                    optBufr.Checked = True
+                    optCSV.Checked = False
+
+            End Select
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub cmdmssReset_Click(sender As Object, e As EventArgs) Handles cmdMssReset.Click
@@ -632,7 +647,7 @@ Err:
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
-        On Error GoTo Err
+        'On Error GoTo Err
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
@@ -642,50 +657,73 @@ Err:
 
         'sql = "SELECT * FROM aws_sites"
         'ds = GetDataSet("aws_sites", sql)
+        Try
 
-        dsNewRow = ds.Tables("aws_sites").NewRow
-        dsNewRow.Item("SiteID") = txtSiteID.Text
-        dsNewRow.Item("SiteName") = txtSiteName.Text
-        dsNewRow.Item("InputFile") = txtInFile.Text
-        dsNewRow.Item("DataStructure") = txtDataStructure.Text
-        dsNewRow.Item("MissingDataFlag") = txtFlag.Text
-        dsNewRow.Item("awsServerIp") = txtIP.Text
-        dsNewRow.Item("GTSHeader") = txtGTSHeader.Text
-        dsNewRow.Item("FilePrefix") = txtfilePrefix.Text
-        dsNewRow.Item("AdjustHH") = Val(txtHrs.Text)
-        dsNewRow.Item("UTCDiff") = Val(txtUTCdiff.Text)
 
-        If chkOperational.Checked Then
-            dsNewRow.Item("OperationalStatus") = 1
-        Else
-            dsNewRow.Item("OperationalStatus") = 0
-        End If
-        If chkGTSEncode.Checked Then
-            dsNewRow.Item("GTSEncode") = 1
-        Else
-            dsNewRow.Item("GTSEncode") = 0
-        End If
+            dsNewRow = ds.Tables("aws_sites").NewRow
+            dsNewRow.Item("SiteID") = txtSiteID.Text
+            dsNewRow.Item("SiteName") = txtSiteName.Text
+            dsNewRow.Item("InputFile") = txtInFile.Text
+            dsNewRow.Item("DataStructure") = txtDataStructure.Text
+            dsNewRow.Item("MissingDataFlag") = txtFlag.Text
+            dsNewRow.Item("awsServerIp") = txtIP.Text
+            dsNewRow.Item("GTSHeader") = txtGTSHeader.Text
+            dsNewRow.Item("FilePrefix") = txtfilePrefix.Text
+            dsNewRow.Item("AdjustHH") = Val(txtHrs.Text)
+            dsNewRow.Item("UTCDiff") = Val(txtUTCdiff.Text)
 
-        If chkPrefix.Checked Then
-            dsNewRow.Item("chkPrefix") = 1
-        Else
-            dsNewRow.Item("chkPrefix") = 0
-        End If
+            If chkOperational.Checked Then
+                dsNewRow.Item("OperationalStatus") = 1
+            Else
+                dsNewRow.Item("OperationalStatus") = 0
+            End If
+            If chkGTSEncode.Checked Then
+                dsNewRow.Item("GTSEncode") = 1
+            Else
+                dsNewRow.Item("GTSEncode") = 0
+            End If
 
-        If chkHrsAdjust.Checked Then
-            dsNewRow.Item("AdjustHr") = 1
-        Else
-            dsNewRow.Item("AdjustHr") = 0
-        End If
+            If chkPrefix.Checked Then
+                dsNewRow.Item("chkPrefix") = 1
+            Else
+                dsNewRow.Item("chkPrefix") = 0
+            End If
 
-        'Add a new record to the data source table
+            If chkHrsAdjust.Checked Then
+                dsNewRow.Item("AdjustHr") = 1
+            Else
+                dsNewRow.Item("AdjustHr") = 0
+            End If
 
-        ds.Tables("aws_sites").Rows.Add(dsNewRow)
-        da.Update(ds, "aws_sites")
-        FormReset("sites")
-        Exit Sub
-Err:
-        MsgBox(Err.Number & " : " & Err.Description)
+            'Add a new record to the data source table
+
+            'ds.Tables("aws_sites").Rows.Add(dsNewRow)
+            'da.Update(ds, "aws_sites")
+            'FormReset("sites")
+
+            'Added fields for WIS2BOX Encoding
+            If optBufr.Checked Then
+                dsNewRow.Item("BUFR") = 1
+            Else
+                dsNewRow.Item("BUFR") = 0
+            End If
+            If optCSV.Checked Then
+                dsNewRow.Item("CSV") = 1
+            Else
+                dsNewRow.Item("CSV") = 0
+            End If
+
+            ds.Tables("aws_sites").Rows.Add(dsNewRow)
+            da.Update(ds, "aws_sites")
+            FormReset("sites")
+
+
+        Catch Err As Exception
+            MsgBox(Err.HResult & " : " & Err.Message)
+        End Try
+        '        Exit Sub
+        'Err:
+        '        MsgBox(Err.Number & " : " & Err.Description)
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -719,21 +757,28 @@ Err:
         Dim recUpdate As New dataEntryGlobalRoutines
         Dim sqlr As String
         Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim bufrState, csvState As Integer
 
-        'Try
+        If optBufr.Checked = True Then
+            bufrState = 1
+            csvState = 0
+        Else
+            bufrState = 0
+            csvState = 1
+        End If
 
         sqlr = "UPDATE aws_sites set SiteName = '" & txtSiteName.Text & "', InputFile= '" & txtInFile.Text & "',FilePrefix ='" & txtfilePrefix.Text & "',chkPrefix = " & chkPrefix.CheckState & ",DataStructure = '" & txtDataStructure.Text & "',UTCDiff = '" & txtUTCdiff.Text & "',AdjustHH = '" & txtHrs.Text & "',AdjustHr = '" & chkHrsAdjust.CheckState &
-                   "',MissingDataFlag = '" & txtFlag.Text & "',awsServerIP ='" & txtIP.Text & "',OperationalStatus = " & chkOperational.CheckState & ",GTSEncode = " & chkGTSEncode.CheckState & ",GTSHeader = '" & txtGTSHeader.Text & "' WHERE SiteID = '" & txtSiteID.Text & "';"
+                   "',MissingDataFlag = '" & txtFlag.Text & "',awsServerIP ='" & txtIP.Text & "',OperationalStatus = " & chkOperational.CheckState & ",GTSEncode = " & chkGTSEncode.CheckState & ",GTSHeader = '" & txtGTSHeader.Text & "',BUFR = " & bufrState & ",CSV = " & csvState & " WHERE SiteID = '" & txtSiteID.Text & "';"
 
         qry = New MySql.Data.MySqlClient.MySqlCommand(sqlr, dbconn)
 
         Try
-                qry.ExecuteNonQuery()
+            qry.ExecuteNonQuery()
             MsgBox("Record successfully Updated")
             'PopulateForm("sites", txtSitesNavigator, rec)
         Catch rx As Exception
-                MsgBox(rx.Message)
-            End Try
+            MsgBox(rx.Message)
+        End Try
 
         '    ds.Tables("aws_sites").Rows(rec).Item("SiteID") = txtSiteID.Text
         '             ds.Tables("aws_sites").Rows(rec).Item("SiteName") = txtSiteName.Text
@@ -853,19 +898,19 @@ Err:
 
         Try
 
-            sql0 = "CREATE TABLE `" & txtStrName.Text & "` " & _
-                   "( " & _
-                    "`Cols` INT NOT NULL, " & _
-                    "`Element_abbreviation` VARCHAR(20) NULL DEFAULT NULL, " & _
-                    "`Element_Name` VARCHAR(20) NULL DEFAULT NULL, " & _
-                    "`Element_Details` VARCHAR(25) NULL DEFAULT NULL, " & _
-                    "`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
-                    "`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
-                    "`unit` VARCHAR(15) NULL DEFAULT NULL, " & _
-                    "`lower_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
-                    "`upper_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
-                    "`obsv` VARCHAR(25) NULL DEFAULT NULL, " & _
-                    "UNIQUE KEY `identification` (`Cols`) " & _
+            sql0 = "CREATE TABLE `" & txtStrName.Text & "` " &
+                   "( " &
+                    "`Cols` INT NOT NULL, " &
+                    "`Element_abbreviation` VARCHAR(20) NULL DEFAULT NULL, " &
+                    "`Element_Name` VARCHAR(20) NULL DEFAULT NULL, " &
+                    "`Element_Details` VARCHAR(25) NULL DEFAULT NULL, " &
+                    "`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL, " &
+                    "`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL, " &
+                    "`unit` VARCHAR(15) NULL DEFAULT NULL, " &
+                    "`lower_limit` VARCHAR(10) NULL DEFAULT NULL, " &
+                    "`upper_limit` VARCHAR(10) NULL DEFAULT NULL, " &
+                    "`obsv` VARCHAR(25) NULL DEFAULT NULL, " &
+                    "UNIQUE KEY `identification` (`Cols`) " &
                  ") COLLATE='utf8_general_ci';"
 
             comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
@@ -1344,7 +1389,7 @@ Err:
         FileOpen(30, fl, OpenMode.Input)
         FileOpen(31, fl_wsi, OpenMode.Input)
 
-        Dim dts(1000), subs(1000), Tdone, Tsubs, subst, yy, mm, dd, hh,mn As String
+        Dim dts(1000), subs(1000), Tdone, Tsubs, subst, yy, mm, dd, hh, mn As String
 
         ' Encode Bufr data for subsets having no WSI
 
@@ -1679,7 +1724,10 @@ Err:
 
                     FileClose(1)
                     FileOpen(1, ftpscript, OpenMode.Output)
-                    If ftpmode = "psftp" Then Print(1, "cd " & flder & Chr(13) & Chr(10)) 'Print #1, "cd " & in_folder
+                    'If ftpmode = "SFTP" Then
+                    '    Print(1, "open SFTP://" & usr & ":" & pwd & "@" & ftp_host & ":" & portNumber & Chr(13) & Chr(10))
+                    '    Print(1, "cd " & flder & Chr(13) & Chr(10)) 'Print #1, "cd " & in_folder
+                    'End If
 
                     If ftpmode = "FTP" Then
                         'Print(1, "open " & ftp_host & Chr(13) & Chr(10))
@@ -1693,12 +1741,9 @@ Err:
                         Print(1, "cd " & flder & Chr(13) & Chr(10))
                         'Print(1, "asc" & Chr(13) & Chr(10))
 
-                        ' open FTP: //awsinam:aws#99@aws.inam.gov.mz
-                        'cd /
-                        'cd / Mapulanguene
-                        'get *20220530*
-                        'Close()
-                        'Exit
+                    ElseIf ftpmode = "SFTP" Then
+                        Print(1, "open SFTP://" & usr & ":" & pwd & "@" & ftp_host & ":" & portNumber & Chr(13) & Chr(10))
+                        Print(1, "cd " & flder & Chr(13) & Chr(10))
                     End If
 
                     ' Check and consider where file prefix is used
@@ -1728,15 +1773,29 @@ Err:
                 Case "put"
                     FileClose(1)
                     FileOpen(2, ftpscript, OpenMode.Output)
-                    If ftpmode = "psftp" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
+
                     If ftpmode = "FTP" Then
-                        Print(2, "open " & ftp_host & Chr(13) & Chr(10))
-                        Print(2, usr & Chr(13) & Chr(10))
-                        Print(2, pwd & Chr(13) & Chr(10))
-                        Print(2, "cd " & flder & Chr(13) & Chr(10))
-                        Print(2, "bin" & Chr(13) & Chr(10))
+                        ' Improved FTP method that uses WinSCP commands and works even in Filezilla servers
+                        Print(1, "open FTP://" & usr & ":" & pwd & "@" & ftp_host & ":" & portNumber & Chr(13) & Chr(10))
+                        Print(1, "cd " & flder & Chr(13) & Chr(10))
+
+                    ElseIf ftpmode = "SFTP" Then
+                        Print(1, "open SFTP://" & usr & ":" & pwd & "@" & ftp_host & ":" & portNumber & Chr(13) & Chr(10))
+                        Print(1, "cd " & flder & Chr(13) & Chr(10))
                     End If
-                    Print(2, "quote PASV" & Chr(13) & Chr(10))
+
+
+
+                    'If ftpmode = "SFTP" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
+                    'If ftpmode = "FTP" Then
+                    '    Print(2, "open " & ftp_host & Chr(13) & Chr(10))
+                    '    Print(2, usr & Chr(13) & Chr(10))
+                    '    Print(2, pwd & Chr(13) & Chr(10))
+                    '    Print(2, "cd " & flder & Chr(13) & Chr(10))
+                    '    Print(2, "bin" & Chr(13) & Chr(10))
+                    'End If
+                    'Print(2, "quote PASV" & Chr(13) & Chr(10))
+
                     Print(2, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
                     Print(2, "bye" & Chr(13) & Chr(10))
                     FileClose(2)
@@ -1753,7 +1812,9 @@ Err:
             Print(3, "echo off" & Chr(13) & Chr(10))
             Print(3, Drive1 & Chr(13) & Chr(10))
             Print(3, "CD " & local_folder & Chr(13) & Chr(10))
-            Print(3, Chr(34) & Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /ini=nul /script=" & Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
+            'Print(3, Chr(34) & Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /ini=nul /script=" & Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
+
+            Print(3, Chr(34) & Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /script=" & Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
 
             ' Improved FTP method that uses WinSCP commands and works even in Filezilla servers
             ' echo off
@@ -1767,9 +1828,11 @@ Err:
                 'If ftpmode = "FTP" Then Print(3, ftpmode & " -i -s: ftp_aws.txt" & Chr(13) & Chr(10))
                 'If ftpmode = "PSFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
             Else
+
                 'If ftpmode = "FTP" Then Print(3, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
                 'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
                 If ftpmode = "SFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+
             End If
 
             Print(3, "echo on" & Chr(13) & Chr(10))
@@ -1868,7 +1931,7 @@ Err:
             '    Return True
             'Else
             Log_Errors(ex.HResult & "-" & ex.Message & " at FTP_Call")
-                FTP_Call = False
+            FTP_Call = False
             'End If
 
         End Try
@@ -1930,6 +1993,7 @@ Err:
                             ftpmode = .Rows(0).Item("ftpMode")
                             usr = .Rows(0).Item("userName")
                             pwd = .Rows(0).Item("password")
+                            portNo = .Rows(0).Item("port")
                             'Log_Errors(flder)
                         End With
                     End If
@@ -1943,7 +2007,7 @@ Err:
     End Function
 
     Function FTP_Put(fl As String) As Boolean
-        Dim Lflder, Rflder, Drv, ftpmode, usr, pwd, ftpscript, ftpbatch, binFile As String
+        Dim Lflder, Rflder, Drv, ftpmode, usr, pwd, ftpscript, ftpbatch, binFile, portNumber As String
         Dim rf As DataSet
 
         Try
@@ -1968,26 +2032,35 @@ Err:
                     ftpmode = .Rows(0).Item("ftpMode")
                     usr = .Rows(0).Item("userName")
                     pwd = .Rows(0).Item("password")
+                    portNumber = .Rows(0).Item("port")
+
                 End With
             End If
             binFile = Strings.Replace(fl, "tmp", "f") ' Create temporary binary file for convinience of uploading to MSS
+
             FileOpen(111, ftpscript, OpenMode.Output)
-            'If ftpmode = "psftp" Then Print(2, "cd " & Rflder & Chr(13) & Chr(10))
+
             If ftpmode = "FTP" Then
-                'Print(111, "open " & ftp_host & Chr(13) & Chr(10))
-                Print(111, "open ftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
-                'Print(111, usr & Chr(13) & Chr(10))
-                'Print(111, pwd & Chr(13) & Chr(10))
+                Print(111, "open FTP://" & usr & ":" & pwd & "@" & ftp_host & ":" & portNumber & Chr(13) & Chr(10))
+                'Print(111, "cd " & flder & Chr(13) & Chr(10))
+
+                'Print(111, "open ftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
+
             ElseIf ftpmode = "SFTP" Then
-                Print(111, "open sftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
+                'Print(111, "open sftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
+                Print(111, "open SFTP://" & usr & ":" & pwd & "@" & ftp_host & ":" & portNumber & Chr(13) & Chr(10))
             End If
+
             Print(111, "cd " & Rflder & Chr(13) & Chr(10))
             Print(111, "bin" & Chr(13) & Chr(10))
-            'Print(111, "quote PASV" & Chr(13) & Chr(10))
-            Print(111, "put" & " " & fl & Chr(13) & Chr(10))
-            'Print(111, "rename" & " " & fl & " " & binFile & Chr(13) & Chr(10))
-            Print(111, "mv" & " " & fl & " " & binFile & Chr(13) & Chr(10))
-            'Print(111, "bye" & Chr(13) & Chr(10))
+
+            'Print(111, "put" & " " & fl & Chr(13) & Chr(10))
+            Print(111, "put" & " " & binFile & Chr(13) & Chr(10))
+
+            ''Print(111, "rename" & " " & fl & " " & binFile & Chr(13) & Chr(10))
+            'Print(111, "mv" & " " & fl & " " & binFile & Chr(13) & Chr(10))
+            ''Print(111, "bye" & Chr(13) & Chr(10))
+
             Print(111, "close" & Chr(13) & Chr(10))
             Print(111, "exit" & Chr(13) & Chr(10))
             FileClose(111)
@@ -2000,11 +2073,8 @@ Err:
             Print(112, "echo off" & Chr(13) & Chr(10))
             Print(112, Drv & Chr(13) & Chr(10))
             Print(112, "CD " & Lflder & Chr(13) & Chr(10))
-            'If ftpmode = "FTP" Then Print(112, ftpmode & " -v -s:ftp_put.txt" & Chr(13) & Chr(10))
-            'If ftpmode = "PSFTP" Then Print(112, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_put.txt" & Chr(13) & Chr(10))
-            'Print(112, "echo on" & Chr(13) & Chr(10))
-            'Print(112, "EXIT" & Chr(13) & Chr(10))
-            Print(112, Chr(34) & Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /ini=nul /script=" & Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
+
+            Print(112, Chr(34) & Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /script=" & Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
             Print(112, "echo on" & Chr(13) & Chr(10))
             Print(112, "close" & Chr(13) & Chr(10))
             Print(112, "exit" & Chr(13) & Chr(10))
@@ -2133,17 +2203,22 @@ Err:
 
     '    End Try
     'End Sub
-    Function GTSEncode(nat_id As String) As Boolean
+    Function GTSEncode(nat_id As String, ByRef BUFR As Boolean) As Boolean
         Dim grs As DataSet
         GTSEncode = False
+        BUFR = False
         Try
-            sql = "Select * from aws_sites where siteID ='" & nat_id & "';"
-            grs = GetDataSet("aws_sites", sql)
-            With grs.Tables("aws_sites")
+            sql = "Select GTSEncode,BUFR from aws_sites where siteID ='" & nat_id & "';"
+            grs = GetDataSet("sites", sql)
+            With grs.Tables("sites")
                 If .Rows.Count <> 0 Then
-                    If .Rows(0).Item("GTSEncode") = 1 Or .Rows(0).Item("GTSEncode") Then Return True
+                    If .Rows(0).Item("GTSEncode") = 1 Or .Rows(0).Item("GTSEncode") Then
+                        If .Rows(0).Item("BUFR") = 1 Then BUFR = True
+                        Return True
+                    End If
                 End If
             End With
+
         Catch ex As Exception
             Log_Errors(ex.Message)
             Return False
@@ -2337,13 +2412,13 @@ Err:
 
                     End If
 
-                    If Not IsDBNull(.Rows(i).Item("unit")) Then
-                        units = .Rows(i).Item("unit")
-                        If units = "knots" Then obs = Val(obs) / 2
-                        If units = "HPa" Then obs = Val(obs) * 100
-                    End If
+                    'If Not IsDBNull(.Rows(i).Item("unit")) Then
+                    '    units = .Rows(i).Item("unit")
+                    '    If Strings.LCase(units) = "knots" Then obs = Val(obs) / 2
+                    '    'If Strings.LCase(units) = "hpa" Then obs = Val(obs) * 100
+                    'End If
 
-                    sql = "INSERT INTO observationfinal " &
+                    sql = "REPLACE INTO observationfinal " &
                         "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue,flag, qcStatus) " &
                         "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "','" & flgs & "','1'" & ";"
 
@@ -2405,11 +2480,12 @@ Err:
         End Try
 
     End Function
-    Sub update_tbltemplate(aws_obsv As DataRow, Date_Time As String, Bufr_E() As String, Abbrev_E() As String)
+    Sub update_tbltemplate(aws_obsv As DataRow, Date_Time As String, Bufr_E() As String, Abbrev_E() As String, Unit_E() As String)
         'Dim qry As MySql.Data.MySqlClient.MySqlCommand
         'Dim dbconw As New MySql.Data.MySqlClient.MySqlConnection
         'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
+        'Log_Errors(Date_Time)
         Dim trs As New DataSet
         Dim sql, yy, mm, dd, hh, Tprd, min, ss, Seq_Desc, tt_aws, InitValue As String
         Dim stn_typ As Integer
@@ -2507,6 +2583,8 @@ Err:
                         .Rows(i).Item("Observation") = lon
                     ElseIf .Rows(i).Item("Bufr_Element") = "007030" Then
                         .Rows(i).Item("Observation") = elv
+                    ElseIf .Rows(i).Item("Bufr_Element") = "007031" Then
+                        .Rows(i).Item("Observation") = Val(elv) + 1.25 ' Barometric height above seal level
                     ElseIf .Rows(i).Item("Bufr_Element") = "004001" Then
                         .Rows(i).Item("Observation") = yy 'obsv = yy
                     ElseIf .Rows(i).Item("Bufr_Element") = "004002" Then
@@ -2527,7 +2605,7 @@ Err:
                 Next i
             End With
 
-            If txtTemplate.Text = "TM_307080" Then ' Use the Synoptic data template
+            If txtTemplate.Text = "tm_307080" Then ' Use the Synoptic data template
 
                 ''Initialize Cloud Replications
                 ''Delayed replication of cloud layers above station level 4 descriptors for a maximum of 4 layers
@@ -2570,6 +2648,13 @@ Err:
                 sql = String.Empty
                 For i = 0 To Bufr_E.Count - 1
                     If Len(Bufr_E(i).ToString) > 0 And aws_obsv(i) <> flg Then
+
+                        ' Convert Wind Speed to SI units
+                        If Strings.LCase(Unit_E(i)) = "knots" Then aws_obsv(i) = Val(aws_obsv(i)) / 2
+
+                        ' Convert Pressure to SI units
+                        If Strings.LCase(Unit_E(i)) = "hpa" Then aws_obsv(i) = Val(aws_obsv(i)) * 100
+
                         sql = sql & "update bufr_crex_data set observation = '" & aws_obsv(i) & "' where Bufr_Element='" & Bufr_E(i) & "';"
                     End If
                 Next
@@ -2596,7 +2681,9 @@ Err:
 
                 'Exit Sub
 
-            ElseIf txtTemplate.Text = "TM_307091" Or txtTemplate.Text = "TM_307092" Then ' AWS Templates
+
+
+            ElseIf txtTemplate.Text = "tm_307091" Or txtTemplate.Text = "tm_307092" Then ' AWS Templates
                 ' Initialize Replication factors
                 sql = "update bufr_crex_data SET Observation = '0', selected = '1' WHERE Bufr_Element = '031000';"
                 Update_data(sql)
@@ -2631,6 +2718,13 @@ Err:
                 sql = String.Empty
                 For i = 0 To Bufr_E.Count - 1
                     If Len(Bufr_E(i).ToString) > 0 And aws_obsv(i) <> flg Then
+
+                        ' Convert Wind Speed to SI units
+                        If Strings.LCase(Unit_E(i)) = "knots" Then aws_obsv(i) = Val(aws_obsv(i)) / 2
+
+                        ' Convert Pressure to SI units
+                        If Strings.LCase(Unit_E(i)) = "hpa" Then aws_obsv(i) = Val(aws_obsv(i)) * 100
+
                         sql = sql & "update bufr_crex_data set selected = '1', observation = '" & aws_obsv(i) & "' where Bufr_Element='" & Bufr_E(i) & "';"
                     End If
                 Next
@@ -2685,7 +2779,7 @@ Err:
                 Log_Errors("Cant' Compute Bufr Data Section")  'MsgBox "Cant' Compute Bufr Data Section"
             Else
 
-                '' Update Subset Number
+                ' Update Subset Number
                 'Bufr_Subst = Bufr_Subst + 1
 
                 '' Append Data in Section 4 with the data computed from current subset
@@ -2700,6 +2794,7 @@ Err:
                 Else
                     BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
                     Bufr_Subst = Bufr_Subst + 1
+                    'Log_Errors(Bufr_Subst)
                     PrintLine(30, Date_Time & "," & BufrSection4)
                 End If
 
@@ -3024,6 +3119,7 @@ Err:
             conndb.Close()
 
         Catch ex As Exception
+            'Log_Errors(sql)
             Log_Errors(ex.Message & " at update_data")
         End Try
     End Sub
@@ -3985,6 +4081,9 @@ Err:
                     If Not IsDBNull(.Rows(i).Item("Observation")) And Len(.Rows(i).Item("Observation")) <> 0 Then
                         If Len(.Rows(i).Item("Observation")) > 0 Then
                             bufrdata = Bufr_Data(.Rows(i).Item("Bufr_Unit"), .Rows(i).Item("Bufr_Scale"), .Rows(i).Item("Bufr_RefValue"), .Rows(i).Item("Bufr_DataWidth_Bits"), .Rows(i).Item("Observation"), .Rows(i).Item("Bufr_Data"))
+
+                            'bufrdata = Bufr_Data(.Rows(i).Item("Bufr_Unit"), .Rows(i).Item("Bufr_Scale"), .Rows(i).Item("Bufr_RefValue"), .Rows(i).Item("Bufr_DataWidth_Bits"), .Rows(i).Item("Observation"), .Rows(i).Item("Bufr_Data"))
+
                             sql = sql & "UPDATE " & tt_aws & " SET Bufr_Data = '" & bufrdata & "' WHERE Nos = '" & RecNo & "';"
 
                         End If
@@ -4055,6 +4154,8 @@ Err:
 
             Bufr_Data = CCITT_Binary(rs, dat, Bufr_DataWidth)
 
+            'Bufr_Data = CCITT_Binary(rs, dat, Strings.Len(dat) * 8)
+
             Exit Function
         End If
 
@@ -4090,7 +4191,17 @@ Err:
         Dim dat1 As String
         Dim chr1 As String
         Dim chr2 As String
-        Dim kount As Integer
+        Dim kount, diff As Integer
+        Try
+            ' Add leading zeroes to short data strings
+            CCITT_Binary = ""
+            binstr = ""
+
+            If Len(dat) < DataWidth / 8 Then
+                diff = DataWidth / 8 - Len(dat)
+                For kount = 1 To diff
+                    dat = dat & " "
+                Next
 
         ' Add leading zeroes to short data strings
         CCITT_Binary = ""
@@ -4103,28 +4214,41 @@ Err:
             dat = Strings.Left(dat, DataWidth / 8)
         End If
 
-        ' Loop the entire data string
-        'Log_Errors(dat)
-        For kount = 1 To Len(dat)
 
-            With rs0.Tables("ccitt")
+                'For kount = 1 To DataWidth - Len(dat) * 8
+                '    binstr = binstr & "0"
+                'Next kount
+            Else
+                dat = Strings.Left(dat, DataWidth / 8)
+            End If
 
-                For i = 0 To .Rows.Count - 1
-                    dat1 = Mid(dat, kount, 1)
-                    If dat1 = " " Then dat1 = "SP"
-                    If dat1 = .Rows(i).Item("Characters") Then
-                        chr1 = .Rows(i).Item("MostSignificant")
-                        chr2 = .Rows(i).Item("LeastSignificant")
-                        binstr = binstr & Decimal_Binary(Val(chr1), 4) & Decimal_Binary(Val(chr2), 4)
-                        'Log_Errors(dat1 & " " & chr1 & "-" & chr2 & " " & binstr)
-                        Exit For
-                    End If
-                Next
+            ' Loop the entire data string
+            'Log_Errors(dat)
+            For kount = 1 To Len(dat)
 
-            End With
-        Next kount
-        ' MsgBox kount & " " & DataWidth & " " & Len(binstr)
-        CCITT_Binary = binstr
+                With rs0.Tables("ccitt")
+
+                    For i = 0 To .Rows.Count - 1
+                        dat1 = Strings.Mid(dat, kount, 1)
+                        If dat1 = " " Then dat1 = "SP"
+                        If dat1 = .Rows(i).Item("Characters") Then
+                            chr1 = .Rows(i).Item("MostSignificant")
+                            chr2 = .Rows(i).Item("LeastSignificant")
+
+                            binstr = binstr & Decimal_Binary(Val(chr1), 4) & Decimal_Binary(Val(chr2), 4)
+                            'Log_Errors(dat1 & " " & chr1 & "-" & chr2 & " " & binstr)
+                            Exit For
+                        End If
+                    Next
+
+                End With
+            Next kount
+            ' MsgBox kount & " " & DataWidth & " " & Len(binstr)
+            CCITT_Binary = binstr
+            'Log_Errors(dat & " " & DataWidth & " " & binstr)
+        Catch ex As Exception
+            Log_Errors(CCITT_Binary & " " & dat)
+        End Try
     End Function
 
     Function AWS_Bufr_Section4(sql As String, ByRef binary_data As String, tt_aws As String) As Boolean
@@ -4513,8 +4637,8 @@ Err:
         ValidFile = False
 
         'AWS_BUFR_File = System.IO.Path.GetFullPath(Application.StartupPath & "\data\" & msg_file & Format(1, "0000") & ".f")
-        'AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
-        AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".tmp"
+        AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
+        'AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".tmp"
 
         BUFR_octet_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_octets.txt"
 
@@ -5528,9 +5652,13 @@ Err:
         If chkGTSEncode.Checked Then
             lblUTCdiff.Visible = True
             txtUTCdiff.Visible = True
+            optBufr.Visible = True
+            optCSV.Visible = True
         Else
             lblUTCdiff.Visible = False
             txtUTCdiff.Visible = False
+            optBufr.Visible = False
+            optCSV.Visible = False
         End If
     End Sub
 
@@ -5698,11 +5826,10 @@ Err:
 
                             If Not IsDBNull(.Rows(k).Item("Climsoft_Element")) And Len(.Rows(k).Item("Climsoft_Element").ToString) <> 0 Then obsv_name(k) = .Rows(k).Item("Climsoft_Element")
                             If Not IsDBNull(.Rows(k).Item("Bufr_Element")) And Len(.Rows(k).Item("Bufr_Element").ToString) <> 0 Then Bufr(k) = .Rows(k).Item("Bufr_Element")
-                            If Not IsDBNull(.Rows(k).Item("Unit")) And Len(.Rows(k).Item("Unit").ToString) <> 0 Then Units(k) = .Rows(k).Item("Unit")
+                            If Not IsDBNull(.Rows(k).Item("unit")) And Len(.Rows(k).Item("unit").ToString) <> 0 Then Units(k) = .Rows(k).Item("unit")
                             If Not IsDBNull(.Rows(k).Item("Lower_limit")) And Len(.Rows(k).Item("Lower_limit").ToString) <> 0 Then L_limit(k) = .Rows(k).Item("Lower_limit")
                             If Not IsDBNull(.Rows(k).Item("Upper_limit")) And Len(.Rows(k).Item("Upper_limit").ToString) <> 0 Then U_limit(k) = .Rows(k).Item("Upper_limit")
                             If Not IsDBNull(.Rows(k).Item("Element_Abbreviation")) And Len(.Rows(k).Item("Element_Abbreviation").ToString) <> 0 Then E_Abbrev(k) = .Rows(k).Item("Element_Abbreviation")
-
                         Next
 
                     End With
@@ -5917,12 +6044,14 @@ Err:
 
     Function update_db(drws As DataRow, colmn As Integer, stn As String, flg As String, AWSsite As String, elm() As String, unitt() As String, Llimit() As String, Ulimit() As String, EBufr() As String, AbbrevE() As String) As Boolean
         Dim dtt, dttdb, x, aws_sql_input_file As String
-        Dim GMTDiff, ET, Rmd As Integer
+        Dim GMTDiff, ET, Rmd, BUFR_E, CSV_E As Integer
+        Dim bufrCode As Boolean
+
 
         Try
 
             dtt = Get_DateStamp(AWSsite, drws)
-            'Log_Errors(dtt)
+
             ' Check for valid date
             If Not IsDate(dtt) Then Return False
 
@@ -5943,8 +6072,12 @@ Err:
 
             For j = 0 To colmn - 1
 
-                '' Convert wind speed to SI units
+                '' Convert Wind Speed to SI units
                 'If Strings.LCase(unitt(j)) = "knots" Then drws(j) = Val(drws(j)) / 2
+
+                '' Convert Pressure to SI units
+                'If Strings.LCase(unitt(j)) = "hpa" Then drws(j) = Val(drws(j)) * 100
+
 
                 ' Skip if value is a missing data flag
                 If drws(j) = flg Then Continue For
@@ -5981,32 +6114,49 @@ Err:
 
             ' Update TDCF Template and Encode to BUFR for GTS Transmission
             ' Test if any BUFR Element is set
-            Kount = 0
-            For i = 0 To EBufr.Count - 1
-                If Len(EBufr(i).ToString) > 0 Then Kount = Kount + 1
+
+            'Initialize the BUFR Elements and Climsoft Elements (for CSV encoding) counts
+            BUFR_E = 0
+            CSV_E = 0
+            For i = 0 To EBufr.Count - 1  'BUFR and CSV Elements have the same list size
+                If Len(EBufr(i).ToString) > 0 Then BUFR_E = BUFR_E + 1
+                If Len(elm(i).ToString) > 0 Then CSV_E = CSV_E + 1
             Next
 
-            If GTSEncode(nat_id) And Val(txtPeriod.Text) <> 999 And Kount > 0 And DateAndTime.Minute(dtt) = 0 Then
+            If GTSEncode(nat_id, bufrCode) And Val(txtPeriod.Text) <> 999 And Kount > 0 And DateAndTime.Minute(dtt) = 0 Then
+                'If GTSEncode(nat_id, bufrCode) And Val(txtPeriod.Text) <> 999 And DateAndTime.Minute(dtt) = 0 Then
                 ' Check records due for Encoding
-
                 'Log_Errors(DateDiff("h", dttdb, Now()) & " <=  " & CInt(txtEncode.Text))
 
-                If DateDiff("h", dttdb, Now()) <= CInt(txtEncode.Text) Then
-                    ' Convert time to UTC
+                'If DateDiff("h", dttdb, Now()) <= CInt(txtEncode.Text) Then
+                If DateDiff("h", Now(), dttdb) < CInt(txtEncode.Text) Then
+                    ' Log_Errors(dttdb & " <=> " & Now() & "  " & DateDiff("h", dttdb, Now()))
 
-                    dtt = DateAdd("h", -1 * CInt(UTCDiff), dtt)
+                    ' Convert time to UTC
+                    Dim utc As String
+                    utc = DateAdd("h", -1 * CInt(UTCDiff), dtt)
 
                     'Compute Encoding interval hours 
                     ET = Math.Round(Val(txtInterval.Text) / 60)
-                    Rmd = DateAndTime.Hour(dtt) Mod ET 'Check when the encoding interval is reached @ Rmd is Zero 
+                    Rmd = DateAndTime.Hour(utc) Mod ET 'Check when the encoding interval is reached @ Rmd is Zero 
 
                     If Rmd = 0 Then
 
-                        update_tbltemplate(drws, dtt, EBufr, AbbrevE)
-                        EncodeBUFR = True
+                        'Log_Errors(dtt)
+                        'update_tbltemplate(drws, dtt, EBufr, AbbrevE)
+                        'EncodeBUFR = True
+                        'Log_Errors(EBufr.Count)
+                        If bufrCode Then
+                            If BUFR_E > 0 Then
+                                update_tbltemplate(drws, utc, EBufr, AbbrevE, unitt)
+                                EncodeBUFR = True
+                            End If
+                        Else
+                            'Create CSV file for WIS2BOX
+                            If CSV_E > 0 Then CSV4WIS2BOX(stn, dttdb, utc)
+                        End If
 
-                        'Create CSV file for WIS2BOX
-                        'CSV4WIS2BOX(stn, dtt)
+
                     End If
                 End If
             End If
@@ -6018,6 +6168,7 @@ Err:
             Return False
         End Try
     End Function
+
     'Function update_db(drws As DataRow, colmn As Integer, txtqlfr As String, flg As String, AWSsite As String, rs As DataSet, rstr As DataSet, elm() As String) As Boolean
 
     '    Dim x, dtt As String
@@ -6257,8 +6408,8 @@ Err:
         End Try
     End Sub
 
-    Function CSV4WIS2BOX(stn As String, timestamp As String) As Boolean
-        Dim csvwisb2box_file, wigos_id, recs, hdrs, wisrecs(47), wishdrs(47), dttime As String
+    Function CSV4WIS2BOX(stn As String, timestamp As String, UTC As String) As Boolean
+        Dim csvwisb2box_file, Wigo_ID, wsi_series, wsi_issuer, wsi_issue_number, wsi_local, recs, hdrs, wisrecs(50), wishdrs(50), dttime As String
 
         'csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & stn & "-" & DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & "-" & DateAndTime.Hour(timestamp) & ".csv"
         dttime = DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & " " & DateAndTime.Hour(timestamp) & ":" & DateAndTime.Minute(timestamp) & ":" & DateAndTime.Second(timestamp)
@@ -6266,7 +6417,8 @@ Err:
         Try
             'FileOpen(14, csvwisb2box_file, OpenMode.Output)
 
-            sql = "SELECT left(wmoid,2) AS WMO_Block,right(wmoid,3) AS WMO_Number,wsi as WIGOS_ID, stationName as Station_Name, year(obsDatetime) as Datetime_Year,month(obsDatetime) As Datetime_Month,day(obsDatetime) as Datetime_Day,hour(obsDatetime)+1 as Datetime_Hour, '0' AS Datetime_Minute,latitude as Latitude, longitude as Longitude, elevation as Elevation, 
+           sql = "SELECT wsi as WIGOS_ID,left(wmoid,2) AS WMO_Block,right(wmoid,3) AS WMO_Number, stationName as Station_Name, year(obsDatetime) as Datetime_Year,month(obsDatetime) As Datetime_Month,day(obsDatetime) as Datetime_Day,hour(obsDatetime)+1 as Datetime_Hour, '0' AS Datetime_Minute,latitude as Latitude, longitude as Longitude, elevation as Elevation, 
+
                AVG(IF(describedBy = '884', value, NULL)) AS 'Pressure_Barometric', 
                AVG(IF(describedBy = '891', value, NULL)) AS 'Pressure_QNH', 
                AVG(IF(describedBy = '881', value, NULL)) AS 'Temperature_Drybulb', 
@@ -6280,25 +6432,33 @@ Err:
                AVG(IF(describedBy = '886', value, NULL)) AS 'WindGust_Speed',
                SUM(IF(describedBy = '928', value, NULL)) AS 'Evaporation_Total',
                SUM(IF(describedBy = '994', value, NULL)) AS 'Radiation_Total'
-               FROM (SELECT wmoid,wsi,recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value 
+
+               FROM (SELECT wsi,wmoid,recordedFrom,StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value 
+
                FROM  station INNER JOIN observationfinal ON stationId = recordedFrom WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='884' OR  describedBy = '891' OR  describedBy = '881' OR  describedBy = '885' OR  describedBy = '895' 
                OR  describedBy = '893' OR  describedBy = '892' OR  describedBy = '888' OR  describedBy = '895' OR  describedBy = '897' OR  describedBy = '887' OR  describedBy = '886' OR  describedBy = '928' OR  describedBy = '994') 
                and (obsdatetime BETWEEN DATE_ADD('" & dttime & "', INTERVAL -1 HOUR ) AND '" & dttime & "') ORDER BY recordedFrom, obsDatetime) t 
                GROUP BY StationName, year(obsDatetime), month(obsDatetime), day(obsDatetime);"
 
-            If Not WIS2BOX_Observations(stn, wigos_id, dttime, sql, wishdrs, wisrecs) Then
+            If Not WIS2BOX_Observations(stn, wsi_series, wsi_issuer, wsi_issue_number, wsi_local, dttime, sql, wishdrs, wisrecs, UTC) Then
                 Log_Errors("Unable to construct WIS2BOX record")
+                Return False
             End If
 
-            hdrs = wishdrs(0)
-            recs = wisrecs(0)
+            hdrs = "wsi_series,wsi_issuer,wsi_issue_number,wsi_local"
+            recs = wsi_series & "," & wsi_issuer & "," & wsi_issue_number & "," & wsi_local
+
             For i = 1 To 46
                 hdrs = hdrs & "," & wishdrs(i)
                 recs = recs & "," & wisrecs(i)
             Next
 
             ' Create a file for WIS2BOX CSV data output
-            csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\WIGOS-" & wigos_id & "-" & DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & "-" & DateAndTime.Hour(timestamp) & ".csv"
+
+            'csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\WIGOS-" & WIGOS_id & "-" & DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & "-" & DateAndTime.Hour(timestamp) & ".csv"
+            csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\WIGOS-" & WIGOS_id & "-" & DateAndTime.Year(UTC) & "-" & DateAndTime.Month(UTC) & "-" & DateAndTime.Day(UTC) & "-" & DateAndTime.Hour(UTC) & ".csv"
+
+
 
             FileOpen(14, csvwisb2box_file, OpenMode.Output)
 
@@ -6317,7 +6477,7 @@ Err:
             Return False
         End Try
     End Function
-    Function WIS2BOX_Observations(stn As String, ByRef wigosID As String, dttm As String, sql As String, ByRef obsv_name() As String, ByRef obsv_Value() As String) As Boolean
+    Function WIS2BOX_Observations(stn As String, ByRef wsi_series As String, ByRef wsi_issuer As String, ByRef wsi_issue_number As String, ByRef wsi_local As String, dttm As String, sql As String, ByRef obsv_name() As String, ByRef obsv_Value() As String, UTC As String) As Boolean
         Dim wisconn As New MySql.Data.MySqlClient.MySqlConnection
         Dim dswis As New DataSet
         Dim dawis As MySql.Data.MySqlClient.MySqlDataAdapter
@@ -6331,11 +6491,17 @@ Err:
             dswis.Clear()
             dawis.Fill(dswis, "wis2box")
 
+            'Log_Errors(sql)
+            If dswis.Tables("wis2box").Rows.Count = 0 Then
+                Log_Errors("No Records found")
+                Return False
+            End If
             'Log_Errors(dswis.Tables("wis2box").Rows.Count)
 
-            obsv_name(0) = "WMO_Block"
-            obsv_name(1) = "WMO_Number"
-            obsv_name(2) = "WIGOS_ID"
+            obsv_name(0) = "WIGOS_ID"
+            obsv_name(1) = "WMO_Block"
+            obsv_name(2) = "WMO_Number"
+
             obsv_name(3) = "Station_Name"
             obsv_name(4) = "Station_Type"
             obsv_name(5) = "Datetime_Year"
@@ -6384,7 +6550,8 @@ Err:
             ' Populate the observations list
             With dswis.Tables("wis2box")
                 For i = 0 To .Columns.Count - 1
-                    For j = 0 To 46
+                    For j = 0 To 49
+
                         If obsv_name(j) = .Columns(i).ColumnName Then
                             If Not IsDBNull(.Rows(0).Item(i)) Then
                                 obsv_Value(j) = .Rows(0).Item(i)
@@ -6397,12 +6564,31 @@ Err:
                 Next
             End With
 
-            ' Get WIGOS ID for the station
-            wigosID = obsv_Value(2)
+            ' Adjust time to UTC
+
+            obsv_Value(5) = DateAndTime.Year(UTC) '"Datetime_Year"
+            obsv_Value(6) = DateAndTime.Month(UTC) ' "Datetime_Month"
+            obsv_Value(7) = DateAndTime.Day(UTC) ' "Datetime_Day"
+            obsv_Value(8) = DateAndTime.Hour(UTC) ' "Datetime_Hour"
+            obsv_Value(9) = DateAndTime.Minute(UTC) ' "Datetime_Minute"
+
+
+            ' Get WIGOS identification components for the station
+            Dim WIGOSID() = obsv_Value(0).Split("-")
+            If WIGOSID.Count <> 4 Then
+                Log_Errors("No valid WIGOS ID " & obsv_Value(0))
+                Return False
+            End If
+
+            wsi_series = WIGOSID(0)
+            wsi_issuer = WIGOSID(1)
+            wsi_issue_number = WIGOSID(2)
+            wsi_local = WIGOSID(3)
+            'Log_Errors(WIGOSID.Count)
 
             ' Compute Special observations
             obsv_Value(4) = 0       ' Station of automatic type 
-            If obsv_Value(12) <> "" Then obsv_Value(13) = Val(obsv_Value(12)) + 1   ' Barometer Elevation
+            If obsv_Value(15) <> "" Then obsv_Value(13) = Val(obsv_Value(12)) + 1   ' Barometer Elevation
             obsv_Value(18) = 1      ' Height of Thermometer above local ground
             obsv_Value(22) = 0.25   ' Height of Raingauge above local ground
             obsv_Value(23) = -24    ' Time period for daily rainfall
@@ -6419,12 +6605,12 @@ Err:
             obsv_Value(45) = -1     ' Radiation period"
 
             ' Compute 24 Hour observations
-            sql = "SELECT left(wmoid,2) AS WMO_Block,right(wmoid,3) AS WMO_Number,wsi as WIGOS_ID, stationName as Station_Name, year(obsDatetime) as Datetime_Year,month(obsDatetime) As Datetime_Month,day(obsDatetime) as Datetime_Day,hour(obsDatetime) as Datetime_Hour, '0' AS Datetime_Minute,latitude as Latitude, longitude as Longitude, elevation as Elevation, 
+            sql = "SELECT wsi as WIGOS_ID,left(wmoid,2) AS WMO_Block,right(wmoid,3) AS WMO_Number, stationName as Station_Name, year(obsDatetime) as Datetime_Year,month(obsDatetime) As Datetime_Month,day(obsDatetime) as Datetime_Day,hour(obsDatetime) as Datetime_Hour, '0' AS Datetime_Minute,latitude as Latitude, longitude as Longitude, elevation as Elevation, 
                MAX(IF(describedBy = '881', value, NULL)) AS 'Temperature_Maximum', 
                MIN(IF(describedBy = '881', value, NULL)) AS 'Temperature_Minimum',                
                SUM(IF(describedBy = '892', value, NULL)) AS 'Rain_24Htotal',
                SUM(IF(describedBy = '888', value, NULL)) AS 'Sunshine_24Htotal'
-               FROM (SELECT wmoid,wsi,recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value 
+               FROM (SELECT wsi,wmoid,recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value 
                FROM  station INNER JOIN observationfinal ON stationId = recordedFrom WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='881' OR  describedBy = '891' OR  describedBy = '892' OR  describedBy = '888') 
                and (obsdatetime BETWEEN DATE_ADD('" & dttm & "', INTERVAL -24 HOUR ) AND '" & dttm & "') ORDER BY recordedFrom, obsDatetime) t;"
 
@@ -6448,6 +6634,10 @@ Err:
             If obsv_Value(31) <> "" Then obsv_Value(31) = Val(obsv_Value(31)) + 273.15 ' Maximum temperature
             If obsv_Value(33) <> "" Then obsv_Value(33) = Val(obsv_Value(33)) + 273.15 ' Minimum temperature
 
+            ' Convert Pressure observation values to Pa
+            If IsNumeric(obsv_Value(14)) Then obsv_Value(14) = obsv_Value(14) * 100 ' "Pressure_Barometric"
+
+
             ' Compute Presure Tendancy
 
             ' 3HR Pressure change
@@ -6464,7 +6654,8 @@ Err:
                     If Not IsDBNull(.Rows(0).Item(0)) And Not IsDBNull(.Rows(1).Item(0)) Then
                         obsv_Value(16) = Val(.Rows(1).Item(0)) - Val(.Rows(0).Item(0))
                     End If
-
+                    ' Convert 3 Hour Pressure Tendancy values to Pa
+                    If IsNumeric(obsv_Value(16)) Then obsv_Value(16) = obsv_Value(16) * 100 ' " 3 Hour Pressure Tendancy"
                 End If
 
             End With
@@ -6483,6 +6674,8 @@ Err:
                     If Not IsDBNull(.Rows(0).Item(0)) And Not IsDBNull(.Rows(1).Item(0)) Then
                         obsv_Value(17) = Val(.Rows(1).Item(0)) - Val(.Rows(0).Item(0))
                     End If
+                    ' Convert 3 Hour Pressure Tendancy values to Pa
+                    If IsNumeric(obsv_Value(17)) Then obsv_Value(17) = obsv_Value(1) * 100 ' "24 Hr Pressure Tendancy"
 
                 End If
             End With
@@ -6491,7 +6684,7 @@ Err:
             Return True
         Catch ex As Exception
             wisconn.Close()
-            Log_Errors(ex.Message & " @ WIS2BOX_Elements")
+            Log_Errors(ex.Message & " @ WIS2BOX_Observations")
             Return False
         End Try
     End Function
@@ -6528,16 +6721,20 @@ Err:
                     Me.Cursor = Cursors.Default
                     Exit Sub
                 Else
-                    Dim msg_file, url, login, pwd, foldr, ftpmode As String
+                    Dim msg_file, url, login, pwd, foldr, ftpmode, ftpPort As String
                     msg_file = csvwisfile
                     url = .Rows(0).Item("ftpId")
                     login = .Rows(0).Item("userName")
                     pwd = .Rows(0).Item("password")
                     foldr = .Rows(0).Item("inputFolder")
                     ftpmode = .Rows(0).Item("ftpMode")
+                    ftpPort = .Rows(0).Item("port")
 
-                    If Not frmCLIMAT.FTP_Execute(msg_file, url, login, pwd, foldr, ftpmode, "put") Then
+                    If Not frmCLIMAT.FTP_Execute(msg_file, url, login, pwd, foldr, ftpmode, "put", ftpPort) Then
                         Log_Errors("FTP Failure")
+                    Else
+                        txtOutputServer.Text = url
+                        txtOutputFolder.Text = foldr
                     End If
 
                 End If

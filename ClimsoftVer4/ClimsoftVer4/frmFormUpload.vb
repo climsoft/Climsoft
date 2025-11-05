@@ -182,7 +182,7 @@ Public Class frmFormUpload
             ' Convert path separater to SQL format
             fl = Strings.Replace(fl, "\", "/")
 
-            conns.ConnectionString = frmLogin.txtusrpwd.Text & ";AllowLoadLocalInfile=true"
+            conns.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
             conns.Open()
 
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
@@ -410,7 +410,8 @@ Public Class frmFormUpload
                         Continue For
                     End If
 
-                    frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & dataForm & "," & capturedBy
+                    frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & ",," & acquisitionType & "," & dataForm & "," & capturedBy
+                    'frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & dataForm & "," & capturedBy
                     PrintLine(122, frmrec & ",")
                     'PrintLine(122)
 
@@ -427,7 +428,7 @@ Public Class frmFormUpload
 
             'Load_Files(fl, "observationinitial", 0, ",")
 
-            strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy);"
+            'strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy);"
 
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
 

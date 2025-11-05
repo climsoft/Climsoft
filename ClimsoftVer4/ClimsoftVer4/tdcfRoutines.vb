@@ -68,7 +68,7 @@
         Dim dscc As New DataSet
 
         Dim binstr, dat1, chr1, chr2, sql As String
-        Dim kount As Integer
+        Dim kount, diff As Integer
 
         Try
             cconn.ConnectionString = frmLogin.txtusrpwd.Text
@@ -86,9 +86,16 @@
             CCITT_Binary = ""
             binstr = ""
             If Len(dat) < DataWidth / 8 Then
-                For kount = 1 To DataWidth - Len(dat) * 8
-                    binstr = binstr & "0"
-                Next kount
+                'For kount = 1 To DataWidth - Len(dat) * 8
+                '    binstr = binstr & "0"
+                'Next kount
+
+                diff = DataWidth / 8 - Len(dat)
+                For kount = 1 To diff
+                    dat = dat & " "
+                Next
+                'formAWSRealTime.Log_Errors(Len(dat))
+
             Else
                 dat = Strings.Left(dat, DataWidth / 8)
             End If

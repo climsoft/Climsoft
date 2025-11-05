@@ -46,6 +46,7 @@ Partial Class frmQC
         Me.lblQCtype = New System.Windows.Forms.Label()
         Me.lblDataTransferProgress = New System.Windows.Forms.Label()
         Me.pnlQCTypes = New System.Windows.Forms.Panel()
+        Me.optMissObstime = New System.Windows.Forms.RadioButton()
         Me.opthrsconsistency = New System.Windows.Forms.RadioButton()
         Me.optdaysconsistency = New System.Windows.Forms.RadioButton()
         Me.optdiurnalrange = New System.Windows.Forms.RadioButton()
@@ -299,6 +300,7 @@ Partial Class frmQC
         'pnlQCTypes
         '
         Me.pnlQCTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlQCTypes.Controls.Add(Me.optMissObstime)
         Me.pnlQCTypes.Controls.Add(Me.opthrsconsistency)
         Me.pnlQCTypes.Controls.Add(Me.optdaysconsistency)
         Me.pnlQCTypes.Controls.Add(Me.optdiurnalrange)
@@ -306,8 +308,18 @@ Partial Class frmQC
         Me.pnlQCTypes.Controls.Add(Me.optAbsoluteLimits)
         Me.pnlQCTypes.Location = New System.Drawing.Point(3, 37)
         Me.pnlQCTypes.Name = "pnlQCTypes"
-        Me.pnlQCTypes.Size = New System.Drawing.Size(302, 223)
+        Me.pnlQCTypes.Size = New System.Drawing.Size(302, 229)
         Me.pnlQCTypes.TabIndex = 23
+        '
+        'optMissObstime
+        '
+        Me.optMissObstime.AutoSize = True
+        Me.optMissObstime.Location = New System.Drawing.Point(12, 207)
+        Me.optMissObstime.Name = "optMissObstime"
+        Me.optMissObstime.Size = New System.Drawing.Size(196, 17)
+        Me.optMissObstime.TabIndex = 26
+        Me.optMissObstime.Text = "Daily observations in misplaced hour"
+        Me.optMissObstime.UseVisualStyleBackColor = True
         '
         'opthrsconsistency
         '
@@ -502,4 +514,5 @@ Partial Class frmQC
     Friend WithEvents opthrsconsistency As RadioButton
     Friend WithEvents optdaysconsistency As RadioButton
     Friend WithEvents optdiurnalrange As RadioButton
+    Friend WithEvents optMissObstime As RadioButton
 End Class
