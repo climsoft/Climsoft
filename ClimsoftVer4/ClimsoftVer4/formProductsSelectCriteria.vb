@@ -365,7 +365,7 @@ Public Class formProductsSelectCriteria
                               "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year,Month, Day;"
 
                     End If
-
+                    'txttest.Text = sql
                     DataProducts(sql, lblProductType.Text)
 
                 Case "Daily"
@@ -2049,7 +2049,7 @@ Err:
 
     Sub XtremesWithDates0(Xvalue As String, Xtype As String, st As String, ed As String)
         Dim f1 As String
-        Dim stns, elms As Integer
+        Dim stns, obsv_name As Integer
         Try
 
             'f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Xtremes.csv"  'data_products.csv"
@@ -2067,14 +2067,14 @@ Err:
             PrintLine(11)
 
             For stns = 0 To lstvStations.Items.Count - 1
-                For elms = 0 To lstvElements.Items.Count - 1
+                For obsv_name = 0 To lstvElements.Items.Count - 1
                     sql = " select stationId,stationname,abbreviation as element,day(obsdatetime) as Day,month(obsdatetime) as Month,year(obsdatetime) as Year,obsvalue as max_val from station,obselement, observationfinal " &
-                          "where stationId=recordedfrom and elementId=describedby and recordedfrom='" & lstvStations.Items(stns).SubItems(0).Text & "' and describedby=" & lstvElements.Items(elms).Text & " and obsvalue=(select " & Xtype & "(obsvalue) from observationfinal where recordedfrom='" & lstvStations.Items(stns).SubItems(0).Text & "' and describedby=" & lstvElements.Items(elms).Text & ");"
+                          "where stationId=recordedfrom and elementId=describedby and recordedfrom='" & lstvStations.Items(stns).SubItems(0).Text & "' and describedby=" & lstvElements.Items(obsv_name).Text & " and obsvalue=(select " & Xtype & "(obsvalue) from observationfinal where recordedfrom='" & lstvStations.Items(stns).SubItems(0).Text & "' and describedby=" & lstvElements.Items(obsv_name).Text & ");"
 
                     sql = "select stationId, stationName, elementId, abbreviation, latitude, longitude, elevation, year(obsDatetime) as Year, month(obsDatetime) as Month, day(obsDatetime) as Day, hour(obsDatetime) as Hour,obsvalue from obs_selected
                            WHERE obsvalue = (select " & Xtype & "(obsvalue) from obs_selected
                            Group by stationId, elementId
-                           Having stationId ='" & lstvStations.Items(stns).SubItems(0).Text & "' and elementId =" & lstvElements.Items(elms).Text & ");"
+                           Having stationId ='" & lstvStations.Items(stns).SubItems(0).Text & "' and elementId =" & lstvElements.Items(obsv_name).Text & ");"
 
 
                     da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -2102,7 +2102,7 @@ Err:
 
     Sub XtremesWithDates(Xvalue As String, Xtype As String)
         Dim f1 As String
-        Dim stns, elms As Integer
+        Dim stns, obsv_name As Integer
         'Dim qry As MySql.Data.MySqlClient.MySqlCommand
 
         Try
@@ -2129,12 +2129,12 @@ Err:
             PrintLine(11)
 
             For stns = 0 To lstvStations.Items.Count - 1
-                For elms = 0 To lstvElements.Items.Count - 1
+                For obsv_name = 0 To lstvElements.Items.Count - 1
 
                     'sql = "DROP TABLE IF EXISTS obs_selected;
                     '           CREATE TABLE obs_selected
                     '           SELECT RecordedFrom as StationId, stationName, describedBy as elementId, abbreviation, obsDatetime, latitude, longitude, elevation, obsValue FROM observationfinal INNER JOIN obselement ON elementId = describedBy INNER JOIN station ON stationId = recordedFrom
-                    '           Where ((RecordedFrom='" & lstvStations.Items(stns).SubItems(0).Text & "') AND (describedBy=" & lstvElements.Items(elms).SubItems(0).Text & ") and (obsDatetime between '" & sdate & "' and '" & edate & "'));"
+                    '           Where ((RecordedFrom='" & lstvStations.Items(stns).SubItems(0).Text & "') AND (describedBy=" & lstvElements.Items(obsv_name).SubItems(0).Text & ") and (obsDatetime between '" & sdate & "' and '" & edate & "'));"
 
 
                     'qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
@@ -2145,13 +2145,13 @@ Err:
 
                     ' SQL statement to select data for extremes with dates computation
                     sql = "SELECT RecordedFrom as StationId, stationName, describedBy as elementId, abbreviation, obsDatetime, latitude, longitude, elevation, obsValue FROM observationfinal INNER JOIN obselement ON elementId = describedBy INNER JOIN station ON stationId = recordedFrom
-                           Where ((RecordedFrom='" & lstvStations.Items(stns).SubItems(0).Text & "') AND (describedBy=" & lstvElements.Items(elms).SubItems(0).Text & ") and (obsDatetime between '" & sdate & "' and '" & edate & "'))"
+                           Where ((RecordedFrom='" & lstvStations.Items(stns).SubItems(0).Text & "') AND (describedBy=" & lstvElements.Items(obsv_name).SubItems(0).Text & ") and (obsDatetime between '" & sdate & "' and '" & edate & "'))"
 
                     ' SQL statement to select extremes values with their dates from the selected data
                     sql = "select stationId, stationName, elementId, abbreviation, latitude, longitude, elevation, year(obsDatetime) as Year, month(obsDatetime) as Month, day(obsDatetime) as Day, hour(obsDatetime) as Hour,obsvalue from (" & sql & ") as t
                            WHERE obsvalue = (select " & Xtype & "(obsvalue) from (" & sql & ") as tt
                            Group by stationId, elementId
-                           Having stationId ='" & lstvStations.Items(stns).SubItems(0).Text & "' and elementId =" & lstvElements.Items(elms).SubItems(0).Text & ");"
+                           Having stationId ='" & lstvStations.Items(stns).SubItems(0).Text & "' and elementId =" & lstvElements.Items(obsv_name).SubItems(0).Text & ");"
 
 
                     da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -2325,7 +2325,7 @@ Err:
 
     End Sub
 
-    Sub Daily_WindSpeed(stns As String, elms As String, sdt As String, edt As String, typ As String)
+    Sub Daily_WindSpeed(stns As String, obsv_name As String, sdt As String, edt As String, typ As String)
         Dim Kount, yyyy, mm, dd As Long
         Dim fl2, nxtdyTot, dat, hdr As String
         Dim WR_Diff, WNDkh, WNDms, U_Limit As Double
@@ -2333,7 +2333,7 @@ Err:
         Try
 
             sql = "SELECT recordedFrom as StationID, describedBy as Code, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, obsDatetime, obsvalue FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
-                   "WHERE (RecordedFrom = " & stns & ") AND (describedBy =" & elms & ") and (obsDatetime between '" & sdt & "' and '" & edt & "') and hour(obsdatetime) = " & Int(RegkeyValue("key01")) & " ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+                   "WHERE (RecordedFrom = " & stns & ") AND (describedBy =" & obsv_name & ") and (obsDatetime between '" & sdt & "' and '" & edt & "') and hour(obsdatetime) = " & Int(RegkeyValue("key01")) & " ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
@@ -2370,7 +2370,7 @@ Err:
 
                         ' Compute wind run total after counter initialization
                         If WR_Diff < 0 Then
-                            If WindValue_Limit(elms, U_Limit) Then
+                            If WindValue_Limit(obsv_name, U_Limit) Then
                                 WR_Diff = (U_Limit - CDbl(.Rows(k).Item(7)) + CDbl(nxtdyTot))
                             Else
                                 Continue For
@@ -2404,7 +2404,7 @@ Err:
         End Try
     End Sub
 
-    Sub Hourly_WindSpeed(stns As String, elms As String, sdt As String, edt As String, typ As String)
+    Sub Hourly_WindSpeed(stns As String, obsv_name As String, sdt As String, edt As String, typ As String)
         Dim Kount, yyyy, mm, dd, hh As Long
         Dim fl2, nxtdyTot, dat, hdr As String
         Dim WR_Diff, WNDkh, WNDms, U_Limit As Double
@@ -2412,7 +2412,7 @@ Err:
         Try
 
             sql = "SELECT recordedFrom as StationID, describedBy as Code, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, obsDatetime, obsvalue FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
-                   "WHERE (RecordedFrom = " & stns & ") AND (describedBy =" & elms & ") and (obsDatetime between '" & sdt & "' and '" & edt & "')  ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+                   "WHERE (RecordedFrom = " & stns & ") AND (describedBy =" & obsv_name & ") and (obsDatetime between '" & sdt & "' and '" & edt & "')  ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
@@ -2449,7 +2449,7 @@ Err:
 
                         ' Compute wind run total after counter initialization
                         If WR_Diff < 0 Then
-                            If WindValue_Limit(elms, U_Limit) Then
+                            If WindValue_Limit(obsv_name, U_Limit) Then
                                 WR_Diff = (U_Limit - CDbl(.Rows(k).Item(7)) + CDbl(nxtdyTot))
                             Else
                                 Continue For
@@ -3876,12 +3876,12 @@ Err:
             MsgBox(ex.Message & " Attribute Get_LatLon")
         End Try
     End Sub
-    Sub TmpTable(stns As String, elms As String, sdt As String, edt As String, summry As String, Optional Levels As String = "")
+    Sub TmpTable(stns As String, obsv_name As String, sdt As String, edt As String, summry As String, Optional Levels As String = "")
         Dim cmd As MySql.Data.MySqlClient.MySqlCommand
         sql = "drop table if exists tmpproducts; " &
               "create table tmpproducts Select  recordedFrom, describedBy, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & summry & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF " &
               "From observationfinal " &
-              "Where (RecordedFrom = " & stns & ") AND (describedBy =" & elms & ") and (obsDatetime between '" & sdt & "' and '" & edt & "') " &
+              "Where (RecordedFrom = " & stns & ") AND (describedBy =" & obsv_name & ") and (obsDatetime between '" & sdt & "' and '" & edt & "') " &
               "group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime) " &
               "Order By recordedFrom, describedBy, YY, MM;"
 
@@ -3889,7 +3889,7 @@ Err:
             sql = "drop table if exists tmpproducts; " &
                   "create table tmpproducts Select  recordedFrom, describedBy, obsLevel,Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & summry & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF " &
                   "From observationfinal " &
-                 "Where (RecordedFrom = " & stns & ") AND (describedBy =" & elms & ") AND (obsDatetime between '" & sdt & "' and '" & edt & "') AND (obsLevel =" & Levels & ") " &
+                 "Where (RecordedFrom = " & stns & ") AND (describedBy =" & obsv_name & ") AND (obsDatetime between '" & sdt & "' and '" & edt & "') AND (obsLevel =" & Levels & ") " &
                  "group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime), obsLevel " &
                  "Order By recordedFrom, describedBy, YY, MM;"
         End If

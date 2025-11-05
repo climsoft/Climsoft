@@ -353,6 +353,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("inputFolder")) Then txtFolder.Text = ds.Tables("aws_mss").Rows(i).Item("inputFolder")
                 If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("inputFolder")) Then txtLogin.Text = ds.Tables("aws_mss").Rows(i).Item("userName")
                 If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("password")) Then txtPassword.Text = ds.Tables("aws_mss").Rows(i).Item("password")
+                If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("port")) Then txtPort.Text = ds.Tables("aws_mss").Rows(i).Item("port")
                 'If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("foldertype")) Then lsFfolders.selecteditem = ds.Tables("aws_mss").Rows(i).Item("foldertype")
             Next
 
@@ -490,6 +491,8 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                     .Rows(0).Item("inputFolder") = txtFolder.Text
                     .Rows(0).Item("userName") = txtLogin.Text
                     .Rows(0).Item("password") = txtPassword.Text
+                    .Rows(0).Item("port") = txtPort.Text
+
                 End With
                 da.Update(ds, "mss")
                 MsgBox("Update successful")
@@ -584,6 +587,8 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 .Rows(0).Item("userName") = txtLogin.Text
                 .Rows(0).Item("password") = txtPassword.Text
                 .Rows(0).Item("foldertype") = "ASC"
+                .Rows(0).Item("port") = txtPort
+
             End With
             da.Update(ds, "mss")
             MsgBox(ClsTranslations.GetTranslation("New Recorded Added"))

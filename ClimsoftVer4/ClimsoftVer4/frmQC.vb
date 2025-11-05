@@ -16,6 +16,11 @@
 
 'Imports ClimsoftVer4.GlobalVariables
 
+Imports System.IO
+Imports System.Security.Cryptography
+Imports Mysqlx
+Imports Org.BouncyCastle.Crypto.Prng
+
 Public Class frmQC
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
@@ -78,7 +83,7 @@ Public Class frmQC
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
 
-            Sql = "SELECT * FROM station ORDER BY stationId"
+            sql = "SELECT * FROM station ORDER BY stationId"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             dss.Clear()
 
@@ -203,7 +208,7 @@ Public Class frmQC
 
     '    Dim m As Integer, n As Integer, elem1 As Integer, elem2 As Integer
     '    Dim stnid, elmcode, stnlist, elmlist, stnelm_selected, QcReportFile As String
-    '    Dim stnselected, elmselected As Boolean
+    '    Dim stnselected, obsv_nameelected As Boolean
 
     '    Me.Cursor = Cursors.WaitCursor
 
@@ -213,7 +218,7 @@ Public Class frmQC
     '    stnlist = ""
     '    elmlist = ""
     '    stnselected = False
-    '    elmselected = False
+    '    obsv_nameelected = False
 
 
     '    ' List the selected stations
@@ -239,7 +244,7 @@ Public Class frmQC
     '        For i = 0 To lstViewElements.Items.Count - 1
     '            If lstViewElements.Items(i).Checked = True Then
     '                elmcode = lstViewElements.Items(i).SubItems(0).Text
-    '                elmselected = True
+    '                obsv_nameelected = True
     '                If Len(elmlist) = 0 Then
     '                    elmlist = "describedBy = " & " '" & elmcode & "'" 'stnid
     '                Else
@@ -249,17 +254,17 @@ Public Class frmQC
     '            End If
     '        Next
     '    Else ' When All Elements are selected
-    '        elmselected = True
+    '        obsv_nameelected = True
     '    End If
 
-    '    If optInterElement.Checked = True Then elmselected = True
+    '    If optInterElement.Checked = True Then obsv_nameelected = True
 
     '    ' Contruct the Stations and Elements selction criteria string
     '    If Len(stnlist) > 0 Then stnlist = "(" & stnlist & ")"
     '    If Len(elmlist) > 0 Then elmlist = "(" & elmlist & ")"
 
     '    ' Set the stations and elements selection conditions
-    '    If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
+    '    If stnselected = False Or obsv_nameelected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
     '        MsgBox(ClsTranslations.GetTranslation(" Selections not properly done. Check values!"), MsgBoxStyle.Exclamation, ClsTranslations.GetTranslation("Selection Error"))
     '        Me.Cursor = Cursors.Default
     '        Exit Sub
@@ -730,10 +735,14 @@ Public Class frmQC
 
 
     Private Sub cmdPerformQC_Click(sender As Object, e As EventArgs) Handles cmdPerformQC.Click
+        If optMissObstime.Checked Then
+            UpdateObsDatetime()
+            Exit Sub
+        End If
 
         Dim m, n, elem1, elem2 As Integer
         Dim stnid, elmcode, stnlist, elmlist, stnelm_selected, stnelm_local, QcReportFile, strSQLog, qcLog As String
-        Dim stnselected, elmselected As Boolean
+        Dim stnselected, obsv_nameelected As Boolean
 
         Me.Cursor = Cursors.WaitCursor
 
@@ -743,7 +752,7 @@ Public Class frmQC
         stnlist = ""
         elmlist = ""
         stnselected = False
-        elmselected = False
+        obsv_nameelected = False
 
 
         ' List the selected stations
@@ -769,7 +778,7 @@ Public Class frmQC
             For i = 0 To lstViewElements.Items.Count - 1
                 If lstViewElements.Items(i).Checked = True Then
                     elmcode = lstViewElements.Items(i).SubItems(0).Text
-                    elmselected = True
+                    obsv_nameelected = True
                     If Len(elmlist) = 0 Then
                         elmlist = "describedBy = " & " '" & elmcode & "'" 'stnid
                     Else
@@ -779,17 +788,17 @@ Public Class frmQC
                 End If
             Next
         Else ' When All Elements are selected
-            elmselected = True
+            obsv_nameelected = True
         End If
 
-        If optInterElement.Checked = True Then elmselected = True
+        If optInterElement.Checked = True Then obsv_nameelected = True
 
         ' Construct the Stations and Elements selction criteria string
         If Len(stnlist) > 0 Then stnlist = "(" & stnlist & ")"
         If Len(elmlist) > 0 Then elmlist = "(" & elmlist & ")"
 
         ' Set the stations and elements selection conditions
-        If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
+        If stnselected = False Or obsv_nameelected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
             MsgBox(ClsTranslations.GetTranslation(" Selections not properly done. Check values!"), MsgBoxStyle.Exclamation, ClsTranslations.GetTranslation("Selection Error"))
             Me.Cursor = Cursors.Default
             Exit Sub
@@ -1604,10 +1613,10 @@ Public Class frmQC
             FileClose(212)
             CommonModules.ViewFile(QcFile)
         Catch x As Exception
-        MsgBox(x.Message & " qcDiurnalRange")
-        'conn.Close()
-        FileClose(212)
-        lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing failed!")
+            MsgBox(x.Message & " qcDiurnalRange")
+            'conn.Close()
+            FileClose(212)
+            lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing failed!")
         End Try
     End Sub
     Sub qcConsecutiveObs(sql As String, period As String, qcType As Integer)
@@ -1686,7 +1695,7 @@ Public Class frmQC
             End If
             'conn.Close()
         Catch x As Exception
-        MsgBox(x.Message & " at qcConsecutiveObs")
+            MsgBox(x.Message & " at qcConsecutiveObs")
             'conn.Close()
             lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing failed!")
         End Try
@@ -1848,6 +1857,171 @@ Public Class frmQC
             End With
         Catch ex As Exception
             MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Sub UpdateObsDatetime()
+        Dim obshh, maxRecs As Integer
+        Dim dttm, dlydttm As String
+        Dim dsrg As New DataSet
+        Dim conh As New MySql.Data.MySqlClient.MySqlConnection
+        Dim darg As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+
+        Try
+
+            Dim errdir, duplfile As String
+
+            'Get full path for the errors output file
+            errdir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\QC"
+
+            ' Create the directory if not existing
+            If Not Directory.Exists(errdir) Then
+                Directory.CreateDirectory(errdir)
+            End If
+            ' Create error file
+            duplfile = errdir & "\qc_misshrs.csv"
+            FileOpen(55, duplfile, OpenMode.Output)
+
+            ' Output headers
+            PrintLine(55, "obs_datetime,station_id,element_code, obs_value,obs_table")
+            myConnectionString = frmLogin.txtusrpwd.Text
+            conh.ConnectionString = myConnectionString
+
+            ' Obtain the daily observation hour from registry
+            sql = "SELECT keyValue FROM regkeys WHERE keyName = 'key01';"
+            conh.Open()
+            darg = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conh)
+            darg.SelectCommand.CommandTimeout = 0
+            dsrg.Clear()
+            darg.Fill(dsrg, "HH")
+            conh.Close()
+            obshh = dsrg.Tables("HH").Rows(0).Item(0)
+            'MsgBox(obshh)
+            Dim obstbls(1), tbl As String
+
+            obstbls(0) = "observationinitial"
+            obstbls(1) = "observationfinal"
+
+            Me.Cursor = Cursors.WaitCursor
+            For j = 0 To obstbls.Count - 1
+                tbl = obstbls(j)
+
+                ' Extract records with misplaced daily hour
+                sql = "SELECT recordedFrom as id, describedBy as code, obsdatetime as dtt," & obshh & "- HOUR(obsdatetime) AS diff,obsvalue FROM " & tbl & " INNER JOIN obselement ON describedBy = elementId
+               WHERE " & obshh & " - HOUR(obsdatetime) !=0 AND (Lcase(LEFT(elementtype,5)) = 'daily' OR describedBy < 101);"
+
+                'MsgBox(sql)
+                conh.Open()
+                darg = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conh)
+                darg.SelectCommand.CommandTimeout = 0
+                dsrg.Clear()
+                darg.Fill(dsrg, "MissHH")
+                conh.Close()
+                With dsrg.Tables("MissHH")
+                    maxRecs = .Rows.Count
+                    If maxRecs = 0 Then
+                        MsgBox("No daily observation records with misplaced hours in table " & tbl)
+                        Continue For
+                        'FileClose(55)
+                        'Me.Cursor = Cursors.Default
+                        'Exit Sub
+                    Else
+                        If MsgBox("Adjust records with the misplaced observation time?", MsgBoxStyle.YesNo, maxRecs & " records in " & tbl) = MsgBoxResult.No Then
+                            Continue For
+                            'Me.Cursor = Cursors.Default
+                            'Exit Sub
+                        End If
+                    End If
+
+                    'If maxRecs > 0 Then
+                    conh.Open()
+                        For i = 0 To maxRecs - 1
+                            'txtProgress.Text = i
+                            'txtProgress.Refresh()
+
+                            dttm = .Rows(i).Item("dtt")
+                            dttm = DateAndTime.Year(dttm) & "-" & DateAndTime.Month(dttm) & "-" & DateAndTime.Day(dttm) & " " & DateAndTime.Hour(dttm) & ":00:00"
+                            dlydttm = DateAndTime.Year(dttm) & "-" & DateAndTime.Month(dttm) & "-" & DateAndTime.Day(dttm) & " " & obshh & ":00:00"
+                            'MsgBox(dttm)
+
+                            'MsgBox(.Rows(0).Item("id") & " " & .Rows(0).Item("code") & " " & dttm & " " & .Rows(0).Item("diff") & " " & .Rows(0).Item("obsvalue"))
+                            Try
+                                sql = "UPDATE " & tbl & " SET obsdatetime = DATE_ADD(obsdatetime,INTERVAL " & .Rows(i).Item("diff") & " HOUR)
+                          WHERE recordedFrom = '" & .Rows(i).Item("id") & "' AND describedBy= " & .Rows(i).Item("code") & " AND obsdatetime='" & dttm & "';"
+                                'txtProgress.Text = sql
+
+                                cmd.Connection = conh
+                                cmd.CommandTimeout = 0
+                                cmd.CommandText = sql  ' Assign the SQL statement to the Mysql command variable
+                                cmd.ExecuteNonQuery()   ' Execute the query
+                            Catch x As Exception
+
+                                If x.HResult = -2147467259 Then
+                                    outPutDublicates(conh, .Rows(i).Item("id"), .Rows(i).Item("code"), dttm, dlydttm, tbl)
+                                Else
+                                    MsgBox(x.HResult & ": " & x.Message)
+                                End If
+                            End Try
+                        txtProgress.Text = "Processing record: " & i + 1 & " of " & maxRecs
+                        txtProgress.Refresh()
+                        Next i
+                        conh.Close()
+
+                    'End If
+                End With
+            Next j
+
+            FileClose(55)
+            Me.Cursor = Cursors.Default
+            Dim siz = New FileInfo(duplfile)
+            'MsgBox(siz.Length)
+
+            If siz.Length > 59 Then CommonModules.ViewFile(duplfile)
+        Catch ex As Exception
+            FileClose(55)
+            conh.Close()
+            MsgBox(ex.Message & " @ UpdateObsDatetime")
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Sub outPutDublicates(conh As MySql.Data.MySqlClient.MySqlConnection, id As String, cod As Integer, obsdtt As String, dlyobsdtt As String, tbls As String, Optional lvl As String = "surface")
+
+        Dim dsr As New DataSet
+        Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim cmdpl As New MySql.Data.MySqlClient.MySqlCommand
+
+        Try
+            sql = "SELECT obsDatetime,recordedFrom, describedBy,obsValue FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & dlyobsdtt & "' UNION
+              SELECT obsDatetime,recordedFrom, describedBy,obsValue FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
+
+            dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conh)
+            dsr.Clear()
+            dar.Fill(dsr, "obs")
+            'MsgBox(dsr.Tables("obs").Rows.Count)
+            With dsr.Tables("obs")
+
+                If .Rows(0).Item("obsValue") = .Rows(1).Item("obsValue") Then
+                    ' Delete record with wrong observation hour
+                    sql = "DELETE FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
+
+                Else ' Duplicate records with conflicting observation values
+                    ' Output both records into a files
+                    PrintLine(55, dlyobsdtt & "," & .Rows(0).Item("recordedFrom") & "," & .Rows(0).Item("describedBy") & "," & .Rows(0).Item("obsValue") & "," & tbls)
+                    PrintLine(55, obsdtt & "," & .Rows(1).Item("recordedFrom") & "," & .Rows(1).Item("describedBy") & "," & .Rows(1).Item("obsValue") & "," & tbls)
+
+                    ' Delete both records from database
+                    sql = "DELETE FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & dlyobsdtt & "';
+                       DELETE From " & tbls & " Where recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
+                End If
+                cmdpl.Connection = conh
+                cmdpl.CommandTimeout = 0
+                cmdpl.CommandText = sql  ' Assign the SQL statement to the Mysql command variable
+                cmdpl.ExecuteNonQuery()
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message & " @ outPutDublicates")
         End Try
     End Sub
 End Class

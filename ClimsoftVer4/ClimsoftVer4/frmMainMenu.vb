@@ -361,6 +361,11 @@ Public Class frmMainMenu
             FileOpen(111, errfl, OpenMode.Output)
             Me.Cursor = Cursors.WaitCursor
             sqlFile = frmImportDaily.dlgOpenImportFile.FileName
+            If (IO.Path.GetFileName(sqlFile)) = "mariadb_climsoft_db_v4_all.sql" Then
+                MsgBox("Can't Execute " & sqlFile)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
             sqlText = IO.File.ReadAllText(sqlFile)
             sqlStatements = Strings.Split(sqlText, ";")
             sqlconn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"

@@ -199,16 +199,16 @@
 
     'Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
     '    Dim stPos, edPos As Integer
-    '    Dim elmstruc As String
+    '    Dim obsv_nametruc As String
 
     '    Try
-    '        If Not Frmdetails(dsSourceTableName, stPos, edPos, elmstruc) Then Exit Sub
+    '        If Not Frmdetails(dsSourceTableName, stPos, edPos, obsv_nametruc) Then Exit Sub
 
-    '        Select Case elmstruc
+    '        Select Case obsv_nametruc
     '            Case "Vertical"
-    '                MsgBox(edPos - stPos & " " & elmstruc)
+    '                MsgBox(edPos - stPos & " " & obsv_nametruc)
     '            Case "Horizontal"
-    '                MsgBox(edPos - stPos & " " & elmstruc)
+    '                MsgBox(edPos - stPos & " " & obsv_nametruc)
     '        End Select
 
     '    Catch ex As Exception
@@ -280,7 +280,7 @@
 
     'Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
     '    Dim stPos, edPos, Dflds, statValues, statFlags As Integer
-    '    Dim elmstruc, dtF, dtT As String
+    '    Dim obsv_nametruc, dtF, dtT As String
 
 
     '    Try
@@ -313,7 +313,7 @@
 
     '    Try
 
-    '        If Not Frmdetails(dsSourceTableName, stPos, edPos, elmstruc) Then Exit Sub
+    '        If Not Frmdetails(dsSourceTableName, stPos, edPos, obsv_nametruc) Then Exit Sub
 
     '        statValues = stPos
     '        statFlags = edPos + 1
@@ -321,13 +321,13 @@
     '        dtF = DateAndTime.Day(dateFrom.Text) & "/" & DateAndTime.Month(dateFrom.Text) & "/" & DateAndTime.Year(dateFrom.Text)
     '        dtT = DateAndTime.Day(dateTo.Text) & "/" & DateAndTime.Month(dateTo.Text) & "/" & DateAndTime.Year(dateTo.Text)
 
-    '        Select Case elmstruc
+    '        Select Case obsv_nametruc
     '            Case "Vertical"
 
     '                Save_Verticals(Dflds, statValues, statFlags, dtF, dtT)
 
     '            Case "Horizontal"
-    '                'MsgBox(edPos - stPos & " " & elmstruc)
+    '                'MsgBox(edPos - stPos & " " & obsv_nametruc)
     '                Save_Horizontals(Dflds, statValues, statFlags, dtF, dtT)
     '        End Select
 
@@ -345,7 +345,7 @@
 
     Private Sub tStrpBtnSave_Click(sender As Object, e As EventArgs)
         Dim stPos, edPos, Dflds, statValues, statFlags As Integer
-        Dim elmstruc, dtF, dtT As String
+        Dim obsv_nametruc, dtF, dtT As String
 
 
         Try
@@ -378,7 +378,7 @@
 
         Try
 
-            If Not Frmdetails(dsSourceTableName, stPos, edPos, elmstruc) Then Exit Sub
+            If Not Frmdetails(dsSourceTableName, stPos, edPos, obsv_nametruc) Then Exit Sub
 
             statValues = stPos
             statFlags = edPos + 1
@@ -386,13 +386,13 @@
             dtF = DateAndTime.Day(dateFrom.Text) & "/" & DateAndTime.Month(dateFrom.Text) & "/" & DateAndTime.Year(dateFrom.Text)
             dtT = DateAndTime.Day(dateTo.Text) & "/" & DateAndTime.Month(dateTo.Text) & "/" & DateAndTime.Year(dateTo.Text)
 
-            Select Case elmstruc
+            Select Case obsv_nametruc
                 Case "Vertical"
 
                     Save_Verticals(Dflds, statValues, statFlags, dtF, dtT)
 
                 Case "Horizontal"
-                    'MsgBox(edPos - stPos & " " & elmstruc)
+                    'MsgBox(edPos - stPos & " " & obsv_nametruc)
                     Save_Horizontals(Dflds, statValues, statFlags, dtF, dtT)
             End Select
 
@@ -406,7 +406,7 @@
 
     Private Sub tlstrpBtn_Click(sender As Object, e As EventArgs) Handles tlstrpBtn.Click
         Dim stPos, edPos, Dflds, statValues, statFlags As Integer
-        Dim elmstruc, dtF, dtT As String
+        Dim obsv_nametruc, dtF, dtT As String
 
 
         Try
@@ -439,7 +439,7 @@
 
         Try
 
-            If Not Frmdetails(dsSourceTableName, stPos, edPos, elmstruc) Then Exit Sub
+            If Not Frmdetails(dsSourceTableName, stPos, edPos, obsv_nametruc) Then Exit Sub
 
             statValues = stPos
             statFlags = edPos + 1
@@ -447,13 +447,13 @@
             dtF = DateAndTime.Day(dateFrom.Text) & "/" & DateAndTime.Month(dateFrom.Text) & "/" & DateAndTime.Year(dateFrom.Text)
             dtT = DateAndTime.Day(dateTo.Text) & "/" & DateAndTime.Month(dateTo.Text) & "/" & DateAndTime.Year(dateTo.Text)
 
-            Select Case elmstruc
+            Select Case obsv_nametruc
                 Case "Vertical"
 
                     Save_Verticals(Dflds, statValues, statFlags, dtF, dtT)
 
                 Case "Horizontal"
-                    'MsgBox(edPos - stPos & " " & elmstruc)
+                    'MsgBox(edPos - stPos & " " & obsv_nametruc)
                     Save_Horizontals(Dflds, statValues, statFlags, dtF, dtT)
             End Select
 

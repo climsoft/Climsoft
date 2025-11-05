@@ -54,6 +54,8 @@ Partial Class frmClimatSettings
         Me.butClose = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.txtPort = New System.Windows.Forms.TextBox()
+        Me.lblPort = New System.Windows.Forms.Label()
         Me.TabParameters.SuspendLayout()
         Me.Parameters.SuspendLayout()
         Me.grpParameters.SuspendLayout()
@@ -207,6 +209,8 @@ Partial Class frmClimatSettings
         'grpMsgSwitch
         '
         Me.grpMsgSwitch.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.grpMsgSwitch.Controls.Add(Me.lblPort)
+        Me.grpMsgSwitch.Controls.Add(Me.txtPort)
         Me.grpMsgSwitch.Controls.Add(Me.txtOriginatingGeneratingCentre)
         Me.grpMsgSwitch.Controls.Add(Me.cmdUpdate)
         Me.grpMsgSwitch.Controls.Add(Me.txtConfirmPassword)
@@ -251,7 +255,7 @@ Partial Class frmClimatSettings
         Me.txtConfirmPassword.Location = New System.Drawing.Point(262, 205)
         Me.txtConfirmPassword.Name = "txtConfirmPassword"
         Me.txtConfirmPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtConfirmPassword.Size = New System.Drawing.Size(157, 20)
+        Me.txtConfirmPassword.Size = New System.Drawing.Size(218, 20)
         Me.txtConfirmPassword.TabIndex = 7
         '
         'txtPassword
@@ -259,21 +263,21 @@ Partial Class frmClimatSettings
         Me.txtPassword.Location = New System.Drawing.Point(261, 176)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPassword.Size = New System.Drawing.Size(157, 20)
+        Me.txtPassword.Size = New System.Drawing.Size(219, 20)
         Me.txtPassword.TabIndex = 6
         '
         'txtLogin
         '
         Me.txtLogin.Location = New System.Drawing.Point(262, 145)
         Me.txtLogin.Name = "txtLogin"
-        Me.txtLogin.Size = New System.Drawing.Size(157, 20)
+        Me.txtLogin.Size = New System.Drawing.Size(218, 20)
         Me.txtLogin.TabIndex = 5
         '
         'txtFolder
         '
         Me.txtFolder.Location = New System.Drawing.Point(262, 115)
         Me.txtFolder.Name = "txtFolder"
-        Me.txtFolder.Size = New System.Drawing.Size(157, 20)
+        Me.txtFolder.Size = New System.Drawing.Size(218, 20)
         Me.txtFolder.TabIndex = 4
         '
         'cboFTP
@@ -282,14 +286,14 @@ Partial Class frmClimatSettings
         Me.cboFTP.Items.AddRange(New Object() {"FTP", "SFTP"})
         Me.cboFTP.Location = New System.Drawing.Point(262, 84)
         Me.cboFTP.Name = "cboFTP"
-        Me.cboFTP.Size = New System.Drawing.Size(114, 21)
+        Me.cboFTP.Size = New System.Drawing.Size(100, 21)
         Me.cboFTP.TabIndex = 3
         '
         'txtServer
         '
         Me.txtServer.Location = New System.Drawing.Point(262, 54)
         Me.txtServer.Name = "txtServer"
-        Me.txtServer.Size = New System.Drawing.Size(156, 20)
+        Me.txtServer.Size = New System.Drawing.Size(218, 20)
         Me.txtServer.TabIndex = 2
         '
         'lblConfirmPassword
@@ -389,6 +393,23 @@ Partial Class frmClimatSettings
         Me.btnAddNew.UseVisualStyleBackColor = True
         Me.btnAddNew.Visible = False
         '
+        'txtPort
+        '
+        Me.txtPort.Location = New System.Drawing.Point(428, 84)
+        Me.txtPort.Name = "txtPort"
+        Me.txtPort.Size = New System.Drawing.Size(52, 20)
+        Me.txtPort.TabIndex = 27
+        '
+        'lblPort
+        '
+        Me.lblPort.AutoSize = True
+        Me.lblPort.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPort.Location = New System.Drawing.Point(383, 88)
+        Me.lblPort.Name = "lblPort"
+        Me.lblPort.Size = New System.Drawing.Size(26, 13)
+        Me.lblPort.TabIndex = 28
+        Me.lblPort.Text = "Port"
+        '
         'frmClimatSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -446,4 +467,6 @@ Partial Class frmClimatSettings
     Friend WithEvents butClose As Button
     Friend WithEvents btnHelp As Button
     Friend WithEvents btnAddNew As Button
+    Friend WithEvents lblPort As Label
+    Friend WithEvents txtPort As TextBox
 End Class
