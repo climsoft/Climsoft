@@ -1971,7 +1971,7 @@ Public Class frmQC
                     'End If
                 End With
             Next j
-
+            txtProgress.Clear()
             FileClose(55)
             Me.Cursor = Cursors.Default
             Dim siz = New FileInfo(duplfile)
