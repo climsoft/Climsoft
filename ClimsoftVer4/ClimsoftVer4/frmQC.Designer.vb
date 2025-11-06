@@ -251,7 +251,7 @@ Partial Class frmQC
         'chkAllStations
         '
         Me.chkAllStations.AutoSize = True
-        Me.chkAllStations.Location = New System.Drawing.Point(314, 411)
+        Me.chkAllStations.Location = New System.Drawing.Point(314, 416)
         Me.chkAllStations.Name = "chkAllStations"
         Me.chkAllStations.Size = New System.Drawing.Size(111, 17)
         Me.chkAllStations.TabIndex = 16
@@ -433,11 +433,12 @@ Partial Class frmQC
         '
         'txtProgress
         '
-        Me.txtProgress.Location = New System.Drawing.Point(8, 431)
+        Me.txtProgress.BackColor = System.Drawing.SystemColors.Control
+        Me.txtProgress.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtProgress.Location = New System.Drawing.Point(15, 429)
         Me.txtProgress.Name = "txtProgress"
-        Me.txtProgress.Size = New System.Drawing.Size(297, 20)
+        Me.txtProgress.Size = New System.Drawing.Size(255, 13)
         Me.txtProgress.TabIndex = 30
-        Me.txtProgress.Visible = False
         '
         'frmQC
         '

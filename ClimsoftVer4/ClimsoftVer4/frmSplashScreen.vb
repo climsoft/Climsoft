@@ -43,7 +43,7 @@ Public NotInheritable Class frmSplashScreen
 
         ClsTranslations.TranslateForm(Me)
         'due to translations. Append the version number here
-        lblVersion.Text = lblVersion.Text & " 4.2.6"
+        lblVersion.Text = lblVersion.Text & " 4.2.7"
 
         Timer1.Start()
 
