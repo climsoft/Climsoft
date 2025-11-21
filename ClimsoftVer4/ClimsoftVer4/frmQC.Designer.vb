@@ -435,9 +435,9 @@ Partial Class frmQC
         '
         Me.txtProgress.BackColor = System.Drawing.SystemColors.Control
         Me.txtProgress.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtProgress.Location = New System.Drawing.Point(15, 429)
+        Me.txtProgress.Location = New System.Drawing.Point(16, 439)
         Me.txtProgress.Name = "txtProgress"
-        Me.txtProgress.Size = New System.Drawing.Size(255, 13)
+        Me.txtProgress.Size = New System.Drawing.Size(867, 13)
         Me.txtProgress.TabIndex = 30
         '
         'frmQC

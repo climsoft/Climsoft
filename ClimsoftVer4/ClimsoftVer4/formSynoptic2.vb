@@ -1245,16 +1245,16 @@
             End With
             'compute Form height
             If fldsValue > 19 Then
-                Me.Height = 220 + 19 * 25 'Maximum height attained
+                Me.Height = 270 + 19 * 25 'Maximum height attained
             Else
-                Me.Height = 220 + fldsValue * 25
+                Me.Height = 270 + fldsValue * 25
             End If
 
             'compute Form width
             If colmn > 1 Then
                 Me.Width = 640 + 243 * (colmn - 1)
             Else
-                Me.Width = 640        ' Minimum width at 2 columns only
+                Me.Width = 870       ' Minimum width at 2 columns only
             End If
             Me.CenterToScreen()
 
