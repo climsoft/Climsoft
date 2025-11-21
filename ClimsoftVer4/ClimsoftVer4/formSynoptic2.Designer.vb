@@ -176,7 +176,7 @@ Partial Class formSynoptic2
         Me.GroupBoxCommands.Location = New System.Drawing.Point(0, 406)
         Me.GroupBoxCommands.Margin = New System.Windows.Forms.Padding(1)
         Me.GroupBoxCommands.Name = "GroupBoxCommands"
-        Me.GroupBoxCommands.Size = New System.Drawing.Size(915, 95)
+        Me.GroupBoxCommands.Size = New System.Drawing.Size(855, 95)
         Me.GroupBoxCommands.TabIndex = 1172
         Me.GroupBoxCommands.TabStop = False
         '
@@ -505,7 +505,7 @@ Partial Class formSynoptic2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(915, 501)
+        Me.ClientSize = New System.Drawing.Size(855, 501)
         Me.Controls.Add(Me.lblInvaliDate)
         Me.Controls.Add(Me.cboYear)
         Me.Controls.Add(Me.lblInsDel)

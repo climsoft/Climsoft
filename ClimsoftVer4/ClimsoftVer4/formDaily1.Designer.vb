@@ -160,7 +160,7 @@ Partial Class formDaily1
         Me.GroupBoxCommands.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBoxCommands.Location = New System.Drawing.Point(0, 355)
         Me.GroupBoxCommands.Name = "GroupBoxCommands"
-        Me.GroupBoxCommands.Size = New System.Drawing.Size(888, 124)
+        Me.GroupBoxCommands.Size = New System.Drawing.Size(722, 124)
         Me.GroupBoxCommands.TabIndex = 1171
         Me.GroupBoxCommands.TabStop = False
         '
@@ -364,7 +364,7 @@ Partial Class formDaily1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(888, 479)
+        Me.ClientSize = New System.Drawing.Size(722, 479)
         Me.Controls.Add(Me.lblInvaliDate)
         Me.Controls.Add(Me.cboYear)
         Me.Controls.Add(Me.lblInsDel)
