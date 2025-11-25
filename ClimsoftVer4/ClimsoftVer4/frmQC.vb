@@ -1542,6 +1542,26 @@ Public Class frmQC
         Next
     End Sub
 
+    Private Sub optMissObstime_CheckedChanged(sender As Object, e As EventArgs) Handles optMissObstime.CheckedChanged
+        If optMissObstime.Checked Then
+            pnlQcStandard.Enabled = False
+            LstViewStations.Enabled = False
+            lstViewElements.Enabled = False
+            cmbstation.Enabled = False
+            cmbElement.Enabled = False
+            chkAllStations.Enabled = False
+            chkAllElements.Enabled = False
+        Else
+            pnlQcStandard.Enabled = True
+            LstViewStations.Enabled = True
+            lstViewElements.Enabled = True
+            cmbstation.Enabled = True
+            cmbElement.Enabled = True
+            chkAllStations.Enabled = True
+            chkAllElements.Enabled = True
+        End If
+    End Sub
+
     Private Sub cmbElement_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbElement.KeyPress
         If Asc(e.KeyChar) = 13 Then
             For i = 0 To lstViewElements.Items.Count - 1
@@ -1862,15 +1882,17 @@ Public Class frmQC
 
     Sub UpdateObsDatetime()
         Dim obshh, maxRecs As Integer
-        Dim dttm, dlydttm As String
+        Dim dttm, dlydttm, qclog As String
         Dim dsrg As New DataSet
         Dim conh As New MySql.Data.MySqlClient.MySqlConnection
-        Dim darg As MySql.Data.MySqlClient.MySqlDataAdapter
+        'Dim darg As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
         Try
 
             Dim errdir, duplfile As String
+
+            txtProgress.Clear()
 
             'Get full path for the errors output file
             errdir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\QC"
@@ -1890,99 +1912,104 @@ Public Class frmQC
 
             ' Obtain the daily observation hour from registry
             sql = "SELECT keyValue FROM regkeys WHERE keyName = 'key01';"
-            conh.Open()
-            darg = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conh)
-            darg.SelectCommand.CommandTimeout = 0
-            dsrg.Clear()
-            darg.Fill(dsrg, "HH")
-            conh.Close()
-            obshh = dsrg.Tables("HH").Rows(0).Item(0)
-            'MsgBox(obshh)
+            dsrg = MSdataset(sql)
+            obshh = dsrg.Tables("recs").Rows(0).Item(0)
+
             Dim obstbls(1), tbl As String
+            Dim tblConfirm(1) As Boolean
 
-            obstbls(0) = "observationinitial"
-            obstbls(1) = "observationfinal"
+            ' Initialize the tables options
+            obstbls(0) = "observationfinal"
+            obstbls(1) = "observationinitial"
 
-            Me.Cursor = Cursors.WaitCursor
+            tblConfirm(0) = False
+            tblConfirm(1) = False
+
+            For k = 0 To obstbls.Count - 1
+                If MsgBox("Adjust records with the misplaced observation time for table " & obstbls(k) & "?", MsgBoxStyle.YesNo, obstbls(k)) = MsgBoxResult.Yes Then
+                    tblConfirm(k) = True
+
+                    ' Delete records with invalid date
+                    sql = "DELETE FROM " & obstbls(k) & " WHERE obsDatetime = '0000-00-00 00:00:00';"
+                    conh.Open()
+                    cmd.Connection = conh
+                    cmd.CommandTimeout = 0
+                    cmd.CommandText = sql  ' Assign the SQL statement to the Mysql command variable
+                    cmd.ExecuteNonQuery()
+                    conh.Close()
+                End If
+            Next
+
             For j = 0 To obstbls.Count - 1
+                If Not tblConfirm(j) Then Continue For
                 tbl = obstbls(j)
 
                 ' Extract records with misplaced daily hour
-                sql = "SELECT recordedFrom as id, describedBy as code, obsdatetime as dtt," & obshh & "- HOUR(obsdatetime) AS diff,obsvalue FROM " & tbl & " INNER JOIN obselement ON describedBy = elementId
-               WHERE " & obshh & " - HOUR(obsdatetime) !=0 AND (Lcase(LEFT(elementtype,5)) = 'daily' OR describedBy < 101);"
+                sql = "SELECT recordedFrom as id, describedBy as code, obsdatetime as dtt," & obshh & "- HOUR(obsdatetime) AS diff,obsvalue,qcTypeLog FROM " & tbl & " INNER JOIN obselement ON describedBy = elementId
+                       WHERE " & obshh & " - HOUR(obsdatetime) !=0 AND (Lcase(LEFT(elementtype,5)) = 'daily' OR describedBy < 101);"
 
-                'MsgBox(sql)
-                conh.Open()
-                darg = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conh)
-                darg.SelectCommand.CommandTimeout = 0
-                dsrg.Clear()
-                darg.Fill(dsrg, "MissHH")
-                conh.Close()
-                With dsrg.Tables("MissHH")
+                    dsrg = MSdataset(sql)
+
+                With dsrg.Tables("recs")
+
                     maxRecs = .Rows.Count
-                    If maxRecs = 0 Then
-                        MsgBox("No daily observation records with misplaced hours in table " & tbl)
-                        Continue For
-                        'FileClose(55)
-                        'Me.Cursor = Cursors.Default
-                        'Exit Sub
-                    Else
-                        If MsgBox("Adjust records with the misplaced observation time?", MsgBoxStyle.YesNo, maxRecs & " records in " & tbl) = MsgBoxResult.No Then
-                            Continue For
-                            'Me.Cursor = Cursors.Default
-                            'Exit Sub
-                        End If
-                    End If
 
-                    'If maxRecs > 0 Then
-                    conh.Open()
+                    If maxRecs = 0 Then
+                        Continue For
+                    Else
                         For i = 0 To maxRecs - 1
-                            'txtProgress.Text = i
-                            'txtProgress.Refresh()
 
                             dttm = .Rows(i).Item("dtt")
+
                             dttm = DateAndTime.Year(dttm) & "-" & DateAndTime.Month(dttm) & "-" & DateAndTime.Day(dttm) & " " & DateAndTime.Hour(dttm) & ":00:00"
                             dlydttm = DateAndTime.Year(dttm) & "-" & DateAndTime.Month(dttm) & "-" & DateAndTime.Day(dttm) & " " & obshh & ":00:00"
-                            'MsgBox(dttm)
 
-                            'MsgBox(.Rows(0).Item("id") & " " & .Rows(0).Item("code") & " " & dttm & " " & .Rows(0).Item("diff") & " " & .Rows(0).Item("obsvalue"))
+                            If IsDBNull(.Rows(i).Item("qcTypeLog")) Then
+                                qclog = 6
+                            Else
+                                qclog = .Rows(i).Item("qcTypeLog") & 6
+                            End If
+
                             Try
-                                sql = "UPDATE " & tbl & " SET obsdatetime = DATE_ADD(obsdatetime,INTERVAL " & .Rows(i).Item("diff") & " HOUR)
-                          WHERE recordedFrom = '" & .Rows(i).Item("id") & "' AND describedBy= " & .Rows(i).Item("code") & " AND obsdatetime='" & dttm & "';"
-                                'txtProgress.Text = sql
+                                sql = "UPDATE " & tbl & " SET obsdatetime = DATE_ADD(obsdatetime,INTERVAL " & .Rows(i).Item("diff") & " HOUR),qcTypeLog = " & qclog & "
+                                       WHERE recordedFrom = '" & .Rows(i).Item("id") & "' AND describedBy= " & .Rows(i).Item("code") & " AND obsdatetime='" & dttm & "';"
 
+                                conh.Open()
                                 cmd.Connection = conh
                                 cmd.CommandTimeout = 0
                                 cmd.CommandText = sql  ' Assign the SQL statement to the Mysql command variable
                                 cmd.ExecuteNonQuery()   ' Execute the query
-                            Catch x As Exception
 
-                                If x.HResult = -2147467259 Then
+                            Catch x As Exception
+                                If x.HResult = -2147467259 Then ' Causes duplications
                                     outPutDublicates(conh, .Rows(i).Item("id"), .Rows(i).Item("code"), dttm, dlydttm, tbl)
                                 Else
-                                    MsgBox(x.HResult & ": " & x.Message)
+                                    MsgBox(x.HResult & ": " & x.Message & "On update records @ UpdateObsDatetime")
                                 End If
                             End Try
-                        txtProgress.Text = "Processing record: " & i + 1 & " of " & maxRecs
-                        txtProgress.Refresh()
+                            conh.Close()
+                            txtProgress.Text = "Processing record: " & i + 1 & " of " & maxRecs
+                            txtProgress.Refresh()
                         Next i
-                        conh.Close()
 
-                    'End If
+                    End If
+
                 End With
             Next j
-            txtProgress.Clear()
+
+                txtProgress.Text = "Process Completed!"
             FileClose(55)
             Me.Cursor = Cursors.Default
             Dim siz = New FileInfo(duplfile)
-            'MsgBox(siz.Length)
 
             If siz.Length > 59 Then CommonModules.ViewFile(duplfile)
         Catch ex As Exception
             FileClose(55)
             conh.Close()
-            MsgBox(ex.Message & " @ UpdateObsDatetime")
+            'MsgBox(ex.HResult & ": " & ex.Message & " @ UpdateObsDatetime") 'MsgBox(x.HResult & ": " & x.Message)
             Me.Cursor = Cursors.Default
+            txtProgress.Text = ex.Message & " @ UpdateObsDatetime" 'MsgBox(x.HResult & ": " & x.Message)
+
         End Try
     End Sub
 
@@ -1993,35 +2020,73 @@ Public Class frmQC
         Dim cmdpl As New MySql.Data.MySqlClient.MySqlCommand
 
         Try
-            sql = "SELECT obsDatetime,recordedFrom, describedBy,obsValue FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & dlyobsdtt & "' UNION
-              SELECT obsDatetime,recordedFrom, describedBy,obsValue FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
+            sql = "SELECT obsDatetime,recordedFrom, describedBy,obsValue FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND (obsDatetime = '" & dlyobsdtt & "' OR obsDatetime = '" & obsdtt & "');" 'UNION
+            'SELECT obsDatetime,recordedFrom, describedBy,obsValue FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
 
             dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conh)
             dsr.Clear()
             dar.Fill(dsr, "obs")
-            'MsgBox(dsr.Tables("obs").Rows.Count)
+
             With dsr.Tables("obs")
 
-                If .Rows(0).Item("obsValue") = .Rows(1).Item("obsValue") Then
+                If IsDBNull(.Rows(0).Item("obsValue")) And IsDBNull(.Rows(1).Item("obsValue")) Then
+                    ' Delete NULL record with wrong observation hour
+                    sql = "DELETE FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
+
+                ElseIf IsDBNull(.Rows(0).Item("obsValue")) Or IsDBNull(.Rows(1).Item("obsValue")) Then
+                    ' Output but NULL and non NULL record into a files
+                    PrintLine(55, dlyobsdtt & "," & .Rows(0).Item("recordedFrom") & "," & .Rows(0).Item("describedBy") & "," & .Rows(0).Item("obsValue") & "," & tbls)
+                    PrintLine(55, obsdtt & "," & .Rows(1).Item("recordedFrom") & "," & .Rows(1).Item("describedBy") & "," & .Rows(1).Item("obsValue") & "," & tbls)
+                    ' Delete both records from database
+                    sql = "DELETE FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & dlyobsdtt & "';
+                          DELETE From " & tbls & " Where recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
+
+                ElseIf .Rows(0).Item("obsValue") = .Rows(1).Item("obsValue") Then
                     ' Delete record with wrong observation hour
                     sql = "DELETE FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
 
-                Else ' Duplicate records with conflicting observation values
+                ElseIf .Rows(0).Item("obsValue") <> .Rows(1).Item("obsValue") Then
                     ' Output both records into a files
                     PrintLine(55, dlyobsdtt & "," & .Rows(0).Item("recordedFrom") & "," & .Rows(0).Item("describedBy") & "," & .Rows(0).Item("obsValue") & "," & tbls)
                     PrintLine(55, obsdtt & "," & .Rows(1).Item("recordedFrom") & "," & .Rows(1).Item("describedBy") & "," & .Rows(1).Item("obsValue") & "," & tbls)
-
                     ' Delete both records from database
                     sql = "DELETE FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & dlyobsdtt & "';
                        DELETE From " & tbls & " Where recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
                 End If
+
                 cmdpl.Connection = conh
                 cmdpl.CommandTimeout = 0
                 cmdpl.CommandText = sql  ' Assign the SQL statement to the Mysql command variable
                 cmdpl.ExecuteNonQuery()
             End With
         Catch ex As Exception
+            txtProgress.Text = ex.Message & " @ outPutDublicates"
+            txtProgress.Refresh()
             MsgBox(ex.Message & " @ outPutDublicates")
         End Try
     End Sub
+
+    Function MSdataset(sqls As String) As DataSet
+
+        Dim conns As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dsr As New DataSet
+        Dim dar As New MySql.Data.MySqlClient.MySqlDataAdapter
+
+        myConnectionString = frmLogin.txtusrpwd.Text
+        conns.ConnectionString = myConnectionString
+        conns.Open()
+        Try
+            dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
+            dar.SelectCommand.CommandTimeout = 0
+            dsr.Clear()
+            dar.Fill(dsr, "recs")
+            conns.Close()
+
+            Return dsr
+        Catch ex As Exception
+            MsgBox("Can't create dataset")
+            conns.Close()
+            Return Nothing
+        End Try
+    End Function
 End Class
