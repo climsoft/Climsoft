@@ -86,7 +86,7 @@ Public Class formAWSRealTime
         load_Indicators()
         Timer1.Start()
         'Timer2.Start()
-        'ClsTranslations.TranslateForm(Me)
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub cmdServers_Click(sender As Object, e As EventArgs) Handles cmdServers.Click
