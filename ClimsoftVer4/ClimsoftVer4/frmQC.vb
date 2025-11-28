@@ -1961,17 +1961,23 @@ Public Class frmQC
 
                             dttm = .Rows(i).Item("dtt")
 
-                            dttm = DateAndTime.Year(dttm) & "-" & DateAndTime.Month(dttm) & "-" & DateAndTime.Day(dttm) & " " & DateAndTime.Hour(dttm) & ":00:00"
-                            dlydttm = DateAndTime.Year(dttm) & "-" & DateAndTime.Month(dttm) & "-" & DateAndTime.Day(dttm) & " " & obshh & ":00:00"
+                            'dttm = DateAndTime.Year(dttm) & "-" & DateAndTime.Month(dttm) & "-" & DateAndTime.Day(dttm) & " " & DateAndTime.Hour(dttm) & ":00:00"
+                            'dlydttm = DateAndTime.Year(dttm) & "-" & DateAndTime.Month(dttm) & "-" & DateAndTime.Day(dttm) & " " & obshh & ":00:00"
+
+                            dttm = DateAndTime.Year(dttm) & "-" & DateAndTime.Month(dttm) & "-" & DateAndTime.Day(dttm) & " " & DateAndTime.Hour(dttm) & ":" & DateAndTime.Minute(dttm) & ":" & DateAndTime.Second(dttm)
+                            dlydttm = DateAdd("h", .Rows(i).Item("diff"), dttm)
+                            dlydttm = DateAndTime.Year(dlydttm) & "-" & DateAndTime.Month(dlydttm) & "-" & DateAndTime.Day(dlydttm) & " " & DateAndTime.Hour(dlydttm) & ":" & DateAndTime.Minute(dlydttm) & ":" & DateAndTime.Second(dlydttm)
 
                             If IsDBNull(.Rows(i).Item("qcTypeLog")) Then
+                                qclog = 6
+                            ElseIf Not IsNumeric(.Rows(i).Item("qcTypeLog")) Then
                                 qclog = 6
                             Else
                                 qclog = .Rows(i).Item("qcTypeLog") & 6
                             End If
 
                             Try
-                                sql = "UPDATE " & tbl & " SET obsdatetime = DATE_ADD(obsdatetime,INTERVAL " & .Rows(i).Item("diff") & " HOUR),qcTypeLog = " & qclog & "
+                                sql = "UPDATE " & tbl & " SET obsdatetime = DATE_ADD(obsdatetime,INTERVAL " & .Rows(i).Item("diff") & " HOUR),qcTypeLog = '" & qclog & "'
                                        WHERE recordedFrom = '" & .Rows(i).Item("id") & "' AND describedBy= " & .Rows(i).Item("code") & " AND obsdatetime='" & dttm & "';"
 
                                 conh.Open()
@@ -1984,7 +1990,9 @@ Public Class frmQC
                                 If x.HResult = -2147467259 Then ' Causes duplications
                                     outPutDublicates(conh, .Rows(i).Item("id"), .Rows(i).Item("code"), dttm, dlydttm, tbl)
                                 Else
-                                    MsgBox(x.HResult & ": " & x.Message & "On update records @ UpdateObsDatetime")
+                                    'MsgBox(x.HResult & ": " & x.Message & "On update records @ UpdateObsDatetime")
+                                    txtProgress.Text = x.Message & "On update records @ UpdateObsDatetime"
+                                    txtProgress.Refresh()
                                 End If
                             End Try
                             conh.Close()
@@ -1997,7 +2005,7 @@ Public Class frmQC
                 End With
             Next j
 
-                txtProgress.Text = "Process Completed!"
+            txtProgress.Text = "Process Completed!"
             FileClose(55)
             Me.Cursor = Cursors.Default
             Dim siz = New FileInfo(duplfile)
@@ -2006,10 +2014,9 @@ Public Class frmQC
         Catch ex As Exception
             FileClose(55)
             conh.Close()
-            'MsgBox(ex.HResult & ": " & ex.Message & " @ UpdateObsDatetime") 'MsgBox(x.HResult & ": " & x.Message)
             Me.Cursor = Cursors.Default
             txtProgress.Text = ex.Message & " @ UpdateObsDatetime" 'MsgBox(x.HResult & ": " & x.Message)
-
+            txtProgress.Refresh()
         End Try
     End Sub
 
@@ -2027,9 +2034,18 @@ Public Class frmQC
             dsr.Clear()
             dar.Fill(dsr, "obs")
 
+
             With dsr.Tables("obs")
 
-                If IsDBNull(.Rows(0).Item("obsValue")) And IsDBNull(.Rows(1).Item("obsValue")) Then
+                If .Rows.Count < 2 Then ' Non duplicate error
+                    If .Rows.Count = 0 Then
+                        Exit Sub
+                    Else
+                        PrintLine(55, dlyobsdtt & "," & .Rows(0).Item("recordedFrom") & "," & .Rows(0).Item("describedBy") & "," & .Rows(0).Item("obsValue") & "," & tbls)
+                        sql = "DELETE FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
+                    End If
+                    ' Duplicate errors
+                ElseIf IsDBNull(.Rows(0).Item("obsValue")) And IsDBNull(.Rows(1).Item("obsValue")) Then
                     ' Delete NULL record with wrong observation hour
                     sql = "DELETE FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
 
@@ -2052,6 +2068,7 @@ Public Class frmQC
                     ' Delete both records from database
                     sql = "DELETE FROM " & tbls & " WHERE recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & dlyobsdtt & "';
                        DELETE From " & tbls & " Where recordedFrom = '" & id & "' AND describedBy=" & cod & " AND obsDatetime = '" & obsdtt & "';"
+
                 End If
 
                 cmdpl.Connection = conh
@@ -2062,7 +2079,7 @@ Public Class frmQC
         Catch ex As Exception
             txtProgress.Text = ex.Message & " @ outPutDublicates"
             txtProgress.Refresh()
-            MsgBox(ex.Message & " @ outPutDublicates")
+            'MsgBox(ex.Message & " @ outPutDublicates")
         End Try
     End Sub
 
@@ -2076,6 +2093,7 @@ Public Class frmQC
         conns.ConnectionString = myConnectionString
         conns.Open()
         Try
+
             dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
             dar.SelectCommand.CommandTimeout = 0
             dsr.Clear()
@@ -2084,7 +2102,9 @@ Public Class frmQC
 
             Return dsr
         Catch ex As Exception
-            MsgBox("Can't create dataset")
+            'MsgBox("Can't create dataset")
+            txtProgress.Text = "Can't create dataset"
+            txtProgress.Refresh()
             conns.Close()
             Return Nothing
         End Try
