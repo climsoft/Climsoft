@@ -121,11 +121,11 @@
   <data name="cmdCSV.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAIAAADZrBkAAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAOBJREFUOE9jOH/tKRkIuzaN1JkMnl3uDZvQxOEIu7ajF2/j14mirWvtGd6gfqBq
-        ZJQ3+zCyGghC0QbUAzR+y8mbQDaQAdQDtBPIvrw4Gg2haAOqm7H1IpAB0QN34emzd5ERujZk2+AITQ8Q
-        oWsDWgXxG4SLphqO0LWhITTVcIRF25UViWiKMBG6tqvLk4BCWBHQuFtnD2DRdu7ak9s7W5GVoqHrm2ux
-        aLtw/dmDi7uQ1WGi2yc3YHHkuatPrq/LR1aHhq6tysCm7dqT+8cXI6vDRLf2TgaSKNqIR/TUdu0pACWu
-        2YBZsaogAAAAAElFTkSuQmCC
+        vAAADrwBlbxySQAAAOBJREFUOE9jOH/tKRmIAVPo/LWnGqkzGTy73Bs2YUrh03b04m38OlG0da09wxvU
+        z+DZhYzyZh8moI03qN+9YdOWkzfPX3vq3rCJwbNLI3Xm+WtPLy+ORkMo2hg8u2ZsvQjXA3fh6bN3kRG6
+        NmTb4AhNDxZtM7ZehPgNlwbs2tAQpgac2q6sSMRUR0Db1eVJmIEGQVdWJN46ewCLtnPXntze2YqpAY6u
+        b67Fou3C9WcPLu7CVI2Mbp/cgK4NZOHVJ9fX5WOqhqNrqzKwabv25P7xxZiqkdGtvZPRtRGP6KsNACWu
+        2YCKI07AAAAAAElFTkSuQmCC
 </value>
   </data>
   <metadata name="OpenFileImport.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

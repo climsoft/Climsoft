@@ -32,7 +32,13 @@ Partial Class formImports
         Me.cmdProcess = New System.Windows.Forms.Button()
         Me.cmdStart = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtOther = New System.Windows.Forms.TextBox()
+        Me.optOther = New System.Windows.Forms.RadioButton()
+        Me.optsemicolon = New System.Windows.Forms.RadioButton()
+        Me.optTab = New System.Windows.Forms.RadioButton()
+        Me.lbldelmt = New System.Windows.Forms.Label()
+        Me.optcomma = New System.Windows.Forms.RadioButton()
+        Me.lblFile = New System.Windows.Forms.Label()
         Me.cmdCSV = New System.Windows.Forms.Button()
         Me.txtCSV = New System.Windows.Forms.TextBox()
         Me.OpenFileImport = New System.Windows.Forms.OpenFileDialog()
@@ -49,9 +55,9 @@ Partial Class formImports
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.Snow
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(29, 68)
+        Me.DataGridView1.Location = New System.Drawing.Point(16, 78)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(487, 357)
+        Me.DataGridView1.Size = New System.Drawing.Size(441, 367)
         Me.DataGridView1.TabIndex = 0
         '
         'Panel1
@@ -63,7 +69,7 @@ Partial Class formImports
         Me.Panel1.Controls.Add(Me.cmdProcess)
         Me.Panel1.Controls.Add(Me.cmdStart)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 428)
+        Me.Panel1.Location = New System.Drawing.Point(0, 469)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(911, 34)
         Me.Panel1.TabIndex = 4
@@ -125,30 +131,96 @@ Partial Class formImports
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.txtOther)
+        Me.GroupBox1.Controls.Add(Me.optOther)
+        Me.GroupBox1.Controls.Add(Me.optsemicolon)
+        Me.GroupBox1.Controls.Add(Me.optTab)
+        Me.GroupBox1.Controls.Add(Me.lbldelmt)
+        Me.GroupBox1.Controls.Add(Me.optcomma)
+        Me.GroupBox1.Controls.Add(Me.lblFile)
         Me.GroupBox1.Controls.Add(Me.cmdCSV)
         Me.GroupBox1.Controls.Add(Me.txtCSV)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(29, 1)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 1)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(487, 62)
+        Me.GroupBox1.Size = New System.Drawing.Size(546, 71)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         '
-        'Label1
+        'txtOther
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 16)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(77, 13)
-        Me.Label1.TabIndex = 6
-        Me.Label1.Text = "Text File (CSV)"
+        Me.txtOther.Location = New System.Drawing.Point(409, 12)
+        Me.txtOther.Name = "txtOther"
+        Me.txtOther.Size = New System.Drawing.Size(25, 20)
+        Me.txtOther.TabIndex = 12
+        Me.txtOther.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'optOther
+        '
+        Me.optOther.AutoSize = True
+        Me.optOther.Location = New System.Drawing.Point(355, 14)
+        Me.optOther.Name = "optOther"
+        Me.optOther.Size = New System.Drawing.Size(51, 17)
+        Me.optOther.TabIndex = 11
+        Me.optOther.Text = "Other"
+        Me.optOther.UseVisualStyleBackColor = True
+        '
+        'optsemicolon
+        '
+        Me.optsemicolon.AutoSize = True
+        Me.optsemicolon.Location = New System.Drawing.Point(219, 14)
+        Me.optsemicolon.Name = "optsemicolon"
+        Me.optsemicolon.Size = New System.Drawing.Size(74, 17)
+        Me.optsemicolon.TabIndex = 10
+        Me.optsemicolon.Text = "Semicolon"
+        Me.optsemicolon.UseVisualStyleBackColor = True
+        '
+        'optTab
+        '
+        Me.optTab.AutoSize = True
+        Me.optTab.Location = New System.Drawing.Point(302, 14)
+        Me.optTab.Name = "optTab"
+        Me.optTab.Size = New System.Drawing.Size(44, 17)
+        Me.optTab.TabIndex = 9
+        Me.optTab.Text = "Tab"
+        Me.optTab.UseVisualStyleBackColor = True
+        '
+        'lbldelmt
+        '
+        Me.lbldelmt.AutoSize = True
+        Me.lbldelmt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbldelmt.Location = New System.Drawing.Point(6, 16)
+        Me.lbldelmt.Name = "lbldelmt"
+        Me.lbldelmt.Size = New System.Drawing.Size(98, 13)
+        Me.lbldelmt.TabIndex = 8
+        Me.lbldelmt.Text = "Select file delimeter"
+        '
+        'optcomma
+        '
+        Me.optcomma.AutoSize = True
+        Me.optcomma.Checked = True
+        Me.optcomma.Location = New System.Drawing.Point(150, 14)
+        Me.optcomma.Name = "optcomma"
+        Me.optcomma.Size = New System.Drawing.Size(60, 17)
+        Me.optcomma.TabIndex = 7
+        Me.optcomma.TabStop = True
+        Me.optcomma.Text = "Comma"
+        Me.optcomma.UseVisualStyleBackColor = True
+        '
+        'lblFile
+        '
+        Me.lblFile.AutoSize = True
+        Me.lblFile.Location = New System.Drawing.Point(6, 41)
+        Me.lblFile.Name = "lblFile"
+        Me.lblFile.Size = New System.Drawing.Size(134, 13)
+        Me.lblFile.TabIndex = 6
+        Me.lblFile.Text = "Text File (station metadata)"
         '
         'cmdCSV
         '
         Me.cmdCSV.BackgroundImage = CType(resources.GetObject("cmdCSV.BackgroundImage"), System.Drawing.Image)
         Me.cmdCSV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdCSV.Location = New System.Drawing.Point(373, 27)
+        Me.cmdCSV.Location = New System.Drawing.Point(501, 32)
         Me.cmdCSV.Name = "cmdCSV"
         Me.cmdCSV.Size = New System.Drawing.Size(36, 29)
         Me.cmdCSV.TabIndex = 5
@@ -156,7 +228,7 @@ Partial Class formImports
         '
         'txtCSV
         '
-        Me.txtCSV.Location = New System.Drawing.Point(9, 34)
+        Me.txtCSV.Location = New System.Drawing.Point(146, 37)
         Me.txtCSV.Name = "txtCSV"
         Me.txtCSV.Size = New System.Drawing.Size(358, 20)
         Me.txtCSV.TabIndex = 4
@@ -164,15 +236,17 @@ Partial Class formImports
         'listErrors
         '
         Me.listErrors.FormattingEnabled = True
-        Me.listErrors.Location = New System.Drawing.Point(522, 69)
+        Me.listErrors.HorizontalScrollbar = True
+        Me.listErrors.Location = New System.Drawing.Point(462, 77)
         Me.listErrors.Name = "listErrors"
-        Me.listErrors.Size = New System.Drawing.Size(361, 355)
+        Me.listErrors.ScrollAlwaysVisible = True
+        Me.listErrors.Size = New System.Drawing.Size(435, 368)
         Me.listErrors.TabIndex = 6
         '
         'lblErrors
         '
         Me.lblErrors.AutoSize = True
-        Me.lblErrors.Location = New System.Drawing.Point(663, 49)
+        Me.lblErrors.Location = New System.Drawing.Point(681, 63)
         Me.lblErrors.Name = "lblErrors"
         Me.lblErrors.Size = New System.Drawing.Size(80, 13)
         Me.lblErrors.TabIndex = 7
@@ -182,7 +256,7 @@ Partial Class formImports
         '
         Me.lblSummary.AutoSize = True
         Me.lblSummary.BackColor = System.Drawing.SystemColors.Control
-        Me.lblSummary.Location = New System.Drawing.Point(526, 405)
+        Me.lblSummary.Location = New System.Drawing.Point(470, 450)
         Me.lblSummary.Name = "lblSummary"
         Me.lblSummary.Size = New System.Drawing.Size(0, 13)
         Me.lblSummary.TabIndex = 8
@@ -191,7 +265,7 @@ Partial Class formImports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(911, 462)
+        Me.ClientSize = New System.Drawing.Size(911, 503)
         Me.Controls.Add(Me.lblSummary)
         Me.Controls.Add(Me.lblErrors)
         Me.Controls.Add(Me.listErrors)
@@ -219,9 +293,15 @@ Partial Class formImports
     Friend WithEvents cmdClose As System.Windows.Forms.Button
     Friend WithEvents cmHelp As System.Windows.Forms.Button
     Friend WithEvents cmdReset As System.Windows.Forms.Button
-    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents lblFile As System.Windows.Forms.Label
     Friend WithEvents listErrors As System.Windows.Forms.ListBox
     Friend WithEvents lblErrors As System.Windows.Forms.Label
     Friend WithEvents lblSummary As System.Windows.Forms.Label
     Friend WithEvents btnUpdate As Button
+    Friend WithEvents lbldelmt As Label
+    Friend WithEvents optcomma As RadioButton
+    Friend WithEvents txtOther As TextBox
+    Friend WithEvents optOther As RadioButton
+    Friend WithEvents optsemicolon As RadioButton
+    Friend WithEvents optTab As RadioButton
 End Class

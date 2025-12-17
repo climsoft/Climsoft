@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports MySql.Data.MySqlClient
+Imports Mysqlx.Crud
 
 Public Class formImports
     Dim dbcon As New MySql.Data.MySqlClient.MySqlConnection
@@ -23,7 +24,7 @@ Public Class formImports
     Dim s As New DataSet
     Dim sql1 As String
     Dim ImportFile As String
-
+    Dim delimit As String
     Dim lin As Integer
     Dim currentRow As String()
 
@@ -42,7 +43,8 @@ Public Class formImports
 
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
             MyReader.TextFieldType = FileIO.FieldType.Delimited
-            MyReader.SetDelimiters(",")
+            'MyReader.SetDelimiters(",")
+            MyReader.SetDelimiters(delimit)
             Dim currentField As String
 
             Dim num As Integer = 1
@@ -198,6 +200,7 @@ Err:
         ClsTranslations.TranslateForm(Me)
     End Sub
     Sub ListFields()
+        'Dim delimit As String
         Try
             dbConectionString = frmLogin.txtusrpwd.Text
             dbcon.ConnectionString = dbConectionString
@@ -210,15 +213,33 @@ Err:
             dbcon.Close()
 
             Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
+
+                ' Get the file delimiter
+                If optcomma.Checked Then
+                    ' Comma delimited
+                    delimit = ","
+                ElseIf optsemicolon.Checked Then
+                    ' Semicolon delimited
+                    delimit = ";"
+                ElseIf optTab.Checked Then
+                    'Tab delimited
+                    delimit = vbTab
+                ElseIf optOther.Checked Then
+                    ' Other characters delimited
+                    delimit = txtOther.Text
+                Else
+                    delimit = " " ' Space delimited
+                End If
                 MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(",")
+                MyReader.SetDelimiters(delimit)
+                'MyReader.SetDelimiters(",")
                 Dim currentField As String
 
                 Dim num As Integer = 1
 
-
                 Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
-                Dim dsNewRow As DataRow
+                'Dim dsNewRow As DataRow
+
                 'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
                 Dim recCommit As New dataEntryGlobalRoutines
 
@@ -263,7 +284,7 @@ Err:
 
             End Using
         Catch ex As Exception
-            MsgBox("No metadata file selected")
+            MsgBox("No metadata file selected or Invalid delimeter")
         End Try
     End Sub
 
@@ -272,7 +293,7 @@ Err:
         Dim fails As Long
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
             MyReader.TextFieldType = FileIO.FieldType.Delimited
-            MyReader.SetDelimiters(",")
+            MyReader.SetDelimiters(delimit)
             Dim nums As Integer
             Dim rows As String()
             Dim mxr As Integer = DataGridView1.Rows.Count
@@ -325,12 +346,16 @@ Err:
     End Sub
 
     Private Sub cmdCSV_Click(sender As Object, e As EventArgs) Handles cmdCSV.Click
-
+        If optOther.Checked And txtOther.Text.ToString = String.Empty Then
+            MsgBox("Blank delimiter for Other not allowed. Please Enter the delimiter character")
+            Exit Sub
+        End If
         'openFD.Title = "Open a Text File"
         'openFD.Filter = "Text Files|*.txt"
         'openFD.ShowDialog()
 
-        OpenFileImport.Filter = "Comma Delimited|*.csv;*.txt"
+        'OpenFileImport.Filter = "Comma Delimited|*.csv;*.txt"
+        OpenFileImport.Filter = "Text Files|*.*"
         OpenFileImport.Title = "Open Import Text File"
         OpenFileImport.ShowDialog()
 
@@ -392,7 +417,8 @@ Err:
             Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
 
                 MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(",")
+                'MyReader.SetDelimiters(",")
+                MyReader.SetDelimiters(delimit)
                 Dim nums As Integer
                 Dim rows As String()
                 Dim mxr As Integer = DataGridView1.Rows.Count
@@ -655,5 +681,24 @@ Err:
         'End Try
 
     End Sub
+
+    Private Sub txtOther_TextChanged(sender As Object, e As EventArgs) Handles txtOther.TextChanged
+        If txtOther.Text.ToString <> String.Empty Then
+            optOther.Checked = True
+        Else
+            optcomma.Checked = True
+            optcomma.Focus()
+        End If
+
+    End Sub
+
+    Private Sub optOther_CheckedChanged(sender As Object, e As EventArgs) Handles optOther.CheckedChanged
+        If optOther.Checked Then
+            txtOther.Focus()
+        Else
+            txtOther.Text = ""
+        End If
+    End Sub
+
 
 End Class
