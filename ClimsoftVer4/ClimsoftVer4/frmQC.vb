@@ -112,7 +112,7 @@ Public Class frmQC
 
             'sql = "SELECT * FROM obselement ORDER BY elementId"
             sql = "SELECT elementId, description FROM obselement INNER JOIN observationinitial ON elementId = describedBy
-                   WHERE qcStatus = 0 GROUP BY elementId ORDER BY elementId;"
+                   GROUP BY elementId ORDER BY elementId;"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             dss.Clear()
             daa.Fill(dss, "element")

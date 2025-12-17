@@ -256,7 +256,9 @@ Public Class frmUploadToObsFinal
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
 
-            sql = "SELECT * FROM station ORDER BY stationId"
+            'sql = "SELECT * FROM station ORDER BY stationId"
+            sql = "SELECT stationId, stationName FROM station INNER JOIN observationinitial ON stationId = recordedFrom
+                   WHERE qcStatus > 0 GROUP BY stationId ORDER BY stationId;"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             ' Set to unlimited timeout period
             daa.SelectCommand.CommandTimeout = 0
@@ -278,7 +280,9 @@ Public Class frmUploadToObsFinal
                 LstViewStations.Items.Add(itms)
             Next
 
-            sql = "SELECT * FROM obselement ORDER BY elementId"
+            'sql = "SELECT * FROM obselement ORDER BY elementId"
+            sql = "SELECT elementId, description FROM obselement INNER JOIN observationinitial ON elementId = describedBy
+                   WHERE qcStatus > 0 GROUP BY elementId ORDER BY elementId;"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             ' Set to unlimited timeout period
             daa.SelectCommand.CommandTimeout = 0

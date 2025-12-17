@@ -122,7 +122,7 @@ Partial Class frmObsView
         Me.TabSelect.Controls.Add(Me.pnlStationsElements)
         Me.TabSelect.Location = New System.Drawing.Point(4, 22)
         Me.TabSelect.Name = "TabSelect"
-        Me.TabSelect.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabSelect.Padding = New System.Windows.Forms.Padding(3)
         Me.TabSelect.Size = New System.Drawing.Size(1207, 545)
         Me.TabSelect.TabIndex = 0
         Me.TabSelect.Text = "Selection Details"
@@ -792,7 +792,7 @@ Partial Class frmObsView
         Me.tabView.Controls.Add(Me.grpButtons)
         Me.tabView.Location = New System.Drawing.Point(4, 22)
         Me.tabView.Name = "tabView"
-        Me.tabView.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.tabView.Padding = New System.Windows.Forms.Padding(3)
         Me.tabView.Size = New System.Drawing.Size(1207, 545)
         Me.tabView.TabIndex = 1
         Me.tabView.Text = "View Records"
@@ -891,7 +891,7 @@ Partial Class frmObsView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1224, 611)
+        Me.ClientSize = New System.Drawing.Size(1214, 602)
         Me.Controls.Add(Me.btnBackup)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)

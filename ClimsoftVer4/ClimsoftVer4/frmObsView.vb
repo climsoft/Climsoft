@@ -299,19 +299,21 @@
                 dt = .Rows(rw).Cells(2).Value & "-" & .Rows(rw).Cells(3).Value & "-" & .Rows(rw).Cells(4).Value & " " & .Rows(rw).Cells(5).Value.ToString
                 'MsgBox(dt)
                 ' Check for NULL for Period
-                If IsDBNull(.Rows(rw).Cells(6).Value) Then
+
+                If IsDBNull(.Rows(rw).Cells(9).Value) Then
+                    Period = "NULL"
+                ElseIf Not IsNumeric(.Rows(rw).Cells(9).Value) Then
                     Period = "NULL"
                 Else
-                    Period = Val(.Rows(rw).Cells(6).Value)
+                    Period = Val(.Rows(rw).Cells(9).Value)
                 End If
 
                 'sql = "Update " & tblName & " set recordedFrom ='" & .Rows(rw).Cells(0).Value & "' ,describedBy ='" & .Rows(rw).Cells(1).Value & "' ,obsdatetime ='" & dt & "' ,obsvalue ='" & .Rows(rw).Cells(4).Value & "',obslevel ='" & .Rows(rw).Cells(3).Value & "' ,flag ='" & .Rows(rw).Cells(5).Value & "' ,period =" & Period & ", qcstatus ='" & .Rows(rw).Cells(7).Value & "', acquisitiontype ='" & .Rows(rw).Cells(9).Value & "' " &
                 '      "WHERE recordedFrom = '" & stn & "' and describedBy='" & elm & "' and obsdatetime ='" & dt & "' and qcStatus='" & qc & "' and acquisitionType='" & aq & "';"
 
-                sql = "Update " & tblName & " set recordedFrom ='" & .Rows(rw).Cells(0).Value & "' ,describedBy ='" & .Rows(rw).Cells(1).Value & "' ,obsdatetime ='" & dt & "' ,obsvalue ='" & .Rows(rw).Cells(7).Value & "',obslevel ='" & .Rows(rw).Cells(6).Value & "' ,flag ='" & .Rows(rw).Cells(8).Value & "' ,period =" & .Rows(rw).Cells(9).Value & ", qcstatus ='" & .Rows(rw).Cells(10).Value & "', acquisitiontype ='" & .Rows(rw).Cells(12).Value & "' " &
+                sql = "Update " & tblName & " set recordedFrom ='" & .Rows(rw).Cells(0).Value & "' ,describedBy ='" & .Rows(rw).Cells(1).Value & "' ,obsdatetime ='" & dt & "' ,obsvalue ='" & .Rows(rw).Cells(7).Value & "',obslevel ='" & .Rows(rw).Cells(6).Value & "' ,flag ='" & .Rows(rw).Cells(8).Value & "' ,period =" & Period & ", qcstatus ='" & .Rows(rw).Cells(10).Value & "', acquisitiontype ='" & .Rows(rw).Cells(12).Value & "' " &
                       "WHERE recordedFrom = '" & stn & "' and describedBy='" & elm & "' and obsdatetime ='" & dt & "' and qcStatus='" & qc & "' and acquisitionType='" & aq & "';"
 
-                'MsgBox(sql)
                 'cmbElement.Text = sql
                 qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
                 qry.CommandTimeout = 0
@@ -608,6 +610,7 @@
             lstBoxAcquition.Enabled = False
         End If
     End Sub
+
 
     Private Sub cmdSelectAllStations_Click(sender As Object, e As EventArgs) Handles cmdSelectAllStations.Click
         Try
