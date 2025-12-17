@@ -2717,21 +2717,23 @@ Err:
         End Try
     End Sub
     Sub FormattedOutput(fp As Integer, rw As Long, col As Integer, dsf As DataSet)
+        Dim fldNm As String
         Try
 
-            'If InStr(ds.Tables("observationfinal").Rows(rw).Item(col), "NULL") <> 0 Then 'Missing Values to be represented as blanks
-            If IsDBNull(dsf.Tables("observationfinal").Rows(rw).Item(col)) Then
-                Write(fp, "")
-            ElseIf InStr(dsf.Tables("observationfinal").Rows(rw).Item(col), ".") <> 0 Then ' Decimal values to be rounded to 2 decimal places
-                If IsNumeric(dsf.Tables("observationfinal").Rows(rw).Item(col)) Then
-                    Write(fp, Strings.Format(dsf.Tables("observationfinal").Rows(rw).Item(col), "0.00"))
+            With dsf.Tables("observationfinal")
+                fldNm = Strings.LCase(.Columns(col).ColumnName)
+                If IsDBNull(.Rows(rw).Item(col)) Then
+                    Write(fp, "")
+                ElseIf InStr(.Rows(rw).Item(col), ".") <> 0 Then ' Decimal values to be rounded to 2 decimal places except for Latitude and Longitude
+                    If IsNumeric(.Rows(rw).Item(col)) And fldNm <> "lat" And fldNm <> "lon" And fldNm <> "latitude" And fldNm <> "longitude" Then
+                        Write(fp, Strings.Format(.Rows(rw).Item(col), "0.00"))
+                    Else
+                        Write(fp, .Rows(rw).Item(col))
+                    End If
                 Else
-                    Write(fp, dsf.Tables("observationfinal").Rows(rw).Item(col))
+                    Write(fp, .Rows(rw).Item(col))
                 End If
-            Else
-                Write(fp, dsf.Tables("observationfinal").Rows(rw).Item(col))
-            End If
-
+            End With
         Catch ex As Exception
             MsgBox(ex.Message & " at  FormattedOutput")
         End Try
