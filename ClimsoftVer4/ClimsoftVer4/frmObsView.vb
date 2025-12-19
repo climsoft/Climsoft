@@ -920,12 +920,13 @@
             'MsgBox(ex.Message & " " & ex.HResult)
             If ex.HResult = -2147467259 Then
                 MsgBox("Check Selections")
+                Me.Cursor = Cursors.Default
+                Return False
             Else
-                MsgBox(ex.Message & "showRecords")
+                'MsgBox(ex.Message & "showRecords")
+                Me.Cursor = Cursors.Default
+                Return True
             End If
-
-            Me.Cursor = Cursors.Default
-            Return False
         End Try
     End Function
     Function BackupRecords(tbl As String, sql As String) As Boolean

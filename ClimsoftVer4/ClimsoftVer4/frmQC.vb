@@ -80,6 +80,9 @@ Public Class frmQC
         chkAllElements.Checked = False
 
         Try
+
+            Me.Cursor = Cursors.WaitCursor
+
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
 
@@ -129,8 +132,9 @@ Public Class frmQC
                 itms = New ListViewItem(elm)
                 lstViewElements.Items.Add(itms)
             Next
-
+            Me.Cursor = Cursors.Default
         Catch ex As MySql.Data.MySqlClient.MySqlException
+            Me.Cursor = Cursors.Default
             MsgBox(ex.Message)
             conns.Close()
         End Try
