@@ -191,17 +191,11 @@ Public Class formDataView
             End If
 
             'Convert Import file path seperators to SQL style
-            importFile = Strings.Left(x, 1)
-            For i = 2 To Len(x) - 1
-                If Strings.Mid(x, i, 1) = "\" Then
-                    importFile = importFile & "/"
-                Else
-                    importFile = importFile & Strings.Mid(x, i, 1)
-                End If
-            Next
-            importFile = importFile & Strings.Right(x, 1)
+            importFile = x.Replace("\", "/")
+            'MsgBox(x & " " & importFile)
 
-            'MsgBox(importFile)
+
+
             Sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
                    /*!40101 SET NAMES utf8mb4 */;
                    /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
@@ -239,7 +233,12 @@ Public Class formDataView
     End Sub
 
     Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
-        frmFormsExport.Show()
+        If InStr(dsSourceTableName, "form_") = 0 Then
+            metadataXport()
+        Else
+            frmFormsExport.Show()
+        End If
+
     End Sub
 
     Private Sub cboStnId_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStnId.SelectedIndexChanged
@@ -577,7 +576,6 @@ Public Class formDataView
                     If IsDBNull(ds1.Tables(dsSourceTableName).Rows(i).Item(j)) Then
                         CellValue = Chr(0) '"\N" '""
 
-                        'dat = dat & "," & "\N"
                     Else
                         CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
 
@@ -585,9 +583,14 @@ Public Class formDataView
                             CellValue = DateAndTime.Year(CellValue) & "-" & DateAndTime.Month(CellValue) & "-" & DateAndTime.Day(CellValue) & " " & DateAndTime.Hour(CellValue) & ":" & DateAndTime.Minute(CellValue) & ":" & DateAndTime.Second(CellValue)
                             'MsgBox(CellValue)
                         End If
-                        ' Exclude escape characters that had been observe in some fields
+
+                        ' Exclude escape characters that had been observed in some fields
                         If InStr(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Chr(10)) > 0 Or InStr(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Chr(13)) > 0 Then
-                            CellValue = Strings.Left(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Len(ds1.Tables(dsSourceTableName).Rows(i).Item(j)) - 1)
+
+                            CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
+                            CellValue = CellValue.Replace(Chr(10), String.Empty)
+                            CellValue = CellValue.Replace(Chr(13), String.Empty)
+
                         End If
                     End If
 
@@ -895,8 +898,93 @@ Public Class formDataView
             Return False
         End Try
     End Function
+    Sub metadataXport()
+        Dim hdr, dat, exportfile, x, CellValue As String
+        Dim ds1 As New DataSet
+        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
 
-    'Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView.CellValueChanged
-    '    MsgBox(id & " " & yr & " " & mn & " " & Me.DataGridView.CurrentCell.Value)
-    'End Sub
+        Try
+            connStr = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = connStr & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
+            conn.Open()
+
+            exportfile = dsSourceTableName & "_hdr"
+            dlgExportFile.Filter = "Form Export file|*.csv"
+            dlgExportFile.Title = ClsTranslations.GetTranslation("Save Export File")
+            dlgExportFile.FileName = exportfile
+            dlgExportFile.ShowDialog()
+            x = dlgExportFile.FileName
+
+            If InStr(x, dsSourceTableName) = 0 Then
+                MsgBox(ClsTranslations.GetTranslation("Improper filename. It Must contain the phrase: ") & dsSourceTableName)
+                'FileClose(111)
+                conn.Close()
+                Exit Sub
+            End If
+
+            FileOpen(111, x, OpenMode.Output)
+
+            hdr = DataGridView.Columns(0).Name
+
+            For i = 1 To DataGridView.ColumnCount - 1
+                hdr = hdr & "," & DataGridView.Columns(i).Name
+            Next
+            PrintLine(111, hdr)
+
+            FileClose(111)
+
+            Sql = "Select * from " & dsSourceTableName & ";"
+            'MsgBox(Sql)
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+
+            ds1.Clear()
+            da1.Fill(ds1, dsSourceTableName)
+
+            'MsgBox(ds1.Tables(dsSourceTableName).Rows.Count)
+
+            FileOpen(111, x, OpenMode.Append)
+
+            For i = 0 To ds1.Tables(dsSourceTableName).Rows.Count - 1
+                dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
+                For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
+                    If IsDBNull(ds1.Tables(dsSourceTableName).Rows(i).Item(j)) Then
+                        CellValue = Chr(0) '"\N" '""
+
+                    Else
+                        CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
+                        'MsgBox(CellValue)
+                        If IsDate(CellValue) And InStr(CellValue, ".") = 0 Then
+                            CellValue = DateAndTime.Year(CellValue) & "-" & DateAndTime.Month(CellValue) & "-" & DateAndTime.Day(CellValue) & " " & DateAndTime.Hour(CellValue) & ":" & DateAndTime.Minute(CellValue) & ":" & DateAndTime.Second(CellValue)
+                            'MsgBox(CellValue)
+                        End If
+
+                        ' Exclude escape characters that had been observed in some fields
+                        If InStr(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Chr(10)) > 0 Or InStr(ds1.Tables(dsSourceTableName).Rows(i).Item(j), Chr(13)) > 0 Then
+
+                            CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
+                            CellValue = CellValue.Replace(Chr(10), String.Empty)
+                            CellValue = CellValue.Replace(Chr(13), String.Empty)
+
+                        End If
+                    End If
+
+                    dat = dat & "," & CellValue
+
+                Next
+                'MsgBox(dat)
+                Print(111, dat & Chr(10))
+            Next
+            FileClose(111)
+
+            conn.Close()
+
+            MsgBox(ClsTranslations.GetTranslation("File") & " '" & exportfile & "' " & ClsTranslations.GetTranslation("Successfully Exported"))
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+            FileClose(111)
+        End Try
+    End Sub
+
 End Class

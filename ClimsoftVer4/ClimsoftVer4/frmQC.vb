@@ -86,9 +86,9 @@ Public Class frmQC
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
 
-            'sql = "SELECT * FROM station ORDER BY stationId"
-            sql = "SELECT stationId, stationName FROM station INNER JOIN observationinitial ON stationId = recordedFrom
-                   GROUP BY stationId ORDER BY stationId;"
+            sql = "SELECT * FROM station ORDER BY stationId"
+            'sql = "SELECT stationId, stationName FROM station INNER JOIN observationinitial ON stationId = recordedFrom
+            '       GROUP BY stationId ORDER BY stationId;"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             dss.Clear()
 
@@ -113,9 +113,9 @@ Public Class frmQC
 
             Next
 
-            'sql = "SELECT * FROM obselement ORDER BY elementId"
-            sql = "SELECT elementId, description FROM obselement INNER JOIN observationinitial ON elementId = describedBy
-                   GROUP BY elementId ORDER BY elementId;"
+            sql = "SELECT * FROM obselement ORDER BY elementId"
+            'sql = "SELECT elementId, description FROM obselement INNER JOIN observationinitial ON elementId = describedBy
+            '       GROUP BY elementId ORDER BY elementId;"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             dss.Clear()
             daa.Fill(dss, "element")

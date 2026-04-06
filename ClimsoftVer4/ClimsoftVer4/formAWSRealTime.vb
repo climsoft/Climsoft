@@ -16,9 +16,13 @@
 
 Imports System.IO
 Imports System.Net
+Imports System.Runtime.CompilerServices
 Imports System.Security.Cryptography
 Imports System.Security.Cryptography.Pkcs
+Imports System.Windows.Forms.DataVisualization.Charting
 Imports Google.Protobuf.WellKnownTypes
+Imports MySql
+Imports Mysqlx
 Imports Org.BouncyCastle.Asn1
 
 Imports Org.BouncyCastle.Math
@@ -120,21 +124,31 @@ Public Class formAWSRealTime
     End Sub
 
     Private Sub cmdSites_Click(sender As Object, e As EventArgs) Handles cmdSites.Click
-        ShowPanel(pnlSites, "Site Settings")
-        'SetDataSet("aws_sites")
+        Try
+            ShowPanel(pnlSites, "Site Settings")
+            'SetDataSet("aws_sites")
 
-        FillList(txtDataStructure, "aws_structures", "strName")
-        FillList(txtSiteID, "station", "stationId")
-        FillList(txtSiteName, "station", "stationName")
-        FillList(txtIP, "aws_basestation", "ftpId")
+            FillList(txtDataStructure, "aws_structures", "strName")
+            FillList(txtSiteID, "station", "stationId")
+            FillList(txtSiteName, "station", "stationName")
+            FillList(txtIP, "aws_basestation", "ftpId")
 
-        'PopulateForm("sites", txtsitesNav, rec)
-        DataGridViewSites.Visible = False
-        SetDataSet("aws_sites")
-        rec = 0
-        PopulateForm("sites", txtSitesNavigator, rec)
-        pnlSites.Dock = DockStyle.Right
-        'rec = 0
+            'FillList(txtDataStructure, "aws_structures", "strName")
+            'FillList(txtSiteID, "station", "stationId")
+            'FillList(txtSiteName, "station", "stationName")
+            'FillList(txtIP, "aws_basestation", "awsServerIP")
+
+            'PopulateForm("sites", txtsitesNav, rec)
+            DataGridViewSites.Visible = False
+            SetDataSet("aws_sites")
+            rec = 0
+            PopulateForm("sites", txtSitesNavigator, rec)
+            pnlSites.Dock = DockStyle.Right
+            'rec = 0
+        Catch ex As Exception
+            MsgBox(ex.Message & " @ cmdSites_Click")
+        End Try
+
     End Sub
 
     Private Sub cmdDataStructures_Click(sender As Object, e As EventArgs) Handles cmdDataStructures.Click
@@ -220,24 +234,30 @@ Err:
     End Sub
 
     Sub SetDataSet(tabl As String)
-        On Error GoTo Err
+        'On Error GoTo Err
+        'Dim daa As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim sql As String
 
-        sql = "SELECT * FROM " & tabl
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        ' Remove timeout requirement
-        da.SelectCommand.CommandTimeout = 0
+        Try
+            sql = "SELECT * FROM " & tabl
 
-        ds.Clear()
-        da.Fill(ds, tabl)
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
 
-        rec = 0
-        Kount = ds.Tables(tabl).Rows.Count
+            ' Remove timeout requirement
+            da.SelectCommand.CommandTimeout = 0
 
-        Exit Sub
-Err:
-        Log_Errors(Err.Description & " SetDataset")
-        'MsgBox(Err.Description)
+            ds.Clear()
+            da.Fill(ds, tabl)
+
+            rec = 0
+            Kount = ds.Tables(tabl).Rows.Count
+
+            'Exit Sub
+            'Err:
+        Catch ex As Exception
+            Log_Errors(Err.Description & " SetDataset")
+            'MsgBox(Err.Description)
+        End Try
     End Sub
     Function GetDataSet(tabl As String, sql As String) As DataSet
         On Error GoTo Err
@@ -323,9 +343,9 @@ Err:
         End Select
 
         navbar.Text = ""
-        If num < 0 Then num = 0
+        If num = 0 Then navbar.Text = 1 & "of" & Kount ' num = 0
 
-        If Kount > 0 Then navbar.Text = num + 1 & "of" & Kount
+        If num > 0 Then navbar.Text = num + 1 & "of" & Kount
 
     End Sub
 
@@ -431,16 +451,19 @@ Err:
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
         DeleteRecord = True
-        On Error GoTo Err
+        Try
 
-        ds.Tables(tbl).Rows(recs).Delete()
-        da.Update(ds, tbl)
+            ds.Tables(tbl).Rows(recs).Delete()
+            da.Update(ds, tbl)
 
-        MsgBox("Record Deleted")
-        Exit Function
-Err:
-        MsgBox(Err.Description)
-        DeleteRecord = False
+            MsgBox("Record Deleted")
+            Return True
+
+        Catch ex As Exception
+            MsgBox(Err.Description)
+            DeleteRecord = False
+        End Try
+
     End Function
 
     'Private Sub cmdBstDelete_Click(sender As Object, e As EventArgs) Handles cmdBstDelete.Click
@@ -574,10 +597,13 @@ Err:
     Sub DeleteRecord(tbl As String, pnl As String, Navbar As TextBox)
         If DeleteRecord(tbl, rec) Then
 
-            If Kount > 0 Then
-                Kount = Kount - 1
-                PopulateForm(pnl, Navbar, rec - 1)
-            End If
+            'If Kount > 0 Then
+            '    Kount = Kount - 1
+            '    PopulateForm(pnl, Navbar, rec - 1)
+            'End If
+            SetDataSet(tbl)
+            PopulateForm(pnl, Navbar, 0)
+
         End If
     End Sub
 
@@ -640,6 +666,7 @@ Err:
     End Sub
 
     Private Sub btnMoveNext_Click(sender As Object, e As EventArgs) Handles btnMoveNext.Click
+
         If rec < Kount - 1 Then
             rec = rec + 1
             PopulateForm("sites", txtSitesNavigator, rec)
@@ -647,19 +674,20 @@ Err:
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
-        'On Error GoTo Err
+
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
+
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
-        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
-        Dim recCommit As New dataEntryGlobalRoutines
+        ''Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        'Dim recCommit As New dataEntryGlobalRoutines
+        Dim qry As New MySql.Data.MySqlClient.MySqlCommand
 
         'sql = "SELECT * FROM aws_sites"
         'ds = GetDataSet("aws_sites", sql)
+        'SetDataSet("aws_sites")
         Try
-
-
             dsNewRow = ds.Tables("aws_sites").NewRow
             dsNewRow.Item("SiteID") = txtSiteID.Text
             dsNewRow.Item("SiteName") = txtSiteName.Text
@@ -715,15 +743,44 @@ Err:
 
             ds.Tables("aws_sites").Rows.Add(dsNewRow)
             da.Update(ds, "aws_sites")
-            FormReset("sites")
+            MsgBox("New site successfully added")
+            SetDataSet("aws_sites")
 
+            'FormReset("sites")
+            rec = 0
+            PopulateForm("sites", txtSitesNavigator, ds.Tables("aws_sites").Rows.Count - 1)
+
+            ' Code commented since a simple one was deviside. It's however, retained for future reference as an altervative solution
+
+            'Dim sql0 As String
+            'Dim oprts = 0, gtsE = 0, prfx = 0, Hr = 0, bfr = 0, csv = 0
+
+            'If chkOperational.Checked Then oprts = 1
+            'If chkGTSEncode.Checked Then gtsE = 1
+            'If chkPrefix.Checked Then prfx = 1
+            'If chkHrsAdjust.Checked Then Hr = 1
+
+            ''Added fields for WIS2 Encoding
+            'If optBufr.Checked Then bfr = 1
+            'If optCSV.Checked Then csv = 1
+
+            'sql0 = "INSERT IGNORE INTO `aws_sites` (`SiteID`, `SiteName`, `InputFile`, `DataStructure`,`MissingDataFlag`,`awsServerIp`,`GTSHeader`,
+            '        `FilePrefix`,`AdjustHH`,`UTCDiff`,`OperationalStatus`,`GTSEncode`,`chkPrefix`,`AdjustHr`,`BUFR`,`CSV`)
+            '        VALUES ('" & txtSiteID.Text & "', '" & txtSiteName.Text & "','" & txtInFile.Text & "','" & txtDataStructure.Text & "',
+            '        '" & txtFlag.Text & "','" & txtIP.Text & "','" & txtGTSHeader.Text & "','" & txtfilePrefix.Text & "','" & Val(txtHrs.Text) & "', '" & Val(txtUTCdiff.Text) & "',
+            '        '" & oprts & "','" & gtsE & "','" & prfx & "','" & Hr & "','" & bfr & "','" & csv & "');"
+
+            'qry.Connection = dbconn
+            'qry.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            'qry.ExecuteNonQuery()   ' Execute the query
+            'PopulateForm("sites", txtSitesNavigator, 0)
+            'MsgBox("New Site Successfully Added!")
 
         Catch Err As Exception
-            MsgBox(Err.HResult & " : " & Err.Message)
+
+            MsgBox(Err.HResult & " : " & Err.Message & " @ Add Record")
         End Try
-        '        Exit Sub
-        'Err:
-        '        MsgBox(Err.Number & " : " & Err.Description)
+
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -755,65 +812,88 @@ Err:
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
-        Dim sqlr As String
-        Dim qry As MySql.Data.MySqlClient.MySqlCommand
-        Dim bufrState, csvState As Integer
+        Dim recNo As Integer
+        'Dim sqlr As String
+        'Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        'Dim bufrState, csvState As Integer
 
-        If optBufr.Checked = True Then
-            bufrState = 1
-            csvState = 0
-        Else
-            bufrState = 0
-            csvState = 1
-        End If
+        'If optBufr.Checked = True Then
+        '    bufrState = 1
+        '    csvState = 0
+        'Else
+        '    bufrState = 0
+        '    csvState = 1
+        'End If
 
-        sqlr = "UPDATE aws_sites set SiteName = '" & txtSiteName.Text & "', InputFile= '" & txtInFile.Text & "',FilePrefix ='" & txtfilePrefix.Text & "',chkPrefix = " & chkPrefix.CheckState & ",DataStructure = '" & txtDataStructure.Text & "',UTCDiff = '" & txtUTCdiff.Text & "',AdjustHH = '" & txtHrs.Text & "',AdjustHr = '" & chkHrsAdjust.CheckState &
-                   "',MissingDataFlag = '" & txtFlag.Text & "',awsServerIP ='" & txtIP.Text & "',OperationalStatus = " & chkOperational.CheckState & ",GTSEncode = " & chkGTSEncode.CheckState & ",GTSHeader = '" & txtGTSHeader.Text & "',BUFR = " & bufrState & ",CSV = " & csvState & " WHERE SiteID = '" & txtSiteID.Text & "';"
+        'sqlr = "UPDATE aws_sites set SiteName = '" & txtSiteName.Text & "', InputFile= '" & txtInFile.Text & "',FilePrefix ='" & txtfilePrefix.Text & "',chkPrefix = " & chkPrefix.CheckState & ",DataStructure = '" & txtDataStructure.Text & "',UTCDiff = '" & txtUTCdiff.Text & "',AdjustHH = '" & txtHrs.Text & "',AdjustHr = '" & chkHrsAdjust.CheckState &
+        '           "',MissingDataFlag = '" & txtFlag.Text & "',awsServerIP ='" & txtIP.Text & "',OperationalStatus = " & chkOperational.CheckState & ",GTSEncode = " & chkGTSEncode.CheckState & ",GTSHeader = '" & txtGTSHeader.Text & "',BUFR = " & bufrState & ",CSV = " & csvState & " WHERE SiteID = '" & txtSiteID.Text & "';"
 
-        qry = New MySql.Data.MySqlClient.MySqlCommand(sqlr, dbconn)
+        'qry = New MySql.Data.MySqlClient.MySqlCommand(sqlr, dbconn)
 
-        Try
-            qry.ExecuteNonQuery()
-            MsgBox("Record successfully Updated")
-            'PopulateForm("sites", txtSitesNavigator, rec)
-        Catch rx As Exception
-            MsgBox(rx.Message)
-        End Try
-
-        '    ds.Tables("aws_sites").Rows(rec).Item("SiteID") = txtSiteID.Text
-        '             ds.Tables("aws_sites").Rows(rec).Item("SiteName") = txtSiteName.Text
-        '             ds.Tables("aws_sites").Rows(rec).Item("InputFile") = txtInFile.Text
-        '             ds.Tables("aws_sites").Rows(rec).Item("DataStructure") = txtDataStructure.Text
-        '             ds.Tables("aws_sites").Rows(rec).Item("MissingDataFlag") = txtFlag.Text
-        '             ds.Tables("aws_sites").Rows(rec).Item("awsServerIp") = txtIP.Text
-        '             ds.Tables("aws_sites").Rows(rec).Item("GTSHeader") = txtGTSHeader.Text
-        '             ds.Tables("aws_sites").Rows(rec).Item("FilePrefix") = txtfilePrefix.Text
-        '             If chkOperational.Checked Then
-        '                 ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 1
-        '             Else
-        '                 ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 0
-        '             End If
-        '             If chkGTSEncode.Checked Then
-        '                 ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 1
-        '             Else
-        '                 ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 0
-        '             End If
-        '             If chkPrefix.Checked Then
-        '                 ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 1
-        '             Else
-        '                 ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 0
-        '             End If
-
-        '             'Add a new record to the data source table
-        '             'If cmdtype = "add" Then ds.Tables("station").Rows.Add(dsNewRow)
-
-        '             da.Update(ds, "aws_sites")
-
-        '             recUpdate.messageBoxRecordedUpdated()
-        '        'ClearStationForm()
-        'Catch ex As Exception
-        '        MsgBox("Update Failure")
+        'Try
+        '    qry.ExecuteNonQuery()
+        '    MsgBox("Record successfully Updated")
+        '    'PopulateForm("sites", txtSitesNavigator, rec)
+        'Catch rx As Exception
+        '    MsgBox(rx.Message)
         'End Try
+        recNo = rec
+        Try
+            ds.Tables("aws_sites").Rows(rec).Item("SiteID") = txtSiteID.Text
+            ds.Tables("aws_sites").Rows(rec).Item("SiteName") = txtSiteName.Text
+            ds.Tables("aws_sites").Rows(rec).Item("InputFile") = txtInFile.Text
+            ds.Tables("aws_sites").Rows(rec).Item("DataStructure") = txtDataStructure.Text
+            ds.Tables("aws_sites").Rows(rec).Item("MissingDataFlag") = txtFlag.Text
+            ds.Tables("aws_sites").Rows(rec).Item("awsServerIp") = txtIP.Text
+            ds.Tables("aws_sites").Rows(rec).Item("GTSHeader") = txtGTSHeader.Text
+            ds.Tables("aws_sites").Rows(rec).Item("FilePrefix") = txtfilePrefix.Text
+
+            If chkOperational.Checked Then
+                ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 1
+            Else
+                ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 0
+            End If
+            If chkGTSEncode.Checked Then
+                ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 1
+            Else
+                ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 0
+            End If
+            If chkPrefix.Checked Then
+                ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 1
+            Else
+                ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 0
+            End If
+            If chkHrsAdjust.Checked Then
+                ds.Tables("aws_sites").Rows(rec).Item("AdjustHr") = 1
+            Else
+                ds.Tables("aws_sites").Rows(rec).Item("AdjustHr") = 0
+            End If
+
+            'Added fields for WIS2BOX Encoding
+            If optBufr.Checked Then
+                ds.Tables("aws_sites").Rows(rec).Item("BUFR") = 1
+            Else
+                ds.Tables("aws_sites").Rows(rec).Item("BUFR") = 0
+            End If
+            If optCSV.Checked Then
+                ds.Tables("aws_sites").Rows(rec).Item("CSV") = 1
+            Else
+                ds.Tables("aws_sites").Rows(rec).Item("CSV") = 0
+            End If
+
+            'Add a new record to the data source table
+            'If cmdtype = "add" Then ds.Tables("station").Rows.Add(dsNewRow)
+
+            da.Update(ds, "aws_sites")
+
+            recUpdate.messageBoxRecordedUpdated()
+            SetDataSet("aws_sites")
+            rec = recNo
+            PopulateForm("sites", txtSitesNavigator, rec)
+            'ClearStationForm()
+        Catch ex As Exception
+            MsgBox("Update Failure")
+        End Try
     End Sub
 
     Sub FillList(ByRef lst As ComboBox, tbl As String, lstfld As String)
@@ -1285,8 +1365,8 @@ Err:
         If ds.Tables("aws_sites").Rows.Count = 0 Then
             Log_Errors("No AWS sites defined. Refer to the Manuals then use the Tab 'Sites' to define the installed AWS sites")
             Me.Cursor = Cursors.Default
-            optStop.Checked = True
-            'Exit Sub
+            'optStop.Checked = True
+            Exit Sub
         End If
         '  Locate and processs aws input data files
         Me.Cursor = Cursors.WaitCursor
@@ -1356,8 +1436,12 @@ Err:
                     End If
                 End If
 
+                Dim ffolder, fdata As String
+
                 infile = .Rows(i).Item("InputFile")
-                'MsgBox(i & infile)
+                ffolder = String.Empty
+                If date_boundFolder(infile, ffolder) Then infile = ffolder
+
                 Process_Status("Seeking input data - " & infile)
                 txtStatus.Refresh()
 
@@ -1545,9 +1629,89 @@ Err:
         FileClose(30)
         FileClose(31)
     End Sub
-    'Sub Next_Encoding_Time()
+    'Function date_boundFolder(flder As String, ffile As String) As String
+    '    Dim yy, mm, mm1, dd, dtPath As String
 
-    'End Sub
+    '    yy = DateAndTime.Year(Now())
+    '    mm = DateAndTime.Month(Now())
+    '    mm1 = DateAndTime.MonthName(mm, Abbreviate:=True)
+    '    dd = DateAndTime.Day(Now())
+
+    '    Try
+    '        If InStr(flder, "yyyyMM") > 0 Then
+    '            dtPath = yy & "/" & mm1
+    '            flder = flder.Replace("yyyyMM", dtPath)
+    '            flder = flder.Replace("\", "/")
+    '            Return flder & "/" & ffile
+
+    '        ElseIf InStr(flder, "yyyyMMdd") > 0 Then
+    '            dtPath = yy & "/" & mm1 & "/" & dd.PadLeft(2, "0")
+    '            flder = flder.Replace("yyyyMMdd", dtPath)
+    '            flder = flder.Replace("\", "/")
+    '            Return flder & "/" & ffile
+
+    '        ElseIf InStr(flder, "yyyymm") > 0 Then
+    '            dtPath = yy & "/" & mm.PadLeft(2, "0")
+    '            flder = flder.Replace("yyyymm", dtPath)
+    '            flder = flder.Replace("\", "/")
+    '            Return flder & "/" & ffile
+
+    '        ElseIf InStr(flder, "yyyymmdd") > 0 Then
+    '            dtPath = yy & "/" & mm.PadLeft(2, "0") & "/" & dd.PadLeft(2, "0")
+    '            flder = flder.Replace("yyyymmdd", dtPath)
+    '            flder = flder.Replace("\", "/")
+    '            Return flder & "/" & ffile
+    '        Else
+    '            Return flder & "/" & ffile
+    '        End If
+
+    '    Catch ex As Exception
+    '        Return flder & "/" & ffile
+    '    End Try
+    'End Function
+
+    Function date_boundFolder(inFolder As String, ByRef flder As String) As Boolean
+        Dim yy, mm, mm1, dd, pFolder, dtPath As String
+
+        yy = DateAndTime.Year(Now())
+        mm = DateAndTime.Month(Now())
+        mm1 = DateAndTime.MonthName(mm, Abbreviate:=True)
+        dd = DateAndTime.Day(Now())
+
+        Try
+            pFolder = IO.Directory.GetParent(inFolder).Name
+
+            If pFolder = "yyyymmm" Then
+                dtPath = yy & "/" & mm1
+                flder = inFolder.Replace("yyyymmm", dtPath)
+                flder = flder.Replace("\", "/")
+                Return True
+
+            ElseIf pFolder = "yyyymmmdd" Then
+                dtPath = yy & "/" & mm1 & "/" & dd.PadLeft(2, "0")
+                flder = inFolder.Replace("yyyymmmdd", dtPath)
+                flder = flder.Replace("\", "/")
+                Return True
+
+            ElseIf pFolder = "yyyymm" Then
+                dtPath = yy & "/" & mm.PadLeft(2, "0")
+                flder = inFolder.Replace("yyyymm", dtPath)
+                flder = flder.Replace("\", "/")
+                Return True
+
+            ElseIf pFolder = "yyyymmdd" Then
+                dtPath = yy & "/" & mm & "/" & dd
+                flder = inFolder.Replace("yyyymmdd", dtPath)
+                flder = flder.Replace("\", "/")
+                Return True
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     Function Compute_Descriptors(tt_aws As String, ByRef Desc_Bits As String) As Boolean
         Compute_Descriptors = True
         On Error GoTo Err
@@ -4203,16 +4367,16 @@ Err:
                     dat = dat & " "
                 Next
 
-        ' Add leading zeroes to short data strings
-        CCITT_Binary = ""
-        binstr = ""
-        If Len(dat) < DataWidth / 8 Then
-            For kount = 1 To DataWidth - Len(dat) * 8
-                binstr = binstr & "0"
-            Next kount
-        Else
-            dat = Strings.Left(dat, DataWidth / 8)
-        End If
+                ' Add leading zeroes to short data strings
+                CCITT_Binary = ""
+                binstr = ""
+                If Len(dat) < DataWidth / 8 Then
+                    For kount = 1 To DataWidth - Len(dat) * 8
+                        binstr = binstr & "0"
+                    Next kount
+                Else
+                    dat = Strings.Left(dat, DataWidth / 8)
+                End If
 
 
                 'For kount = 1 To DataWidth - Len(dat) * 8
@@ -4637,7 +4801,7 @@ Err:
         ValidFile = False
 
         'AWS_BUFR_File = System.IO.Path.GetFullPath(Application.StartupPath & "\data\" & msg_file & Format(1, "0000") & ".f")
-        AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
+        AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".bin"
         'AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".tmp"
 
         BUFR_octet_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_octets.txt"
@@ -5738,6 +5902,10 @@ Err:
     ' Definition for data hours adjustment requirements
     Dim AdjustHr, AdjustHH, UTCDiff, UTCHH As Integer
 
+    Private Sub cmdBstDelete_Click(sender As Object, e As EventArgs) Handles cmdBstDelete.Click
+        DeleteRecord("aws_basestation", "bss", txtbssNavigator)
+    End Sub
+
     Function Process_InputFiles(dts As DataSet) As Boolean
         Dim hdrows, kount As Integer
         Dim rs, rstr As New DataSet
@@ -5892,12 +6060,11 @@ Err:
                         recs = 0
 
                         For Each row As DataRow In result
-
+                            If Not update_db(row, colmn, nat_id, flg, AWSsite, obsv_name, Units, L_limit, U_limit, Bufr, E_Abbrev) Then Continue For
                             recs = recs + 1
                             Process_Status("Processing input record " & recs & " of " & result.Count) ' & "  From " & infile)
                             txtStatus.Refresh()
-                            If Not update_db(row, colmn, nat_id, flg, AWSsite, obsv_name, Units, L_limit, U_limit, Bufr, E_Abbrev) Then Continue For
-
+                            'If Not update_db(row, colmn, nat_id, flg, AWSsite, obsv_name, Units, L_limit, U_limit, Bufr, E_Abbrev) Then Continue For
                         Next
 
                     End If
@@ -6129,8 +6296,8 @@ Err:
                 'Log_Errors(DateDiff("h", dttdb, Now()) & " <=  " & CInt(txtEncode.Text))
 
                 'If DateDiff("h", dttdb, Now()) <= CInt(txtEncode.Text) Then
-                If DateDiff("h", Now(), dttdb) < CInt(txtEncode.Text) Then
-                    ' Log_Errors(dttdb & " <=> " & Now() & "  " & DateDiff("h", dttdb, Now()))
+                If CInt(DateDiff("h", dttdb, Now())) < CInt(txtEncode.Text) Then
+                    'Log_Errors(dttdb & " <=> " & Now() & "  " & DateDiff("h", Now(), dttdb) & "<=>" & CInt(txtEncode.Text))
 
                     ' Convert time to UTC
                     Dim utc As String
@@ -6153,7 +6320,8 @@ Err:
                             End If
                         Else
                             'Create CSV file for WIS2BOX
-                            If CSV_E > 0 Then CSV4WIS2BOX(stn, dttdb, utc)
+                            'If CSV_E > 0 Then CSV4WIS2BOX(stn, dttdb, utc)
+                            If CSV_E > 0 Then AWS_CSV4WIS2BOX(stn, dttdb, utc)
                         End If
 
 
@@ -6417,7 +6585,7 @@ Err:
         Try
             'FileOpen(14, csvwisb2box_file, OpenMode.Output)
 
-           sql = "SELECT wsi as WIGOS_ID,left(wmoid,2) AS WMO_Block,right(wmoid,3) AS WMO_Number, stationName as Station_Name, year(obsDatetime) as Datetime_Year,month(obsDatetime) As Datetime_Month,day(obsDatetime) as Datetime_Day,hour(obsDatetime)+1 as Datetime_Hour, '0' AS Datetime_Minute,latitude as Latitude, longitude as Longitude, elevation as Elevation, 
+            sql = "SELECT wsi as WIGOS_ID,left(wmoid,2) AS WMO_Block,right(wmoid,3) AS WMO_Number, stationName as Station_Name, year(obsDatetime) as Datetime_Year,month(obsDatetime) As Datetime_Month,day(obsDatetime) as Datetime_Day,hour(obsDatetime)+1 as Datetime_Hour, '0' AS Datetime_Minute,latitude as Latitude, longitude as Longitude, elevation as Elevation, 
 
                AVG(IF(describedBy = '884', value, NULL)) AS 'Pressure_Barometric', 
                AVG(IF(describedBy = '891', value, NULL)) AS 'Pressure_QNH', 
@@ -6474,6 +6642,268 @@ Err:
         Catch ex As Exception
             Log_Errors(ex.Message & " @ CSV4WIS2BOX")
             FileClose(14)
+            Return False
+        End Try
+    End Function
+    Function AWS_CSV4WIS2BOX(stn As String, timestamp As String, UTC As String) As Boolean
+        Dim csvwisb2box_file, wsi_series, wsi_issuer, wsi_issue_number, wsi_local, recs, hdrs, wisrecs(50), wishdrs(50), dttime As String
+
+        'csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & stn & "-" & DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & "-" & DateAndTime.Hour(timestamp) & ".csv"
+        dttime = DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & " " & DateAndTime.Hour(timestamp) & ":" & DateAndTime.Minute(timestamp) & ":" & DateAndTime.Second(timestamp)
+        'Log_Errors(csvwisb2box_file)
+        Try
+            'FileOpen(14, csvwisb2box_file, OpenMode.Output)
+
+            sql = "SELECT wsi as WIGOS_ID,latitude, longitude, elevation as station_height_above_msl,left(wmoid,2) AS wmo_block_number,right(wmoid,3) AS wmo_station_number, year(obsDatetime) as year,month(obsDatetime) As month,day(obsDatetime) as day,hour(obsDatetime)+1 as hour, '0' AS minute, 
+
+               AVG(IF(describedBy = '884', value, NULL)) AS 'station_pressure', 
+               AVG(IF(describedBy = '891', value, NULL)) AS 'msl_pressure', 
+               AVG(IF(describedBy = '881', value, NULL)) AS 'air_temperature', 
+               AVG(IF(describedBy = '885', value, NULL)) AS 'dewpoint_temperature', 
+               AVG(IF(describedBy = '893', value, NULL)) AS 'relative_humidity', 
+               SUM(IF(describedBy = '892', value, NULL)) AS 'total_precipitation_1_hour',
+               AVG(IF(describedBy = '895', value, NULL)) AS 'wind_direction',
+               AVG(IF(describedBy = '897', value, NULL)) AS 'wind_speed',
+               AVG(IF(describedBy = '887', value, NULL)) AS 'maximum_wind_gust_direction_1_hour',
+               AVG(IF(describedBy = '886', value, NULL)) AS 'maximum_wind_gust_speed_1_hour'
+               FROM (SELECT wsi,wmoid,recordedFrom,StationName,latitude, longitude, elevation, describedBy, obsDatetime, obsValue value 
+               FROM  station INNER JOIN observationfinal ON stationId = recordedFrom WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='884' OR  describedBy = '891' OR  describedBy = '881' OR  describedBy = '885' OR  describedBy = '895' 
+               OR  describedBy = '893' OR  describedBy = '892' OR  describedBy = '895' OR  describedBy = '897' OR  describedBy = '887' OR  describedBy = '886') 
+               and (obsdatetime BETWEEN DATE_ADD('" & dttime & "', INTERVAL -1 HOUR ) AND '" & dttime & "') ORDER BY recordedFrom, obsDatetime) t 
+               GROUP BY StationName, year(obsDatetime), month(obsDatetime), day(obsDatetime);"
+
+            If Not AWS_WIS2BOX_Observations(stn, wsi_series, wsi_issuer, wsi_issue_number, wsi_local, dttime, sql, wishdrs, wisrecs, UTC) Then
+                Log_Errors("Unable to construct WIS2BOX record")
+                Return False
+            End If
+
+            'hdrs = "wsi_series,wsi_issuer,wsi_issue_number,wsi_local"
+            'recs = wsi_series & "," & wsi_issuer & "," & wsi_issue_number & "," & wsi_local
+
+            hdrs = wishdrs(0)
+            recs = wisrecs(0)
+
+            For i = 1 To 43
+                hdrs = hdrs & "," & wishdrs(i)
+                recs = recs & "," & wisrecs(i)
+            Next
+
+            ' Create a file for WIS2BOX CSV data output
+
+            'csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\WIGOS-" & WIGOS_id & "-" & DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & "-" & DateAndTime.Hour(timestamp) & ".csv"
+            csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\WIGOS-" & WIGOS_id & "-" & DateAndTime.Year(UTC) & "-" & DateAndTime.Month(UTC) & "-" & DateAndTime.Day(UTC) & "-" & DateAndTime.Hour(UTC) & ".csv"
+
+
+
+            FileOpen(14, csvwisb2box_file, OpenMode.Output)
+
+            PrintLine(14, hdrs)
+            PrintLine(14, recs)
+
+            CSVWIS2BOX_Send(csvwisb2box_file)
+            lstOutputFiles.Items.Add(IO.Path.GetFileName(csvwisb2box_file))
+
+            FileClose(14)
+            Return True
+
+        Catch ex As Exception
+            Log_Errors(ex.Message & " @ CSV4WIS2BOX")
+            FileClose(14)
+            Return False
+        End Try
+    End Function
+    Function AWS_WIS2BOX_Observations(stn As String, ByRef wsi_series As String, ByRef wsi_issuer As String, ByRef wsi_issue_number As String, ByRef wsi_local As String, dttm As String, sql As String, ByRef obsv_name() As String, ByRef obsv_Value() As String, UTC As String) As Boolean
+        Dim wisconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dswis As New DataSet
+        Dim dawis As MySql.Data.MySqlClient.MySqlDataAdapter
+
+        Try
+            wisconn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
+            wisconn.Open()
+
+            dawis = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, wisconn)
+            dawis.SelectCommand.CommandTimeout = 0
+            dswis.Clear()
+            dawis.Fill(dswis, "wis2box")
+
+            'Log_Errors(sql)
+            If dswis.Tables("wis2box").Rows.Count = 0 Then
+                Log_Errors("No Records found")
+                Return False
+            End If
+            'Log_Errors(dswis.Tables("wis2box").Rows.Count)
+
+            'obsv_name(0) = "WIGOS_ID"
+            obsv_name(0) = "wsi_series"
+            obsv_name(1) = "wsi_issuer"
+            obsv_name(2) = "wsi_issue_number"
+            obsv_name(3) = "wsi_local"
+            obsv_name(4) = "latitude"
+            obsv_name(5) = "longitude"
+            obsv_name(6) = "station_height_above_msl"
+            obsv_name(7) = "barometer_height_above_msl"
+            obsv_name(8) = "wmo_block_number"
+            obsv_name(9) = "wmo_station_number"
+            obsv_name(10) = "station_type"
+            obsv_name(11) = "year"
+            obsv_name(12) = "month"
+            obsv_name(13) = "day"
+            obsv_name(14) = "hour"
+            obsv_name(15) = "minute"
+            obsv_name(16) = "station_pressure"
+            obsv_name(17) = "msl_pressure"
+            obsv_name(18) = "geopotential_height"
+            obsv_name(19) = "thermometer_height"
+            obsv_name(20) = "air_temperature"
+            obsv_name(21) = "dewpoint_temperature"
+            obsv_name(22) = "relative_humidity"
+            obsv_name(23) = "method_of_ground_state_measurement"
+            obsv_name(24) = "ground_state"
+            obsv_name(25) = "method_of_snow_depth_measurement"
+            obsv_name(26) = "snow_depth"
+            obsv_name(27) = "precipitation_intensity"
+            obsv_name(28) = "anemometer_height"
+            obsv_name(29) = "time_period_of_wind"
+            obsv_name(30) = "wind_direction"
+            obsv_name(31) = "wind_speed"
+            obsv_name(32) = "maximum_wind_gust_direction_10_minutes"
+            obsv_name(33) = "maximum_wind_gust_speed_10_minutes"
+            obsv_name(34) = "maximum_wind_gust_direction_1_hour"
+            obsv_name(35) = "maximum_wind_gust_speed_1_hour"
+            obsv_name(36) = "maximum_wind_gust_direction_3_hours"
+            obsv_name(37) = "maximum_wind_gust_speed_3_hours"
+            obsv_name(38) = "rain_sensor_height"
+            obsv_name(39) = "total_precipitation_1_hour"
+            obsv_name(40) = "total_precipitation_3_hours"
+            obsv_name(41) = "total_precipitation_6_hours"
+            obsv_name(42) = "total_precipitation_12_hours"
+            obsv_name(43) = "total_precipitation_24_hours"
+
+            With dswis.Tables("wis2box")
+                For i = 0 To .Columns.Count - 1
+                    For j = 0 To 43
+                        If obsv_name(j) = .Columns(i).ColumnName Then
+                            If Not IsDBNull(.Rows(0).Item(i)) Then
+                                obsv_Value(j) = .Rows(0).Item(i)
+                            Else
+                                obsv_Value(j) = ""
+                            End If
+                            Exit For
+                        End If
+                    Next
+                Next
+                obsv_Value(0) = .Rows(0).Item("WIGOS_ID")
+            End With
+
+            ' Get WIGOS identification components for the station
+
+            Dim WIGOSID() = obsv_Value(0).Split("-")
+
+            If WIGOSID.Count <> 4 Then
+                Log_Errors("No valid WIGOS ID " & obsv_Value(0))
+                Return False
+            End If
+
+            obsv_Value(0) = WIGOSID(0)
+            obsv_Value(1) = WIGOSID(1)
+            obsv_Value(2) = WIGOSID(2)
+            obsv_Value(3) = WIGOSID(3)
+
+            ' Adjust time to UTC
+
+            obsv_Value(11) = DateAndTime.Year(UTC) '"Datetime_Year"
+            obsv_Value(12) = DateAndTime.Month(UTC) ' "Datetime_Month"
+            obsv_Value(13) = DateAndTime.Day(UTC) ' "Datetime_Day"
+            obsv_Value(14) = DateAndTime.Hour(UTC) ' "Datetime_Hour"
+            obsv_Value(15) = DateAndTime.Minute(UTC) ' "Datetime_Minute"
+
+            ' Compute Special observations
+            obsv_Value(10) = 0       ' Station of automatic type 
+            If obsv_Value(6) <> "" Then obsv_Value(7) = Val(obsv_Value(6)) + 1   ' Barometer Elevation
+            obsv_Value(19) = 1      ' Height of Thermometer above local ground
+            obsv_Value(38) = 0.25   ' Height of Raingauge above local ground
+            obsv_Value(28) = 10     ' Height of Wind instrument above local ground
+            obsv_Value(29) = -10    ' Wind time period
+
+            ' Convert temperature observation values to Kelvin
+            If obsv_Value(20) <> "" Then obsv_Value(20) = Val(obsv_Value(20)) + 273.15 ' Dry bulb temperature
+            If obsv_Value(21) <> "" Then obsv_Value(21) = Val(obsv_Value(21)) + 273.15 ' Wet bulb temperature
+
+            ' Convert Pressure observation values to Pa
+            If IsNumeric(obsv_Value(16)) Then obsv_Value(16) = obsv_Value(16) * 100 ' "station_pressure"
+            If IsNumeric(obsv_Value(17)) Then obsv_Value(17) = obsv_Value(17) * 100 ' "msl_pressure"
+
+            ' Compute preciptation accumation
+            Dim Tperiod As Integer
+            Dim Ptotal As String
+
+            ' 3HR preciptation accumation
+            Tperiod = 3 * 60 ' Time period in minutes
+
+            If Not precip_Accumulation(Ptotal, stn, dttm, Tperiod) Then Ptotal = ""
+            obsv_Value(40) = Ptotal
+
+            ' 6HR preciptation accumation
+            Tperiod = 6 * 60 ' Time period in minutes
+
+            If Not precip_Accumulation(Ptotal, stn, dttm, Tperiod) Then Ptotal = ""
+            obsv_Value(41) = Ptotal
+
+            ' 12HR preciptation accumation
+            Tperiod = 12 * 60 ' Time period in minutes
+
+            If Not precip_Accumulation(Ptotal, stn, dttm, Tperiod) Then Ptotal = ""
+            obsv_Value(42) = Ptotal
+
+            ' 24HR preciptation accumation
+            Tperiod = 24 * 60 ' Time period in minutes
+
+            If Not precip_Accumulation(Ptotal, stn, dttm, Tperiod) Then Ptotal = ""
+            obsv_Value(43) = Ptotal
+
+            'For i = 0 To 43
+            '    Log_Errors(i & " " & obsv_name(i) & " " & obsv_Value(i))
+            'Next
+
+            wisconn.Close()
+            Return True
+        Catch ex As Exception
+            wisconn.Close()
+            Log_Errors(ex.Message & " @ AWS_WIS2BOX_Observations")
+            Return False
+        End Try
+    End Function
+
+    Function precip_Accumulation(ByRef Total As String, stn As String, dtt As String, mprd As Integer) As Boolean
+        Dim wisconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dswis As New DataSet
+        Dim dawis As MySql.Data.MySqlClient.MySqlDataAdapter
+
+        Try
+            wisconn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
+            wisconn.Open()
+
+            sql = "SELECT sum(obsvalue) As Total FROM observationfinal
+                   WHERE RecordedFrom = '" & stn & "' AND describedBy ='892'
+                   AND obsdatetime  BETWEEN DATE_ADD('" & dtt & "', INTERVAL - " & (mprd - 1) & " MINUTE) AND '" & dtt & "';"
+            'Log_Errors(sql)
+            dawis = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, wisconn)
+            dawis.SelectCommand.CommandTimeout = 0
+            dswis.Clear()
+            dawis.Fill(dswis, "Ptotals")
+            wisconn.Close()
+
+            If dswis.Tables("Ptotals").Rows.Count = 0 Then
+                Return False
+            Else
+                Total = dswis.Tables("Ptotals").Rows(0).Item("Total")
+            End If
+
+            Return True
+
+        Catch ex As Exception
+            wisconn.Close()
+            Log_Errors(ex.Message & " @  precip_Accumulation")
             Return False
         End Try
     End Function
@@ -6750,6 +7180,8 @@ Err:
         End Try
         Me.Cursor = Cursors.Default
     End Sub
+
+
 End Class
 
 Public Class FTP

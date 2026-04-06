@@ -277,7 +277,7 @@ Partial Class formAWSRealTime
         Me.pnlControl.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlControl.Location = New System.Drawing.Point(0, 0)
         Me.pnlControl.Name = "pnlControl"
-        Me.pnlControl.Size = New System.Drawing.Size(191, 606)
+        Me.pnlControl.Size = New System.Drawing.Size(191, 604)
         Me.pnlControl.TabIndex = 0
         '
         'cmdHelp
@@ -367,7 +367,7 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.lblErrors)
         Me.pnlProcessing.Controls.Add(Me.Panel1)
         Me.pnlProcessing.Controls.Add(Me.grpElements)
-        Me.pnlProcessing.Location = New System.Drawing.Point(194, 11)
+        Me.pnlProcessing.Location = New System.Drawing.Point(193, 56)
         Me.pnlProcessing.Name = "pnlProcessing"
         Me.pnlProcessing.Size = New System.Drawing.Size(775, 199)
         Me.pnlProcessing.TabIndex = 1
@@ -927,7 +927,7 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.Controls.Add(Me.DataGridViewStructures)
         Me.pnlDataStructures.Location = New System.Drawing.Point(191, 27)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(760, 76)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(760, 77)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
@@ -994,7 +994,7 @@ Partial Class formAWSRealTime
         'txtDelimiter
         '
         Me.txtDelimiter.FormattingEnabled = True
-        Me.txtDelimiter.Items.AddRange(New Object() {"comma", "tab", "space"})
+        Me.txtDelimiter.Items.AddRange(New Object() {"comma", "tab", "semicolon", "space"})
         Me.txtDelimiter.Location = New System.Drawing.Point(171, 33)
         Me.txtDelimiter.Name = "txtDelimiter"
         Me.txtDelimiter.Size = New System.Drawing.Size(168, 21)
@@ -1110,10 +1110,10 @@ Partial Class formAWSRealTime
         Me.pnlSites.AutoSize = True
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
         Me.pnlSites.Controls.Add(Me.grpSites)
-        Me.pnlSites.Location = New System.Drawing.Point(187, -24)
+        Me.pnlSites.Location = New System.Drawing.Point(187, -23)
         Me.pnlSites.Name = "pnlSites"
         Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.pnlSites.Size = New System.Drawing.Size(785, 457)
+        Me.pnlSites.Size = New System.Drawing.Size(785, 454)
         Me.pnlSites.TabIndex = 3
         '
         'grpSites
@@ -1156,7 +1156,7 @@ Partial Class formAWSRealTime
         Me.grpSites.Controls.Add(Me.chkHrsAdjust)
         Me.grpSites.Location = New System.Drawing.Point(8, 50)
         Me.grpSites.Name = "grpSites"
-        Me.grpSites.Size = New System.Drawing.Size(769, 378)
+        Me.grpSites.Size = New System.Drawing.Size(774, 378)
         Me.grpSites.TabIndex = 67
         Me.grpSites.TabStop = False
         '
@@ -1525,9 +1525,9 @@ Partial Class formAWSRealTime
         Me.pnlServers.Controls.Add(Me.pnlMSS)
         Me.pnlServers.Controls.Add(Me.cmdMSS)
         Me.pnlServers.Controls.Add(Me.cmdBaseStation)
-        Me.pnlServers.Location = New System.Drawing.Point(191, 374)
+        Me.pnlServers.Location = New System.Drawing.Point(191, 376)
         Me.pnlServers.Name = "pnlServers"
-        Me.pnlServers.Size = New System.Drawing.Size(778, 150)
+        Me.pnlServers.Size = New System.Drawing.Size(778, 180)
         Me.pnlServers.TabIndex = 2
         Me.pnlServers.Visible = False
         '
@@ -2124,7 +2124,7 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox5)
         Me.pnlMsgEncoding.Location = New System.Drawing.Point(203, 177)
         Me.pnlMsgEncoding.Name = "pnlMsgEncoding"
-        Me.pnlMsgEncoding.Size = New System.Drawing.Size(752, 189)
+        Me.pnlMsgEncoding.Size = New System.Drawing.Size(752, 109)
         Me.pnlMsgEncoding.TabIndex = 4
         Me.pnlMsgEncoding.Visible = False
         '
@@ -2431,7 +2431,7 @@ Partial Class formAWSRealTime
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(976, 606)
+        Me.ClientSize = New System.Drawing.Size(985, 604)
         Me.Controls.Add(Me.pnlProcessing)
         Me.Controls.Add(Me.pnlDataStructures)
         Me.Controls.Add(Me.pnlServers)
