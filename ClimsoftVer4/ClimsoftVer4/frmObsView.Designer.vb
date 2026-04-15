@@ -891,7 +891,7 @@ Partial Class frmObsView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1212, 600)
+        Me.ClientSize = New System.Drawing.Size(1229, 610)
         Me.Controls.Add(Me.btnBackup)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)

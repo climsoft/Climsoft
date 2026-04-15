@@ -1,4 +1,6 @@
-﻿Public Class frmSynopTDCF
+﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+
+Public Class frmSynopTDCF
     Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
     Dim dbConnectionString As String
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
@@ -7,7 +9,7 @@
     Dim recUpdate As New dataEntryGlobalRoutines
     Dim TDCF As New tdcfRoutines
     Dim ds As New DataSet
-    Dim sql, msg_header, msg_file, mmm, Data_Description_Section, descriptors_file As String
+    Dim sql, msg_header, msg_file, mmm, Data_Description_Section, descriptors_file, stnAlt As String
     Dim rec, Kount As Integer
 
 
@@ -167,7 +169,7 @@
                 optsection = 0
             End If
 
-            sql = "Update bufr_indicators set Msg_Header= '" & txtMsgHeader.Text & "',BUFR_Edition= '" & txtBUFREditionNumber.Text & "',Originating_Centre= '" & txtOriginatingGeneratingCentre.Text & "',Originating_SubCentre= '" & txtOriginatingGeneratingSubCentre.Text & "',Update_Sequence= '" & txtUpdateSequenceNumber.Text & "',Optional_Section= '" & optsection & "',Data_Category= '" & txtDataCategory.Text & "',Intenational_Data_SubCategory= '" & txtInternationalDataSubCategory.Text & "',Local_Data_SubCategory= '" & txtLocalDataSubCategory.Text & "',Master_table= '" & txtMastersTableVersionNumber.Text & "',Local_Table= '" & txtLocalTableVersionNumber.Text & _
+            sql = "Update bufr_indicators set Msg_Header= '" & txtMsgHeader.Text & "',BUFR_Edition= '" & txtBUFREditionNumber.Text & "',Originating_Centre= '" & txtOriginatingGeneratingCentre.Text & "',Originating_SubCentre= '" & txtOriginatingGeneratingSubCentre.Text & "',Update_Sequence= '" & txtUpdateSequenceNumber.Text & "',Optional_Section= '" & optsection & "',Data_Category= '" & txtDataCategory.Text & "',Intenational_Data_SubCategory= '" & txtInternationalDataSubCategory.Text & "',Local_Data_SubCategory= '" & txtLocalDataSubCategory.Text & "',Master_table= '" & txtMastersTableVersionNumber.Text & "',Local_Table= '" & txtLocalTableVersionNumber.Text &
                 "' where tmplate= '" & cboTemplate.Text & "';"
             'MsgBox(sql)
 
@@ -204,7 +206,7 @@
                 ' Update server details
                 CurrentServer = ds.Tables("aws_mss").Rows(0).Item("ftpId")
 
-                sql = "Update aws_mss set ftpId= '" & txtServer.Text & "',ftpMode= '" & cboFTP.Text & "',inputFolder= '" & txtFolder.Text & "',userName= '" & txtLogin.Text & "',password= '" & txtPassword.Text & _
+                sql = "Update aws_mss set ftpId= '" & txtServer.Text & "',ftpMode= '" & cboFTP.Text & "',inputFolder= '" & txtFolder.Text & "',userName= '" & txtLogin.Text & "',password= '" & txtPassword.Text &
                     "' where ftpId= '" & CurrentServer & "';"
                 'MsgBox(sql)
 
@@ -317,7 +319,9 @@
                 Update_Instruments_Details(dbconn, cboStation.Items(i))
                 Update_Time_Periods(dbconn)
                 Update_Observation_data(dbconn, cboStation.Items(i), txtYear.Text, cboMonth.Text, cboDay.Text, cboHour.Text)
+                'MsgBox(1)
                 Encode_Bufr(dbconn)
+                'MsgBox(2)
                 If Bufr_Section4(dbconn, Section4_Data) Then
                     stn_wsi_data = ""
                     If TDCF.WSI_data(cboStation.Items(i), stn_wsi_data) Then
@@ -333,7 +337,6 @@
                     Continue For
                 End If
             Next i
-
             ' Output Bufr coded data if subsets exist
 
             msg_header = txtMsgHeader.Text & " " & cboDay.Text.PadLeft(2, "0"c) & cboHour.Text.PadLeft(2, "0"c) & "00"
@@ -450,6 +453,7 @@
 
             ' Clear previously encoded data
             sql = "update bufr_crex_data set bufr_data = '',crex_data = '' where bufr_data <> '' or crex_data <> '';"
+
             ' Create the Command for executing query and set its properties
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
 
@@ -484,66 +488,73 @@
             End With
 
         Catch ex As Exception
-            MsgBox(ex.Message & " Bufr_Crex_Initialize")
+            MsgBox(ex.Message & " @ Bufr_Crex_Initialize")
         End Try
     End Sub
     Sub Set_Replications(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
 
-        sql = "Select * from bufr_crex_data"
+        Try
+            sql = "Select * from bufr_crex_data"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
-        ' Set to unlimited timeout period
-        da.SelectCommand.CommandTimeout = 0
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
 
-        ds.Clear()
-        da.Fill(ds, "bufr_crex_data")
+            ds.Clear()
+            da.Fill(ds, "bufr_crex_data")
 
-        Initialize_Cloud_Replications(conn1, ds, 4, "119", "cloud_rep1") 'Delayed replication of cloud layers above station level 4 times for a maximum of 4 layers
+            Initialize_Cloud_Replications(conn1, ds, 4, "119", "cloud_rep1") 'Delayed replication of cloud layers above station level 4 times for a maximum of 4 layers
 
-        Initialize_Cloud_Replications(conn1, ds, 5, "611", "cloud_rep2") 'Delayed replication of cloud layers below station level 4 times for a maximum of 5 layers
+            Initialize_Cloud_Replications(conn1, ds, 5, "611", "cloud_rep2") 'Delayed replication of cloud layers below station level 4 times for a maximum of 5 layers
 
-        ' Set the replicated cloud layers to TRUE if observations made
-        Dim flds As Integer
+            ' Set the replicated cloud layers to TRUE if observations made
+            Dim flds As Integer
 
-        sql = "Select * from " & srcTable.Text & " where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "' and stationId = '" & stn & "';"
+            sql = "Select * from " & srcTable.Text & " where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "' and stationId = '" & stn & "';"
 
-        'sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
-        'MsgBox(sql)
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
-        ' Set to unlimited timeout period
-        da.SelectCommand.CommandTimeout = 0
+            'sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
+            'MsgBox(sql)
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
 
-        ds.Clear()
-        da.Fill(ds, "from form_synoptic_2_ra1")
+            ds.Clear()
+            da.Fill(ds, "from form_synoptic_2_ra1")
 
-        ' Initialize cloud layers by setting them to FALSE so that they are not selected if observations not made
-        Kount = ds.Tables("from form_synoptic_2_ra1").Rows.Count
+            ' Initialize cloud layers by setting them to FALSE so that they are not selected if observations not made
+            Kount = ds.Tables("from form_synoptic_2_ra1").Rows.Count
 
-        flds = ds.Tables("from form_synoptic_2_ra1").Columns.Count
+            flds = ds.Tables("from form_synoptic_2_ra1").Columns.Count
 
-        With ds.Tables("from form_synoptic_2_ra1")
-            'For i = 0 To Kount - 1
+            With ds.Tables("from form_synoptic_2_ra1")
+                'For i = 0 To Kount - 1
 
-            ' Replications for clounds above the station
-            If Not IsDBNull(.Rows(0).Item("Val_Elem119")) And Len(.Rows(0).Item("Val_Elem119")) <> 0 Then Select_Descriptor(conn1, "119", "cloud_rep1")
+                ' Replications for clounds above the station
+                If Not IsDBNull(.Rows(0).Item("Val_Elem119")) And Len(.Rows(0).Item("Val_Elem119")) <> 0 Then Select_Descriptor(conn1, "119", "cloud_rep1")
 
-            If Not IsDBNull(.Rows(0).Item("Val_Elem123")) And Len(.Rows(0).Item("Val_Elem123")) <> 0 Then Select_Descriptor(conn1, "123", "cloud_rep1")
+                If Not IsDBNull(.Rows(0).Item("Val_Elem123")) And Len(.Rows(0).Item("Val_Elem123")) <> 0 Then Select_Descriptor(conn1, "123", "cloud_rep1")
 
-            If Not IsDBNull(.Rows(0).Item("Val_Elem127")) And Len(.Rows(0).Item("Val_Elem127")) <> 0 Then Select_Descriptor(conn1, "127", "cloud_rep1")
+                'MsgBox(.Rows(0).Item("Val_Elem127"))
+                If Not IsDBNull(.Rows(0).Item("Val_Elem127")) Then Select_Descriptor(conn1, "127", "cloud_rep1")
+                'If Not IsDBNull(.Rows(0).Item("Val_Elem127")) And Len(.Rows(0).Item("Val_Elem127")) <> 0 Then Select_Descriptor(conn1, "127", "cloud_rep1")
 
-            If Not IsDBNull(.Rows(0).Item("Val_Elem131")) And Len(.Rows(0).Item("Val_Elem131")) <> 0 Then Select_Descriptor(conn1, "131", "cloud_rep1")
-
-            ' Replications for clounds below the station
-            ' These observations are not recorded in this form. Hence the associated elements have been commented
-            ' However the replication factor is set to Zero but Selected so that the decoders can retrieve the replication factor
-            Select_Descriptor(conn1, "", "cloud_rep2")
-            'If Len(.Rows(i).Item("Val_Elem611")) > 0 Then Select_Descriptor(conn1, "611", "cloud_rep2")
-            'If Len(.Rows(i).Item("Val_Elem621")) > 0 Then Select_Descriptor(conn1, "621", "cloud_rep2")
-            'If Len(.Rows(i).Item("Val_Elem631")) > 0 Then Select_Descriptor(conn1, "631", "cloud_rep2")
-            'If Len(.Rows(i).Item("Val_Elem641")) > 0 Then Select_Descriptor(conn1, "641", "cloud_rep2")
-            'Next
-
-        End With
+                If Not IsDBNull(.Rows(0).Item("Val_Elem131")) Then Select_Descriptor(conn1, "131", "cloud_rep1")
+                'If Not IsDBNull(.Rows(0).Item("Val_Elem131")) And Len(.Rows(0).Item("Val_Elem131")) <> 0 Then Select_Descriptor(conn1, "131", "cloud_rep1")
+                'MsgBox(2)
+                ' Replications for clounds below the station
+                ' These observations are not recorded in this form. Hence the associated elements have been commented
+                ' However the replication factor is set to Zero but Selected so that the decoders can retrieve the replication factor
+                Select_Descriptor(conn1, "", "cloud_rep2")
+                'MsgBox(3)
+                'If Len(.Rows(i).Item("Val_Elem611")) > 0 Then Select_Descriptor(conn1, "611", "cloud_rep2")
+                'If Len(.Rows(i).Item("Val_Elem621")) > 0 Then Select_Descriptor(conn1, "621", "cloud_rep2")
+                'If Len(.Rows(i).Item("Val_Elem631")) > 0 Then Select_Descriptor(conn1, "631", "cloud_rep2")
+                'If Len(.Rows(i).Item("Val_Elem641")) > 0 Then Select_Descriptor(conn1, "641", "cloud_rep2")
+                'Next
+            End With
+        Catch x As Exception
+            MsgBox(x.Message & " @ Set_Replications")
+        End Try
     End Sub
     Sub Update_Station_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
         Dim station_name, wmo_block, wmo_No, lat, lon, elev, qualifier, typ As String
@@ -565,6 +576,8 @@
             If Not IsDBNull(ds.Tables("stations").Rows(0).Item("latitude")) Then lat = ds.Tables("stations").Rows(0).Item("latitude")
             If Not IsDBNull(ds.Tables("stations").Rows(0).Item("longitude")) Then lon = ds.Tables("stations").Rows(0).Item("longitude")
             If Not IsDBNull(ds.Tables("stations").Rows(0).Item("elevation")) Then elev = ds.Tables("stations").Rows(0).Item("elevation")
+            If IsNumeric(elev) Then stnAlt = elev
+
             'qualifier = ds.Tables("stations").Rows(0).Item("qualifier")
 
             qualifier = Strings.UCase(Get_StationQualifier(conn1, stn))
@@ -643,7 +656,7 @@
             With ds.Tables("instruments")
                 For i = 0 To .Rows.Count - 1
                     Select Case .Rows(i).Item("code")
-                        Case 5 ' Pecipitation Instrument
+                        Case 5 ' Pecipitation Instrument 
                             Update_Observation(conn1, .Rows(i).Item("height"), "R24_SH") ' Height for 24 hr observation
                             Update_Observation(conn1, .Rows(i).Item("height"), "RR_SH") ' Height for 1 hr observation
                         Case 101  ' Temperature Instrument
@@ -659,7 +672,9 @@
                             Update_Observation(conn1, .Rows(i).Item("height"), "evap_SH") 'Height
                             Update_Observation(conn1, .Rows(i).Item("instrumentcode"), "evap_I") 'Type
                         Case 106 ' Pressure Instrument
-                            Update_Observation(conn1, .Rows(i).Item("height"), "station_pressure_height") 'Height
+                            If IsNumeric(.Rows(i).Item("height")) Then
+                                Update_Observation(conn1, .Rows(i).Item("height") + Val(stnAlt), "station_pressure_height") 'Heigh
+                            End If
                     End Select
                 Next
             End With
@@ -679,8 +694,9 @@
         End If
         Update_Observation(conn1, Tprd, "ww_TP") ' Time Period for Past and Present Weather
         Update_Observation(conn1, Tprd, "tempc_t")  ' Time Period for Past and Present Weather 2
-        Update_Observation(conn1, cboHour.Text, "tR_TP") ' Time Period for precipitation replication 1
-        Update_Observation(conn1, "-3", "tR_TP") ' Time Period for precipitation replication 2
+        'Update_Observation(conn1, cboHour.Text, "tR_TP") ' Time Period for precipitation replication 1
+        Update_Observation(conn1, "-24", "tR_TP1") ' Time Period for precipitation replication 1
+        Update_Observation(conn1, "-3", "tR_TP2") ' Time Period for precipitation replication 2
         Update_Observation(conn1, "-24", "evap_TP") ' Time Period for evaporation
         Update_Observation(conn1, "-24", "SSS_TP") ' Time Period for sunshine replication 1
         Update_Observation(conn1, "-1", "SS_TP") ' Time Period for sunshine replication 2
@@ -756,12 +772,14 @@
                                     End If
                                 End With
 
-                                'If code = 814 Then MsgBox(dat)
-                                Update_Observation(conn1, dat, code)
+                            'If code = 814 Then MsgBox(dat)
 
-                                ' Compute cloud layers replications
-                                'Clouds above station level
-                                If code = 116 Or code = 120 Or code = 124 Or code = 128 Then rep1 = rep1 + 1
+                            Update_Observation(conn1, dat, code)
+                            If code = 400 Then Update_Observation(conn1, dat, "ppp")
+                            If code = 814 Then Update_Observation(conn1, dat, "a")
+                            ' Compute cloud layers replications
+                            'Clouds above station level
+                            If code = 116 Or code = 120 Or code = 124 Or code = 128 Then rep1 = rep1 + 1
                                 'Clouds below station level
                                 If code = 612 Or code = 622 Or code = 632 Or code = 642 Then rep2 = rep2 + 1
                             End If
@@ -795,7 +813,7 @@
                             If .Rows(0).Item(i) = "T" Then Update_Observation(conn1, -1, 174) '24Hr Precipitation
                         End If
 
-                        '' Compute Character and Intensity of precipitation in Templat TM307081
+                        '' Compute Character and Intensity of precipitation in Templat3 TM307081
                         If cboTemplate.Text = "TM_307081" Then
                             If fld = "Val_Elem005" Then
                                 If Not IsDBNull(.Rows(0).Item(i)) Then
@@ -814,6 +832,9 @@
                     'MsgBox(rep1 & " " & rep2)
                     Update_Observation(conn1, rep1, "cloud_rep1")
                     Update_Observation(conn1, rep2, "cloud_rep2")
+
+                    ' Update 3Hr Pressure tendancy
+
                 End With
             End If
         Catch ex As Exception
@@ -892,7 +913,7 @@
                 End With
             Next
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " @ Select_Descriptor")
         End Try
 
     End Sub
@@ -971,6 +992,7 @@
     Sub Encode_Bufr(conn1 As MySql.Data.MySqlClient.MySqlConnection)
         Dim ds1 As New DataSet
         Dim bufr_str, climsoft_element_scale As String
+
         Try
             'sql = "Select * from bufr_crex_data"
             sql = "SELECT * FROM bufr_crex_data where selected = 1 ORDER BY Nos;"
@@ -1005,12 +1027,13 @@
                     objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
                     'Execute query
                     objCmd.ExecuteNonQuery()
+
                 End With
             Next
 
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " @ Encode_Bufr")
         End Try
 
     End Sub
@@ -1100,22 +1123,24 @@
 
             s = 0
             Do While DecN > 0
+                'Do While DecN > 1
                 r = DecN Mod 2
 
-                Mid(Decimal_Binary, bts - s, 1) = r
+                    Mid(Decimal_Binary, bts - s, 1) = r
 
-                If r = 1 Then
-                    DecN = DecN / 2 - 0.5
-                Else
-                    DecN = DecN / 2
-                End If
-                s = s + 1
-            Loop
+                    If r = 1 Then
+                        DecN = DecN / 2 - 0.5
+                    Else
+                        DecN = DecN / 2
+                    End If
+                    s = s + 1
+                Loop
 
-            Return Decimal_Binary
+                Return Decimal_Binary
 
         Catch ex As Exception
-            MsgBox(ex.Message & " Decimal_Binary")
+            'MsgBox(DecN & " " & bts & " = " & Decimal_Binary)
+            'MsgBox(ex.Message & " @ Decimal_Binary")
             'MsgBox(DecN & " " & bts & " " & Decimal_Binary)
             Return Decimal_Binary
         End Try

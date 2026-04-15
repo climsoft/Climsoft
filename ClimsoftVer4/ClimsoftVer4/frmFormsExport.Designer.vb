@@ -47,10 +47,10 @@ Partial Class frmFormsExport
         Me.cmbElement = New System.Windows.Forms.ComboBox()
         Me.cmbstation = New System.Windows.Forms.ComboBox()
         Me.tlstrpButtom = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tlstrpBtn = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.pnlPeriod.SuspendLayout()
         Me.tlstrpButtom.SuspendLayout()
         Me.SuspendLayout()
@@ -276,6 +276,12 @@ Partial Class frmFormsExport
         Me.tlstrpButtom.TabIndex = 44
         Me.tlstrpButtom.Text = "ToolStrip1"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.AutoSize = False
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(12, 25)
+        '
         'tlstrpBtn
         '
         Me.tlstrpBtn.AutoSize = False
@@ -304,12 +310,6 @@ Partial Class frmFormsExport
         Me.ToolStripButton2.Name = "ToolStripButton2"
         Me.ToolStripButton2.Size = New System.Drawing.Size(50, 22)
         Me.ToolStripButton2.Text = "&Close"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.AutoSize = False
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(12, 25)
         '
         'frmFormsExport
         '

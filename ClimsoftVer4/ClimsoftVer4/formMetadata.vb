@@ -1009,7 +1009,7 @@ Err:
             .DataGridView.Refresh()
             .grpSearch.Visible = False
             .DataGridView.Dock = DockStyle.Top
-            .btnExport.Enabled = False
+            '.btnExport.Enabled = False
         End With
     End Sub
 
