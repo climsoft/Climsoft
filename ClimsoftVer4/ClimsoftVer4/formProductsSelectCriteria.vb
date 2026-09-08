@@ -350,9 +350,34 @@ Public Class formProductsSelectCriteria
 
                 Case "Hourly"
 
-                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour," & elmcolmn & " FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
-                           "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime), hour(obsDatetime);"
+                    If txtrandomHours.Text <> String.Empty Then
+                        Dim hrs(), qstr As String
 
+                        hrs = txtrandomHours.Text.Split(",")
+                        'MsgBox(hrs.Count)
+
+                        qstr = "Hour(obsdatetime)=" & hrs(0)
+                        For i = 1 To hrs.Count - 1
+                            If IsNumeric(hrs(i)) Then qstr = qstr & " or Hour(obsdatetime)=" & hrs(i)                       '
+                        Next
+
+                        xpivot = SumAvg
+                        For i = 0 To hrs.Count - 1
+                            If i = 0 Then xpivot = ""
+                            If IsNumeric(hrs(i)) Then xpivot = xpivot & "," & SumAvg & "(IF(hour(obsDatetime) = '" & hrs(i) & "', value, NULL)) AS '" & hrs(i) & "'"
+
+                        Next
+
+                        sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As Year, Month(obsDatetime) As Month, day(obsDatetime) As Day " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
+                              "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "' and (" & qstr & ")) ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year,Month, Day;"
+                        'MsgBox(sql)
+                        'txtrandomHours.Text = sql
+                    Else
+
+                        sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour," & elmcolmn & " FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                           "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime), hour(obsDatetime);"
+                        'MsgBox(sql)
+                    End If
                     'Transpose values when the option is selected
                     If chkTranspose.Checked = True Then
                         xpivot = SumAvg
@@ -2783,6 +2808,13 @@ Err:
         If lblProductType.Text = "Hourly" Or lblProductType.Text = "Daily" Or lblProductType.Text = "Monthly" Or lblProductType.Text = "Annual" Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Or lblProductType.Text = "Histograms" Or lblProductType.Text = "TimeSeries" Or lblProductType.Text = "Seasonal Monthly" Then
             optMean.Enabled = True
             optTotal.Enabled = True
+            If lblProductType.Text = "Hourly" Then
+                chkRandomHours.Visible = True
+            Else
+                chkRandomHours.Checked = False
+                chkRandomHours.Visible = False
+                txtrandomHours.Text = ""
+            End If
         Else
             optMean.Enabled = False
             optTotal.Enabled = False
@@ -3715,6 +3747,16 @@ Err:
 
     End Sub
 
+    Private Sub chkRandomHours_CheckedChanged(sender As Object, e As EventArgs) Handles chkRandomHours.CheckedChanged
+        If chkRandomHours.Checked Then
+            txtrandomHours.Visible = True
+            lblHours.Visible = True
+        Else
+            txtrandomHours.Visible = False
+            lblHours.Visible = False
+        End If
+    End Sub
+
     Sub add_Element(id As String)
         Dim str(3) As String
         Dim itm = New ListViewItem
@@ -4323,4 +4365,5 @@ Err:
         sql = "select stationId, stationName from Station where adminRegion4 ='" & lstRegion4.SelectedItem & "';"
         Populate_StationsListView(sql)
     End Sub
+
 End Class

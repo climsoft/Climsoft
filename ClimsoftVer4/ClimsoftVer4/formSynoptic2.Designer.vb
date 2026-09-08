@@ -206,7 +206,7 @@ Partial Class formSynoptic2
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(77, 23)
         Me.btnTDCF.TabIndex = 698
-        Me.btnTDCF.Text = "TDCF"
+        Me.btnTDCF.Text = "BUFR/CSV"
         Me.btnTDCF.UseVisualStyleBackColor = True
         '
         'btnView

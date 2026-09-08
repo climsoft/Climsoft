@@ -46,20 +46,28 @@ Partial Class frmUploadToObsFinal
         Me.cmbElement = New System.Windows.Forms.ComboBox()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.cmbstation = New System.Windows.Forms.ComboBox()
+        Me.butOK = New System.Windows.Forms.Button()
+        Me.dateTo = New System.Windows.Forms.DateTimePicker()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.dateFrom = New System.Windows.Forms.DateTimePicker()
+        Me.lblFrom = New System.Windows.Forms.Label()
+        Me.chkEntrydate = New System.Windows.Forms.CheckBox()
+        Me.pnlSelectDate = New System.Windows.Forms.Panel()
+        Me.pnlSelectDate.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblProcessingStatus
         '
         Me.lblProcessingStatus.AutoSize = True
         Me.lblProcessingStatus.ForeColor = System.Drawing.Color.Red
-        Me.lblProcessingStatus.Location = New System.Drawing.Point(83, 491)
+        Me.lblProcessingStatus.Location = New System.Drawing.Point(89, 69)
         Me.lblProcessingStatus.Name = "lblProcessingStatus"
         Me.lblProcessingStatus.Size = New System.Drawing.Size(0, 13)
         Me.lblProcessingStatus.TabIndex = 25
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(547, 480)
+        Me.btnHelp.Location = New System.Drawing.Point(548, 488)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 23
@@ -68,7 +76,7 @@ Partial Class frmUploadToObsFinal
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(448, 480)
+        Me.btnCancel.Location = New System.Drawing.Point(449, 488)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 22
@@ -78,7 +86,7 @@ Partial Class frmUploadToObsFinal
         'btnOK
         '
         Me.btnOK.Enabled = False
-        Me.btnOK.Location = New System.Drawing.Point(662, 480)
+        Me.btnOK.Location = New System.Drawing.Point(663, 488)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 23)
         Me.btnOK.TabIndex = 4
@@ -88,7 +96,7 @@ Partial Class frmUploadToObsFinal
         '
         'lblEndMonth
         '
-        Me.lblEndMonth.Location = New System.Drawing.Point(170, 485)
+        Me.lblEndMonth.Location = New System.Drawing.Point(161, 46)
         Me.lblEndMonth.Name = "lblEndMonth"
         Me.lblEndMonth.Size = New System.Drawing.Size(95, 13)
         Me.lblEndMonth.TabIndex = 20
@@ -97,7 +105,7 @@ Partial Class frmUploadToObsFinal
         '
         'lblBeginMonth
         '
-        Me.lblBeginMonth.Location = New System.Drawing.Point(170, 452)
+        Me.lblBeginMonth.Location = New System.Drawing.Point(161, 13)
         Me.lblBeginMonth.Name = "lblBeginMonth"
         Me.lblBeginMonth.Size = New System.Drawing.Size(95, 13)
         Me.lblBeginMonth.TabIndex = 19
@@ -106,7 +114,7 @@ Partial Class frmUploadToObsFinal
         '
         'lblEndYear
         '
-        Me.lblEndYear.Location = New System.Drawing.Point(12, 485)
+        Me.lblEndYear.Location = New System.Drawing.Point(3, 46)
         Me.lblEndYear.Name = "lblEndYear"
         Me.lblEndYear.Size = New System.Drawing.Size(86, 13)
         Me.lblEndYear.TabIndex = 18
@@ -115,7 +123,7 @@ Partial Class frmUploadToObsFinal
         '
         'lblBeginYear
         '
-        Me.lblBeginYear.Location = New System.Drawing.Point(12, 452)
+        Me.lblBeginYear.Location = New System.Drawing.Point(3, 13)
         Me.lblBeginYear.Name = "lblBeginYear"
         Me.lblBeginYear.Size = New System.Drawing.Size(86, 13)
         Me.lblBeginYear.TabIndex = 17
@@ -124,7 +132,7 @@ Partial Class frmUploadToObsFinal
         '
         'txtEndMonth
         '
-        Me.txtEndMonth.Location = New System.Drawing.Point(271, 481)
+        Me.txtEndMonth.Location = New System.Drawing.Point(262, 42)
         Me.txtEndMonth.Name = "txtEndMonth"
         Me.txtEndMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtEndMonth.TabIndex = 3
@@ -133,7 +141,7 @@ Partial Class frmUploadToObsFinal
         '
         'txtBeginMonth
         '
-        Me.txtBeginMonth.Location = New System.Drawing.Point(271, 448)
+        Me.txtBeginMonth.Location = New System.Drawing.Point(262, 9)
         Me.txtBeginMonth.Name = "txtBeginMonth"
         Me.txtBeginMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtBeginMonth.TabIndex = 2
@@ -142,14 +150,14 @@ Partial Class frmUploadToObsFinal
         '
         'txtEndYear
         '
-        Me.txtEndYear.Location = New System.Drawing.Point(104, 481)
+        Me.txtEndYear.Location = New System.Drawing.Point(95, 42)
         Me.txtEndYear.Name = "txtEndYear"
         Me.txtEndYear.Size = New System.Drawing.Size(48, 20)
         Me.txtEndYear.TabIndex = 1
         '
         'txtBeginYear
         '
-        Me.txtBeginYear.Location = New System.Drawing.Point(104, 449)
+        Me.txtBeginYear.Location = New System.Drawing.Point(95, 10)
         Me.txtBeginYear.Name = "txtBeginYear"
         Me.txtBeginYear.Size = New System.Drawing.Size(48, 20)
         Me.txtBeginYear.TabIndex = 0
@@ -206,7 +214,7 @@ Partial Class frmUploadToObsFinal
         '
         'cmdUploadData
         '
-        Me.cmdUploadData.Location = New System.Drawing.Point(337, 480)
+        Me.cmdUploadData.Location = New System.Drawing.Point(338, 488)
         Me.cmdUploadData.Name = "cmdUploadData"
         Me.cmdUploadData.Size = New System.Drawing.Size(73, 23)
         Me.cmdUploadData.TabIndex = 30
@@ -216,7 +224,7 @@ Partial Class frmUploadToObsFinal
         'txtDataTransferProgress
         '
         Me.txtDataTransferProgress.ForeColor = System.Drawing.Color.Black
-        Me.txtDataTransferProgress.Location = New System.Drawing.Point(456, 428)
+        Me.txtDataTransferProgress.Location = New System.Drawing.Point(443, 432)
         Me.txtDataTransferProgress.Name = "txtDataTransferProgress"
         Me.txtDataTransferProgress.Size = New System.Drawing.Size(280, 20)
         Me.txtDataTransferProgress.TabIndex = 31
@@ -226,7 +234,7 @@ Partial Class frmUploadToObsFinal
         '
         Me.lblTableRecords.AutoSize = True
         Me.lblTableRecords.ForeColor = System.Drawing.Color.Black
-        Me.lblTableRecords.Location = New System.Drawing.Point(519, 451)
+        Me.lblTableRecords.Location = New System.Drawing.Point(506, 455)
         Me.lblTableRecords.Name = "lblTableRecords"
         Me.lblTableRecords.Size = New System.Drawing.Size(122, 13)
         Me.lblTableRecords.TabIndex = 32
@@ -278,11 +286,86 @@ Partial Class frmUploadToObsFinal
         Me.cmbstation.Size = New System.Drawing.Size(210, 21)
         Me.cmbstation.TabIndex = 38
         '
+        'butOK
+        '
+        Me.butOK.Location = New System.Drawing.Point(261, 111)
+        Me.butOK.Name = "butOK"
+        Me.butOK.Size = New System.Drawing.Size(53, 24)
+        Me.butOK.TabIndex = 59
+        Me.butOK.Text = "Select"
+        Me.butOK.UseVisualStyleBackColor = True
+        '
+        'dateTo
+        '
+        Me.dateTo.Location = New System.Drawing.Point(81, 123)
+        Me.dateTo.Name = "dateTo"
+        Me.dateTo.Size = New System.Drawing.Size(175, 20)
+        Me.dateTo.TabIndex = 58
+        '
+        'lblTo
+        '
+        Me.lblTo.AutoSize = True
+        Me.lblTo.Location = New System.Drawing.Point(24, 127)
+        Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(52, 13)
+        Me.lblTo.TabIndex = 57
+        Me.lblTo.Text = "End Date"
+        '
+        'dateFrom
+        '
+        Me.dateFrom.Location = New System.Drawing.Point(81, 99)
+        Me.dateFrom.Name = "dateFrom"
+        Me.dateFrom.Size = New System.Drawing.Size(175, 20)
+        Me.dateFrom.TabIndex = 56
+        Me.dateFrom.Value = New Date(2023, 11, 1, 0, 0, 0, 0)
+        '
+        'lblFrom
+        '
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.Location = New System.Drawing.Point(24, 103)
+        Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(55, 13)
+        Me.lblFrom.TabIndex = 55
+        Me.lblFrom.Text = "Start Date"
+        '
+        'chkEntrydate
+        '
+        Me.chkEntrydate.AutoSize = True
+        Me.chkEntrydate.Location = New System.Drawing.Point(27, 74)
+        Me.chkEntrydate.Name = "chkEntrydate"
+        Me.chkEntrydate.Size = New System.Drawing.Size(123, 17)
+        Me.chkEntrydate.TabIndex = 54
+        Me.chkEntrydate.Text = "Select by Entry Date"
+        Me.chkEntrydate.UseVisualStyleBackColor = True
+        '
+        'pnlSelectDate
+        '
+        Me.pnlSelectDate.Controls.Add(Me.lblBeginYear)
+        Me.pnlSelectDate.Controls.Add(Me.butOK)
+        Me.pnlSelectDate.Controls.Add(Me.txtBeginYear)
+        Me.pnlSelectDate.Controls.Add(Me.dateTo)
+        Me.pnlSelectDate.Controls.Add(Me.txtEndYear)
+        Me.pnlSelectDate.Controls.Add(Me.lblTo)
+        Me.pnlSelectDate.Controls.Add(Me.txtBeginMonth)
+        Me.pnlSelectDate.Controls.Add(Me.dateFrom)
+        Me.pnlSelectDate.Controls.Add(Me.txtEndMonth)
+        Me.pnlSelectDate.Controls.Add(Me.lblFrom)
+        Me.pnlSelectDate.Controls.Add(Me.lblEndYear)
+        Me.pnlSelectDate.Controls.Add(Me.chkEntrydate)
+        Me.pnlSelectDate.Controls.Add(Me.lblBeginMonth)
+        Me.pnlSelectDate.Controls.Add(Me.lblEndMonth)
+        Me.pnlSelectDate.Controls.Add(Me.lblProcessingStatus)
+        Me.pnlSelectDate.Location = New System.Drawing.Point(12, 417)
+        Me.pnlSelectDate.Name = "pnlSelectDate"
+        Me.pnlSelectDate.Size = New System.Drawing.Size(323, 153)
+        Me.pnlSelectDate.TabIndex = 60
+        '
         'frmUploadToObsFinal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(748, 512)
+        Me.ClientSize = New System.Drawing.Size(748, 516)
+        Me.Controls.Add(Me.pnlSelectDate)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.cmbElement)
         Me.Controls.Add(Me.lblStation)
@@ -295,22 +378,15 @@ Partial Class frmUploadToObsFinal
         Me.Controls.Add(Me.chkAllStations)
         Me.Controls.Add(Me.lstViewElements)
         Me.Controls.Add(Me.LstViewStations)
-        Me.Controls.Add(Me.lblProcessingStatus)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
-        Me.Controls.Add(Me.lblEndMonth)
-        Me.Controls.Add(Me.lblBeginMonth)
-        Me.Controls.Add(Me.lblEndYear)
-        Me.Controls.Add(Me.lblBeginYear)
-        Me.Controls.Add(Me.txtEndMonth)
-        Me.Controls.Add(Me.txtBeginMonth)
-        Me.Controls.Add(Me.txtEndYear)
-        Me.Controls.Add(Me.txtBeginYear)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmUploadToObsFinal"
         Me.Text = "Upload to ObservationFinal"
+        Me.pnlSelectDate.ResumeLayout(False)
+        Me.pnlSelectDate.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -339,4 +415,11 @@ Partial Class frmUploadToObsFinal
     Friend WithEvents cmbElement As ComboBox
     Friend WithEvents lblStation As Label
     Friend WithEvents cmbstation As ComboBox
+    Friend WithEvents butOK As Button
+    Friend WithEvents dateTo As DateTimePicker
+    Friend WithEvents lblTo As Label
+    Friend WithEvents dateFrom As DateTimePicker
+    Friend WithEvents lblFrom As Label
+    Friend WithEvents chkEntrydate As CheckBox
+    Friend WithEvents pnlSelectDate As Panel
 End Class

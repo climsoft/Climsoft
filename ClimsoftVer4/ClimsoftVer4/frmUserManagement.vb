@@ -1,4 +1,6 @@
-﻿Public Class frmUserManagement
+﻿Imports Microsoft.VisualBasic.ApplicationServices
+
+Public Class frmUserManagement
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim connStr As String, Sql As String
     Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
@@ -901,6 +903,7 @@
                         objCmd.ExecuteNonQuery()
 
                         Sql = "GRANT SELECT ON " & dbnme & ".qc_interelement_relationship_definition TO '" & txtUserName.Text & "';"
+                        MsgBox(Sql)
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
@@ -1686,6 +1689,7 @@
         End Try
 
         ' Update User Role
+
         Try
             If Len(cboUserRole.Text) > 0 Then
                 usrName = Me.DataGridView1.CurrentCell.Value
@@ -1711,21 +1715,93 @@
                 ' Set new privileges according to the new role
                 If Not SetPrivileges(usrName, cboUserRole.Text) Then Exit Sub
 
+                Sql = "Update climsoftusers SET xRole ='0000' WHERE userName LIKE '" & usrName & "';"
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd.ExecuteNonQuery()
+                chkQC.Checked = 0
+                chkProducts.Checked = 0
+                chkMetadata.Checked = 0
+                chkDtransfer.Checked = 0
+
+
                 MsgBox("User Role updated!", MsgBoxStyle.Information)
                 conn.Close()
 
             Else
                 MsgBox("User Role not updated!", MsgBoxStyle.Information)
             End If
-            populateDataGrid()
-            conn.Close()
+
+
+            '' Update Additional Roles
+            'If chkXroles.Checked Then
+            '    Dim xRoles As String
+            '    'Dim qc As Integer, pr As Integer, metdta As Integer, dtrf As Integer
+
+            '    'usrName = Me.DataGridView1.CurrentCell.Value
+            '    xRoles = ""
+            '    If chkQC.Checked Then xRoles = xRoles & 1 Else xRoles = xRoles & 0
+            '    If chkProducts.Checked Then xRoles = xRoles & 2 Else xRoles = xRoles & 0
+            '    If chkMetadata.Checked Then xRoles = xRoles & 3 Else xRoles = xRoles & 0
+            '    If chkDtransfer.Checked Then xRoles = xRoles & 4 Else xRoles = xRoles & 0
+            '    'MsgBox(xRoles)
+            '    If xRoles <> String.Empty Then
+            '        conn.Open()
+            '        additionalRoles(Me.DataGridView1.CurrentCell.Value, xRoles)
+            '        Sql = "Update climsoftusers SET xRole ='" & xRoles & "' WHERE userName LIKE '" & usrName & "';"
+            '        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            '        objCmd.ExecuteNonQuery()
+            '        conn.Close()
+            '    End If
+            'End If
+            'populateDataGrid()
+
+            '' Set Previliges for the additional roles
+
+            'If chkQC.Checked Then SetPrivileges(usrName, "ClimsoftQC")
+            'If chkProducts.Checked Then SetPrivileges(usrName, "ClimsoftProducts")
+            'If chkMetadata.Checked Then SetPrivileges(usrName, "ClimsoftMetadata")
+            'If chkDtransfer.Checked Then SetPrivileges(usrName, "ClimsoftOperatorSupervisor")
+
+
         Catch ex As Exception
             MsgBox(ex.Message)
             'If ex.HResult <> -2147467259 Then MsgBox(ex.Message)
             conn.Close()
         End Try
     End Sub
+    Function additionalRoles(usr As String, addRoles As String) As Boolean
 
+        Try
+            'MsgBox(usr & " " & addRoles)
+
+            ' Set Additional Role
+            ''Sql = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '" & usr & "'@'%'; FLUSH PRIVILEGES;"
+            ''objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            ''objCmd.ExecuteNonQuery()
+
+
+            ''Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.qc_interelement_relationship_definition TO '" & usr & "';  FLUSH PRIVILEGES;"
+            ''objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            '''execute command
+            ''objCmd.ExecuteNonQuery()
+
+            ''Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.qc_interelement_1 TO '" & txtUserName.Text & "';"
+            ''objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            '''execute command
+            ''objCmd.ExecuteNonQuery()
+            ''Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.qc_interelement_2 TO '" & txtUserName.Text & "';"
+            ''objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            '''execute command
+            ''objCmd.ExecuteNonQuery()
+
+
+
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     Sub CurrentDB(connstr As String, ByRef dbnme As String)
         Dim Ssvr, Esvr, Sdb, Edb As Integer
         Dim svrstr, portstr As String
@@ -1802,7 +1878,9 @@
         Dim dbnme As String
         CurrentDB(connStr, dbnme)
 
-        On Error GoTo Err
+        'MsgBox(usrName & " " & usrRole & " " & dbnme)
+        'On Error GoTo Err
+        On Error Resume Next
         'Try
 
         If usrRole = "ClimsoftAdmin" Then
@@ -2658,9 +2736,11 @@
             objCmd.ExecuteNonQuery()
 
             Sql = "GRANT SELECT ON " & dbnme & ".qc_interelement_relationship_definition TO '" & usrName & "';"
+            'MsgBox(Sql)
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+
 
             Sql = "GRANT DELETE,SELECT,INSERT,UPDATE,DROP ON " & dbnme & ".qc_interelement_1 TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
@@ -2724,6 +2804,12 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+            objCmd.ExecuteNonQuery()
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".observationfinal TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
+
             Sql = "GRANT SELECT ON " & dbnme & ".paperarchivedefinition TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2870,6 +2956,10 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.observationfinal TO '" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'execute command
+            objCmd.ExecuteNonQuery()
             Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.paperarchivedefinition TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
@@ -2914,7 +3004,7 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
-            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".obselement TO '" & usrName & "';"
+            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".obselement TO '" & usrName & "';  FLUSH PRIVILEGES;"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
@@ -3126,7 +3216,7 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
-            Sql = "GRANT CREATE,DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".tblproducts TO '" & usrName & "';"
+            Sql = "GRANT CREATE,DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".tblproducts TO '" & usrName & "';  FLUSH PRIVILEGES;"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
@@ -3466,14 +3556,132 @@
         objCmd.ExecuteNonQuery()
 
         Return True
-Err:
-        If Err.Number = 5 Then Resume Next
-        'MsgBox(Err.Description)
-        Return False
+        'Err:
+        '        If Err.Number = 5 Then Resume Next
+        '        'MsgBox(Err.Description)
+        '        Return False
     End Function
 
     Private Sub txtConfirmPassword_GotFocus(sender As Object, e As EventArgs) Handles txtConfirmPassword.GotFocus
         Clipboard.Clear()
+    End Sub
+
+    Private Sub chkXroles_CheckedChanged(sender As Object, e As EventArgs) Handles chkXroles.CheckedChanged
+        If chkXroles.Checked Then
+            If Not populateAdditionalRoles(Me.DataGridView1.CurrentCell.Value) Then
+                chkXroles.Checked = False
+                Exit Sub
+            End If
+            Me.Height = 440
+        Else
+                Me.Height = 332
+        End If
+    End Sub
+    Function populateAdditionalRoles(usr As String) As Boolean
+        Dim dsr As New DataSet
+        Dim dar As New MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim xroles As String
+        Try
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
+
+            Sql = "select xRole from climsoftusers where userName = '" & usr & "';"
+            dar = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            dsr.Clear()
+            dar.Fill(dsr, "Addroles")
+            xroles = dsr.Tables("Addroles").Rows(0).Item("xRole")
+
+            'MsgBox(xroles)
+            chkQC.Checked = Strings.Mid(xroles, 1, 1)
+            chkProducts.Checked = Strings.Mid(xroles, 2, 1)
+            chkMetadata.Checked = Strings.Mid(xroles, 3, 1)
+            chkDtransfer.Checked = Strings.Right(xroles, 1)
+
+            conn.Close()
+            Return True
+        Catch ex As Exception
+            conn.Close()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Private Sub btAddRoles_Click(sender As Object, e As EventArgs) Handles btAddRoles.Click
+        Dim usrName, xRoles As String
+
+        Try
+            connStr = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = connStr
+
+            usrName = Me.DataGridView1.CurrentCell.Value
+
+            ' Update Additional Roles
+            xRoles = "0000"
+            If chkQC.Checked Then
+                If MsgBox("Confirm add QC role?", vbYesNo) = vbYes Then Mid(xRoles, 1, 1) = 1
+            End If
+
+            If chkProducts.Checked Then
+                If MsgBox("Confirm add Products role?", vbYesNo) = vbYes Then Mid(xRoles, 2, 1) = 2
+            End If
+
+            If chkMetadata.Checked Then
+                If MsgBox("Confirm add Metadata role?", vbYesNo) = vbYes Then Mid(xRoles, 3, 1) = 3
+            End If
+
+            If chkDtransfer.Checked Then
+                If MsgBox("Confirm add Data Transfer role?", vbYesNo) = vbYes Then Mid(xRoles, 4, 1) = 4
+            End If
+
+            If xRoles <> "0000" Then
+                conn.Open()
+                Sql = "Update climsoftusers SET xRole ='" & xRoles & "' WHERE userName LIKE '" & usrName & "';"
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd.ExecuteNonQuery()
+                conn.Close()
+            Else
+                MsgBox("No additional role selected")
+                conn.Close()
+                Exit Sub
+            End If
+
+            ' Set Previliges for the additional roles
+            If chkQC.Checked Then
+                conn.Open()
+                SetPrivileges(usrName, "ClimsoftQC")
+                conn.Close()
+            End If
+
+            If chkProducts.Checked Then
+                conn.Open()
+                SetPrivileges(usrName, "ClimsoftProducts")
+                conn.Close()
+            End If
+
+            If chkMetadata.Checked Then
+                conn.Open()
+                SetPrivileges(usrName, "ClimsoftMetadata")
+                conn.Close()
+            End If
+
+            If chkDtransfer.Checked Then
+                conn.Open()
+                SetPrivileges(usrName, "ClimsoftOperatorSupervisor")
+                Sql = "GRANT SELECT,INSERT,UPDATE ON observationinitial TO '" & usrName & "';
+                       GRANT Select,INSERT,UPDATE On observationfinal To '" & usrName & "';
+                       FLUSH PRIVILEGES"
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                'execute command
+                objCmd.ExecuteNonQuery()
+
+                conn.Close()
+            End If
+            populateDataGrid()
+
+        Catch x As Exception
+            conn.Close()
+            MsgBox(x.Message & " btAddRoles")
+        End Try
     End Sub
 
     Private Sub txtPassword_GotFocus(sender As Object, e As EventArgs) Handles txtPassword.GotFocus

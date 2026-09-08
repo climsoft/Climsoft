@@ -553,4 +553,5 @@
     Private Sub ucrYearSelector_Leave(sender As Object, e As EventArgs) Handles ucrYearSelector.Leave
         setHours()
     End Sub
+
 End Class

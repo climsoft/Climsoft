@@ -6,7 +6,7 @@
     Dim ds, dsSequencer, dsValueLimits As New DataSet
     Dim sql, obsValue, elemCode, sqlValueLimits, valUpperLimit, valLowerLimit As String
     Dim FldName As New dataEntryGlobalRoutines
-    Dim DBT, WBT, DPT, RH, PPP, GPM, ELV As String
+    Dim DBT, WBT, DPT, RH, PPP, GPM, MSL, ELV As String
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
         'MsgBox(inc)
@@ -957,6 +957,9 @@
                     End If
 
 
+
+
+
                     'elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
                     'sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
                     ''
@@ -1000,6 +1003,7 @@
                         For Each ctl In Me.Controls
                             If Strings.Left(Me.ActiveControl.Name, 14) = "txtVal_Elem101" Then DBT = Me.ActiveControl.Text
                             If Strings.Left(ctl.name, 14) = "txtVal_Elem103" Then
+
                                 'Compute Dew point
                                 If IsNumeric(DBT) And IsNumeric(WBT) Then
                                     DPT = FldName.calculateDewpoint(Val(DBT) / 10, Val(WBT) / 10)
@@ -1056,6 +1060,45 @@
                             Next
                         End If
                     Next
+
+                    ' Compute MSL
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 14) = "txtVal_Elem106" Then PPP = ctl.text
+
+                        If Strings.Left(ctl.name, 14) = "txtVal_Elem101" Then
+                            DBT = ctl.text
+
+                            ELV = Station_Elv(cboStation.SelectedValue) ' Get Elevation
+
+                            Dim ctlMSL As Control
+                            For Each ctlMSL In Me.Controls
+                                If Strings.Left(ctlMSL.Name, 14) = "txtVal_Elem107" Then
+                                    If IsNumeric(DBT) And IsNumeric(PPP) And IsNumeric(ELV) Then
+                                        MSL = FldName.calculateMSLppp(Val(PPP) / 10, Val(DBT) / 10, Val(ELV))
+
+                                        ctlMSL.Text = MSL
+                                    Else
+                                        ctlMSL.Text = ""
+                                    End If
+                                End If
+                            Next
+
+                            ' Clear M in flag box if captured
+                            Dim flgctl As Control
+                            For Each flgctl In Me.Controls
+                                If Strings.Left(flgctl.Name, 10) = "txtFlag107" Then flgctl.Text = ""
+                            Next
+                        End If
+                    Next
+
+                    'Public Function calculateMSLppp(ppp As String, dryBulb As String, elevation As String) As String
+                    '    Dim MSLppp As VariantType
+
+                    '    MSLppp = (ppp * (1 - 0.0065 * elevation / (dryBulb + 0.0065 * elevation + 273.15)) ^ -5.257) * 10
+                    '    '0.0065 is dry adiabatic lapse rate
+                    '    calculateMSLppp = MSLppp
+                    'End Function
+
 
                 ElseIf Me.ActiveControl.Name = "cboYear" Then
                     'Check for numeric
@@ -1545,19 +1588,19 @@
 
 
 
-            'If codi = "Then003" Or codi = "003" Or codi = "005" Or codi = "018" Or codi = "084" Or codi = "099" Or codi = "133" Or codi = "816" Then
-            '    If Val(cboHour.Text) = Val(FldName.RegkeyValue("key01")) Then
-            '        ctl.Enabled = True
-            '    Else
-            '        ctl.Enabled = False
-            '    End If
-            'ElseIf codi = "002" Then
-            '    If Val(cboHour.Text) = Val(FldName.RegkeyValue("key02")) Then
-            '        ctl.Enabled = True
-            '    Else
-            '        ctl.Enabled = False
-            '    End If
-            'End If
+            If codi = "Then003" Or codi = "003" Or codi = "005" Or codi = "085" Or codi = "018" Or codi = "084" Or codi = "099" Or codi = "133" Or codi = "816" Then
+                If Val(cboHour.Text) = Val(FldName.RegkeyValue("key01")) Then
+                    ctl.Enabled = True
+                Else
+                    ctl.Enabled = False
+                End If
+            ElseIf codi = "002" Then
+                If Val(cboHour.Text) = Val(FldName.RegkeyValue("key02")) Then
+                    ctl.Enabled = True
+                Else
+                    ctl.Enabled = False
+                End If
+            End If
         Next
         'formPopulate()
         '' Populate form if the record exist to avoid repeat entry
@@ -1582,15 +1625,25 @@
             da.Fill(ds, "form_synoptic2_TDCF")
             kount = ds.Tables("form_synoptic2_TDCF").Rows.Count
 
+            ' For BUFR encoding
             frmSynopTDCF.cboStation.Text = cboStation.Text
             frmSynopTDCF.txtYear.Text = cboYear.Text
             frmSynopTDCF.cboMonth.Text = cboMonth.Text
             frmSynopTDCF.cboDay.Text = cboDay.Text
             frmSynopTDCF.cboHour.Text = cboHour.Text
 
+            ' For CSV encoding
+            frmSynopTDCF.cboStations.Text = cboStation.Text
+            frmSynopTDCF.txtYears.Text = cboYear.Text
+            frmSynopTDCF.cboMonths.Text = cboMonth.Text
+            frmSynopTDCF.cboDays.Text = cboDay.Text
+            frmSynopTDCF.cboHours.Text = cboHour.Text
+            'MsgBox(frmSynopTDCF.cboStations.SelectedValue)
+
             ' Populate the station combo box with the stations for the subset
             For i = 0 To kount - 1
                 frmSynopTDCF.cboStation.Items.Add(ds.Tables("form_synoptic2_TDCF").Rows(i).Item("stationId"))
+                frmSynopTDCF.cboStations.Items.Add(ds.Tables("form_synoptic2_TDCF").Rows(i).Item("stationId"))
             Next
 
         Catch ex As Exception
@@ -2103,9 +2156,12 @@
             dattime = DateSerial(cboYear.Text, cboMonth.Text, cboDay.Text) & " " & cboHour.Text.PadLeft(2, "0") & ":00:00"
             dtt = cboYear.Text & "-" & cboMonth.Text & "-" & cboDay.Text & " " & cboHour.Text.PadLeft(2, "0") & ":00:00"
 
-            If DateDiff("h", Now(), dattime) >= 0 Or Not IsDate(dtt) Then
+            ' Chack for invlid observation date and and time
 
-                'MsgBox("Observations for future date not allowed")
+            'If DateDiff("h", Now(), dattime) > -3 Or Not IsDate(dtt) Then
+            'If DateDiff("h", Now(), dattime) > 0 Or Not IsDate(dtt) Then
+            If (DateDiff("h", Now(), dattime) > 0 Or DateAndTime.Hour(Now()) - DateAndTime.Hour(dattime)) < 0 Or Not IsDate(dtt) Then
+
                 ' dissable text boxes
                 DisableTboxes()
                 lblInvaliDate.Text = "Invalid Date Entry! Check Values"

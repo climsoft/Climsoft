@@ -90,7 +90,7 @@ Public Class frmFormUpload
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
 
         Dim m, n, maxRows, st, ed, flds, elemCode, acquisitionType, qcStatus, obsperiod As Integer
-        Dim strSQL, stnlist, code_loc, yyyy, mm, dd, hh, capturedBy, stnId, obsDatetime, obsVal, obsFlag, obsLevel, dataForm, bdate, edate As String
+        Dim strSQL, stnlist, code_loc, yyyy, mm, dd, hh, capturedBy, stnId, obsDatetime, obsVal, obsFlag, obsLevel, dataForm, bdate, edate, entryDate As String
         Dim stnselected As Boolean
 
         Try
@@ -206,12 +206,15 @@ Public Class frmFormUpload
             obsLevel = "surface"
             dataForm = lblFormName1.Text
             code_loc = ""
-
+            entryDate = Now()
             If Not Data_Fields(dataForm, st, ed, code_loc) Then
+                'MsgBox(st & " " & ed & " " & code_loc)
                 FileClose(122)
                 conns.Close()
                 Exit Sub
             End If
+            'MsgBox(st & " " & ed & " " & code_loc)
+
             'conns.Close()
             'MsgBox(st & " " & ed & " " & code_loc)
             flds = (ed - st) + 1 ' Total fields for the observation values
@@ -232,6 +235,11 @@ Public Class frmFormUpload
                     capturedBy = ""
                 End If
 
+                If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item("entryDatetime")) Then entryDate = dss.Tables(frm_tbl).Rows(n).Item("entryDatetime")
+
+                entryDate = Year(entryDate) & "-" & Month(entryDate) & "-" & DateAndTime.Day(entryDate) & " " & DateAndTime.Hour(entryDate) & ":" & DateAndTime.Minute(entryDate) & ":" & DateAndTime.Second(entryDate) 'entryDate
+
+                'MsgBox(entryDate)
                 If code_loc = "Vertical" Then elemCode = dss.Tables(frm_tbl).Rows(n).Item("elementId")
 
                 For m = st To ed
@@ -364,11 +372,12 @@ Public Class frmFormUpload
 
                             datetimeGTS(obsDatetime)
 
-                            strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
-                                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "');"
+                            strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy,entry_date_time) " &
+                                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & dataForm & "','" & capturedBy & "','" & entryDate & "');"
 
                             ' First save data into a text file to be uploaded later
-                            frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
+                            frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & dataForm & "," & capturedBy & "," & entryDate
+                            ' recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy,entry_date_time
                             PrintLine(122, frmrec & ",")
                             'PrintLine(122)
 
@@ -386,9 +395,11 @@ Public Class frmFormUpload
                             datetimeGTS(obsDatetime)
 
                             ''Generate SQL string for inserting data into observationinitial table
+                            strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy,entry_date_time) " &
+                                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & dataForm & "','" & capturedBy & "','" & entryDate & "');"
 
                             ' First save data into a text file to be uploaded later
-                            frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & capturedBy & "," & dataForm
+                            frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & dataForm & "," & capturedBy & "," & entryDate
                             PrintLine(122, frmrec & ",")
                             'PrintLine(122)
 
@@ -410,11 +421,8 @@ Public Class frmFormUpload
                         Continue For
                     End If
 
-                    frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & ",," & acquisitionType & "," & dataForm & "," & capturedBy
-                    'frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & dataForm & "," & capturedBy
+                    frmrec = stnId & "," & elemCode & "," & obsDatetime & "," & obsLevel & "," & obsVal & "," & obsFlag & "," & obsperiod & "," & qcStatus & "," & acquisitionType & "," & dataForm & "," & capturedBy & "," & entryDate
                     PrintLine(122, frmrec & ",")
-                    'PrintLine(122)
-
                 Next m
                 'Move to next record in dataset
             Next n
@@ -426,15 +434,16 @@ Public Class frmFormUpload
 
             ' Create sql query
 
-            Load_Files(fl, "observationinitial", 0, ",")
+            'Load_Files(fl, "observationinitial", 0, ",")
 
-            'strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy);"
+            strSQL = "LOAD DATA local INFILE '" & fl & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy,entry_date_time);"
+            ' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,dataForm,capturedBy,entry_date_time)
+            ' 9136164_AWS,112,2026-5-30 6:00:00,surface,242,,1,0,,1,form_synoptic2_TDCF,samuel,2026-5-30 14:16:36
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
 
-            'objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conns)
-
-            ''Execute query
-            'objCmd.CommandTimeout = 0
-            'objCmd.ExecuteNonQuery()
+            'Execute query
+            objCmd.CommandTimeout = 0
+            objCmd.ExecuteNonQuery()
 
             If maxRows = 0 Then
                 txtDataTransferProgress1.Text = " No data found "
@@ -446,7 +455,7 @@ Public Class frmFormUpload
             conns.Close()
         Catch ex As Exception
             FileClose(122)
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " @ btnStart_Click")
             lblDataTransferProgress.ForeColor = Color.Red
             lblDataTransferProgress.Text = "Data transfer Failure !"
 
@@ -475,7 +484,7 @@ Public Class frmFormUpload
             'conns.ConnectionString = frmLogin.txtusrpwd.Text
             'conns.Open()
 
-            sql = "select val_start_position as St, val_end_position as Ed, elem_code_location as Loc from data_forms where table_name = '" & tbl & "';"
+            sql = "select val_start_position as st, val_end_position as ed, elem_code_location as Loc from data_forms where table_name = '" & tbl & "';"
             'MsgBox(sql)
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             ' Set to unlimited timeout period

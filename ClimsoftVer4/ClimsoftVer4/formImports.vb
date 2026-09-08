@@ -439,12 +439,17 @@ Err:
 
                     fails = 0
                     listErrors.Items.Clear()
+
                     fldlist = DataGridView1.Rows(0).Cells(2).Value
+
                     For i = 1 To DataGridView1.Rows.Count - 1
                         If Len(DataGridView1.Rows(i).Cells(2).Value) <> 0 Then
                             fldlist = fldlist & "," & DataGridView1.Rows(i).Cells(2).Value
                         End If
                     Next
+
+                    ' Remove leading blank field name
+                    If Strings.Left(fldlist, 1) = "," Then fldlist = Strings.Right(fldlist, Len(fldlist) - 1)
 
                     If Strings.InStr(fldlist, "stationId") = 0 Then
                         Me.Cursor = Windows.Forms.Cursors.Default
@@ -452,7 +457,6 @@ Err:
                         FileClose(222)
                         Exit Sub
                     End If
-
 
                     Do While MyReader.EndOfData = False
 

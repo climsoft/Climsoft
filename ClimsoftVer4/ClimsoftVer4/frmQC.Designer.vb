@@ -29,6 +29,12 @@ Partial Class frmQC
         Me.pnlAdvanced = New System.Windows.Forms.Panel()
         Me.lblQcAdvanced = New System.Windows.Forms.Label()
         Me.pnlQcStandard = New System.Windows.Forms.Panel()
+        Me.butOK = New System.Windows.Forms.Button()
+        Me.dateTo = New System.Windows.Forms.DateTimePicker()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.dateFrom = New System.Windows.Forms.DateTimePicker()
+        Me.lblFrom = New System.Windows.Forms.Label()
+        Me.chkEntrydate = New System.Windows.Forms.CheckBox()
         Me.txtEndMonth = New System.Windows.Forms.TextBox()
         Me.txtBeginMonth = New System.Windows.Forms.TextBox()
         Me.txtEndYear = New System.Windows.Forms.TextBox()
@@ -124,6 +130,12 @@ Partial Class frmQC
         'pnlQcStandard
         '
         Me.pnlQcStandard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlQcStandard.Controls.Add(Me.butOK)
+        Me.pnlQcStandard.Controls.Add(Me.dateTo)
+        Me.pnlQcStandard.Controls.Add(Me.lblTo)
+        Me.pnlQcStandard.Controls.Add(Me.dateFrom)
+        Me.pnlQcStandard.Controls.Add(Me.lblFrom)
+        Me.pnlQcStandard.Controls.Add(Me.chkEntrydate)
         Me.pnlQcStandard.Controls.Add(Me.txtEndMonth)
         Me.pnlQcStandard.Controls.Add(Me.txtBeginMonth)
         Me.pnlQcStandard.Controls.Add(Me.txtEndYear)
@@ -132,14 +144,66 @@ Partial Class frmQC
         Me.pnlQcStandard.Controls.Add(Me.lblBeginMonth)
         Me.pnlQcStandard.Controls.Add(Me.lblEndYear)
         Me.pnlQcStandard.Controls.Add(Me.lblBeginYear)
-        Me.pnlQcStandard.Location = New System.Drawing.Point(4, 296)
+        Me.pnlQcStandard.Location = New System.Drawing.Point(4, 294)
         Me.pnlQcStandard.Name = "pnlQcStandard"
-        Me.pnlQcStandard.Size = New System.Drawing.Size(302, 95)
+        Me.pnlQcStandard.Size = New System.Drawing.Size(302, 170)
         Me.pnlQcStandard.TabIndex = 8
+        '
+        'butOK
+        '
+        Me.butOK.Location = New System.Drawing.Point(243, 121)
+        Me.butOK.Name = "butOK"
+        Me.butOK.Size = New System.Drawing.Size(53, 24)
+        Me.butOK.TabIndex = 53
+        Me.butOK.Text = "Select"
+        Me.butOK.UseVisualStyleBackColor = True
+        '
+        'dateTo
+        '
+        Me.dateTo.Location = New System.Drawing.Point(63, 133)
+        Me.dateTo.Name = "dateTo"
+        Me.dateTo.Size = New System.Drawing.Size(175, 20)
+        Me.dateTo.TabIndex = 52
+        '
+        'lblTo
+        '
+        Me.lblTo.AutoSize = True
+        Me.lblTo.Location = New System.Drawing.Point(6, 137)
+        Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(52, 13)
+        Me.lblTo.TabIndex = 51
+        Me.lblTo.Text = "End Date"
+        '
+        'dateFrom
+        '
+        Me.dateFrom.Location = New System.Drawing.Point(63, 109)
+        Me.dateFrom.Name = "dateFrom"
+        Me.dateFrom.Size = New System.Drawing.Size(175, 20)
+        Me.dateFrom.TabIndex = 50
+        Me.dateFrom.Value = New Date(2023, 11, 1, 0, 0, 0, 0)
+        '
+        'lblFrom
+        '
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.Location = New System.Drawing.Point(6, 113)
+        Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(55, 13)
+        Me.lblFrom.TabIndex = 49
+        Me.lblFrom.Text = "Start Date"
+        '
+        'chkEntrydate
+        '
+        Me.chkEntrydate.AutoSize = True
+        Me.chkEntrydate.Location = New System.Drawing.Point(8, 77)
+        Me.chkEntrydate.Name = "chkEntrydate"
+        Me.chkEntrydate.Size = New System.Drawing.Size(123, 17)
+        Me.chkEntrydate.TabIndex = 45
+        Me.chkEntrydate.Text = "Select by Entry Date"
+        Me.chkEntrydate.UseVisualStyleBackColor = True
         '
         'txtEndMonth
         '
-        Me.txtEndMonth.Location = New System.Drawing.Point(258, 46)
+        Me.txtEndMonth.Location = New System.Drawing.Point(258, 44)
         Me.txtEndMonth.Name = "txtEndMonth"
         Me.txtEndMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtEndMonth.TabIndex = 10
@@ -148,7 +212,7 @@ Partial Class frmQC
         '
         'txtBeginMonth
         '
-        Me.txtBeginMonth.Location = New System.Drawing.Point(258, 18)
+        Me.txtBeginMonth.Location = New System.Drawing.Point(258, 16)
         Me.txtBeginMonth.Name = "txtBeginMonth"
         Me.txtBeginMonth.Size = New System.Drawing.Size(33, 20)
         Me.txtBeginMonth.TabIndex = 9
@@ -157,7 +221,7 @@ Partial Class frmQC
         '
         'txtEndYear
         '
-        Me.txtEndYear.Location = New System.Drawing.Point(94, 48)
+        Me.txtEndYear.Location = New System.Drawing.Point(94, 46)
         Me.txtEndYear.Name = "txtEndYear"
         Me.txtEndYear.Size = New System.Drawing.Size(44, 20)
         Me.txtEndYear.TabIndex = 8
@@ -165,7 +229,7 @@ Partial Class frmQC
         '
         'txtBeginYear
         '
-        Me.txtBeginYear.Location = New System.Drawing.Point(94, 20)
+        Me.txtBeginYear.Location = New System.Drawing.Point(94, 18)
         Me.txtBeginYear.Name = "txtBeginYear"
         Me.txtBeginYear.Size = New System.Drawing.Size(44, 20)
         Me.txtBeginYear.TabIndex = 7
@@ -174,7 +238,7 @@ Partial Class frmQC
         'lblEndMonth
         '
         Me.lblEndMonth.AutoSize = True
-        Me.lblEndMonth.Location = New System.Drawing.Point(159, 50)
+        Me.lblEndMonth.Location = New System.Drawing.Point(159, 48)
         Me.lblEndMonth.Name = "lblEndMonth"
         Me.lblEndMonth.Size = New System.Drawing.Size(59, 13)
         Me.lblEndMonth.TabIndex = 6
@@ -183,7 +247,7 @@ Partial Class frmQC
         'lblBeginMonth
         '
         Me.lblBeginMonth.AutoSize = True
-        Me.lblBeginMonth.Location = New System.Drawing.Point(159, 22)
+        Me.lblBeginMonth.Location = New System.Drawing.Point(159, 20)
         Me.lblBeginMonth.Name = "lblBeginMonth"
         Me.lblBeginMonth.Size = New System.Drawing.Size(67, 13)
         Me.lblBeginMonth.TabIndex = 5
@@ -192,7 +256,7 @@ Partial Class frmQC
         'lblEndYear
         '
         Me.lblEndYear.AutoSize = True
-        Me.lblEndYear.Location = New System.Drawing.Point(6, 52)
+        Me.lblEndYear.Location = New System.Drawing.Point(6, 50)
         Me.lblEndYear.Name = "lblEndYear"
         Me.lblEndYear.Size = New System.Drawing.Size(51, 13)
         Me.lblEndYear.TabIndex = 4
@@ -201,7 +265,7 @@ Partial Class frmQC
         'lblBeginYear
         '
         Me.lblBeginYear.AutoSize = True
-        Me.lblBeginYear.Location = New System.Drawing.Point(6, 24)
+        Me.lblBeginYear.Location = New System.Drawing.Point(6, 22)
         Me.lblBeginYear.Name = "lblBeginYear"
         Me.lblBeginYear.Size = New System.Drawing.Size(59, 13)
         Me.lblBeginYear.TabIndex = 3
@@ -292,7 +356,7 @@ Partial Class frmQC
         '
         Me.lblDataTransferProgress.AutoSize = True
         Me.lblDataTransferProgress.ForeColor = System.Drawing.Color.Red
-        Me.lblDataTransferProgress.Location = New System.Drawing.Point(13, 405)
+        Me.lblDataTransferProgress.Location = New System.Drawing.Point(5, 451)
         Me.lblDataTransferProgress.Name = "lblDataTransferProgress"
         Me.lblDataTransferProgress.Size = New System.Drawing.Size(0, 13)
         Me.lblDataTransferProgress.TabIndex = 22
@@ -389,7 +453,7 @@ Partial Class frmQC
         Me.lblSelectTimeRange.AutoSize = True
         Me.lblSelectTimeRange.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSelectTimeRange.ForeColor = System.Drawing.Color.Black
-        Me.lblSelectTimeRange.Location = New System.Drawing.Point(70, 280)
+        Me.lblSelectTimeRange.Location = New System.Drawing.Point(70, 277)
         Me.lblSelectTimeRange.Name = "lblSelectTimeRange"
         Me.lblSelectTimeRange.Size = New System.Drawing.Size(115, 13)
         Me.lblSelectTimeRange.TabIndex = 25
@@ -435,9 +499,9 @@ Partial Class frmQC
         '
         Me.txtProgress.BackColor = System.Drawing.SystemColors.Control
         Me.txtProgress.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtProgress.Location = New System.Drawing.Point(16, 439)
+        Me.txtProgress.Location = New System.Drawing.Point(311, 438)
         Me.txtProgress.Name = "txtProgress"
-        Me.txtProgress.Size = New System.Drawing.Size(867, 13)
+        Me.txtProgress.Size = New System.Drawing.Size(584, 13)
         Me.txtProgress.TabIndex = 30
         '
         'frmQC
@@ -516,4 +580,10 @@ Partial Class frmQC
     Friend WithEvents optdaysconsistency As RadioButton
     Friend WithEvents optdiurnalrange As RadioButton
     Friend WithEvents optMissObstime As RadioButton
+    Friend WithEvents chkEntrydate As CheckBox
+    Friend WithEvents dateTo As DateTimePicker
+    Friend WithEvents lblTo As Label
+    Friend WithEvents dateFrom As DateTimePicker
+    Friend WithEvents lblFrom As Label
+    Friend WithEvents butOK As Button
 End Class
