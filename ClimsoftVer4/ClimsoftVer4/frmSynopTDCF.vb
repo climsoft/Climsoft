@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports Org.BouncyCastle.Crypto.Engines
 
 Public Class frmSynopTDCF
     Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
@@ -11,12 +12,20 @@ Public Class frmSynopTDCF
     Dim ds As New DataSet
     Dim sql, msg_header, msg_file, mmm, Data_Description_Section, descriptors_file, stnAlt As String
     Dim rec, Kount As Integer
-
+    Dim wis2recs(122), obsv_name(122), CSVfile As String
 
     Private Sub frmSynopTDCF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         sql = "CREATE TABLE IF NOT EXISTS `bufr_indicators` (`BUFR_Edition` int(11) DEFAULT '0',`Originating_Centre` int(11) DEFAULT '0',`Originating_SubCentre` int(11) DEFAULT '0',`Update_Sequence` int(11) DEFAULT '0',`Optional_Section` int(11) DEFAULT '0',`Data_Category` int(11) DEFAULT '0',`Intenational_Data_SubCategory` int(11) DEFAULT '0',`Local_Data_SubCategory` int(11) DEFAULT '0',`Master_table` int(11) DEFAULT '0',`Local_Table` int(11) DEFAULT '0') ENGINE=InnoDB DEFAULT CHARSET=latin1;"
         PopulateForms()
+
         ClsTranslations.TranslateForm(Me)
+
+        If Not WIS2BOX_Parameters() Then
+            Exit Sub
+
+        Else
+
+        End If
     End Sub
 
     Sub PopulateForms()
@@ -634,7 +643,7 @@ Public Class frmSynopTDCF
                     If IsDBNull(.Rows(0).Item("qualifier")) Then Return "MISSING"
                     If Len(.Rows(0).Item("qualifier")) = 0 Then Return "MISSING"
                 Else
-                        Get_StationQualifier = "MISSING"
+                    Get_StationQualifier = "MISSING"
                 End If
                 Return .Rows(0).Item("qualifier")
             End With
@@ -733,44 +742,44 @@ Public Class frmSynopTDCF
                         'MsgBox(2 & " _" & fld)
                         'If Len(fld) = 11 And IsNumeric(Int(Strings.Mid(fld, 9, 3))) Then ' Fields for data values
                         code = Int(Strings.Mid(fld, 9, 3))
-                            'MsgBox(code)
-                            If Not IsDBNull(.Rows(0).Item(i)) Then dat = .Rows(0).Item(i)
-                            'MsgBox(dat)
-                            If Len(dat) <> 0 Then
-                                'MsgBox(0)
-                                ' Compute observations with special conditions
-                                ' Scale Radiation and Pressure
-                                If code = 133 Then
-                                    dat = dat & "0000"
-                                ElseIf code = 106 Or code = 107 Or code = 399 Or code = 301 Or code = 400 Then ' Scale Pressure
-                                    dat = CLng(dat) * 100
-                                    'ElseIf code = "506" Then ' Time of beginning or end of precipitation
-                                    '    dat = 9
-                                ElseIf code = 114 Then ' Convert OKTAS to %
-                                    dat = CLng(dat) * 12.5
-                                ElseIf code = 132 Then ' Convert hours of Sunshine to minutes
-                                    dat = CLng(dat) * 60
+                        'MsgBox(code)
+                        If Not IsDBNull(.Rows(0).Item(i)) Then dat = .Rows(0).Item(i)
+                        'MsgBox(dat)
+                        If Len(dat) <> 0 Then
+                            'MsgBox(0)
+                            ' Compute observations with special conditions
+                            ' Scale Radiation and Pressure
+                            If code = 133 Then
+                                dat = dat & "0000"
+                            ElseIf code = 106 Or code = 107 Or code = 399 Or code = 301 Or code = 400 Then ' Scale Pressure
+                                dat = CLng(dat) * 100
+                                'ElseIf code = "506" Then ' Time of beginning or end of precipitation
+                                '    dat = 9
+                            ElseIf code = 114 Then ' Convert OKTAS to %
+                                dat = CLng(dat) * 12.5
+                            ElseIf code = 132 Then ' Convert hours of Sunshine to minutes
+                                dat = CLng(dat) * 60
+                            End If
+
+                            ' Convert Non SI units observation from formSynoptic2
+                            With formSynoptic2
+                                If .cboCloudheightUnits.Text = "feet" And (code = 192 Or code = 118 Or code = 122 Or code = 126 Or code = 130) Then
+                                    dat = CLng(dat) * 0.3048
                                 End If
 
-                                ' Convert Non SI units observation from formSynoptic2
-                                With formSynoptic2
-                                    If .cboCloudheightUnits.Text = "feet" And (code = 192 Or code = 118 Or code = 122 Or code = 126 Or code = 130) Then
-                                        dat = CLng(dat) * 0.3048
-                                    End If
+                                If .cboWindSpdUnits.Text = "knots" And code = 111 Then
+                                    dat = CLng(dat) * 0.51
+                                End If
 
-                                    If .cboWindSpdUnits.Text = "knots" And code = 111 Then
-                                        dat = CLng(dat) * 0.51
-                                    End If
+                                If .cboPrecipUnits.Text = "inches" And code = 5 Then
+                                    dat = CLng(dat) * 25.4
+                                End If
 
-                                    If .cboPrecipUnits.Text = "inches" And code = 5 Then
-                                        dat = CLng(dat) * 25.4
-                                    End If
-
-                                    If .cboTempUnits.Text = "Deg F" And (code = 2 Or code = 3 Or code = 99 Or code = 101 Or code = 102) Then
-                                        'dat = CLng(dat) * 0.3048
-                                        dat = (CLng(dat) - 32) * (5 / 9)
-                                    End If
-                                End With
+                                If .cboTempUnits.Text = "Deg F" And (code = 2 Or code = 3 Or code = 99 Or code = 101 Or code = 102) Then
+                                    'dat = CLng(dat) * 0.3048
+                                    dat = (CLng(dat) - 32) * (5 / 9)
+                                End If
+                            End With
 
                             'If code = 814 Then MsgBox(dat)
 
@@ -780,33 +789,33 @@ Public Class frmSynopTDCF
                             ' Compute cloud layers replications
                             'Clouds above station level
                             If code = 116 Or code = 120 Or code = 124 Or code = 128 Then rep1 = rep1 + 1
-                                'Clouds below station level
-                                If code = 612 Or code = 622 Or code = 632 Or code = 642 Then rep2 = rep2 + 1
+                            'Clouds below station level
+                            If code = 612 Or code = 622 Or code = 632 Or code = 642 Then rep2 = rep2 + 1
+                        End If
+                        'MsgBox(1)
+                        ' Convert Special Cloud type data
+                        If code = "169" Or code = "170" Or code = "171" Then
+                            If Len(dat) <> 0 Then
+                                Select Case code
+                                    Case "169" 'Cloud type CL
+                                        If dat = "0" Then dat = 30
+                                        If dat = "9" Then dat = 62
+                                    Case "170" 'Cloud type CM
+                                        If dat = "0" Then dat = 20
+                                        If dat = "9" Then dat = 61
+                                    Case "171"  'Cloud type CM
+                                        If dat = "0" Then dat = 10
+                                        If dat = "9" Then dat = 60
+                                End Select
+                            Else
+                                dat = "63"
                             End If
-                            'MsgBox(1)
-                            ' Convert Special Cloud type data
-                            If code = "169" Or code = "170" Or code = "171" Then
-                                If Len(dat) <> 0 Then
-                                    Select Case code
-                                        Case "169" 'Cloud type CL
-                                            If dat = "0" Then dat = 30
-                                            If dat = "9" Then dat = 62
-                                        Case "170" 'Cloud type CM
-                                            If dat = "0" Then dat = 20
-                                            If dat = "9" Then dat = 61
-                                        Case "171"  'Cloud type CM
-                                            If dat = "0" Then dat = 10
-                                            If dat = "9" Then dat = 60
-                                    End Select
-                                Else
-                                    dat = "63"
-                                End If
-                                Update_Observation(conn1, dat, code)
-                            End If
-                            'End If
-                            'MsgBox(2)
-                            ' Compute value for TRACE precipitation if present
-                            If fld = "Flag005" And Not IsDBNull(.Rows(0).Item(i)) Then
+                            Update_Observation(conn1, dat, code)
+                        End If
+                        'End If
+                        'MsgBox(2)
+                        ' Compute value for TRACE precipitation if present
+                        If fld = "Flag005" And Not IsDBNull(.Rows(0).Item(i)) Then
                             If .Rows(0).Item(i) = "T" Then Update_Observation(conn1, -1, 5) '24Hr Precipitation
                         End If
                         If fld = "Flag174" And Not IsDBNull(.Rows(0).Item(i)) Then
@@ -1049,7 +1058,7 @@ Public Class frmSynopTDCF
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
 
-                ds.Clear()
+            ds.Clear()
             da.Fill(ds, "obselement")
             Kount = ds.Tables("obselement").Rows.Count
 
@@ -1126,17 +1135,17 @@ Public Class frmSynopTDCF
                 'Do While DecN > 1
                 r = DecN Mod 2
 
-                    Mid(Decimal_Binary, bts - s, 1) = r
+                Mid(Decimal_Binary, bts - s, 1) = r
 
-                    If r = 1 Then
-                        DecN = DecN / 2 - 0.5
-                    Else
-                        DecN = DecN / 2
-                    End If
-                    s = s + 1
-                Loop
+                If r = 1 Then
+                    DecN = DecN / 2 - 0.5
+                Else
+                    DecN = DecN / 2
+                End If
+                s = s + 1
+            Loop
 
-                Return Decimal_Binary
+            Return Decimal_Binary
 
         Catch ex As Exception
             'MsgBox(DecN & " " & bts & " = " & Decimal_Binary)
@@ -1239,7 +1248,7 @@ Public Class frmSynopTDCF
                     Next
                 Next
             End With
-   
+
             CCITT_Binary = binstr
         Catch ex As Exception
             MsgBox(ex.Message & " at CCITT_Binary")
@@ -1247,6 +1256,46 @@ Public Class frmSynopTDCF
         End Try
     End Function
 
+    Private Sub btnEncode_Click(sender As Object, e As EventArgs) Handles btnEncode.Click
+        Dim hdrs, obsv, msgdate As String
+
+        msgdate = "Climsoft_WIS2" & txtYears.Text & cboMonths.Text.PadLeft(2, "0") & cboDays.Text.PadLeft(2, "0") & cboHours.Text.PadLeft(2, "0")
+        CSVfile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msgdate & ".csv"
+
+
+        FileOpen(22, CSVfile, OpenMode.Output)
+        btnView.Enabled = False
+        btnSend.Enabled = False
+
+        ' Print the header into the CSV file
+        If cboStations.Items.Count > 0 Then
+            'btnView.Enabled = True
+            hdrs = obsv_name(0)
+            For i = 1 To obsv_name.Count - 1
+                hdrs = hdrs & "," & obsv_name(i)
+            Next
+            PrintLine(22, hdrs) ' Print headers
+        Else
+            Exit Sub
+        End If
+
+        ' Output the observation daya for the selected hour for all stations into the CSV file
+        For j = 0 To cboStations.Items.Count - 1
+            If data4CSV(cboStations.Items(j), txtYears.Text, cboMonths.Text, cboDays.Text, cboHours.Text) Then
+                btnView.Enabled = True
+                btnSend.Enabled = True
+                obsv = wis2recs(0)
+                For i = 1 To wis2recs.Count - 1
+                    obsv = obsv & "," & wis2recs(i)
+                Next
+                PrintLine(22, obsv) ' Print observation data
+            End If
+        Next
+        FileClose(22)
+        MsgBox("CSV File for WIS2 Created")
+        '' Send CSV file to WIS2 Node
+        'formAWSRealTime.CSVWIS2BOX_Send(CSVfile)
+    End Sub
 
     Function BUFR_Code(conn1 As MySql.Data.MySqlClient.MySqlConnection, binary_data As String, subsets As Integer, Optional WSId As Boolean = False) As Boolean
 
@@ -1492,7 +1541,7 @@ Public Class frmSynopTDCF
             'Dim obsv As String
 
             'counts = 1
-            'sql = "select * from bufr_crex_data where selected =1 order by nos;"
+            'sql = "Select * from bufr_crex_data where selected =1 order by nos;"
 
             'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
             'ds.Clear()
@@ -1529,6 +1578,23 @@ Public Class frmSynopTDCF
         End Try
 
     End Function
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        CommonModules.ViewFile(CSVfile)
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnSend_Click(sender As Object, e As EventArgs)
+        formAWSRealTime.CSVWIS2BOX_Send(CSVfile)
+    End Sub
+
+    Private Sub btnSend_Click_1(sender As Object, e As EventArgs) Handles btnSend.Click
+        ' Send CSV file to WIS2 Node
+        formAWSRealTime.CSVWIS2BOX_Send(CSVfile)
+    End Sub
 
     Private Sub cmdViewDecsriptors_Click(sender As Object, e As EventArgs) Handles cmdViewDecsriptors.Click
         If System.IO.File.Exists(descriptors_file) Then
@@ -1759,4 +1825,506 @@ Public Class frmSynopTDCF
         End Try
     End Function
 
+    Function WIS2BOX_Parameters() As Boolean
+        'Dim wis2recs(122), obsv_name(122) As String
+
+        Try
+            obsv_name(0) = "wsi_series"
+            obsv_name(1) = "wsi_issuer"
+            obsv_name(2) = "wsi_issue_number"
+            obsv_name(3) = "wsi_local"
+            obsv_name(4) = "wmo_block_number"
+            obsv_name(5) = "wmo_station_number"
+            obsv_name(6) = "station_name"
+            obsv_name(7) = "station_type"
+            obsv_name(8) = "year"
+            obsv_name(9) = "month"
+            obsv_name(10) = "day"
+            obsv_name(11) = "hour"
+            obsv_name(12) = "minute"
+            obsv_name(13) = "latitude"
+            obsv_name(14) = "longitude"
+            obsv_name(15) = "station_height_above_msl"
+            obsv_name(16) = "barometer_height_above_msl"
+            obsv_name(17) = "station_pressure"
+            obsv_name(18) = "msl_pressure"
+            obsv_name(19) = "pressure_change_3hr"
+            obsv_name(20) = "pressure_tendency_characteristic"
+            obsv_name(21) = "pressure_change_24hr"
+            obsv_name(22) = "pressure_standard_level"
+            obsv_name(23) = "geopotential_height"
+            obsv_name(24) = "thermometer_height"
+            obsv_name(25) = "air_temperature"
+            obsv_name(26) = "dewpoint_temperature"
+            obsv_name(27) = "relative_humidity"
+            obsv_name(28) = "visibility_sensor_height"
+            obsv_name(29) = "horizontal_visibility"
+            obsv_name(30) = "rain_sensor_height"
+            obsv_name(31) = "total_precipitation_24_hour"
+            obsv_name(32) = "cloud_total_cover"
+            obsv_name(33) = "cloud_total_vertical_sig"
+            obsv_name(34) = "cloud_amount_low_level"
+            obsv_name(35) = "cloud_base_height"
+            obsv_name(36) = "cloud_type_low_level"
+            obsv_name(37) = "cloud_type_mid_level"
+            obsv_name(38) = "cloud_type_high_level"
+            obsv_name(39) = "cloud_layer1_vertical_sig"
+            obsv_name(40) = "cloud_layer1_amount"
+            obsv_name(41) = "cloud_layer1_type"
+            obsv_name(42) = "cloud_layer1_base_height"
+            obsv_name(43) = "cloud_layer2_vertical_sig"
+            obsv_name(44) = "cloud_layer2_amount"
+            obsv_name(45) = "cloud_layer2_type"
+            obsv_name(46) = "cloud_layer2_base_height"
+            obsv_name(47) = "cloud_layer3_vertical_sig"
+            obsv_name(48) = "cloud_layer3_amount"
+            obsv_name(49) = "cloud_layer3_type"
+            obsv_name(50) = "cloud_layer3_base_height"
+            obsv_name(51) = "cloud_layer4_vertical_sig"
+            obsv_name(52) = "cloud_layer4_amount"
+            obsv_name(53) = "cloud_layer4_type"
+            obsv_name(54) = "cloud_layer4_base_height"
+            obsv_name(55) = "method_of_ground_state_measurement"
+            obsv_name(56) = "ground_state"
+            obsv_name(57) = "method_of_snow_depth_measurement"
+            obsv_name(58) = "snow_depth"
+            obsv_name(59) = "ground_minimum_temperature"
+            obsv_name(60) = "present_weather"
+            obsv_name(61) = "past_weather_period"
+            obsv_name(62) = "past_weather1"
+            obsv_name(63) = "past_weather2"
+            obsv_name(64) = "sunshine_total_1hr"
+            obsv_name(65) = "sunshine_total_24hr"
+            obsv_name(66) = "rain_sensor_height"
+            obsv_name(67) = "total_precipitation_1_hour"
+            obsv_name(68) = "total_precipitation_3_hour"
+            obsv_name(69) = "total_precipitation_6_hour"
+            obsv_name(70) = "total_precipitation_12_hour"
+            obsv_name(71) = "total_precipitation_24_hour"
+            obsv_name(72) = "extreme_temp_sensor_height"
+            obsv_name(73) = "temp_max_period"
+            obsv_name(74) = "temp_maximum"
+            obsv_name(75) = "temp_min_period"
+            obsv_name(76) = "temp_minimum"
+            obsv_name(77) = "anemometer_height"
+            obsv_name(78) = "wind_instrument_type"
+            obsv_name(79) = "wind_direction"
+            obsv_name(80) = "wind_speed"
+            obsv_name(81) = "max_wind_gust_direction_10min"
+            obsv_name(82) = "maximum_wind_gust_speed_10min"
+            obsv_name(83) = "max_wind_gust_direction_60min"
+            obsv_name(84) = "maximum_wind_gust_speed_60min"
+            obsv_name(85) = "evaporation_sensor_height"
+            obsv_name(86) = "evaporation_time_period"
+            obsv_name(87) = "evaporation_sensor_type"
+            obsv_name(88) = "evaporation_total"
+            obsv_name(89) = "solar_radiation1_time_period"
+            obsv_name(90) = "solar_radiation1_long_wave"
+            obsv_name(91) = "solar_radiation1_short_wave"
+            obsv_name(92) = "solar_radiation1_net"
+            obsv_name(93) = "solar_radiation1_global"
+            obsv_name(94) = "solar_radiation1_diffuse"
+            obsv_name(95) = "solar_radiation1_direct"
+            obsv_name(96) = "solar_radiation24_time_period"
+            obsv_name(97) = "solar_radiation24_long_wave"
+            obsv_name(98) = "solar_radiation24_short_wave"
+            obsv_name(99) = "solar_radiation24_net"
+            obsv_name(100) = "solar_radiation24_global"
+            obsv_name(101) = "solar_radiation24_diffuse"
+            obsv_name(102) = "solar_radiation24_direct"
+            obsv_name(103) = "soil_level1_depth"
+            obsv_name(104) = "soil_level1_temperature"
+            obsv_name(105) = "soil_level2_depth"
+            obsv_name(106) = "soil_level2_temperature"
+            obsv_name(107) = "soil_level3_depth"
+            obsv_name(108) = "soil_level3_temperature"
+            obsv_name(109) = "soil_level4_depth"
+            obsv_name(110) = "soil_level4_temperature"
+            obsv_name(111) = "soil_level5_depth"
+            obsv_name(112) = "soil_level5_temperature"
+            obsv_name(113) = "soil_level6_depth"
+            obsv_name(114) = "soil_level6_temperature"
+            obsv_name(115) = "soil_level7_depth"
+            obsv_name(116) = "soil_level7_temperature"
+            obsv_name(117) = "soil_level8_depth"
+            obsv_name(118) = "soil_level8_temperature"
+            obsv_name(119) = "soil_level9_depth"
+            obsv_name(120) = "soil_level9_temperature"
+            obsv_name(121) = "soil_level10_depth"
+            obsv_name(122) = "soil_level10_temperature"
+
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Function data4CSV(stnid As String, yy As Integer, mm As Integer, dd As Integer, hh As Integer) As Boolean
+        'Dim wsi, wmo_block, wmo_No, station_name, lat, lon, elev, typ As String
+        Dim WIGOSID(3) As String
+        Try
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            dbconn.ConnectionString = dbConnectionString
+            dbconn.Open()
+
+            ' Get all stations with the same observation time to constitute the subset of stations for encoding
+            sql = "select wsi,stationName, wmoid, latitude, longitude, elevation,qualifier from station where stationid = '" & stnid & "';"
+            'MsgBox(sql)
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ds.Clear()
+            da.Fill(ds, "station")
+
+            ' Get Metadata
+            With ds.Tables("station")
+                If .Rows.Count = 0 Then
+                    MsgBox("No Observations found")
+                    dbconn.Close()
+                    Return False
+                End If
+
+                ' Get WSI
+                If Not IsDBNull(.Rows(0).Item("wsi")) Then
+                    If InStr(.Rows(0).Item("wsi"), "-") > 0 Then
+                        WIGOSID = .Rows(0).Item("wsi").Split("-")
+                        wis2recs(0) = WIGOSID(0)
+                        wis2recs(1) = WIGOSID(1)
+                        wis2recs(2) = WIGOSID(2)
+                        wis2recs(3) = WIGOSID(3)
+                    End If
+                End If
+
+                ' Station name
+                If Not IsDBNull(.Rows(0).Item("stationName")) Then
+                    If Len(.Rows(0).Item("stationName")) > 0 Then
+                        wis2recs(6) = .Rows(0).Item("stationName")
+                    End If
+                End If
+
+                ''WMO id
+                'If Not IsDBNull(.Rows(0).Item("wmoid")) Then
+                '    If Len(.Rows(0).Item("wmoid")) > 0 Then
+                '        wis2recs(4) = Strings.Left(.Rows(0).Item("wmoid"), 2) ' wmo_block_number
+                '        wis2recs(5) = Strings.Right(.Rows(0).Item("wmoid"), 3) 'wmo_station_number
+                '    End If
+                'End If
+
+                ' Station type
+                wis2recs(7) = 3 ' Missing as default value
+                If Not IsDBNull(.Rows(0).Item("qualifier")) Then
+                    If Len(.Rows(0).Item("qualifier")) > 0 Then
+                        wis2recs(7) = 1 ' Assumed manual
+                        If Strings.UCase(.Rows(0).Item("qualifier")) = "AWS" Then wis2recs(7) = 0
+                        If Strings.UCase(.Rows(0).Item("qualifier")) = "HYBRID" Then wis2recs(7) = 2
+                    End If
+                End If
+
+                ' WMO ID
+                If Not IsDBNull(.Rows(0).Item("wmoid")) Then
+                    If Len(.Rows(0).Item("wmoid")) = 5 Then
+                        wis2recs(4) = Strings.Left(.Rows(0).Item("wmoid"), 2) ' wmo_block_number
+                        wis2recs(5) = Strings.Right(.Rows(0).Item("wmoid"), 3) 'wmo_station_number
+                    End If
+                End If
+
+                ' Latitude
+                If Not IsDBNull(.Rows(0).Item("latitude")) Then
+                    If IsNumeric(.Rows(0).Item("latitude")) Then wis2recs(13) = .Rows(0).Item("latitude")
+                End If
+
+                ' Longitude
+                If Not IsDBNull(.Rows(0).Item("longitude")) Then
+                    If IsNumeric(.Rows(0).Item("longitude")) Then wis2recs(14) = .Rows(0).Item("longitude")
+                End If
+
+                ' Elevation and barometer height above msl
+                If Not IsDBNull(.Rows(0).Item("elevation")) Then
+                    If IsNumeric(.Rows(0).Item("elevation")) Then
+                        wis2recs(15) = .Rows(0).Item("elevation")
+                        wis2recs(16) = Val(.Rows(0).Item("elevation")) + 1
+                    End If
+                    'MsgBox(wis2recs(15) & " " & wis2recs(16))
+                End If
+
+                'Next
+            End With
+
+            ' Date and time
+            wis2recs(8) = yy
+            wis2recs(9) = mm
+            wis2recs(10) = dd
+            wis2recs(11) = hh
+            wis2recs(12) = 0
+            'sql = "SELECT * FROM form_synoptic2_tdcf WHERE stationid = '" & stnid & "' AND yyyy = " & yy & " AND mm = " & mm & " AND dd = " & dd & " AND hh = " & hh & ";"
+
+            WIS2BOX_Observations(stnid, yy, mm, dd, hh, sql)
+
+            'MsgBox(sql)
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ds.Clear()
+            da.Fill(ds, "obsv")
+
+            ' Get observation data
+
+            With ds.Tables("obsv")
+                If .Rows.Count = 0 Then
+                    MsgBox("No Observations found")
+                    dbconn.Close()
+                    Return False
+                End If
+
+                For i = 0 To obsv_name.Count - 1
+                    For j = 0 To .Columns.Count - 1
+                        If obsv_name(i) = .Columns(j).ColumnName Then
+                            wis2recs(i) = .Rows(0).Item(j)
+                            Continue For
+                        End If
+                    Next
+                Next
+
+                ' Put the cloud levels type values in the right code figures with two digits according to the WMO standards
+
+                For i = 0 To 122
+                    Select Case obsv_name(i)
+                        Case "cloud_type_low_level"
+                            If IsNumeric(wis2recs(i)) Then wis2recs(i) = "3" & Strings.Left(wis2recs(i), 1)
+                        Case "cloud_type_mid_level"
+                            If IsNumeric(wis2recs(i)) Then wis2recs(i) = "2" & Strings.Left(wis2recs(i), 1)
+                        Case "cloud_type_high_level"
+                            If IsNumeric(wis2recs(i)) Then wis2recs(i) = "1" & Strings.Left(wis2recs(i), 1)
+                    End Select
+                Next
+
+                ' Compute Cloud Vertical Significances
+
+                ' Vertical Significance for Total Cloud Cover
+                Dim N, CL, CM, CH As String
+
+                N = ""
+                CL = ""
+                CM = ""
+                CH = ""
+
+                For j = 0 To .Columns.Count - 1
+                    If .Columns(j).ColumnName = "cloud_total_cover" Then
+                        N = .Rows(0).Item(j)
+                    ElseIf .Columns(j).ColumnName = "cloud_type_low_level" Then
+                        CL = .Rows(0).Item(j)
+                    ElseIf .Columns(j).ColumnName = "cloud_type_mid_level" Then
+                        CM = .Rows(0).Item(j)
+                    ElseIf .Columns(j).ColumnName = "cloud_type_high_level" Then
+                        CH = .Rows(0).Item(j)
+                    End If
+                Next
+
+                If N = "" Then 'Cloud data missing
+                    'MsgBox("Cloud data missing")
+                    wis2recs(33) = 63
+                ElseIf N = 9 Then 'Sky is obscured by fog and/or other phenomena (ceiling)
+                    wis2recs(33) = 5
+                ElseIf N = 0 Then ' There are no clouds (clear sky).
+                    wis2recs(33) = 62
+                ElseIf Val(CL) > 30 Then
+                    wis2recs(33) = 7
+                ElseIf Val(CL) = 30 And CM > 20 Then
+                    wis2recs(33) = 8
+                ElseIf Val(CL) = 30 And CM = 20 And CH > 10 Then
+                    wis2recs(33) = 0
+                End If
+                'MsgBox(N & " " & CL & " " & CM & " " & CH & " " & wis2recs(33))
+
+                ' Vertical Significance for Individual Cloud Layers
+
+                ' First Significant Layer
+                If IsNumeric(wis2recs(41)) Then
+                    If wis2recs(41) = 9 Then
+                        wis2recs(39) = 4
+                    Else
+                        wis2recs(39) = 1
+                    End If
+                End If
+
+                ' Second Significant Layer
+                If IsNumeric(wis2recs(45)) Then
+                    If wis2recs(45) = 9 Then
+                        wis2recs(43) = 4
+                    ElseIf wis2recs(41) = 9 Then
+                        wis2recs(43) = 1
+                    ElseIf wis2recs(41) <> 9 Then
+                        wis2recs(43) = 2
+                    End If
+                End If
+
+                ' Third Significant Layer
+                If IsNumeric(wis2recs(49)) Then
+                    If wis2recs(49) = 9 Then
+                        wis2recs(47) = 4
+                    ElseIf wis2recs(43) <> 2 Then
+                        wis2recs(47) = 2
+                    ElseIf wis2recs(43) = 2 Then
+                        wis2recs(47) = 3
+                    End If
+                End If
+
+                ' Fourth Significant Layer
+                If IsNumeric(wis2recs(53)) Then
+                    If wis2recs(53) = 9 Then
+                        wis2recs(51) = 4
+                    Else
+                        wis2recs(51) = 3
+                    End If
+                End If
+
+                ' Get Soil Temperature Depths
+                Dim lvl(10), tmp(10) As String, Tlvs As Integer
+                Tlvs = 0
+
+                For i = 104 To 122 Step 2
+                    If IsNumeric(wis2recs(i)) Then
+                        soilTempDepths(obsv_name(i), wis2recs(i - 1))
+                        lvl(Tlvs) = wis2recs(i - 1)
+                        tmp(Tlvs) = wis2recs(i)
+                        'MsgBox(lvl(Tlvs) & " " & tmp(Tlvs))
+                        Tlvs = Tlvs + 1
+                    End If
+                Next
+
+                'Intialize soil temperatures data
+                For i = 103 To 122
+                    wis2recs(i) = ""
+                    'If InStr(obsv_name(i), "temp") > 0 Then
+                    '    MsgBox(obsv_name(i) & " " & wis2recs(i))
+                    'End If
+                Next
+
+                'Re-arrange soil temperatures data according to the levels order and convert to Kelvin scale
+                For i = 0 To Tlvs - 1
+                    wis2recs(103 + 2 * i) = lvl(i)
+                    wis2recs(103 + 2 * i + 1) = Val(tmp(i)) / 10 + 273.15
+                Next
+
+                ' Convert surface temperatures to Kelvin scale
+                For i = 0 To 122
+                    If obsv_name(i) = "air_temperature" Or obsv_name(i) = "dewpoint_temperature" Or obsv_name(i) = "temp_maximum" Or obsv_name(i) = "temp_minimum" Then
+                        If IsNumeric(wis2recs(i)) Then wis2recs(i) = Val(wis2recs(i)) / 10 + 273.15
+                    End If
+                Next
+
+                ' Convert presure values from Hpa to pa
+                For i = 0 To 122
+                    If obsv_name(i) = "station_pressure" Or obsv_name(i) = "msl_pressure" Or obsv_name(i) = "pressure_change_3hr" Or obsv_name(i) = "pressure_change_24hr" Then
+                        If IsNumeric(wis2recs(i)) Then wis2recs(i) = Val(wis2recs(i)) * 10 'values had been scaled to a factor of 10
+                    ElseIf obsv_name(i) = "pressure_standard_level" Then
+                        If IsNumeric(wis2recs(i)) Then wis2recs(i) = Val(wis2recs(i)) * 100
+                    End If
+                Next
+            End With
+
+            dbconn.Close()
+            Return True
+        Catch ex As Exception
+            dbconn.Close()
+            MsgBox(ex.Message & " @data4CSV")
+            Return False
+        End Try
+    End Function
+
+    Function WIS2BOX_Observations(stnid As String, yy As Integer, mm As Integer, dd As Integer, hh As Integer, ByRef sql As String) As Boolean
+
+        Try
+            sql = "SELECT
+            Val_Elem106 AS station_pressure,
+            Val_Elem107 AS msl_pressure,
+            Val_Elem301 AS pressure_standard_level,
+            Val_Elem185 AS geopotential_height,
+            Val_Elem101 AS air_temperature,
+            Val_Elem103 AS dewpoint_temperature,
+            Val_Elem105 AS relative_humidity,
+            Val_Elem110 AS horizontal_visibility,
+            Val_Elem005 AS total_precipitation_24_hour,
+            Val_Elem104 AS total_precipitation_1_hour,
+            Val_Elem115 AS cloud_total_cover,
+            Val_Elem191 AS cloud_amount_low_level,
+            Val_Elem118 AS cloud_base_height,
+            Val_Elem192 AS cloud_type_low_level,
+            Val_Elem193 AS cloud_type_mid_level,
+            Val_Elem195 AS cloud_type_high_level,
+            Val_Elem116 AS cloud_layer1_amount,
+            Val_Elem117 AS cloud_layer1_type,
+            Val_Elem118 AS cloud_layer1_base_height,
+            Val_Elem120 AS cloud_layer2_amount,
+            Val_Elem121 AS cloud_layer2_type,
+            Val_Elem122 AS cloud_layer2_base_height,
+            Val_Elem124 AS cloud_layer3_amount,
+            Val_Elem125 AS cloud_layer3_type,
+            Val_Elem126 AS cloud_layer3_base_height,
+            Val_Elem128 AS cloud_layer4_amount,
+            Val_Elem129 AS cloud_layer4_type,
+            Val_Elem130 AS cloud_layer4_base_height,
+            Val_Elem085 AS ground_minimum_temperature,
+            Val_Elem167 AS present_weather,
+            Val_Elem197 AS past_weather1,
+            Val_Elem198 AS past_weather2,
+            Val_Elem132 AS sunshine_total_1hr,
+            Val_Elem002 AS temp_maximum,
+            Val_Elem003 AS temp_minimum,
+            Val_Elem112 AS wind_direction,
+            Val_Elem111 AS wind_speed,
+            Val_Elem018 AS evaporation_total,
+            Val_Elem175 AS soil_level1_temperature,
+            Val_Elem275 AS soil_level2_temperature,
+            Val_Elem274 AS soil_level3_temperature,
+            Val_Elem269 AS soil_level4_temperature,
+            Val_Elem273 AS soil_level5_temperature,
+            Val_Elem272 AS soil_level6_temperature
+            FROM form_synoptic2_tdcf WHERE stationid = '" & stnid & "' AND yyyy = " & yy & " AND mm = " & mm & " AND dd = " & dd & " AND hh = " & hh & ";"
+
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Function soilTempDepths(lvlName As String, ByRef depth As String) As Boolean
+
+        Try
+
+
+            'With soilTemp("soilTemp")
+
+            '    For i = 0 To .Rows.Count - 1
+            '        tmps(i) = .Rows(i).Item(1)
+
+            Select Case lvlName
+                Case "soil_level1_temperature"
+                    depth = "0.05"
+                Case "soil_level2_temperature"
+                    depth = "0.1"
+                Case "soil_level3_temperature"
+                    depth = "0.2"
+                Case "soil_level4_temperature"
+                    depth = "0.3"
+                Case "soil_level5_temperature"
+                    depth = "0.4"
+                Case "soil_level6_temperature"
+                    depth = "0.5"
+                Case "soil_level7_temperature"
+                    depth = "0.6"
+                Case "soil_level8_temperature"
+                    depth = "0.7"
+                Case "soil_level9_temperature"
+                    depth = "1.0"
+                Case "soil_level10_temperature"
+                    depth = "1.2"
+            End Select
+            '    Next
+            'End With
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message & " @ soilTmpe")
+            Return False
+        End Try
+    End Function
 End Class

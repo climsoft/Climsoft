@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports ClimsoftVer4.Translations
+Imports Org.BouncyCastle.Pqc.Crypto
 
 
 Public Class frmMainMenu
@@ -22,14 +23,15 @@ Public Class frmMainMenu
     Public HTMLHelp As New clsHelp
 
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim usrName, usrRole As String
+        Dim usrName, usrRole, addRoles As String
         Dim i, maxRows As Integer
         'Dim usr As Boolean = False
         usrRole = ""
-
+        addRoles = "0000"
         Try
             usrName = frmLogin.txtUsername.Text
             maxRows = dsClimsoftUserRoles.Tables("userRoles").Rows.Count
+
 
             'Get the role for the logged in user from the climsoftusers table
             If maxRows > 0 Then
@@ -37,10 +39,11 @@ Public Class frmMainMenu
                     If dsClimsoftUserRoles.Tables("userRoles").Rows(i).Item("userName") = usrName Then
                         'usr = True
                         usrRole = dsClimsoftUserRoles.Tables("userRoles").Rows(i).Item("userRole")
+                        addRoles = dsClimsoftUserRoles.Tables("userRoles").Rows(i).Item("xRole")
                         userGroup = usrRole
                     End If
                 Next i
-
+                'MsgBox(addRoles)
                 'Disable controls that do not correspond to the user role
                 If usrRole = "ClimsoftOperator" Or usrRole = "ClimsoftOperatorSupervisor" Or usrRole = "ClimsoftRainfall" Then
                     mnuAdministration.Enabled = False
@@ -123,6 +126,30 @@ Public Class frmMainMenu
                     btnMainDataTransfer.Enabled = False
                 End If
             End If
+
+            '' Extra Roles
+            Dim roles(3) As Integer
+            roles(0) = Strings.Mid(addRoles, 1, 1) ' QC
+            roles(1) = Strings.Mid(addRoles, 2, 1) ' Products
+            roles(2) = Strings.Mid(addRoles, 3, 1) ' Metadata
+            roles(3) = Strings.Mid(addRoles, 4, 1) ' Data Transfer
+
+
+            For i = 0 To 3
+                Select Case roles(i)
+                    Case 1 ' QC
+                        mnuQC.Enabled = True
+                        btnMainQC.Enabled = True
+                    Case 2  ' Products
+                        mnuProducts.Enabled = True
+                        btnMainProducts.Enabled = True
+                    Case 3 ' Metadata
+                        btnMainMetadata.Enabled = True
+                    Case 4 ' Data Transfer
+                        btnMainDataTransfer.Enabled = True
+                End Select
+
+            Next
 
             Me.CenterToScreen()
         Catch ex As Exception

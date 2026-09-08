@@ -115,7 +115,7 @@ Partial Class frmProducts
         Me.lblProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProducts.Location = New System.Drawing.Point(77, 52)
         Me.lblProducts.Name = "lblProducts"
-        Me.lblProducts.Size = New System.Drawing.Size(69, 16)
+        Me.lblProducts.Size = New System.Drawing.Size(68, 16)
         Me.lblProducts.TabIndex = 14
         Me.lblProducts.Text = "Products"
         '
@@ -179,7 +179,7 @@ Partial Class frmProducts
         Me.lblProductsCategory.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProductsCategory.Location = New System.Drawing.Point(18, 19)
         Me.lblProductsCategory.Name = "lblProductsCategory"
-        Me.lblProductsCategory.Size = New System.Drawing.Size(151, 16)
+        Me.lblProductsCategory.Size = New System.Drawing.Size(150, 16)
         Me.lblProductsCategory.TabIndex = 17
         Me.lblProductsCategory.Text = "Select Product category"
         '

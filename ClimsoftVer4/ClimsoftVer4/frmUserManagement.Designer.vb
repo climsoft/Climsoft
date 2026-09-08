@@ -38,6 +38,12 @@ Partial Class frmUserManagement
         Me.lblFrmUserManagementGuidelines = New System.Windows.Forms.Label()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnPrivilges = New System.Windows.Forms.Button()
+        Me.chkXroles = New System.Windows.Forms.CheckBox()
+        Me.chkQC = New System.Windows.Forms.CheckBox()
+        Me.chkProducts = New System.Windows.Forms.CheckBox()
+        Me.chkMetadata = New System.Windows.Forms.CheckBox()
+        Me.chkDtransfer = New System.Windows.Forms.CheckBox()
+        Me.btAddRoles = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -187,11 +193,76 @@ Partial Class frmUserManagement
         Me.btnPrivilges.Text = "Refresh Privileges"
         Me.btnPrivilges.UseVisualStyleBackColor = True
         '
+        'chkXroles
+        '
+        Me.chkXroles.AutoSize = True
+        Me.chkXroles.Location = New System.Drawing.Point(35, 263)
+        Me.chkXroles.Name = "chkXroles"
+        Me.chkXroles.Size = New System.Drawing.Size(117, 17)
+        Me.chkXroles.TabIndex = 15
+        Me.chkXroles.Text = "Multiple User Roles"
+        Me.chkXroles.UseVisualStyleBackColor = True
+        '
+        'chkQC
+        '
+        Me.chkQC.AutoSize = True
+        Me.chkQC.Location = New System.Drawing.Point(56, 292)
+        Me.chkQC.Name = "chkQC"
+        Me.chkQC.Size = New System.Drawing.Size(41, 17)
+        Me.chkQC.TabIndex = 16
+        Me.chkQC.Text = "QC"
+        Me.chkQC.UseVisualStyleBackColor = True
+        '
+        'chkProducts
+        '
+        Me.chkProducts.AutoSize = True
+        Me.chkProducts.Location = New System.Drawing.Point(56, 313)
+        Me.chkProducts.Name = "chkProducts"
+        Me.chkProducts.Size = New System.Drawing.Size(68, 17)
+        Me.chkProducts.TabIndex = 17
+        Me.chkProducts.Text = "Products"
+        Me.chkProducts.UseVisualStyleBackColor = True
+        '
+        'chkMetadata
+        '
+        Me.chkMetadata.AutoSize = True
+        Me.chkMetadata.Location = New System.Drawing.Point(56, 334)
+        Me.chkMetadata.Name = "chkMetadata"
+        Me.chkMetadata.Size = New System.Drawing.Size(71, 17)
+        Me.chkMetadata.TabIndex = 18
+        Me.chkMetadata.Text = "Metadata"
+        Me.chkMetadata.UseVisualStyleBackColor = True
+        '
+        'chkDtransfer
+        '
+        Me.chkDtransfer.AutoSize = True
+        Me.chkDtransfer.Location = New System.Drawing.Point(56, 355)
+        Me.chkDtransfer.Name = "chkDtransfer"
+        Me.chkDtransfer.Size = New System.Drawing.Size(91, 17)
+        Me.chkDtransfer.TabIndex = 19
+        Me.chkDtransfer.Text = "Data Transfer"
+        Me.chkDtransfer.UseVisualStyleBackColor = True
+        '
+        'btAddRoles
+        '
+        Me.btAddRoles.Location = New System.Drawing.Point(46, 375)
+        Me.btAddRoles.Name = "btAddRoles"
+        Me.btAddRoles.Size = New System.Drawing.Size(101, 23)
+        Me.btAddRoles.TabIndex = 20
+        Me.btAddRoles.Text = "Add Role"
+        Me.btAddRoles.UseVisualStyleBackColor = True
+        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(788, 297)
+        Me.ClientSize = New System.Drawing.Size(788, 293)
+        Me.Controls.Add(Me.btAddRoles)
+        Me.Controls.Add(Me.chkDtransfer)
+        Me.Controls.Add(Me.chkMetadata)
+        Me.Controls.Add(Me.chkProducts)
+        Me.Controls.Add(Me.chkQC)
+        Me.Controls.Add(Me.chkXroles)
         Me.Controls.Add(Me.btnPrivilges)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.lblFrmUserManagementGuidelines)
@@ -233,4 +304,10 @@ Partial Class frmUserManagement
     Friend WithEvents lblFrmUserManagementGuidelines As System.Windows.Forms.Label
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnPrivilges As Button
+    Friend WithEvents chkXroles As CheckBox
+    Friend WithEvents chkQC As CheckBox
+    Friend WithEvents chkProducts As CheckBox
+    Friend WithEvents chkMetadata As CheckBox
+    Friend WithEvents chkDtransfer As CheckBox
+    Friend WithEvents btAddRoles As Button
 End Class

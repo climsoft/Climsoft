@@ -143,6 +143,7 @@ Public Class frmProducts
                 formProductsSelectCriteria.lstvElements.Items.Add(itm)
                 formProductsSelectCriteria.lblProductType.Text = selectedProductName
                 formProductsSelectCriteria.Show()
+
             Case Else
                 formProductsSelectCriteria.lblProductType.Text = selectedProductName
                 formProductsSelectCriteria.Show()
@@ -437,5 +438,9 @@ Public Class frmProducts
             conp.Close()
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    Private Sub lstViewProducts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstViewProducts.SelectedIndexChanged
+
     End Sub
 End Class

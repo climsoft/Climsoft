@@ -33,6 +33,9 @@ Partial Class formProductsSelectCriteria
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlStationsElements = New System.Windows.Forms.Panel()
+        Me.lblHours = New System.Windows.Forms.Label()
+        Me.txtrandomHours = New System.Windows.Forms.TextBox()
+        Me.chkRandomHours = New System.Windows.Forms.CheckBox()
         Me.pnlExtremes = New System.Windows.Forms.Panel()
         Me.btnMinDate = New System.Windows.Forms.RadioButton()
         Me.btnMaxDate = New System.Windows.Forms.RadioButton()
@@ -135,7 +138,7 @@ Partial Class formProductsSelectCriteria
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(4, 1, 0, 1)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1060, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1062, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -191,6 +194,9 @@ Partial Class formProductsSelectCriteria
         '
         Me.pnlStationsElements.BackColor = System.Drawing.SystemColors.ControlLight
         Me.pnlStationsElements.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlStationsElements.Controls.Add(Me.lblHours)
+        Me.pnlStationsElements.Controls.Add(Me.txtrandomHours)
+        Me.pnlStationsElements.Controls.Add(Me.chkRandomHours)
         Me.pnlStationsElements.Controls.Add(Me.pnlExtremes)
         Me.pnlStationsElements.Controls.Add(Me.pnlLevels)
         Me.pnlStationsElements.Controls.Add(Me.txttest)
@@ -218,6 +224,36 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Name = "pnlStationsElements"
         Me.pnlStationsElements.Size = New System.Drawing.Size(1058, 441)
         Me.pnlStationsElements.TabIndex = 4
+        '
+        'lblHours
+        '
+        Me.lblHours.AutoSize = True
+        Me.lblHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHours.Location = New System.Drawing.Point(899, 197)
+        Me.lblHours.Name = "lblHours"
+        Me.lblHours.Size = New System.Drawing.Size(145, 12)
+        Me.lblHours.TabIndex = 36
+        Me.lblHours.Text = "Enter hours separated by commas"
+        Me.lblHours.Visible = False
+        '
+        'txtrandomHours
+        '
+        Me.txtrandomHours.Location = New System.Drawing.Point(896, 179)
+        Me.txtrandomHours.Name = "txtrandomHours"
+        Me.txtrandomHours.Size = New System.Drawing.Size(151, 20)
+        Me.txtrandomHours.TabIndex = 35
+        Me.txtrandomHours.Visible = False
+        '
+        'chkRandomHours
+        '
+        Me.chkRandomHours.AutoSize = True
+        Me.chkRandomHours.Location = New System.Drawing.Point(797, 178)
+        Me.chkRandomHours.Name = "chkRandomHours"
+        Me.chkRandomHours.Size = New System.Drawing.Size(97, 17)
+        Me.chkRandomHours.TabIndex = 34
+        Me.chkRandomHours.Text = "Random Hours"
+        Me.chkRandomHours.UseVisualStyleBackColor = True
+        Me.chkRandomHours.Visible = False
         '
         'pnlExtremes
         '
@@ -990,7 +1026,7 @@ Partial Class formProductsSelectCriteria
         Me.ToolStrip2.Location = New System.Drawing.Point(0, 483)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
-        Me.ToolStrip2.Size = New System.Drawing.Size(1060, 25)
+        Me.ToolStrip2.Size = New System.Drawing.Size(1062, 25)
         Me.ToolStrip2.TabIndex = 9
         Me.ToolStrip2.Text = "ToolStrip2"
         '
@@ -1050,7 +1086,7 @@ Partial Class formProductsSelectCriteria
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
-        Me.ToolStrip1.Size = New System.Drawing.Size(1060, 31)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1062, 31)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -1058,7 +1094,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1060, 508)
+        Me.ClientSize = New System.Drawing.Size(1062, 508)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlStationsElements)
         Me.Controls.Add(Me.ToolStrip1)
@@ -1182,4 +1218,7 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents optRegion3 As RadioButton
     Friend WithEvents lstRegion2 As ListBox
     Friend WithEvents optRegion2 As RadioButton
+    Friend WithEvents chkRandomHours As CheckBox
+    Friend WithEvents txtrandomHours As TextBox
+    Friend WithEvents lblHours As Label
 End Class

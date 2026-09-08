@@ -17,13 +17,14 @@
 'Imports ClimsoftVer4.GlobalVariables
 
 Imports System.IO
+Imports System.Reflection
 Imports System.Security.Cryptography
 Imports Mysqlx
 Imports Org.BouncyCastle.Crypto.Prng
 
 Public Class frmQC
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-    Dim myConnectionString As String
+    Dim myConnectionString, stns(), elems() As String
     Dim beginYear As Integer, endYear As Integer, beginMonth As Integer, endMonth As Integer, sql As String, strSQL As String
     Dim ds As New DataSet, da As MySql.Data.MySqlClient.MySqlDataAdapter, beginYearMonth As String, endYearMonth As String
     Dim ds1 As New DataSet, da1 As MySql.Data.MySqlClient.MySqlDataAdapter, sql1 As String
@@ -90,6 +91,7 @@ Public Class frmQC
             'sql = "SELECT stationId, stationName FROM station INNER JOIN observationinitial ON stationId = recordedFrom
             '       GROUP BY stationId ORDER BY stationId;"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            daa.SelectCommand.CommandTimeout = 0
             dss.Clear()
 
             daa.Fill(dss, "station")
@@ -117,6 +119,7 @@ Public Class frmQC
             'sql = "SELECT elementId, description FROM obselement INNER JOIN observationinitial ON elementId = describedBy
             '       GROUP BY elementId ORDER BY elementId;"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            daa.SelectCommand.CommandTimeout = 0
             dss.Clear()
             daa.Fill(dss, "element")
             lstViewElements.Items.Clear()
@@ -745,8 +748,33 @@ Public Class frmQC
     Private Sub cmdPerformQC_Click(sender As Object, e As EventArgs) Handles cmdPerformQC.Click
         If optMissObstime.Checked Then
             UpdateObsDatetime()
+
             Exit Sub
         End If
+
+
+        'If chkEntrydate.Checked Then
+        '    Dim kount As Integer
+        '    ' Get stations
+        '    entryDatetimeStations(stns, elems)
+        '    'MsgBox("Stations = " & stns.Count)
+        '    'MsgBox("Elements = " & elems.Count)
+        '    'MsgBox(stns(0) & " " & elems(0))
+
+        '    kount = 0
+        '    'Tchecked = LstViewStations.CheckedItems.Count
+        '    'MsgBox(Tchecked)
+        '    For k = 0 To LstViewStations.Items.Count - 1
+
+        '        If LstViewStations.Items(kount).Checked = False Then
+        '            LstViewStations.Items(kount).Remove()
+        '        Else
+        '            kount = kount + 1
+        '        End If
+        '    Next
+        '    'LstViewStations.Refresh()
+        '    Exit Sub
+        'End If
 
         Dim m, n, elem1, elem2 As Integer
         Dim stnid, elmcode, stnlist, elmlist, stnelm_selected, stnelm_local, QcReportFile, strSQLog, qcLog As String
@@ -806,7 +834,8 @@ Public Class frmQC
         If Len(elmlist) > 0 Then elmlist = "(" & elmlist & ")"
 
         ' Set the stations and elements selection conditions
-        If stnselected = False Or obsv_nameelected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
+        'If (stnselected = False Or obsv_nameelected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4) And chkEntrydate.Checked = False Then
+        If (stnselected = False Or obsv_nameelected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4) And chkEntrydate.Checked = False Then
             MsgBox(ClsTranslations.GetTranslation(" Selections not properly done. Check values!"), MsgBoxStyle.Exclamation, ClsTranslations.GetTranslation("Selection Error"))
             Me.Cursor = Cursors.Default
             Exit Sub
@@ -819,7 +848,7 @@ Public Class frmQC
                 If optInterElement.Checked = True Then stnelm_selected = stnlist & " and "
             End If
             'If chkAllElements.Checked = False And chkAllStations.Checked = True Then stnelm_selected = ""
-
+            'If chkEntrydate.Checked = True Then stnelm_selected = elmlist
         End If
 
         myConnectionString = frmLogin.txtusrpwd.Text
@@ -904,7 +933,7 @@ Public Class frmQC
             'UpdateqcLog(strSQLog, 1)
 
         End If
-
+        'MsgBox(strSQL)
         ' Create the Command for executing query and set its properties
         objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
@@ -1342,7 +1371,7 @@ Public Class frmQC
                             If lstViewElements.Items(j).Checked = True Then
                                 elmcode = lstViewElements.Items(j).SubItems(0).Text
                                 strSQL = "SELECT recordedFrom AS STN, describedBy AS COD, obsDatetime AS DT,Year(obsDatetime) as YY, Month(obsDatetime) AS MM, Day(obsDatetime) AS DD, Hour(obsDatetime) AS HH, obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm AS Val FROM observationinitial " &
-                                          "where recordedFrom = " & stnid & " and describedBy ='" & elmcode & "' and year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+                                          "where recordedFrom = '" & stnid & "' and describedBy ='" & elmcode & "' and year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
 
                                 If optdaysconsistency.Checked Then
                                     qcConsecutiveObs(strSQL, "d", 4)
@@ -1579,6 +1608,63 @@ Public Class frmQC
                     Exit For
                 End If
             Next
+        End If
+    End Sub
+
+    Private Sub butOK_Click(sender As Object, e As EventArgs) Handles butOK.Click
+
+        Dim kount As Integer
+        Dim dtfrom, dtTo As String
+
+        dtfrom = DateAndTime.Year(dateFrom.Text) & "-" & DateAndTime.Month(dateFrom.Text) & "-" & DateAndTime.Day(dateFrom.Text) & " 00:00:00"
+        dtTo = DateAndTime.Year(dateTo.Text) & "-" & DateAndTime.Month(dateTo.Text) & "-" & DateAndTime.Day(dateTo.Text) & " 23:59:59"
+        Cursor = Cursors.WaitCursor
+
+        'MsgBox(dateFrom.Text & " " & dateTo.Text)
+        If Not entryDatetimeStations(dtfrom, dtTo) Then Exit Sub ' Get stations and elements from key entry forms
+        kount = 0
+        For k = 0 To LstViewStations.Items.Count - 1
+            If LstViewStations.Items(kount).Checked = False Then
+                LstViewStations.Items(kount).Remove()
+            Else
+                kount = kount + 1
+            End If
+        Next
+
+        kount = 0
+        For k = 0 To lstViewElements.Items.Count - 1
+            If lstViewElements.Items(kount).Checked = False Then
+                lstViewElements.Items(kount).Remove()
+            Else
+                kount = kount + 1
+            End If
+        Next
+        Cursor = Cursors.Default
+
+    End Sub
+
+    Private Sub chkEntrydate_CheckedChanged(sender As Object, e As EventArgs) Handles chkEntrydate.CheckedChanged
+        If chkEntrydate.Checked Then
+            pnlQcStandard.Height = 162
+
+            txtBeginYear.Visible = False
+            txtEndYear.Visible = False
+            txtBeginMonth.Visible = False
+            txtEndMonth.Visible = False
+
+            txtBeginYear.Text = "0000"
+            txtEndYear.Text = "9999"
+        Else
+            pnlQcStandard.Height = 110
+
+            txtBeginYear.Visible = True
+            txtEndYear.Visible = True
+            txtBeginMonth.Visible = True
+            txtEndMonth.Visible = True
+
+            txtBeginYear.Text = ""
+            txtEndYear.Text = ""
+
         End If
     End Sub
 
@@ -2090,7 +2176,124 @@ Public Class frmQC
             'MsgBox(ex.Message & " @ outPutDublicates")
         End Try
     End Sub
+    Function entryDatetimeStations(stdt As String, eddt As String) As Boolean
+        'Dim ortn As String
+        Dim max, stclmn, edclmn As Integer
+        Try
+            sql = "SELECT data_forms.table_name,val_start_position,val_end_position,elem_code_location FROM data_forms WHERE selected =1;"
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
 
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "lst")
+            'MsgBox(ds.Tables("lst").Rows.Count)
+            max = ds.Tables("lst").Rows.Count
+
+            Dim tbl(max), orient(max), stEpos(max), edEpos(max) As String
+            For j = 0 To max - 1
+                tbl(j) = ds.Tables("lst").Rows(j).Item(0)
+                orient(j) = ds.Tables("lst").Rows(j).Item("elem_code_location")
+                stEpos(j) = ds.Tables("lst").Rows(j).Item("val_start_position")
+                edEpos(j) = ds.Tables("lst").Rows(j).Item("val_end_position")
+            Next
+
+            For i = 0 To max - 1
+
+                If orient(i) = "Vertical" Then
+                    sql = "SELECT stationid,elementid FROM " & tbl(i) & " WHERE entrydatetime between '" & stdt & "' AND '" & eddt & "' GROUP BY stationid,elementid;"
+
+                    Try
+                        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                        da.SelectCommand.CommandTimeout = 0
+                        ds.Clear()
+                        da.Fill(ds, "recs")
+
+                        If ds.Tables("recs").Rows.Count = 0 Then Continue For
+
+                        ' Check station items that have been found in the forms
+                        For k = 0 To ds.Tables("recs").Rows.Count - 1
+                            For n = 0 To LstViewStations.Items.Count - 1
+                                If LstViewStations.Items(n).SubItems(0).Text = ds.Tables("recs").Rows(k).Item("stationid") Then
+                                    LstViewStations.Items(n).Checked = True
+                                    Exit For
+                                End If
+                            Next
+                        Next
+
+                        ' Check elements items that have been found in the forms
+                        For k = 0 To ds.Tables("recs").Rows.Count - 1
+                            For n = 0 To lstViewElements.Items.Count - 1
+                                If lstViewElements.Items(n).SubItems(0).Text = ds.Tables("recs").Rows(k).Item("elementid") Then
+                                    lstViewElements.Items(n).Checked = True
+                                    Exit For
+                                End If
+                            Next
+                        Next
+
+                    Catch ex As Exception
+                        'MsgBox(ex.Message)
+                    End Try
+
+                ElseIf orient(i) = "Horizontal" Then
+                    sql = "SELECT * FROM " & tbl(i) & " WHERE entrydatetime BETWEEN '" & stdt & "' AND '" & eddt & "' GROUP BY stationid;"
+
+                    Try
+                        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                        da.SelectCommand.CommandTimeout = 0
+                        ds.Clear()
+                        da.Fill(ds, "recs")
+
+                        If ds.Tables("recs").Rows.Count = 0 Then Continue For
+
+                        ' Check station items that have been found in the forms
+                        For k = 0 To ds.Tables("recs").Rows.Count - 1
+                            For n = 0 To LstViewStations.Items.Count - 1
+                                If LstViewStations.Items(n).SubItems(0).Text = ds.Tables("recs").Rows(k).Item("stationid") Then
+                                    LstViewStations.Items(n).Checked = True
+                                    Exit For
+                                End If
+                            Next
+                        Next
+
+                        ' Check elements items that have been found in the forms
+
+                        If tbl(i) = "form_hourlywind" Then ' form_hourlywind has unique structure
+                            'MsgBox(tbl(i))
+                            For n = 0 To lstViewElements.Items.Count - 1
+                                If lstViewElements.Items(n).SubItems(0).Text = "111" Or lstViewElements.Items(n).SubItems(0).Text = "112" Then
+                                    lstViewElements.Items(n).Checked = True
+                                    'Exit For
+                                End If
+                            Next
+                        Else
+
+                            stclmn = Val(stEpos(i))
+                            edclmn = Val(edEpos(i))
+                            For k = stclmn To edclmn
+                                For n = 0 To lstViewElements.Items.Count - 1
+                                    If lstViewElements.Items(n).SubItems(0).Text = Val(Strings.Right(ds.Tables("recs").Columns(k).ColumnName, 3)) Then
+                                        lstViewElements.Items(n).Checked = True
+                                        Exit For
+                                    End If
+                                Next
+                            Next
+                        End If
+                    Catch ex As Exception
+                        'MsgBox(ex.Message)
+                    End Try
+                End If
+            Next
+
+            conn.Close()
+            Return True
+        Catch ex As Exception
+            conn.Close()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
     Function MSdataset(sqls As String) As DataSet
 
         Dim conns As New MySql.Data.MySqlClient.MySqlConnection
@@ -2117,4 +2320,6 @@ Public Class frmQC
             Return Nothing
         End Try
     End Function
+
+
 End Class

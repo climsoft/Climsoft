@@ -1407,6 +1407,8 @@ Public Class form_synopticRA1
         SubsetObservations()
     End Sub
 
+
+
     Sub SubsetObservations()
         Dim kount As Integer
         Try

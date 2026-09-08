@@ -14,10 +14,11 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Security.Cryptography
 Imports MySql.Data.MySqlClient
+Imports Mysqlx
 
 Public Class dataEntryGlobalRoutines
-
     Public Sub messageBoxNoPreviousRecord()
         MsgBox("No more previous record!", MsgBoxStyle.Exclamation)
     End Sub
@@ -1111,7 +1112,57 @@ Public Class dataEntryGlobalRoutines
             Return False
         End Try
     End Function
+    Function get_prevHourValue(obs As String, stn As String, elm As String, y As Integer, m As Integer, d As Integer, h As String, ByRef prv As String) As Boolean
+        Dim dt, hh, psthh, colmn0, sql As String
+        Dim y0, m0, d0 As Integer
+        Dim dtt, dtt1 As Date
+        Dim connh As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dsh As New DataSet
+        Dim dah As MySql.Data.MySqlClient.MySqlDataAdapter
 
+        connh.ConnectionString = frmLogin.txtusrpwd.Text
+        connh.Open()
+
+        Try
+            dt = DateSerial(y, m, d)
+
+            dtt = dt & " " & h.PadLeft(2, "0") & ":00:00"
+            dtt1 = DateAdd("h", -1, dtt)
+
+            y0 = DateAndTime.Year(dtt1)
+            m0 = DateAndTime.Month(dtt1)
+            d0 = DateAndTime.Day(dtt1)
+            psthh = DateAndTime.Hour(dtt1)
+
+            psthh = psthh.PadLeft(2, "0")
+
+            colmn0 = "hh_" & psthh
+
+            sql = "SELECT " & colmn0 & " FROM form_hourly WHERE stationId = '" & stn & "' AND elementId = '" & elm & "' AND yyyy= " & y0 & " AND mm = " & m0 & " AND dd = " & d0 & ";"
+            dah = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, connh)
+            dsh.Clear()
+            dah.Fill(dsh, "prevHr")
+
+            With dsh.Tables("prevHr")
+                If .Rows.Count = 1 Then
+                    prv = .Rows(0).Item(0)
+                    'MsgBox(obs & " " & .Rows(0).Item(0))
+                    If Val(obs) < Val(.Rows(0).Item(0)) Then
+                        'MsgBox("check for errors")
+                    End If
+                Else
+                    MsgBox("Previous hour record not available")
+                End If
+            End With
+
+            connh.Close()
+            Return True
+        Catch ex As Exception
+            connh.Close()
+            MsgBox(ex.Message & " " & "@ get_prevHourValue")
+            Return False
+        End Try
+    End Function
     Function Load_Files(flname As String, tblname As String, skplines As Integer, fldsep As String, Optional fldquotechar As String = "") As Boolean
         Dim lconn As New MySql.Data.MySqlClient.MySqlConnection
         ' Dim cmd As MySqlConnector.MySqlCommand

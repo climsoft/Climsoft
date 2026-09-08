@@ -3,6 +3,7 @@
     Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
     Private bIncludePeriod As Boolean = True
     Public objKeyPress As New dataEntryGlobalRoutines
+    Public idx As String
 
     Public Property IncludePeriod() As Boolean
         Get
@@ -269,6 +270,29 @@
 
     Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
         If e.KeyCode = Keys.Enter Then
+
+            With frmNewHourly.ucrHourly
+                If .ucrElementSelector.cboValues.SelectedValue = 187 Then
+
+                    'MsgBox(.ActiveControl.Name)
+                    'idx = .ActiveControl.TabIndex
+
+                    idx = Strings.Mid(.ActiveControl.Name, 19, Len(.ActiveControl.Name) - 18) 'The control has substring with hour value at the end  
+
+                    frmNewHourly.dat(idx) = ucrValue.txtBox.Text
+
+                    frmNewHourly.currVal = frmNewHourly.dat(idx)
+                    If idx = 0 Then objKeyPress.get_prevHourValue(frmNewHourly.dat(0), .ucrStationSelector.cboValues.SelectedValue, .ucrElementSelector.cboValues.SelectedValue, .ucrYearSelector.cboValues.SelectedValue, .ucrMonthSelector.cboValues.SelectedValue, .ucrDaySelector.cboValues.SelectedValue, idx, frmNewHourly.prevVal)
+                    If idx > 0 And idx < 24 Then frmNewHourly.prevVal = frmNewHourly.dat(idx - 1)
+
+                    If Val(frmNewHourly.currVal) < Val(frmNewHourly.prevVal) Then
+                        MsgBox("Value [" & frmNewHourly.currVal & "] is lower than previous reading [" & frmNewHourly.prevVal & "]. Confirm values!")
+                        '    .ActiveControl.BackColor = Color.Yellow
+                        'Else
+                        '    .ActiveControl.BackColor = Color.White
+                    End If
+                End If
+            End With
 
             Compare_Entry(ucrValue.txtBox.Text)
 
@@ -641,6 +665,5 @@
             Loop
         End If
     End Sub
-
 
 End Class

@@ -26,6 +26,7 @@ Imports Mysqlx
 Imports Org.BouncyCastle.Asn1
 
 Imports Org.BouncyCastle.Math
+Imports Org.BouncyCastle.Math.EC.Custom
 
 Public Class formAWSRealTime
 
@@ -1678,6 +1679,9 @@ Err:
         mm1 = DateAndTime.MonthName(mm, Abbreviate:=True)
         dd = DateAndTime.Day(Now())
 
+        mm = mm.PadLeft(2, "0")
+        dd = dd.PadLeft(2, "0")
+
         Try
             pFolder = IO.Directory.GetParent(inFolder).Name
 
@@ -1688,13 +1692,15 @@ Err:
                 Return True
 
             ElseIf pFolder = "yyyymmmdd" Then
-                dtPath = yy & "/" & mm1 & "/" & dd.PadLeft(2, "0")
+                'dtPath = yy & "/" & mm1 & "/" & dd.PadLeft(2, "0")
+                dtPath = yy & "/" & mm1 & "/" & dd
                 flder = inFolder.Replace("yyyymmmdd", dtPath)
                 flder = flder.Replace("\", "/")
                 Return True
 
             ElseIf pFolder = "yyyymm" Then
-                dtPath = yy & "/" & mm.PadLeft(2, "0")
+                'dtPath = yy & "/" & mm.PadLeft(2, "0")
+                dtPath = yy & "/" & mm
                 flder = inFolder.Replace("yyyymm", dtPath)
                 flder = flder.Replace("\", "/")
                 Return True
@@ -6210,6 +6216,7 @@ Err:
     End Function
 
     Function update_db(drws As DataRow, colmn As Integer, stn As String, flg As String, AWSsite As String, elm() As String, unitt() As String, Llimit() As String, Ulimit() As String, EBufr() As String, AbbrevE() As String) As Boolean
+
         Dim dtt, dttdb, x, aws_sql_input_file As String
         Dim GMTDiff, ET, Rmd, BUFR_E, CSV_E As Integer
         Dim bufrCode As Boolean
@@ -6319,9 +6326,13 @@ Err:
                                 EncodeBUFR = True
                             End If
                         Else
-                            'Create CSV file for WIS2BOX
+                            'Log_Errors("Create CSV file for WIS2BOX")
                             'If CSV_E > 0 Then CSV4WIS2BOX(stn, dttdb, utc)
-                            If CSV_E > 0 Then AWS_CSV4WIS2BOX(stn, dttdb, utc)
+
+                            'If CSV_E > 0 Then AWS_CSV4WIS2BOX(stn, dttdb, utc)
+
+                            Climsoft_Synop_CSV4WIS2BOX(stn, dttdb, utc, elm)
+
                         End If
 
 
@@ -6709,6 +6720,427 @@ Err:
         Catch ex As Exception
             Log_Errors(ex.Message & " @ CSV4WIS2BOX")
             FileClose(14)
+            Return False
+        End Try
+    End Function
+    Function Climsoft_Synop_CSV4WIS2BOX(stn As String, timestamp As String, UTC As String, elm() As String) As Boolean
+
+        Dim csvwisb2box_file, wsi_series, wsi_issuer, wsi_issue_number, wsi_local, recs, hdrs, wisrecs(133), wishdrs(133), dttime, sql_soil As String
+
+        dttime = DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & " " & DateAndTime.Hour(timestamp) & ":" & DateAndTime.Minute(timestamp) & ":" & DateAndTime.Second(timestamp)
+
+        Try
+
+            sql = "SELECT wsi as WIGOS_ID,latitude, longitude, elevation as station_height_above_msl,left(wmoid,2) AS wmo_block_number,right(wmoid,3) AS wmo_station_number, year(obsDatetime) as year,month(obsDatetime) As month,day(obsDatetime) as day,hour(obsDatetime)+1 as hour, '0' AS minute, 
+
+               AVG(IF(describedBy = '884', value, NULL)) AS 'station_pressure', 
+               AVG(IF(describedBy = '891', value, NULL)) AS 'msl_pressure', 
+               AVG(IF(describedBy = '881', value, NULL)) AS 'air_temperature', 
+               AVG(IF(describedBy = '885', value, NULL)) AS 'dewpoint_temperature', 
+               AVG(IF(describedBy = '893', value, NULL)) AS 'relative_humidity', 
+               SUM(IF(describedBy = '892', value, NULL)) AS 'total_precipitation_1_hour',
+               AVG(IF(describedBy = '895', value, NULL)) AS 'wind_direction',
+               AVG(IF(describedBy = '897', value, NULL)) AS 'wind_speed',
+               AVG(IF(describedBy = '887', value, NULL)) AS 'max_wind_gust_direction_60min',
+               AVG(IF(describedBy = '886', value, NULL)) AS 'maximum_wind_gust_speed_60min',
+               AVG(IF(describedBy = '930', value, NULL)) AS 'soil_level1_temperature', 
+               AVG(IF(describedBy = '931', value, NULL)) AS 'soil_level2_temperature', 
+               AVG(IF(describedBy = '932', value, NULL)) AS 'soil_level3_temperature', 
+               AVG(IF(describedBy = '933', value, NULL)) AS 'soil_level4_temperature', 
+               SUM(IF(describedBy = '934', value, NULL)) AS 'soil_level5_temperature',
+               AVG(IF(describedBy = '935', value, NULL)) AS 'soil_level6_temperature',
+               AVG(IF(describedBy = '936', value, NULL)) AS 'soil_level7_temperature',
+               AVG(IF(describedBy = '937', value, NULL)) AS 'soil_level8_temperature',
+               AVG(IF(describedBy = '940', value, NULL)) AS 'soil_level9_temperature',
+               AVG(IF(describedBy = '941', value, NULL)) AS 'soil_level10_temperature',
+               AVG(IF(describedBy = '928', value, NULL)) AS 'evaporation_total',
+               AVG(IF(describedBy = '894', value, NULL)) AS 'solar_radiation1_global'
+               FROM (SELECT wsi,wmoid,recordedFrom,StationName,latitude, longitude, elevation, describedBy, obsDatetime, obsValue value 
+               FROM  station INNER JOIN observationfinal ON stationId = recordedFrom WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='884' OR  describedBy = '891' OR  describedBy = '881' OR  describedBy = '885' OR  describedBy = '895' 
+               OR  describedBy = '893' OR  describedBy = '892' OR  describedBy = '895' OR  describedBy = '897' OR  describedBy = '887' OR  describedBy = '886' OR  describedBy = '930' OR  describedBy = '931' OR  describedBy = '932' 
+               OR  describedBy = '933' OR  describedBy = '934' OR  describedBy = '935' OR  describedBy = '936' OR  describedBy = '937' OR  describedBy = '940' OR  describedBy = '941' OR describedBy =  '928' OR describedBy =  '894') 
+               and (obsdatetime BETWEEN DATE_ADD('" & dttime & "', INTERVAL -1 HOUR ) AND '" & dttime & "') ORDER BY recordedFrom, obsDatetime) t 
+               GROUP BY StationName, year(obsDatetime), month(obsDatetime), day(obsDatetime);"
+
+
+            sql_soil = "Select describedBy,round(avg(obsvalue),2) AS mean FROM observationfinal WHERE recordedFrom = '" & stn & "'
+                   And (obsdatetime BETWEEN DATE_ADD('" & dttime & "', INTERVAL -1 HOUR ) AND '" & dttime & "')
+                   And (describedBy ='930' OR  describedBy = '931' OR  describedBy = '932' OR  describedBy = '933' OR  describedBy = '934' 
+                   Or describedBy = '935' OR  describedBy = '936' OR  describedBy = '937' OR  describedBy = '940' OR  describedBy = '942')
+                   GROUP BY describedBy ORDER BY describedBy;"
+            'Log_Errors(dttime)
+            If Not Climsoft_Synop_WIS2BOX_Observations(stn, wsi_series, wsi_issuer, wsi_issue_number, wsi_local, dttime, sql, wishdrs, wisrecs, UTC, sql_soil) Then
+                Log_Errors("Unable to construct WIS2BOX record")
+                Return False
+            End If
+
+            hdrs = wishdrs(0)
+            recs = wisrecs(0)
+
+            For i = 1 To 122
+                hdrs = hdrs & "," & wishdrs(i)
+                recs = recs & "," & wisrecs(i)
+            Next
+
+            ' Create a file for WIS2BOX CSV data output
+
+            'csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\WIGOS-" & WIGOS_id & "-" & DateAndTime.Year(timestamp) & "-" & DateAndTime.Month(timestamp) & "-" & DateAndTime.Day(timestamp) & "-" & DateAndTime.Hour(timestamp) & ".csv"
+            csvwisb2box_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Climsoft-WIS2-" & WIGOS_id & "-" & DateAndTime.Year(UTC) & "-" & DateAndTime.Month(UTC) & "-" & DateAndTime.Day(UTC) & "-" & DateAndTime.Hour(UTC) & ".csv"
+
+            'Log_Errors(csvwisb2box_file)
+
+            FileOpen(14, csvwisb2box_file, OpenMode.Output)
+
+            PrintLine(14, hdrs)
+            PrintLine(14, recs)
+
+            CSVWIS2BOX_Send(csvwisb2box_file)
+            lstOutputFiles.Items.Add(IO.Path.GetFileName(csvwisb2box_file))
+
+            FileClose(14)
+            Return True
+
+        Catch ex As Exception
+            Log_Errors(ex.Message & " @ Climsoft_Synop_CSV4WIS2BOX")
+            FileClose(14)
+            Return False
+        End Try
+    End Function
+
+    Function Climsoft_Synop_WIS2BOX_Observations(stn As String, ByRef wsi_series As String, ByRef wsi_issuer As String, ByRef wsi_issue_number As String, ByRef wsi_local As String, dttm As String, sql As String, ByRef obsv_name() As String, ByRef obsv_Value() As String, UTC As String, sql_soil As String) As Boolean
+        Dim wisconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dswis As New DataSet
+        Dim dawis As MySql.Data.MySqlClient.MySqlDataAdapter
+
+        Try
+            wisconn.ConnectionString = frmLogin.txtusrpwd.Text & ";Convert Zero Datetime=True;AllowLoadLocalInfile=true"
+            wisconn.Open()
+
+            dawis = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, wisconn)
+            dawis.SelectCommand.CommandTimeout = 0
+            dswis.Clear()
+            dawis.Fill(dswis, "wis2box")
+
+            If dswis.Tables("wis2box").Rows.Count = 0 Then
+                Log_Errors("No Records found")
+                Return False
+            End If
+
+            obsv_name(0) = "wsi_series"
+            obsv_name(1) = "wsi_issuer"
+            obsv_name(2) = "wsi_issue_number"
+            obsv_name(3) = "wsi_local"
+            obsv_name(4) = "wmo_block_number"
+            obsv_name(5) = "wmo_station_number"
+            obsv_name(6) = "station_name"
+            obsv_name(7) = "station_type"
+            obsv_name(8) = "year"
+            obsv_name(9) = "month"
+            obsv_name(10) = "day"
+            obsv_name(11) = "hour"
+            obsv_name(12) = "minute"
+            obsv_name(13) = "latitude"
+            obsv_name(14) = "longitude"
+            obsv_name(15) = "station_height_above_msl"
+            obsv_name(16) = "barometer_height_above_msl"
+            obsv_name(17) = "station_pressure"
+            obsv_name(18) = "msl_pressure"
+            obsv_name(19) = "pressure_change_3hr"
+            obsv_name(20) = "pressure_tendency_characteristic"
+            obsv_name(21) = "pressure_change_24hr"
+            obsv_name(22) = "pressure_standard_level"
+            obsv_name(23) = "geopotential_height"
+            obsv_name(24) = "thermometer_height"
+            obsv_name(25) = "air_temperature"
+            obsv_name(26) = "dewpoint_temperature"
+            obsv_name(27) = "relative_humidity"
+            obsv_name(28) = "visibility_sensor_height"
+            obsv_name(29) = "horizontal_visibility"
+            obsv_name(30) = "rain_sensor_height"
+            obsv_name(31) = "total_precipitation_24_hour"
+            obsv_name(32) = "cloud_total_cover"
+            obsv_name(33) = "cloud_total_vertical_sig"
+            obsv_name(34) = "cloud_amount_low_level"
+            obsv_name(35) = "cloud_base_height"
+            obsv_name(36) = "cloud_type_low_level"
+            obsv_name(37) = "cloud_type_mid_level"
+            obsv_name(38) = "cloud_type_high_level"
+            obsv_name(39) = "cloud_layer1_vertical_sig"
+            obsv_name(40) = "cloud_layer1_amount"
+            obsv_name(41) = "cloud_layer1_type"
+            obsv_name(42) = "cloud_layer1_base_height"
+            obsv_name(43) = "cloud_layer2_vertical_sig"
+            obsv_name(44) = "cloud_layer2_amount"
+            obsv_name(45) = "cloud_layer2_type"
+            obsv_name(46) = "cloud_layer2_base_height"
+            obsv_name(47) = "cloud_layer3_vertical_sig"
+            obsv_name(48) = "cloud_layer3_amount"
+            obsv_name(49) = "cloud_layer3_type"
+            obsv_name(50) = "cloud_layer3_base_height"
+            obsv_name(51) = "cloud_layer4_vertical_sig"
+            obsv_name(52) = "cloud_layer4_amount"
+            obsv_name(53) = "cloud_layer4_type"
+            obsv_name(54) = "cloud_layer4_base_height"
+            obsv_name(55) = "method_of_ground_state_measurement"
+            obsv_name(56) = "ground_state"
+            obsv_name(57) = "method_of_snow_depth_measurement"
+            obsv_name(58) = "snow_depth"
+            obsv_name(59) = "ground_minimum_temperature"
+            obsv_name(60) = "present_weather"
+            obsv_name(61) = "past_weather_period"
+            obsv_name(62) = "past_weather1"
+            obsv_name(63) = "past_weather2"
+            obsv_name(64) = "sunshine_total_1hr"
+            obsv_name(65) = "sunshine_total_24hr"
+            obsv_name(66) = "rain_sensor_height"
+            obsv_name(67) = "total_precipitation_1_hour"
+            obsv_name(68) = "total_precipitation_3_hour"
+            obsv_name(69) = "total_precipitation_6_hour"
+            obsv_name(70) = "total_precipitation_12_hour"
+            obsv_name(71) = "total_precipitation_24_hour"
+            obsv_name(72) = "extreme_temp_sensor_height"
+            obsv_name(73) = "temp_max_period"
+            obsv_name(74) = "temp_maximum"
+            obsv_name(75) = "temp_min_period"
+            obsv_name(76) = "temp_minimum"
+            obsv_name(77) = "anemometer_height"
+            obsv_name(78) = "wind_instrument_type"
+            obsv_name(79) = "wind_direction"
+            obsv_name(80) = "wind_speed"
+            obsv_name(81) = "max_wind_gust_direction_10min"
+            obsv_name(82) = "maximum_wind_gust_speed_10min"
+            obsv_name(83) = "max_wind_gust_direction_60min"
+            obsv_name(84) = "maximum_wind_gust_speed_60min"
+            obsv_name(85) = "evaporation_sensor_height"
+            obsv_name(86) = "evaporation_time_period"
+            obsv_name(87) = "evaporation_sensor_type"
+            obsv_name(88) = "evaporation_total"
+            obsv_name(89) = "solar_radiation1_time_period"
+            obsv_name(90) = "solar_radiation1_long_wave"
+            obsv_name(91) = "solar_radiation1_short_wave"
+            obsv_name(92) = "solar_radiation1_net"
+            obsv_name(93) = "solar_radiation1_global"
+            obsv_name(94) = "solar_radiation1_diffuse"
+            obsv_name(95) = "solar_radiation1_direct"
+            obsv_name(96) = "solar_radiation24_time_period"
+            obsv_name(97) = "solar_radiation24_long_wave"
+            obsv_name(98) = "solar_radiation24_short_wave"
+            obsv_name(99) = "solar_radiation24_net"
+            obsv_name(100) = "solar_radiation24_global"
+            obsv_name(101) = "solar_radiation24_diffuse"
+            obsv_name(102) = "solar_radiation24_direct"
+            obsv_name(103) = "soil_level1_depth"
+            obsv_name(104) = "soil_level1_temperature"
+            obsv_name(105) = "soil_level2_depth"
+            obsv_name(106) = "soil_level2_temperature"
+            obsv_name(107) = "soil_level3_depth"
+            obsv_name(108) = "soil_level3_temperature"
+            obsv_name(109) = "soil_level4_depth"
+            obsv_name(110) = "soil_level4_temperature"
+            obsv_name(111) = "soil_level5_depth"
+            obsv_name(112) = "soil_level5_temperature"
+            obsv_name(113) = "soil_level6_depth"
+            obsv_name(114) = "soil_level6_temperature"
+            obsv_name(115) = "soil_level7_depth"
+            obsv_name(116) = "soil_level7_temperature"
+            obsv_name(117) = "soil_level8_depth"
+            obsv_name(118) = "soil_level8_temperature"
+            obsv_name(119) = "soil_level9_depth"
+            obsv_name(120) = "soil_level9_temperature"
+            obsv_name(121) = "soil_level10_depth"
+            obsv_name(122) = "soil_level10_temperature"
+
+            ' Update observation values with blanks for missing data
+            With dswis.Tables("wis2box")
+                For i = 0 To .Columns.Count - 1
+                    For j = 0 To 122
+                        If obsv_name(j) = .Columns(i).ColumnName Then
+                            If Not IsDBNull(.Rows(0).Item(i)) Then
+                                obsv_Value(j) = .Rows(0).Item(i)
+                            Else
+                                obsv_Value(j) = ""
+                            End If
+                            Exit For
+                        End If
+                    Next
+
+                Next
+                obsv_Value(0) = .Rows(0).Item("WIGOS_ID")
+            End With
+
+            ' Get WIGOS identification components for the station
+            Dim WIGOSID() = obsv_Value(0).Split("-")
+
+            If WIGOSID.Count <> 4 Then
+                Log_Errors("No valid WIGOS ID " & obsv_Value(0))
+                Return False
+            End If
+
+            obsv_Value(0) = WIGOSID(0)
+            obsv_Value(1) = WIGOSID(1)
+            obsv_Value(2) = WIGOSID(2)
+            obsv_Value(3) = WIGOSID(3)
+
+            ' Adjust time to UTC
+            obsv_Value(8) = DateAndTime.Year(UTC) '"Datetime_Year"
+            obsv_Value(9) = DateAndTime.Month(UTC) ' "Datetime_Month"
+            obsv_Value(10) = DateAndTime.Day(UTC) ' "Datetime_Day"
+            obsv_Value(11) = DateAndTime.Hour(UTC) ' "Datetime_Hour"
+            obsv_Value(12) = DateAndTime.Minute(UTC) ' "Datetime_Minute"
+
+            ' Compute Time Periods
+            obsv_Value(61) = -6       ' past_weather_period
+            ' obsv_Value(82) = -1       ' sunshine_time_period_1hr
+            ' obsv_Value(84) = -24      ' sunshine_time_period_24hr
+            'obsv_Value(87) = -1       ' rain_period_1_hr
+            'obsv_Value(89) = -3       ' rain_period_3_hr
+            'obsv_Value(91) = -6       ' rain_period_6_hr
+            'obsv_Value(93) = -12      ' rain_period_12_hr
+            'obsv_Value(95) = -24      ' rain_period_24_hr
+            obsv_Value(73) = -12      ' temp_max_period
+            obsv_Value(75) = -24     ' temp_min_period
+            'obsv_Value(105) = -10     ' Wind time period
+            'obsv_Value(108) = -10     ' Wind time period' time_period_of_wind_gust_10min
+            'obsv_Value(111) = -60     ' time_period_of_wind_gust_60min
+            obsv_Value(86) = -24     ' evaporation_time_period
+            obsv_Value(89) = -1      ' solar_radiation1_time_period
+            obsv_Value(96) = -24     ' solar_radiation24_time_period
+
+            ' Compute Special observations
+            obsv_Value(7) = 0       ' Station of automatic type 
+            If obsv_Value(15) <> "" Then obsv_Value(16) = Val(obsv_Value(15)) + 1   ' Barometer Elevation
+            obsv_Value(24) = 1       ' Height of Thermometer above local ground
+            obsv_Value(30) = 0.25    ' Height of Raingauge above local ground
+            obsv_Value(77) = 10     ' Height of Wind instrument above local ground
+            '  obsv_Value(105) = -10    ' Wind time period
+            '   obsv_Value(104) = 2       'Wind time_significance'
+
+            ' Soil temperatures and depths
+            dawis = New MySql.Data.MySqlClient.MySqlDataAdapter(sql_soil, wisconn)
+            dawis.SelectCommand.CommandTimeout = 0
+            dswis.Clear()
+            dawis.Fill(dswis, "soilTemp")
+
+            Dim lvl(0 To dswis.Tables("soilTemp").Rows.Count - 1) As String, tmp(0 To dswis.Tables("soilTemp").Rows.Count - 1) As String
+            With dswis.Tables("soilTemp")
+                If .Rows.Count > 0 Then
+                    soilTemp(dswis, lvl, tmp)
+                End If
+            End With
+
+            ' Convert temperature observation values to Kelvin
+            If obsv_Value(25) <> "" Then obsv_Value(25) = Val(obsv_Value(25)) + 273.15 ' Dry bulb temperature
+            If obsv_Value(26) <> "" Then obsv_Value(26) = Val(obsv_Value(26)) + 273.15 ' Wet bulb temperature
+
+            ' Soil Temperatures
+            'Refresh values
+            For i = 103 To 122
+                obsv_Value(i) = ""
+            Next
+
+            ' Depths Temperatures
+            For i = 0 To lvl.Count - 1
+                obsv_Value(103 + i * 2) = lvl(i)
+                obsv_Value(103 + i * 2 + 1) = tmp(i)
+                'Log_Errors(lvl(i) & " " & tmp(i))
+            Next
+
+
+            For i = 104 To 122 Step 2
+                If obsv_Value(i) <> "" Then obsv_Value(i) = Val(obsv_Value(i)) + 273.15
+            Next
+
+            ' Convert Pressure observation values to Pa
+            If IsNumeric(obsv_Value(17)) Then obsv_Value(17) = obsv_Value(17) * 100 ' "station_pressure"
+            If IsNumeric(obsv_Value(18)) Then obsv_Value(17) = obsv_Value(18) * 100 ' "msl_pressure"
+            If IsNumeric(obsv_Value(19)) Then obsv_Value(19) = obsv_Value(19) * 100 ' "pressure_change_3hr"
+            If IsNumeric(obsv_Value(21)) Then obsv_Value(21) = obsv_Value(21) * 100 ' "pressure_change_24hr"
+            If IsNumeric(obsv_Value(22)) Then obsv_Value(22) = obsv_Value(22) * 100 ' "pressure_standard_level"
+
+            ' Compute preciptation accumation
+            Dim Tperiod As Integer
+            Dim Ptotal As String
+
+            obsv_name(67) = "total_precipitation_1_hour"
+            obsv_name(68) = "total_precipitation_3_hour"
+            obsv_name(69) = "total_precipitation_6_hour"
+            obsv_name(70) = "total_precipitation_12_hour"
+            obsv_name(71) = "total_precipitation_24_hour"
+
+            ' 1HR preciptation accumation
+            Tperiod = 60 ' Time period in minutes
+            If Not precip_Accumulation(Ptotal, stn, dttm, Tperiod) Then Ptotal = ""
+            obsv_Value(67) = Ptotal
+
+            ' 3HR preciptation accumation
+            Tperiod = 3 * 60 ' Time period in minutes
+            If Not precip_Accumulation(Ptotal, stn, dttm, Tperiod) Then Ptotal = ""
+            obsv_Value(68) = Ptotal
+
+            ' 6HR preciptation accumation
+            Tperiod = 6 * 60 ' Time period in minutes
+            If Not precip_Accumulation(Ptotal, stn, dttm, Tperiod) Then Ptotal = ""
+            obsv_Value(69) = Ptotal
+
+            ' 12HR preciptation accumation
+            Tperiod = 12 * 60 ' Time period in minutes
+
+            If Not precip_Accumulation(Ptotal, stn, dttm, Tperiod) Then Ptotal = ""
+            obsv_Value(70) = Ptotal
+
+            ' 24HR preciptation accumation
+            Tperiod = 24 * 60 ' Time period in minutes
+
+            If Not precip_Accumulation(Ptotal, stn, dttm, Tperiod) Then Ptotal = ""
+            obsv_Value(71) = Ptotal
+
+            'For i = 0 To 131
+            '    Log_Errors(i & " " & obsv_name(i) & " " & obsv_Value(i))
+            'Next
+
+            wisconn.Close()
+            Return True
+        Catch ex As Exception
+            wisconn.Close()
+            Log_Errors(ex.Message & " @ Climsoft_Synop_WIS2BOX_Observations")
+            Return False
+        End Try
+    End Function
+    Function soilTemp(soilDat As DataSet, ByRef lvls() As String, ByRef tmps() As String) As Boolean
+
+        Try
+            With soilDat.Tables("soilTemp")
+
+                For i = 0 To .Rows.Count - 1
+                    tmps(i) = .Rows(i).Item(1)
+
+                    Select Case .Rows(i).Item(0)
+                        Case 930
+                            lvls(i) = "0.05"
+                        Case 931
+                            lvls(i) = "0.1"
+                        Case 932
+                            lvls(i) = "0.2"
+                        Case 933
+                            lvls(i) = "0.3"
+                        Case 934
+                            lvls(i) = "0.4"
+                        Case 935
+                            lvls(i) = "0.5"
+                        Case 936
+                            lvls(i) = "0.6"
+                        Case 937
+                            lvls(i) = "0.7"
+                        Case 940
+                            lvls(i) = "1.0"
+                        Case 942
+                            lvls(i) = "1.2"
+                    End Select
+                Next
+            End With
+            Return True
+        Catch ex As Exception
+            Log_Errors(ex.Message & " @ soilTmpe")
             Return False
         End Try
     End Function
